@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 REGISTRATION_STATUS = ((0, "Closed"), (1, "Open"))
 
@@ -19,3 +20,9 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+    # https://docs.djangoproject.com/en/4.2/ref/models/instances/#django.db.models.Model.clean
+    def clean(self):
+        """Custom validation for Course model"""
+        if self.start_date > self.end_date:
+            raise ValidationError("Start date cannot be later than end date.")
