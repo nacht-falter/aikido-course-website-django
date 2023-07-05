@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Aikido Nocquet BW</title>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="{% url 'courses' %}">Courses</a></li>
+    </ul>
+  </nav>
+
+  <!-- Content -->
+  <main>
+    {% block content %}
+    {% endblock content %}
+  </main>
+
+  <footer></footer>
+</body>
+
+</html>
