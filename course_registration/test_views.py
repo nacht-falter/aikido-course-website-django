@@ -89,7 +89,7 @@ class RegisterCourseTest(TestCase):
 
 
 class CancelCourseRegistrationTest(TestCase):
-    """Test for CancelCouresRegistration view"""
+    """Tests for CancelCouresRegistration view"""
 
     def setUp(self):
         self.course = Course.objects.create(
@@ -124,9 +124,57 @@ class CancelCourseRegistrationTest(TestCase):
             pk=self.registration.pk
         )
         self.assertEqual(len(registrations), 0)
-        # Test messages: https://stackoverflow.com/a/46865530 
+
+        # Test messages: https://stackoverflow.com/a/46865530
         messages = [m.message for m in get_messages(response.wsgi_request)]
         self.assertIn(
             f"Your registration for {self.course.title} has been cancelled.",
+            messages,
+        )
+
+
+class UpdateCourseRegistrationTest(TestCase):
+    """Tests for UpdateCourseRegistration view"""
+
+    def setUp(self):
+        self.course = Course.objects.create(
+            title="Test course",
+            slug="test-course",
+            start_date=date.today(),
+            end_date=date.today() + timedelta(days=1),
+            registration_status=(1),
+            course_fee=50,
+        )
+        self.user = User.objects.create_user(
+            username="test-user", password="testpassword"
+        )
+        self.client.force_login(self.user)
+        self.registration = CourseRegistration.objects.create(
+            user=self.user,
+            course=self.course,
+            final_fee=50,
+            payment_status=0,
+            accept_terms=True,
+            exam=False,
+            comment="Test comment",
+        )
+
+    def test_update_course_registration(self):
+        response = self.client.post(
+            f"/user/registrations/update/{self.registration.pk}/",
+            {
+                "exam": True,
+                "final_fee": 50,
+            },
+        )
+
+        self.assertRedirects(response, "/user/registrations/", 302, 200)
+        registration = CourseRegistration.objects.get(pk=self.registration.pk)
+        self.assertEqual(registration.exam, True)
+
+        # Test messages: https://stackoverflow.com/a/46865530
+        messages = [m.message for m in get_messages(response.wsgi_request)]
+        self.assertIn(
+            f"Your registration for {self.course.title} has been updated.",
             messages,
         )
