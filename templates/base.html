@@ -11,7 +11,10 @@
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="{% url 'courses' %}">Courses</a></li>
+      <li><a href="{% url 'course_list' %}">Courses</a></li>
+        {% if user.is_authenticated %}
+      <li><a href="{% url 'courseregistration_list' %}">My registrations</a></li>
+        {% endif %}
     </ul>
   </nav>
 

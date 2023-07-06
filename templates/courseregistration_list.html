@@ -14,6 +14,7 @@
 {% for registration in courseregistration_list %}
 <p>{{ registration.course.title }}</p>
 <p>({{ registration.course.start_date }}–{{ registration.course.end_date }})</p>
+<p><a href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a></p>
 {% empty %}
 <p>You have not signed up to any courses yet. You can find a <a href="{% url 'course_list' %}">list of available courses here</a></p>
 {% endfor %}

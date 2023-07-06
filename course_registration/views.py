@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, reverse
+from django.urls import reverse_lazy
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from .models import Course, CourseRegistration
 from .forms import CourseRegistrationForm
 
@@ -66,3 +68,18 @@ class CourseRegistrationList(generic.ListView):
     # https://stackoverflow.com/questions/24725617/how-to-make-generic-listview-only-show-users-listing
     def get_queryset(self):
         return self.model.objects.filter(user=self.request.user)
+
+
+class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
+    """Deletes a registration instance"""
+
+    model = CourseRegistration
+    success_url = reverse_lazy("courseregistration_list")
+    template_name = "courseregistration_confirm_delete.html"
+
+    # https://stackoverflow.com/questions/74756918/django-deleteview-successmessagemixin-how-to-pass-data-to-message
+    def get_success_message(self, cleaned_data):
+        return (
+            f"Your registration for {self.object.course.title}"
+            "has been cancelled."
+        )

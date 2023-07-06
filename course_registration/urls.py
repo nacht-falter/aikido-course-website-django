@@ -13,4 +13,9 @@ urlpatterns = [
         views.CourseRegistrationList.as_view(),
         name="courseregistration_list",
     ),
+    path(
+        "user/registrations/cancel/<int:pk>/",
+        views.CancelCourseRegistration.as_view(),
+        name="cancel_courseregistration",
+    ),
 ]

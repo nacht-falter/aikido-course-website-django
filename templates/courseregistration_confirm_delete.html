@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Cancel Registration?</h3>
+<!-- https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#deleteview -->
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to cancel your registration for {{ object.course.title }}?</p>
+    <input type="submit" value="Confirm">
+</form>
+{% endblock content %}
