@@ -81,5 +81,5 @@ class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
     def get_success_message(self, cleaned_data):
         return (
             f"Your registration for {self.object.course.title}"
-            "has been cancelled."
+            " has been cancelled."
         )
