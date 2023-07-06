@@ -5,6 +5,7 @@
 <!-- https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#deleteview -->
 <form method="post">{% csrf_token %}
     <p>Are you sure you want to cancel your registration for {{ object.course.title }}?</p>
-    <input type="submit" value="Confirm">
+    <a href="{% url 'courseregistration_list' %}"><button type="button">No</button></a>
+    <input type="submit" value="Yes">
 </form>
 {% endblock content %}

@@ -71,7 +71,11 @@ class CourseRegistrationList(generic.ListView):
 
 
 class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
-    """Deletes a registration instance"""
+    """
+    Deletes a course registration instance
+    Documentation for DeleteView:
+    https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#deleteview
+    """
 
     model = CourseRegistration
     success_url = reverse_lazy("courseregistration_list")
@@ -82,4 +86,28 @@ class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
         return (
             f"Your registration for {self.object.course.title}"
             " has been cancelled."
+        )
+
+
+# https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#updateview
+class UpdateCourseRegistration(SuccessMessageMixin, generic.edit.UpdateView):
+    """
+    Updates a course registration instance
+    Documentation for UpdateView:
+    https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#updateview
+    """
+
+    model = CourseRegistration
+    fields = [
+        "exam",
+        "accept_terms",
+        "final_fee",
+    ]
+    template_name = "courseregistration_update.html"
+    success_url = reverse_lazy("courseregistration_list")
+
+    def get_success_message(self, cleaned_data):
+        return (
+            f"Your registration for {self.object.course.title}"
+            " has been updated."
         )

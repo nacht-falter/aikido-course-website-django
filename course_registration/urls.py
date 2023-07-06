@@ -18,4 +18,9 @@ urlpatterns = [
         views.CancelCourseRegistration.as_view(),
         name="cancel_courseregistration",
     ),
+    path(
+        "user/registrations/update/<int:pk>/",
+        views.UpdateCourseRegistration.as_view(),
+        name="update_courseregistration",
+    ),
 ]

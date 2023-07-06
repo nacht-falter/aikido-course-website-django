@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Update Registration</h3>
+<!-- https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#updateview -->
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <a href="{% url 'courseregistration_list' %}"><button type="button">Cancel</button></a>
+    <input type="submit" value="Update">
+</form>
+{% endblock content %}
