@@ -12,12 +12,18 @@
 {% if user.is_authenticated %}
 <h3>Your registrations</h3>
 {% for registration in courseregistration_list %}
-<p>{{ registration.course.title }}</p>
-<p>({{ registration.course.start_date }}–{{ registration.course.end_date }})</p>
-<p><a href="{% url 'update_courseregistration' registration.pk %}">Update registration</a></p>
-<p><a href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a></p>
+<div style="border: 1px solid black; margin: 5px; padding: 5px;">
+  <h4>{{ registration.course.title }}</h4>
+  <p>{{ registration.course.start_date }}–{{ registration.course.end_date }}</p>
+  {% if registration.exam %}
+  <p style="color: red">You have applied for an exam.</p>
+  {% endif %}
+  <p><a href="{% url 'update_courseregistration' registration.pk %}">Update registration</a> | <a
+      href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a></p>
+</div>
 {% empty %}
-<p>You have not signed up to any courses yet. You can find a <a href="{% url 'course_list' %}">list of available courses here</a></p>
+<p>You have not signed up to any courses yet. You can find a <a href="{% url 'course_list' %}">list of available courses
+    here</a></p>
 {% endfor %}
 {% endif %}
 {% endblock content %}
