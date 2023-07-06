@@ -17,5 +17,7 @@
 <p><a href="{% url 'register_course' course.slug %}" title="Register for {{ course.title }}">Sign up for this course</a>
 </p>
 {% endif %}
+{% empty %}
+    <p>There are currently no courses available.</p>
 {% endfor %}
 {% endblock content %}

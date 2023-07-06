@@ -8,6 +8,7 @@ from .forms import CourseRegistrationForm
 
 class CourseList(generic.ListView):
     """Displays a list of all courses"""
+
     model = Course
     queryset = Course.objects.all()
     template_name = "course_list.html"
@@ -15,6 +16,7 @@ class CourseList(generic.ListView):
 
 class RegisterCourse(View):
     """Displays a registration form or a message"""
+
     def get(self, request, slug):
         courses = Course.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
@@ -25,7 +27,7 @@ class RegisterCourse(View):
             messages.warning(
                 request, "You are already registered for this course."
             )
-            return HttpResponseRedirect(reverse("courses"))
+            return HttpResponseRedirect(reverse("course_list"))
 
         registration_form = CourseRegistrationForm()
 
@@ -50,4 +52,17 @@ class RegisterCourse(View):
         else:
             registration_form = CourseRegistrationForm()
 
-        return HttpResponseRedirect(reverse("courses"))
+        return HttpResponseRedirect(reverse("courseregistration_list"))
+
+
+class CourseRegistrationList(generic.ListView):
+    """Displays a list of a users course registrations"""
+
+    model = CourseRegistration
+    template_name = "courseregistration_list.html"
+    # https://docs.djangoproject.com/en/3.2/topics/class-based-views/generic-display/#making-friendly-template-contexts
+    context_object_name = "courseregistration_list"
+
+    # https://stackoverflow.com/questions/24725617/how-to-make-generic-listview-only-show-users-listing
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user)

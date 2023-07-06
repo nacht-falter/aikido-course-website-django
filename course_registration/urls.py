@@ -2,10 +2,15 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("courses/", views.CourseList.as_view(), name="courses"),
+    path("courses/", views.CourseList.as_view(), name="course_list"),
     path(
         "courses/register/<slug:slug>/",
         views.RegisterCourse.as_view(),
         name="register_course",
+    ),
+    path(
+        "user/registrations/",
+        views.CourseRegistrationList.as_view(),
+        name="courseregistration_list",
     ),
 ]

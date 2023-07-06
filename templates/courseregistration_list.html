@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- https://docs.djangoproject.com/en/3.2/ref/contrib/messages/#displaying-messages -->
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if user.is_authenticated %}
+<h3>Your registrations</h3>
+{% for registration in courseregistration_list %}
+<p>{{ registration.course.title }}</p>
+<p>({{ registration.course.start_date }}–{{ registration.course.end_date }})</p>
+{% empty %}
+<p>You have not signed up to any courses yet. You can find a <a href="{% url 'course_list' %}">list of available courses here</a></p>
+{% endfor %}
+{% endif %}
+{% endblock content %}
