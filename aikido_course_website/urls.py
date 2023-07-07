@@ -23,4 +23,5 @@ urlpatterns = [
         include("course_registration.urls"),
         name="course_registration-urls",
     ),
+    path('accounts/', include('allauth.urls')),
 ]

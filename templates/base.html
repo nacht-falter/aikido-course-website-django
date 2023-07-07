@@ -12,9 +12,13 @@
   <nav>
     <ul>
       <li><a href="{% url 'course_list' %}">Courses</a></li>
-        {% if user.is_authenticated %}
+      {% if user.is_authenticated %}
       <li><a href="{% url 'courseregistration_list' %}">My registrations</a></li>
-        {% endif %}
+      <li><a href="{% url 'account_logout' %}">Logout</a></li>
+      {% else %}
+      <li><a href="{% url 'account_login' %}">Sign Up | Login</a></li>
+      {% endif %}
+
     </ul>
   </nav>
 
