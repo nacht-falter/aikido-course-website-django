@@ -6,7 +6,8 @@ from .models import Course, CourseRegistration, CourseSession
 class CourseSessionInline(admin.TabularInline):
     """Adds all Sessions for a course to the course view.
     Django documentation for inline models:
-    https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#inlinemodeladmin-objects
+    https://docs.djangoproject.com/en/4.2/ref/contrib/admin
+    /#inlinemodeladmin-objects
     """
 
     model = CourseSession
@@ -14,14 +15,11 @@ class CourseSessionInline(admin.TabularInline):
 
 
 class CourseRegistrationInline(admin.TabularInline):
-    """Adds all registrations for a course to the course view.
-    Django documentation for inline models:
-    https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#inlinemodeladmin-objects
-    """
+    """Adds all registrations for a course to the course view."""
 
     model = CourseRegistration
     extra = 0  # Set number of additional rows to 0
-    max_num = 0 # Hide option to add more rows
+    max_num = 0  # Hide option to add more rows
     fields = [
         "user",
         "selected_sessions",
@@ -48,6 +46,7 @@ class CourseAdmin(admin.ModelAdmin):
         "start_date",
         "end_date",
         "course_fee",
+        "get_course_registration_count",
     )
     search_fields = ["title", "description"]
     list_filter = ("registration_status",)
@@ -77,3 +76,11 @@ class CourseAdmin(admin.ModelAdmin):
                 end_date=course.end_date,
                 course_fee=course.course_fee,
             )
+
+    def get_course_registration_count(self, course):
+        """Gets the number of registrations for a course"""
+        registrations = CourseRegistration.objects.filter(course=course)
+        return len(registrations)
+
+    # https://stackoverflow.com/a/64352815
+    get_course_registration_count.short_description = "Registrations"
