@@ -28,12 +28,17 @@ class Course(models.Model):
     # https://docs.djangoproject.com/en/4.2/ref/models/instances/#django.db.models.Model.clean
     def clean(self):
         """Custom validation for Course model"""
-        if self.start_date > self.end_date:
+        if (
+            self.start_date
+            and self.end_date
+            and self.start_date > self.end_date
+        ):
             raise ValidationError("Start date cannot be later than end date.")
 
 
 class CourseSession(models.Model):
     """Represents a session within a course"""
+
     title = models.CharField(max_length=200)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     date = models.DateField()
@@ -52,9 +57,10 @@ class CourseSession(models.Model):
 
 class CourseRegistration(models.Model):
     """Represents a registration for a course by a user"""
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    course_sessions = models.ManyToManyField(CourseSession, blank=False)
+    selected_sessions = models.ManyToManyField(CourseSession, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)
     exam = models.BooleanField(default=False)
     accept_terms = models.BooleanField(default=False)

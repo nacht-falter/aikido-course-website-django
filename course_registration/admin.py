@@ -1,17 +1,42 @@
 from django.contrib import admin
-from .models import Course, CourseRegistration
+
+from .models import Course, CourseRegistration, CourseSession
 
 
-class RegistrationInline(admin.TabularInline):
+class CourseSessionInline(admin.TabularInline):
+    """Adds all Sessions for a course to the course view.
+    Django documentation for inline models:
+    https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#inlinemodeladmin-objects
     """
-    Adds all registrations for a course to the course view.
 
+    model = CourseSession
+    extra = 0  # Set number of additional rows to 0
+
+
+class CourseRegistrationInline(admin.TabularInline):
+    """Adds all registrations for a course to the course view.
     Django documentation for inline models:
     https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#inlinemodeladmin-objects
     """
 
     model = CourseRegistration
     extra = 0  # Set number of additional rows to 0
+    max_num = 0 # Hide option to add more rows
+    fields = [
+        "user",
+        "selected_sessions",
+        "exam",
+        "accept_terms",
+        "final_fee",
+        "payment_status",
+    ]
+    readonly_fields = [
+        "user",
+        "selected_sessions",
+        "exam",
+        "accept_terms",
+        "final_fee",
+    ]
 
 
 @admin.register(Course)
@@ -27,7 +52,7 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ["title", "description"]
     list_filter = ("registration_status",)
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [RegistrationInline]
+    inlines = [CourseSessionInline, CourseRegistrationInline]
     actions = [
         "duplicate_selected_courses",
     ]
