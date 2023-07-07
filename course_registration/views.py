@@ -1,11 +1,16 @@
+from datetime import date
+
 from django.shortcuts import render, get_object_or_404, reverse
 from django.urls import reverse_lazy
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+
 from .models import Course, CourseRegistration
 from .forms import CourseRegistrationForm
+
+CURRENT_DATE = date.today()
 
 
 class CourseList(generic.ListView):
@@ -62,26 +67,36 @@ class CourseRegistrationList(generic.ListView):
 
     model = CourseRegistration
     template_name = "courseregistration_list.html"
-    # https://docs.djangoproject.com/en/3.2/topics/class-based-views/generic-display/#making-friendly-template-contexts
+
+    # Define name for context object:
+    # https://docs.djangoproject.com/en/3.2/topics/class-based-
+    # views/generic-display/#making-friendly-template-contexts
     context_object_name = "courseregistration_list"
 
-    # https://stackoverflow.com/questions/24725617/how-to-make-generic-listview-only-show-users-listing
+    # Passing additional context to generic view:
+    # https://docs.djangoproject.com/en/4.2/ref/class-based-
+    # views/mixins-simple/#contextmixin
+    extra_context = {"current_date": CURRENT_DATE}
+
+    # Filter user registrations: https://stackoverflow.com/a/24725716
     def get_queryset(self):
         return self.model.objects.filter(user=self.request.user)
 
 
 class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
-    """
-    Deletes a course registration instance
+    """Deletes a course registration instance
     Documentation for DeleteView:
-    https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#deleteview
+    https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic
+    -editing/#deleteview
     """
 
     model = CourseRegistration
     success_url = reverse_lazy("courseregistration_list")
     template_name = "courseregistration_confirm_delete.html"
 
-    # https://stackoverflow.com/questions/74756918/django-deleteview-successmessagemixin-how-to-pass-data-to-message
+    # Get success message:
+    # https://stackoverflow.com/questions/74756918/django-deleteview-
+    # successmessagemixin-how-to-pass-data-to-message
     def get_success_message(self, cleaned_data):
         return (
             f"Your registration for {self.object.course.title}"
@@ -89,12 +104,11 @@ class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
         )
 
 
-# https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#updateview
 class UpdateCourseRegistration(SuccessMessageMixin, generic.edit.UpdateView):
-    """
-    Updates a course registration instance
+    """Updates a course registration instance
     Documentation for UpdateView:
-    https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#updateview
+    https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic
+    -editing/#updateview
     """
 
     model = CourseRegistration
@@ -103,9 +117,12 @@ class UpdateCourseRegistration(SuccessMessageMixin, generic.edit.UpdateView):
         "accept_terms",
         "final_fee",
     ]
-    template_name = "courseregistration_update.html"
     success_url = reverse_lazy("courseregistration_list")
+    template_name = "courseregistration_update.html"
 
+    # Get success message:
+    # https://stackoverflow.com/questions/74756918/django-deleteview-
+    # successmessagemixin-how-to-pass-data-to-message
     def get_success_message(self, cleaned_data):
         return (
             f"Your registration for {self.object.course.title}"

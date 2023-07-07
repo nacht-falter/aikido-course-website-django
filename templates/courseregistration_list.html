@@ -10,20 +10,37 @@
 </ul>
 {% endif %}
 {% if user.is_authenticated %}
-<h3>Your registrations</h3>
-{% for registration in courseregistration_list %}
-<div style="border: 1px solid black; margin: 5px; padding: 5px;">
-  <h4>{{ registration.course.title }}</h4>
-  <p>{{ registration.course.start_date }}–{{ registration.course.end_date }}</p>
-  {% if registration.exam %}
-  <p style="color: red">You have applied for an exam.</p>
-  {% endif %}
-  <p><a href="{% url 'update_courseregistration' registration.pk %}">Update registration</a> | <a
-      href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a></p>
-</div>
-{% empty %}
-<p>You have not signed up to any courses yet. You can find a <a href="{% url 'course_list' %}">list of available courses
-    here</a></p>
-{% endfor %}
+  <h3>Your upcoming courses</h3>
+  {% for registration in courseregistration_list %}
+    <!-- https://docs.djangoproject.com/en/4.2/ref/templates/builtins/#date -->
+    {% if registration.course.end_date|date > current_date|date %}
+      <div style="border: 1px solid black; margin: 5px; padding: 5px;">
+        <h4>{{ registration.course.title }}</h4>
+        <p>{{ registration.course.start_date }}–{{ registration.course.end_date }}</p>
+        {% if registration.exam %}
+          <p style="color: red">You have applied for an exam.</p>
+        {% endif %}
+        <p><a href="{% url 'update_courseregistration' registration.pk %}">Update registration</a> | <a
+        href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a></p>
+      </div>
+    {% endif %}
+    {% empty %}
+      <p>You are currently not signed up for any courses. You can find a <a href="{% url 'course_list' %}">list of
+      available courses here</a></p>
+  {% endfor %}
+  <h3>Your past courses</h3>
+  {% for registration in courseregistration_list %}
+    {% if current_date|date > registration.course.end_date|date %}
+      <div style="border: 1px solid black; margin: 5px; padding: 5px;">
+        <h4>{{ registration.course.title }}</h4>
+        <p>{{ registration.course.start_date }}–{{ registration.course.end_date }}</p>
+        {% if registration.exam %}
+          <p>You have applied for an exam with this course.</p>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% empty %}
+      <p>You have not signed up for any courses in the past.</p>
+  {% endfor %}
 {% endif %}
 {% endblock content %}
