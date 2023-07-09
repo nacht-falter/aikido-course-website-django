@@ -4,11 +4,12 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.urls import reverse_lazy
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
-from .models import Course, CourseRegistration
-from .forms import CourseRegistrationForm
+from .models import Course, CourseRegistration, UserProfile
+from .forms import CourseRegistrationForm, UserProfileForm
 
 CURRENT_DATE = date.today()
 
@@ -128,3 +129,42 @@ class UpdateCourseRegistration(SuccessMessageMixin, generic.edit.UpdateView):
             f"Your registration for {self.object.course.title}"
             " has been updated."
         )
+
+
+class UserProfileView(LoginRequiredMixin, View):
+    """Displays a user profile or a form to create a new profile.
+    Documentation for LoginRequiredMixin: https://docs.djangoproject
+    .com/en/4.2/topics/auth/default/#the-loginrequiredmixin-mixin
+    """
+
+    def get(self, request):
+        user = request.user
+        profiles = UserProfile.objects.filter(user=user)
+        if profiles:
+            profile = get_object_or_404(profiles, user=user)
+            return render(request, "userprofile.html", {"profile": profile})
+
+        else:
+            profile_form = UserProfileForm()
+            return render(
+                request,
+                "create_userprofile.html",
+                {"form": profile_form},
+            )
+
+    def post(self, request):
+        profile_form = UserProfileForm(data=request.POST)
+        if profile_form.is_valid():
+            UserProfile.objects.create(
+                user=request.user,
+                grade=profile_form.cleaned_data["grade"],
+                first_name=profile_form.cleaned_data["first_name"],
+                last_name=profile_form.cleaned_data["last_name"],
+            )
+            messages.info(
+                request, "You have successfully created a user profile."
+            )
+        else:
+            profile_form = UserProfileForm()
+
+        return HttpResponseRedirect(reverse("create_userprofile"))

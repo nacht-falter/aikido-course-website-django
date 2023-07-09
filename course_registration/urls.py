@@ -23,4 +23,9 @@ urlpatterns = [
         views.UpdateCourseRegistration.as_view(),
         name="update_courseregistration",
     ),
+    path(
+        "user/profile/",
+        views.UserProfileView.as_view(),
+        name="create_userprofile",
+    ),
 ]
