@@ -1,14 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- https://docs.djangoproject.com/en/3.2/ref/contrib/messages/#displaying-messages -->
-{% if messages %}
-<ul class="messages">
-  {% for message in messages %}
-  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
 <h3>Your profile</h3>
 <ul>
   <li>Name: {{ profile.user.first_name }} {{ profile.user.last_name }}</li>

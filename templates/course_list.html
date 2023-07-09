@@ -1,14 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- https://docs.djangoproject.com/en/3.2/ref/contrib/messages/#displaying-messages -->
-{% if messages %}
-<ul class="messages">
-  {% for message in messages %}
-  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
 {% for course in course_list %}
 <h3>{{ course.title }}:</h3>
 <p>{{ course.start_date }}-{{ course.end_date }}</p>
