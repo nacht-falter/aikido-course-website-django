@@ -2,7 +2,7 @@ from datetime import date, timedelta
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
-from .models import Course, CourseRegistration
+from .models import Course, CourseRegistration, UserProfile
 
 
 class CourseListTest(TestCase):
@@ -43,7 +43,8 @@ class RegisterCourseTest(TestCase):
             course_fee=50,
         )
         # Test user login:
-        # https://docs.djangoproject.com/en/3.2/topics/testing/tools/#django.test.Client.force_login
+        # https://docs.djangoproject.com/en/3.2/topics/testing/tools
+        # /#django.test.Client.force_login
         self.user = User.objects.create_user(
             username="test-user", password="testpassword"
         )
@@ -74,7 +75,11 @@ class RegisterCourseTest(TestCase):
         print("\ntest_post_valid_registration_form")
         response = self.client.post(
             "/courses/register/test-course/",
-            {"final_fee": 50, "accept_terms": True, "exam": False},
+            {
+                "final_fee": 50,
+                "accept_terms": True,
+                "exam": False,
+            },
         )
         self.assertRedirects(response, "/user/registrations/", 302, 200)
         course_registration = CourseRegistration.objects.all()
@@ -160,6 +165,7 @@ class UpdateCourseRegistrationTest(TestCase):
         )
 
     def test_update_course_registration(self):
+        print("\ntest_update_course_registration")
         response = self.client.post(
             f"/user/registrations/update/{self.registration.pk}/",
             {
@@ -178,3 +184,49 @@ class UpdateCourseRegistrationTest(TestCase):
             f"Your registration for {self.course.title} has been updated.",
             messages,
         )
+
+
+class UserProfileViewTest(TestCase):
+    """Tests for UserProfileView view"""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="test-user",
+            password="testpassword",
+        )
+        self.client.force_login(self.user)
+
+    def test_get_user_profile(self):
+        print("\ntest_get_user_profile")
+        self.user_profile = UserProfile.objects.create(
+            user=self.user,
+            first_name="Test",
+            last_name="User",
+            grade="ng",
+        )
+        response = self.client.get("/user/profile/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "userprofile.html")
+
+    def test_get_user_profile_form(self):
+        print("\ntest_get_user_profile_form")
+        response = self.client.get("/user/profile/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "create_userprofile.html")
+
+    def test_post_valid_user_profile_form(self):
+        print("\ntest_post_valid_user_profile_form")
+        response = self.client.post(
+            "/user/profile/",
+            {
+                "first_name": "Test",
+                "last_name": "User",
+                "grade": "ng",
+            },
+        )
+        self.assertRedirects(response, "/user/profile/", 302, 200)
+
+    def test_post_invalid_user_profile_form(self):
+        print("\ntest_post_invalid_user_profile_form")
+        response = self.client.post("/user/profile/")
+        self.assertRedirects(response, "/user/profile/", 302, 200)
