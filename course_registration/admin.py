@@ -1,10 +1,11 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
-from .models import Course, CourseRegistration, CourseSession
+from .models import Course, CourseRegistration, CourseSession, UserProfile
 
 
 class CourseSessionInline(admin.TabularInline):
-    """Adds all Sessions for a course to the course view.
+    """Displays CourseSessions as an inline model
     Django documentation for inline models:
     https://docs.djangoproject.com/en/4.2/ref/contrib/admin
     /#inlinemodeladmin-objects
@@ -15,7 +16,7 @@ class CourseSessionInline(admin.TabularInline):
 
 
 class CourseRegistrationInline(admin.TabularInline):
-    """Adds all registrations for a course to the course view."""
+    """Displays CourseRegistrations as an inline model"""
 
     model = CourseRegistration
     extra = 0  # Set number of additional rows to 0
@@ -82,5 +83,17 @@ class CourseAdmin(admin.ModelAdmin):
         registrations = CourseRegistration.objects.filter(course=course)
         return len(registrations)
 
-    # https://stackoverflow.com/a/64352815
+    # Customize property name: https://stackoverflow.com/a/64352815
     get_course_registration_count.short_description = "Registrations"
+
+
+class UserProfileInline(admin.StackedInline):
+    """Displays UserProfile as an inline model"""
+
+    model = UserProfile
+    extra = 0  # Set number of additional rows to 0
+    fields = ["grade", "first_name", "last_name"]
+
+
+# Add inlines to UserAdmin model: https://stackoverflow.com/a/35573797
+UserAdmin.inlines += (UserProfileInline,)
