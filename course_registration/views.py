@@ -167,4 +167,4 @@ class UserProfileView(LoginRequiredMixin, View):
         else:
             profile_form = UserProfileForm()
 
-        return HttpResponseRedirect(reverse("create_userprofile"))
+        return HttpResponseRedirect(reverse("userprofile"))

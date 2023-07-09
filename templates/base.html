@@ -19,9 +19,10 @@
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="{% url 'course_list' %}">Courses</a></li>
+      <li><a href="{% url 'course_list' %}">All Courses</a></li>
       {% if user.is_authenticated %}
-      <li><a href="{% url 'courseregistration_list' %}">My registrations</a></li>
+      <li><a href="{% url 'courseregistration_list' %}">My Courses</a></li>
+      <li><a href="{% url 'userprofile' %}">My Profile</a></li>
       <li><a href="{% url 'account_logout' %}">Logout</a></li>
       {% else %}
       <li><a href="{% url 'account_login' %}">Sign Up | Login</a></li>

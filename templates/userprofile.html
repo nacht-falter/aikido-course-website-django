@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>Your profile</h3>
+<h3>My User Profile</h3>
 <ul>
   <li>Name: {{ profile.user.first_name }} {{ profile.user.last_name }}</li>
   <li>E-mail: {{ profile.user.email }}</li>
   <li>Grade: {{ profile.get_grade_display }}</li>
 </ul>
+
+<p><a href="{% url 'courseregistration_list' %}">My courses</a></p>
 {% endblock content %}

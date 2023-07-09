@@ -26,6 +26,6 @@ urlpatterns = [
     path(
         "user/profile/",
         views.UserProfileView.as_view(),
-        name="create_userprofile",
+        name="userprofile",
     ),
 ]
