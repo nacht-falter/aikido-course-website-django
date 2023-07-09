@@ -1,8 +1,11 @@
+from datetime import datetime, date, timedelta
+
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from datetime import datetime, date, timedelta
-from .models import Course, CourseSession
+from django.utils.text import slugify
+
+from .models import Course, CourseSession, UserProfile
 
 
 class TestCourseModel(TestCase):
@@ -14,7 +17,7 @@ class TestCourseModel(TestCase):
             slug="valid-course",
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
-            registration_status=(0),
+            registration_status=0,
             course_fee=50,
         )
         self.invalid_coures = Course.objects.create(
@@ -22,7 +25,7 @@ class TestCourseModel(TestCase):
             slug="invalid-course",
             start_date=date.today(),
             end_date=date.today() - timedelta(days=1),
-            registration_status=(0),
+            registration_status=0,
             course_fee=50,
         )
 
@@ -47,7 +50,7 @@ class TestCourseSessionModel(TestCase):
             slug="test-course",
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
-            registration_status=(0),
+            registration_status=0,
             course_fee=50,
         )
         self.course_sessions = []
@@ -86,3 +89,29 @@ class TestCourseSessionModel(TestCase):
         session = CourseSession.objects.get(title="Invalid session")
         # https://stackoverflow.com/questions/73188838/django-testcase-check-validationerror-with-assertraises-in-is-throwing-validatio
         self.assertRaises(ValidationError, session.clean)
+
+
+class TestUserProfileModel(TestCase):
+    """Tests for UserProfile model"""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="test-user",
+            password="testpassword",
+        )
+        self.client.force_login(self.user)
+        self.user_profile = UserProfile.objects.create(
+            user=self.user,
+            first_name="Test",
+            last_name="User",
+            grade="ng",
+        )
+
+    def test_user_profile_slug(self):
+        print("\ntest_user_profile_slug")
+        self.assertEqual(self.user_profile.slug, slugify(self.user.username))
+
+    def test_user_profile_upates_name(self):
+        print("\ntest_user_profile_updates_name")
+        self.assertEqual(self.user_profile.first_name, self.user.first_name)
+        self.assertEqual(self.user_profile.last_name, self.user.last_name)
