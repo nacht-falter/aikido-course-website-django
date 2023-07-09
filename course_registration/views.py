@@ -63,25 +63,33 @@ class RegisterCourse(View):
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
-class CourseRegistrationList(generic.ListView):
+class CourseRegistrationList(View):
     """Displays a list of a users course registrations"""
 
-    model = CourseRegistration
-    template_name = "courseregistration_list.html"
+    def get(self, request):
+        user_registrations = CourseRegistration.objects.filter(
+            user=request.user
+        )
+        current_date = date.today()
+        past_registrations = [
+            registration
+            for registration in user_registrations
+            if registration.course.end_date < current_date
+        ]
+        upcoming_registrations = [
+            registration
+            for registration in user_registrations
+            if registration.course.end_date > current_date
+        ]
 
-    # Define name for context object:
-    # https://docs.djangoproject.com/en/3.2/topics/class-based-
-    # views/generic-display/#making-friendly-template-contexts
-    context_object_name = "courseregistration_list"
-
-    # Passing additional context to generic view:
-    # https://docs.djangoproject.com/en/4.2/ref/class-based-
-    # views/mixins-simple/#contextmixin
-    extra_context = {"current_date": CURRENT_DATE}
-
-    # Filter user registrations: https://stackoverflow.com/a/24725716
-    def get_queryset(self):
-        return self.model.objects.filter(user=self.request.user)
+        return render(
+            request,
+            "courseregistration_list.html",
+            {
+                "past_registrations": past_registrations,
+                "upcoming_registrations": upcoming_registrations,
+            },
+        )
 
 
 class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
