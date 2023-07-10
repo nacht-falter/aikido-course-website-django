@@ -1,7 +1,9 @@
 from datetime import date, timedelta
+
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
+
 from .models import Course, CourseRegistration, UserProfile
 
 
@@ -229,4 +231,52 @@ class UserProfileViewTest(TestCase):
     def test_post_invalid_user_profile_form(self):
         print("\ntest_post_invalid_user_profile_form")
         response = self.client.post("/user/profile/")
+        self.assertRedirects(response, "/user/profile/", 302, 200)
+
+
+class UpdateUserProfileViewTest(TestCase):
+    """Tests for UpdateUserProfile view"""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="test-username",
+            password="testpassword",
+            first_name="Test",
+            last_name="User",
+            email="test@mail.com",
+        )
+        self.client.force_login(self.user)
+        self.user_profile = UserProfile.objects.create(
+            user=self.user, grade="ng"
+        )
+
+    def test_get_update_user_profile_form(self):
+        print("\ntest_get_update_user_profile_form")
+        response = self.client.get("/user/profile/update/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "update_userprofile.html")
+
+    def test_post_valid_update_user_profile_form(self):
+        print("\ntest_post_valid_update_user_profile_form")
+        changed_data = {
+            "username": "test_username_changed",
+            "first_name": "Test_changed",
+            "last_name": "User_changed",
+            "email": "test_changed@mail.com",
+            "grade": "6k",
+        }
+        response = self.client.post("/user/profile/update/", changed_data)
+        user_profile = UserProfile.objects.get(user=self.user)
+        user = user_profile.user
+
+        self.assertRedirects(response, "/user/profile/", 302, 200)
+        self.assertEqual(user_profile.user.username, changed_data["username"])
+        self.assertEqual(user.first_name, changed_data["first_name"])
+        self.assertEqual(user.last_name, changed_data["last_name"])
+        self.assertEqual(user.email, changed_data["email"])
+        self.assertEqual(user_profile.grade, changed_data["grade"])
+
+    def test_post_invalid_user_profile_form(self):
+        print("\ntest_post_invalid_user_update_profile_form")
+        response = self.client.post("/user/profile/update/")
         self.assertRedirects(response, "/user/profile/", 302, 200)
