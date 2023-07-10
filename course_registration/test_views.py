@@ -200,8 +200,6 @@ class UserProfileViewTest(TestCase):
         print("\ntest_get_user_profile")
         self.user_profile = UserProfile.objects.create(
             user=self.user,
-            first_name="Test",
-            last_name="User",
             grade="ng",
         )
         response = self.client.get("/user/profile/")
@@ -219,8 +217,10 @@ class UserProfileViewTest(TestCase):
         response = self.client.post(
             "/user/profile/",
             {
+                "username": "test_username",
                 "first_name": "Test",
                 "last_name": "User",
+                "email": "test@mail.com",
                 "grade": "ng",
             },
         )

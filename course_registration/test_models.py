@@ -102,16 +102,9 @@ class TestUserProfileModel(TestCase):
         self.client.force_login(self.user)
         self.user_profile = UserProfile.objects.create(
             user=self.user,
-            first_name="Test",
-            last_name="User",
             grade="ng",
         )
 
     def test_user_profile_slug(self):
         print("\ntest_user_profile_slug")
         self.assertEqual(self.user_profile.slug, slugify(self.user.username))
-
-    def test_user_profile_upates_name(self):
-        print("\ntest_user_profile_updates_name")
-        self.assertEqual(self.user_profile.first_name, self.user.first_name)
-        self.assertEqual(self.user_profile.last_name, self.user.last_name)

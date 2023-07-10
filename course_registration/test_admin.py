@@ -17,7 +17,6 @@ request = request_factory.get("/admin")
 
 class TestCourseAdmin(TestCase):
     """Tests for the CourseAdmin model"""
-    print("Tests for CourseAdmin model")
 
     def setUp(self):
         site = AdminSite()
