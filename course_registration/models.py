@@ -119,8 +119,6 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
     grade = models.CharField(
         max_length=2, choices=GRADES_CHOICES, default=NO_GRADE
     )
@@ -129,11 +127,6 @@ class UserProfile(models.Model):
     # /topics/db/models/#overriding-predefined-model-methods
     def save(self, *args, **kwargs):
         # Create slug from another field: https://stackoverflow.com/a/837835
-        if not self.id:
+        if not self.slug:
             self.slug = slugify(self.user.username)
-
-            self.user.first_name = self.first_name
-            self.user.last_name = self.last_name
-            self.user.save()
-
         super(UserProfile, self).save(*args, **kwargs)

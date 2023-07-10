@@ -1,4 +1,5 @@
 from django import forms
+
 from .models import CourseRegistration, UserProfile
 
 
@@ -14,6 +15,10 @@ class CourseRegistrationForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
+    # Add new fields to form: https://stackoverflow.com/a/58944671
+    first_name = forms.CharField(max_length=200)
+    last_name = forms.CharField(max_length=200)
+
     class Meta:
         model = UserProfile
-        fields = ["first_name", "last_name", "grade"]
+        fields = ["grade"]

@@ -92,7 +92,7 @@ class UserProfileInline(admin.StackedInline):
 
     model = UserProfile
     extra = 0  # Set number of additional rows to 0
-    fields = ["grade", "first_name", "last_name"]
+    fields = ["grade"]
 
 
 # Add inlines to UserAdmin model: https://stackoverflow.com/a/35573797

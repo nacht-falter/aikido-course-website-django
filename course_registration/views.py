@@ -163,12 +163,18 @@ class UserProfileView(LoginRequiredMixin, View):
     def post(self, request):
         profile_form = UserProfileForm(data=request.POST)
         if profile_form.is_valid():
-            UserProfile.objects.create(
+            user_profile = UserProfile.objects.create(
                 user=request.user,
                 grade=profile_form.cleaned_data["grade"],
-                first_name=profile_form.cleaned_data["first_name"],
-                last_name=profile_form.cleaned_data["last_name"],
             )
+            user_profile.user.first_name = profile_form.cleaned_data[
+                "first_name"
+            ]
+            user_profile.user.last_name = profile_form.cleaned_data[
+                "last_name"
+            ]
+            user_profile.user.save()
+            user_profile.save()
             messages.info(
                 request, "You have successfully created a user profile."
             )
