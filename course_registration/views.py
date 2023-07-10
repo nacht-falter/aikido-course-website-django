@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import Course, CourseRegistration, UserProfile
-from .forms import CourseRegistrationForm, UserProfileForm
+from . import forms
 
 CURRENT_DATE = date.today()
 
@@ -37,7 +37,7 @@ class RegisterCourse(View):
             )
             return HttpResponseRedirect(reverse("course_list"))
 
-        registration_form = CourseRegistrationForm()
+        registration_form = forms.CourseRegistrationForm()
 
         return render(
             request,
@@ -48,7 +48,7 @@ class RegisterCourse(View):
     def post(self, request, slug):
         queryset = Course.objects.filter(registration_status=1)
         course = get_object_or_404(queryset, slug=slug)
-        registration_form = CourseRegistrationForm(data=request.POST)
+        registration_form = forms.CourseRegistrationForm(data=request.POST)
         if registration_form.is_valid():
             registration = registration_form.save(commit=False)
             registration.course = course
@@ -58,7 +58,7 @@ class RegisterCourse(View):
                 request, f"You have successfully signed up for {course.title}"
             )
         else:
-            registration_form = CourseRegistrationForm()
+            registration_form = forms.CourseRegistrationForm()
 
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
@@ -153,7 +153,7 @@ class UserProfileView(LoginRequiredMixin, View):
             return render(request, "userprofile.html", {"profile": profile})
 
         else:
-            profile_form = UserProfileForm()
+            profile_form = forms.UserProfileForm()
             return render(
                 request,
                 "create_userprofile.html",
@@ -161,7 +161,7 @@ class UserProfileView(LoginRequiredMixin, View):
             )
 
     def post(self, request):
-        profile_form = UserProfileForm(data=request.POST)
+        profile_form = forms.UserProfileForm(data=request.POST)
         if profile_form.is_valid():
             user_profile = UserProfile.objects.create(
                 user=request.user,
@@ -179,6 +179,53 @@ class UserProfileView(LoginRequiredMixin, View):
                 request, "You have successfully created a user profile."
             )
         else:
-            profile_form = UserProfileForm()
+            profile_form = forms.UserProfileForm()
+
+        return HttpResponseRedirect(reverse("userprofile"))
+
+
+class UpdateUserProfile(LoginRequiredMixin, View):
+    """Displays a form to update user information"""
+
+    def get(self, request):
+        queryset = UserProfile.objects.filter(user=request.user)
+        user_profile = get_object_or_404(queryset, user=request.user)
+
+        profile_form = forms.UpdateUserProfileForm(
+            initial={
+                "username": request.user.username,
+                "first_name": request.user.first_name,
+                "last_name": request.user.last_name,
+                "email": request.user.email,
+                "grade": user_profile.grade,
+            }
+        )
+        return render(
+            request,
+            "update_userprofile.html",
+            {"form": profile_form},
+        )
+
+    def post(self, request):
+        queryset = UserProfile.objects.filter(user=request.user)
+        user_profile = get_object_or_404(queryset, user=request.user)
+        profile_form = forms.UpdateUserProfileForm(data=request.POST)
+        if profile_form.is_valid():
+            user_profile.user.username = profile_form.cleaned_data["username"]
+            user_profile.user.first_name = profile_form.cleaned_data[
+                "first_name"
+            ]
+            user_profile.user.last_name = profile_form.cleaned_data[
+                "last_name"
+            ]
+            user_profile.user.email = profile_form.cleaned_data["email"]
+            user_profile.grade = profile_form.cleaned_data["grade"]
+            user_profile.user.save()
+            user_profile.save()
+            messages.info(
+                request, "You have successfully updated your user profile."
+            )
+        else:
+            profile_form = forms.UpdateUserProfileForm()
 
         return HttpResponseRedirect(reverse("userprofile"))

@@ -8,5 +8,6 @@
   <li>Grade: {{ profile.get_grade_display }}</li>
 </ul>
 
-<p><a href="{% url 'courseregistration_list' %}">My courses</a></p>
+<p><a href="{% url 'update_userprofile' %}">Edit My Profile</a></p>
+<p><a href="{% url 'courseregistration_list' %}">My Courses</a></p>
 {% endblock content %}

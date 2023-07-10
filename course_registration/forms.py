@@ -22,3 +22,21 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ["grade"]
+
+
+class UpdateUserProfileForm(forms.ModelForm):
+    # Add new fields to form: https://stackoverflow.com/a/58944671
+    username = forms.CharField(max_length=100)
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+
+    class Meta:
+        model = UserProfile
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "grade",
+        ]
