@@ -8,6 +8,9 @@
   <li>Grade: {{ profile.get_grade_display }}</li>
 </ul>
 
-<p><a href="{% url 'update_userprofile' %}">Edit My Profile</a></p>
+<p><a href="{% url 'update_userprofile' %}">Edit my Profile</a></p>
 <p><a href="{% url 'courseregistration_list' %}">My Courses</a></p>
+{% if not user.is_staff %}
+<p><a href="{% url 'deactivate_user' %}">Deactivate my Account</a></p>
+{% endif %}
 {% endblock content %}

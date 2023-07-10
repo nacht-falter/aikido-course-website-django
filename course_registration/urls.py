@@ -32,5 +32,10 @@ urlpatterns = [
         "user/profile/update/",
         views.UpdateUserProfile.as_view(),
         name="update_userprofile",
-    )
+    ),
+    path(
+        "user/deactivate/",
+        views.DeactivateUser.as_view(),
+        name="deactivate_user",
+    ),
 ]

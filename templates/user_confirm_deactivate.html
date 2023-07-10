@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Deactivate your Account?</h3>
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to deactivate your account?<p>
+    <a href="{% url 'userprofile' %}"><button type="button">No</button></a>
+    <input type="submit" value="Yes, I am sure!">
+</form>
+{% endblock content %}

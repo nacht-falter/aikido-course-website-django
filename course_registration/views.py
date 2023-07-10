@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.models import User
 
 from .models import Course, CourseRegistration, UserProfile
 from . import forms
@@ -229,3 +230,35 @@ class UpdateUserProfile(LoginRequiredMixin, View):
             profile_form = forms.UpdateUserProfileForm()
 
         return HttpResponseRedirect(reverse("userprofile"))
+
+
+class DeactivateUser(LoginRequiredMixin, View):
+    """Deactivates a user accounts
+    The Django docs recommend to deactivate user accounts instead
+    of deleting them to avoid breaking foreign keys:
+    https://docs.djangoproject.com/en/4.2/ref/contrib/auth/#django
+    .contrib.auth.models.User.is_active
+    """
+
+    def get(self, request):
+        return render(
+            request,
+            "user_confirm_deactivate.html",
+        )
+
+    def post(self, request):
+        if not request.user.is_staff:
+            user = User.objects.get(pk=request.user.pk)
+            user.is_active = False
+            user.save()
+            messages.info(
+                request, "You have successfully deactivated your account."
+            )
+            return HttpResponseRedirect(reverse("course_list"))
+        else:
+            messages.warning(
+                request,
+                "Staff accounts can not be deactivated."
+                " Please contact us if you want to deactivate your account.",
+            )
+            return HttpResponseRedirect(reverse("userprofile"))
