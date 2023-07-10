@@ -280,3 +280,43 @@ class UpdateUserProfileViewTest(TestCase):
         print("\ntest_post_invalid_user_update_profile_form")
         response = self.client.post("/user/profile/update/")
         self.assertRedirects(response, "/user/profile/", 302, 200)
+
+
+class DeactivateUserTest(TestCase):
+    """Tests for DeactivateUser view"""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="test-username",
+            password="testpassword",
+        )
+        self.client.force_login(self.user)
+
+    def test_get_deactivate_user(self):
+        print("\ntest_get_deactivate_user")
+        response = self.client.get("/user/deactivate/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "user_confirm_deactivate.html")
+
+    def test_post_deactivate_user(self):
+        print("\ntest_post_deactivate_user")
+        response = self.client.post("/user/deactivate/")
+        user = User.objects.get(pk=self.user.pk)
+        self.assertRedirects(response, "/courses/", 302, 200)
+        self.assertFalse(user.is_active)
+
+    def test_deactivate_staff_user(self):
+        print("\ntest_deactivate_staff_user")
+        user = User.objects.get(pk=self.user.pk)
+        user.is_staff = True
+        user.save()
+        response = self.client.post("/user/deactivate/")
+        self.assertRedirects(response, "/user/profile/", 302, 200)
+
+        # Test messages: https://stackoverflow.com/a/46865530
+        messages = [m.message for m in get_messages(response.wsgi_request)]
+        self.assertIn(
+            "Staff accounts can not be deactivated."
+            " Please contact us if you want to deactivate your account.",
+            messages,
+        )
