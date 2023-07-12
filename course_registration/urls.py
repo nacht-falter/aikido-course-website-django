@@ -1,4 +1,7 @@
 from django.urls import path
+
+from course_registration.views import CustomPasswordChangeView
+
 from . import views
 
 urlpatterns = [
@@ -37,5 +40,13 @@ urlpatterns = [
         "user/deactivate/",
         views.DeactivateUser.as_view(),
         name="deactivate_user",
+    ),
+
+    # Override default allauth password redirect url
+    # https://stackoverflow.com/a/56599071
+    path(
+        "accounts/password/change/",
+        CustomPasswordChangeView.as_view(),
+        name="account_change_password",
     ),
 ]

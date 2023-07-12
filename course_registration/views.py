@@ -9,6 +9,8 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 
+from allauth.account.views import PasswordChangeView
+
 from .models import Course, CourseRegistration, UserProfile
 from . import forms
 
@@ -262,3 +264,10 @@ class DeactivateUser(LoginRequiredMixin, View):
                 " Please contact us if you want to deactivate your account.",
             )
             return HttpResponseRedirect(reverse("userprofile"))
+
+
+class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    """Overrides the redirect URL for the allauth PasswordChangeView
+    Instructions from: https://stackoverflow.com/a/56599071
+    """
+    success_url = reverse_lazy('userprofile')
