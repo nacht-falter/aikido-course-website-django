@@ -51,6 +51,7 @@ class RegisterCourseTest(TestCase):
             username="test-user", password="testpassword"
         )
         self.client.force_login(self.user)
+        self.user_profile = UserProfile.objects.create(user=self.user)
 
     def test_get_registration_form(self):
         print("\ntest_get_registration_form")
@@ -84,8 +85,8 @@ class RegisterCourseTest(TestCase):
             },
         )
         self.assertRedirects(response, "/user/registrations/", 302, 200)
-        course_registration = CourseRegistration.objects.all()
-        self.assertEqual(len(course_registration), 1)
+        queryset = CourseRegistration.objects.all()
+        self.assertEqual(len(queryset), 1)
 
     def test_post_invalid_registration_form(self):
         print("\ntest_post_invalid_registration_form")
@@ -93,6 +94,21 @@ class RegisterCourseTest(TestCase):
         self.assertRedirects(response, "/user/registrations/", 302, 200)
         registrations = CourseRegistration.objects.all()
         self.assertEqual(len(registrations), 0)
+
+    def test_auto_added_exam_grade(self):
+        print("\ntest_auto_added_exam_grade")
+        self.client.post(
+            "/courses/register/test-course/",
+            {
+                "final_fee": 50,
+                "accept_terms": True,
+                "exam": True,
+            },
+        )
+        registration = CourseRegistration.objects.get(
+            course=self.course, user=self.user
+        )
+        self.assertEqual(registration.exam_grade, self.user_profile.grade + 1)
 
 
 class CancelCourseRegistrationTest(TestCase):
@@ -202,7 +218,7 @@ class UserProfileViewTest(TestCase):
         print("\ntest_get_user_profile")
         self.user_profile = UserProfile.objects.create(
             user=self.user,
-            grade="ng",
+            grade=0,
         )
         response = self.client.get("/user/profile/")
         self.assertEqual(response.status_code, 200)
@@ -223,7 +239,7 @@ class UserProfileViewTest(TestCase):
                 "first_name": "Test",
                 "last_name": "User",
                 "email": "test@mail.com",
-                "grade": "ng",
+                "grade": 0,
             },
         )
         self.assertRedirects(response, "/user/profile/", 302, 200)
@@ -246,9 +262,7 @@ class UpdateUserProfileViewTest(TestCase):
             email="test@mail.com",
         )
         self.client.force_login(self.user)
-        self.user_profile = UserProfile.objects.create(
-            user=self.user, grade="ng"
-        )
+        self.user_profile = UserProfile.objects.create(user=self.user, grade=0)
 
     def test_get_update_user_profile_form(self):
         print("\ntest_get_update_user_profile_form")
@@ -263,7 +277,7 @@ class UpdateUserProfileViewTest(TestCase):
             "first_name": "Test_changed",
             "last_name": "User_changed",
             "email": "test_changed@mail.com",
-            "grade": "6k",
+            "grade": 1,
         }
         response = self.client.post("/user/profile/update/", changed_data)
         user_profile = UserProfile.objects.get(user=self.user)

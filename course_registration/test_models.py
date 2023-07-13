@@ -102,7 +102,7 @@ class TestUserProfileModel(TestCase):
         self.client.force_login(self.user)
         self.user_profile = UserProfile.objects.create(
             user=self.user,
-            grade="ng",
+            grade=0,
         )
 
     def test_user_profile_slug(self):
