@@ -41,7 +41,11 @@ urlpatterns = [
         views.DeactivateUser.as_view(),
         name="deactivate_user",
     ),
-
+    path(
+        "user/update-grade/",
+        views.UpdateGrade.as_view(),
+        name="update_grade",
+    ),
     # Override default allauth password redirect url
     # https://stackoverflow.com/a/56599071
     path(

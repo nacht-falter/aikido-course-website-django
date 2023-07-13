@@ -4,6 +4,27 @@ from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
 
+# Documentation for defining choices for CharFields:
+# https://docs.djangoproject.com/en/4.2/ref/models/fields/#choices
+# Assign increasing integer values to a list of variables:
+# https://stackoverflow.com/a/64485228
+(
+    RED_BELT,
+    SIXTH_KYU,
+    FIFTH_KYU,
+    FOURTH_KYU,
+    THIRD_KYU,
+    SECOND_KYU,
+    FIRST_KYU,
+    SHODAN,
+    NIDAN,
+    SANDAN,
+    YONDAN,
+    GODAN,
+    ROKUDAN,
+) = range(13)
+
+
 class Course(models.Model):
     """Represents a course a user can sign up for"""
 
@@ -62,11 +83,25 @@ class CourseRegistration(models.Model):
 
     PAYMENT_STATUS = ((0, "Unpaid"), (1, "Paid"))
 
+    EXAM_GRADE_CHOICES = [
+        (SIXTH_KYU, "6th Kyu ⚪️"),
+        (FIFTH_KYU, "5th Kyu 🟡"),
+        (FOURTH_KYU, "4th Kyu 🟠"),
+        (THIRD_KYU, "3rd Kyu 🟢"),
+        (SECOND_KYU, "2nd Kyu 🔵"),
+        (FIRST_KYU, "1st Kyu 🟤"),
+    ]
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     selected_sessions = models.ManyToManyField(CourseSession, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)
     exam = models.BooleanField(default=False)
+    exam_grade = models.IntegerField(
+        choices=EXAM_GRADE_CHOICES, default=RED_BELT
+    )
+    exam_passed = models.BooleanField()
+    grade_updated = models.BooleanField(default=False)
     accept_terms = models.BooleanField(default=False)
     final_fee = models.IntegerField()
     payment_status = models.IntegerField(choices=PAYMENT_STATUS, default=0)
@@ -85,43 +120,25 @@ class CourseRegistration(models.Model):
 class UserProfile(models.Model):
     """Represents a user profile"""
 
-    # Documentation for defing choices for a CharField
-    # https://docs.djangoproject.com/en/4.2/ref/models/fields/#choices
-    NO_GRADE = "ng"
-    SIXTH_KYU = "6k"
-    FIFTH_KYU = "5k"
-    FOURTH_KYU = "4k"
-    THIRD_KYU = "3k"
-    SECOND_KYU = "2k"
-    FIRST_KYU = "1k"
-    SHODAN = "1d"
-    NIDAN = "2d"
-    SANDAN = "3d"
-    YONDAN = "4d"
-    GODAN = "5d"
-    ROKUDAN = "6d"
-
-    GRADES_CHOICES = [
-        (NO_GRADE, "No Grade (Red Belt)"),
-        (SIXTH_KYU, "6. Kyu (White Belt)"),
-        (FIFTH_KYU, "5. Kyu (Yellow Belt)"),
-        (FOURTH_KYU, "4. Kyu (Orange Belt)"),
-        (THIRD_KYU, "3. Kyu (Green Belt)"),
-        (SECOND_KYU, "2. Kyu (Blue Belt)"),
-        (FIRST_KYU, "1. Kyu (Brown Belt)"),
-        (SHODAN, "1. Dan"),
-        (NIDAN, "2. Dan"),
-        (SANDAN, "3. Dan"),
-        (YONDAN, "4. Dan"),
-        (GODAN, "5. Dan"),
-        (ROKUDAN, "6. Dan"),
+    GRADE_CHOICES = [
+        (RED_BELT, "Red Belt 🔴"),
+        (SIXTH_KYU, "6th Kyu ⚪️"),
+        (FIFTH_KYU, "5th Kyu 🟡"),
+        (FOURTH_KYU, "4th Kyu 🟠"),
+        (THIRD_KYU, "3rd Kyu 🟢"),
+        (SECOND_KYU, "2nd Kyu 🔵"),
+        (FIRST_KYU, "1st Kyu 🟤"),
+        (SHODAN, "1st Dan ⚫️"),
+        (NIDAN, "2nd  Dan ⚫️"),
+        (SANDAN, "3rd Dan ⚫️"),
+        (YONDAN, "4th Dan ⚫️"),
+        (GODAN, "5th Dan ⚫️"),
+        (ROKUDAN, "6th Dan ⚫️"),
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
-    grade = models.CharField(
-        max_length=2, choices=GRADES_CHOICES, default=NO_GRADE
-    )
+    grade = models.IntegerField(choices=GRADE_CHOICES, default=RED_BELT)
 
     # Overriding save method: https://docs.djangoproject.com/en/4.2
     # /topics/db/models/#overriding-predefined-model-methods

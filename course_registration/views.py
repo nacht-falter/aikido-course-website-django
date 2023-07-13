@@ -56,6 +56,9 @@ class RegisterCourse(View):
             registration = registration_form.save(commit=False)
             registration.course = course
             registration.user = request.user
+            registration.exam_grade = (
+                UserProfile.objects.get(user=request.user).grade + 1
+            )
             registration.save()
             messages.info(
                 request, f"You have successfully signed up for {course.title}"
@@ -77,7 +80,7 @@ class CourseRegistrationList(View):
         past_registrations = [
             registration
             for registration in user_registrations
-            if registration.course.end_date < current_date
+            if registration.course.end_date <= current_date
         ]
         upcoming_registrations = [
             registration
@@ -234,6 +237,50 @@ class UpdateUserProfile(LoginRequiredMixin, View):
         return HttpResponseRedirect(reverse("userprofile"))
 
 
+class UpdateGrade(View):
+    """Updates a user's grade"""
+
+    def get(self, request):
+        exam_registration = CourseRegistration.objects.filter(
+            user=request.user, grade_updated=False
+        ).first()
+        if (
+            exam_registration
+            and exam_registration.course.end_date <= date.today()
+        ):
+            return render(
+                request,
+                "update_grade.html",
+                {"exam_registration": exam_registration},
+            )
+
+        else:
+            messages.info(request, "No exam application")
+            return HttpResponseRedirect(reverse("userprofile"))
+
+    def post(self, request):
+        answer = request.POST.get("answer")
+        if answer == "yes":
+            user_profile = UserProfile.objects.get(user=request.user)
+            exam_registration = CourseRegistration.objects.filter(
+                user=request.user, grade_updated=False
+            ).first()
+            user_profile.grade = exam_registration.exam_grade
+            user_profile.save()
+            exam_registration.grade_updated = True
+            exam_registration.save()
+            messages.info(
+                request,
+                "Congratulations! Your grade has been updated to"
+                f" {user_profile.get_grade_display()}.",
+            )
+        else:
+            pass
+            messages.info(request, "Your grade has not been updated.")
+
+        return HttpResponseRedirect(reverse("userprofile"))
+
+
 class DeactivateUser(LoginRequiredMixin, View):
     """Deactivates a user accounts
     The Django docs recommend to deactivate user accounts instead
@@ -243,10 +290,7 @@ class DeactivateUser(LoginRequiredMixin, View):
     """
 
     def get(self, request):
-        return render(
-            request,
-            "user_confirm_deactivate.html",
-        )
+        return render(request, "user_confirm_deactivate.html")
 
     def post(self, request):
         if not request.user.is_staff:
@@ -270,4 +314,5 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     """Overrides the redirect URL for the allauth PasswordChangeView
     Instructions from: https://stackoverflow.com/a/56599071
     """
-    success_url = reverse_lazy('userprofile')
+
+    success_url = reverse_lazy("userprofile")

@@ -24,8 +24,10 @@
 <div style="border: 1px solid black; margin: 5px; padding: 5px;">
   <h4>{{ registration.course.title }}</h4>
   <p>{{ registration.course.start_date }}–{{ registration.course.end_date }}</p>
-  {% if registration.exam %}
-  <p>You have applied for an exam with this course.</p>
+  {% if registration.exam and registration.exam_passed %}
+  <p>You have passed your {{ registration.get_exam_grade_display }} exam on this course.</p>
+  {% elif registration.exam and not registration.exam_passed %}
+  <p>You did not pass your {{ registration.get_exam_grade_display }} exam on this course.</p>
   {% endif %}
 </div>
 {% empty %}

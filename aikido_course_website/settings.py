@@ -58,7 +58,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = "/user/profile/"
+LOGIN_REDIRECT_URL = "/user/update-grade/"
 LOGOUT_REDIRECT_URL = "/"
 
 ACCOUNT_EMAIL_REQUIRED = True
