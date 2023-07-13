@@ -56,9 +56,7 @@ class RegisterCourse(View):
             registration = registration_form.save(commit=False)
             registration.course = course
             registration.user = request.user
-            queryset = (
-                UserProfile.objects.filter(user=request.user)
-            )
+            queryset = UserProfile.objects.filter(user=request.user)
             user_profile = get_object_or_404(queryset, user=request.user)
             registration.exam_grade = user_profile.grade + 1
             registration.save()
@@ -261,11 +259,11 @@ class UpdateGrade(View):
 
     def post(self, request):
         answer = request.POST.get("answer")
+        exam_registration = CourseRegistration.objects.filter(
+            user=request.user, grade_updated=False
+        ).first()
         if answer == "yes":
             user_profile = UserProfile.objects.get(user=request.user)
-            exam_registration = CourseRegistration.objects.filter(
-                user=request.user, grade_updated=False
-            ).first()
             user_profile.grade = exam_registration.exam_grade
             user_profile.save()
             exam_registration.grade_updated = True
@@ -276,7 +274,8 @@ class UpdateGrade(View):
                 f" {user_profile.get_grade_display()}.",
             )
         else:
-            pass
+            exam_registration.grade_updated = True
+            exam_registration.save()
             messages.info(request, "Your grade has not been updated.")
 
         return HttpResponseRedirect(reverse("userprofile"))

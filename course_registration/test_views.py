@@ -334,3 +334,66 @@ class DeactivateUserTest(TestCase):
             " Please contact us if you want to deactivate your account.",
             messages,
         )
+
+
+class UpdateGradeTest(TestCase):
+    """Tests for UpdateGrade view"""
+
+    def setUp(self):
+        self.course = Course.objects.create(
+            title="Test course",
+            slug="test-course",
+            start_date=date.today() - timedelta(days=2),
+            end_date=date.today() - timedelta(days=1),
+            registration_status=(1),
+            course_fee=50,
+        )
+        self.user = User.objects.create_user(
+            username="test-user", password="testpassword"
+        )
+        self.user_profile = UserProfile.objects.create(user=self.user, grade=1)
+        self.client.force_login(self.user)
+        self.registration = CourseRegistration.objects.create(
+            user=self.user,
+            course=self.course,
+            final_fee=50,
+            payment_status=0,
+            accept_terms=True,
+            exam=True,
+            exam_grade=self.user_profile.grade + 1,
+            grade_updated=False,
+            comment="Test comment",
+        )
+
+    def test_get_update_grade_after_course(self):
+        print("\ntest_get_update_grade_after_course")
+        response = self.client.get("/user/update-grade/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "update_grade.html")
+
+    def test_get_update_grade_before_course_ends(self):
+        print("\ntest_get_update_grade_before_course_ends")
+        self.course.end_date = date.today() + timedelta(days=1)
+        self.course.save()
+        response = self.client.get("/user/update-grade/")
+        self.assertRedirects(response, "/user/profile/", 302, 200)
+
+    def test_post_update_grade_confirmed(self):
+        print("\ntest_post_update_grade_confirmed")
+        response = self.client.post("/user/update-grade/", {"answer": "yes"})
+        self.registration.refresh_from_db()
+        self.user_profile.refresh_from_db()
+        self.assertEqual(self.user_profile.grade, self.registration.exam_grade)
+        self.assertEqual(self.registration.grade_updated, True)
+        self.assertRedirects(response, "/user/profile/", 302, 200)
+
+    def test_post_update_grade_cancelled(self):
+        print("\ntest_post_update_grade_cancelled")
+        response = self.client.post("/user/update-grade/", {"answer": "no"})
+        self.registration.refresh_from_db()
+        self.user_profile.refresh_from_db()
+        self.assertEqual(
+            self.user_profile.grade, self.registration.exam_grade - 1
+        )
+        self.assertEqual(self.registration.grade_updated, True)
+        self.assertRedirects(response, "/user/profile/", 302, 200)
