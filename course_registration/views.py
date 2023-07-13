@@ -56,9 +56,11 @@ class RegisterCourse(View):
             registration = registration_form.save(commit=False)
             registration.course = course
             registration.user = request.user
-            registration.exam_grade = (
-                UserProfile.objects.get(user=request.user).grade + 1
+            queryset = (
+                UserProfile.objects.filter(user=request.user)
             )
+            user_profile = get_object_or_404(queryset, user=request.user)
+            registration.exam_grade = user_profile.grade + 1
             registration.save()
             messages.info(
                 request, f"You have successfully signed up for {course.title}"
@@ -255,7 +257,6 @@ class UpdateGrade(View):
             )
 
         else:
-            messages.info(request, "No exam application")
             return HttpResponseRedirect(reverse("userprofile"))
 
     def post(self, request):

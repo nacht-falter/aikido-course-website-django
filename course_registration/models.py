@@ -100,7 +100,7 @@ class CourseRegistration(models.Model):
     exam_grade = models.IntegerField(
         choices=EXAM_GRADE_CHOICES, default=RED_BELT
     )
-    exam_passed = models.BooleanField()
+    exam_passed = models.BooleanField(null=True)
     grade_updated = models.BooleanField(default=False)
     accept_terms = models.BooleanField(default=False)
     final_fee = models.IntegerField()
