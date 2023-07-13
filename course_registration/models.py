@@ -74,7 +74,11 @@ class CourseSession(models.Model):
     # https://docs.djangoproject.com/en/4.2/ref/models/instances
     # /#django.db.models.Model.clean
     def clean(self):
-        if self.start_time > self.end_time:
+        if (
+            self.start_time
+            and self.end_time
+            and self.start_time > self.end_time
+        ):
             raise ValidationError("Start time cannot be later than end time.")
 
 
