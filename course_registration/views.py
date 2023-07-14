@@ -26,11 +26,22 @@ class CourseList(generic.ListView):
 
 
 class RegisterCourse(LoginRequiredMixin, View):
-    """Displays a registration form or a message"""
+    """Creates a course registration"""
+
+    def prepare_course_data(self, course):
+        """Prepares data to be passed to the template"""
+        course_data = {"course_fee": course.course_fee}
+        counter = 0
+        for session in course.sessions.all():
+            course_data[f"session_{counter}_fee"] = session.session_fee
+            counter += 1
+        return course_data
 
     def get(self, request, slug):
         courses = Course.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
+
+        course_data = self.prepare_course_data(course)
 
         user_registered = CourseRegistration.objects.filter(
             user=request.user, course=course
@@ -46,12 +57,18 @@ class RegisterCourse(LoginRequiredMixin, View):
         return render(
             request,
             "register_course.html",
-            {"course": course, "form": registration_form},
+            {
+                "course": course,
+                "form": registration_form,
+                "course_data": course_data,
+            },
         )
 
     def post(self, request, slug):
         queryset = Course.objects.filter(registration_status=1)
         course = get_object_or_404(queryset, slug=slug)
+        course_data = self.prepare_course_data(course)
+
         registration_form = forms.CourseRegistrationForm(
             data=request.POST, course=course
         )
@@ -100,7 +117,11 @@ class RegisterCourse(LoginRequiredMixin, View):
             return render(
                 request,
                 "register_course.html",
-                {"course": course, "form": registration_form},
+                {
+                    "course": course,
+                    "form": registration_form,
+                    "course_data": course_data,
+                },
             )
 
         return HttpResponseRedirect(reverse("courseregistration_list"))

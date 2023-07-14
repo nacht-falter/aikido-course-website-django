@@ -71,7 +71,7 @@ class CourseSession(models.Model):
     session_fee = models.IntegerField(default=10)
 
     def __str__(self):
-        return f"{self.date}: {self.title}"
+        return self.title
 
     # https://docs.djangoproject.com/en/4.2/ref/models/instances
     # /#django.db.models.Model.clean
