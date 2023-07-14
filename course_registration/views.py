@@ -81,7 +81,7 @@ class RegisterCourse(LoginRequiredMixin, View):
                 messages.warning(
                     request,
                     "Registration not submitted. "
-                    "Please select at least one session."
+                    "Please select at least one session.",
                 )
             registration_form = forms.CourseRegistrationForm(course=course)
             return render(
@@ -143,30 +143,61 @@ class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
         )
 
 
-class UpdateCourseRegistration(SuccessMessageMixin, generic.edit.UpdateView):
-    """Updates a course registration instance
-    Documentation for UpdateView:
-    https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic
-    -editing/#updateview
-    """
+class UpdateCourseRegistration(LoginRequiredMixin, View):
+    """Updates a course registration"""
 
-    model = CourseRegistration
-    fields = [
-        "exam",
-        "accept_terms",
-        "final_fee",
-    ]
-    success_url = reverse_lazy("courseregistration_list")
-    template_name = "courseregistration_update.html"
-
-    # Get success message:
-    # https://stackoverflow.com/questions/74756918/django-deleteview-
-    # successmessagemixin-how-to-pass-data-to-message
-    def get_success_message(self, cleaned_data):
-        return (
-            f"Your registration for {self.object.course.title}"
-            " has been updated."
+    def get(self, request, pk):
+        registration = get_object_or_404(CourseRegistration, pk=pk)
+        registration_form = forms.CourseRegistrationForm(
+            instance=registration, course=registration.course
         )
+
+        return render(
+            request,
+            "update_courseregistration.html",
+            {"course": registration.course, "form": registration_form},
+        )
+
+    def post(self, request, pk):
+        registration = get_object_or_404(CourseRegistration, pk=pk)
+        registration_form = forms.CourseRegistrationForm(
+            data=request.POST,
+            instance=registration,
+            course=registration.course,
+        )
+        if registration_form.is_valid():
+            registration = registration_form.save(commit=False)
+            registration.save()
+
+            # Update the registration to include the selected sessions.
+            selected_sessions = registration_form.cleaned_data.get(
+                "selected_sessions"
+            )
+            registration.selected_sessions.set(selected_sessions)
+
+            messages.info(
+                request,
+                "You have successfully signed up for "
+                f"{registration.course.title}",
+            )
+        else:
+            if not registration_form.cleaned_data.get("selected_sessions"):
+                messages.warning(
+                    request,
+                    "Registration not submitted. "
+                    "Please select at least one session.",
+                )
+            registration_form = forms.CourseRegistrationForm(
+                instance=registration, course=registration.course
+            )
+
+            return render(
+                request,
+                "update_courseregistration.html",
+                {"course": registration.course, "form": registration_form},
+            )
+
+        return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
 class UserProfileView(LoginRequiredMixin, View):
