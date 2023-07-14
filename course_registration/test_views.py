@@ -1,10 +1,10 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 
-from .models import Course, CourseRegistration, UserProfile
+from .models import Course, CourseRegistration, UserProfile, CourseSession
 
 
 class CourseListTest(TestCase):
@@ -44,6 +44,13 @@ class RegisterCourseTest(TestCase):
             registration_status=(1),
             course_fee=50,
         )
+        self.session = CourseSession.objects.create(
+            title="Test sessions",
+            course=self.course,
+            date=date.today(),
+            start_time=datetime.now().time(),
+            end_time=datetime.now().time(),
+        )
         # Test user login:
         # https://docs.djangoproject.com/en/3.2/topics/testing/tools
         # /#django.test.Client.force_login
@@ -79,6 +86,7 @@ class RegisterCourseTest(TestCase):
         response = self.client.post(
             "/courses/register/test-course/",
             {
+                "selected_sessions": [self.session.id],
                 "final_fee": 50,
                 "accept_terms": True,
                 "exam": False,
@@ -91,7 +99,7 @@ class RegisterCourseTest(TestCase):
     def test_post_invalid_registration_form(self):
         print("\ntest_post_invalid_registration_form")
         response = self.client.post(f"/courses/register/{self.course.slug}/")
-        self.assertRedirects(response, "/user/registrations/", 302, 200)
+        self.assertEqual(response.status_code, 200)
         registrations = CourseRegistration.objects.all()
         self.assertEqual(len(registrations), 0)
 
@@ -100,6 +108,7 @@ class RegisterCourseTest(TestCase):
         self.client.post(
             "/courses/register/test-course/",
             {
+                "selected_sessions": [self.session.id],
                 "final_fee": 50,
                 "accept_terms": True,
                 "exam": True,
