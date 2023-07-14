@@ -31,6 +31,7 @@ class RegisterCourse(LoginRequiredMixin, View):
     def get(self, request, slug):
         courses = Course.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
+
         user_registered = CourseRegistration.objects.filter(
             user=request.user, course=course
         )
@@ -58,9 +59,24 @@ class RegisterCourse(LoginRequiredMixin, View):
             registration = registration_form.save(commit=False)
             registration.course = course
             registration.user = request.user
+
+            selected_sessions = registration_form.cleaned_data.get(
+                "selected_sessions"
+            )
+
+            # Calculate registration fee:
+            if len(selected_sessions) == len(course.sessions.all()):
+                registration.final_fee = course.course_fee
+            else:
+                registration.final_fee = 0
+                for session in selected_sessions:
+                    registration.final_fee += session.session_fee
+
+            # Set exam:
             queryset = UserProfile.objects.filter(user=request.user)
             user_profile = get_object_or_404(queryset, user=request.user)
             registration.exam_grade = user_profile.grade + 1
+
             registration.save()
 
             # Update the registration to include the selected sessions.
@@ -68,9 +84,6 @@ class RegisterCourse(LoginRequiredMixin, View):
             # to-many field: https://docs.djangoproject.com/en/4.2/ref
             # /models/relations/#django.db.models.fields.related.Relat
             # edManager.set
-            selected_sessions = registration_form.cleaned_data.get(
-                "selected_sessions"
-            )
             registration.selected_sessions.set(selected_sessions)
 
             messages.info(
@@ -167,12 +180,24 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
         )
         if registration_form.is_valid():
             registration = registration_form.save(commit=False)
-            registration.save()
 
-            # Update the registration to include the selected sessions.
             selected_sessions = registration_form.cleaned_data.get(
                 "selected_sessions"
             )
+
+            # Calculate registration fee:
+            if len(selected_sessions) == len(
+                registration.course.sessions.all()
+            ):
+                registration.final_fee = registration.course.course_fee
+            else:
+                registration.final_fee = 0
+                for session in selected_sessions:
+                    registration.final_fee += session.session_fee
+
+            registration.save()
+
+            # Update the registration to include the selected sessions.
             registration.selected_sessions.set(selected_sessions)
 
             messages.info(

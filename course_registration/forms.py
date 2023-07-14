@@ -29,7 +29,6 @@ class CourseRegistrationForm(forms.ModelForm):
             "exam",
             "accept_terms",
             "comment",
-            "final_fee",
         ]
 
 

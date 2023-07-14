@@ -62,7 +62,9 @@ class CourseSession(models.Model):
     """Represents a session within a course"""
 
     title = models.CharField(max_length=200)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name="sessions"
+    )
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -107,7 +109,7 @@ class CourseRegistration(models.Model):
     exam_passed = models.BooleanField(null=True)
     grade_updated = models.BooleanField(default=False)
     accept_terms = models.BooleanField(default=False)
-    final_fee = models.IntegerField()
+    final_fee = models.IntegerField(default=0)
     payment_status = models.IntegerField(choices=PAYMENT_STATUS, default=0)
     comment = models.TextField(blank=True)
 
