@@ -1,12 +1,31 @@
 from django import forms
 
-from .models import CourseRegistration, UserProfile
+from .models import CourseRegistration, UserProfile, CourseSession
 
 
 class CourseRegistrationForm(forms.ModelForm):
+    # Pass course instance to form (adapted from:
+    # https://medium.com/analytics-vidhya/django-how-to-pass-the-
+    # user-object-into-form-classes-ee322f02948c):
+    def __init__(self, *args, **kwargs):
+        course = kwargs.pop("course", None)
+        super().__init__(*args, **kwargs)
+        self.fields[
+            "selected_sessions"
+        ].queryset = CourseSession.objects.filter(course=course)
+
+    accept_terms = forms.BooleanField(required=True)
+    selected_sessions = forms.ModelMultipleChoiceField(
+        label="Select sessions:",
+        queryset=None,
+        widget=forms.CheckboxSelectMultiple,
+        required=True,
+    )
+
     class Meta:
         model = CourseRegistration
         fields = [
+            "selected_sessions",
             "exam",
             "accept_terms",
             "comment",

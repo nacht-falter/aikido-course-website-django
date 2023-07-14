@@ -25,7 +25,7 @@ class CourseList(generic.ListView):
     template_name = "course_list.html"
 
 
-class RegisterCourse(View):
+class RegisterCourse(LoginRequiredMixin, View):
     """Displays a registration form or a message"""
 
     def get(self, request, slug):
@@ -40,7 +40,7 @@ class RegisterCourse(View):
             )
             return HttpResponseRedirect(reverse("course_list"))
 
-        registration_form = forms.CourseRegistrationForm()
+        registration_form = forms.CourseRegistrationForm(course=course)
 
         return render(
             request,
@@ -51,7 +51,9 @@ class RegisterCourse(View):
     def post(self, request, slug):
         queryset = Course.objects.filter(registration_status=1)
         course = get_object_or_404(queryset, slug=slug)
-        registration_form = forms.CourseRegistrationForm(data=request.POST)
+        registration_form = forms.CourseRegistrationForm(
+            data=request.POST, course=course
+        )
         if registration_form.is_valid():
             registration = registration_form.save(commit=False)
             registration.course = course
@@ -60,11 +62,33 @@ class RegisterCourse(View):
             user_profile = get_object_or_404(queryset, user=request.user)
             registration.exam_grade = user_profile.grade + 1
             registration.save()
+
+            # Update the registration to include the selected sessions.
+            # Instructions on how to save objects with a many-
+            # to-many field: https://docs.djangoproject.com/en/4.2/ref
+            # /models/relations/#django.db.models.fields.related.Relat
+            # edManager.set
+            selected_sessions = registration_form.cleaned_data.get(
+                "selected_sessions"
+            )
+            registration.selected_sessions.set(selected_sessions)
+
             messages.info(
                 request, f"You have successfully signed up for {course.title}"
             )
         else:
-            registration_form = forms.CourseRegistrationForm()
+            if not registration_form.cleaned_data.get("selected_sessions"):
+                messages.warning(
+                    request,
+                    "Registration not submitted. "
+                    "Please select at least one session."
+                )
+            registration_form = forms.CourseRegistrationForm(course=course)
+            return render(
+                request,
+                "register_course.html",
+                {"course": course, "form": registration_form},
+            )
 
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
