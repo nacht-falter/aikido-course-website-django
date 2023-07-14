@@ -177,6 +177,13 @@ class UpdateCourseRegistrationTest(TestCase):
             registration_status=(1),
             course_fee=50,
         )
+        self.session = CourseSession.objects.create(
+            title="Test session 1",
+            course=self.course,
+            date=date.today(),
+            start_time=datetime.now().time(),
+            end_time=datetime.now().time(),
+        )
         self.user = User.objects.create_user(
             username="test-user", password="testpassword"
         )
@@ -191,11 +198,21 @@ class UpdateCourseRegistrationTest(TestCase):
             comment="Test comment",
         )
 
-    def test_update_course_registration(self):
-        print("\ntest_update_course_registration")
+    def test_get_update_course_registration(self):
+        print("\ntest_get_update_course_registration")
+        response = self.client.get(
+            f"/user/registrations/update/{self.registration.id}/"
+        )
+        self.assertTemplateUsed(response, "update_courseregistration.html")
+        self.assertEqual(response.status_code, 200)
+
+    def test_post_valid_update_course_registration(self):
+        print("\ntest_post_valid_update_course_registration")
         response = self.client.post(
             f"/user/registrations/update/{self.registration.pk}/",
             {
+                "selected_sessions": [self.session.id],
+                "accept_terms": True,
                 "exam": True,
                 "final_fee": 50,
             },
@@ -205,10 +222,23 @@ class UpdateCourseRegistrationTest(TestCase):
         registration = CourseRegistration.objects.get(pk=self.registration.pk)
         self.assertEqual(registration.exam, True)
 
-        # Test messages: https://stackoverflow.com/a/46865530
         messages = [m.message for m in get_messages(response.wsgi_request)]
         self.assertIn(
-            f"Your registration for {self.course.title} has been updated.",
+            f"You have successfully signed up for {self.course.title}",
+            messages,
+        )
+
+    def test_post_invalid_update_course_registration(self):
+        print("\ntest_post_invalid_update_course_registration")
+        response = self.client.post(
+            f"/user/registrations/update/{self.registration.pk}/",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "update_courseregistration.html")
+        messages = [m.message for m in get_messages(response.wsgi_request)]
+        self.assertIn(
+            "Registration not submitted. "
+            "Please select at least one session.",
             messages,
         )
 
