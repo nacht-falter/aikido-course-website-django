@@ -45,7 +45,7 @@ class RegisterCourseTest(TestCase):
             course_fee=50,
         )
         self.session = CourseSession.objects.create(
-            title="Test sessions",
+            title="Test session",
             course=self.course,
             date=date.today(),
             start_time=datetime.now().time(),
@@ -71,7 +71,6 @@ class RegisterCourseTest(TestCase):
         CourseRegistration.objects.create(
             user=self.user,
             course=self.course,
-            final_fee=50,
             payment_status=0,
             accept_terms=True,
             exam=False,
@@ -87,7 +86,6 @@ class RegisterCourseTest(TestCase):
             "/courses/register/test-course/",
             {
                 "selected_sessions": [self.session.id],
-                "final_fee": 50,
                 "accept_terms": True,
                 "exam": False,
             },
@@ -109,15 +107,57 @@ class RegisterCourseTest(TestCase):
             "/courses/register/test-course/",
             {
                 "selected_sessions": [self.session.id],
-                "final_fee": 50,
                 "accept_terms": True,
                 "exam": True,
             },
         )
         registration = CourseRegistration.objects.get(
-            course=self.course, user=self.user
+            course=self.course,
+            user=self.user,
         )
         self.assertEqual(registration.exam_grade, self.user_profile.grade + 1)
+
+    def test_registration_fee_calculation_entire_course(self):
+        print("\ntest_registration_fee_calculation_entire_course")
+        self.client.post(
+            "/courses/register/test-course/",
+            {
+                "selected_sessions": [self.session.id],
+                "accept_terms": True,
+                "exam": True,
+            },
+        )
+        registration = CourseRegistration.objects.get(
+            course=self.course,
+            user=self.user,
+        )
+        self.assertEqual(
+            registration.course.course_fee, registration.final_fee
+        )
+
+    def test_registration_fee_calculation_single_sessions(self):
+        print("\ntest_registration_fee_calculation_single_sessions")
+        self.another_session = CourseSession.objects.create(
+            title="Another test session",
+            course=self.course,
+            date=date.today(),
+            start_time=datetime.now().time(),
+            end_time=datetime.now().time(),
+        )
+
+        self.client.post(
+            "/courses/register/test-course/",
+            {
+                "selected_sessions": [self.session.id],
+                "accept_terms": True,
+                "exam": True,
+            },
+        )
+        registration = CourseRegistration.objects.get(
+            course=self.course,
+            user=self.user,
+        )
+        self.assertEqual(self.session.session_fee, registration.final_fee)
 
 
 class CancelCourseRegistrationTest(TestCase):
@@ -139,7 +179,6 @@ class CancelCourseRegistrationTest(TestCase):
         self.registration = CourseRegistration.objects.create(
             user=self.user,
             course=self.course,
-            final_fee=50,
             payment_status=0,
             accept_terms=True,
             exam=False,
@@ -178,7 +217,7 @@ class UpdateCourseRegistrationTest(TestCase):
             course_fee=50,
         )
         self.session = CourseSession.objects.create(
-            title="Test session 1",
+            title="Test session",
             course=self.course,
             date=date.today(),
             start_time=datetime.now().time(),
@@ -191,7 +230,6 @@ class UpdateCourseRegistrationTest(TestCase):
         self.registration = CourseRegistration.objects.create(
             user=self.user,
             course=self.course,
-            final_fee=50,
             payment_status=0,
             accept_terms=True,
             exam=False,
@@ -214,10 +252,8 @@ class UpdateCourseRegistrationTest(TestCase):
                 "selected_sessions": [self.session.id],
                 "accept_terms": True,
                 "exam": True,
-                "final_fee": 50,
             },
         )
-
         self.assertRedirects(response, "/user/registrations/", 302, 200)
         registration = CourseRegistration.objects.get(pk=self.registration.pk)
         self.assertEqual(registration.exam, True)
@@ -241,6 +277,41 @@ class UpdateCourseRegistrationTest(TestCase):
             "Please select at least one session.",
             messages,
         )
+
+    def test_update_registration_fee_calculation_entire_course(self):
+        print("\ntest_registration_fee_calculation_entire_course")
+        self.client.post(
+            f"/user/registrations/update/{self.registration.pk}/",
+            {
+                "selected_sessions": [self.session.id],
+                "accept_terms": True,
+                "exam": True,
+            },
+        )
+        self.registration.refresh_from_db()
+        self.assertEqual(
+            self.registration.course.course_fee, self.registration.final_fee
+        )
+
+    def test_update_registration_fee_calculation_single_sessions(self):
+        print("\ntest_registration_fee_calculation_single_sessions")
+        self.another_session = CourseSession.objects.create(
+            title="Another test session",
+            course=self.course,
+            date=date.today(),
+            start_time=datetime.now().time(),
+            end_time=datetime.now().time(),
+        )
+        self.client.post(
+            f"/user/registrations/update/{self.registration.pk}/",
+            {
+                "selected_sessions": [self.session.id],
+                "accept_terms": True,
+                "exam": True,
+            },
+        )
+        self.registration.refresh_from_db()
+        self.assertEqual(self.session.session_fee, self.registration.final_fee)
 
 
 class UserProfileViewTest(TestCase):
@@ -395,7 +466,6 @@ class UpdateGradeTest(TestCase):
         self.registration = CourseRegistration.objects.create(
             user=self.user,
             course=self.course,
-            final_fee=50,
             payment_status=0,
             accept_terms=True,
             exam=True,
