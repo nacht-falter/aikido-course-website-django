@@ -180,25 +180,45 @@ class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
 class UpdateCourseRegistration(LoginRequiredMixin, View):
     """Updates a course registration"""
 
+    def prepare_course_data(self, course):
+        """Prepares data to be passed to the template"""
+        course_data = {"course_fee": course.course_fee}
+        counter = 0
+        for session in course.sessions.all():
+            course_data[f"session_{counter}_fee"] = session.session_fee
+            counter += 1
+        return course_data
+
     def get(self, request, pk):
         registration = get_object_or_404(CourseRegistration, pk=pk)
+        course = registration.course
         registration_form = forms.CourseRegistrationForm(
-            instance=registration, course=registration.course
+            instance=registration,
+            course=course,
         )
+        course_data = self.prepare_course_data(course)
 
         return render(
             request,
             "update_courseregistration.html",
-            {"course": registration.course, "form": registration_form},
+            {
+                "course": course,
+                "form": registration_form,
+                "course_data": course_data,
+            },
         )
 
     def post(self, request, pk):
         registration = get_object_or_404(CourseRegistration, pk=pk)
+        course = registration.course
         registration_form = forms.CourseRegistrationForm(
             data=request.POST,
             instance=registration,
-            course=registration.course,
+            course=course,
         )
+
+        course_data = self.prepare_course_data(course)
+
         if registration_form.is_valid():
             registration = registration_form.save(commit=False)
 
@@ -207,10 +227,8 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             )
 
             # Calculate registration fee:
-            if len(selected_sessions) == len(
-                registration.course.sessions.all()
-            ):
-                registration.final_fee = registration.course.course_fee
+            if len(selected_sessions) == len(course.sessions.all()):
+                registration.final_fee = course.course_fee
             else:
                 registration.final_fee = 0
                 for session in selected_sessions:
@@ -223,8 +241,8 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
 
             messages.info(
                 request,
-                "You have successfully signed up for "
-                f"{registration.course.title}",
+                "You have successfully updated your registration for "
+                f"{course.title}",
             )
         else:
             if not registration_form.cleaned_data.get("selected_sessions"):
@@ -234,13 +252,17 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                     "Please select at least one session.",
                 )
             registration_form = forms.CourseRegistrationForm(
-                instance=registration, course=registration.course
+                instance=registration, course=course
             )
 
             return render(
                 request,
                 "update_courseregistration.html",
-                {"course": registration.course, "form": registration_form},
+                {
+                    "course": course,
+                    "form": registration_form,
+                    "course_data": course_data,
+                },
             )
 
         return HttpResponseRedirect(reverse("courseregistration_list"))
