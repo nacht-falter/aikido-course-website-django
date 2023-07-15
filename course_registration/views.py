@@ -90,9 +90,17 @@ class RegisterCourse(LoginRequiredMixin, View):
                     registration.final_fee += session.session_fee
 
             # Set exam:
-            queryset = UserProfile.objects.filter(user=request.user)
-            user_profile = get_object_or_404(queryset, user=request.user)
-            registration.exam_grade = user_profile.grade + 1
+            user_profile = get_object_or_404(UserProfile, user=request.user)
+            if user_profile.grade < 6:
+                registration.exam_grade = user_profile.grade + 1
+            else:
+                registration.exam = False
+                messages.warning(
+                    request,
+                    "Exam application rejected. As a "
+                    f"{user_profile.get_grade_display()} "
+                    "you can't apply for exams anymore.",
+                )
 
             registration.save()
 
@@ -113,6 +121,7 @@ class RegisterCourse(LoginRequiredMixin, View):
                     "Registration not submitted. "
                     "Please select at least one session.",
                 )
+
             registration_form = forms.CourseRegistrationForm(course=course)
             return render(
                 request,
@@ -233,6 +242,19 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                 registration.final_fee = 0
                 for session in selected_sessions:
                     registration.final_fee += session.session_fee
+
+            # Set exam:
+            user_profile = get_object_or_404(UserProfile, user=request.user)
+            if user_profile.grade < 6:
+                registration.exam_grade = user_profile.grade + 1
+            else:
+                registration.exam = False
+                messages.warning(
+                    request,
+                    "Exam application rejected. As a "
+                    f"{user_profile.get_grade_display()} "
+                    "you can't apply for exams anymore.",
+                )
 
             registration.save()
 
