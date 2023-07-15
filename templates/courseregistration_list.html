@@ -68,8 +68,10 @@
 
   {% if registration.exam and registration.exam_passed %}
   <p>You have passed your {{ registration.get_exam_grade_display }} exam on this course.</p>
-  {% elif registration.exam and not registration.exam_passed %}
+  {% elif registration.exam and registration.exam_passed == False %}
   <p>You did not pass your {{ registration.get_exam_grade_display }} exam on this course.</p>
+  {% else %}
+  <p>You applied for your {{ registration.get_exam_grade_display }} exam for this course.</p>
   {% endif %}
 
 </div>
