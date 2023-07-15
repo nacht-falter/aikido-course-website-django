@@ -25,6 +25,7 @@ class CourseRegistrationInline(admin.TabularInline):
         "user",
         "selected_sessions",
         "exam",
+        "exam_passed",
         "accept_terms",
         "final_fee",
         "payment_status",
@@ -55,6 +56,7 @@ class CourseAdmin(admin.ModelAdmin):
     inlines = [CourseSessionInline, CourseRegistrationInline]
     actions = [
         "duplicate_selected_courses",
+        "toggle_registration_status",
     ]
 
     def duplicate_selected_courses(self, request, queryset):
@@ -77,6 +79,19 @@ class CourseAdmin(admin.ModelAdmin):
                 end_date=course.end_date,
                 course_fee=course.course_fee,
             )
+
+    def toggle_registration_status(self, request, queryset):
+        """Action for toggling course registration status"""
+        for course in queryset:
+            if course.registration_status == 0:
+                course.registration_status = 1
+            else:
+                course.registration_status = 0
+            course.save()
+
+    toggle_registration_status.short_description = (
+        "Toggle registration status of selected courses"
+    )
 
     def get_course_registration_count(self, course):
         """Gets the number of registrations for a course"""
