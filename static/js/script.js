@@ -1,4 +1,33 @@
 /**
+ * Check/uncheck all sessions if entire course box is checked/unchecked
+ */
+function checkSessionCheckboxes() {
+  for (let checkbox of sessionsCheckboxes) {
+    checkbox.checked = entireCourseCheckbox.checked;
+  }
+  calculateFinalFee();
+}
+
+/**
+ * Check/uncheck entire course box, depending on if sessions boxes are
+ * checked/unchecked
+ */
+function checkEntireCourseCheckbox() {
+  if (this.checked === false && entireCourseCheckbox.checked === true) {
+    entireCourseCheckbox.checked = false;
+  }
+  let allSessionsSelected = true;
+  for (let checkbox of sessionsCheckboxes) {
+    if (checkbox.checked === false) {
+      allSessionsSelected = false;
+      break;
+    }
+  }
+  entireCourseCheckbox.checked = allSessionsSelected;
+  calculateFinalFee();
+}
+
+/**
  * Calculate the final fee and display it
  */
 function calculateFinalFee() {
@@ -28,7 +57,7 @@ const sessionsList = document.getElementById("id_selected_sessions");
 const sessionsCheckboxes = sessionsList.querySelectorAll("input");
 
 // Add event listeners to checkboxes:
-entireCourseCheckbox.addEventListener("click", calculateFinalFee);
+entireCourseCheckbox.addEventListener("click", checkSessionCheckboxes);
 for (let checkbox of sessionsCheckboxes) {
-  checkbox.addEventListener("click", calculateFinalFee);
+  checkbox.addEventListener("click", checkEntireCourseCheckbox);
 }
