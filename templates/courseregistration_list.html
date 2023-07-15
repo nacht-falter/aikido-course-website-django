@@ -1,37 +1,83 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
+
 <h3>Your upcoming courses</h3>
+
 {% for registration in upcoming_registrations %}
 <div style="border: 1px solid black; margin: 5px; padding: 5px;">
   <h4>{{ registration.course.title }}</h4>
-  <p>{{ registration.course.start_date }}–{{ registration.course.end_date }}</p>
+  <table>
+    <tr>
+      <td>Start date:</td>
+      <td>{{ registration.course.start_date }}</td>
+    </tr>
+    <tr>
+      <td>End date:</td>
+      <td>{{ registration.course.end_date }}</td>
+    </tr>
+    <tr>
+      <td>Selected Sessions:</td>
+      <td>
+        <table>
+          {% for session in registration.selected_sessions.all %}
+          <tr>
+            <td>
+              {{ session }}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </td>
+    <tr>
+      <td>Fee:</td>
+      <td>{{ registration.final_fee }} €</td>
+    </tr>
+    {% if registration.comment %}
+    <tr>
+      <td>Your comment:</td>
+      <td>{{ registration.comment }}</td>
+    </tr>
+    {% endif %}
+  </table>
+
   {% if registration.exam %}
-  <p style="color: red">You have applied for an exam.</p>
+  <p style="color: red">You have applied for an exam for {{ registration.get_exam_grade_display }}.</p>
   {% endif %}
+
   <p>
     <a href="{% url 'update_courseregistration' registration.pk %}">Update registration</a> |
     <a href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a>
   </p>
 </div>
+
 {% empty %}
 <p>You are currently not signed up for any courses. You can find a <a href="{% url 'course_list' %}">list of
     available courses here</a></p>
+
 {% endfor %}
+
 <h3>Your past courses</h3>
+
 {% for registration in past_registrations %}
 <div style="border: 1px solid black; margin: 5px; padding: 5px;">
   <h4>{{ registration.course.title }}</h4>
   <p>{{ registration.course.start_date }}–{{ registration.course.end_date }}</p>
+
   {% if registration.exam and registration.exam_passed %}
   <p>You have passed your {{ registration.get_exam_grade_display }} exam on this course.</p>
   {% elif registration.exam and not registration.exam_passed %}
   <p>You did not pass your {{ registration.get_exam_grade_display }} exam on this course.</p>
   {% endif %}
+
 </div>
+
 {% empty %}
 <p>You have not signed up for any courses in the past.</p>
+
 {% endfor %}
+
 {% endif %}
 {% endblock content %}
