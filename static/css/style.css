@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "source-sans";
+  src: url(../fonts/SourceSansPro-Regular.otf);
+}
+
+body {
+  font-family: source-sans;
+}
+
+.main-logo {
+  margin: 0 auto;
+  height: 5em;
+}
+
+.nav-link:hover {
+  color: #1e3c95;
+}
+
+.signup-button {
+  margin-top: 5px;
+  color: #1e3c95;
+  border-color: #1e3c95;
+}
+
+.signup-button:hover {
+  background-color: #1e3c95;
+  border-color: #1e3c95;
+}
