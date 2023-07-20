@@ -27,7 +27,7 @@ h3 {
 
   .carousel-item img {
     position: absolute;
-    object-fit:cover;
+    object-fit: cover;
     top: 0;
     left: 0;
     min-height: 30vh;
@@ -55,6 +55,26 @@ a.badge:hover {
   opacity: 0.8;
 }
 
+.accordion-button {
+  transition: all 0.1s;
+}
+
+.accordion-button:hover {
+  background-color: rgba(30, 60, 149, 0.2);
+}
+
+.accordion-collapse {
+  transition: all 0.1s;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: rgba(30, 60, 149, 0.2);
+}
+
+.accordion-body {
+  background-color: #eeeeee;
+}
+
 .signup-button {
   margin-top: 5px;
   color: #1e3c95;
@@ -64,4 +84,13 @@ a.badge:hover {
 .signup-button:hover {
   background-color: #1e3c95;
   border-color: #1e3c95;
+}
+
+.course-signup-button {
+  background-color: #1e3c95;
+  border: none;
+}
+
+.course-signup-button:hover {
+  background-color: rgba(30, 60, 149, 0.8);
 }

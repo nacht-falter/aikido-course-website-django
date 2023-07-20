@@ -1,15 +1,72 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-{% for course in course_list %}
-<h3>{{ course.title }}:</h3>
-<p>{{ course.start_date }}-{{ course.end_date }}</p>
-<p>{{ course.description }}</p>
-{% if user.is_authenticated and course.registration_status == 1 %}
-<p><a href="{% url 'register_course' course.slug %}" title="Register for {{ course.title }}">Sign up for this course</a>
-</p>
-{% endif %}
-{% empty %}
+<h3 class="mb-4">Courses {% now "Y" %}</h3>
+<div class="accordion" id="accordion">
+    {% for course in course_list %}
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseCourse{{ course.id }}" aria-expanded="false"
+                aria-controls="collapseCourse{{ course.id }}">
+                <div class="container m-0 text-left">
+                    <div class="row">
+                        <div class="col-8 col-md-3">
+                            <strong>
+                                {{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j" }}
+                            </strong>
+                        </div>
+                        <div class="col-8 col-md-6">
+                            <strong>
+                                {{ course.title }}
+                            </strong>
+                        </div>
+                        <div class="col-8 col-md-3">
+                            {% if course.registration_status == 1 %}
+                            <span class="badge text-bg-success">
+                                Registration {{ course.get_registration_status_display }}
+                            </span>
+                            {% else %}
+                            <span class="badge text-bg-secondary">
+                                Registration {{ course.get_registration_status_display }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </div>
+        <div id="collapseCourse{{ course.id }}" class="accordion-collapse collapse" data-bs-parent="#accordion">
+            <div class="accordion-body">
+                <h5 class="mb-4">{{ course.title }}</h5>
+                <h6 class="border-bottom border-dark-subtle"><strong>Dates:</strong></h6>
+                <p>{{ course.start_date|date:"M n" }}-{{ course.end_date }}</p>
+                {% if course.description %}
+                <h6 class="border-bottom border-dark-subtle"><strong>Description:</strong></h6>
+                <p>{{ course.description }}</p>
+                {% endif %}
+                <h6 class="border-bottom border-dark-subtle"><strong>Sessions:</strong></h6>
+                <ul>
+                    {% for session in course.sessions.all %}
+                    <li>
+                        <strong>{{ session.title }}</strong><br>
+                        {{ session.date }}, {{ session.start_time }} to {{ session.end_time }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                <hr class="text-light">
+                {% if user.is_authenticated and course.registration_status == 1 %}
+                <a class="btn btn-primary course-signup-button" href="{% url 'register_course' course.slug %}"
+                    title="Sign up for {{ course.title }}">
+                    Sign up for this course</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
     <p>There are currently no courses available.</p>
-{% endfor %}
+    {% endfor %}
+</div>
+
 {% endblock content %}
