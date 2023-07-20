@@ -75,6 +75,10 @@ a.badge:hover {
   background-color: #eeeeee;
 }
 
+.registration-card {
+  max-width: 800px;
+}
+
 .signup-button {
   margin-top: 5px;
   color: #1e3c95;
@@ -88,9 +92,10 @@ a.badge:hover {
 
 .course-signup-button {
   background-color: #1e3c95;
-  border: none;
+  border-color: #1e3c95;
 }
 
 .course-signup-button:hover {
-  background-color: rgba(30, 60, 149, 0.8);
+  background-color: #022385;
+  border-color: #022385;
 }

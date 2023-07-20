@@ -2,84 +2,93 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-
 <h3>Your upcoming courses</h3>
 
 {% for registration in upcoming_registrations %}
-<div style="border: 1px solid black; margin: 5px; padding: 5px;">
-  <h4>{{ registration.course.title }}</h4>
-  <table>
-    <tr>
-      <td>Start date:</td>
-      <td>{{ registration.course.start_date }}</td>
-    </tr>
-    <tr>
-      <td>End date:</td>
-      <td>{{ registration.course.end_date }}</td>
-    </tr>
-    <tr>
-      <td>Selected Sessions:</td>
-      <td>
-        <table>
-          {% for session in registration.selected_sessions.all %}
-          <tr>
-            <td>
-              {{ session }}
-            </td>
-          </tr>
-          {% endfor %}
+<div class="card my-4 registration-card">
+    <h4 id="registration-{{ registration.id }}" class="card-header bg-secondary-subtle">{{ registration.course.title }}
+    </h4>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th scope="col">Dates:</th>
+                <td>{{ registration.course.start_date|date:"M j" }} to {{ registration.course.end_date }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Selected Sessions:</th>
+                <td>
+                    <ul>
+                        {% for session in registration.selected_sessions.all %}
+                        <li>
+                            <strong>{{ session.title }}</strong><br>
+                            {{ session.date }}, {{ session.start_time }} to {{ session.end_time }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            <tr>
+                <th scope="col">Course Fee:</th>
+                <td>{{ registration.final_fee }} €</td>
+            </tr>
+            {% if registration.comment %}
+            <tr>
+                <th scope="col">Your Comment:</th>
+                <td>{{ registration.comment }}</td>
+            </tr>
+            {% endif %}
         </table>
-      </td>
-    <tr>
-      <td>Fee:</td>
-      <td>{{ registration.final_fee }} €</td>
-    </tr>
-    {% if registration.comment %}
-    <tr>
-      <td>Your comment:</td>
-      <td>{{ registration.comment }}</td>
-    </tr>
-    {% endif %}
-  </table>
 
-  {% if registration.exam %}
-  <p style="color: red">You have applied for an exam for {{ registration.get_exam_grade_display }}.</p>
-  {% endif %}
+        {% if registration.exam %}
+        <p class="badge text-bg-warning">You have applied for an exam for {{ registration.get_exam_grade_display }}.</p>
+        {% endif %}
 
-  <p>
-    <a href="{% url 'update_courseregistration' registration.pk %}">Update registration</a> |
-    <a href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a>
-  </p>
+    </div>
+    <div class="card-footer bg-secondary-subtle text-center">
+        <a class="btn btn-sm btn-primary course-signup-button me-3" title="Update Registration"
+            href="{% url 'update_courseregistration' registration.pk %}">Update registration</a>
+        <a class="btn btn-sm btn-danger" title="Cancel Registration"
+            href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a>
+    </div>
+
 </div>
-
 {% empty %}
-<p>You are currently not signed up for any courses. You can find a <a href="{% url 'course_list' %}">list of
-    available courses here</a></p>
-
+<p>
+    You are currently not signed up for any courses. You can find a <a href="{% url 'course_list' %}" class="blue-link"
+        title="Go to course list">list of all courses here.</a>
+</p>
 {% endfor %}
+<hr>
 
-<h3>Your past courses</h3>
+<h3 class="my-4">Your past courses</h3>
 
 {% for registration in past_registrations %}
-<div style="border: 1px solid black; margin: 5px; padding: 5px;">
-  <h4>{{ registration.course.title }}</h4>
-  <p>{{ registration.course.start_date }}–{{ registration.course.end_date }}</p>
-
-  {% if registration.exam and registration.exam_passed %}
-  <p>You have passed your {{ registration.get_exam_grade_display }} exam on this course.</p>
-  {% elif registration.exam and registration.exam_passed == False %}
-  <p>You did not pass your {{ registration.get_exam_grade_display }} exam on this course.</p>
-  {% else %}
-  <p>You applied for your {{ registration.get_exam_grade_display }} exam for this course.</p>
-  {% endif %}
-
+<div class="card my-4 registration-card">
+    <h5 id="registration-{{ registration.id }}" class="card-header bg-secondary-subtle">{{ registration.course.title }}
+    </h5>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th scope="col">Dates:</th>
+                <td>{{ registration.course.start_date|date:"M j" }} to {{ registration.course.end_date }}</td>
+            </tr>
+        </table>
+        <p class="badge text-bg-secondary mb-0">
+            {% if registration.exam and registration.exam_passed %}
+            You have passed your {{ registration.get_exam_grade_display }} exam on this course.
+            {% elif registration.exam and registration.exam_passed == False %}
+            You did not pass your {{ registration.get_exam_grade_display }} exam on this course.
+            {% elif registration.exam %}
+            You applied for your {{ registration.get_exam_grade_display }} exam on this course.
+            {% else %}
+            No exam
+            {% endif %}
+        </p>
+    </div>
 </div>
-
 {% empty %}
-<p>You have not signed up for any courses in the past.</p>
-
+<p>
+    You are currently not signed up for any courses. You can find a <a href="{% url 'course_list' %}" class="blue-link"
+        title="Go to course list">list of all courses here.</a>
+</p>
 {% endfor %}
-
-{% endif %}
 {% endblock content %}

@@ -170,7 +170,7 @@ class RegisterCourse(LoginRequiredMixin, View):
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
-class CourseRegistrationList(View):
+class CourseRegistrationList(LoginRequiredMixin, View):
     """Displays a list of a users course registrations"""
 
     def get(self, request):
@@ -199,7 +199,9 @@ class CourseRegistrationList(View):
         )
 
 
-class CancelCourseRegistration(SuccessMessageMixin, generic.edit.DeleteView):
+class CancelCourseRegistration(
+    LoginRequiredMixin, SuccessMessageMixin, generic.edit.DeleteView
+):
     """Deletes a course registration instance
     Documentation for DeleteView:
     https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic
@@ -437,7 +439,7 @@ class UpdateGrade(View):
             )
 
         else:
-            return HttpResponseRedirect(reverse("userprofile"))
+            return HttpResponseRedirect(reverse("home"))
 
     def post(self, request):
         answer = request.POST.get("answer")
@@ -460,7 +462,7 @@ class UpdateGrade(View):
             exam_registration.save()
             messages.info(request, "Your grade has not been updated.")
 
-        return HttpResponseRedirect(reverse("userprofile"))
+        return HttpResponseRedirect(reverse("home"))
 
 
 class DeactivateUser(LoginRequiredMixin, View):
