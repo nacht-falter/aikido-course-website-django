@@ -41,14 +41,20 @@
 <ul>
   {% for course in upcoming_courses %}
   <li class="mb-2">
-    <a class="blue-link" title="Go to {{ course.title }}" href="{% url 'course_list' %}#collapseCourse{{ course.id }}">
+    <a class="blue-link" title="Go to {{ course.title }}" href="{% url 'course_list' %}#{{ course.id }}">
       {{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j Y" }}: {{ course.title }}
     </a>
+    {% if course.registration_status == 1 %}
+    <a class="ms-2 badge text-bg-success" href="{% url 'register_course' course.slug %}"
+      title="Register for this course"><i class="fa-solid fa-user-plus"></i> Registration open</a>
+    {% endif %}
     {% for registration in upcoming_registrations %}
     {% if registration.course == course %}
-    <a class="ms-2 badge text-bg-success" href="{% url 'courseregistration_list' %}#registration-{{ registration.id }}"><i class="fa-regular fa-circle-check"></i> Signed up</a>
+    <a class="badge text-bg-primary" href="{% url 'courseregistration_list' %}#{{ registration.id }}"
+      title="Show registration"><i class="fa-regular fa-circle-check"></i> Signed up</a>
     {% if registration.exam == True %}
-    <a class="badge text-bg-primary" href="{% url 'courseregistration_list' %}#registration-{{ registration.id }}"><i class="fa-regular fa-circle-check"></i> Exam</a>
+    <a class="badge text-bg-warning" href="{% url 'courseregistration_list' %}#{{ registration.id }}"
+      title="Show registration"><i class="fa-regular fa-circle-check"></i> Exam</a>
     {% endif %}
     {% endif %}
     {% endfor %}

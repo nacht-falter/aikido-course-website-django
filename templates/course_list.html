@@ -5,9 +5,9 @@
 <h3 class="mb-4">Courses {% now "Y" %}</h3>
 <div class="accordion" id="accordion">
     {% for course in course_list %}
-    <div class="accordion-item">
+    <div class="accordion-item" id="accordion-{{ course.id }}">
         <div class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            <button id="button-{{ course.id }}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseCourse{{ course.id }}" aria-expanded="false"
                 aria-controls="collapseCourse{{ course.id }}">
                 <div class="container m-0 text-left">
