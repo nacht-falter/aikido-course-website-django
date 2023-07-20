@@ -5,6 +5,7 @@ from course_registration.views import CustomPasswordChangeView
 from . import views
 
 urlpatterns = [
+    path("", views.HomePage.as_view(), name="home"),
     path("courses/", views.CourseList.as_view(), name="course_list"),
     path(
         "courses/register/<slug:slug>/",

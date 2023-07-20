@@ -17,6 +17,37 @@ from . import forms
 CURRENT_DATE = date.today()
 
 
+class HomePage(View):
+    """Displays the home page"""
+
+    def get(self, request):
+        current_date = date.today()
+        all_courses = Course.objects.all()
+        upcoming_courses = [
+            course for course in all_courses if course.end_date >= current_date
+        ]
+        if request.user.is_authenticated:
+            all_registrations = CourseRegistration.objects.filter(
+                user=request.user
+            )
+            upcoming_registrations = [
+                registration
+                for registration in all_registrations
+                if registration.course.end_date >= current_date
+            ]
+        else:
+            upcoming_registrations = []
+
+        return render(
+            request,
+            "index.html",
+            {
+                "upcoming_courses": upcoming_courses,
+                "upcoming_registrations": upcoming_registrations,
+            },
+        )
+
+
 class CourseList(generic.ListView):
     """Displays a list of all courses"""
 
@@ -90,17 +121,20 @@ class RegisterCourse(LoginRequiredMixin, View):
                     registration.final_fee += session.session_fee
 
             # Set exam:
-            user_profile = get_object_or_404(UserProfile, user=request.user)
-            if user_profile.grade < 6:
-                registration.exam_grade = user_profile.grade + 1
-            else:
-                registration.exam = False
-                messages.warning(
-                    request,
-                    "Exam application rejected. As a "
-                    f"{user_profile.get_grade_display()} "
-                    "you can't apply for exams anymore.",
+            if registration.exam:
+                user_profile = get_object_or_404(
+                    UserProfile, user=request.user
                 )
+                if user_profile.grade < 6:
+                    registration.exam_grade = user_profile.grade + 1
+                else:
+                    registration.exam = False
+                    messages.warning(
+                        request,
+                        "Exam application rejected. As a "
+                        f"{user_profile.get_grade_display()} "
+                        "you can't apply for exams anymore.",
+                    )
 
             registration.save()
 
@@ -244,17 +278,20 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                     registration.final_fee += session.session_fee
 
             # Set exam:
-            user_profile = get_object_or_404(UserProfile, user=request.user)
-            if user_profile.grade < 6:
-                registration.exam_grade = user_profile.grade + 1
-            else:
-                registration.exam = False
-                messages.warning(
-                    request,
-                    "Exam application rejected. As a "
-                    f"{user_profile.get_grade_display()} "
-                    "you can't apply for exams anymore.",
+            if registration.exam:
+                user_profile = get_object_or_404(
+                    UserProfile, user=request.user
                 )
+                if user_profile.grade < 6:
+                    registration.exam_grade = user_profile.grade + 1
+                else:
+                    registration.exam = False
+                    messages.warning(
+                        request,
+                        "Exam application rejected. As a "
+                        f"{user_profile.get_grade_display()} "
+                        "you can't apply for exams anymore.",
+                    )
 
             registration.save()
 

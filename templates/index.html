@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<div id="carouselHome" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'images/slider-2.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/slider-1.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/slider-3.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/slider-4.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock header %}
+
+{% block content %}
+<h2 class="mb-4">DANBW – Dynamic Aikido Nocquet in Baden-Württemberg</h2>
+<p>Welcome to the official website of DANBW, the association of Aikido clubs in Baden-Württemberg, which practice
+  Aikido in the tradition of Master André Nocquet. On this website, you can find information about our organization and
+  our clubs, about Aikido and our lineage. DANBW members can sign up for <a class="blue-link"
+    href="{% url 'course_list' %}" title="Go to all courses">our courses</a>.</p>
+<p>Whether you're a beginner or an experienced Aikidoka, we invite you to explore our community and discover the
+  transformative power of Aikido.</p>
+<p>Join us on the mat and start your Aikido journey today!</p>
+<h3 class="mt-4">Our Next Courses</h3>
+<ul>
+  {% for course in upcoming_courses %}
+  <li class="mb-2">
+    <a class="blue-link" title="Go to {{ course.title }}" href="{% url 'course_list' %}#collapseCourse{{ course.id }}">
+      {{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j Y" }}: {{ course.title }}
+    </a>
+    {% for registration in upcoming_registrations %}
+    {% if registration.course == course %}
+    <a class="ms-2 badge text-bg-success" href="{% url 'courseregistration_list' %}#registration-{{ registration.id }}"><i class="fa-regular fa-circle-check"></i> Signed up</a>
+    {% if registration.exam == True %}
+    <a class="badge text-bg-primary" href="{% url 'courseregistration_list' %}#registration-{{ registration.id }}"><i class="fa-regular fa-circle-check"></i> Exam</a>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}
