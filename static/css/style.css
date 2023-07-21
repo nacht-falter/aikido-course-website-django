@@ -47,6 +47,14 @@ h3 {
   color: #1e3c95;
 }
 
+.active {
+  color: #b5172c !important;
+}
+
+.active:hover {
+  color: #1e3c95 !important;
+}
+
 a.badge {
   text-decoration: none;
 }

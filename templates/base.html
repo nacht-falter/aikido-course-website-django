@@ -30,6 +30,10 @@
   </div>
   {% endif %}
   <!-- Navigation -->
+  <!-- Getting data to dynamically set active nav-link. Adapted from: https://stackoverflow.com/a/55151707 -->
+  <!-- Django Documentation for ResolverMatch: -->
+  <!-- https://docs.djangoproject.com/en/4.2/ref/urlresolvers/#django.urls.ResolverMatch -->
+  {% with request.resolver_match.kwargs.category_slug as category_slug and request.resolver_match.url_name as url_name %}
   <nav class="navbar navbar-expand-lg px-5 py-3 bg-body-tertiary shadow-sm">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}">
@@ -46,19 +50,20 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+            <a class="nav-link {% if url_name == 'home' %}active{% endif %}" aria-current="page"
+              href="{% url 'home' %}">Home</a>
           </li>
           {% for category in categories %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {% if category.slug == category_slug %}active{% endif %}" href="#"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ category.title }}
             </a>
             <ul class="dropdown-menu">
               {% for page in category.pages.all %}
               <li>
                 <!-- Pass slugs from different models to url: https://stackoverflow.com/a/56719888 -->
-                <a class="dropdown-item"
-                  href="{% url 'page_detail' category_slug=category.slug page_slug=page.slug %}">
+                <a class="dropdown-item" href="{% url 'page_detail' category_slug=category.slug page_slug=page.slug %}">
                   {{ page.title }}
                 </a>
               </li>
@@ -67,11 +72,13 @@
           </li>
           {% endfor %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'course_list' %}">Courses</a>
+            <a class="nav-link {% if url_name == 'course_list' %}active{% endif %}"
+              href="{% url 'course_list' %}">Courses</a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {% if url_name == 'userprofile' or url_name == 'courseregistration_list' %}active{% endif %}"
+              href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               My Account
             </a>
             <ul class="dropdown-menu">
@@ -114,6 +121,7 @@
       </div>
     </div>
   </nav>
+  {% endwith %}
   <header>
     {% block header %}
     {% endblock header %}
