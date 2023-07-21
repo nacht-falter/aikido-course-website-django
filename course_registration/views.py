@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 
 from allauth.account.views import PasswordChangeView
 
-from .models import Course, CourseRegistration, UserProfile
+from .models import Course, CourseRegistration, UserProfile, Page
 from . import forms
 
 CURRENT_DATE = date.today()
@@ -26,6 +26,7 @@ class HomePage(View):
         upcoming_courses = [
             course for course in all_courses if course.end_date >= current_date
         ]
+        upcoming_registrations = []
         if request.user.is_authenticated:
             all_registrations = CourseRegistration.objects.filter(
                 user=request.user
@@ -35,8 +36,6 @@ class HomePage(View):
                 for registration in all_registrations
                 if registration.course.end_date >= current_date
             ]
-        else:
-            upcoming_registrations = []
 
         return render(
             request,
@@ -46,6 +45,16 @@ class HomePage(View):
                 "upcoming_registrations": upcoming_registrations,
             },
         )
+
+
+class PageDetail(View):
+    """Displays a page"""
+
+    def get(self, request, page_slug, *args, **kwargs):
+        queryset = Page.objects.filter(status=1)
+        page = get_object_or_404(queryset, slug=page_slug)
+
+        return render(request, "page_detail.html", {"page": page})
 
 
 class CourseList(generic.ListView):
