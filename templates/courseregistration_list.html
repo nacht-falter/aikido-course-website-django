@@ -44,9 +44,9 @@
 
     </div>
     <div class="card-footer bg-secondary-subtle text-center">
-        <a class="btn btn-sm btn-primary course-signup-button me-3" title="Update Registration"
+        <a class="btn btn-sm btn-primary course-signup-button m-2 my-sm-0" title="Update Registration"
             href="{% url 'update_courseregistration' registration.pk %}">Update registration</a>
-        <a class="btn btn-sm btn-danger" title="Cancel Registration"
+        <a class="btn btn-sm btn-danger m-2 my-sm-0" title="Cancel Registration"
             href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a>
     </div>
 
@@ -57,9 +57,8 @@
         title="Go to course list">list of all courses here.</a>
 </p>
 {% endfor %}
-<hr>
 
-<h3 class="my-4">Your past courses</h3>
+<h3 class="mt-5 mb-4">Your past courses</h3>
 
 {% for registration in past_registrations %}
 <div class="card my-4 registration-card">
@@ -86,9 +85,6 @@
     </div>
 </div>
 {% empty %}
-<p>
-    You are currently not signed up for any courses. You can find a <a href="{% url 'course_list' %}" class="blue-link"
-        title="Go to course list">list of all courses here.</a>
-</p>
+<p>You did not sign up for any courses in the past.</p>
 {% endfor %}
 {% endblock content %}

@@ -32,8 +32,13 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg px-5 py-3 bg-body-tertiary shadow-sm">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}"><img class="main-logo" src="{% static 'images/danbw-logo.png' %}"
-          alt="Dynamic Aikido Nocquet BW Logo"></a>
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img class="main-logo" src="{% static 'images/danbw-logo.png' %}" alt="Dynamic Aikido Nocquet BW Logo">
+        <h1 class="main-title d-none d-md-inline-block ms-5 align-middle text-wrap">
+          <span class="text-nowrap">Dynamic Aikido Nocquet</span>
+          <span class="text-nowrap">Baden-Württemberg</span>
+        </h1>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -52,19 +57,29 @@
               My Account
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'userprofile' %}">My Profile</a></li>
-              <li><a class="dropdown-item" href="{% url 'courseregistration_list' %}">My Registrations</a></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'userprofile' %}">
+                  <i class="fa-solid fa-user"></i> My Profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'courseregistration_list' %}">
+                  <i class="fa-solid fa-pen-to-square"></i> My Registrations</a>
+              </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'account_logout' %}">
+                  <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+              </li>
             </ul>
           </li>
           {% endif %}
         </ul>
         {% if user.is_authenticated %}
-        <span class="nav-item ms-5">
-          <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+        <span class="nav-item ms-5 text-nowrap">
+          <a class="nav-link" href="{% url 'account_logout' %}">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
         </span>
         {% else %}
         <ul class="navbar-nav">
@@ -72,8 +87,8 @@
             <a class="nav-link" href="{% url 'account_login' %}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-primary btn-sm signup-button" href="{% url 'account_signup' %}"><i
-                class="fa-solid fa-user"></i> Sign Up</a>
+            <a class="btn btn-outline-primary btn-sm signup-button" href="{% url 'account_signup' %}">
+              <i class="fa-solid fa-user"></i> Sign Up</a>
           </li>
         </ul>
         {% endif %}
