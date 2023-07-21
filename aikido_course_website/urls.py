@@ -23,5 +23,6 @@ urlpatterns = [
         include("course_registration.urls"),
         name="course_registration-urls",
     ),
-    path('accounts/', include('allauth.urls')),
+    path("accounts/", include("allauth.urls")),
+    path('summernote/', include('django_summernote.urls')),
 ]
