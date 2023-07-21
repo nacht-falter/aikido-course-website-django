@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
-from .models import Course, CourseSession, UserProfile
+from .models import Course, CourseSession, UserProfile, Category, Page
 
 
 class TestCourseModel(TestCase):
@@ -37,7 +37,8 @@ class TestCourseModel(TestCase):
     def test_course_custom_date_validation(self):
         print("\ntest_course_custom_date_validation")
         course = Course.objects.get(title="Invalid course")
-        # https://stackoverflow.com/questions/73188838/django-testcase-check-validationerror-with-assertraises-in-is-throwing-validatio
+        # https://stackoverflow.com/questions/73188838/django-testcase-
+        # check-validationerror-with-assertraises-in-is-throwing-validatio
         self.assertRaises(ValidationError, course.clean)
 
 
@@ -74,20 +75,16 @@ class TestCourseSessionModel(TestCase):
             session_fee=10,
         )
 
-    def test_session_str_method_returns_date_and_title(self):
+    def test_session_str_method_returns_title(self):
         print("\ntest_session_str_method_returns_title")
-        expected_date = date.today()
         counter = 0
         for session in self.course_sessions:
-            self.assertEqual(
-                str(session), f"{expected_date}: Test session {counter}"
-            )
+            self.assertEqual(str(session), f"Test session {counter}")
             counter += 1
 
     def test_session_custom_date_validation(self):
         print("\ntest_session_custom_date_validation")
         session = CourseSession.objects.get(title="Invalid session")
-        # https://stackoverflow.com/questions/73188838/django-testcase-check-validationerror-with-assertraises-in-is-throwing-validatio
         self.assertRaises(ValidationError, session.clean)
 
 
@@ -108,3 +105,37 @@ class TestUserProfileModel(TestCase):
     def test_user_profile_slug(self):
         print("\ntest_user_profile_slug")
         self.assertEqual(self.user_profile.slug, slugify(self.user.username))
+
+
+class TestCategoryModel(TestCase):
+    """Tests for the Category model"""
+
+    def setUp(self):
+        self.category = Category.objects.create(
+            title="Test Category",
+        )
+
+    def test_category_str_method_returns_title(self):
+        print("\ntest_category_str_method_returns_title")
+        category = Category.objects.get(title="Test Category")
+        self.assertEqual(str(category), "Test Category")
+
+
+class TestPageModel(TestCase):
+    """Tests for the Page model"""
+
+    def setUp(self):
+        self.category = Category.objects.create(
+            title="Test Category",
+        )
+        self.page = Page.objects.create(
+            title="Test Page",
+            slug="test-page",
+            category=self.category,
+            status=0,
+        )
+
+    def test_page_str_method_returns_title(self):
+        print("\ntest_page_str_method_returns_title")
+        page = Page.objects.get(title="Test Page")
+        self.assertEqual(str(page), "Test Page")

@@ -26,7 +26,7 @@ class TestCourseAdmin(TestCase):
             slug="test-course",
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
-            registration_status=(0),
+            registration_status=0,
             course_fee=50,
         )
         self.user = User.objects.create_user(
@@ -63,3 +63,13 @@ class TestCourseAdmin(TestCase):
             self.course
         )
         self.assertEqual(len(registrations), registration_count)
+
+    def test_toggle_registration_status_action(self):
+        print("\ntest_toggle_registration_status_action")
+        queryset = Course.objects.all()
+        self.admin.toggle_registration_status(request, queryset)
+        self.course.refresh_from_db()
+        self.assertEqual(self.course.registration_status, 1)
+        self.admin.toggle_registration_status(request, queryset)
+        self.course.refresh_from_db()
+        self.assertEqual(self.course.registration_status, 0)

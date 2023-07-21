@@ -117,6 +117,32 @@ class RegisterCourseTest(TestCase):
         )
         self.assertEqual(registration.exam_grade, self.user_profile.grade + 1)
 
+    def test_invalid_exam_application(self):
+        print("\ntest_invalid_exam_application")
+        self.user_profile.grade = 6
+        self.user_profile.save()
+        response = self.client.post(
+            "/courses/register/test-course/",
+            {
+                "selected_sessions": [self.session.id],
+                "accept_terms": True,
+                "exam": True,
+            },
+        )
+        registration = CourseRegistration.objects.get(
+            course=self.course,
+            user=self.user,
+        )
+        self.assertFalse(registration.exam)
+
+        messages = [m.message for m in get_messages(response.wsgi_request)]
+        self.assertIn(
+            "Exam application rejected. As a "
+            f"{self.user_profile.get_grade_display()} "
+            "you can't apply for exams anymore.",
+            messages,
+        )
+
     def test_registration_fee_calculation_entire_course(self):
         print("\ntest_registration_fee_calculation_entire_course")
         self.client.post(
@@ -227,6 +253,7 @@ class UpdateCourseRegistrationTest(TestCase):
             username="test-user", password="testpassword"
         )
         self.client.force_login(self.user)
+        self.user_profile = UserProfile.objects.create(user=self.user, grade=0)
         self.registration = CourseRegistration.objects.create(
             user=self.user,
             course=self.course,
@@ -260,7 +287,8 @@ class UpdateCourseRegistrationTest(TestCase):
 
         messages = [m.message for m in get_messages(response.wsgi_request)]
         self.assertIn(
-            f"You have successfully signed up for {self.course.title}",
+            "You have successfully updated your registration for "
+            f"{self.course.title}",
             messages,
         )
 
@@ -312,6 +340,32 @@ class UpdateCourseRegistrationTest(TestCase):
         )
         self.registration.refresh_from_db()
         self.assertEqual(self.session.session_fee, self.registration.final_fee)
+
+    def test_update_invalid_exam_application(self):
+        print("\ntest_update_invalid_exam_application")
+        self.user_profile.grade = 6
+        self.user_profile.save()
+        response = self.client.post(
+            f"/user/registrations/update/{self.registration.pk}/",
+            {
+                "selected_sessions": [self.session.id],
+                "accept_terms": True,
+                "exam": True,
+            },
+        )
+        registration = CourseRegistration.objects.get(
+            course=self.course,
+            user=self.user,
+        )
+        self.assertFalse(registration.exam)
+
+        messages = [m.message for m in get_messages(response.wsgi_request)]
+        self.assertIn(
+            "Exam application rejected. As a "
+            f"{self.user_profile.get_grade_display()} "
+            "you can't apply for exams anymore.",
+            messages,
+        )
 
 
 class UserProfileViewTest(TestCase):
@@ -485,7 +539,7 @@ class UpdateGradeTest(TestCase):
         self.course.end_date = date.today() + timedelta(days=1)
         self.course.save()
         response = self.client.get("/user/update-grade/")
-        self.assertRedirects(response, "/user/profile/", 302, 200)
+        self.assertRedirects(response, "/", 302, 200)
 
     def test_post_update_grade_confirmed(self):
         print("\ntest_post_update_grade_confirmed")
@@ -494,7 +548,7 @@ class UpdateGradeTest(TestCase):
         self.user_profile.refresh_from_db()
         self.assertEqual(self.user_profile.grade, self.registration.exam_grade)
         self.assertEqual(self.registration.grade_updated, True)
-        self.assertRedirects(response, "/user/profile/", 302, 200)
+        self.assertRedirects(response, "/", 302, 200)
 
     def test_post_update_grade_cancelled(self):
         print("\ntest_post_update_grade_cancelled")
@@ -505,4 +559,4 @@ class UpdateGradeTest(TestCase):
             self.user_profile.grade, self.registration.exam_grade - 1
         )
         self.assertEqual(self.registration.grade_updated, True)
-        self.assertRedirects(response, "/user/profile/", 302, 200)
+        self.assertRedirects(response, "/", 302, 200)
