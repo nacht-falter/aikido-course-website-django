@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
+from cloudinary.models import CloudinaryField
 
 # Documentation for defining choices for CharFields:
 # https://docs.djangoproject.com/en/4.2/ref/models/fields/#choices
@@ -153,3 +154,35 @@ class UserProfile(models.Model):
         if not self.slug:
             self.slug = slugify(self.user.username)
         super(UserProfile, self).save(*args, **kwargs)
+
+
+class Category(models.Model):
+    """Represents a category to be used for displaying pages on the website"""
+
+    title = models.CharField(max_length=200, unique=True)
+
+    class Meta:
+        # https://djangoandy.com/2021/09/01/adjusting-the-plural-of-a-
+        # model-in-django-admin/
+        verbose_name_plural = "categories"
+
+    def __str__(self):
+        return self.title
+
+
+class Page(models.Model):
+    """Represents a page to be displayed on the website"""
+
+    STATUS = ((0, "Draft"), (1, "Published"))
+
+    title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="pages"
+    )
+    status = models.IntegerField(choices=STATUS, default=0)
+    featured_image = CloudinaryField("image", default="placeholder")
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title

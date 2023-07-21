@@ -1,7 +1,17 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django_summernote.admin import SummernoteModelAdmin
+from django_summernote.widgets import SummernoteWidget
+from django.db import models
 
-from .models import Course, CourseRegistration, CourseSession, UserProfile
+from .models import (
+    Course,
+    CourseRegistration,
+    CourseSession,
+    UserProfile,
+    Category,
+    Page,
+)
 
 
 class CourseSessionInline(admin.TabularInline):
@@ -25,6 +35,7 @@ class CourseRegistrationInline(admin.TabularInline):
         "user",
         "selected_sessions",
         "exam",
+        "exam_grade",
         "exam_passed",
         "accept_terms",
         "final_fee",
@@ -34,6 +45,7 @@ class CourseRegistrationInline(admin.TabularInline):
         "user",
         "selected_sessions",
         "exam",
+        "exam_grade",
         "accept_terms",
         "final_fee",
     ]
@@ -112,3 +124,36 @@ class UserProfileInline(admin.StackedInline):
 
 # Add inlines to UserAdmin model: https://stackoverflow.com/a/35573797
 UserAdmin.inlines += (UserProfileInline,)
+
+
+@admin.register(Page)
+class PageAdmin(SummernoteModelAdmin):
+    list_display = ("title", "slug", "status", "category")
+    search_fields = ["title", "content"]
+    list_filter = ("status", "category")
+    prepopulated_fields = {"slug": ("title",)}
+    summernote_fields = ("content",)
+
+
+class PageInline(admin.StackedInline):
+    """Displays pages as an inline model"""
+
+    model = Page
+    extra = 0
+    fields = [
+        "title",
+        "slug",
+        "category",
+        "status",
+        "featured_image",
+        "content",
+    ]
+    # Add summernote field to inline model:
+    # https://github.com/summernote/django-summernote/issues/14
+    formfield_overrides = {models.TextField: {'widget': SummernoteWidget}}
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("title",)
+    inlines = [PageInline]
