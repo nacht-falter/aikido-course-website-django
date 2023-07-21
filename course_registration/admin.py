@@ -156,4 +156,5 @@ class PageInline(admin.StackedInline):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("title",)
+    prepopulated_fields = {"slug": ("title",)}
     inlines = [PageInline]

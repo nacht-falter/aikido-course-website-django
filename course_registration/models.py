@@ -160,6 +160,7 @@ class Category(models.Model):
     """Represents a category to be used for displaying pages on the website"""
 
     title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
         # https://djangoandy.com/2021/09/01/adjusting-the-plural-of-a-
