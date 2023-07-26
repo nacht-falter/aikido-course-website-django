@@ -52,11 +52,10 @@ class CourseRegistrationInline(admin.TabularInline):
 
 
 @admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
+class CourseAdmin(SummernoteModelAdmin):
     list_display = (
         "title",
         "registration_status",
-        "description",
         "start_date",
         "end_date",
         "course_fee",
@@ -65,6 +64,7 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ["title", "description"]
     list_filter = ("registration_status",)
     prepopulated_fields = {"slug": ("title",)}
+    summernote_fields = ("description",)
     inlines = [CourseSessionInline, CourseRegistrationInline]
     actions = [
         "duplicate_selected_courses",
@@ -150,7 +150,7 @@ class PageInline(admin.StackedInline):
     ]
     # Add summernote field to inline model:
     # https://github.com/summernote/django-summernote/issues/14
-    formfield_overrides = {models.TextField: {'widget': SummernoteWidget}}
+    formfield_overrides = {models.TextField: {"widget": SummernoteWidget}}
 
 
 @admin.register(Category)
