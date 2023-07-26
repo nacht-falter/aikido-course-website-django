@@ -221,6 +221,9 @@ class CancelCourseRegistration(
     success_url = reverse_lazy("courseregistration_list")
     template_name = "courseregistration_confirm_delete.html"
 
+    def get_queryset(self):
+        return CourseRegistration.objects.filter(user=self.request.user)
+
     # Get success message:
     # https://stackoverflow.com/questions/74756918/django-deleteview-
     # successmessagemixin-how-to-pass-data-to-message
@@ -244,7 +247,9 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
         return course_data
 
     def get(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
+        registration = get_object_or_404(
+            CourseRegistration, pk=pk, user=request.user
+        )
         course = registration.course
         registration_form = forms.CourseRegistrationForm(
             instance=registration,
@@ -263,7 +268,9 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
         )
 
     def post(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
+        registration = get_object_or_404(
+            CourseRegistration, pk=pk, user=request.user
+        )
         course = registration.course
         registration_form = forms.CourseRegistrationForm(
             data=request.POST,
