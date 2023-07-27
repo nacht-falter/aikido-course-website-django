@@ -121,29 +121,11 @@ class RegisterCourse(LoginRequiredMixin, View):
                 "selected_sessions"
             )
 
-            # Calculate registration fee:
-            if len(selected_sessions) == len(course.sessions.all()):
-                registration.final_fee = course.course_fee
-            else:
-                registration.final_fee = 0
-                for session in selected_sessions:
-                    registration.final_fee += session.session_fee
+            registration.final_fee = registration.calculate_fees(
+                course, selected_sessions
+            )
 
-            # Set exam:
-            if registration.exam:
-                user_profile = get_object_or_404(
-                    UserProfile, user=request.user
-                )
-                if user_profile.grade < 6:
-                    registration.exam_grade = user_profile.grade + 1
-                else:
-                    registration.exam = False
-                    messages.warning(
-                        request,
-                        "Exam application rejected. As a "
-                        f"{user_profile.get_grade_display()} "
-                        "you can't apply for exams anymore.",
-                    )
+            registration.set_exam(request.user)
 
             registration.save()
 
@@ -287,29 +269,11 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                 "selected_sessions"
             )
 
-            # Calculate registration fee:
-            if len(selected_sessions) == len(course.sessions.all()):
-                registration.final_fee = course.course_fee
-            else:
-                registration.final_fee = 0
-                for session in selected_sessions:
-                    registration.final_fee += session.session_fee
+            registration.final_fee = registration.calculate_fees(
+                course, selected_sessions
+            )
 
-            # Set exam:
-            if registration.exam:
-                user_profile = get_object_or_404(
-                    UserProfile, user=request.user
-                )
-                if user_profile.grade < 6:
-                    registration.exam_grade = user_profile.grade + 1
-                else:
-                    registration.exam = False
-                    messages.warning(
-                        request,
-                        "Exam application rejected. As a "
-                        f"{user_profile.get_grade_display()} "
-                        "you can't apply for exams anymore.",
-                    )
+            registration.set_exam(request.user)
 
             registration.save()
 

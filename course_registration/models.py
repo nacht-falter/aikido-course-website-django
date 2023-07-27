@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
+from django.shortcuts import get_object_or_404
 
 from cloudinary.models import CloudinaryField
 
@@ -122,6 +123,23 @@ class CourseRegistration(models.Model):
                 fields=["user", "course"], name="unique_user_registration"
             )
         ]
+
+    def calculate_fees(self, course, selected_sessions):
+        final_fee = 0
+        if len(selected_sessions) == len(course.sessions.all()):
+            final_fee = course.course_fee
+        else:
+            for session in selected_sessions:
+                final_fee += session.session_fee
+        return final_fee
+
+    def set_exam(self, user):
+        if self.exam:
+            user_profile = get_object_or_404(UserProfile, user=user)
+            if user_profile.grade < 6:
+                self.exam_grade = user_profile.grade + 1
+            else:
+                self.exam = False
 
 
 class UserProfile(models.Model):
