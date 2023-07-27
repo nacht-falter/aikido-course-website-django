@@ -86,13 +86,16 @@ class RegisterCourse(LoginRequiredMixin, View):
         user_registered = CourseRegistration.objects.filter(
             user=request.user, course=course
         )
+
         if user_registered:
             messages.warning(
                 request, "You are already registered for this course."
             )
             return HttpResponseRedirect(reverse("course_list"))
 
-        registration_form = forms.CourseRegistrationForm(course=course)
+        registration_form = forms.CourseRegistrationForm(
+            course=course, user_profile=request.user.profile
+        )
 
         return render(
             request,
@@ -110,7 +113,7 @@ class RegisterCourse(LoginRequiredMixin, View):
         course_data = self.prepare_course_data(course)
 
         registration_form = forms.CourseRegistrationForm(
-            data=request.POST, course=course
+            data=request.POST, course=course, user_profile=request.user.profile
         )
         if registration_form.is_valid():
             registration = registration_form.save(commit=False)
@@ -147,7 +150,9 @@ class RegisterCourse(LoginRequiredMixin, View):
                     "Please select at least one session.",
                 )
 
-            registration_form = forms.CourseRegistrationForm(course=course)
+            registration_form = forms.CourseRegistrationForm(
+                course=course, user_profile=request.user.profile
+            )
             return render(
                 request,
                 "register_course.html",
@@ -236,6 +241,7 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
         registration_form = forms.CourseRegistrationForm(
             instance=registration,
             course=course,
+            user_profile=request.user.profile,
         )
         course_data = self.prepare_course_data(course)
 
@@ -258,6 +264,7 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             data=request.POST,
             instance=registration,
             course=course,
+            user_profile=request.user.profile,
         )
 
         course_data = self.prepare_course_data(course)
@@ -293,7 +300,9 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                     "Please select at least one session.",
                 )
             registration_form = forms.CourseRegistrationForm(
-                instance=registration, course=course
+                instance=registration,
+                course=course,
+                user_profile=request.user.profile,
             )
 
             return render(

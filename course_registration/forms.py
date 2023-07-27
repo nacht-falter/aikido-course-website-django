@@ -9,10 +9,13 @@ class CourseRegistrationForm(forms.ModelForm):
     # user-object-into-form-classes-ee322f02948c):
     def __init__(self, *args, **kwargs):
         course = kwargs.pop("course", None)
+        user_profile = kwargs.pop("user_profile", None)
         super().__init__(*args, **kwargs)
         self.fields[
             "selected_sessions"
         ].queryset = CourseSession.objects.filter(course=course)
+        if user_profile.grade >= 6:
+            self.fields["exam"].widget = forms.HiddenInput()
 
     accept_terms = forms.BooleanField(required=True)
     selected_sessions = forms.ModelMultipleChoiceField(

@@ -161,7 +161,9 @@ class UserProfile(models.Model):
         (ROKUDAN, "6th Dan ⚫️"),
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="profile"
+    )
     slug = models.SlugField(unique=True)
     grade = models.IntegerField(choices=GRADE_CHOICES, default=RED_BELT)
 
