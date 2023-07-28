@@ -52,6 +52,7 @@ urlpatterns = [
         views.PageDetail.as_view(),
         name="page_detail",
     ),
+    path("contact/", views.ContactPage.as_view(), name="contact"),
     # Override default allauth password redirect url
     # https://stackoverflow.com/a/56599071
     path(

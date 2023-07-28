@@ -132,7 +132,9 @@
     {% endblock content %}
   </main>
 
-  <footer></footer>
+  <footer class="p-5 bg-body-tertiary" >
+      <a href="{% url 'contact' %}">Contact</a>
+    </footer>
   <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
 </body>

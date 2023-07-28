@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
+from django.core.mail import send_mail, BadHeaderError
 
 from allauth.account.views import PasswordChangeView
 
@@ -45,6 +46,48 @@ class HomePage(View):
                 "upcoming_registrations": upcoming_registrations,
             },
         )
+
+
+class ContactPage(View):
+    """Displays contact information and a contact form
+    Instructions from: https://learndjango.com/tutorials/django-email-
+    contact-form-tutorial
+    """
+
+    def get(self, request):
+        contact_form = forms.ContactForm()
+
+        return render(
+            request,
+            "contact.html",
+            {"form": contact_form},
+        )
+
+    def post(self, request):
+        contact_form = forms.ContactForm(data=request.POST)
+        if contact_form.is_valid():
+            subject = contact_form.cleaned_data["subject"]
+            from_email = contact_form.cleaned_data["from_email"]
+            message = contact_form.cleaned_data["message"]
+            try:
+                send_mail(
+                    subject,
+                    message,
+                    from_email,
+                    ["johannes@aikido-freiburg.de"],
+                )
+            except BadHeaderError:
+                messages.warning(
+                    request, "Invalid Header found. Please try again."
+                )
+                return HttpResponseRedirect(reverse("contact"))
+            messages.success(
+                request, "Thank you! Your message has been sent."
+            )
+        else:
+            contact_form = forms.ContactForm()
+
+        return HttpResponseRedirect(reverse("home"))
 
 
 class PageDetail(View):
