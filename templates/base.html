@@ -13,7 +13,7 @@
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <!-- https://docs.djangoproject.com/en/3.2/ref/contrib/messages/#displaying-messages -->
   {% if messages %}
   <div class="container m-0">
@@ -29,11 +29,22 @@
     </div>
   </div>
   {% endif %}
+
+  {% if user.is_authenticated %}
+  <div id="auth_bar" class="w-100 bg-secondary text-end text-uppercase text-light border-bottom px-5 py-1">
+    <span>You are logged in as <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover"
+        href="{% url 'userprofile' %}" title="Go to User Profile">{{ user }}
+        <i class="fa-solid fa-circle-user"></i></a> |
+      <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover" href="{% url 'account_logout' %}"
+        title="Logout">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+    </span>
+  </div>
+  {% endif %}
   <!-- Navigation -->
   <!-- Getting data to dynamically set active nav-link. Adapted from: https://stackoverflow.com/a/55151707 -->
   <!-- Django Documentation for ResolverMatch: -->
   <!-- https://docs.djangoproject.com/en/4.2/ref/urlresolvers/#django.urls.ResolverMatch -->
-  {% with request.resolver_match.kwargs.category_slug as category_slug and request.resolver_match.url_name as url_name %}
+  {% with request.resolver_match.kwargs.slug as slug and request.resolver_match.url_name as url_name %}
   <nav class="navbar navbar-expand-lg px-5 py-3 bg-body-tertiary shadow-sm">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}">
@@ -55,15 +66,15 @@
           </li>
           {% for category in categories %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {% if category.slug == category_slug %}active{% endif %}" href="#"
-              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {% if category.slug == slug %}active{% endif %}" href="#" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
               {{ category.title }}
             </a>
             <ul class="dropdown-menu">
               {% for page in category.pages.all %}
               <li>
                 <!-- Pass slugs from different models to url: https://stackoverflow.com/a/56719888 -->
-                <a class="dropdown-item" href="{% url 'page_detail' category_slug=category.slug page_slug=page.slug %}">
+                <a class="dropdown-item" href="{% url 'page_detail' slug=category.slug page_slug=page.slug %}">
                   {{ page.title }}
                 </a>
               </li>
@@ -101,12 +112,7 @@
           </li>
           {% endif %}
         </ul>
-        {% if user.is_authenticated %}
-        <span class="nav-item ms-5 text-nowrap">
-          <a class="nav-link" href="{% url 'account_logout' %}">
-            <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-        </span>
-        {% else %}
+        {% if not user.is_authenticated %}
         <ul class="navbar-nav">
           <li class="nav-item ms-5">
             <a class="nav-link" href="{% url 'account_login' %}">Login</a>
@@ -132,9 +138,9 @@
     {% endblock content %}
   </main>
 
-  <footer class="p-5 bg-body-tertiary" >
-      <a href="{% url 'contact' %}">Contact</a>
-    </footer>
+  <footer class="p-5 bg-body-tertiary mt-auto">
+    <a href="{% url 'contact' %}">Contact</a>
+  </footer>
   <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
 </body>
