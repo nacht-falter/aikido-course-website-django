@@ -1,10 +1,10 @@
 from datetime import date
 
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.urls import reverse_lazy
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
@@ -16,6 +16,24 @@ from .models import Course, CourseRegistration, UserProfile, Page
 from . import forms
 
 CURRENT_DATE = date.today()
+
+
+class UserProfileExistsMixin(UserPassesTestMixin):
+    """Checks if user has a user profile and redirects to user profile
+    page if no profile is found.
+    Documentation for UserPassesTestMixin:
+    https://docs.djangoproject.com/en/4.2/topics/auth/default/#django.
+    contrib.auth.mixins.UserPassesTestMixin
+    """
+
+    def test_func(self):
+        return UserProfile.objects.filter(user=self.request.user).exists()
+
+    def handle_no_permission(self):
+        messages.warning(
+            self.request, "Please create a user profile before proceeding."
+        )
+        return redirect("/user/profile/")
 
 
 class HomePage(View):
@@ -81,9 +99,7 @@ class ContactPage(View):
                     request, "Invalid Header found. Please try again."
                 )
                 return HttpResponseRedirect(reverse("contact"))
-            messages.success(
-                request, "Thank you! Your message has been sent."
-            )
+            messages.success(request, "Thank you! Your message has been sent.")
         else:
             contact_form = forms.ContactForm()
 
@@ -108,7 +124,7 @@ class CourseList(generic.ListView):
     template_name = "course_list.html"
 
 
-class RegisterCourse(LoginRequiredMixin, View):
+class RegisterCourse(LoginRequiredMixin, UserProfileExistsMixin, View):
     """Creates a course registration"""
 
     def prepare_course_data(self, course):
@@ -209,7 +225,7 @@ class RegisterCourse(LoginRequiredMixin, View):
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
-class CourseRegistrationList(LoginRequiredMixin, View):
+class CourseRegistrationList(LoginRequiredMixin, UserProfileExistsMixin, View):
     """Displays a list of a users course registrations"""
 
     def get(self, request):
