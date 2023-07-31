@@ -483,6 +483,7 @@ class UpdateGrade(View):
             user_profile.grade = exam_registration.exam_grade
             user_profile.save()
             exam_registration.grade_updated = True
+            exam_registration.exam_passed = True
             exam_registration.save()
             messages.info(
                 request,
