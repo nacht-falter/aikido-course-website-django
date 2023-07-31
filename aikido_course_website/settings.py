@@ -62,12 +62,15 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+# Allauth settings
+
 LOGIN_REDIRECT_URL = "/user/update-grade/"
 LOGOUT_REDIRECT_URL = "/"
-
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/user/profile/"
 
-ACCOUNT_EMAIL_VERIFICATION = "none"
+# Email Settings
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.ionos.de"
