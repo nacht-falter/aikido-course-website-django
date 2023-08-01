@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
 
 from allauth.account.views import PasswordChangeView
 
@@ -33,6 +34,7 @@ class UserProfileExistsMixin(UserPassesTestMixin):
         messages.warning(
             self.request, "Please create a user profile before proceeding."
         )
+
         return redirect("/user/profile/")
 
 
@@ -92,7 +94,7 @@ class ContactPage(View):
                     subject,
                     message,
                     from_email,
-                    ["johannes@aikido-freiburg.de"],
+                    [settings.EMAIL_HOST_USER],
                 )
             except BadHeaderError:
                 messages.warning(
@@ -197,6 +199,33 @@ class RegisterCourse(LoginRequiredMixin, UserProfileExistsMixin, View):
             # /models/relations/#django.db.models.fields.related.Relat
             # edManager.set
             registration.selected_sessions.set(selected_sessions)
+
+            # Send confirmation email:
+            exam = (
+                registration.get_exam_grade_display()
+                if registration.exam
+                else "None"
+            )
+            sessions = [session.title for session in selected_sessions]
+            send_mail(
+                # Subject:
+                f"[DANBW e.V.] You signed up for {registration.course}",
+                # Message content:
+                f"Hi {registration.user},\n"
+                "You have succesfully signed up "
+                f"for {course}\n"
+                f"\nCourse dates: {course.start_date.strftime('%b %d')} "
+                f"to {course.end_date.strftime('%b %d, %Y')}\n"
+                "\nRegistration details:\n"
+                f"- Selected sessions: "
+                f"{(', '.join(sessions))}\n"
+                f"- Exam: {exam}\n"
+                f"- Fee: {registration.final_fee} €",
+                # Sender:
+                settings.EMAIL_HOST_USER,
+                # Recipient:
+                [registration.user.email],
+            )
 
             messages.info(
                 request, f"You have successfully signed up for {course.title}"
