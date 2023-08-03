@@ -35,8 +35,8 @@
     <span>You are logged in as <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover"
         href="{% url 'userprofile' %}" title="Go to User Profile">{{ user }}
         <i class="fa-solid fa-circle-user"></i></a> |
-      <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover" href="{% url 'account_logout' %}"
-        title="Logout">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+      <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover" data-bs-toggle="modal"
+        data-bs-target="#logoutModal" href="#" title="Logout">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
     </span>
   </div>
   {% endif %}
@@ -46,7 +46,7 @@
   <!-- Django Documentation for ResolverMatch: -->
   <!-- https://docs.djangoproject.com/en/4.2/ref/urlresolvers/#django.urls.ResolverMatch -->
   {% with request.resolver_match.kwargs.category_slug as slug and request.resolver_match.url_name as url_name %}
-  <nav class="navbar navbar-expand-lg px-5 py-3 bg-body-tertiary shadow-sm">
+  <nav id="main-navigation" class="navbar navbar-expand-lg px-2 px-md-5 py-2 py-md-3 bg-body-tertiary shadow-sm">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}">
         <img class="main-logo" src="{% static 'images/danbw-logo.png' %}" alt="Dynamic Aikido Nocquet BW Logo">
@@ -115,7 +115,7 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" href="{% url 'account_logout' %}">
+                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal" href="#">
                   <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
               </li>
             </ul>
@@ -139,8 +139,34 @@
     {% endblock header %}
   </header>
 
+  <!-- Logout Modal -->
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="logoutModalLabel">Logout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h2 class="mt-2">Logout</h2>
+          <p>Are you sure you want to log out?</p>
+        </div>
+        <div class="modal-footer">
+          <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button class="btn btn-sm btn-primary" type="submit">Logout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Content -->
-  <main class="p-5">
+  <main class="px-2 px-md-5">
     {% block content %}
     {% endblock content %}
   </main>
