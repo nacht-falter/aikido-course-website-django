@@ -13,7 +13,7 @@ from django.conf import settings
 
 from allauth.account.views import PasswordChangeView
 
-from .models import Course, CourseRegistration, UserProfile, Page
+from .models import Course, CourseRegistration, UserProfile, Page, Category
 from . import forms
 
 CURRENT_DATE = date.today()
@@ -31,10 +31,6 @@ class UserProfileExistsMixin(UserPassesTestMixin):
         return UserProfile.objects.filter(user=self.request.user).exists()
 
     def handle_no_permission(self):
-        messages.warning(
-            self.request, "Please create a user profile before proceeding."
-        )
-
         return redirect("/user/profile/")
 
 
@@ -108,6 +104,18 @@ class ContactPage(View):
         return HttpResponseRedirect(reverse("home"))
 
 
+class PageList(generic.ListView):
+    """Displays a list of pages from a category"""
+    model = Page
+    template_name = "page_list.html"
+    paginate_by = 1
+
+    def get_queryset(self):
+        category_slug = self.kwargs.get('category_slug')
+        category = get_object_or_404(Category, slug=category_slug)
+        return Page.objects.filter(category=category)
+
+
 class PageDetail(View):
     """Displays a page"""
 
@@ -120,7 +128,6 @@ class PageDetail(View):
 
 class CourseList(generic.ListView):
     """Displays a list of all courses"""
-
     model = Course
     queryset = Course.objects.all()
     template_name = "course_list.html"
