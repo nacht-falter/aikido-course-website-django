@@ -6,6 +6,7 @@ function checkSessionCheckboxes() {
     checkbox.checked = entireCourseCheckbox.checked;
   }
   calculateFinalFee();
+  disableSubmitButton();
 }
 
 /**
@@ -25,6 +26,7 @@ function checkEntireCourseCheckbox() {
   }
   entireCourseCheckbox.checked = allSessionsSelected;
   calculateFinalFee();
+  disableSubmitButton();
 }
 
 /**
@@ -47,6 +49,27 @@ function calculateFinalFee() {
   finalFeeDisplay.innerText = finalFee;
 }
 
+/**
+ * Disable submit button if form is invalid
+ */
+function disableSubmitButton() {
+  let checkboxChecked = false;
+  for (checkbox of sessionsCheckboxes) {
+    if (checkbox.checked == true) {
+      checkboxChecked = true;
+      break;
+    }
+  }
+  if (entireCourseCheckbox.checked) {
+    checkboxChecked = true;
+  }
+  if (checkboxChecked == true && acceptTermsCheckbox.checked) {
+    submitButton.classList.remove("disabled");
+  } else {
+    submitButton.classList.add("disabled");
+  }
+}
+
 // Receiving data from the template. Instructions from: https://adamj.eu/tech/
 // 2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/
 const course_data = JSON.parse(document.currentScript.nextElementSibling.textContent);
@@ -55,11 +78,14 @@ const finalFeeDisplay = document.getElementById("final-fee-display");
 const entireCourseCheckbox = document.getElementById("entire-course");
 const sessionsList = document.getElementById("id_selected_sessions");
 const sessionsCheckboxes = sessionsList.querySelectorAll("input");
+const acceptTermsCheckbox = document.getElementById("id_accept_terms");
+const submitButton = document.getElementById("submit-button");
 
 // Add event listeners to checkboxes:
 entireCourseCheckbox.addEventListener("click", checkSessionCheckboxes);
 for (let checkbox of sessionsCheckboxes) {
   checkbox.addEventListener("click", checkEntireCourseCheckbox);
 }
+acceptTermsCheckbox.addEventListener("click", disableSubmitButton);
 
 checkEntireCourseCheckbox();
