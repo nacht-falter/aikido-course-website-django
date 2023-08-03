@@ -61,3 +61,5 @@ entireCourseCheckbox.addEventListener("click", checkSessionCheckboxes);
 for (let checkbox of sessionsCheckboxes) {
   checkbox.addEventListener("click", checkEntireCourseCheckbox);
 }
+
+checkEntireCourseCheckbox();
