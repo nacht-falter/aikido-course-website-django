@@ -2,27 +2,52 @@
 {% load static %}
 {% block content %}
 <h3>Update registration for {{ course.title }}</h3>
-<form method="post">
-  {% csrf_token %}
-  <table>
-    <tr>
-      <td><strong>Entire course</strong></td>
-      <td><input type="checkbox" name="entire-course" id="entire-course" </td>
-    </tr>
-    {{ form.as_table }}
-    <tr>
-      <td><strong>Registration Fee:</strong></td>
-      <td><span id="final-fee-display">0</span> €</td>
-
-    </tr>
-  </table>
-  <a href="{% url 'courseregistration_list' %}"><button type="button">Cancel</button></a>
-  <button type="submit">Update</button>
-</form>
+<div class="registration-form-wrapper">
+  <form method="post">
+    {% csrf_token %}
+    <table class="registration-form-table table table-striped table-borderless">
+      <tr>
+        <th>I will attend the following sessions:</th>
+        <td>{{ form.selected_sessions }}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="checkbox" name="entire-course" id="entire-course"> I will attend the entire course
+        </td>
+      </tr>
+      {% if not user.profile.grade > 5 %}
+      <tr>
+        <td colspan="2">{{ form.exam }} I want to apply for my {{ user.profile.get_grade_display }} exam</td>
+      </tr>
+      {% endif %}
+      <tr>
+        <th>Comments:</th>
+        <td>{{ form.comment }}</td>
+      </tr>
+      <tr>
+        <td colspan="2">{{ form.accept_terms }} I accept the <a href="#terms-and-conditions">terms and conditions</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Registration Fee: <span id="final-fee-display">0</span> €</strong>
+        </td>
+      </tr>
+    </table>
+    <a href="{% url 'courseregistration_list' %}"><button class="btn btn-sm btn-danger" type="button">Cancel</button></a>
+    <button id="submit-button" class="btn btn-sm btn-primary disabled" type="submit">Update registration</button>
+  </form>
+  <hr class="mt-4">
+  <h3 id="terms-and-conditions">Terms and Conditions</h3>
+  <p>The organizer (DANBW e. V.) does not provide insurance coverage.</p>
+  <p>Also, the organizer may take photos during the course, which could be published without mentioning
+    names (e.g., on the DANBW website). If you do not wish to have your photos published, please inform the organizer
+    before
+    the start of the course.</p>
+</div>
 
 <!-- Instructions for safely passing data to JavaScript: -->
 <!-- https://adamj.eu/tech/2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/ -->
-<script src="{% static 'js/script.js' %}" defer></script>
+<script src="{% static 'js/registration_form.js' %}" defer></script>
 {{ course_data|json_script:"course_data" }}
 
 {% endblock content %}
