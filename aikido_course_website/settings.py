@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "cloudinary",
     "django_summernote",
+    "crispy_forms",
+    "crispy_bootstrap5",
     "course_registration",
 ]
 
@@ -79,6 +81,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-info",

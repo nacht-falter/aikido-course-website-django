@@ -107,3 +107,12 @@ a.badge:hover {
   background-color: #022385;
   border-color: #022385;
 }
+
+.form-card {
+  width: 35vw;
+  min-width: 300px;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 1.5em;
+  box-shadow: 0 3px 3px lightgrey;
+}
