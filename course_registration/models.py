@@ -181,11 +181,13 @@ class Category(models.Model):
 
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
+    menu_position = models.IntegerField(default=0)
 
     class Meta:
         # https://djangoandy.com/2021/09/01/adjusting-the-plural-of-a-
         # model-in-django-admin/
         verbose_name_plural = "categories"
+        ordering = ["menu_position"]
 
     def __str__(self):
         return self.title
@@ -204,6 +206,10 @@ class Page(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     featured_image = CloudinaryField("image", default="placeholder")
     content = models.TextField()
+    menu_position = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ["menu_position"]
