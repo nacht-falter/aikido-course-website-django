@@ -15,10 +15,29 @@ main {
 .main-logo {
   margin: 0 auto;
   height: 5em;
+  transition: all 0.5s;
+}
+
+.main-logo:hover {
+  opacity: 0.9;
 }
 
 .main-title {
   font-size: 1.75rem;
+  transition: all 0.5s;
+  color: #1e3c95;
+}
+
+.main-title:hover {
+  color: #b5172c;
+}
+
+#main-navigation {
+  background: linear-gradient(90deg, #eeeeee, #f8f9fa);
+}
+
+footer {
+  background: linear-gradient(90deg, #f8f9fa, #eeeeee);
 }
 
 @media (max-width: 1400px) {
