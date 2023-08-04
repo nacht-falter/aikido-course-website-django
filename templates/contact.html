@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
 {% load static %}
 
 {% block content %}
@@ -6,7 +9,7 @@
 <p>Leave a message. We'll get back to you.</p>
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Send</button>
+  {{ form|crispy }}
+  <button class="btn btn-primary btn-sm" type="submit">Send</button>
 </form>
 {% endblock content %}

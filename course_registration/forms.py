@@ -36,8 +36,8 @@ class CourseRegistrationForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     # Add new fields to form: https://stackoverflow.com/a/58944671
-    first_name = forms.CharField(max_length=200)
-    last_name = forms.CharField(max_length=200)
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
 
     class Meta:
         model = UserProfile
@@ -63,6 +63,6 @@ class UpdateUserProfileForm(forms.ModelForm):
 
 
 class ContactForm(forms.Form):
-    from_email = forms.EmailField(required=True)
+    from_email = forms.EmailField(required=True, label="Your email")
     subject = forms.CharField(required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)

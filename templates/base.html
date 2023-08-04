@@ -171,8 +171,17 @@
     {% endblock content %}
   </main>
 
-  <footer class="p-5 bg-body-tertiary mt-auto">
-    <a href="{% url 'contact' %}">Contact</a>
+  <footer class="bg-body-tertiary mt-auto">
+    <nav class="navbar m-5 d-flex justify-content-end">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link blue-link" href="{% url 'contact' %}"><i class="fa-regular fa-envelope"></i> Get in touch with us!</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="copyright bg-dark text-light p-4 text-center">
+      <i class="fa-regular fa-copyright"></i> Dynamic Aikido Nocquet Baden-Württemberg e. V. {% now "Y" %}
+    </div>
   </footer>
   <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
