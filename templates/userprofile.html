@@ -1,17 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>My User Profile</h3>
+<h3>Profile</h3>
 <ul>
-  <li>Name: {{ profile.user.first_name }} {{ profile.user.last_name }}</li>
-  <li>E-mail: {{ profile.user.email }}</li>
-  <li>Grade: {{ profile.get_grade_display }}</li>
+    <li>Name: {{ profile.user.first_name }} {{ profile.user.last_name }}</li>
+    <li>E-mail: {{ profile.user.email }}</li>
+    <li>Grade: {{ profile.get_grade_display }}</li>
 </ul>
 
-<p><a href="{% url 'courseregistration_list' %}">My Courses</a></p>
-<p><a href="{% url 'update_userprofile' %}">Edit my Profile</a></p>
+<p><a href="{% url 'update_userprofile' %}" title="Update Profile">Edit Profile</a></p>
+<p><a href="{% url 'account_change_password' %}" title="Change Password">Change password</a></p>
 {% if not user.is_staff %}
-<p><a href="{% url 'account_change_password' %}">Change my password</a></p>
-<p><a href="{% url 'deactivate_user' %}">Deactivate my Account</a></p>
+<p><a href="#" title="Deactivate Account" data-bs-toggle="modal"
+        data-bs-target="#deactivateAccountModal">Deactivate Account</a></p>
+
+<!-- Deactivate Account Modal -->
+<div class="modal fade" id="deactivateAccountModal" tabindex="-1"
+    aria-labelledby="deactivateAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deactivateAccountModalLabel">Deactivate Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2 class="mt-2">Deactivate your Account?</h2>
+                <p>Are you sure you want to deactivate your account?
+                <p>
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{% url 'deactivate_user' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No, go
+                        back</button>
+                    <input class="btn btn-sm btn-danger" type="submit" value="Yes, deactivate my account">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 {% endif %}
 {% endblock content %}
