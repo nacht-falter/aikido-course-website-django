@@ -36,12 +36,22 @@ class CourseRegistrationForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     # Add new fields to form: https://stackoverflow.com/a/58944671
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
+    first_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={"placeholder": "First Name"}),
+    )
+    last_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={"placeholder": "Last Name"}),
+    )
 
     class Meta:
         model = UserProfile
-        fields = ["grade"]
+        fields = [
+            "first_name",
+            "last_name",
+            "grade",
+        ]
 
 
 class UpdateUserProfileForm(forms.ModelForm):
