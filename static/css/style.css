@@ -7,11 +7,33 @@ body {
   font-family: source-sans;
 }
 
+main {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
 .main-logo {
   margin: 0 auto;
   height: 5em;
 }
 
+.main-title {
+  font-size: 1.75rem;
+}
+
+@media (max-width: 1400px) {
+  .main-title {
+    max-width: 25%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .main-title {
+    font-size: 1.2rem;
+  }
+}
+
+h1,
 h2 {
   color: #1e3c95;
 }
@@ -32,6 +54,21 @@ h3 {
     left: 0;
     min-height: 30vh;
   }
+}
+
+.featured-image {
+  max-height: 40vh;
+  object-fit: cover;
+}
+
+@media (max-width: 1000px) {
+  .featured-image {
+    max-height: 35vh;
+  }
+}
+
+#auth_bar {
+  font-size: 80%;
 }
 
 .blue-link {
