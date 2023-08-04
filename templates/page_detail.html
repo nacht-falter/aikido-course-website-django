@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <h2>{{ page.title }}</h2>
 <div>
-  <!-- Display featured image. Instructions from CI Django blog walkthrough: -->
-  {% if "placeholder" in page.featured_image.url %}
-  <img class="featured-image" src="{% static 'images/placeholder.jpg' %}" width="100%">
-  {% else %}
-  <img class="featured-image" src=" {{ page.featured_image.url }}" width="100%">
-  {% endif %}
-</div>
-<p>{{ page.content|safe }}</p>
+<div>{{ page.content|safe }}</div>
 {% endblock %}

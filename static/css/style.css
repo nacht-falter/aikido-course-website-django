@@ -198,3 +198,7 @@ a.badge:hover {
   max-height: 15vh;
   width: 100%;
 }
+
+.page-content img {
+  max-width: 300px;
+}
