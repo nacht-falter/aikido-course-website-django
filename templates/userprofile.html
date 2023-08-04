@@ -1,22 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>Profile</h3>
-<ul>
-    <li>Name: {{ profile.user.first_name }} {{ profile.user.last_name }}</li>
-    <li>E-mail: {{ profile.user.email }}</li>
-    <li>Grade: {{ profile.get_grade_display }}</li>
-</ul>
+<h2>Profile: {{ user }}</h2>
+<table class="table table-striped">
 
-<p><a href="{% url 'update_userprofile' %}" title="Update Profile">Edit Profile</a></p>
-<p><a href="{% url 'account_change_password' %}" title="Change Password">Change password</a></p>
+    <tr>
+        <td>Name</td>
+        <td>{{ profile.user.first_name }} {{ profile.user.last_name }}</td>
+    </tr>
+    <tr>
+        <td>E-mail</td>
+        <td>{{ profile.user.email }}</td>
+    </tr>
+    <tr>
+        <td>Grade</td>
+        <td>{{ profile.get_grade_display }}</td>
+    </tr>
+</table>
+
+<a class="btn btn-primary btn-sm" href="{% url 'update_userprofile' %}" title="Update Profile">Edit Profile</a>
+<a class="btn btn-secondary btn-sm" href="{% url 'account_change_password' %}" title="Change Password">Change
+    password</a>
 {% if not user.is_staff %}
-<p><a href="#" title="Deactivate Account" data-bs-toggle="modal"
-        data-bs-target="#deactivateAccountModal">Deactivate Account</a></p>
+<a class="btn btn-danger btn-sm" href="#" title="Deactivate Account" data-bs-toggle="modal"
+    data-bs-target="#deactivateAccountModal">Deactivate Account</a></p>
 
 <!-- Deactivate Account Modal -->
-<div class="modal fade" id="deactivateAccountModal" tabindex="-1"
-    aria-labelledby="deactivateAccountModalLabel" aria-hidden="true">
+<div class="modal fade" id="deactivateAccountModal" tabindex="-1" aria-labelledby="deactivateAccountModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -41,7 +52,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endif %}
 {% endblock content %}
