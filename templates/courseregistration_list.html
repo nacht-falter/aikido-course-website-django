@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
 <h3>Your upcoming courses</h3>
 
 {% for registration in upcoming_registrations %}
@@ -46,10 +47,37 @@
     <div class="card-footer bg-secondary-subtle text-center">
         <a class="btn btn-sm btn-primary course-signup-button m-2 my-sm-0" title="Update Registration"
             href="{% url 'update_courseregistration' registration.pk %}">Update registration</a>
-        <a class="btn btn-sm btn-danger m-2 my-sm-0" title="Cancel Registration"
-            href="{% url 'cancel_courseregistration' registration.pk %}">Cancel registration</a>
+        <a class="btn btn-sm btn-danger m-2 my-sm-0" title="Cancel Registration" data-bs-toggle="modal"
+            data-bs-target="#cancelRegistrationModal{{ registration.pk }}" href="#">Cancel registration</a>
     </div>
 
+    <!-- Cancel Registration Modal -->
+    <div class="modal fade" id="cancelRegistrationModal{{ registration.pk }}" tabindex="-1"
+        aria-labelledby="cancelRegistrationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelRegistrationModalLabel">Cancel Registration</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h2 class="mt-2">Cancel Registration for {{ registration.course.title }}?</h2>
+                    <p>Are you sure you want to cancel your registration for {{ registration.course.title }}?</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" action="{% url 'cancel_courseregistration' registration.pk %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No, go
+                            back</button>
+                        <input class="btn btn-sm btn-danger" type="submit" value="Yes, cancel my registration">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% empty %}
 <p>
