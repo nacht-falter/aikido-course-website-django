@@ -42,6 +42,10 @@ h3 {
   color: #b5172c;
 }
 
+i {
+  margin-right: 5px;
+}
+
 @media (max-width: 767px) {
   .carousel .carousel-item {
     min-height: 30vh;
@@ -100,6 +104,14 @@ a.badge:hover {
   opacity: 0.8;
 }
 
+.accordion > :nth-child(2n) .accordion-button {
+  background-color: #dddddd;
+}
+
+.accordion > :nth-child(2n) .accordion-button:hover {
+  background-color: rgba(30, 60, 149, 0.2);
+}
+
 .accordion-button {
   transition: all 0.1s;
 }
@@ -130,19 +142,33 @@ a.badge:hover {
   border-color: #1e3c95;
 }
 
-.signup-button:hover {
-  background-color: #1e3c95;
-  border-color: #1e3c95;
+.signup-button:hover,
+.signup-button:active {
+  background-color: #1e3c95 !important;
+  border-color: #1e3c95 !important;
 }
 
 .course-signup-button {
-  background-color: #1e3c95;
-  border-color: #1e3c95;
+  background-color: #1e3c95 !important;
+  border-color: #1e3c95 !important;
 }
 
-.course-signup-button:hover {
+.course-signup-button:hover,
+.course-signup-button:active {
   background-color: #022385;
   border-color: #022385;
+}
+
+.btn-primary {
+  background-color: #1e3c95 !important;
+  border-color: #1e3c95 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #254bbd !important;
+  border-color: #254bbd !important;
 }
 
 .form-card {
@@ -152,4 +178,23 @@ a.badge:hover {
   margin: 0 auto;
   margin-top: 1.5em;
   box-shadow: 0 3px 3px lightgrey;
+}
+
+.form-table td {
+  padding: 0.5em;
+}
+
+.registration-form-table td {
+  display: block;
+}
+
+.registration-form-table th {
+  display: block;
+  padding-bottom: 0;
+  font-weight: normal;
+}
+
+.registration-form-table textarea {
+  max-height: 15vh;
+  width: 100%;
 }
