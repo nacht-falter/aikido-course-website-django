@@ -1,5 +1,4 @@
 """aikido_course_website URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -24,5 +23,5 @@ urlpatterns = [
         name="course_registration-urls",
     ),
     path("accounts/", include("allauth.urls")),
-    path('summernote/', include('django_summernote.urls')),
+    path("summernote/", include("django_summernote.urls")),
 ]
