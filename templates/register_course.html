@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 <h2>Sign up for {{ course.title }}</h2>
 <p>Please select the sessions you want to attend or select entire course. The course fee will be displayed
@@ -13,12 +14,13 @@
         <td>{{ form.selected_sessions }}</td>
       </tr>
       <tr>
-        <td colspan="2"><input type="checkbox" name="entire-course" id="entire-course"> I will attend the entire course
+        <td colspan="2">
+          <input type="checkbox" name="entire-course" id="entire-course"> I will attend the entire course
         </td>
       </tr>
       {% if not user.profile.grade > 5 %}
       <tr>
-        <td colspan="2">{{ form.exam }} I want to apply for my {{ user.profile.get_grade_display }} exam</td>
+        <td colspan="2">{{ form.exam }} I want to apply for an exam</td>
       </tr>
       {% endif %}
       <tr>
@@ -26,23 +28,27 @@
         <td>{{ form.comment }}</td>
       </tr>
       <tr>
-        <td colspan="2">{{ form.accept_terms }} I accept the <a href="#terms-and-conditions">terms and conditions</a></td>
+        <td colspan="2">
+          {{ form.accept_terms }} I accept the <a href="#terms-and-conditions">terms and conditions</a>
+        </td>
       </tr>
       <tr>
         <td>
-            <strong>Registration Fee: <span id="final-fee-display">0</span> €</strong>
+          <strong>Registration Fee: <span id="final-fee-display">0</span> €</strong>
         </td>
       </tr>
     </table>
-    <a href="{% url 'course_list' %}"><button class="btn btn-sm btn-danger" type="button">Cancel</button></a>
+    <a href="{% url 'course_list' %}">
+      <button class="btn btn-sm btn-danger" type="button">Cancel</button>
+    </a>
     <button id="submit-button" class="btn btn-sm btn-primary disabled" type="submit">Sign up</button>
   </form>
   <hr class="mt-4">
   <h3 id="terms-and-conditions">Terms and Conditions</h3>
   <p>The organizer (DANBW e. V.) does not provide insurance coverage.</p>
-  <p>Also, the organizer may take photos during the course, which could be published without mentioning
-    names (e.g., on the DANBW website). If you do not wish to have your photos published, please inform the organizer before
-    the start of the course.</p>
+  <p>Also, the organizer may take photos during the course, which could be published without mentioning names (e.g., on
+    the DANBW website). If you do not wish to have your photos published, please inform the organizer before the start
+    of the course.</p>
 </div>
 
 <!-- Instructions for safely passing data to JavaScript: -->
