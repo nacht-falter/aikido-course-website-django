@@ -300,6 +300,11 @@ class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
 
         registration.delete()
 
+        messages.success(
+            request,
+            f"Your registration for {registration.course.title} "
+            "has been cancelled.",
+        )
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
