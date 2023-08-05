@@ -100,7 +100,9 @@ class CourseRegistration(models.Model):
         (FIRST_KYU, "1st Kyu 🟤"),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="registrations"
+    )
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     selected_sessions = models.ManyToManyField(CourseSession, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)

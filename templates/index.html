@@ -37,7 +37,8 @@
 <p>Whether you're a beginner or an experienced Aikidoka, we invite you to explore our community and discover the
   transformative power of Aikido.</p>
 <p>Join us on the mat and start your Aikido journey today!</p>
-<h3 class="mt-4">Our Next Courses</h3>
+<hr>
+<h3 class="mt-4 mb-3">Our Next Courses:</h3>
 <ul>
   {% for course in upcoming_courses %}
   <li class="mb-2">
@@ -45,7 +46,7 @@
       {{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j Y" }}: {{ course.title }}
     </a>
     {% if course.registration_status == 1 %}
-    <a class="ms-2 badge text-bg-success" href="{% url 'register_course' course.slug %}"
+    <a class="ms-2 badge text-bg-success" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
       title="Register for this course"><i class="fa-solid fa-user-plus"></i> Registration open</a>
     {% endif %}
     {% for registration in upcoming_registrations %}
@@ -59,7 +60,8 @@
     {% endif %}
     {% endfor %}
   </li>
+  {% empty %}
+  <p>There are no courses available at the moment.</p>
   {% endfor %}
 </ul>
-
 {% endblock content %}

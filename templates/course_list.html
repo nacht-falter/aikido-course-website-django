@@ -9,25 +9,35 @@
     <div class="accordion-item" id="accordion-{{ course.id }}">
         <div class="accordion-header">
             <a id="button-{{ course.id }}" class="accordion-button collapsed text-decoration-none" role="button"
-                data-bs-toggle="collapse" title="{{ course.title }}" data-bs-target="#collapseCourse{{ course.id }}" aria-expanded="false"
-                aria-controls="collapseCourse{{ course.id }}">
+                data-bs-toggle="collapse" title="{{ course.title }}" data-bs-target="#collapseCourse{{ course.id }}"
+                aria-expanded="false" aria-controls="collapseCourse{{ course.id }}">
                 <div class="container m-0 text-left">
                     <div class="row">
-                        <div class="col-8 col-md-3 col-lg-2">
+                        <div class="col-12 col-md-3 col-lg-2">
                             <strong>
                                 {{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j" }}
                             </strong>
                         </div>
-                        <div class="col-8 col-md-6 col-lg-8">
+                        <div class="col-12 col-md-5 col-lg-5">
                             <strong>
                                 {{ course.title }}
                             </strong>
                         </div>
-                        <div class="col-8 col-md-3 col-lg-2">
+                        <div class="col-12 col-md-4 col-lg-5 text-md-end">
                             {% if course.registration_status == 1 %}
                             <span class="badge text-bg-success">
                                 Registration {{ course.get_registration_status_display }}
                             </span>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                            {% for registration in user.registrations.all %}
+                            {% if registration.course == course %}
+                            <span class="badge text-bg-primary"><i class="fa-regular fa-circle-check"></i> Signed up</span>
+                            {% if registration.exam == True %}
+                            <span class="badge text-bg-warning"><i class="fa-regular fa-circle-check"></i> Exam</span>
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
                             {% endif %}
                         </div>
                     </div>
@@ -54,7 +64,7 @@
                 </ul>
                 <hr class="text-light">
                 {% if course.registration_status == 1 %}
-                <a class="btn btn-primary course-signup-button" href="{% url 'register_course' course.slug %}"
+                <a class="btn btn-success" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
                     title="Sign up for {{ course.title }}">
                     Sign up for this course</a>
                 {% endif %}

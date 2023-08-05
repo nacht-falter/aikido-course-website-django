@@ -1,10 +1,10 @@
 from datetime import date
 
-from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.shortcuts import render, get_object_or_404, reverse
 from django.urls import reverse_lazy
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
@@ -19,29 +19,13 @@ from . import forms
 CURRENT_DATE = date.today()
 
 
-class UserProfileExistsMixin(UserPassesTestMixin):
-    """Checks if user has a user profile and redirects to user profile
-    page if no profile is found.
-    Documentation for UserPassesTestMixin:
-    https://docs.djangoproject.com/en/4.2/topics/auth/default/#django.
-    contrib.auth.mixins.UserPassesTestMixin
-    """
-
-    def test_func(self):
-        return UserProfile.objects.filter(user=self.request.user).exists()
-
-    def handle_no_permission(self):
-        return redirect("/user/profile/")
-
-
 class HomePage(View):
     """Displays the home page"""
 
     def get(self, request):
-        current_date = date.today()
         all_courses = Course.objects.all()
         upcoming_courses = [
-            course for course in all_courses if course.end_date >= current_date
+            course for course in all_courses if course.end_date >= CURRENT_DATE
         ]
         upcoming_registrations = []
         if request.user.is_authenticated:
@@ -51,7 +35,7 @@ class HomePage(View):
             upcoming_registrations = [
                 registration
                 for registration in all_registrations
-                if registration.course.end_date >= current_date
+                if registration.course.end_date >= CURRENT_DATE
             ]
 
         return render(
@@ -106,12 +90,13 @@ class ContactPage(View):
 
 class PageList(generic.ListView):
     """Displays a list of pages from a category"""
+
     model = Page
     template_name = "page_list.html"
     paginate_by = 1
 
     def get_queryset(self):
-        category_slug = self.kwargs.get('category_slug')
+        category_slug = self.kwargs.get("category_slug")
         category = get_object_or_404(Category, slug=category_slug)
         return Page.objects.filter(category=category)
 
@@ -128,12 +113,13 @@ class PageDetail(View):
 
 class CourseList(generic.ListView):
     """Displays a list of all courses"""
+
     model = Course
     queryset = Course.objects.all()
     template_name = "course_list.html"
 
 
-class RegisterCourse(LoginRequiredMixin, UserProfileExistsMixin, View):
+class RegisterCourse(LoginRequiredMixin, View):
     """Creates a course registration"""
 
     def prepare_course_data(self, course):
@@ -146,6 +132,13 @@ class RegisterCourse(LoginRequiredMixin, UserProfileExistsMixin, View):
         return course_data
 
     def get(self, request, slug):
+        user_profile = UserProfile.objects.filter(user=request.user)
+        if not user_profile:
+            messages.warning(
+                request, "Please create a user profile and try again."
+            )
+            return HttpResponseRedirect(reverse("userprofile"))
+
         courses = Course.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
 
@@ -261,23 +254,22 @@ class RegisterCourse(LoginRequiredMixin, UserProfileExistsMixin, View):
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
-class CourseRegistrationList(LoginRequiredMixin, UserProfileExistsMixin, View):
+class CourseRegistrationList(LoginRequiredMixin, View):
     """Displays a list of a users course registrations"""
 
     def get(self, request):
         user_registrations = CourseRegistration.objects.filter(
             user=request.user
         )
-        current_date = date.today()
         past_registrations = [
             registration
             for registration in user_registrations
-            if registration.course.end_date <= current_date
+            if registration.course.end_date < CURRENT_DATE
         ]
         upcoming_registrations = [
             registration
             for registration in user_registrations
-            if registration.course.end_date > current_date
+            if registration.course.end_date >= CURRENT_DATE
         ]
 
         return render(
