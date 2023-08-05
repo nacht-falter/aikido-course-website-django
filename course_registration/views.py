@@ -10,6 +10,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
+from django.core.exceptions import PermissionDenied
 
 from allauth.account.views import PasswordChangeView
 
@@ -282,30 +283,24 @@ class CourseRegistrationList(LoginRequiredMixin, View):
         )
 
 
-class CancelCourseRegistration(
-    LoginRequiredMixin, SuccessMessageMixin, generic.edit.DeleteView
-):
-    """Deletes a course registration instance
-    Documentation for DeleteView:
-    https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic
-    -editing/#deleteview
-    """
+class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
+    """Deletes a course registration instance"""
 
-    model = CourseRegistration
-    success_url = reverse_lazy("courseregistration_list")
-    template_name = "courseregistration_confirm_delete.html"
+    def get(self, request, pk):
+        registration = get_object_or_404(CourseRegistration, pk=pk)
+        if registration.user != request.user:
+            raise PermissionDenied
 
-    def get_queryset(self):
-        return CourseRegistration.objects.filter(user=self.request.user)
+        return HttpResponseRedirect(reverse("courseregistration_list"))
 
-    # Get success message:
-    # https://stackoverflow.com/questions/74756918/django-deleteview-
-    # successmessagemixin-how-to-pass-data-to-message
-    def get_success_message(self, cleaned_data):
-        return (
-            f"Your registration for {self.object.course.title}"
-            " has been cancelled."
-        )
+    def post(self, request, pk):
+        registration = get_object_or_404(CourseRegistration, pk=pk)
+        if registration.user != request.user:
+            raise PermissionDenied
+
+        registration.delete()
+
+        return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
 class UpdateCourseRegistration(LoginRequiredMixin, View):
@@ -321,9 +316,10 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
         return course_data
 
     def get(self, request, pk):
-        registration = get_object_or_404(
-            CourseRegistration, pk=pk, user=request.user
-        )
+        registration = get_object_or_404(CourseRegistration, pk=pk)
+        if registration.user != request.user:
+            raise PermissionDenied
+
         course = registration.course
         registration_form = forms.CourseRegistrationForm(
             instance=registration,
@@ -343,9 +339,10 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
         )
 
     def post(self, request, pk):
-        registration = get_object_or_404(
-            CourseRegistration, pk=pk, user=request.user
-        )
+        registration = get_object_or_404(CourseRegistration, pk=pk)
+        if registration.user != request.user:
+            raise PermissionDenied
+
         course = registration.course
         registration_form = forms.CourseRegistrationForm(
             data=request.POST,
