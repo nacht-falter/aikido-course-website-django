@@ -553,7 +553,12 @@ class DeactivateUser(LoginRequiredMixin, View):
     """
 
     def get(self, request):
-        return render(request, "user_confirm_deactivate.html")
+        messages.warning(
+            request,
+            "Please use the button on the user profile page for "
+            "deactivating your account.",
+        )
+        return HttpResponseRedirect(reverse("userprofile"))
 
     def post(self, request):
         if not request.user.is_staff:
