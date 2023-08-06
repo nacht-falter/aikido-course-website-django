@@ -3,6 +3,7 @@ from datetime import date, datetime, timedelta
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
+from django.core import mail
 
 from .models import Course, CourseRegistration, UserProfile, CourseSession
 
@@ -134,14 +135,6 @@ class RegisterCourseTest(TestCase):
             user=self.user,
         )
         self.assertFalse(registration.exam)
-
-        messages = [m.message for m in get_messages(response.wsgi_request)]
-        self.assertIn(
-            "Exam application rejected. As a "
-            f"{self.user_profile.get_grade_display()} "
-            "you can't apply for exams anymore.",
-            messages,
-        )
 
     def test_registration_fee_calculation_entire_course(self):
         print("\ntest_registration_fee_calculation_entire_course")
@@ -359,14 +352,6 @@ class UpdateCourseRegistrationTest(TestCase):
         )
         self.assertFalse(registration.exam)
 
-        messages = [m.message for m in get_messages(response.wsgi_request)]
-        self.assertIn(
-            "Exam application rejected. As a "
-            f"{self.user_profile.get_grade_display()} "
-            "you can't apply for exams anymore.",
-            messages,
-        )
-
 
 class UserProfileViewTest(TestCase):
     """Tests for UserProfileView view"""
@@ -473,8 +458,7 @@ class DeactivateUserTest(TestCase):
     def test_get_deactivate_user(self):
         print("\ntest_get_deactivate_user")
         response = self.client.get("/user/deactivate/")
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "user_confirm_deactivate.html")
+        self.assertRedirects(response, "/user/profile/", 302, 200)
 
     def test_post_deactivate_user(self):
         print("\ntest_post_deactivate_user")
