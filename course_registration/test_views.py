@@ -210,9 +210,20 @@ class CancelCourseRegistrationTest(TestCase):
             exam=False,
             comment="Test comment",
         )
+        self.user2 = User.objects.create_user(
+            username="test-user2", password="testpassword"
+        )
+        self.registration2 = CourseRegistration.objects.create(
+            user=self.user2,
+            course=self.course,
+            payment_status=0,
+            accept_terms=True,
+            exam=False,
+            comment="Test comment",
+        )
 
-    def test_cancel_course_registration(self):
-        print("\ntest_cancel_course_registration")
+    def test_cancel_valid_course_registration_post(self):
+        print("\ntest_cancel_valid_course_registration_post")
         response = self.client.post(
             f"/user/registrations/cancel/{self.registration.pk}/"
         )
@@ -228,6 +239,37 @@ class CancelCourseRegistrationTest(TestCase):
             f"Your registration for {self.course.title} has been cancelled.",
             messages,
         )
+
+    def test_cancel_forbidden_course_registration_post(self):
+        print("\ntest_cancel_forbidden_course_registration_post")
+        response = self.client.post(
+            f"/user/registrations/cancel/{self.registration2.pk}/"
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_cancel_valid_course_registration_get(self):
+        print("\ntest_cancel_valid_course_registration_get")
+        response = self.client.get(
+            f"/user/registrations/cancel/{self.registration.pk}/"
+        )
+        messages = [m.message for m in get_messages(response.wsgi_request)]
+        self.assertIn(
+            "Please cancel registrations by clicking the button from the "
+            "My Registrations page.",
+            messages,
+        )
+
+    def test_cancel_inexistent_course_registration_get(self):
+        print("\ntest_get_cancel_inexistent_course_registration")
+        response = self.client.get("/user/registrations/cancel/3/")
+        self.assertEqual(response.status_code, 404)
+
+    def test_cancel_forbidden_course_registration_get(self):
+        print("\ntest_get_cancel_forbidden_course_registration")
+        response = self.client.get(
+            f"/user/registrations/cancel/{self.registration2.pk}/"
+        )
+        self.assertEqual(response.status_code, 403)
 
 
 class UpdateCourseRegistrationTest(TestCase):
@@ -617,9 +659,7 @@ class PageTest(TestCase):
 
     def test_get_page_list(self):
         print("\ntest_get_page_list")
-        response = self.client.get(
-            f"/pages/{self.category.slug}/"
-        )
+        response = self.client.get(f"/pages/{self.category.slug}/")
         self.assertEqual(response.status_code, 200)
         self.assertQuerySetEqual(
             response.context["object_list"], Page.objects.all()
