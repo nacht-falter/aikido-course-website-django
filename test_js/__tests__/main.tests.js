@@ -1,4 +1,25 @@
-const { autoCloseMessages } = require("../../static/js/main");
+const { showAccordionItem, autoCloseMessages } = require("../../static/js/main");
+
+describe("Accordion item clicked", () => {
+  test("test accordionItem is clicked", () => {
+    const accordionContainer = document.createElement("div");
+    accordionContainer.id = "accordion";
+    document.body.appendChild(accordionContainer);
+
+    let accordionItem = document.createElement("button");
+    accordionItem.id = "button-1";
+    accordionItem.addEventListener("click", function () {
+      this.clicked = true;
+    });
+
+    accordionContainer.appendChild(accordionItem);
+    location.hash = "#1";
+
+    showAccordionItem();
+
+    expect(accordionItem.clicked).toBe(true);
+  });
+});
 
 describe("Auto close messages", () => {
   test("autoCloseMessages closes messages", () => {
