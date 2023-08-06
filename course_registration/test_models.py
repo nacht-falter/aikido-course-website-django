@@ -1,4 +1,4 @@
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, time
 
 from django.test import TestCase
 from django.contrib.auth.models import User
@@ -70,8 +70,8 @@ class TestCourseSessionModel(TestCase):
             title="Invalid session",
             course=self.course,
             date=date.today(),
-            start_time=(datetime.now() + timedelta(hours=1)).time(),
-            end_time=datetime.now().time(),
+            start_time=time(10, 0, 0),
+            end_time=time(9, 0, 0),
             session_fee=10,
         )
 
