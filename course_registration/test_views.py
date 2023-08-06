@@ -315,6 +315,17 @@ class UpdateCourseRegistrationTest(TestCase):
             exam=False,
             comment="Test comment",
         )
+        self.user2 = User.objects.create_user(
+            username="test-user2", password="testpassword"
+        )
+        self.registration2 = CourseRegistration.objects.create(
+            user=self.user2,
+            course=self.course,
+            payment_status=0,
+            accept_terms=True,
+            exam=False,
+            comment="Test comment",
+        )
 
     def test_get_update_course_registration(self):
         print("\ntest_get_update_course_registration")
@@ -323,6 +334,13 @@ class UpdateCourseRegistrationTest(TestCase):
         )
         self.assertTemplateUsed(response, "update_courseregistration.html")
         self.assertEqual(response.status_code, 200)
+
+    def test_get_forbidden_update_course_registration(self):
+        print("\ntest_get_forbidden_update_course_registration")
+        response = self.client.get(
+            f"/user/registrations/update/{self.registration2.id}/"
+        )
+        self.assertEqual(response.status_code, 403)
 
     def test_post_valid_update_course_registration(self):
         print("\ntest_post_valid_update_course_registration")
@@ -358,6 +376,13 @@ class UpdateCourseRegistrationTest(TestCase):
             "Please select at least one session.",
             messages,
         )
+
+    def test_post_forbidden_update_course_registration(self):
+        print("\ntest_post_forbidden_update_course_registration")
+        response = self.client.post(
+            f"/user/registrations/update/{self.registration2.id}/"
+        )
+        self.assertEqual(response.status_code, 403)
 
     def test_update_registration_fee_calculation_entire_course(self):
         print("\ntest_registration_fee_calculation_entire_course")
