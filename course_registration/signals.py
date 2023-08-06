@@ -13,8 +13,8 @@ from allauth.account.signals import email_confirmed
 
 
 @receiver(email_confirmed)
-def email_confirmed_(request, email_address, **kwargs):
-    user = User.objects.get(emailaddress=email_address)
+def email_confirmed(request, email_address, **kwargs):
+    user = User.objects.get(email=email_address)
 
     send_mail(
         "[DANBW e.V.] Email confirmation successful",
