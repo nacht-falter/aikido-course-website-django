@@ -5,7 +5,14 @@ from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from django.core import mail
 
-from .models import Course, CourseRegistration, UserProfile, CourseSession
+from .models import (
+    Course,
+    CourseRegistration,
+    UserProfile,
+    CourseSession,
+    Category,
+    Page,
+)
 
 
 class CourseListTest(TestCase):
@@ -590,3 +597,37 @@ class ContactPageTest(TestCase):
             "Invalid Header found. Please try again.",
             messages,
         )
+
+
+class PageTest(TestCase):
+    """Tests for PageList and PageDetail views"""
+
+    def setUp(self):
+        self.category = Category.objects.create(
+            title="Test Category",
+            slug="test-category",
+        )
+        self.page = Page.objects.create(
+            title="Test page",
+            slug="test-page",
+            category=self.category,
+            status=1,
+            content="Test Content",
+        )
+
+    def test_get_page_list(self):
+        print("\ntest_get_page_list")
+        response = self.client.get(
+            f"/pages/{self.category.slug}/"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerySetEqual(
+            response.context["object_list"], Page.objects.all()
+        )
+
+    def test_get_page(self):
+        print("\ntest_get_page")
+        response = self.client.get(
+            f"/pages/{self.category.slug}/{self.page.slug}/"
+        )
+        self.assertEqual(response.status_code, 200)
