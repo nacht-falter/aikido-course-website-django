@@ -57,7 +57,6 @@ class ContactPage(View):
 
     def get(self, request):
         contact_form = forms.ContactForm()
-
         return render(
             request,
             "contact.html",
@@ -85,6 +84,11 @@ class ContactPage(View):
             messages.success(request, "Thank you! Your message has been sent.")
         else:
             contact_form = forms.ContactForm()
+            return render(
+                request,
+                "contact.html",
+                {"form": contact_form},
+            )
 
         return HttpResponseRedirect(reverse("home"))
 
