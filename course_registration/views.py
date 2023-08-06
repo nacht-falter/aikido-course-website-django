@@ -294,6 +294,12 @@ class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
         registration = get_object_or_404(CourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
+        else:
+            messages.warning(
+                request,
+                "Please cancel registrations by clicking the button from the "
+                "My Registrations page.",
+            )
 
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
