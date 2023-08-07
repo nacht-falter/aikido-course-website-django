@@ -14,10 +14,12 @@ describe("Accordion item clicked", () => {
 
     accordionContainer.appendChild(accordionItem);
     location.hash = "#1";
-
     showAccordionItem();
+    expect(accordionItem.clicked).toBeTruthy;
 
-    expect(accordionItem.clicked).toBe(true);
+    location.hash = "#2";
+    showAccordionItem();
+    expect(accordionItem.clicked).toBeFalsy;
   });
 });
 
