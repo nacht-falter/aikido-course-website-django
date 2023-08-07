@@ -8,8 +8,8 @@ body {
 }
 
 main {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  max-width: 1500px;
+  margin: 1.5em auto;
 }
 
 .main-logo {
@@ -63,6 +63,10 @@ h3 {
 
 i {
   margin-right: 5px;
+}
+
+.carousel-inner {
+  max-height: 600px;
 }
 
 .carousel-item img {
