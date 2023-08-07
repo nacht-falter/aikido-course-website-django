@@ -54,7 +54,7 @@ function calculateFinalFee(courseData) {
  */
 function disableSubmitButton() {
   let checkboxChecked = false;
-  for (checkbox of sessionsCheckboxes) {
+  for (let checkbox of sessionsCheckboxes) {
     if (checkbox.checked == true) {
       checkboxChecked = true;
       break;
