@@ -18,8 +18,8 @@
     </tr>
 </table>
 
-<a class="btn btn-primary btn-sm" href="{% url 'update_userprofile' %}" title="Update Profile">Edit Profile</a>
-<a class="btn btn-secondary btn-sm" href="{% url 'account_change_password' %}" title="Change Password">Change
+<a class="btn btn-primary btn-sm" href="{% url 'update_userprofile' %}" title="Update Profile">Update Profile</a>
+<a class="btn btn-primary btn-sm" href="{% url 'account_change_password' %}" title="Change Password">Change
     password</a>
 {% if not user.is_staff %}
 <a class="btn btn-danger btn-sm" href="#" title="Deactivate Account" data-bs-toggle="modal"

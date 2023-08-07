@@ -197,8 +197,7 @@ a.badge:hover {
 }
 
 .btn-primary:hover,
-.btn-primary:active,
-.btn-primary:visited {
+.btn-primary:active {
   background-color: #254bbd !important;
   border-color: #254bbd !important;
 }
