@@ -16,6 +16,8 @@ describe("Registration form tests", () => {
       <input type="checkbox" id="id_accept_terms">
       <button id="submit-button"></button>
       <div id="final-fee-display"></div>
+      <span id="session-validation-msg"></span>
+      <span id="terms-validation-msg"></span>
     `;
     // Only import the functions, after creating the dom elements.
     // This was a tough one to debug ...
@@ -89,5 +91,23 @@ describe("Registration form tests", () => {
       source.disableSubmitButton();
       expect(source.submitButton.classList.contains("disabled")).toBe(false);
     });
+
+    test("session validation messages are displayed", () => {
+      checkbox1.checked = checkbox2.checked = false;
+      source.disableSubmitButton();
+      expect(source.sessionMsg.style.display).toBe("inline");
+      checkbox1.checked = true;
+      source.disableSubmitButton();
+      expect(source.sessionMsg.style.display).toBe("none");
+    })
+
+    test("terms validation messages are displayed", () => {
+      source.acceptTermsCheckbox.checked = false;
+      source.disableSubmitButton();
+      expect(source.termsMsg.style.display).toBe("inline");
+      source.acceptTermsCheckbox.checked = true;
+      source.disableSubmitButton();
+      expect(source.termsMsg.style.display).toBe("none");
+    })
   });
 });
