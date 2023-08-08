@@ -13,7 +13,7 @@
         <table class="table">
             <tr>
                 <th scope="col">Dates:</th>
-                <td>{{ registration.course.start_date|date:"M j" }} to {{ registration.course.end_date }}</td>
+                <td>{{ registration.course.start_date|date:"M j" }} to {{ registration.course.end_date|date:"M j, Y" }}</td>
             </tr>
             <tr>
                 <th scope="col">Selected Sessions:</th>
@@ -21,10 +21,9 @@
                     <ul>
                         {% for session in registration.selected_sessions.all %}
                         <li>
-                            <strong>{{ session.title }}</strong><br>
-                            {{ session.date }}, {{ session.start_time }} to {{ session.end_time }}
-                        </li>
-                        {% endfor %}
+                            <strong>{{ session.title }}</strong>
+                            ({{ session.date|date:"M j" }}, {{ session.start_time|time:"H:s" }}-{{ session.end_time|time:"H:s" }})
+                        </li>                        {% endfor %}
                     </ul>
                 </td>
             <tr>

@@ -48,7 +48,7 @@
             <div class="accordion-body">
                 <h4 class="mb-4">{{ course.title }}</h4>
                 <h5 class="border-bottom border-dark-subtle"><strong>Dates:</strong></h5>
-                <p>{{ course.start_date|date:"M n" }}-{{ course.end_date }}</p>
+                <p>{{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j" }}</p>
                 {% if course.description %}
                 <h5 class="border-bottom border-dark-subtle"><strong>Description:</strong></h5>
                 <p>{{ course.description|safe }}</p>
@@ -64,7 +64,7 @@
                 </ul>
                 <hr class="text-light">
                 {% if course.registration_status == 1 %}
-                <a class="btn btn-success" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
+                <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
                     title="Sign up for {{ course.title }}">
                     Sign up for this course</a>
                 {% endif %}
