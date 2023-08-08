@@ -5,7 +5,7 @@
 
 html {
   scroll-behavior: smooth;
-} 
+}
 
 body {
   font-family: source-sans;
@@ -66,6 +66,10 @@ h3 {
   color: #b5172c;
 }
 
+h4 {
+  margin-top: 0.5em;
+}
+
 i {
   margin-right: 5px;
 }
@@ -104,6 +108,25 @@ i {
 .featured-image {
   max-height: 500px;
   object-fit: cover;
+}
+
+.page-content img {
+  margin-right: 0.5em;
+}
+
+@media (max-width: 575px) {
+  .page-content img {
+    width: 100% !important;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 575px) {
+  .page-content img {
+    max-width: 400px;
+    max-height: 300px;
+    object-fit: cover;
+  }
 }
 
 #auth_bar {
@@ -169,6 +192,10 @@ a.badge:hover {
 
 .registration-card {
   max-width: 800px;
+}
+
+.btn {
+  margin-top: 0.25em;
 }
 
 .signup-button {
