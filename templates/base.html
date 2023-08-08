@@ -84,7 +84,7 @@
               {% for page in category.pages.all %}
               <li>
                 <a class="dropdown-item"
-                  href="{% url 'page_list' category_slug=category.slug%}?page={{ forloop.counter }}">
+                    href="{% url 'page_list' category_slug=category.slug%}#{{ page.slug }}">
                   {{ page.title }}
                 </a>
               </li>

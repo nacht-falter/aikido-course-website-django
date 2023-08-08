@@ -2,49 +2,23 @@
 {% load static %}
 
 {% block content %}
+<h2>{{ page_list.first.category.title }}</h2>
+<hr>
 {% for page in page_list %}
-<h2>{{ page.title }}</h2>
-
+<h3 id="{{ page.slug }}" class="mt-5">{{ page.title }}</h3>
 <!-- Content -->
-<div class="page-content">{{ page.content|safe }}</div>
-<hr class="clearfix">
-<!-- Pagination -->
-{% if is_paginated %}
-<nav aria-label="Page navigation">
-  <ul class="pagination justify-content-center">
-    {% if page_obj.has_previous %}
-    <li class="page-item">
-      <a class="page-link blue-link link-underline link-underline-opacity-0"
-        href="?page={{ page_obj.previous_page_number }}" aria-label="Previous" title="Go to previous page">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Next</span>
-      </a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-      <a class="page-link link-underline link-underline-opacity-0" href="#" tabindex="-1"
-        aria-disabled="true">&laquo;</a>
-      {% endif %}
-
-    <li class="page-item">
-      <a class="page-link blue-link link-underline link-underline-opacity-0"
-        href="?page={{ page_obj.number }}">{{ page }}</a>
-    </li>
-
-    {% if page_obj.has_next %}
-    <li class="page-item">
-      <a class="page-link blue-link link-underline link-underline-opacity-0"
-        href="?page={{ page_obj.next_page_number }}" aria-label="Next" title="Go to next page">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Next Page</span>
-      </a>
-    </li>
-    {% else %}
-    <li class="page-item"> <a class="page-link disabled" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span> </a> </li>
+<div class="container mb-5 mx-0 mw-100">
+  <div class="row">
+    <div class="p-0 col-12 {% if not 'placeholder' in page.featured_image.url %}col-md-7{% endif %}">
+      {{ page.content|safe }}
+    </div>
+    {% if not "placeholder" in page.featured_image.url %}
+    <div class="col-12 col-md-5 px-0 py-2 px-md-4 py-md-0">
+      <img class="featured-image" src=" {{ page.featured_image.url }}" width="100%">
+    </div>
     {% endif %}
-  </ul>
-</nav>
-{% endif %}
+  </div>
+</div>
+<hr class="clearfix">
 {% endfor %}
 {% endblock %}

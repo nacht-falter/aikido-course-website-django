@@ -98,12 +98,11 @@ class PageList(generic.ListView):
 
     model = Page
     template_name = "page_list.html"
-    paginate_by = 1
 
     def get_queryset(self):
         category_slug = self.kwargs.get("category_slug")
         category = get_object_or_404(Category, slug=category_slug)
-        return Page.objects.filter(category=category)
+        return Page.objects.filter(status=1, category=category)
 
 
 class PageDetail(View):

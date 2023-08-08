@@ -3,13 +3,18 @@
   src: url(../fonts/SourceSansPro-Regular.otf);
 }
 
+html {
+  scroll-behavior: smooth;
+} 
+
 body {
   font-family: source-sans;
 }
 
 main {
   max-width: 1500px;
-  margin: 1.5em auto;
+  min-width: 75vw;
+  margin: 3em auto;
 }
 
 .main-logo {
@@ -97,14 +102,8 @@ i {
 }
 
 .featured-image {
-  max-height: 40vh;
+  max-height: 500px;
   object-fit: cover;
-}
-
-@media (max-width: 1000px) {
-  .featured-image {
-    max-height: 35vh;
-  }
 }
 
 #auth_bar {
@@ -232,8 +231,4 @@ a.badge:hover {
 .registration-form-table textarea {
   max-height: 15vh;
   width: 100%;
-}
-
-.page-content img {
-  max-width: 300px;
 }
