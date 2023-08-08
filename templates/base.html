@@ -11,7 +11,7 @@
   <link href="{% static 'fontawesome/css/brands.css' %}" rel="stylesheet">
   <link href="{% static 'fontawesome/css/solid.css' %}" rel="stylesheet">
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -67,14 +67,6 @@
               href="{% url 'home' %}">Home</a>
           </li>
           {% for category in categories %}
-          {% if category.pages.all.count == 1 %}
-          {% for page in category.pages.all %}
-          <li class="nav-item">
-            <a class="nav-link {% if url_name == 'category_slug' %}active{% endif %}"
-              href="{% url 'page_detail' category_slug=category.slug page_slug=page.slug %}">{{ page.title }}</a>
-          </li>
-          {% endfor %}
-          {% else %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {% if category.slug == slug %}active{% endif %}" href="#" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
@@ -83,15 +75,13 @@
             <ul class="dropdown-menu">
               {% for page in category.pages.all %}
               <li>
-                <a class="dropdown-item"
-                    href="{% url 'page_list' category_slug=category.slug%}#{{ page.slug }}">
+                <a class="dropdown-item" href="{% url 'page_list' category_slug=category.slug%}#{{ page.slug }}">
                   {{ page.title }}
                 </a>
               </li>
               {% endfor %}
             </ul>
           </li>
-          {% endif %}
           {% endfor %}
           <li class="nav-item">
             <a class="nav-link {% if url_name == 'course_list' %}active{% endif %}"
