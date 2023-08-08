@@ -48,11 +48,6 @@ urlpatterns = [
         name="update_grade",
     ),
     path(
-        "pages/<slug:category_slug>/<slug:page_slug>/",
-        views.PageDetail.as_view(),
-        name="page_detail",
-    ),
-    path(
         "pages/<slug:category_slug>/",
         views.PageList.as_view(),
         name="page_list",

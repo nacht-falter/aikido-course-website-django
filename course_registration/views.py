@@ -105,16 +105,6 @@ class PageList(generic.ListView):
         return Page.objects.filter(status=1, category=category)
 
 
-class PageDetail(View):
-    """Displays a page"""
-
-    def get(self, request, page_slug, *args, **kwargs):
-        queryset = Page.objects.filter(status=1)
-        page = get_object_or_404(queryset, slug=page_slug)
-
-        return render(request, "page_detail.html", {"page": page})
-
-
 class CourseList(generic.ListView):
     """Displays a list of all courses"""
 
