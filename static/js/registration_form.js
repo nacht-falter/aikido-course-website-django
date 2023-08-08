@@ -57,11 +57,19 @@ function disableSubmitButton() {
   for (let checkbox of sessionsCheckboxes) {
     if (checkbox.checked == true) {
       checkboxChecked = true;
+      sessionMsg.style.display = "none";
       break;
+    } else {
+      sessionMsg.style.display = "inline";
     }
   }
   if (entireCourseCheckbox.checked) {
     checkboxChecked = true;
+  }
+  if (acceptTermsCheckbox.checked) {
+    termsMsg.style.display = "none";
+  } else {
+    termsMsg.style.display = "inline";
   }
   if (checkboxChecked == true && acceptTermsCheckbox.checked) {
     submitButton.classList.remove("disabled");
@@ -80,6 +88,8 @@ const sessionsList = document.getElementById("id_selected_sessions");
 const sessionsCheckboxes = sessionsList.querySelectorAll("input");
 const acceptTermsCheckbox = document.getElementById("id_accept_terms");
 const submitButton = document.getElementById("submit-button");
+const sessionMsg = document.getElementById("session-validation-msg");
+const termsMsg = document.getElementById("terms-validation-msg");
 
 // Add event listeners to checkboxes:
 entireCourseCheckbox.addEventListener("click", checkSessionCheckboxes);
@@ -100,4 +110,6 @@ module.exports = {
   sessionsCheckboxes,
   acceptTermsCheckbox,
   submitButton,
+  sessionMsg,
+  termsMsg,
 };

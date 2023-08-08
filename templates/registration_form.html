@@ -1,0 +1,35 @@
+<table class="registration-form-table table table-striped table-borderless">
+  <tr>
+    <th>I will attend the following sessions:
+      <span id="session-validation-msg" class="badge text-bg-light text-danger">Please select at least one
+        session.</span>
+    </th>
+    <td>{{ form.selected_sessions }}</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <input type="checkbox" name="entire-course" id="entire-course"> I will attend the entire course
+    </td>
+  </tr>
+  {% if not user.profile.grade > 5 %}
+  <tr>
+    <td colspan="2">{{ form.exam }} I want to apply for an exam</td>
+  </tr>
+  {% endif %}
+  <tr>
+    <th>Comments:</th>
+    <td>{{ form.comment }}</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      {{ form.accept_terms }} I accept the <a href="#terms-and-conditions">terms and conditions</a>
+      <span id="terms-validation-msg" class="badge text-bg-light text-danger">Please accept the terms
+        and conditions.</span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Registration Fee: <span id="final-fee-display">0</span> €</strong>
+    </td>
+  </tr>
+</table>
