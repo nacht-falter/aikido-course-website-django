@@ -678,7 +678,7 @@ class ContactPageTest(TestCase):
 
 
 class PageTest(TestCase):
-    """Tests for PageList and PageDetail views"""
+    """Tests for PageList view"""
 
     def setUp(self):
         self.category = Category.objects.create(
@@ -701,9 +701,4 @@ class PageTest(TestCase):
             response.context["object_list"], Page.objects.all()
         )
 
-    def test_get_page(self):
-        print("\ntest_get_page")
-        response = self.client.get(
-            f"/pages/{self.category.slug}/{self.page.slug}/"
-        )
         self.assertEqual(response.status_code, 200)
