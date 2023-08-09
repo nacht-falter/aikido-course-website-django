@@ -9,7 +9,7 @@
 <!-- Content -->
 <div class="container mb-5 mx-0 mw-100">
   <div class="row">
-    <div class="p-0 col-12 {% if not 'placeholder' in page.featured_image.url %}col-md-7{% endif %}">
+    <div class="page-content p-0 col-12 {% if not 'placeholder' in page.featured_image.url %}col-md-7{% endif %}">
       {{ page.content|safe }}
     </div>
     {% if not "placeholder" in page.featured_image.url %}
