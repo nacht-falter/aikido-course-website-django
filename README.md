@@ -8,7 +8,7 @@ DANBW already has a [website](https://www.danbw.de), which is slowly becoming ou
 
 The deployed version of the website can be found here: https://aikido-course-website-django-ddffe52bc952.herokuapp.com/
 
-![Aikido Course Website Mockups](media/screenshots/aikido_course_website_mockups.jpg)
+![Aikido Course Website Mockups](media/screenshots/mockups.jpg)
 
 ## Table of contents
 
