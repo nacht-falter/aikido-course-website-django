@@ -81,7 +81,7 @@ The project aims to provide a central platform for DANBW members, which engages 
 ### Scope Plane
 
 #### User Stories Within Project Scope
-ℹ️ The following user stories were included in the current scope of the project. User stories marked with the https://github.com/nacht-falter/aikido-course-website-django/labels/MVP make up the [Minimum Viable Product](https://en.wikipedia.org/wiki/Minimum_viable_product).
+ℹ️ The following user stories were included in the current scope of the project. User stories marked with the https://github.com/nacht-falter/aikido-course-website-django/labels/MVP label make up the [Minimum Viable Product](https://en.wikipedia.org/wiki/Minimum_viable_product).
 
 ##### THEME: User Accounts and Profiles
 
@@ -144,6 +144,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 
 👉 USER STORY: As a **user**, I can **log out from my account** by **clicking on a Logout button from anywhere on the website**. (https://github.com/nacht-falter/aikido-course-website-django/issues/4)
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
+
 <details>
 
 <summary>Show details</summary>
@@ -824,11 +825,11 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 - Slug field is auto completed
 
 ###### Tasks
--  Create Course model according to ERD (MVP version)
+- Create Course model according to ERD (MVP version)
 - Register Course model in admin view
 - Add custom validation to date fields
 - Add auto fill method for slug field
--  Write tests for the model
+- Write tests for the model
 
 <hr>
 
@@ -1258,27 +1259,30 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 
 ### Structure Plane
 
-The project is built around two main models: Courses and Users. What the website is supposed to do, essentially, is to connect those to models. The connection between those two models is provided by Course Registrations as an intermediary model.
+The project is built around two main models: Courses and Users. What the website is supposed to do, essentially, is to connect those to models. The connection between the two models is provided by the Course Registrations model as an intermediary model.
 
-The relationships between the models used in the project is represented in the following entity relationship diagrams:
+The relationships between the models used in the project are represented in the following entity relationship diagrams:
 
 Database schema for the minimum viable product:
 
-![ERD for MVP](media/erd_mvp.png)
+![ERD for MVP](media/erd/erd_mvp.png)
 
-Database schema for the final version of the current scope:
+Database schema for the final version in the current scope:
 
-![ERD for MVP](media/erd_mvp.png)
+![ERD for MVP](media/erd/erd_mvp.png)
 
 ### Skeleton Plane
 
 The overall layout of the website stays close to the [existing website](https://www.danbw.de) in order to make the transition from the old to the new version as user-friendly as possible.
 
-The website consists of three main sections: A header with the logo, the main title, and the navigation menu, a main section for the content and a footer.
+The website consists of three main sections: A header with the logo, the main title, and the navigation menu, a main section for the content, and a footer.
 
 The website is designed to be responsive for all screen sizes.
 
-The wireframes for the project can be found here: [Wireframes Mobile](media/wireframes/wireframes-mobile.png)
+The wireframes for the project can be found here:
+
+[Wireframes Mobile](media/wireframes/wireframes-mobile.png)
+
 [Wireframes Desktop](media/wireframes/wireframes-desktop.png)
 
 ### Surface Plane
@@ -1300,7 +1304,7 @@ The color scheme consists of two main colors:
 
 #### Fonts
 
-The font for the website,[Source Sans 3](https://fonts.google.com/specimen/Source+Sans+3), is the same as on the existing website in order to provide visual coherence.
+The font for the website, [Source Sans 3](https://fonts.google.com/specimen/Source+Sans+3), is the same as on the existing website in order to provide visual coherence.
 
 #### Logo
 
@@ -1310,13 +1314,254 @@ The organizations logo has been slightly updated for this project to make it fit
 
 ## Agile Methodology
 
+### GitHub Issues and Projects as Agile Tools
+
+[GitHub Issues](https://docs.github.com/en/issues) and [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) were used as tools for Agile methodology.
+
+- [Issues](https://github.com/nacht-falter/aikido-course-website-django/issues) were used for user stories and for bugs.
+
+- Issue tasks were used to define acceptance criteria and tasks for each user story.
+
+- Issue labels were used to categorize issues into [Themes](https://github.com/nacht-falter/aikido-course-website-django/labels?q=THEME) and [Epics](https://github.com/nacht-falter/aikido-course-website-django/labels?q=EPIC)
+
+- Furthermore all user stories were prioritized using the MoSCoW prioritization technique with the following project-wide priorities:
+
+  https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%20Must-Have https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%20Should-Have https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%20Could-Have https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%20Won%27t-Have
+
+- All user stories were assigned a size label categorizing them into five different sizes:
+
+  https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XS https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20M https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XL
+
+  The Fibonacci series was used to assign story points to theses sizes: XS = 1 story point, S = 2 story points, M = 3 story points, L = 5 story points, XL = 8 story points.
+
+- Milestones were used for the [Product Backlog](https://github.com/nacht-falter/aikido-course-website-django/milestone/1) and for adding user stories to [Sprints](https://github.com/nacht-falter/aikido-course-website-django/milestones?state=closed).
+
+- [Projects](https://github.com/nacht-falter/aikido-course-website-django/projects?query=is%3Aclosed) were used for tracking tasks within each iteration.
+
+- [Project workflows](https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/adding-items-automatically) were used to automatically add user stories in a sprint to the Todo column of the corresponding  project board.
+
+- A [custom priority field](https://docs.github.com/en/issues/planning-and-tracking-with-projects/understanding-fields) was created in order to further prioritize items within a project on a sprint level.
+
+### Sprint Planning
+
+The project was planned with timeboxed sprints of three days each. User stories were assigned to each sprint, while prioritizing MVP user stories, but making sure that the amount of user stories with a Must-Have priority never exceeded 60% in each sprint.
+
+#### Sprint 1 (3.7.-5.7.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- Initial Setup and Deployment
+- Create models for MVP
+- Setup Admin view for course management
+- Create course list view
+
+All items completed on 5.7.2023
+
+[Sprint Details](https://github.com/nacht-falter/aikido-course-website-django/milestone/2?closed=1)
+
+[Sprint Project Board](https://github.com/users/nacht-falter/projects/5)
+
+</details>
+
+<hr>
+
+#### Sprint 2 (6.7-8.7.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- Create forms for course registration for logged-in users (*C*RUD)
+- Create a list view to display a user's current and past registrations (C*R*UD)
+- Add options for updating and cancelling registrations (CR*UD*)
+
+All items completed on 7.7.2023
+
+[Sprint Details](https://github.com/nacht-falter/aikido-course-website-django/milestone/19?closed=1)
+
+[Sprint Project Board](https://github.com/users/nacht-falter/projects/6)
+
+</details>
+
+<hr>
+
+#### Sprint 3 (10.7.-12.7.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- User account registration
+- Login/Logout
+- Deactivate account
+- User profile
+- Refine admin view
+- Bugfixes
+
+All items completed on 11.7.2023
+
+[Sprint Details](https://github.com/nacht-falter/aikido-course-website-django/milestone/20?closed=1)
+
+[Sprint Project Board](https://github.com/users/nacht-falter/projects/8)
+
+</details>
+
+<hr>
+
+#### Sprint 4 (13.7.-15.7.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- Course fee calculation
+- Update grade after exam
+- Password reset
+- Admin site actions
+
+Finished on 15.7.2023, one unfinished item moved back to product backlog
+
+[Sprint Details](https://github.com/nacht-falter/aikido-course-website-django/milestone/21?closed=1)
+
+[Sprint Project Board](https://github.com/users/nacht-falter/projects/9)
+
+</details>
+
+<hr>
+
+#### Sprint 5 (18.7.-20.7.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- Startpage content
+- Implement Django messages
+- Main navigation
+- Basic styling for user interface
+- Bugfixes
+
+Finished on 20.7.2023, two unfinished items moved back to product backlog
+
+[Sprint Details](https://github.com/nacht-falter/aikido-course-website-django/milestone/22?closed=1)
+
+[Sprint Project Board](https://github.com/users/nacht-falter/projects/10)
+
+</details>
+
+<hr>
+
+#### Sprint 6 (21.7.-25.7.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- Pages and Categories
+- Accessibility
+- WYSIWYG editor
+- Bugfixes
+
+Finished on 25.7.2023, two unfinished items moved back to product backlog
+
+[Sprint Details](https://github.com/nacht-falter/aikido-course-website-django/milestone/23?closed=1)
+
+[Sprint Project Board](https://github.com/users/nacht-falter/projects/12)
+
+</details>
+
+<hr>
+
+#### Sprint 7 (26.7.-28.7.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- Contact Form
+- Custom error pages
+- Bugfixes
+
+Completed on 28.7.2023
+
+[Sprint Details](https://github.com/nacht-falter/aikido-course-website-django/milestone/24?closed=1)
+
+[Sprint Project Board](https://github.com/users/nacht-falter/projects/13)
+
+</details>
+
+<hr>
+
+#### Sprint 8 (31.7.-2.8.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- Page content
+- Confirmation emails 
+- Login status indicator
+- Bugfixes
+
+Finished on on 2.8.2023, one unfinished item moved back to the product backlog
+
+[Sprint Details](https://github.com/nacht-falter/aikido-course-website-django/milestone/25?closed=1)
+
+[Sprint Project Board](https://github.com/users/nacht-falter/projects/14)
+
+</details>
+
+<hr>
+
+#### Sprint 9 (3.8.-5.8.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- Testing
+- Bugfixes
+
+Completed on 5.8.2023
+
+</details>
+
+<hr>
+
+#### Sprint 10 (7.8-9.8.2023)
+
+<details>
+
+<summary>Show sprint details</summary>
+
+- Documentation
+- Implement test user feedback
+- Bugfixes
+
+Completed on 9.8.2023
+
+</details>
+
+<hr>
+
+### Tracking Progress
+
+The progress of the project was tracked with a burndown chart ([Burndown Chart Template](https://www.smartsheet.com/content/burndown-chart-templates)), by calculating the total amount of story points from the user stories. The ideal velocity was calulated by dividing the total number of story points with the number of sprints. The progress was tracked after each sprint:
+
+![Burndown Chart](media/agile/burndown_chart.png)
+
 ## Technologies Used
+
 ### Frameworks and Languages
+
 - The website has been built with [Django](https://www.djangoproject.com/), a Python web framework.
 - HTML, CSS and JavaScript have been used for designing the website's front end.
 - [Bootstrap](https://getbootstrap.com/) was used for designing the front end.
 
 ### Addditional Python Packages
+
 - [gunicorn](https://pypi.org/project/gunicorn/): WSGI server used for deployment 
 - [psycopg2](https://pypi.org/project/psycopg2/): PostgreSQL database integration
 - [dj-database-url](https://pypi.org/project/dj-database-url/): Django database management 
@@ -1329,16 +1574,17 @@ The organizations logo has been slightly updated for this project to make it fit
 - [coverage](https://pypi.org/project/coverage/): Analyzing test coverage
 
 ### Other Software
+
 - [GitHub](https://github.com/) is used to store all project files in the [repository](https://github.com/nacht-falter/aikido-course-website)
-- [GitHub Issues](https://docs.github.com/en/issues) have been used for Agile methodology by assignng user stories to issues and using labels to organize user stories.
+- [GitHub Issues](https://docs.github.com/en/issues) have been used for Agile methodology by assigning user stories to issues and using labels to organize user stories.
 - [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) have been used for Agile sprint planning and task tracking.
   [The project boards for all sprints can be found here](https://github.com/nacht-falter/aikido-course-website-django/projects?query=is%3Aclosed).
 - [Git](https://git-scm.com/) was used for version control by committing changes to Git and pushing them to GitHub from the command line.
 - [Heroku](https://heroku.com/) is used to deploy the website. The deployed version is available at: 
 - [ElephantSQL](https://www.elephantsql.com/) is used for the project's PostgreSQL database.
 - [Cloudinary](https://cloudinary.com/) is used to store media files.
-- [Balsamiq](https://balsamiq.com/) was used to create the [wireframes](#wireframes) during the design process.
-- [Lucidchart](https://www.lucidchart.com/) was used to create the [entitity relationship diagrams (ERD)](#???????) used for modeling the project database.
+- [Balsamiq](https://balsamiq.com/) was used to create the [wireframes](#skeleton-plane) during the design process.
+- [Lucidchart](https://www.lucidchart.com/) was used to create the [entitity relationship diagrams (ERD)](#structure-plane) used for modeling the project database.
 - [Font Awesome](https://fontawesome.com/) was used to add icons for aesthetic and UX purposes. The necessary files have been included in the static/fontawesome folder to avoid loading them from an external resource on each page load.
 - [Google Fonts](https://fonts.google.com/) was used to import the font 'Source Sans 3'. The [font files](https://fonts.google.com/specimen/Source+Sans+3) have been included in the assets/fonts folder, to ensure that they don't have to be loaded from an external resource.
 - [LightHouse](https://developer.chrome.com/docs/lighthouse/) has been used to assess the website's performance.
@@ -1347,12 +1593,34 @@ The organizations logo has been slightly updated for this project to make it fit
 - [Pixelmator Pro](https://www.pixelmator.com/pro/) was used to resize and edit images and to create the [mockup image](#danbw-aikido-course-website) at the top of this README
 
 ## Testing
-[Testing documentation](TESTING.md)
+
+[Testing documentation can be found here](TESTING.md)
 
 ## Deployment
+
 The project was deployed to [Heroku](https://heroku.com). The live version of the project can be found at https://aikido-course-website-django-ddffe52bc952.herokuapp.com/
 
-...
+The necessary steps to deploy the project are:
+  - Clone or fork the repository.
+  - Create an account at https://cloudinary.com and get your cloudinary url from the dashboard.
+  - Create a PostgreSQL database, for example at https://www.elephantsql.com/, and find the database address.
+  - Create a new app from the [Heroku dashboard](https://dashboard.heroku.com).
+  - Go to the Settings tab and click on `Reveal Config Vars` in the *Config Vars* section.
+  - Now add the following config vars:
+    |Name|Value|
+    |---|---|
+    |CLOUDINARY_URL|\<Your cloudinary url\>|
+    |DATABASE_URL|\<Your database url\>|
+    |DEFAULT_FROM_EMAIL|\<your email address\>|
+    |DEVELOPMENT|FALSE|
+    [EMAIL_HOST_PASSWORD|\<your email password\>|
+    |EMAIL_HOST_USER|\<your email address\>|
+    |PORT|8000|
+    |SECRET_KEY|\<some random string\>|
+
+  - Add `Python` to the *Buildpacks* section.
+  - Click on the *Deploy* tab and connect the Heroku app to your GitHub repository.
+  - Choose the branch you want to deploy in the *Manual deploy* section and click on **Deploy Branch**.
 
 ## Credits
 
@@ -1369,6 +1637,8 @@ The following resources were used for the project:
 ### Texts
 
 ...
+### Other
+
 
 ### Acknowledgements
 - I would like to thank my Code Institute mentor Can for his continued support and helpful advice.
