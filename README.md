@@ -1,22 +1,75 @@
 # DANBW Aikido Course Website
 ## A Django-based course registration website for Dynamic Aikido Nocquet BW (DANBW)
-**Dynamic Aikido Nocquet BW** is an Aikido Organisation based in Baden-Württemberg, Germany. The organisation offers Aikido courses several times a year. Members of the organization can sign up for those courses.
+**Dynamic Aikido Nocquet BW** is an Aikido organization based in Baden-Württemberg, Germany. The organization offers Aikido courses several times a year. Members of the organization can sign up for those courses.
 
 This website aims at offering an easy and straightforward way for DANBW members to sign up for courses and manage their course registrations and exams. Furthermore the website allows DANBW staff members to manage courses and course registrations as well as the website content.
 
-DANBW already has a [website](https://www.danbw.de), which is slowly becoming outdated.This project therefore aims at replacing the current website. The project replicated the most important features of the existing website, added a couple of new features and dropped some obsolete features.
+DANBW already has a [website](https://www.danbw.de), which is slowly becoming outdated. This project therefore aims at replacing the current website. The project replicated the most important features of the existing website, added a couple of new features and dropped some obsolete features.
+
+[!Aikido Course Website Mockups](media/screenshots/aikido_course_website_mockups.jpg)
 
 ## Table of contents
+
+...
 
 ## Features
 ### Existing Features
 
+#### User Accounts and Profiles
+- Users can sign up to the website by providing an email address, a username and a password.
+- Users need to confirm their email address, before being able to login to the website.
+- After having confirmed their email address, users are asked to create a user profile with their full name and their current Aikido grade.
+- Users can see their user profile on the **My Profile** page. From there, they can also update their information or delete their account, if they are regular users (Staff users cannot delete their accounts from the frontend, as a security measure).
+
+[!Screenshots Account](media/screenshots/screenshots_account.png)
+
+#### Course Registration and Management
+- Users can sign up for courses by choosing a course with open registration status from the **Courses** page and filling out the sign up form. Users can choose if they want to participate in the whole course or select single sessions. The course fee will be calculated automatically, depending on the selection. Users can also apply for a grading exam. The exam grade will be stored with the registration according to the user's current grade.
+- After signing up for a course, users can see their current registrations on the **My Registrations** page. They can update or cancel their registrations, if they wish.
+
+[!Screenshots Course Registration](media/screenshots/screenshots_courseregistration.png)
+
+- Upon logging in for the first time after a course with an exam application has passed, the user will be asked to confirm if they have passed their exam.
+
+[!Screenshots Course Registration](media/screenshots/screenshots_exam_passed.png)
+
+#### Website UX
+- The website has a responsive navigation menu accessible from all pages.
+- The start page presents the user with an image slideshow and general information about the organization. Furthermore, the start page features a list of upcoming courses, so that users can immediately see, which courses are available to sign up for.
+- There are several other pages available providing detailed information about Aikido, about the organization. Also, visitors, who are interested in learning Aikido can get information on where to start.
+- Finally there is a contact page available from the websites footer. Upon submitting the contact form, an email is send to the organization with the user's message.
+
+[!Screenshots Course Registration](media/screenshots/screenshots_content.png)
+
+#### Staff functions
+##### Course and Registration Management
+- Staff members can manage courses and course registrations from the Django admin site. They can create new courses, update existing courses and see a list of registrations for each course.
+- They can also update registrations, for example to update the payment status.
+- There are actions available for duplicating courses (in order to minimize the effort for creating new courses, which are similar to existing courses) and for toggling a course's registration status.
+
+[!Screenshots Course Registration](media/screenshots/screenshots_admin_courses.png)
+
+##### Content Management
+- Staff users can also create new pages or edit existing pages in order to update the website's content.
+- Pages are assigned a category and newly created pages will be automatically appear in the main navigation in the appropriate menu item. The order in which pages and categories appear in the navigation can be controlled by assigning a menu position value.
+- The page content can be edited with a WYSIWIG editor, which allows for styling and also image upload.
+
+[!Screenshots Course Registration](media/screenshots/screenshots_admin_pages.png)
 
 ### Future Features
-All user stories, which were not completed so far, because they have been prioritized as https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%20Won%27t-Have and are thus still on the [Product Backlog](https://github.com/nacht-falter/aikido-course-website-django/milestone/1) should be reevaluated for future Sprints.
+- The following features have not been implemented in the current scope of the project, but could be worth considering for future iterations:
+  - Add a breadcrumb navigation to the website in order to further improve user experience.
+  - Update a course's registration status automatically based on a registration period. This would require some task scheduling solution on the server, like [Cron](https://wiki.ubuntuusers.de/Cron/).
+  - Limit the final fee of a course registration so that the fee for multiple sessions never exceeds the fee for the entire course.
+  - Add the option to upload a PDF file or an image as attachment with a course.
+  - Add a form for signing up for a membership with the organization.
+  - Allow staff users to download course registration data as a CSV file.
+- Furthermore, all [user stories, which were not part of the current scope of the project](#user-stories-not-included-in-current-scope), could be reevaluated and considered for future iterations. 
 
 ## Design Process
 ### Strategy Plane
+
+
 
 ### Scope Plane
 
@@ -506,7 +559,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XL
 ###### Acceptance Criteria
 - The website has a consistent layout and styling over all pages.
 - The website is responsive for different screen sizes.
--  The website uses colors and images which represent the organisation.
+-  The website uses colors and images which represent the organization.
 
 ###### Tasks
 - Add bootstrap to base template
@@ -652,7 +705,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XS
 - The homepage includes information about the website's purpose and a short description.
 
 ###### Tasks
-- Add description of the organisation and the purpose of the website to the home page template
+- Add description of the organization and the purpose of the website to the home page template
 
 <hr>
 
@@ -1181,6 +1234,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 </details>
 
 <hr>
+
 ### Structure Plane
 
 ### Skeleton Plane
