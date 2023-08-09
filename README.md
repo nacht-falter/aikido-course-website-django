@@ -8,7 +8,7 @@ DANBW already has a [website](https://www.danbw.de), which is slowly becoming ou
 
 The deployed version of the website can be found here: https://aikido-course-website-django-ddffe52bc952.herokuapp.com/
 
-[!Aikido Course Website Mockups](media/screenshots/aikido_course_website_mockups.jpg)
+![Aikido Course Website Mockups](media/screenshots/aikido_course_website_mockups.jpg)
 
 ## Table of contents
 
@@ -23,17 +23,17 @@ The deployed version of the website can be found here: https://aikido-course-web
 - After having confirmed their email address, users are asked to create a user profile with their full name and their current Aikido grade.
 - Users can see their user profile on the **My Profile** page. From there, they can also update their information or delete their account, if they are regular users (Staff users cannot delete their accounts from the frontend, as a security measure).
 
-[!Screenshots Account](media/screenshots/screenshots_account.png)
+![Screenshots Account](media/screenshots/screenshots_account.png)
 
 #### Course Registration and Management
 - Users can sign up for courses by choosing a course with open registration status from the **Courses** page and filling out the sign up form. Users can choose if they want to participate in the whole course or select single sessions. The course fee will be calculated automatically, depending on the selection. Users can also apply for a grading exam. The exam grade will be stored with the registration according to the user's current grade.
 - After signing up for a course, users can see their current registrations on the **My Registrations** page. They can update or cancel their registrations, if they wish.
 
-[!Screenshots Course Registration](media/screenshots/screenshots_courseregistration.png)
+![Screenshots Course Registration](media/screenshots/screenshots_courseregistration.png)
 
 - Upon logging in for the first time after a course with an exam application has passed, the user will be asked to confirm if they have passed their exam.
 
-[!Screenshots Course Registration](media/screenshots/screenshots_exam_passed.png)
+![Screenshots Course Registration](media/screenshots/screenshots_exam_passed.png)
 
 #### Website UX
 - The website has a responsive navigation menu accessible from all pages.
@@ -41,7 +41,7 @@ The deployed version of the website can be found here: https://aikido-course-web
 - There are several other pages available providing detailed information about Aikido, about the organization. Also, visitors, who are interested in learning Aikido can get information on where to start.
 - Finally there is a contact page available from the websites footer. Upon submitting the contact form, an email is send to the organization with the user's message.
 
-[!Screenshots Course Registration](media/screenshots/screenshots_content.png)
+![Screenshots Course Registration](media/screenshots/screenshots_content.png)
 
 #### Staff functions
 ##### Course and Registration Management
@@ -49,14 +49,14 @@ The deployed version of the website can be found here: https://aikido-course-web
 - They can also update registrations, for example to update the payment status.
 - There are actions available for duplicating courses (in order to minimize the effort for creating new courses, which are similar to existing courses) and for toggling a course's registration status.
 
-[!Screenshots Course Registration](media/screenshots/screenshots_admin_courses.png)
+![Screenshots Course Registration](media/screenshots/screenshots_admin_courses.png)
 
 ##### Content Management
 - Staff users can also create new pages or edit existing pages in order to update the website's content.
 - Pages are assigned a category and newly created pages will be automatically appear in the main navigation in the appropriate menu item. The order in which pages and categories appear in the navigation can be controlled by assigning a menu position value.
 - The page content can be edited with a WYSIWIG editor, which allows for styling and also image upload.
 
-[!Screenshots Course Registration](media/screenshots/screenshots_admin_pages.png)
+![Screenshots Course Registration](media/screenshots/screenshots_admin_pages.png)
 
 ### Future Features
 - The following features have not been implemented in the current scope of the project, but could be worth considering for future iterations:
@@ -1258,19 +1258,57 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 
 ### Structure Plane
 
+The project is built around two main models: Courses and Users. What the website is supposed to do, essentially, is to connect those to models. The connection between those two models is provided by Course Registrations as an intermediary model.
+
+The relationships between the models used in the project is represented in the following entity relationship diagrams:
+
+Database schema for the minimum viable product:
+
+![ERD for MVP](media/erd_mvp.png)
+
+Database schema for the final version of the current scope:
+
+![ERD for MVP](media/erd_mvp.png)
+
 ### Skeleton Plane
+
+The overall layout of the website stays close to the [existing website](https://www.danbw.de) in order to make the transition from the old to the new version as user-friendly as possible.
+
+The website consists of three main sections: A header with the logo, the main title, and the navigation menu, a main section for the content and a footer.
+
+The website is designed to be responsive for all screen sizes.
+
+The wireframes for the project can be found here: [Wireframes Mobile](media/wireframes/wireframes-mobile.png)
+[Wireframes Desktop](media/wireframes/wireframes-desktop.png)
 
 ### Surface Plane
 
-#### Color Scheme
+Similar to the general layout, the goal of the visual design of the website was to stay close to the design of the original website, while updating and modernizing design elements where adequate.
+
+#### Colors
+
+The project adopts the color scheme of the original website, which is part of the corporate design of the organization.
+
+The color scheme consists of two main colors:
+
+<!-- Display colors in markdown: https://stackoverflow.com/a/41247934 -->
+![#1e3c95](https://placehold.co/100x100/1e3c95/1e3c95.png) Primary color: #1e3c95
+
+![#b5172c](https://placehold.co/100x100/b5172c/b5172c.png)  Secondary color: #b5172c
+
+![#f1f1f1](https://placehold.co/100x100/f1f1f1/f1f1f1.png) Tertiary color: #f1f1f1
 
 #### Fonts
 
+The font for the website,[Source Sans 3](https://fonts.google.com/specimen/Source+Sans+3), is the same as on the existing website in order to provide visual coherence.
+
 #### Logo
 
-## Agile Methodology
+The organizations logo has been slightly updated for this project to make it fit better to the more modern look of the website:
 
-Mention MVP!
+![DANBW Logo](static/images/danbw-logo.png)
+
+## Agile Methodology
 
 ## Technologies Used
 ### Frameworks and Languages
