@@ -6,6 +6,8 @@ This website aims at offering an easy and straightforward way for DANBW members 
 
 DANBW already has a [website](https://www.danbw.de), which is slowly becoming outdated. This project therefore aims at replacing the current website. The project replicated the most important features of the existing website, added a couple of new features and dropped some obsolete features.
 
+The deployed version of the website can be found here: https://aikido-course-website-django-ddffe52bc952.herokuapp.com/
+
 [!Aikido Course Website Mockups](media/screenshots/aikido_course_website_mockups.jpg)
 
 ## Table of contents
@@ -67,20 +69,26 @@ DANBW already has a [website](https://www.danbw.de), which is slowly becoming ou
 - Furthermore, all [user stories, which were not part of the current scope of the project](#user-stories-not-included-in-current-scope), could be reevaluated and considered for future iterations. 
 
 ## Design Process
+
+This project was designed with a user-centered approach, keeping the five planes of user experience in mind.
+
 ### Strategy Plane
 
+The website's target audience are members of the Aikido organization DANBW. The aim is to provide an easy and intuitive way for members to sign up for courses and manage their course registrations. At the same time, the project wants to make managing courses and registrations as simple as possible for staff members.
 
+The project aims to provide a central platform for DANBW members, which engages its users and offers a positive user experience. This should be part of a strong sense of community, which is an important aspect of DANBW.
 
 ### Scope Plane
 
 #### User Stories Within Project Scope
-ℹ️ The following user stories were included in the current scope of the project
+ℹ️ The following user stories were included in the current scope of the project. User stories marked with the https://github.com/nacht-falter/aikido-course-website-django/labels/MVP make up the [Minimum Viable Product](https://en.wikipedia.org/wiki/Minimum_viable_product).
 
 ##### THEME: User Accounts and Profiles
 
 ###### EPIC: User Registration and Authentication
 
 👉 USER STORY: As a **visitor**, I can **create a user account** so that I can **log in and store my information** (https://github.com/nacht-falter/aikido-course-website-django/issues/2)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -111,6 +119,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 </details>
 
 👉 USER STORY: As a **user**, I can **log in to my account** by **clicking on a login button from anywhere on the Website** (https://github.com/nacht-falter/aikido-course-website-django/issues/3)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -134,6 +143,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 </details>
 
 👉 USER STORY: As a **user**, I can **log out from my account** by **clicking on a Logout button from anywhere on the website**. (https://github.com/nacht-falter/aikido-course-website-django/issues/4)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 <details>
 
 <summary>Show details</summary>
@@ -236,6 +246,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20M
 </details>
 
 👉 USER STORY: As a **logged-in user**, I can **reset my password** (https://github.com/nacht-falter/aikido-course-website-django/issues/8)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -286,6 +297,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 ###### EPIC: Course Registration
 
 👉 USER STORY: As a **visitor**, I can **click on a link in the navigation menu** to **see a list of available courses** (https://github.com/nacht-falter/aikido-course-website-django/issues/11)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -361,6 +373,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 </details>
 
 👉 USER STORY: As a **logged-in user**, I can **fill out a sign-up form** to **sign up for a course** (https://github.com/nacht-falter/aikido-course-website-django/issues/43)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -413,6 +426,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XS
 </details>
 
 👉 USER STORY: As a **logged-in user**, I can **edit my current registrations** so that **I can update information** (https://github.com/nacht-falter/aikido-course-website-django/issues/16)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -440,6 +454,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 </details>
 
 👉 USER STORY: As a **logged-in user**, I can **cancel a course registration** (https://github.com/nacht-falter/aikido-course-website-django/issues/17)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -546,6 +561,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XS
 ###### EPIC: UI Design
 
 👉 USER STORY: As a **visitor** or a **logged-in user**, I want **the website to have a responsive, consistent and visually appealing UI design** in order to **elicit a positive response during my visit** (https://github.com/nacht-falter/aikido-course-website-django/issues/36)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -571,6 +587,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XL
 </details>
 
 👉 USER STORY: As a **user**, I want **the website to comply with accessibility guidelines** so that **I can access it with screen readers or other assistive technologies** (https://github.com/nacht-falter/aikido-course-website-django/issues/55)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -643,6 +660,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 ###### EPIC: Navigation
 
 👉 USER STORY: As a **visitor** or **logged-in user**, I can **easily navigate through different sections of the website using a clear and intuitive navigation menu displayed on all pages** (https://github.com/nacht-falter/aikido-course-website-django/issues/23)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -691,6 +709,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XS
 ###### EPIC: Website Content
 
 👉 USER STORY: As a **user**, I want **the start page to display information about the website's purpose** (https://github.com/nacht-falter/aikido-course-website-django/issues/25)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -788,6 +807,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 ###### EPIC: Course Management
 
 👉 USER STORY: As a **staff member**, I can **create new courses** (https://github.com/nacht-falter/aikido-course-website-django/issues/30)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -837,6 +857,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 </details>
 
 👉 USER STORY: As a **staff member**, I can **update or delete existing courses** (https://github.com/nacht-falter/aikido-course-website-django/issues/32)
+https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
 
@@ -1248,6 +1269,8 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 #### Logo
 
 ## Agile Methodology
+
+Mention MVP!
 
 ## Technologies Used
 ### Frameworks and Languages
