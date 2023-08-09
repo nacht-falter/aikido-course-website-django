@@ -12,7 +12,30 @@ The deployed version of the website can be found here: https://aikido-course-web
 
 ## Table of contents
 
-...
+- [Features](#features)
+  - [Existing Features](#existing-features)
+  - [Future Features](#future-features)
+- [Design Process](#design-process)
+  - [Strategy Plane](#strategy-plane)
+  - [Scope Plane](#scope-plane)
+  - [Structure Plane](#structure-plane)
+  - [Skeleton Plane](#skeleton-plane)
+  - [Surface Plane](#surface-plane)
+- [Agile Methodology](#agile-methodology)
+  - [GitHub Issues and Projects](#github-issues-and-projects-as-agile-tools)
+  - [Sprint Planning](#sprint-planning)
+  - [Progress Tracking](#progress-tracking)
+- [Technologies Used](#technologies-used)
+  - [Frameworks and Languages](#frameworks-and-languages)
+  - [Addditional Python Packages](#addditional-python-packages)
+  - [Other Software](#other-software)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Credits](#credits)
+  - [Code](#code)
+  - [Images](#images)
+  - [Text](#texts)
+  - [Acknowledgements](#acknowledgements)
 
 ## Features
 ### Existing Features
@@ -1234,7 +1257,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20M
 
 </details>
 
-👉 USER STORY: As a **staff member,* I can **download a CSV file containing all registrations for a course** so that **I can have a local copy of that information.** (https://github.com/nacht-falter/aikido-course-website-django/issues/39)
+👉 USER STORY: As a **staff member,** I can **download a CSV file containing all registrations for a course** so that **I can have a local copy of that information.** (https://github.com/nacht-falter/aikido-course-website-django/issues/39)
 
 <details>
 
@@ -1304,7 +1327,7 @@ The color scheme consists of two main colors:
 
 #### Fonts
 
-The font for the website, [Source Sans 3](https://fonts.google.com/specimen/Source+Sans+3), is the same as on the existing website in order to provide visual coherence.
+The font for the website, [Source Sans 3](https://fonts.google.com/specimen/Source+Sans+3), is the same as the one used on the existing website in order to provide visual coherence.
 
 #### Logo
 
@@ -1546,7 +1569,7 @@ Completed on 9.8.2023
 
 <hr>
 
-### Tracking Progress
+### Progress Tracking
 
 The progress of the project was tracked with a burndown chart ([Burndown Chart Template](https://www.smartsheet.com/content/burndown-chart-templates)), by calculating the total amount of story points from the user stories. The ideal velocity was calulated by dividing the total number of story points with the number of sprints. The progress was tracked after each sprint:
 
@@ -1627,20 +1650,45 @@ The necessary steps to deploy the project are:
 The following resources were used for the project:
 
 ### Code
+I made exensive use of the Django documentation available at: https://docs.djangoproject.com/en/stable/. I won't list all the used pages here, but the use of the Django docs is extensively documented in comments in the code.
 
-...
+The initial setup and the basic strcture of the project followed the instructions from the Code Institute Django Blog walkthrough project.
+
+All other used sources are listed here (All code from other sources has been thoroughly reviewed, understood and adapoted to the specific circumstances of this project):
+- Customize property name: https://stackoverflow.com/a/64352815
+- Add inlines to UserAdmin model: https://stackoverflow.com/a/35573797
+- Add summernote field to inline model: https://github.com/summernote/django-summernote/issues/14
+- Instructions for importing signals: https://www.geeksforgeeks.org/how-to-create-and-use-signals-in-django/
+- Context processor for passing categories to templates: https://stackoverflow.com/a/34903331
+- Pass course instance to form: https://medium.com/analytics-vidhya/django-how-to-pass-the-user-object-into-form-classes-ee322f02948c)
+- Add new fields to form: https://stackoverflow.com/a/58944671
+- Create slug from another field: https://stackoverflow.com/a/837835
+- Adjust the plural of a model: https://djangoandy.com/2021/09/01/adjusting-the-plural-of-a-model-in-django-admin/
+- Assign increasing integer values to a list of variables: https://stackoverflow.com/a/64485228
+- Using django signals: https://www.geeksforgeeks.org/how-to-create-and-use-signals-in-django/
+- Testing Django admin instructions from: https://www.argpar.se/posts/programming/testing-django-admin
+- Test validation error: https://stackoverflow.com/questions/73188838/django-testcase-check-validationerror-with-assertraises-in-is-throwing-validatio
+- Test messages: https://stackoverflow.com/a/46865530
+- Test Redirect: https://stackoverflow.com/a/49353888
+- Test bad header: https://stackoverflow.com/a/27268861
+- Override default allauth password redirect url: https://stackoverflow.com/a/56599071
+- Contact form: https://learndjango.com/tutorials/django-email-contact-form-tutorial
+- Get Course id from url: https://stackoverflow.com/a/1036564
+- Receiving data from the template with JavaScript: Instructions from: https://adamj.eu/tech/2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/
+- Get data to dynamically set active nav-link: https://stackoverflow.com/a/55151707
+- Instructions for safely passing data to JavaScript: https://adamj.eu/tech/2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/
+Mocking timers with Jest: https://jestjs.io/docs/timer-mocks
 
 ### Images
 
-...
+All images used on the website were images used on the original website https://www.danbw.de. I would like to thank DANBW for letting me use these images.
 
 ### Texts
 
-...
-### Other
-
+The texts used for the project were taken from the original website, updated and translated to English.
 
 ### Acknowledgements
+
 - I would like to thank my Code Institute mentor Can for his continued support and helpful advice.
 - I would like to thank the Code Institute tutors for their support.
-- I would like to thank all friends and family members who have tested the websute for their helpful feedback and suggestions.
+- I would like to thank all friends and family members who have tested the website for their helpful feedback and suggestions.
