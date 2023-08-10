@@ -111,11 +111,12 @@ i {
 }
 
 .page-content img {
-  margin-right: 0.5em;
+  margin: 0 0.5em;
 }
 
 @media (max-width: 575px) {
   .page-content img {
+    float: none !important;
     width: 100% !important;
     object-fit: cover;
   }
