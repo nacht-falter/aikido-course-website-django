@@ -4,7 +4,7 @@
 
 This website aims at offering an easy and straightforward way for DANBW members to sign up for courses and manage their course registrations and exams. Furthermore the website allows DANBW staff members to manage courses and course registrations as well as the website content.
 
-DANBW already has a [website](https://www.danbw.de), which is slowly becoming outdated. This project therefore aims at replacing the current website. The project replicated the most important features of the existing website, added a couple of new features and dropped some obsolete features.
+DANBW already has a [website](https://www.danbw.de), which is slowly becoming outdated. This project therefore aims at replacing the current website, which has been approved by the DANBW board. The project replicated the most important features of the existing website, added a couple of new features and dropped some obsolete features.
 
 The deployed version of the website can be found here: https://aikido-course-website-django-ddffe52bc952.herokuapp.com/
 
@@ -27,7 +27,7 @@ The deployed version of the website can be found here: https://aikido-course-web
   - [Progress Tracking](#progress-tracking)
 - [Technologies Used](#technologies-used)
   - [Frameworks and Languages](#frameworks-and-languages)
-  - [Addditional Python Packages](#addditional-python-packages)
+  - [Additional Python Packages](#addditional-python-packages)
   - [Other Software](#other-software)
 - [Testing](#testing)
 - [Deployment](#deployment)
@@ -38,19 +38,20 @@ The deployed version of the website can be found here: https://aikido-course-web
   - [Acknowledgements](#acknowledgements)
 
 ## Features
+
 ### Existing Features
 
 #### User Accounts and Profiles
-- Users can sign up to the website by providing an email address, a username and a password.
-- Users need to confirm their email address, before being able to login to the website.
+- Users can sign up to the website by providing an email address, a username, and a password.
+- Users need to confirm their email address, before being able to log in to the website.
 - After having confirmed their email address, users are asked to create a user profile with their full name and their current Aikido grade.
 - Users can see their user profile on the **My Profile** page. From there, they can also update their information or delete their account, if they are regular users (Staff users cannot delete their accounts from the frontend, as a security measure).
 
 ![Screenshots Account](media/screenshots/screenshots_account.png)
 
 #### Course Registration and Management
-- Users can sign up for courses by choosing a course with open registration status from the **Courses** page and filling out the sign up form. Users can choose if they want to participate in the whole course or select single sessions. The course fee will be calculated automatically, depending on the selection. Users can also apply for a grading exam. The exam grade will be stored with the registration according to the user's current grade.
-- After signing up for a course, users can see their current registrations on the **My Registrations** page. They can update or cancel their registrations, if they wish.
+- Users can sign up for courses by choosing a course with open registration status from the **Courses** page and filling out the sign-up form. Users can decide if they want to participate in the whole course or select single sessions. The course fee will be calculated automatically, depending on the selection. Users can also apply for a grading exam. The exam grade will be stored with the registration according to the user's current grade.
+- After signing up for a course, users can see their current registrations on the **My Registrations** page. They can update or cancel their registrations if they wish.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_courseregistration.png)
 
@@ -61,32 +62,32 @@ The deployed version of the website can be found here: https://aikido-course-web
 #### Website UX
 - The website has a responsive navigation menu accessible from all pages.
 - The start page presents the user with an image slideshow and general information about the organization. Furthermore, the start page features a list of upcoming courses, so that users can immediately see, which courses are available to sign up for.
-- There are several other pages available providing detailed information about Aikido, about the organization. Also, visitors, who are interested in learning Aikido can get information on where to start.
-- Finally there is a contact page available from the websites footer. Upon submitting the contact form, an email is send to the organization with the user's message.
+- There are several other pages available providing detailed information about Aikido, about the organization. Moreover, visitors, who are interested in learning Aikido, can get information on where to start.
+- Finally, there is a contact page available from the websites' footer. Upon submitting the contact form, an email is sent to the organization with the user's message.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_content.png)
 
 #### Staff functions
 ##### Course and Registration Management
-- Staff members can manage courses and course registrations from the Django admin site. They can create new courses, update existing courses and see a list of registrations for each course.
+- Staff members can manage courses and course registrations from the Django admin site. They can create new courses, update existing courses, and see a list of registrations for each course.
 - They can also update registrations, for example to update the payment status.
 - There are actions available for duplicating courses (in order to minimize the effort for creating new courses, which are similar to existing courses) and for toggling a course's registration status.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_admin_courses.png)
 
 ##### Content Management
-- Staff users can also create new pages or edit existing pages in order to update the website's content.
-- Pages are assigned a category and newly created pages will be automatically appear in the main navigation in the appropriate menu item. The order in which pages and categories appear in the navigation can be controlled by assigning a menu position value.
-- The page content can be edited with a WYSIWIG editor, which allows for styling and also image upload.
+- Staff users can also create new pages or edit existing pages to update the website's content.
+- Pages are assigned a category and newly created pages will automatically appear in the main navigation in the appropriate menu item. The order in which pages and categories appear in the navigation can be controlled by assigning a menu position value.
+- The page content can be edited with a WYSIWYG editor, which allows for styling and also image upload.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_admin_pages.png)
 
 ### Future Features
 - The following features have not been implemented in the current scope of the project, but could be worth considering for future iterations:
-  - Add a breadcrumb navigation to the website in order to further improve user experience.
+  - Add a breadcrumb navigation to the website to further improve user experience.
   - Update a course's registration status automatically based on a registration period. This would require some task scheduling solution on the server, like [Cron](https://wiki.ubuntuusers.de/Cron/).
   - Limit the final fee of a course registration so that the fee for multiple sessions never exceeds the fee for the entire course.
-  - Add the option to upload a PDF file or an image as attachment with a course.
+  - Add the option to upload a PDF file or an image as an attachment with a course.
   - Add a form for signing up for a membership with the organization.
   - Allow staff users to download course registration data as a CSV file.
 - Furthermore, all [user stories, which were not part of the current scope of the project](#user-stories-not-included-in-current-scope), could be reevaluated and considered for future iterations. 
@@ -104,13 +105,16 @@ The project aims to provide a central platform for DANBW members, which engages 
 ### Scope Plane
 
 #### User Stories Within Project Scope
-ℹ️ The following user stories were included in the current scope of the project. User stories marked with the https://github.com/nacht-falter/aikido-course-website-django/labels/MVP label make up the [Minimum Viable Product](https://en.wikipedia.org/wiki/Minimum_viable_product).
+ℹ️ The following user stories were included in the current scope of the project.
+
+ℹ️ User stories marked with the https://github.com/nacht-falter/aikido-course-website-django/labels/MVP label make up the [Minimum Viable Product](https://en.wikipedia.org/wiki/Minimum_viable_product).
 
 ##### THEME: User Accounts and Profiles
 
 ###### EPIC: User Registration and Authentication
 
 👉 USER STORY: As a **visitor**, I can **create a user account** so that I can **log in and store my information** (https://github.com/nacht-falter/aikido-course-website-django/issues/2)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -142,6 +146,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 </details>
 
 👉 USER STORY: As a **user**, I can **log in to my account** by **clicking on a login button from anywhere on the Website** (https://github.com/nacht-falter/aikido-course-website-django/issues/3)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -166,6 +171,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 </details>
 
 👉 USER STORY: As a **user**, I can **log out from my account** by **clicking on a Logout button from anywhere on the website**. (https://github.com/nacht-falter/aikido-course-website-django/issues/4)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -270,6 +276,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20M
 </details>
 
 👉 USER STORY: As a **logged-in user**, I can **reset my password** (https://github.com/nacht-falter/aikido-course-website-django/issues/8)
+ 
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -321,6 +328,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 ###### EPIC: Course Registration
 
 👉 USER STORY: As a **visitor**, I can **click on a link in the navigation menu** to **see a list of available courses** (https://github.com/nacht-falter/aikido-course-website-django/issues/11)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -397,6 +405,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 </details>
 
 👉 USER STORY: As a **logged-in user**, I can **fill out a sign-up form** to **sign up for a course** (https://github.com/nacht-falter/aikido-course-website-django/issues/43)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -450,6 +459,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XS
 </details>
 
 👉 USER STORY: As a **logged-in user**, I can **edit my current registrations** so that **I can update information** (https://github.com/nacht-falter/aikido-course-website-django/issues/16)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -478,6 +488,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 </details>
 
 👉 USER STORY: As a **logged-in user**, I can **cancel a course registration** (https://github.com/nacht-falter/aikido-course-website-django/issues/17)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -585,6 +596,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XS
 ###### EPIC: UI Design
 
 👉 USER STORY: As a **visitor** or a **logged-in user**, I want **the website to have a responsive, consistent and visually appealing UI design** in order to **elicit a positive response during my visit** (https://github.com/nacht-falter/aikido-course-website-django/issues/36)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -611,6 +623,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XL
 </details>
 
 👉 USER STORY: As a **user**, I want **the website to comply with accessibility guidelines** so that **I can access it with screen readers or other assistive technologies** (https://github.com/nacht-falter/aikido-course-website-django/issues/55)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -684,6 +697,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 ###### EPIC: Navigation
 
 👉 USER STORY: As a **visitor** or **logged-in user**, I can **easily navigate through different sections of the website using a clear and intuitive navigation menu displayed on all pages** (https://github.com/nacht-falter/aikido-course-website-django/issues/23)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -733,6 +747,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XS
 ###### EPIC: Website Content
 
 👉 USER STORY: As a **user**, I want **the start page to display information about the website's purpose** (https://github.com/nacht-falter/aikido-course-website-django/issues/25)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -831,6 +846,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L
 ###### EPIC: Course Management
 
 👉 USER STORY: As a **staff member**, I can **create new courses** (https://github.com/nacht-falter/aikido-course-website-django/issues/30)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -881,6 +897,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 </details>
 
 👉 USER STORY: As a **staff member**, I can **update or delete existing courses** (https://github.com/nacht-falter/aikido-course-website-django/issues/32)
+
 https://github.com/nacht-falter/aikido-course-website-django/labels/MVP
 
 <details>
@@ -972,7 +989,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 
 </details>
 
-👉 USER STORY: As a **staff member** I can **use a WYSIWIG editor in the Django backend** so that **I have more control over layout and styling.** (https://github.com/nacht-falter/aikido-course-website-django/issues/44)
+👉 USER STORY: As a **staff member** I can **use a WYSIWYG editor in the Django backend** so that **I have more control over layout and styling.** (https://github.com/nacht-falter/aikido-course-website-django/issues/44)
 
 <details>
 
@@ -984,7 +1001,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%
 https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S
 
 ###### Acceptance Criteria
-- There is a WYSIWIG editor installed that staff members can use for editing text fields.
+- There is a WYSIWYG editor installed that staff members can use for editing text fields.
 
 ###### Tasks
 - Install and setup summernote.
@@ -1034,7 +1051,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XL
 - Staff members can add pages from the admin view
 - Staff members can define for pages
 - Published pages are displayed in the main navigation automatically
-- Staff members can use a WYSIWIG editor to edit the page contents
+- Staff members can use a WYSIWYG editor to edit the page contents
 
 ###### Tasks
 - Create page model
@@ -1049,6 +1066,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XL
 </details>
 
 <hr>
+
 
 #### User Stories Not Included in Current Scope
 ℹ️ The following user stories were not included in the current scope of the project.
@@ -1234,7 +1252,7 @@ https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XL
 
 </details>
 
-👉 USER STORY: As a **visitor** or **logged-in user** I want **to be able to see a list of pages with thumbnail images to visit** in the sidebar on the home page (https://github.com/nacht-falter/aikido-course-website-django/issues/65)
+👉 USER STORY: As a **visitor** or **logged-in user**, I want **to be able to see a list of pages with thumbnail images to visit** in the sidebar on the home page (https://github.com/nacht-falter/aikido-course-website-django/issues/65)
 
 <details>
 
@@ -1292,11 +1310,11 @@ Database schema for the minimum viable product:
 
 Database schema for the final version in the current scope:
 
-![ERD for MVP](media/erd/erd_mvp.png)
+![ERD for MVP](media/erd/erd_final.png)
 
 ### Skeleton Plane
 
-The overall layout of the website stays close to the [existing website](https://www.danbw.de) in order to make the transition from the old to the new version as user-friendly as possible.
+The overall layout of the website stays close to the [existing website](https://www.danbw.de) to make the transition from the old to the new version as user-friendly as possible.
 
 The website consists of three main sections: A header with the logo, the main title, and the navigation menu, a main section for the content, and a footer.
 
@@ -1310,13 +1328,13 @@ The wireframes for the project can be found here:
 
 ### Surface Plane
 
-Similar to the general layout, the goal of the visual design of the website was to stay close to the design of the original website, while updating and modernizing design elements where adequate.
+Similar to the general layout, the goal of the visual design of the website was to stay close to the design of the original website, while updating and modernizing design elements where appropriate.
 
 #### Colors
 
 The project adopts the color scheme of the original website, which is part of the corporate design of the organization.
 
-The color scheme consists of two main colors:
+The color scheme consists of two main colors and one tertiary color:
 
 <!-- Display colors in markdown: https://stackoverflow.com/a/41247934 -->
 ![#1e3c95](https://placehold.co/100x100/1e3c95/1e3c95.png) Primary color: #1e3c95
@@ -1331,7 +1349,7 @@ The font for the website, [Source Sans 3](https://fonts.google.com/specimen/Sour
 
 #### Logo
 
-The organizations logo has been slightly updated for this project to make it fit better to the more modern look of the website:
+The organization's logo has been slightly updated for this project to make it fit better with the more modern look of the website:
 
 ![DANBW Logo](static/images/danbw-logo.png)
 
@@ -1341,33 +1359,33 @@ The organizations logo has been slightly updated for this project to make it fit
 
 [GitHub Issues](https://docs.github.com/en/issues) and [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) were used as tools for Agile methodology.
 
-- [Issues](https://github.com/nacht-falter/aikido-course-website-django/issues) were used for user stories and for bugs.
+- I used [Issues](https://github.com/nacht-falter/aikido-course-website-django/issues) for user stories and for bugs.
 
 - Issue tasks were used to define acceptance criteria and tasks for each user story.
 
-- Issue labels were used to categorize issues into [Themes](https://github.com/nacht-falter/aikido-course-website-django/labels?q=THEME) and [Epics](https://github.com/nacht-falter/aikido-course-website-django/labels?q=EPIC)
+- I assigned labels to user stories to categorize them into [Themes](https://github.com/nacht-falter/aikido-course-website-django/labels?q=THEME) and [Epics](https://github.com/nacht-falter/aikido-course-website-django/labels?q=EPIC)
 
-- Furthermore all user stories were prioritized using the MoSCoW prioritization technique with the following project-wide priorities:
+- Furthermore, all user stories were prioritized using the MoSCoW prioritization technique with the following project-wide priorities:
 
   https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%20Must-Have https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%20Should-Have https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%20Could-Have https://github.com/nacht-falter/aikido-course-website-django/labels/PRIORITY%3A%20Won%27t-Have
 
-- All user stories were assigned a size label categorizing them into five different sizes:
+- All user stories were assigned a SIZE label, categorizing them into five different sizes:
 
   https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XS https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20S https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20M https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20L https://github.com/nacht-falter/aikido-course-website-django/labels/SIZE%3A%20XL
 
-  The Fibonacci series was used to assign story points to theses sizes: XS = 1 story point, S = 2 story points, M = 3 story points, L = 5 story points, XL = 8 story points.
+  The Fibonacci series was used to assign story points to these sizes: XS = 1 story point, S = 2 story points, M = 3 story points, L = 5 story points, XL = 8 story points.
 
-- Milestones were used for the [Product Backlog](https://github.com/nacht-falter/aikido-course-website-django/milestone/1) and for adding user stories to [Sprints](https://github.com/nacht-falter/aikido-course-website-django/milestones?state=closed).
+- I used Milestones for the [Product Backlog](https://github.com/nacht-falter/aikido-course-website-django/milestone/1) and for adding user stories to [Sprints](https://github.com/nacht-falter/aikido-course-website-django/milestones?state=closed).
 
 - [Projects](https://github.com/nacht-falter/aikido-course-website-django/projects?query=is%3Aclosed) were used for tracking tasks within each iteration.
 
 - [Project workflows](https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/adding-items-automatically) were used to automatically add user stories in a sprint to the Todo column of the corresponding  project board.
 
-- A [custom priority field](https://docs.github.com/en/issues/planning-and-tracking-with-projects/understanding-fields) was created in order to further prioritize items within a project on a sprint level.
+- Finally, I created a [custom priority field](https://docs.github.com/en/issues/planning-and-tracking-with-projects/understanding-fields) to further prioritize items within a project on a sprint level.
 
 ### Sprint Planning
 
-The project was planned with timeboxed sprints of three days each. User stories were assigned to each sprint, while prioritizing MVP user stories, but making sure that the amount of user stories with a Must-Have priority never exceeded 60% in each sprint.
+I planned the project with timeboxed sprints of three days each. I assigned user stories to each sprint, while prioritizing MVP user stories, but making sure that the amount of user stories with a Must-Have priority never exceeded 60% in each sprint. The situation was reevaluated after each sprint.
 
 #### Sprint 1 (3.7.-5.7.2023)
 
@@ -1571,7 +1589,7 @@ Completed on 9.8.2023
 
 ### Progress Tracking
 
-The progress of the project was tracked with a burndown chart ([Burndown Chart Template](https://www.smartsheet.com/content/burndown-chart-templates)), by calculating the total amount of story points from the user stories. The ideal velocity was calulated by dividing the total number of story points with the number of sprints. The progress was tracked after each sprint:
+The progress of the project was tracked with a burndown chart ([Burndown Chart Template](https://www.smartsheet.com/content/burndown-chart-templates)), by calculating the total amount of story points from the user stories. The ideal velocity was calculated by dividing the total number of story points with the number of sprints. The progress was tracked after each sprint:
 
 ![Burndown Chart](media/agile/burndown_chart.png)
 
@@ -1580,8 +1598,8 @@ The progress of the project was tracked with a burndown chart ([Burndown Chart T
 ### Frameworks and Languages
 
 - The website has been built with [Django](https://www.djangoproject.com/), a Python web framework.
-- HTML, CSS and JavaScript have been used for designing the website's front end.
-- [Bootstrap](https://getbootstrap.com/) was used for designing the front end.
+- HTML, CSS, and JavaScript have been used for implementing the website's front end.
+- [Bootstrap](https://getbootstrap.com/) was used for the visual design and the layout for the front end.
 
 ### Addditional Python Packages
 
@@ -1592,7 +1610,7 @@ The progress of the project was tracked with a burndown chart ([Burndown Chart T
 - [dj3-cloudinary-storage](https://pypi.org/project/dj3-cloudinary-storage/): Using Cloudinary as Django file storage
 - [django-allauth](https://pypi.org/project/django-allauth/): Advanced authentication and user management for Django 
 - [django-summernote](https://pypi.org/project/django-summernote/): WYSIWYG editor for text fields
-- [django-crispy-forms](https://pypi.org/project/django-crispy-forms/): Provides styling for django forms 
+- [django-crispy-forms](https://pypi.org/project/django-crispy-forms/): Provides styling for Django forms 
 - [crispy-bootstrap5](https://pypi.org/project/crispy-bootstrap5/): Bootstrap5 package for crispy forms 
 - [coverage](https://pypi.org/project/coverage/): Analyzing test coverage
 
@@ -1607,7 +1625,7 @@ The progress of the project was tracked with a burndown chart ([Burndown Chart T
 - [ElephantSQL](https://www.elephantsql.com/) is used for the project's PostgreSQL database.
 - [Cloudinary](https://cloudinary.com/) is used to store media files.
 - [Balsamiq](https://balsamiq.com/) was used to create the [wireframes](#skeleton-plane) during the design process.
-- [Lucidchart](https://www.lucidchart.com/) was used to create the [entitity relationship diagrams (ERD)](#structure-plane) used for modeling the project database.
+- [Lucidchart](https://www.lucidchart.com/) was used to create the [entity relationship diagrams (ERD)](#structure-plane) used for modeling the project database.
 - [Font Awesome](https://fontawesome.com/) was used to add icons for aesthetic and UX purposes. The necessary files have been included in the static/fontawesome folder to avoid loading them from an external resource on each page load.
 - [Google Fonts](https://fonts.google.com/) was used to import the font 'Source Sans 3'. The [font files](https://fonts.google.com/specimen/Source+Sans+3) have been included in the assets/fonts folder, to ensure that they don't have to be loaded from an external resource.
 - [LightHouse](https://developer.chrome.com/docs/lighthouse/) has been used to assess the website's performance.
@@ -1625,7 +1643,7 @@ The project was deployed to [Heroku](https://heroku.com). The live version of th
 
 The necessary steps to deploy the project are:
   - Clone or fork the repository.
-  - Create an account at https://cloudinary.com and get your cloudinary url from the dashboard.
+  - Create an account at https://cloudinary.com and get your Cloudinary URL from the dashboard.
   - Create a PostgreSQL database, for example at https://www.elephantsql.com/, and find the database address.
   - Create a new app from the [Heroku dashboard](https://dashboard.heroku.com).
   - Go to the Settings tab and click on `Reveal Config Vars` in the *Config Vars* section.
@@ -1650,11 +1668,11 @@ The necessary steps to deploy the project are:
 The following resources were used for the project:
 
 ### Code
-I made exensive use of the Django documentation available at: https://docs.djangoproject.com/en/stable/. I won't list all the used pages here, but the use of the Django docs is extensively documented in comments in the code.
+I made extensive use of the Django documentation available at: https://docs.djangoproject.com/en/stable/. I won't list all the used pages here, but the use of the Django docs is extensively documented in comments in the code.
 
-The initial setup and the basic strcture of the project followed the instructions from the Code Institute Django Blog walkthrough project.
+The initial setup and the basic structure of the project followed the instructions from the Code Institute Django Blog walkthrough project.
 
-All other used sources are listed here (All code from other sources has been thoroughly reviewed, understood and adapoted to the specific circumstances of this project):
+All other used sources are listed here (all code from these sources has been thoroughly reviewed, understood and adapted to the specific circumstances of this project):
 - Customize property name: https://stackoverflow.com/a/64352815
 - Add inlines to UserAdmin model: https://stackoverflow.com/a/35573797
 - Add summernote field to inline model: https://github.com/summernote/django-summernote/issues/14
@@ -1677,11 +1695,11 @@ All other used sources are listed here (All code from other sources has been tho
 - Receiving data from the template with JavaScript: Instructions from: https://adamj.eu/tech/2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/
 - Get data to dynamically set active nav-link: https://stackoverflow.com/a/55151707
 - Instructions for safely passing data to JavaScript: https://adamj.eu/tech/2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/
-Mocking timers with Jest: https://jestjs.io/docs/timer-mocks
+- Mocking timers with Jest: https://jestjs.io/docs/timer-mocks
 
 ### Images
 
-All images used on the website were images used on the original website https://www.danbw.de. I would like to thank DANBW for letting me use these images.
+All images used on the website were images used on the original website (https://www.danbw.de). I would like to thank DANBW for letting me use these images.
 
 ### Texts
 
@@ -1689,6 +1707,6 @@ The texts used for the project were taken from the original website, updated and
 
 ### Acknowledgements
 
-- I would like to thank my Code Institute mentor Can for his continued support and helpful advice.
+- I would like to thank my Code Institute mentor Can for his continued support and constructive advice.
 - I would like to thank the Code Institute tutors for their support.
 - I would like to thank all friends and family members who have tested the website for their helpful feedback and suggestions.
