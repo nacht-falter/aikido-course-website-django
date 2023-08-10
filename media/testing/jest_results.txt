@@ -1,0 +1,17 @@
+Results from running `npx jest --coverage`:
+
+ PASS  test_js/__tests__/main.tests.js
+ PASS  test_js/__tests__/registration_form.tests.js
+----------------------|---------|----------|---------|---------|-------------------
+File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+----------------------|---------|----------|---------|---------|-------------------
+All files             |   98.52 |    88.46 |     100 |   98.52 |
+ main.js              |     100 |      100 |     100 |     100 |
+ registration_form.js |   98.14 |    86.36 |     100 |   98.14 | 18
+----------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 2 passed, 2 total
+Tests:       13 passed, 13 total
+Snapshots:   0 total
+Time:        1.769 s
+Ran all test suites.
