@@ -6,7 +6,7 @@
 <p>Did you pass the exam?</p>
 <form method="post" action="{% url 'update_grade' %}">
     {% csrf_token %}
-    <button type="submit" name="answer" value="yes">Yes</button>
-    <button type="submit" name="answer" value="no">No</button>
+    <button btn btn-success btn-sm type="submit" name="answer" value="yes">Yes, I passed</button>
+    <button btn btn-secondary btn-sm type="submit" name="answer" value="no">No, I didn't</button>
 </form>
 {% endblock content %}
