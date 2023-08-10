@@ -15,11 +15,15 @@ Code coverage has been measured using [Coverage.py](https://coverage.readthedocs
 
 ![Coverage Report Python](media/testing/coverage_py_results.png)
 
+The detailed test results can be found here: [Test Results Python](media/testing/unittest_results.txt)
+
 ### JavaScript Testing
 
 All JavaScript code written for the project has been tested by writing automated tests using [Jest](https://jestjs.io/). 98% of the JavaScript code is covered by the tests.
 
 ![Coverage Report JavaScript](media/testing/coverage_js_results.png)
+
+The detailed test results can be found here: [Test Results JavaScript](media/testing/jest_results.txt)
 
 ## Manual Testing
 
@@ -61,6 +65,7 @@ All JavaScript code was validated with the [Jshint linter](https://jshint.com/).
 A report on the application website generated with [Chrome Lighthouse](https://developer.chrome.com/docs/lighthouse/) showed no major issues with the performance or accessibility of the application.
 
 ![Lighthouse results summary](media/testing/lighthouse_result_summary.png)
+
 [Detailed Chrome Lighthouse results](media/testing/lighthouse_results.pdf)
 
 ### WAVE
@@ -72,11 +77,11 @@ A report on the application website generated with [Chrome Lighthouse](https://d
 
 ## Bugs
 
-A list of all bugs encountered during the devolpment phase can be found [here](https://github.com/nacht-falter/aikido-course-website-django/issues?q=label%3ABUG+is%3Aclosed).
+A list of the issues created for bugs encountered during devolpment can be found [here](https://github.com/nacht-falter/aikido-course-website-django/issues?q=label%3ABUG+is%3Aclosed).
 
 | Bug | Fix |
 | ----------- | ----------- |
-| [Course registrations nor filtered properly](https://github.com/nacht-falter/aikido-course-website-django/issues/48)  | Fix queryset filter in CourseRegistrationList view |
+| [Course registrations not filtered properly](https://github.com/nacht-falter/aikido-course-website-django/issues/48)  | Fix queryset filter in CourseRegistrationList view |
 | [Error message after account signup](https://github.com/nacht-falter/aikido-course-website-django/issues/49) | Disable `ACCOUNT_EMAIL_REQUIRED` in settings.py as long as email backend is not configured yet |
 | [Exam passed status is not displayed properly in Course Registration List](https://github.com/nacht-falter/aikido-course-website-django/issues/52) | Set filter in template explicitely to `False` |
 | [Type error on CourseSession model when creating without start_date or end_date](https://github.com/nacht-falter/aikido-course-website-django/issues/53) | Check if start_time and end_time are set before calling custom clean() method on Course model |
