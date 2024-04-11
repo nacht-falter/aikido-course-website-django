@@ -39,6 +39,7 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 
 ALLOWED_HOSTS = [
     "aikido-course-website-django-ddffe52bc952.herokuapp.com",
+    "dev.danbw.de",
     "127.0.0.1",
 ]
 
