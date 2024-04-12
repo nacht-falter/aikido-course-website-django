@@ -41,6 +41,8 @@ class Course(models.Model):
         choices=REGISTRATION_STATUS, default=0
     )
     course_fee = models.IntegerField()
+    organizer = models.CharField(max_length=200, blank=True)
+    teacher = models.CharField(max_length=200, blank=True)
 
     class Meta:
         ordering = ["start_date"]
