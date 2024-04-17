@@ -14,19 +14,19 @@ from django.urls import reverse_lazy
 from django.views import View, generic
 
 from . import forms
-from .models import (Category, Course, UserCourseRegistration, ExternalCourse,
-                     InternalCourse, Page, UserProfile)
+from .models import (Category, Course, ExternalCourse, InternalCourse, Page,
+                     UserCourseRegistration, UserProfile)
 
 CURRENT_DATE = date.today()
+ALL_COURSES = list(InternalCourse.objects.all()) + list(ExternalCourse.objects.all())
 
 
 class HomePage(View):
     """Displays the home page"""
 
     def get(self, request):
-        all_courses = Course.objects.all()
         upcoming_courses = [
-            course for course in all_courses if course.end_date >= CURRENT_DATE
+            course for course in ALL_COURSES if course.end_date >= CURRENT_DATE
         ]
         upcoming_registrations = []
         if request.user.is_authenticated:
@@ -109,10 +109,7 @@ class CourseList(View):
     """Displays a list of all internal and external courses"""
 
     def get(self, request):
-        internal_courses = InternalCourse.objects.all()
-        external_courses = ExternalCourse.objects.all()
-        course_list = sorted(list(
-            internal_courses) + list(external_courses), key=lambda course: course.start_date)
+        course_list = sorted(ALL_COURSES, key=lambda course: course.start_date)
 
         return render(
             request,
@@ -143,7 +140,7 @@ class RegisterCourse(LoginRequiredMixin, View):
             )
             return HttpResponseRedirect(reverse("userprofile"))
 
-        courses = Course.objects.filter(registration_status=1)
+        courses = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
 
         course_data = self.prepare_course_data(course)
