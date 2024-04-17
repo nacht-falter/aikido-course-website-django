@@ -21,6 +21,18 @@ main {
   }
 }
 
+@media (min-width: 1400px) {
+  main {
+    margin: 3em 15vw;
+  }
+}
+
+@media (min-width: 1600px) {
+  main {
+    margin: 3em 20vw;
+  }
+}
+
 .main-logo {
   margin: 0 auto;
   height: 5em;
