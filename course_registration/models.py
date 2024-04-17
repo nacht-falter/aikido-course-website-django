@@ -1,10 +1,9 @@
-from django.db import models
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.utils.text import slugify
+from django.db import models
 from django.shortcuts import get_object_or_404
-
-from cloudinary.models import CloudinaryField
+from django.utils.text import slugify
 
 # Documentation for defining choices for CharFields:
 # https://docs.djangoproject.com/en/4.2/ref/models/fields/#choices
@@ -30,18 +29,10 @@ from cloudinary.models import CloudinaryField
 class Course(models.Model):
     """Represents a course a user can sign up for"""
 
-    REGISTRATION_STATUS = ((0, "Closed"), (1, "Open"))
-
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    description = models.TextField(blank=True)
     start_date = models.DateField()
     end_date = models.DateField()
-    registration_status = models.IntegerField(
-        choices=REGISTRATION_STATUS, default=0
-    )
-    course_fee = models.IntegerField()
-    organizer = models.CharField(max_length=200, blank=True)
     teacher = models.CharField(max_length=200, blank=True)
 
     class Meta:
@@ -49,6 +40,9 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_course_type(self):
+        return self.__class__.__name__
 
     # https://docs.djangoproject.com/en/4.2/ref/models/instances
     # /#django.db.models.Model.clean
@@ -62,12 +56,35 @@ class Course(models.Model):
             raise ValidationError("Start date cannot be later than end date.")
 
 
+class InternalCourse(Course):
+    """Represents a course organized by the organization"""
+
+    REGISTRATION_STATUS = ((0, "Closed"), (1, "Open"))
+
+    registration_status = models.IntegerField(
+        choices=REGISTRATION_STATUS, default=0
+    )
+    description = models.TextField(blank=True)
+    registration_start_date = models.DateField(blank=True)
+    registration_end_date = models.DateField(blank=True)
+    organizer = models.CharField(max_length=200, blank=True, default="DANBW")
+    course_fee = models.IntegerField()
+    course_fee_cash = models.IntegerField()
+
+
+class ExternalCourse(Course):
+    """Represents a course organized by an external organization"""
+
+    organizer = models.CharField(max_length=200, blank=True)
+    url = models.URLField()
+
+
 class CourseSession(models.Model):
     """Represents a session within a course"""
 
     title = models.CharField(max_length=200)
     course = models.ForeignKey(
-        Course, on_delete=models.CASCADE, related_name="sessions"
+        InternalCourse, on_delete=models.CASCADE, related_name="sessions"
     )
     date = models.DateField()
     start_time = models.TimeField()
@@ -105,7 +122,7 @@ class CourseRegistration(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="registrations"
     )
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(InternalCourse, on_delete=models.CASCADE)
     selected_sessions = models.ManyToManyField(CourseSession, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)
     exam = models.BooleanField(default=False)

@@ -1,21 +1,21 @@
 from datetime import date
 
-from django.shortcuts import render, get_object_or_404, reverse
-from django.urls import reverse_lazy
-from django.views import generic, View
-from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.models import User
-from django.core.mail import send_mail, BadHeaderError
-from django.conf import settings
-from django.core.exceptions import PermissionDenied
-
 from allauth.account.views import PasswordChangeView
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import PermissionDenied
+from django.core.mail import BadHeaderError, send_mail
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, reverse
+from django.urls import reverse_lazy
+from django.views import View, generic
 
-from .models import Course, CourseRegistration, UserProfile, Page, Category
 from . import forms
+from .models import (Category, Course, CourseRegistration, ExternalCourse,
+                     InternalCourse, Page, UserProfile)
 
 CURRENT_DATE = date.today()
 
@@ -105,12 +105,22 @@ class PageList(generic.ListView):
         return Page.objects.filter(status=1, category=category)
 
 
-class CourseList(generic.ListView):
-    """Displays a list of all courses"""
+class CourseList(View):
+    """Displays a list of all internal and external courses"""
 
-    model = Course
-    queryset = Course.objects.all()
-    template_name = "course_list.html"
+    def get(self, request):
+        internal_courses = InternalCourse.objects.all()
+        external_courses = ExternalCourse.objects.all()
+        course_list = sorted(list(
+            internal_courses) + list(external_courses), key=lambda course: course.start_date)
+
+        return render(
+            request,
+            "course_list.html",
+            {
+                "course_list": course_list,
+            },
+        )
 
 
 class RegisterCourse(LoginRequiredMixin, View):
@@ -163,7 +173,7 @@ class RegisterCourse(LoginRequiredMixin, View):
         )
 
     def post(self, request, slug):
-        queryset = Course.objects.filter(registration_status=1)
+        queryset = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(queryset, slug=slug)
         course_data = self.prepare_course_data(course)
 

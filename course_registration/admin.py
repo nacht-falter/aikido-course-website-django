@@ -1,17 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.db import models
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget
-from django.db import models
 
-from .models import (
-    Course,
-    CourseRegistration,
-    CourseSession,
-    UserProfile,
-    Category,
-    Page,
-)
+from .models import (Category, Course, CourseRegistration, CourseSession,
+                     ExternalCourse, InternalCourse, Page, UserProfile)
 
 
 class CourseSessionInline(admin.TabularInline):
@@ -51,8 +45,8 @@ class CourseRegistrationInline(admin.TabularInline):
     ]
 
 
-@admin.register(Course)
-class CourseAdmin(SummernoteModelAdmin):
+@admin.register(InternalCourse)
+class InternalCourseAdmin(SummernoteModelAdmin):
     list_display = (
         "title",
         "registration_status",
@@ -77,20 +71,35 @@ class CourseAdmin(SummernoteModelAdmin):
             new_title = f"Copy of {course.title}"
             new_slug = f"copy-of-{course.slug}"
             counter = 2
-            while Course.objects.filter(title=new_title).exists():
+            while InternalCourse.objects.filter(title=new_title).exists():
                 new_title = f"Copy {counter} of {course.title}"
                 new_slug = f"copy-{counter}-of-{course.slug}"
                 counter += 1
 
-            Course.objects.create(
+            InternalCourse.objects.create(
                 title=new_title,
                 slug=new_slug,
                 description=course.description,
                 registration_status=0,
                 start_date=course.start_date,
                 end_date=course.end_date,
+                registration_start_date=course.registration_start_date,
+                registration_end_date=course.registration_end_date,
                 course_fee=course.course_fee,
+                course_fee_cash=course.course_fee_cash,
+                organizer=course.organizer,
+                teacher=course.teacher,
             )
+
+            for session in course.sessions.all():
+                CourseSession.objects.create(
+                    title=session.title,
+                    course=InternalCourse.objects.get(title=new_title),
+                    date=session.date,
+                    start_time=session.start_time,
+                    end_time=session.end_time,
+                    session_fee=session.session_fee,
+                )
 
     def toggle_registration_status(self, request, queryset):
         """Action for toggling course registration status"""
@@ -113,6 +122,39 @@ class CourseAdmin(SummernoteModelAdmin):
     # Customize property name: https://stackoverflow.com/a/64352815
     get_course_registration_count.short_description = "Registrations"
 
+
+@admin.register(ExternalCourse)
+class ExternalCourseAdmin(SummernoteModelAdmin):
+    list_display = (
+        "title",
+        "url",
+        "start_date",
+        "end_date",
+    )
+    search_fields = ["title", "description"]
+    prepopulated_fields = {"slug": ("title",)}
+    summernote_fields = ("description",)
+    actions = ["duplicate_selected_courses"]
+
+    def duplicate_selected_courses(self, request, queryset):
+        """Action for duplicating existing courses"""
+        for course in queryset:
+            new_title = f"Copy of {course.title}"
+            new_slug = f"copy-of-{course.slug}"
+            counter = 2
+            while ExternalCourse.objects.filter(title=new_title).exists():
+                new_title = f"Copy {counter} of {course.title}"
+                new_slug = f"copy-{counter}-of-{course.slug}"
+                counter += 1
+            ExternalCourse.objects.create(
+                title=new_title,
+                slug=new_slug,
+                url=course.url,
+                start_date=course.start_date,
+                end_date=course.end_date,
+                organizer=course.organizer,
+                teacher=course.teacher,
+            )
 
 class UserProfileInline(admin.StackedInline):
     """Displays UserProfile as an inline model"""

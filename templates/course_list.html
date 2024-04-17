@@ -4,26 +4,56 @@
 {% block content %}
 <h2>Courses</h2>
 <h3 class="mb-4">{% now "Y" %}</h3>
+<div class="course-list-header d-none d-md-flex">
+    <div class="container m-0 text-left course-list-header-container">
+        <div class="row">
+            <div class="col-12 col-md-2 col-lg-2">
+                <strong>Dates</strong>
+            </div>
+            <div class="col-12 col-md-2 col-lg-2">
+                <strong>Organizer</strong>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4">
+                <strong>Title</strong>
+            </div>
+            <div class="col-12 col-md-2 col-lg-2">
+                <strong>Teacher</strong>
+            </div>
+            <div class="col-12 col-md-2 col-lg-2 text-md-center">
+                <strong>Status</strong>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="accordion" id="accordion">
     {% for course in course_list %}
-    <div class="accordion-item" id="accordion-{{ course.id }}">
+    {% if course.get_course_type == "InternalCourse" %} 
+    <div class="accordion-item border-0 mb-2" id="accordion-{{ course.id }}">
         <div class="accordion-header">
             <a id="button-{{ course.id }}" class="accordion-button collapsed text-decoration-none" role="button"
                 data-bs-toggle="collapse" title="{{ course.title }}" data-bs-target="#collapseCourse{{ course.id }}"
                 aria-expanded="false" aria-controls="collapseCourse{{ course.id }}">
                 <div class="container m-0 text-left">
                     <div class="row">
-                        <div class="col-12 col-md-3 col-lg-2">
-                            <strong>
-                                {{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j" }}
-                            </strong>
+                        <div class="col-12 d-md-none fs-5">
+                            <span><strong>{{ course.title }}</strong></span>
                         </div>
-                        <div class="col-12 col-md-5 col-lg-5">
-                            <strong>
-                                {{ course.title }}
-                            </strong>
+                        <div class="col-3 d-md-none">Dates: </div>
+                        <div class="col-9 col-md-2 col-lg-2">
+                            <span>{{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j" }}</span>
                         </div>
-                        <div class="col-12 col-md-4 col-lg-5 text-md-end">
+                        <div class="col-3 d-md-none">Organizer: </div>
+                        <div class="col-9 col-md-2 col-lg-2">
+                            <span>{{ course.organizer }}</span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 d-none d-md-block">
+                            <span><strong>{{ course.title }}</strong></span>
+                        </div>
+                        <div class="col-3 d-md-none">Teacher: </div>
+                        <div class="col-9 col-md-2 col-lg-2">
+                            <span>{{ course.teacher }}</span>
+                        </div>
+                        <div class="col-12 col-md-2 col-lg-2 text-md-end">
                             {% if course.registration_status == 1 %}
                             <span class="badge text-bg-success">
                                 Registration {{ course.get_registration_status_display }}
@@ -46,8 +76,8 @@
         </div>
         <div id="collapseCourse{{ course.id }}" class="accordion-collapse collapse" data-bs-parent="#accordion">
             <div class="accordion-body">
-                <h4 class="mb-4">{{ course.title }}</h4>
-                <h5 class="border-bottom border-dark-subtle"><strong>Dates:</strong></h5>
+                <h5 class="mb-4">{{ course.title }}</h5>
+                <h6 class="border-bottom border-dark-subtle"><strong>Dates:</strong></h6>
                 <p>{{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j" }}</p>
                 {% if course.description %}
                 <h5 class="border-bottom border-dark-subtle"><strong>Description:</strong></h5>
@@ -71,6 +101,42 @@
             </div>
         </div>
     </div>
+    {% else %}
+    <div class="accordion-item border-0 mb-2" id="accordion-{{ course.id }}">
+        <div class="accordion-header">
+            <span id="button-{{ course.id }}" class="accordion-button accordion-button-no-link text-dark" title="{{ course.title }}">
+                <div class="container m-0 text-left">
+                    <div class="row">
+                        <div class="col-12 d-md-none fs-5">
+                            <span><strong>{{ course.title }}</strong></span>
+                        </div>
+                        <div class="col-3 d-md-none">Dates: </div>
+                        <div class="col-9 col-md-2 col-lg-2">
+                            <span>{{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j" }}</span>
+                        </div>
+                        <div class="col-3 d-md-none">Organizer: </div>
+                        <div class="col-9 col-md-2 col-lg-2">
+                            <span>{{ course.organizer }}</span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 d-none d-md-block">
+                            <span><strong>{{ course.title }}</strong></span>
+                        </div>
+                        <div class="col-3 d-md-none">Teacher: </div>
+                        <div class="col-9 col-md-2 col-lg-2">
+                            <span>{{ course.teacher }}</span>
+                        </div>
+                        <div class="col-12 col-md-2 col-lg-2 text-md-end">
+                            <a href="{{ course.url }}" class="badge btn btn-sm btn-outline-primary" title="Go to {{ course.title }}" target="_blank">
+                                <small><i class="fas fa-external-link-alt"></i></small>
+                                Go to course website
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+    {% endif %}
     {% empty %}
     <p>There are currently no courses available.</p>
     {% endfor %}

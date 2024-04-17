@@ -12,9 +12,13 @@ body {
 }
 
 main {
-  max-width: 1500px;
-  min-width: 75vw;
-  margin: 3em auto;
+  margin: 3em 1vw;
+}
+
+@media (min-width: 768px) {
+  main {
+    margin: 3em 10vw;
+  }
 }
 
 .main-logo {
@@ -160,8 +164,31 @@ a.badge:hover {
   opacity: 0.8;
 }
 
+.course-list-header {
+  padding: 8px 21px;
+  display: flex;
+}
+
+.course-list-header-container {
+  padding: 0 12px;
+}
+
+.course-list-header::after {
+  content: "";
+  display: block;
+  width: 1.25rem;
+}
+
+.accordion > :nth-child(1n) .accordion-button {
+  background-color: #eeeeee;
+}
+
 .accordion > :nth-child(2n) .accordion-button {
-  background-color: #dddddd;
+  background-color: #f9f9f9;
+}
+
+.accordion > :nth-child(1n) .accordion-button:hover {
+  background-color: rgba(30, 60, 149, 0.2);
 }
 
 .accordion > :nth-child(2n) .accordion-button:hover {
@@ -170,6 +197,7 @@ a.badge:hover {
 
 .accordion-button {
   transition: all 0.1s;
+  box-shadow: none !important;
 }
 
 .accordion-button:hover {
@@ -185,7 +213,12 @@ a.badge:hover {
 }
 
 .accordion-body {
-  background-color: #eeeeee;
+  box-shadow: 0 0 5px lightgrey inset;
+  background-color: #ffffff;
+}
+
+.accordion-button-no-link::after {
+  background-image: none !important;
 }
 
 .registration-card {
@@ -228,6 +261,18 @@ a.badge:hover {
 .btn-primary:active {
   background-color: #254bbd !important;
   border-color: #254bbd !important;
+}
+
+.btn-outline-primary {
+  color: #022385;
+  border-color: #022385;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active {
+  color: #ffffff !important;
+  background-color: #022385;
+  border-color: #022385;
 }
 
 .form-card {
