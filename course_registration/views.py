@@ -14,7 +14,7 @@ from django.urls import reverse_lazy
 from django.views import View, generic
 
 from . import forms
-from .models import (Category, Course, CourseRegistration, ExternalCourse,
+from .models import (Category, Course, UserCourseRegistration, ExternalCourse,
                      InternalCourse, Page, UserProfile)
 
 CURRENT_DATE = date.today()
@@ -30,7 +30,7 @@ class HomePage(View):
         ]
         upcoming_registrations = []
         if request.user.is_authenticated:
-            all_registrations = CourseRegistration.objects.filter(
+            all_registrations = UserCourseRegistration.objects.filter(
                 user=request.user
             )
             upcoming_registrations = [
@@ -148,7 +148,7 @@ class RegisterCourse(LoginRequiredMixin, View):
 
         course_data = self.prepare_course_data(course)
 
-        user_registered = CourseRegistration.objects.filter(
+        user_registered = UserCourseRegistration.objects.filter(
             user=request.user, course=course
         )
 
@@ -158,7 +158,7 @@ class RegisterCourse(LoginRequiredMixin, View):
             )
             return HttpResponseRedirect(reverse("course_list"))
 
-        registration_form = forms.CourseRegistrationForm(
+        registration_form = forms.UserCourseRegistrationForm(
             course=course, user_profile=request.user.profile
         )
 
@@ -177,7 +177,7 @@ class RegisterCourse(LoginRequiredMixin, View):
         course = get_object_or_404(queryset, slug=slug)
         course_data = self.prepare_course_data(course)
 
-        registration_form = forms.CourseRegistrationForm(
+        registration_form = forms.UserCourseRegistrationForm(
             data=request.POST, course=course, user_profile=request.user.profile
         )
         if registration_form.is_valid():
@@ -242,7 +242,7 @@ class RegisterCourse(LoginRequiredMixin, View):
                     "Please select at least one session.",
                 )
 
-            registration_form = forms.CourseRegistrationForm(
+            registration_form = forms.UserCourseRegistrationForm(
                 course=course, user_profile=request.user.profile
             )
             return render(
@@ -258,11 +258,11 @@ class RegisterCourse(LoginRequiredMixin, View):
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
-class CourseRegistrationList(LoginRequiredMixin, View):
+class UserCourseRegistrationList(LoginRequiredMixin, View):
     """Displays a list of a users course registrations"""
 
     def get(self, request):
-        user_registrations = CourseRegistration.objects.filter(
+        user_registrations = UserCourseRegistration.objects.filter(
             user=request.user
         )
         past_registrations = [
@@ -286,11 +286,11 @@ class CourseRegistrationList(LoginRequiredMixin, View):
         )
 
 
-class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
+class CancelUserCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
     """Deletes a course registration instance"""
 
     def get(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
+        registration = get_object_or_404(UserCourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
         else:
@@ -303,7 +303,7 @@ class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
     def post(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
+        registration = get_object_or_404(UserCourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
 
@@ -317,7 +317,7 @@ class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
-class UpdateCourseRegistration(LoginRequiredMixin, View):
+class UpdateUserCourseRegistration(LoginRequiredMixin, View):
     """Updates a course registration"""
 
     def prepare_course_data(self, course):
@@ -330,12 +330,12 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
         return course_data
 
     def get(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
+        registration = get_object_or_404(UserCourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
 
         course = registration.course
-        registration_form = forms.CourseRegistrationForm(
+        registration_form = forms.UserCourseRegistrationForm(
             instance=registration,
             course=course,
             user_profile=request.user.profile,
@@ -353,12 +353,12 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
         )
 
     def post(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
+        registration = get_object_or_404(UserCourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
 
         course = registration.course
-        registration_form = forms.CourseRegistrationForm(
+        registration_form = forms.UserCourseRegistrationForm(
             data=request.POST,
             instance=registration,
             course=course,
@@ -397,7 +397,7 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                     "Registration not submitted. "
                     "Please select at least one session.",
                 )
-            registration_form = forms.CourseRegistrationForm(
+            registration_form = forms.UserCourseRegistrationForm(
                 instance=registration,
                 course=course,
                 user_profile=request.user.profile,
@@ -512,7 +512,7 @@ class UpdateGrade(View):
     """Updates a user's grade"""
 
     def get(self, request):
-        exam_registration = CourseRegistration.objects.filter(
+        exam_registration = UserCourseRegistration.objects.filter(
             user=request.user, grade_updated=False
         ).first()
         if (
@@ -530,7 +530,7 @@ class UpdateGrade(View):
 
     def post(self, request):
         answer = request.POST.get("answer")
-        exam_registration = CourseRegistration.objects.filter(
+        exam_registration = UserCourseRegistration.objects.filter(
             user=request.user, grade_updated=False
         ).first()
         if answer == "yes":

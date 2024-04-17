@@ -14,17 +14,17 @@ urlpatterns = [
     ),
     path(
         "user/registrations/",
-        views.CourseRegistrationList.as_view(),
+        views.UserCourseRegistrationList.as_view(),
         name="courseregistration_list",
     ),
     path(
         "user/registrations/cancel/<int:pk>/",
-        views.CancelCourseRegistration.as_view(),
+        views.CancelUserCourseRegistration.as_view(),
         name="cancel_courseregistration",
     ),
     path(
         "user/registrations/update/<int:pk>/",
-        views.UpdateCourseRegistration.as_view(),
+        views.UpdateUserCourseRegistration.as_view(),
         name="update_courseregistration",
     ),
     path(

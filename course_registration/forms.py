@@ -1,8 +1,8 @@
 from django import forms
-from .models import CourseRegistration, UserProfile, CourseSession
+from .models import UserCourseRegistration, UserProfile, CourseSession
 
 
-class CourseRegistrationForm(forms.ModelForm):
+class UserCourseRegistrationForm(forms.ModelForm):
     # Pass course instance to form (adapted from:
     # https://medium.com/analytics-vidhya/django-how-to-pass-the-
     # user-object-into-form-classes-ee322f02948c):
@@ -25,7 +25,7 @@ class CourseRegistrationForm(forms.ModelForm):
     )
 
     class Meta:
-        model = CourseRegistration
+        model = UserCourseRegistration
         fields = [
             "selected_sessions",
             "exam",

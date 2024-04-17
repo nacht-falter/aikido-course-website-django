@@ -4,7 +4,7 @@ from django.db import models
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget
 
-from .models import (Category, Course, CourseRegistration, CourseSession,
+from .models import (Category, Course, UserCourseRegistration, CourseSession,
                      ExternalCourse, InternalCourse, Page, UserProfile)
 
 
@@ -19,10 +19,10 @@ class CourseSessionInline(admin.TabularInline):
     extra = 0  # Set number of additional rows to 0
 
 
-class CourseRegistrationInline(admin.TabularInline):
-    """Displays CourseRegistrations as an inline model"""
+class UserCourseRegistrationInline(admin.TabularInline):
+    """Displays UserCourseRegistrations as an inline model"""
 
-    model = CourseRegistration
+    model = UserCourseRegistration
     extra = 0  # Set number of additional rows to 0
     max_num = 0  # Hide option to add more rows
     fields = [
@@ -59,7 +59,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     list_filter = ("registration_status",)
     prepopulated_fields = {"slug": ("title",)}
     summernote_fields = ("description",)
-    inlines = [CourseSessionInline, CourseRegistrationInline]
+    inlines = [CourseSessionInline, UserCourseRegistrationInline]
     actions = [
         "duplicate_selected_courses",
         "toggle_registration_status",
@@ -116,7 +116,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
 
     def get_course_registration_count(self, course):
         """Gets the number of registrations for a course"""
-        registrations = CourseRegistration.objects.filter(course=course)
+        registrations = UserCourseRegistration.objects.filter(course=course)
         return len(registrations)
 
     # Customize property name: https://stackoverflow.com/a/64352815

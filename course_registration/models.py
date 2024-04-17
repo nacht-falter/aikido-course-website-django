@@ -105,7 +105,7 @@ class CourseSession(models.Model):
             raise ValidationError("Start time cannot be later than end time.")
 
 
-class CourseRegistration(models.Model):
+class UserCourseRegistration(models.Model):
     """Represents a registration for a course by a user"""
 
     PAYMENT_STATUS = ((0, "Unpaid"), (1, "Paid"))
@@ -141,7 +141,8 @@ class CourseRegistration(models.Model):
         # ref/models/constraints/#django.db.models.UniqueConstraint
         constraints = [
             models.UniqueConstraint(
-                fields=["user", "course"], name="unique_user_registration"
+                fields=["user", "course"],
+                name="unique_user_registration"
             )
         ]
 
@@ -161,6 +162,42 @@ class CourseRegistration(models.Model):
                 self.exam_grade = user_profile.grade + 1
             else:
                 self.exam = False
+
+
+class GuestCourseRegistration(models.Model):
+    """Represents a registration for a course by a user"""
+
+    PAYMENT_STATUS = ((0, "Unpaid"), (1, "Paid"))
+
+    email = models.EmailField()
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    course = models.ForeignKey(InternalCourse, on_delete=models.CASCADE)
+    selected_sessions = models.ManyToManyField(CourseSession, blank=False)
+    registration_date = models.DateTimeField(auto_now_add=True)
+    accept_terms = models.BooleanField(default=False)
+    final_fee = models.IntegerField(default=0)
+    payment_status = models.IntegerField(choices=PAYMENT_STATUS, default=0)
+    comment = models.TextField(blank=True)
+
+    class Meta:
+        # Set unique constraint: https://docs.djangoproject.com/en/4.2/
+        # ref/models/constraints/#django.db.models.UniqueConstraint
+        constraints = [
+            models.UniqueConstraint(
+                fields=["email", "course"],
+                name="unique_guest_registration"
+            )
+        ]
+
+    def calculate_fees(self, course, selected_sessions):
+        final_fee = 0
+        if len(selected_sessions) == len(course.sessions.all()):
+            final_fee = course.course_fee
+        else:
+            for session in selected_sessions:
+                final_fee += session.session_fee
+        return final_fee
 
 
 class UserProfile(models.Model):
