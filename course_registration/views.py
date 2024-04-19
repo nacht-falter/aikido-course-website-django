@@ -14,7 +14,6 @@ from django.urls import reverse_lazy
 from django.views import View, generic
 
 from . import forms
-from .mixins import CustomAuthenticationMixin
 from .models import (Category, ExternalCourse, InternalCourse, Page,
                      UserCourseRegistration, UserProfile)
 from .utils import send_registration_confirmation

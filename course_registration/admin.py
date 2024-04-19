@@ -57,6 +57,8 @@ class GuestCourseRegistrationInline(admin.TabularInline):
         "first_name",
         "last_name",
         "selected_sessions",
+        "exam",
+        "exam_grade",
         "accept_terms",
         "final_fee",
         "payment_status",
@@ -66,6 +68,8 @@ class GuestCourseRegistrationInline(admin.TabularInline):
         "first_name",
         "last_name",
         "selected_sessions",
+        "exam",
+        "exam_grade",
         "accept_terms",
         "final_fee",
     ]
