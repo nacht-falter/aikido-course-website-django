@@ -25,6 +25,33 @@ from django.utils.text import slugify
     ROKUDAN,
 ) = range(13)
 
+PAYMENT_STATUS = ((0, "Unpaid"), (1, "Paid"))
+
+EXAM_GRADE_CHOICES = [
+    (SIXTH_KYU, "7th Kyu ⚪️"),
+    (FIFTH_KYU, "5th Kyu 🟡"),
+    (FOURTH_KYU, "4th Kyu 🟠"),
+    (THIRD_KYU, "3rd Kyu 🟢"),
+    (SECOND_KYU, "2nd Kyu 🔵"),
+    (FIRST_KYU, "1st Kyu 🟤"),
+]
+
+GRADE_CHOICES = [
+    (RED_BELT, "Red Belt 🔴"),
+    (SIXTH_KYU, "6th Kyu ⚪️"),
+    (FIFTH_KYU, "5th Kyu 🟡"),
+    (FOURTH_KYU, "4th Kyu 🟠"),
+    (THIRD_KYU, "3rd Kyu 🟢"),
+    (SECOND_KYU, "2nd Kyu 🔵"),
+    (FIRST_KYU, "1st Kyu 🟤"),
+    (SHODAN, "1st Dan ⚫️"),
+    (NIDAN, "2nd  Dan ⚫️"),
+    (SANDAN, "3rd Dan ⚫️"),
+    (YONDAN, "4th Dan ⚫️"),
+    (GODAN, "5th Dan ⚫️"),
+    (ROKUDAN, "6th Dan ⚫️"),
+]
+
 
 class Course(models.Model):
     """Represents a course a user can sign up for"""
@@ -108,17 +135,6 @@ class CourseSession(models.Model):
 class UserCourseRegistration(models.Model):
     """Represents a registration for a course by a user"""
 
-    PAYMENT_STATUS = ((0, "Unpaid"), (1, "Paid"))
-
-    EXAM_GRADE_CHOICES = [
-        (SIXTH_KYU, "6th Kyu ⚪️"),
-        (FIFTH_KYU, "5th Kyu 🟡"),
-        (FOURTH_KYU, "4th Kyu 🟠"),
-        (THIRD_KYU, "3rd Kyu 🟢"),
-        (SECOND_KYU, "2nd Kyu 🔵"),
-        (FIRST_KYU, "1st Kyu 🟤"),
-    ]
-
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="registrations"
     )
@@ -167,14 +183,17 @@ class UserCourseRegistration(models.Model):
 class GuestCourseRegistration(models.Model):
     """Represents a registration for a course by a user"""
 
-    PAYMENT_STATUS = ((0, "Unpaid"), (1, "Paid"))
-
     email = models.EmailField()
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     course = models.ForeignKey(InternalCourse, on_delete=models.CASCADE)
     selected_sessions = models.ManyToManyField(CourseSession, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)
+    grade = models.IntegerField(choices=GRADE_CHOICES, default=RED_BELT)
+    exam = models.BooleanField(default=False)
+    exam_grade = models.IntegerField(
+        choices=EXAM_GRADE_CHOICES
+    )
     accept_terms = models.BooleanField(default=False)
     final_fee = models.IntegerField(default=0)
     payment_status = models.IntegerField(choices=PAYMENT_STATUS, default=0)
@@ -199,25 +218,16 @@ class GuestCourseRegistration(models.Model):
                 final_fee += session.session_fee
         return final_fee
 
+    def set_exam(self):
+        if self.exam:
+            if self.grade < 6:
+                self.exam_grade = self.grade + 1
+            else:
+                self.exam = False
+
 
 class UserProfile(models.Model):
     """Represents a user profile"""
-
-    GRADE_CHOICES = [
-        (RED_BELT, "Red Belt 🔴"),
-        (SIXTH_KYU, "6th Kyu ⚪️"),
-        (FIFTH_KYU, "5th Kyu 🟡"),
-        (FOURTH_KYU, "4th Kyu 🟠"),
-        (THIRD_KYU, "3rd Kyu 🟢"),
-        (SECOND_KYU, "2nd Kyu 🔵"),
-        (FIRST_KYU, "1st Kyu 🟤"),
-        (SHODAN, "1st Dan ⚫️"),
-        (NIDAN, "2nd  Dan ⚫️"),
-        (SANDAN, "3rd Dan ⚫️"),
-        (YONDAN, "4th Dan ⚫️"),
-        (GODAN, "5th Dan ⚫️"),
-        (ROKUDAN, "6th Dan ⚫️"),
-    ]
 
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="profile"

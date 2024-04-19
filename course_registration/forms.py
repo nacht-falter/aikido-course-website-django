@@ -1,5 +1,7 @@
 from django import forms
-from .models import UserCourseRegistration, UserProfile, CourseSession
+
+from .models import (CourseSession, GuestCourseRegistration,
+                    UserCourseRegistration, UserProfile, GRADE_CHOICES)
 
 
 class UserCourseRegistrationForm(forms.ModelForm):
@@ -28,6 +30,39 @@ class UserCourseRegistrationForm(forms.ModelForm):
         model = UserCourseRegistration
         fields = [
             "selected_sessions",
+            "exam",
+            "accept_terms",
+            "comment",
+        ]
+
+
+class GuestCourseRegistrationForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        course = kwargs.pop("course", None)
+        super().__init__(*args, **kwargs)
+        self.fields[
+            "selected_sessions"
+        ].queryset = CourseSession.objects.filter(course=course)
+
+    accept_terms = forms.BooleanField(required=True)
+    selected_sessions = forms.ModelMultipleChoiceField(
+        label="Select sessions:",
+        queryset=None,
+        widget=forms.CheckboxSelectMultiple,
+        required=True,
+    )
+    grade = forms.ChoiceField(
+        choices=GRADE_CHOICES, required=True
+    )
+
+    class Meta:
+        model = GuestCourseRegistration
+        fields = [
+            "email",
+            "first_name",
+            "last_name",
+            "selected_sessions",
+            "grade",
             "exam",
             "accept_terms",
             "comment",

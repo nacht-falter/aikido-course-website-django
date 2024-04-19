@@ -301,7 +301,7 @@ a.badge:hover {
 }
 
 .registration-form-table td {
-  display: block;
+  /* display: block; */
 }
 
 .registration-form-table th {

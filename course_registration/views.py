@@ -9,16 +9,19 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render, reverse
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.urls import reverse_lazy
 from django.views import View, generic
 
 from . import forms
-from .models import (Category, Course, ExternalCourse, InternalCourse, Page,
+from .mixins import CustomAuthenticationMixin
+from .models import (Category, ExternalCourse, InternalCourse, Page,
                      UserCourseRegistration, UserProfile)
+from .utils import send_registration_confirmation
 
 CURRENT_DATE = date.today()
-ALL_COURSES = list(InternalCourse.objects.all()) + list(ExternalCourse.objects.all())
+ALL_COURSES = list(InternalCourse.objects.all()) + \
+    list(ExternalCourse.objects.all())
 
 
 class HomePage(View):
@@ -120,7 +123,7 @@ class CourseList(View):
         )
 
 
-class RegisterCourse(LoginRequiredMixin, View):
+class RegisterCourse(View):
     """Creates a course registration"""
 
     def prepare_course_data(self, course):
@@ -133,31 +136,38 @@ class RegisterCourse(LoginRequiredMixin, View):
         return course_data
 
     def get(self, request, slug):
-        user_profile = UserProfile.objects.filter(user=request.user)
-        if not user_profile:
-            messages.warning(
-                request, "Please create a user profile and try again."
-            )
-            return HttpResponseRedirect(reverse("userprofile"))
 
         courses = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
-
         course_data = self.prepare_course_data(course)
 
-        user_registered = UserCourseRegistration.objects.filter(
-            user=request.user, course=course
-        )
+        if not request.user.is_authenticated and not request.GET.get("allow_guest"):
+            return redirect('/accounts/login/?next=' + request.path + '&allow_guest=True')
 
-        if user_registered:
-            messages.warning(
-                request, "You are already registered for this course."
+        if request.user.is_authenticated:
+            user_profile = UserProfile.objects.filter(user=request.user)
+            if not user_profile:
+                messages.warning(
+                    request, "Please create a user profile and try again."
+                )
+                return HttpResponseRedirect(reverse("userprofile"))
+            user_registered = UserCourseRegistration.objects.filter(
+                user=request.user, course=course
             )
-            return HttpResponseRedirect(reverse("course_list"))
 
-        registration_form = forms.UserCourseRegistrationForm(
-            course=course, user_profile=request.user.profile
-        )
+            if user_registered:
+                messages.warning(
+                    request, "You are already registered for this course."
+                )
+                return HttpResponseRedirect(reverse("course_list"))
+
+            registration_form = forms.UserCourseRegistrationForm(
+                course=course, user_profile=request.user.profile
+            )
+        else:
+            registration_form = forms.GuestCourseRegistrationForm(
+                course=course
+            )
 
         return render(
             request,
@@ -174,13 +184,18 @@ class RegisterCourse(LoginRequiredMixin, View):
         course = get_object_or_404(queryset, slug=slug)
         course_data = self.prepare_course_data(course)
 
-        registration_form = forms.UserCourseRegistrationForm(
-            data=request.POST, course=course, user_profile=request.user.profile
-        )
+        if request.user.is_authenticated:
+            registration_form = forms.UserCourseRegistrationForm(
+                data=request.POST, course=course, user_profile=request.user.profile
+            )
+        else:
+            registration_form = forms.GuestCourseRegistrationForm(
+                data=request.POST, course=course
+            )
+
         if registration_form.is_valid():
             registration = registration_form.save(commit=False)
             registration.course = course
-            registration.user = request.user
 
             selected_sessions = registration_form.cleaned_data.get(
                 "selected_sessions"
@@ -190,7 +205,17 @@ class RegisterCourse(LoginRequiredMixin, View):
                 course, selected_sessions
             )
 
-            registration.set_exam(request.user)
+            if request.user.is_authenticated:
+                registration.set_exam(request.user)
+                registration.user = request.user
+            else:
+                registration.set_exam()
+                registration.email = registration_form.cleaned_data.get(
+                    "email")
+                registration.first_name = registration_form.cleaned_data.get(
+                    "first_name")
+                registration.last_name = registration_form.cleaned_data.get(
+                    "last_name")
 
             registration.save()
 
@@ -201,32 +226,21 @@ class RegisterCourse(LoginRequiredMixin, View):
             # edManager.set
             registration.selected_sessions.set(selected_sessions)
 
-            # Send confirmation email:
             exam = (
                 registration.get_exam_grade_display()
                 if registration.exam
                 else "None"
             )
             sessions = [session.title for session in selected_sessions]
-            send_mail(
-                # Subject:
-                f"[DANBW e.V.] You signed up for {registration.course}",
-                # Message content:
-                f"Hi {registration.user},\n"
-                "You have succesfully signed up "
-                f"for {course}\n"
-                f"\nCourse dates: {course.start_date.strftime('%b %d')} "
-                f"to {course.end_date.strftime('%b %d, %Y')}\n"
-                "\nRegistration details:\n"
-                f"- Selected sessions: "
-                f"{(', '.join(sessions))}\n"
-                f"- Exam: {exam}\n"
-                f"- Fee: {registration.final_fee} €",
-                # Sender:
-                settings.EMAIL_HOST_USER,
-                # Recipient:
-                [registration.user.email],
-            )
+
+            if request.user.is_authenticated:
+                send_registration_confirmation(
+                    registration, course, sessions, exam, is_authenticated=True
+                )
+            else:
+                send_registration_confirmation(
+                    registration, course, sessions, exam, is_authenticated=False
+                )
 
             messages.info(
                 request, f"You have successfully signed up for {course.title}"
@@ -239,9 +253,14 @@ class RegisterCourse(LoginRequiredMixin, View):
                     "Please select at least one session.",
                 )
 
-            registration_form = forms.UserCourseRegistrationForm(
-                course=course, user_profile=request.user.profile
-            )
+            if request.user.is_authenticated:
+                registration_form = forms.UserCourseRegistrationForm(
+                    course=course, user_profile=request.user.profile
+                )
+            else:
+                registration_form = forms.GuestCourseRegistrationForm(
+                    course=course
+                )
             return render(
                 request,
                 "register_course.html",
@@ -252,7 +271,10 @@ class RegisterCourse(LoginRequiredMixin, View):
                 },
             )
 
-        return HttpResponseRedirect(reverse("courseregistration_list"))
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse("courseregistration_list"))
+
+        return HttpResponseRedirect(reverse("course_list"))
 
 
 class UserCourseRegistrationList(LoginRequiredMixin, View):
@@ -290,12 +312,11 @@ class CancelUserCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View
         registration = get_object_or_404(UserCourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
-        else:
-            messages.warning(
-                request,
-                "Please cancel registrations by clicking the button from the "
-                "My Registrations page.",
-            )
+        messages.warning(
+            request,
+            "Please cancel registrations by clicking the button from the "
+            "My Registrations page.",
+        )
 
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
@@ -425,14 +446,12 @@ class UserProfileView(LoginRequiredMixin, View):
         if profiles:
             profile = get_object_or_404(profiles, user=user)
             return render(request, "userprofile.html", {"profile": profile})
-
-        else:
-            profile_form = forms.UserProfileForm()
-            return render(
-                request,
-                "create_userprofile.html",
-                {"form": profile_form},
-            )
+        profile_form = forms.UserProfileForm()
+        return render(
+            request,
+            "create_userprofile.html",
+            {"form": profile_form},
+        )
 
     def post(self, request):
         profile_form = forms.UserProfileForm(data=request.POST)
@@ -521,9 +540,7 @@ class UpdateGrade(View):
                 "update_grade.html",
                 {"exam_registration": exam_registration},
             )
-
-        else:
-            return HttpResponseRedirect(reverse("home"))
+        return HttpResponseRedirect(reverse("home"))
 
     def post(self, request):
         answer = request.POST.get("answer")
@@ -575,13 +592,12 @@ class DeactivateUser(LoginRequiredMixin, View):
                 request, "You have successfully deactivated your account."
             )
             return HttpResponseRedirect(reverse("course_list"))
-        else:
-            messages.warning(
-                request,
-                "Staff accounts can not be deactivated."
-                " Please contact us if you want to deactivate your account.",
-            )
-            return HttpResponseRedirect(reverse("userprofile"))
+        messages.warning(
+            request,
+            "Staff accounts can not be deactivated."
+            " Please contact us if you want to deactivate your account.",
+        )
+        return HttpResponseRedirect(reverse("userprofile"))
 
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):

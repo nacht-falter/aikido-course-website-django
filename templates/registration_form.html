@@ -1,14 +1,35 @@
 <table class="registration-form-table table table-striped table-borderless">
+  {% if not user.authenticated %}
   <tr>
-    <th>I will attend the following sessions:
-      <span id="session-validation-msg" class="badge text-bg-light text-danger">Please select at least one
-        session.</span>
+    <td>First Name:</td>
+    <td>{{ form.first_name }}</td>
+  </tr>
+  <tr>
+    <td>Last Name:</td>
+    <td>{{ form.last_name }}</td>
+  </tr>
+  <tr>
+    <td>E-Mail:</td>
+    <td>{{ form.email }}</td>
+  </tr>
+  <tr>
+    <td>Grade:</td>
+    <td>{{ form.grade }}</td>
+  </tr>
+  {% endif %}
+  <tr>
+    <th>
+      I will attend the following sessions:
+      <span id="session-validation-msg" class="badge text-bg-light text-danger"
+        >Please select at least one session.</span
+      >
     </th>
     <td>{{ form.selected_sessions }}</td>
   </tr>
   <tr>
     <td colspan="2">
-      <input type="checkbox" name="entire-course" id="entire-course"> I will attend the entire course
+      <input type="checkbox" name="entire-course" id="entire-course" /> I will
+      attend the entire course
     </td>
   </tr>
   {% if not user.profile.grade > 5 %}
@@ -22,9 +43,11 @@
   </tr>
   <tr>
     <td colspan="2">
-      {{ form.accept_terms }} I accept the <a href="#terms-and-conditions">terms and conditions</a>
-      <span id="terms-validation-msg" class="badge text-bg-light text-danger">Please accept the terms
-        and conditions.</span>
+      {{ form.accept_terms }} I accept the
+      <a href="#terms-and-conditions">terms and conditions</a>
+      <span id="terms-validation-msg" class="badge text-bg-light text-danger"
+        >Please accept the terms and conditions.</span
+      >
     </td>
   </tr>
   <tr>

@@ -4,8 +4,9 @@ from django.db import models
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget
 
-from .models import (Category, Course, UserCourseRegistration, CourseSession,
-                     ExternalCourse, InternalCourse, Page, UserProfile)
+from .models import (Category, Course, CourseSession, ExternalCourse,
+                     GuestCourseRegistration, InternalCourse, Page,
+                     UserCourseRegistration, UserProfile)
 
 
 class CourseSessionInline(admin.TabularInline):
@@ -45,6 +46,31 @@ class UserCourseRegistrationInline(admin.TabularInline):
     ]
 
 
+class GuestCourseRegistrationInline(admin.TabularInline):
+    """Displays GuestCourseRegistrations as an inline model"""
+
+    model = GuestCourseRegistration
+    extra = 0  # Set number of additional rows to 0
+    max_num = 0  # Hide option to add more rows
+    fields = [
+        "email",
+        "first_name",
+        "last_name",
+        "selected_sessions",
+        "accept_terms",
+        "final_fee",
+        "payment_status",
+    ]
+    readonly_fields = [
+        "email",
+        "first_name",
+        "last_name",
+        "selected_sessions",
+        "accept_terms",
+        "final_fee",
+    ]
+
+
 @admin.register(InternalCourse)
 class InternalCourseAdmin(SummernoteModelAdmin):
     list_display = (
@@ -59,7 +85,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     list_filter = ("registration_status",)
     prepopulated_fields = {"slug": ("title",)}
     summernote_fields = ("description",)
-    inlines = [CourseSessionInline, UserCourseRegistrationInline]
+    inlines = [CourseSessionInline, UserCourseRegistrationInline, GuestCourseRegistrationInline]
     actions = [
         "duplicate_selected_courses",
         "toggle_registration_status",
@@ -155,6 +181,7 @@ class ExternalCourseAdmin(SummernoteModelAdmin):
                 organizer=course.organizer,
                 teacher=course.teacher,
             )
+
 
 class UserProfileInline(admin.StackedInline):
     """Displays UserProfile as an inline model"""
