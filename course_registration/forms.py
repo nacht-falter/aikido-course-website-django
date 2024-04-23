@@ -1,7 +1,7 @@
 from django import forms
 
-from .models import (CourseSession, GuestCourseRegistration,
-                    UserCourseRegistration, UserProfile, GRADE_CHOICES)
+from .models import (GRADE_CHOICES, DOJO_CHOICES, CourseSession, GuestCourseRegistration,
+                     UserCourseRegistration, UserProfile)
 
 
 class UserCourseRegistrationForm(forms.ModelForm):
@@ -25,6 +25,7 @@ class UserCourseRegistrationForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         required=True,
     )
+    exam = forms.BooleanField(required=False, label="I want to apply for an exam")
 
     class Meta:
         model = UserCourseRegistration
@@ -44,9 +45,9 @@ class GuestCourseRegistrationForm(forms.ModelForm):
             "selected_sessions"
         ].queryset = CourseSession.objects.filter(course=course)
 
-    accept_terms = forms.BooleanField(required=True)
+    accept_terms = forms.BooleanField(required=True, label="I accept the terms and conditions")
     selected_sessions = forms.ModelMultipleChoiceField(
-        label="Select sessions:",
+        label="I will attend the following sessions:",
         queryset=None,
         widget=forms.CheckboxSelectMultiple,
         required=True,
@@ -54,6 +55,7 @@ class GuestCourseRegistrationForm(forms.ModelForm):
     grade = forms.ChoiceField(
         choices=GRADE_CHOICES, required=True
     )
+    exam = forms.BooleanField(required=False, label="I want to apply for an exam")
 
     class Meta:
         model = GuestCourseRegistration
@@ -62,6 +64,7 @@ class GuestCourseRegistrationForm(forms.ModelForm):
             "first_name",
             "last_name",
             "selected_sessions",
+            "dojo",
             "grade",
             "exam",
             "accept_terms",
@@ -85,6 +88,7 @@ class UserProfileForm(forms.ModelForm):
         fields = [
             "first_name",
             "last_name",
+            "dojo",
             "grade",
         ]
 

@@ -237,6 +237,10 @@ a.badge:hover {
   max-width: 800px;
 }
 
+.card-header {
+  margin-top: 0 !important;
+}
+
 .btn {
   margin-top: 0.25em;
 }
@@ -300,17 +304,8 @@ a.badge:hover {
   padding: 0.5em;
 }
 
-.registration-form-table td {
-  /* display: block; */
-}
 
-.registration-form-table th {
-  display: block;
-  padding-bottom: 0;
-  font-weight: normal;
-}
-
-.registration-form-table textarea {
-  max-height: 15vh;
+.registration-form-content textarea {
+  max-height: 10vh;
   width: 100%;
 }

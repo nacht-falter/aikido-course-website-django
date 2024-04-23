@@ -52,6 +52,12 @@ GRADE_CHOICES = [
     (ROKUDAN, "6th Dan ⚫️"),
 ]
 
+DOJO_CHOICES = [
+    ("AAR", "Aikido am Rhein"),
+    ("AVE", "Aikido Verein Emmendingen"),
+    ("AVF", "Aikido Verein Freiburg"),
+    ("TVD", "Turnverein Denzlingen"),
+]
 
 class Course(models.Model):
     """Represents a course a user can sign up for"""
@@ -189,10 +195,11 @@ class GuestCourseRegistration(models.Model):
     course = models.ForeignKey(InternalCourse, on_delete=models.CASCADE)
     selected_sessions = models.ManyToManyField(CourseSession, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)
-    grade = models.IntegerField(choices=GRADE_CHOICES, default=RED_BELT)
+    dojo = models.CharField(max_length=3, choices=DOJO_CHOICES, blank=False)
+    grade = models.IntegerField(choices=GRADE_CHOICES, default=RED_BELT, blank=False)
     exam = models.BooleanField(default=False)
     exam_grade = models.IntegerField(
-        choices=EXAM_GRADE_CHOICES
+        choices=EXAM_GRADE_CHOICES, blank=True, null=True
     )
     accept_terms = models.BooleanField(default=False)
     final_fee = models.IntegerField(default=0)
@@ -233,6 +240,7 @@ class UserProfile(models.Model):
         User, on_delete=models.CASCADE, related_name="profile"
     )
     slug = models.SlugField(unique=True)
+    dojo = models.CharField(max_length=3, choices=DOJO_CHOICES)
     grade = models.IntegerField(choices=GRADE_CHOICES, default=RED_BELT)
 
     # Overriding save method: https://docs.djangoproject.com/en/4.2

@@ -80,11 +80,13 @@ function disableSubmitButton() {
 
 // Receiving data from the template. Instructions from: https://adamj.eu/tech/
 // 2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/
-const courseData = document.currentScript ? JSON.parse(document.currentScript.nextElementSibling.textContent) : {};
+const courseData = document.currentScript
+  ? JSON.parse(document.currentScript.nextElementSibling.textContent)
+  : {};
 
 const finalFeeDisplay = document.getElementById("final-fee-display");
 const entireCourseCheckbox = document.getElementById("entire-course");
-const sessionsList = document.getElementById("id_selected_sessions");
+const sessionsList = document.getElementById("div_id_selected_sessions");
 const sessionsCheckboxes = sessionsList.querySelectorAll("input");
 const acceptTermsCheckbox = document.getElementById("id_accept_terms");
 const submitButton = document.getElementById("submit-button");

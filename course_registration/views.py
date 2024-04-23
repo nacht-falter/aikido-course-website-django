@@ -520,7 +520,11 @@ class UpdateUserProfile(LoginRequiredMixin, View):
         else:
             profile_form = forms.UpdateUserProfileForm()
 
-        return HttpResponseRedirect(reverse("userprofile"))
+        next_url = request.GET.get('next')
+        if next_url:
+            return HttpResponseRedirect(next_url)
+        else:
+            return HttpResponseRedirect(reverse("userprofile"))
 
 
 class UpdateGrade(View):

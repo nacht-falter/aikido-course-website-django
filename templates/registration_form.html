@@ -1,58 +1,77 @@
-<table class="registration-form-table table table-striped table-borderless">
-  {% if not user.authenticated %}
-  <tr>
-    <td>First Name:</td>
-    <td>{{ form.first_name }}</td>
-  </tr>
-  <tr>
-    <td>Last Name:</td>
-    <td>{{ form.last_name }}</td>
-  </tr>
-  <tr>
-    <td>E-Mail:</td>
-    <td>{{ form.email }}</td>
-  </tr>
-  <tr>
-    <td>Grade:</td>
-    <td>{{ form.grade }}</td>
-  </tr>
-  {% endif %}
-  <tr>
-    <th>
-      I will attend the following sessions:
-      <span id="session-validation-msg" class="badge text-bg-light text-danger"
-        >Please select at least one session.</span
-      >
-    </th>
-    <td>{{ form.selected_sessions }}</td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <input type="checkbox" name="entire-course" id="entire-course" /> I will
-      attend the entire course
-    </td>
-  </tr>
-  {% if not user.profile.grade > 5 %}
-  <tr>
-    <td colspan="2">{{ form.exam }} I want to apply for an exam</td>
-  </tr>
-  {% endif %}
-  <tr>
-    <th>Comments:</th>
-    <td>{{ form.comment }}</td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      {{ form.accept_terms }} I accept the
-      <a href="#terms-and-conditions">terms and conditions</a>
-      <span id="terms-validation-msg" class="badge text-bg-light text-danger"
-        >Please accept the terms and conditions.</span
-      >
-    </td>
-  </tr>
-  <tr>
-    <td>
+{% load crispy_forms_tags %}
+  {% csrf_token %}
+  <div class="registration-form-content">
+    <h3>Personal Details</h3>
+    {% if not user.is_authenticated %}
+    <div class="row">
+      <div class="col-sm-9 mb-3">{{ form.first_name|as_crispy_field }}</div>
+      <div class="col-sm-9 mb-3">{{ form.last_name|as_crispy_field }}</div>
+      <div class="col-sm-9 mb-3">{{ form.email|as_crispy_field }}</div>
+      <div class="col-sm-9 mb-3">{{ form.grade|as_crispy_field }}</div>
+      <div class="col-sm-9 mb-3">{{ form.dojo|as_crispy_field }}</div>
+    </div>
+    {% else %}
+    <div class="row">
+      <div class="col-sm-3 mb-3">Name:</div>
+      <div class="col-sm-9 mb-3">{{ user.first_name }} {{ user.last_name }}</div>
+      <div class="col-sm-3 mb-3">E-mail:</div>
+      <div class="col-sm-9 mb-3">{{ user.email }}</div>
+      <div class="col-sm-3 mb-3">Grade:</div>
+      <div class="col-sm-9 mb-3">{{ user.profile.get_grade_display }}</div>
+      <div class="col-sm-3 mb-3">Dojo:</div>
+      <div class="col-sm-9 mb-3">{{ user.profile.get_dojo_display }}</div>
+      <a href="{% url 'update_userprofile' %}?next={{ request.path }}">Edit Profile</a>
+
+    </div>
+    {% endif %}
+    <hr />
+
+    <h3>Course Details</h3>
+
+    <div class="row">
+      <div class="col-sm-3 mb-3">
+        <strong>Sessions:</strong>
+      </div>
+      <div class="col-sm-9 mb-3">
+        <div id="id_selected_sessions">
+          {{ form.selected_sessions|as_crispy_field }}
+        </div>
+        <div>
+          <input type="checkbox" name="entire-course" id="entire-course" class="form-check-input"/>
+          <label for="entire-course">Entire Course</label>
+        </div>
+        <span id="session-validation-msg" class="badge text-bg-light text-danger">
+            Please select at least one session.
+          </span >
+      </div>
+
+      {% if not user.profile.grade > 5 %}
+      <div class="col-sm-3 mb-3">
+        <strong>Exam:</strong>
+      </div>
+      <div class="col-sm-9 mb-3">
+        {{ form.exam|as_crispy_field }}
+      </div>
+    </div>
+    {% endif %}
+
+    <hr />
+
+    <h3>Additional Information</h3>
+    <div class="row">
+      <div>{{ form.comment|as_crispy_field }}</div>
+      <div>
+        {{ form.accept_terms|as_crispy_field }}
+        <a href="#terms-and-conditions">Terms and Conditions</a>
+        <span id="terms-validation-msg" class="badge text-bg-light text-danger"
+        >Please accept the terms and conditions below.</span
+        >
+      </div>
+    </div
+    <div class="col-12 mb-3">
+      <hr>
       <strong>Registration Fee: <span id="final-fee-display">0</span> €</strong>
-    </td>
-  </tr>
-</table>
+    </div>
+
+  </div>
+  <hr>
