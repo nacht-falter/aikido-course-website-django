@@ -15,7 +15,7 @@ main {
   margin: 3em 1vw;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   main {
     margin: 3em 10vw;
   }
