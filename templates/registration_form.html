@@ -1,79 +1,89 @@
 {% load crispy_forms_tags %}
-  {% csrf_token %}
-  <div class="registration-form-content">
-    <h3>Personal Details</h3>
-    {% if not user.is_authenticated %}
-    <div class="row">
-      <div class="col-sm-9 mb-3">{{ form.first_name|as_crispy_field }}</div>
-      <div class="col-sm-9 mb-3">{{ form.last_name|as_crispy_field }}</div>
-      <div class="col-sm-9 mb-3">{{ form.email|as_crispy_field }}</div>
-      <div class="col-sm-9 mb-3">{{ form.grade|as_crispy_field }}</div>
-      <div class="col-sm-9 mb-3">{{ form.dojo|as_crispy_field }}</div>
+
+<div class="registration-form-content">
+  <div class="card mb-3">
+    <div class="card-header">
+      <h4 class="card-title">Personal Details</h4>
     </div>
-    {% else %}
-    <div class="row">
-      <div class="col-sm-3 mb-3">Name:</div>
-      <div class="col-sm-9 mb-3">{{ user.first_name }} {{ user.last_name }}</div>
-      <div class="col-sm-3 mb-3">E-mail:</div>
-      <div class="col-sm-9 mb-3">{{ user.email }}</div>
-      <div class="col-sm-3 mb-3">Grade:</div>
-      <div class="col-sm-9 mb-3">{{ user.profile.get_grade_display }}</div>
-      <div class="col-sm-3 mb-3">Dojo:</div>
-      <div class="col-sm-9 mb-3">{{ user.profile.get_dojo_display }}</div>
-      <a href="{% url 'update_userprofile' %}?next={{ request.path }}">Edit Profile</a>
-
-    </div>
-    {% endif %}
-    <hr />
-
-    <h3>Course Details</h3>
-
-    <div class="row">
-      <div class="col-sm-3 mb-3">
-        <strong>Sessions:</strong>
+    <div class="card-body">
+      <div class="row">
+        {% if not user.is_authenticated %}
+        {% else %}
+        <div class="col-3 mb-2">Name:</div>
+        <div class="col-9 mb-2">{{ user.first_name }} {{ user.last_name }}</div>
+        <div class="col-3 mb-2">E-mail:</div>
+        <div class="col-9 mb-2">{{ user.email }}</div>
+        <div class="col-3 mb-2">Grade:</div>
+        <div class="col-9 mb-2">{{ user.profile.get_grade_display }}</div>
+        <div class="col-3 mb-2">Dojo:</div>
+        <div class="col-9 mb-2">{{ user.profile.get_dojo_display }}</div>
+        {% endif %}
       </div>
-      <div class="col-sm-9 mb-3">
-        <div id="id_selected_sessions">
-          {{ form.selected_sessions|as_crispy_field }}
-        </div>
-        <div>
-          <input type="checkbox" name="entire-course" id="entire-course" class="form-check-input"/>
-          <label for="entire-course">Entire Course</label>
-        </div>
-        <span id="session-validation-msg" class="badge text-bg-light text-danger">
-            Please select at least one session.
-        </span >
-      </div>
-    </div>
-
-      {% if not user.profile.grade > 5 %}
-      <div id="exam-section" class="row">
-        <div class="col-sm-3 mb-3">
-          <strong>Exam:</strong>
-        </div>
-        <div class="col-sm-9 mb-3">
-          {{ form.exam|as_crispy_field }}
-        </div>
-      </div>
-    {% endif %}
-
-    <hr />
-
-    <h3>Additional Information</h3>
-    <div class="row">
-      <div>{{ form.comment|as_crispy_field }}</div>
-      <div>
-        {{ form.accept_terms|as_crispy_field }}
-        <a href="#terms-and-conditions">Terms and Conditions</a>
-        <span id="terms-validation-msg" class="badge text-bg-light text-danger"
-        >Please accept the terms and conditions below.</span
-        >
-      </div>
-    </div
-    <div class="col-12 mb-3">
+      {% if user.is_authenticated %}
       <hr>
-      <strong>Registration Fee: <span id="final-fee-display">0</span> €</strong>
+      <a href="{% url 'update_userprofile' %}?next={{ request.path }}" class="btn btn-sm btn-outline-primary">
+        Edit Profile
+      </a>
+      {% endif %}
     </div>
-
   </div>
-  <hr>
+
+  <div class="card mb-3">
+    <div class="card-header">
+      <h4 class="card-title">Course Details</h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3 mb-2">
+          <strong>Sessions:</strong>
+        </div>
+        <div class="col-9 mb-2">
+          <div id="id_selected_sessions">
+            {{ form.selected_sessions|as_crispy_field }}
+          </div>
+          <div class="form-check">
+            <input type="checkbox" name="entire-course" id="entire-course" class="form-check-input"/>
+            <label for="entire-course" class="form-check-label">Entire Course</label>
+          </div>
+          <span id="session-validation-msg" class="badge text-bg-light text-danger">
+            Please select at least one session.
+          </span >
+        </div>
+
+        {% if not user.profile.grade > 5 %}
+        <hr>
+        <div id="exam-section" class="row">
+          <div class="col-3 mb-2">
+            <strong>Exam:</strong>
+          </div>
+          <div class="col-9 mb-2">
+            {{ form.exam|as_crispy_field }}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-header">
+      <h4 class="card-title">Additional Information</h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div>{{ form.comment|as_crispy_field }}</div>
+        <hr>
+        <div>
+          {{ form.accept_terms|as_crispy_field }}
+          <a href="#terms-and-conditions">Terms and Conditions</a>
+          <span id="terms-validation-msg" class="badge text-bg-light text-danger">
+            Please accept the terms and conditions below.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mb-3">
+    <strong>Registration Fee: <span id="final-fee-display">0</span> €</strong>
+  </div>
+</div>

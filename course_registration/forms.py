@@ -18,9 +18,11 @@ class UserCourseRegistrationForm(forms.ModelForm):
         if user_profile.grade >= 6:
             self.fields["exam"].widget = forms.HiddenInput()
 
-    accept_terms = forms.BooleanField(required=True)
+    accept_terms = forms.BooleanField(
+        required=True, label="I accept the terms and conditions"
+    )
     selected_sessions = forms.ModelMultipleChoiceField(
-        label="Select sessions:",
+        label="I will attend the following sessions:",
         queryset=None,
         widget=forms.CheckboxSelectMultiple,
         required=True,
@@ -47,7 +49,8 @@ class GuestCourseRegistrationForm(forms.ModelForm):
         ].queryset = CourseSession.objects.filter(course=course)
 
     accept_terms = forms.BooleanField(
-        required=True, label="I accept the terms and conditions")
+        required=True, label="I accept the terms and conditions"
+    )
     selected_sessions = forms.ModelMultipleChoiceField(
         label="I will attend the following sessions:",
         queryset=None,
