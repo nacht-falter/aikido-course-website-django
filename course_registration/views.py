@@ -458,6 +458,7 @@ class UserProfileView(LoginRequiredMixin, View):
             user_profile = UserProfile.objects.create(
                 user=request.user,
                 grade=profile_form.cleaned_data["grade"],
+                dojo=profile_form.cleaned_data["dojo"],
             )
             user_profile.user.first_name = profile_form.cleaned_data[
                 "first_name"
@@ -490,6 +491,7 @@ class UpdateUserProfile(LoginRequiredMixin, View):
                 "last_name": request.user.last_name,
                 "email": request.user.email,
                 "grade": user_profile.grade,
+                "dojo": user_profile.dojo,
             }
         )
         return render(
@@ -512,6 +514,7 @@ class UpdateUserProfile(LoginRequiredMixin, View):
             ]
             user_profile.user.email = profile_form.cleaned_data["email"]
             user_profile.grade = profile_form.cleaned_data["grade"]
+            user_profile.dojo = profile_form.cleaned_data["dojo"]
             user_profile.user.save()
             user_profile.save()
             messages.info(

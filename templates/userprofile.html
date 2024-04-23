@@ -16,6 +16,9 @@
         <td>Grade</td>
         <td>{{ profile.get_grade_display }}</td>
     </tr>
+    <tr>
+        <td>Dojo</td>
+        <td>{{ profile.get_dojo_display }}</td>
 </table>
 
 <a class="btn btn-primary btn-sm" href="{% url 'update_userprofile' %}" title="Update Profile">Update Profile</a>
