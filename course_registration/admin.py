@@ -1,6 +1,12 @@
+import csv
+import tempfile
+import zipfile
+
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.db import models
+from django.http import HttpResponse
+from django.utils.text import slugify
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget
 
@@ -89,10 +95,12 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     list_filter = ("registration_status",)
     prepopulated_fields = {"slug": ("title",)}
     summernote_fields = ("description",)
-    inlines = [CourseSessionInline, UserCourseRegistrationInline, GuestCourseRegistrationInline]
+    inlines = [CourseSessionInline, UserCourseRegistrationInline,
+               GuestCourseRegistrationInline]
     actions = [
         "duplicate_selected_courses",
         "toggle_registration_status",
+        "export_csv"
     ]
 
     def duplicate_selected_courses(self, request, queryset):
@@ -146,8 +154,98 @@ class InternalCourseAdmin(SummernoteModelAdmin):
 
     def get_course_registration_count(self, course):
         """Gets the number of registrations for a course"""
-        registrations = UserCourseRegistration.objects.filter(course=course)
+
+        registrations = list(
+            UserCourseRegistration.objects.filter(course=course))
+        registrations += list(
+            GuestCourseRegistration.objects.filter(course=course))
+
         return len(registrations)
+
+    def write_csv_data(self, writer, registrations):
+        """Write registration data to CSV"""
+
+        writer.writerow([
+            "First Name",
+            "Last Name",
+            "Email",
+            "Grade",
+            "Selected Sessions",
+            "Exam",
+            "Exam Grade",
+            "Accept Terms",
+            "Final Fee",
+            "Payment Status"
+        ])
+
+        for registration in registrations:
+            selected_sessions = ", ".join(
+                session.title for session in registration.selected_sessions.all())
+
+            if hasattr(registration, 'user'):
+                user = registration.user
+            else:
+                user = None
+
+            writer.writerow([
+                user.first_name if user else registration.first_name,
+                user.last_name if user else registration.last_name,
+                user.email if user else registration.email,
+                user.profile.get_grade_display() if user else registration.get_grade_display(),
+                selected_sessions,
+                "Yes" if registration.exam else "No",
+                registration.get_exam_grade_display(),
+                "Yes" if registration.accept_terms else "No",
+                registration.final_fee,
+                registration.get_payment_status_display()
+            ])
+
+    def export_csv(self, request, queryset):
+        """Action for exporting course registrations to CSV or zip"""
+
+        if queryset.count() == 1:
+            course = queryset.first()
+            response = HttpResponse(content_type="text/csv")
+            response["Content-Disposition"] = (
+                f"attachment; filename={slugify(course.title)}_registrations.csv"
+            )
+            writer = csv.writer(response)
+
+            registrations = list(
+                UserCourseRegistration.objects.filter(course=course))
+            registrations += list(
+                GuestCourseRegistration.objects.filter(course=course))
+
+            self.write_csv_data(writer, registrations)
+
+            return response
+
+        zip_buffer = tempfile.TemporaryFile()
+        with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+            for course in queryset:
+                csv_filename = f"{slugify(course.title)}_registrations.csv"
+
+                registrations = list(
+                    UserCourseRegistration.objects.filter(course=course))
+                registrations += list(
+                    GuestCourseRegistration.objects.filter(course=course))
+
+                with tempfile.NamedTemporaryFile(
+                    delete=False, mode='w', newline=''
+                ) as csv_file:
+                    writer = csv.writer(csv_file)
+                    self.write_csv_data(
+                        writer, registrations)
+                zip_file.write(csv_file.name, arcname=csv_filename)
+        zip_buffer.seek(0)
+
+        response = HttpResponse(
+            zip_buffer.read(), content_type='application/zip')
+        response['Content-Disposition'] = (
+            'attachment; filename=courses_registrations.zip'
+        )
+
+        return response
 
     # Customize property name: https://stackoverflow.com/a/64352815
     get_course_registration_count.short_description = "Registrations"
