@@ -102,16 +102,18 @@ acceptTermsCheckbox.addEventListener("click", disableSubmitButton);
 
 checkEntireCourseCheckbox();
 
-module.exports = {
-  checkSessionCheckboxes,
-  checkEntireCourseCheckbox,
-  calculateFinalFee,
-  disableSubmitButton,
-  finalFeeDisplay,
-  entireCourseCheckbox,
-  sessionsCheckboxes,
-  acceptTermsCheckbox,
-  submitButton,
-  sessionMsg,
-  termsMsg,
-};
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    checkSessionCheckboxes,
+    checkEntireCourseCheckbox,
+    calculateFinalFee,
+    disableSubmitButton,
+    finalFeeDisplay,
+    entireCourseCheckbox,
+    sessionsCheckboxes,
+    acceptTermsCheckbox,
+    submitButton,
+    sessionMsg,
+    termsMsg,
+  };
+}

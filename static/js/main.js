@@ -30,4 +30,7 @@ function autoCloseMessages() {
 showAccordionItem();
 autoCloseMessages();
 
-module.exports = { showAccordionItem, autoCloseMessages };
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { showAccordionItem, autoCloseMessages };
+}
