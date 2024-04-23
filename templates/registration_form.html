@@ -42,17 +42,19 @@
         </div>
         <span id="session-validation-msg" class="badge text-bg-light text-danger">
             Please select at least one session.
-          </span >
-      </div>
-
-      {% if not user.profile.grade > 5 %}
-      <div class="col-sm-3 mb-3">
-        <strong>Exam:</strong>
-      </div>
-      <div class="col-sm-9 mb-3">
-        {{ form.exam|as_crispy_field }}
+        </span >
       </div>
     </div>
+
+      {% if not user.profile.grade > 5 %}
+      <div id="exam-section" class="row">
+        <div class="col-sm-3 mb-3">
+          <strong>Exam:</strong>
+        </div>
+        <div class="col-sm-9 mb-3">
+          {{ form.exam|as_crispy_field }}
+        </div>
+      </div>
     {% endif %}
 
     <hr />

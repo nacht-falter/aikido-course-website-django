@@ -78,6 +78,17 @@ function disableSubmitButton() {
   }
 }
 
+/**
+ * Hide exam section if grade is above 1st Kyu
+ */
+function checkGrade() {
+  if (grade.value > 5) {
+    examSection.style.display = "none";
+  } else {
+    examSection.style.display = "flex";
+  }
+}
+
 // Receiving data from the template. Instructions from: https://adamj.eu/tech/
 // 2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/
 const courseData = document.currentScript
@@ -92,14 +103,18 @@ const acceptTermsCheckbox = document.getElementById("id_accept_terms");
 const submitButton = document.getElementById("submit-button");
 const sessionMsg = document.getElementById("session-validation-msg");
 const termsMsg = document.getElementById("terms-validation-msg");
+const grade = document.getElementById("id_grade");
+const examSection = document.getElementById("exam-section");
 
-// Add event listeners to checkboxes:
+// Add event listeners:
 entireCourseCheckbox.addEventListener("click", checkSessionCheckboxes);
 for (let checkbox of sessionsCheckboxes) {
   checkbox.addEventListener("click", checkEntireCourseCheckbox);
 }
 acceptTermsCheckbox.addEventListener("click", disableSubmitButton);
+grade.addEventListener("change", checkGrade);
 
+// Initial checks:
 checkEntireCourseCheckbox();
 
 if (typeof module !== "undefined" && module.exports) {
