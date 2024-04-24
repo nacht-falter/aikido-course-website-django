@@ -8,6 +8,11 @@
     <div class="card-body">
       <div class="row">
         {% if not user.is_authenticated %}
+        <div class="col-9 mb-2">{{ form.first_name|as_crispy_field }}</div>
+        <div class="col-9 mb-2">{{ form.last_name|as_crispy_field }}</div>
+        <div class="col-9 mb-2">{{ form.email|as_crispy_field }}</div>
+        <div class="col-9 mb-2">{{ form.grade|as_crispy_field }}</div>
+        <div class="col-9 mb-2">{{ form.dojo|as_crispy_field }}</div>
         {% else %}
         <div class="col-3 mb-2">Name:</div>
         <div class="col-9 mb-2">{{ user.first_name }} {{ user.last_name }}</div>
@@ -49,19 +54,19 @@
             Please select at least one session.
           </span >
         </div>
-
-        {% if not user.profile.grade > 5 %}
-        <hr>
-        <div id="exam-section" class="row">
-          <div class="col-3 mb-2">
-            <strong>Exam:</strong>
-          </div>
-          <div class="col-9 mb-2">
-            {{ form.exam|as_crispy_field }}
-          </div>
-        </div>
-        {% endif %}
       </div>
+
+      {% if not user.profile.grade > 5 %}
+      <hr>
+      <div id="exam-section" class="row">
+        <div class="col-3 mb-2">
+          <strong>Exam:</strong>
+        </div>
+        <div class="col-9 mb-2">
+          {{ form.exam|as_crispy_field }}
+        </div>
+      </div>
+      {% endif %}
     </div>
   </div>
 
@@ -72,8 +77,8 @@
     <div class="card-body">
       <div class="row">
         <div>{{ form.comment|as_crispy_field }}</div>
-        <hr>
         <div>
+          <hr>
           {{ form.accept_terms|as_crispy_field }}
           <a href="#terms-and-conditions">Terms and Conditions</a>
           <span id="terms-validation-msg" class="badge text-bg-light text-danger">
