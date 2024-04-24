@@ -4,6 +4,7 @@
 {% block content %}
 <h2>Courses</h2>
 <h3 class="mb-4">{% now "Y" %}</h3>
+{% if course_list %}
 <div class="course-list-header d-none d-md-flex">
     <div class="container m-0 text-left course-list-header-container">
         <div class="row">
@@ -25,6 +26,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 <div class="accordion" id="accordion">
     {% for course in course_list %}
     {% if course.get_course_type == "InternalCourse" %} 
