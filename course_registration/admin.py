@@ -91,6 +91,21 @@ class GuestCourseRegistrationInline(admin.TabularInline):
 
 @admin.register(InternalCourse)
 class InternalCourseAdmin(SummernoteModelAdmin):
+    fields = (
+        "title",
+        "start_date",
+        "end_date",
+        "registration_status",
+        "registration_start_date",
+        "registration_end_date",
+        "organizer",
+        "teacher",
+        "course_fee",
+        "course_fee_cash",
+        "discount_percentage",
+        "bank_transfer_until",
+        "description",
+    )
     list_display = (
         "title",
         "registration_status",
@@ -102,7 +117,6 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     )
     search_fields = ["title", "description"]
     list_filter = ("registration_status",)
-    prepopulated_fields = {"slug": ("title",)}
     summernote_fields = ("description",)
     inlines = [CourseSessionInline, UserCourseRegistrationInline,
                GuestCourseRegistrationInline]

@@ -114,7 +114,13 @@ class InternalCourse(Course):
     organizer = models.CharField(max_length=200, blank=True, default="DANBW")
     course_fee = models.IntegerField()
     course_fee_cash = models.IntegerField()
-    discount_percentage = models.IntegerField(default=100)
+    discount_percentage = models.IntegerField(default=50)
+    bank_transfer_until = models.DateField(blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class ExternalCourse(Course):
