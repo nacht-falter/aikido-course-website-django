@@ -56,6 +56,13 @@ function calculateFinalFee(courseData) {
     finalFee *= courseData.discount_percentage / 100;
   }
   finalFeeDisplay.innerText = finalFee;
+  if (finalFee > 0) {
+    finalFeeContainer.classList.remove("alert-danger");
+    finalFeeContainer.classList.add("alert-success");
+  } else {
+    finalFeeContainer.classList.remove("alert-success");
+    finalFeeContainer.classList.add("alert-danger");
+  }
 }
 
 /**
@@ -104,6 +111,7 @@ const courseData = document.currentScript
   ? JSON.parse(document.currentScript.nextElementSibling.textContent)
   : {};
 
+const finalFeeContainer = document.getElementById("final-fee-container");
 const finalFeeDisplay = document.getElementById("final-fee-display");
 const entireCourseCheckbox = document.getElementById("entire-course");
 const sessionsList = document.getElementById("div_id_selected_sessions");

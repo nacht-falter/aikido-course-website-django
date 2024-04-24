@@ -7,13 +7,7 @@
     </div>
     <div class="card-body">
       <div class="row">
-        {% if not user.is_authenticated %}
-        <div class="col-9 mb-2">{{ form.first_name|as_crispy_field }}</div>
-        <div class="col-9 mb-2">{{ form.last_name|as_crispy_field }}</div>
-        <div class="col-9 mb-2">{{ form.email|as_crispy_field }}</div>
-        <div class="col-9 mb-2">{{ form.grade|as_crispy_field }}</div>
-        <div class="col-9 mb-2">{{ form.dojo|as_crispy_field }}</div>
-        {% else %}
+        {% if user.is_authenticated %}
         <div class="col-3 mb-2">Name:</div>
         <div class="col-9 mb-2">{{ user.first_name }} {{ user.last_name }}</div>
         <div class="col-3 mb-2">E-mail:</div>
@@ -22,6 +16,12 @@
         <div class="col-9 mb-2">{{ user.profile.get_grade_display }}</div>
         <div class="col-3 mb-2">Dojo:</div>
         <div class="col-9 mb-2">{{ user.profile.get_dojo_display }}</div>
+        {% else %}
+        <div class="col-12 mb-2">{{ form.first_name|as_crispy_field }}</div>
+        <div class="col-12 mb-2">{{ form.last_name|as_crispy_field }}</div>
+        <div class="col-12 mb-2">{{ form.email|as_crispy_field }}</div>
+        <div class="col-12 mb-2">{{ form.grade|as_crispy_field }}</div>
+        <div class="col-12 mb-2">{{ form.dojo|as_crispy_field }}</div>
         {% endif %}
       </div>
       {% if user.is_authenticated %}
@@ -115,6 +115,6 @@
     </div>
   </div>
   <div class="col-12 mb-3 fs-5">
-    <strong>Registration Fee: <span id="final-fee-display">0</span> €</strong>
+    <div id="final-fee-container" class="alert alert-danger"><strong>Registration Fee: <span id="final-fee-display">0</span> €</strong></div>
   </div>
 </div>
