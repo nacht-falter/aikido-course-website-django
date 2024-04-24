@@ -34,17 +34,26 @@ function checkEntireCourseCheckbox() {
  */
 function calculateFinalFee(courseData) {
   let finalFee = 0;
+  let paymentMethod = paymentMethodSelect.value;
   if (entireCourseCheckbox.checked) {
-    finalFee = courseData.course_fee;
+    finalFee =
+      paymentMethod == 0 ? courseData.course_fee : courseData.course_fee_cash;
   } else {
     let i = 0;
     for (let checkbox of sessionsCheckboxes) {
       if (checkbox.checked) {
-        let sessionFee = courseData[`session_${i}_fee`];
+        let sessionFee =
+          paymentMethod == 0
+            ? courseData[`session_${i}_fee`]
+            : courseData[`session_${i}_fee_cash`];
         finalFee += sessionFee;
       }
       i++;
     }
+  }
+
+  if (discountCheckbox.checked) {
+    finalFee *= courseData.discount_percentage / 100;
   }
   finalFeeDisplay.innerText = finalFee;
 }
@@ -82,7 +91,7 @@ function disableSubmitButton() {
  * Hide exam section if grade is above 1st Kyu
  */
 function checkGrade() {
-  if (grade.value > 5) {
+  if (gradeSelect.value > 5) {
     examSection.style.display = "none";
   } else {
     examSection.style.display = "flex";
@@ -103,16 +112,22 @@ const acceptTermsCheckbox = document.getElementById("id_accept_terms");
 const submitButton = document.getElementById("submit-button");
 const sessionMsg = document.getElementById("session-validation-msg");
 const termsMsg = document.getElementById("terms-validation-msg");
-const grade = document.getElementById("id_grade");
+const gradeSelect = document.getElementById("id_grade");
 const examSection = document.getElementById("exam-section");
+const discountCheckbox = document.getElementById("id_discount");
+const paymentMethodSelect = document.getElementById("id_payment_method");
 
 // Add event listeners:
 entireCourseCheckbox.addEventListener("click", checkSessionCheckboxes);
 for (let checkbox of sessionsCheckboxes) {
   checkbox.addEventListener("click", checkEntireCourseCheckbox);
 }
+discountCheckbox.addEventListener("click", checkEntireCourseCheckbox);
+paymentMethodSelect.addEventListener("change", checkEntireCourseCheckbox);
 acceptTermsCheckbox.addEventListener("click", disableSubmitButton);
-grade.addEventListener("change", checkGrade);
+if (gradeSelect) {
+  gradeSelect.addEventListener("change", checkGrade);
+}
 
 // Initial checks:
 checkEntireCourseCheckbox();

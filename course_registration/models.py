@@ -25,7 +25,17 @@ from django.utils.text import slugify
     ROKUDAN,
 ) = range(13)
 
+(
+    BANK,
+    CASH,
+) = range(2)
+
 PAYMENT_STATUS = ((0, "Unpaid"), (1, "Paid"))
+
+PAYMENT_METHODS = [
+    (BANK, "Bank Transfer"),
+    (CASH, "Cash"),
+]
 
 EXAM_GRADE_CHOICES = [
     (SIXTH_KYU, "7th Kyu ⚪️"),
@@ -58,6 +68,7 @@ DOJO_CHOICES = [
     ("AVF", "Aikido Verein Freiburg"),
     ("TVD", "Turnverein Denzlingen"),
 ]
+
 
 class Course(models.Model):
     """Represents a course a user can sign up for"""
@@ -103,6 +114,7 @@ class InternalCourse(Course):
     organizer = models.CharField(max_length=200, blank=True, default="DANBW")
     course_fee = models.IntegerField()
     course_fee_cash = models.IntegerField()
+    discount_percentage = models.IntegerField(default=100)
 
 
 class ExternalCourse(Course):
@@ -122,7 +134,8 @@ class CourseSession(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    session_fee = models.IntegerField(default=10)
+    session_fee = models.IntegerField(default=0)
+    session_fee_cash = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -154,8 +167,10 @@ class UserCourseRegistration(models.Model):
     exam_passed = models.BooleanField(null=True)
     grade_updated = models.BooleanField(default=False)
     accept_terms = models.BooleanField(default=False)
+    discount = models.BooleanField(default=False)
     final_fee = models.IntegerField(default=0)
     payment_status = models.IntegerField(choices=PAYMENT_STATUS, default=0)
+    payment_method = models.IntegerField(choices=PAYMENT_METHODS, default=0)
     comment = models.TextField(blank=True)
 
     class Meta:
@@ -175,7 +190,7 @@ class UserCourseRegistration(models.Model):
         else:
             for session in selected_sessions:
                 final_fee += session.session_fee
-        return final_fee
+        return final_fee * course.discount_percentage / 100
 
     def set_exam(self, user):
         if self.exam:
@@ -196,14 +211,17 @@ class GuestCourseRegistration(models.Model):
     selected_sessions = models.ManyToManyField(CourseSession, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)
     dojo = models.CharField(max_length=3, choices=DOJO_CHOICES, blank=False)
-    grade = models.IntegerField(choices=GRADE_CHOICES, default=RED_BELT, blank=False)
+    grade = models.IntegerField(
+        choices=GRADE_CHOICES, default=RED_BELT, blank=False)
     exam = models.BooleanField(default=False)
     exam_grade = models.IntegerField(
         choices=EXAM_GRADE_CHOICES, blank=True, null=True
     )
     accept_terms = models.BooleanField(default=False)
+    discount = models.BooleanField(default=False)
     final_fee = models.IntegerField(default=0)
     payment_status = models.IntegerField(choices=PAYMENT_STATUS, default=0)
+    payment_method = models.IntegerField(choices=PAYMENT_METHODS, default=0)
     comment = models.TextField(blank=True)
 
     class Meta:
@@ -223,7 +241,7 @@ class GuestCourseRegistration(models.Model):
         else:
             for session in selected_sessions:
                 final_fee += session.session_fee
-        return final_fee
+        return final_fee * course.discount_percentage / 100
 
     def set_exam(self):
         if self.exam:

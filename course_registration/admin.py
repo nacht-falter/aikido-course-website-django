@@ -41,6 +41,8 @@ class UserCourseRegistrationInline(admin.TabularInline):
         "accept_terms",
         "final_fee",
         "payment_status",
+        "payment_method",
+        "discount",
     ]
     readonly_fields = [
         "user",
@@ -49,6 +51,8 @@ class UserCourseRegistrationInline(admin.TabularInline):
         "exam_grade",
         "accept_terms",
         "final_fee",
+        "payment_method",
+        "discount",
     ]
 
 
@@ -68,6 +72,8 @@ class GuestCourseRegistrationInline(admin.TabularInline):
         "accept_terms",
         "final_fee",
         "payment_status",
+        "payment_method",
+        "discount",
     ]
     readonly_fields = [
         "email",
@@ -78,6 +84,8 @@ class GuestCourseRegistrationInline(admin.TabularInline):
         "exam_grade",
         "accept_terms",
         "final_fee",
+        "payment_method",
+        "discount",
     ]
 
 
@@ -89,6 +97,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         "start_date",
         "end_date",
         "course_fee",
+        "course_fee_cash",
         "get_course_registration_count",
     )
     search_fields = ["title", "description"]

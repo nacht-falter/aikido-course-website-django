@@ -19,16 +19,16 @@ from .models import (Category, ExternalCourse, InternalCourse, Page,
 from .utils import send_registration_confirmation
 
 CURRENT_DATE = date.today()
-ALL_COURSES = list(InternalCourse.objects.all()) + \
-    list(ExternalCourse.objects.all())
 
 
 class HomePage(View):
     """Displays the home page"""
 
     def get(self, request):
+        all_courses = list(InternalCourse.objects.all()) + \
+            list(ExternalCourse.objects.all())
         upcoming_courses = [
-            course for course in ALL_COURSES if course.end_date >= CURRENT_DATE
+            course for course in all_courses if course.end_date >= CURRENT_DATE
         ]
         upcoming_registrations = []
         if request.user.is_authenticated:
@@ -111,7 +111,9 @@ class CourseList(View):
     """Displays a list of all internal and external courses"""
 
     def get(self, request):
-        course_list = sorted(ALL_COURSES, key=lambda course: course.start_date)
+        all_courses = list(InternalCourse.objects.all()) + \
+            list(ExternalCourse.objects.all())
+        course_list = sorted(all_courses, key=lambda course: course.start_date)
 
         return render(
             request,
@@ -127,7 +129,10 @@ class RegisterCourse(View):
 
     def prepare_course_data(self, course):
         """Prepares data to be passed to the template"""
-        course_data = {"course_fee": course.course_fee}
+        course_data = {"course_fee": course.course_fee,
+                       "course_fee_cash": course.course_fee_cash,
+                       "discount_percentage": course.discount_percentage
+                       }
         counter = 0
         for session in course.sessions.all():
             course_data[f"session_{counter}_fee"] = session.session_fee
@@ -339,7 +344,10 @@ class UpdateUserCourseRegistration(LoginRequiredMixin, View):
 
     def prepare_course_data(self, course):
         """Prepares data to be passed to the template"""
-        course_data = {"course_fee": course.course_fee}
+        course_data = {"course_fee": course.course_fee,
+                       "course_fee_cash": course.course_fee_cash,
+                       "discount_percentage": course.discount_percentage
+                       }
         counter = 0
         for session in course.sessions.all():
             course_data[f"session_{counter}_fee"] = session.session_fee

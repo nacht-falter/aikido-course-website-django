@@ -30,13 +30,18 @@ class UserCourseRegistrationForm(forms.ModelForm):
     exam = forms.BooleanField(
         required=False, label="I want to apply for an exam")
 
+    discount = forms.BooleanField(
+        required=False, label="I am eligible for a discount")
+
     class Meta:
         model = UserCourseRegistration
         fields = [
             "selected_sessions",
             "exam",
-            "accept_terms",
+            "payment_method",
+            "discount",
             "comment",
+            "accept_terms",
         ]
 
 
@@ -60,6 +65,9 @@ class GuestCourseRegistrationForm(forms.ModelForm):
     exam = forms.BooleanField(
         required=False, label="I want to apply for an exam")
 
+    discount = forms.BooleanField(
+            required=False, label="I am eligible for a discount")
+
     class Meta:
         model = GuestCourseRegistration
         fields = [
@@ -70,8 +78,10 @@ class GuestCourseRegistrationForm(forms.ModelForm):
             "dojo",
             "grade",
             "exam",
-            "accept_terms",
+            "payment_method",
+            "discount",
             "comment",
+            "accept_terms",
         ]
 
 
