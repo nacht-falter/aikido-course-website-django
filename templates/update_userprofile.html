@@ -15,7 +15,14 @@
             </div>
         </div>
         <div class="card-footer">
-            <a href="{% url 'userprofile' %}" class="btn btn-secondary btn-sm">Cancel</a>
+            <a href="{% if request.META.HTTP_REFERER %}
+                      {{ request.META.HTTP_REFERER }}
+                      {% else %}
+                      {% url 'userprofile' %}
+                      {% endif %}"
+               class="btn btn-secondary btn-sm">
+                Cancel
+            </a>
             <button class="btn btn-primary btn-sm" type="submit">Update information</button>
         </div>
     </form>
