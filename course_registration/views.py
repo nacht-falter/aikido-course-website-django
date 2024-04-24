@@ -534,8 +534,8 @@ class UpdateUserProfile(LoginRequiredMixin, View):
         next_url = request.GET.get('next')
         if next_url:
             return HttpResponseRedirect(next_url)
-        else:
-            return HttpResponseRedirect(reverse("userprofile"))
+
+        return HttpResponseRedirect(reverse("userprofile"))
 
 
 class UpdateGrade(View):

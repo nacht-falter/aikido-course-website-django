@@ -192,11 +192,11 @@ class UserCourseRegistration(models.Model):
     def calculate_fees(self, course, selected_sessions):
         final_fee = 0
         if len(selected_sessions) == len(course.sessions.all()):
-            final_fee = course.course_fee
+            final_fee = course.course_fee if self.payment_method == 0 else course.course_fee_cash
         else:
             for session in selected_sessions:
-                final_fee += session.session_fee
-        return final_fee * course.discount_percentage / 100
+                final_fee += session.session_fee if self.payment_method == 0 else session.session_fee_cash
+        return final_fee * course.discount_percentage / 100 if self.discount else final_fee
 
     def set_exam(self, user):
         if self.exam:
@@ -243,11 +243,11 @@ class GuestCourseRegistration(models.Model):
     def calculate_fees(self, course, selected_sessions):
         final_fee = 0
         if len(selected_sessions) == len(course.sessions.all()):
-            final_fee = course.course_fee
+            final_fee = course.course_fee if self.payment_method == 0 else course.course_fee_cash
         else:
             for session in selected_sessions:
-                final_fee += session.session_fee
-        return final_fee * course.discount_percentage / 100
+                final_fee += session.session_fee if self.payment_method == 0 else session.session_fee_cash
+        return final_fee * course.discount_percentage / 100 if self.discount else final_fee
 
     def set_exam(self):
         if self.exam:
