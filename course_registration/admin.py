@@ -276,6 +276,15 @@ class InternalCourseAdmin(SummernoteModelAdmin):
 
 @admin.register(ExternalCourse)
 class ExternalCourseAdmin(SummernoteModelAdmin):
+    fields = (
+        "title",
+        "start_date",
+        "end_date",
+        "organizer",
+        "teacher",
+        "url",
+    )
+
     list_display = (
         "title",
         "url",
@@ -283,7 +292,6 @@ class ExternalCourseAdmin(SummernoteModelAdmin):
         "end_date",
     )
     search_fields = ["title", "description"]
-    prepopulated_fields = {"slug": ("title",)}
     summernote_fields = ("description",)
     actions = ["duplicate_selected_courses"]
 
@@ -324,9 +332,19 @@ UserAdmin.inlines += (UserProfileInline,)
 class PageAdmin(SummernoteModelAdmin):
     list_display = ("title", "slug", "status", "category")
     search_fields = ["title", "content"]
-    list_filter = ("status", "category")
     prepopulated_fields = {"slug": ("title",)}
+    list_filter = ("status", "category")
     summernote_fields = ("content",)
+    actions = ["toggle_status"]
+
+    def toggle_status(self, request, queryset):
+        """Action for toggling page status"""
+        for page in queryset:
+            if page.status == 0:
+                page.status = 1
+            else:
+                page.status = 0
+            page.save()
 
 
 class PageInline(admin.StackedInline):
@@ -342,6 +360,7 @@ class PageInline(admin.StackedInline):
         "featured_image",
         "content",
     ]
+    prepopulated_fields = {"slug": ("title",)}
     # Add summernote field to inline model:
     # https://github.com/summernote/django-summernote/issues/14
     formfield_overrides = {models.TextField: {"widget": SummernoteWidget}}
@@ -349,6 +368,7 @@ class PageInline(admin.StackedInline):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    fields = ("title", "slug", "menu_position")
     list_display = ("title",)
     prepopulated_fields = {"slug": ("title",)}
     inlines = [PageInline]

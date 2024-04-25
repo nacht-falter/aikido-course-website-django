@@ -99,6 +99,11 @@ class Course(models.Model):
         ):
             raise ValidationError("Start date cannot be later than end date.")
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
 
 class InternalCourse(Course):
     """Represents a course organized by the organization"""
@@ -116,11 +121,6 @@ class InternalCourse(Course):
     course_fee_cash = models.IntegerField()
     discount_percentage = models.IntegerField(default=50)
     bank_transfer_until = models.DateField(blank=False)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
 
 
 class ExternalCourse(Course):
