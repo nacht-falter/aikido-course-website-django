@@ -26,6 +26,10 @@ class HomePage(View):
     def get(self, request):
         all_courses = list(InternalCourse.objects.all()) + \
             list(ExternalCourse.objects.all())
+
+        for course in all_courses:
+            course.save()
+
         upcoming_courses = [
             course for course in all_courses if course.end_date >= CURRENT_DATE
         ]
@@ -114,6 +118,10 @@ class CourseList(View):
             list(ExternalCourse.objects.all())
         course_list = sorted(all_courses, key=lambda course: course.start_date)
 
+        # Update the registration status for each course
+        for course in course_list:
+            course.save()
+
         return render(
             request,
             "course_list.html",
@@ -143,6 +151,15 @@ class RegisterCourse(View):
         courses = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
         course_data = self.prepare_course_data(course)
+
+        course.save()
+
+        if course.registration_status == 0:
+            messages.warning(
+                request,
+                "Registration for this course is not possible at the moment."
+            )
+            return HttpResponseRedirect(reverse("course_list"))
 
         if not request.user.is_authenticated and not request.GET.get("allow_guest"):
             return redirect('/accounts/login/?next=' + request.path + '&allow_guest=True')

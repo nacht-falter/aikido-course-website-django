@@ -1,3 +1,5 @@
+from datetime import date
+
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
@@ -114,6 +116,8 @@ class InternalCourse(Course):
 
     REGISTRATION_STATUS = ((0, "Closed"), (1, "Open"))
 
+    CURRENT_DATE = date.today()
+
     registration_status = models.IntegerField(
         choices=REGISTRATION_STATUS, default=0
     )
@@ -125,6 +129,13 @@ class InternalCourse(Course):
     course_fee_cash = models.IntegerField()
     discount_percentage = models.IntegerField(default=50)
     bank_transfer_until = models.DateField(blank=False)
+
+    def save(self, *args, **kwargs):
+        if self.registration_start_date <= self.CURRENT_DATE <= self.registration_end_date:
+            self.registration_status = 1  # Open
+        else:
+            self.registration_status = 0  # Closed
+        super().save(*args, **kwargs)
 
 
 class ExternalCourse(Course):

@@ -17,11 +17,8 @@
             <div class="col-12 col-md-4 col-lg-4">
                 <strong>Title</strong>
             </div>
-            <div class="col-12 col-md-2 col-lg-2">
+            <div class="col-12 col-md-4 col-lg-4">
                 <strong>Teacher</strong>
-            </div>
-            <div class="col-12 col-md-2 col-lg-2 text-md-center">
-                <strong>Status</strong>
             </div>
         </div>
     </div>
@@ -33,10 +30,10 @@
     <div class="accordion-item border-0 mb-2" id="accordion-{{ course.id }}">
         <div class="accordion-header">
             <a id="button-{{ course.id }}" class="accordion-button collapsed text-decoration-none" role="button"
-                data-bs-toggle="collapse" title="{{ course.title }}" data-bs-target="#collapseCourse{{ course.id }}"
-                aria-expanded="false" aria-controls="collapseCourse{{ course.id }}">
+               data-bs-toggle="collapse" title="{{ course.title }}" data-bs-target="#collapseCourse{{ course.id }}"
+               aria-expanded="false" aria-controls="collapseCourse{{ course.id }}">
                 <div class="container m-0 text-left">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-12 d-md-none fs-5">
                             <span><strong>{{ course.title }}</strong></span>
                         </div>
@@ -77,15 +74,15 @@
             </a>
         </div>
         <div id="collapseCourse{{ course.id }}" class="accordion-collapse collapse" data-bs-parent="#accordion">
-            <div class="accordion-body">
+            <div class="accordion-body px-5 py-4">
                 <h5 class="mb-4">{{ course.title }}</h5>
-                <h6 class="border-bottom border-dark-subtle"><strong>Dates:</strong></h6>
+                <h6 class="border-bottom border-dark-subtle">Dates:</h6>
                 <p>{{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j" }}</p>
                 {% if course.description %}
-                <h5 class="border-bottom border-dark-subtle"><strong>Description:</strong></h5>
+                <h6 class="border-bottom border-dark-subtle">Description:</h6>
                 <p>{{ course.description|safe }}</p>
                 {% endif %}
-                <h5 class="border-bottom border-dark-subtle"><strong>Sessions:</strong></h5>
+                <h6 class="border-bottom border-dark-subtle">Sessions:</h6>
                 <ul>
                     {% for session in course.sessions.all %}
                     <li>
@@ -94,11 +91,17 @@
                     </li>
                     {% endfor %}
                 </ul>
-                <hr class="text-light">
                 {% if course.registration_status == 1 %}
-                <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
-                    title="Sign up for {{ course.title }}">
-                    Sign up for this course</a>
+                <div class="text-end">
+                    <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
+                                               title="Sign up for {{ course.title }}">
+                        Sign up for {{ course.title }}
+                    </a>
+                    {% elif course.registration_status == 0 %}
+                    <a class="btn btn-primary disabled">
+                        Registration starts on {{ course.registration_start_date|date:"M j" }}
+                    </a>
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -108,7 +111,7 @@
         <div class="accordion-header">
             <span id="button-{{ course.id }}" class="accordion-button accordion-button-no-link text-dark" title="{{ course.title }}">
                 <div class="container m-0 text-left">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-12 d-md-none fs-5">
                             <span><strong>{{ course.title }}</strong></span>
                         </div>
