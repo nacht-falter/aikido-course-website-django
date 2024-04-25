@@ -10,9 +10,11 @@ from django.utils.text import slugify
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget
 
-from .models import (Category, Course, CourseSession, ExternalCourse,
-                     GuestCourseRegistration, InternalCourse, Page,
+from .models import (Category, CourseSession, ExternalCourse,
+                     GuestCourseRegistration, InternalCourse, Page, User,
                      UserCourseRegistration, UserProfile)
+
+admin.site.register(User, UserAdmin)
 
 
 class CourseSessionInline(admin.TabularInline):

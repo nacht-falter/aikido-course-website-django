@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib.auth.models import User
+from .models import User
 
 from allauth.account.signals import email_confirmed
 

@@ -10,10 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
 import os
-import dj_database_url
+from pathlib import Path
 
+import dj_database_url
 from django.contrib.messages import constants as messages
 
 if os.path.isfile("env.py"):
@@ -65,10 +65,19 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-# Allauth settings
+# Custom User Model
+AUTH_USER_MODEL = "course_registration.User"
 
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+# Allauth settings
 LOGIN_REDIRECT_URL = "/user/update-grade/"
 LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/user/profile/"

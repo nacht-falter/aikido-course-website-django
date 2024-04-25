@@ -4,7 +4,6 @@ from allauth.account.views import PasswordChangeView
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
 from django.core.mail import BadHeaderError, send_mail
@@ -14,7 +13,7 @@ from django.urls import reverse_lazy
 from django.views import View, generic
 
 from . import forms
-from .models import (Category, ExternalCourse, InternalCourse, Page,
+from .models import (Category, ExternalCourse, InternalCourse, Page, User,
                      UserCourseRegistration, UserProfile)
 from .utils import send_registration_confirmation
 
@@ -319,7 +318,7 @@ class CancelUserCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View
         messages.warning(
             request,
             "Please cancel registrations by clicking the button from the "
-            "My Registrations page.",
+            "'My Registrations' page.",
         )
 
         return HttpResponseRedirect(reverse("courseregistration_list"))
@@ -494,7 +493,6 @@ class UpdateUserProfile(LoginRequiredMixin, View):
 
         profile_form = forms.UpdateUserProfileForm(
             initial={
-                "username": request.user.username,
                 "first_name": request.user.first_name,
                 "last_name": request.user.last_name,
                 "email": request.user.email,
@@ -513,7 +511,6 @@ class UpdateUserProfile(LoginRequiredMixin, View):
         user_profile = get_object_or_404(queryset, user=request.user)
         profile_form = forms.UpdateUserProfileForm(data=request.POST)
         if profile_form.is_valid():
-            user_profile.user.username = profile_form.cleaned_data["username"]
             user_profile.user.first_name = profile_form.cleaned_data[
                 "first_name"
             ]

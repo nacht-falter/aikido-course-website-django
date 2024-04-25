@@ -1,5 +1,5 @@
 from cloudinary.models import CloudinaryField
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.shortcuts import get_object_or_404
@@ -68,6 +68,10 @@ DOJO_CHOICES = [
     ("AVF", "Aikido Verein Freiburg"),
     ("TVD", "Turnverein Denzlingen"),
 ]
+
+
+class User(AbstractUser):
+    pass
 
 
 class Course(models.Model):
@@ -272,7 +276,8 @@ class UserProfile(models.Model):
     def save(self, *args, **kwargs):
         # Create slug from another field: https://stackoverflow.com/a/837835
         if not self.slug:
-            self.slug = slugify(self.user.username)
+            self.slug = slugify(
+                f"{self.user.first_name}-{self.user.last_name}")
         super(UserProfile, self).save(*args, **kwargs)
 
 

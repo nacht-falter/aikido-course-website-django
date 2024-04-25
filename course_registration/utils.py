@@ -15,7 +15,7 @@ def send_registration_confirmation(
 
     subject = f"[Dynamic Aikido Nocquet BW] You signed up for {registration.course}"
     message_parts = [
-        f"Hi {registration.user},\n" if is_authenticated else f"Hi {registration.first_name},\n",
+        f"Hi {registration.user.first_name},\n" if is_authenticated else f"Hi {registration.first_name},\n",
         "You have successfully signed up ",
         f"for {course}\n",
         f"\nCourse dates: {course.start_date.strftime('%b %d')} to ",
