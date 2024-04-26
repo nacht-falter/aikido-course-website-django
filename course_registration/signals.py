@@ -14,4 +14,4 @@ from .utils import send_email_confirmation
 @receiver(email_confirmed)
 def email_confirmed(request, email_address, **kwargs):
     user = User.objects.get(email=email_address)
-    send_email_confirmation(user, request, email_address)
+    send_email_confirmation(user, request)

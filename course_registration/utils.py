@@ -6,18 +6,18 @@ from django.core.mail import send_mail
 from .models import User
 
 
-def send_email_confirmation(user, request, email_address, **kwargs):
-    send_mail(
-        "[DANBW e.V.] Email confirmation successful",
-        (
-            f"Hi, {user.first_name},\n"
-            "you have successfully confirmed your email address.\n"
-            "You can login to your account at: "
-            f"{request.META['HTTP_HOST']}/accounts/login"
-        ),
-        settings.EMAIL_HOST_USER,
-        [email_address],
-    )
+def send_email_confirmation(user, request):
+    subject = "[Dynamic Aikido Nocquet BW] Email confirmation successful"
+    message_parts = [
+        "Hi,\n",
+        f"you have successfully confirmed your email address {user.email}.\n",
+        "You can login to your account at: ",
+        f"{request.META['HTTP_HOST']}/accounts/login",
+    ]
+    sender = settings.EMAIL_HOST_USER
+    recipient = user.email
+    message = "".join(message_parts)
+    send_mail(subject, message, sender, [recipient])
 
 
 def send_registration_confirmation(
@@ -31,7 +31,7 @@ def send_registration_confirmation(
 
     subject = f"[Dynamic Aikido Nocquet BW] You signed up for {registration.course}"
     message_parts = [
-        f"Hi {registration.user.first_name},\n" if is_authenticated else f"Hi {registration.first_name},\n",
+        f"Hi {registration.user.first_name if is_authenticated else registration.first_name},\n",
         "You have successfully signed up ",
         f"for {course}\n",
         f"\nCourse dates: {course.start_date.strftime('%b %d')} to ",
@@ -57,7 +57,5 @@ def send_registration_confirmation(
 
     sender = settings.EMAIL_HOST_USER
     recipient = registration.user.email if is_authenticated else registration.email
-
-    message = ''.join(message_parts)
-
+    message = "".join(message_parts)
     send_mail(subject, message, sender, [recipient])
