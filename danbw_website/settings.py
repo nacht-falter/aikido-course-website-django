@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "users",
     "courses",
     "course_registrations",
+    "pages",
     "course_registration",
 ]
 

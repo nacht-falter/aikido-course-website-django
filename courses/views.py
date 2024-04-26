@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 
-from courses.models import ExternalCourse, InternalCourse
+from .models import ExternalCourse, InternalCourse
 
 
 class CourseList(View):

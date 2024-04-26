@@ -1,4 +1,4 @@
-from .models import Category
+from pages.models import Category
 
 
 def add_categories_to_context(request):
