@@ -1,6 +1,5 @@
 from datetime import date
 
-from allauth.account.views import PasswordChangeView
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,16 +8,13 @@ from django.core.exceptions import PermissionDenied
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, reverse
-from django.urls import reverse_lazy
 from django.views import View, generic
 
+from courses.models import ExternalCourse, InternalCourse
+
 from . import forms
-from .models import (Category, ExternalCourse, InternalCourse, Page, User,
-                     UserCourseRegistration, UserProfile)
+from .models import Category, Page, UserCourseRegistration, UserProfile
 from .utils import send_registration_confirmation
-
-CURRENT_DATE = date.today()
-
 
 class HomePage(View):
     """Displays the home page"""
@@ -31,7 +27,7 @@ class HomePage(View):
             course.save()
 
         upcoming_courses = [
-            course for course in all_courses if course.end_date >= CURRENT_DATE
+            course for course in all_courses if course.end_date >= date.today()
         ]
         upcoming_registrations = []
         if request.user.is_authenticated:
@@ -41,7 +37,7 @@ class HomePage(View):
             upcoming_registrations = [
                 registration
                 for registration in all_registrations
-                if registration.course.end_date >= CURRENT_DATE
+                if registration.course.end_date >= date.today()
             ]
 
         return render(
@@ -108,27 +104,6 @@ class PageList(generic.ListView):
         category_slug = self.kwargs.get("category_slug")
         category = get_object_or_404(Category, slug=category_slug)
         return Page.objects.filter(status=1, category=category)
-
-
-class CourseList(View):
-    """Displays a list of all internal and external courses"""
-
-    def get(self, request):
-        all_courses = list(InternalCourse.objects.all()) + \
-            list(ExternalCourse.objects.all())
-        course_list = sorted(all_courses, key=lambda course: course.start_date)
-
-        # Update the registration status for each course
-        for course in course_list:
-            course.save()
-
-        return render(
-            request,
-            "course_list.html",
-            {
-                "course_list": course_list,
-            },
-        )
 
 
 class RegisterCourse(View):
@@ -307,12 +282,12 @@ class UserCourseRegistrationList(LoginRequiredMixin, View):
         past_registrations = [
             registration
             for registration in user_registrations
-            if registration.course.end_date < CURRENT_DATE
+            if registration.course.end_date < date.today()
         ]
         upcoming_registrations = [
             registration
             for registration in user_registrations
-            if registration.course.end_date >= CURRENT_DATE
+            if registration.course.end_date >= date.today()
         ]
 
         return render(
