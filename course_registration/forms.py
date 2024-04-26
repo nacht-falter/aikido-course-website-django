@@ -1,7 +1,7 @@
 from django import forms
 
-from .models import (GRADE_CHOICES, CourseSession, GuestCourseRegistration,
-                     UserCourseRegistration, UserProfile)
+from .models import (CourseSession, GuestCourseRegistration,
+                     UserCourseRegistration)
 
 
 class UserCourseRegistrationForm(forms.ModelForm):
@@ -66,7 +66,7 @@ class GuestCourseRegistrationForm(forms.ModelForm):
         required=False, label="I want to apply for an exam")
 
     discount = forms.BooleanField(
-            required=False, label="I am eligible for a discount")
+        required=False, label="I am eligible for a discount")
 
     class Meta:
         model = GuestCourseRegistration
@@ -82,44 +82,6 @@ class GuestCourseRegistrationForm(forms.ModelForm):
             "discount",
             "comment",
             "accept_terms",
-        ]
-
-
-class UserProfileForm(forms.ModelForm):
-    # Add new fields to form: https://stackoverflow.com/a/58944671
-    first_name = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(attrs={"placeholder": "First Name"}),
-    )
-    last_name = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(attrs={"placeholder": "Last Name"}),
-    )
-
-    class Meta:
-        model = UserProfile
-        fields = [
-            "first_name",
-            "last_name",
-            "grade",
-            "dojo",
-        ]
-
-
-class UpdateUserProfileForm(forms.ModelForm):
-    # Add new fields to form: https://stackoverflow.com/a/58944671
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
-    email = forms.EmailField()
-
-    class Meta:
-        model = UserProfile
-        fields = [
-            "first_name",
-            "last_name",
-            "email",
-            "grade",
-            "dojo"
         ]
 
 

@@ -1,5 +1,5 @@
 """
-WSGI config for aikido_course_website project.
+WSGI config for danbw_website project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'aikido_course_website.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'danbw_website.settings')
 
 application = get_wsgi_application()

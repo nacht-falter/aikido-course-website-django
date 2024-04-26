@@ -1,79 +1,13 @@
 from datetime import date
 
 from cloudinary.models import CloudinaryField
-from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 
-# Documentation for defining choices for CharFields:
-# https://docs.djangoproject.com/en/4.2/ref/models/fields/#choices
-# Assign increasing integer values to a list of variables:
-# https://stackoverflow.com/a/64485228
-(
-    RED_BELT,
-    SIXTH_KYU,
-    FIFTH_KYU,
-    FOURTH_KYU,
-    THIRD_KYU,
-    SECOND_KYU,
-    FIRST_KYU,
-    SHODAN,
-    NIDAN,
-    SANDAN,
-    YONDAN,
-    GODAN,
-    ROKUDAN,
-) = range(13)
-
-(
-    BANK,
-    CASH,
-) = range(2)
-
-PAYMENT_STATUS = ((0, "Unpaid"), (1, "Paid"))
-
-PAYMENT_METHODS = [
-    (BANK, "Bank Transfer"),
-    (CASH, "Cash"),
-]
-
-EXAM_GRADE_CHOICES = [
-    (SIXTH_KYU, "7th Kyu ⚪️"),
-    (FIFTH_KYU, "5th Kyu 🟡"),
-    (FOURTH_KYU, "4th Kyu 🟠"),
-    (THIRD_KYU, "3rd Kyu 🟢"),
-    (SECOND_KYU, "2nd Kyu 🔵"),
-    (FIRST_KYU, "1st Kyu 🟤"),
-]
-
-GRADE_CHOICES = [
-    (RED_BELT, "Red Belt 🔴"),
-    (SIXTH_KYU, "6th Kyu ⚪️"),
-    (FIFTH_KYU, "5th Kyu 🟡"),
-    (FOURTH_KYU, "4th Kyu 🟠"),
-    (THIRD_KYU, "3rd Kyu 🟢"),
-    (SECOND_KYU, "2nd Kyu 🔵"),
-    (FIRST_KYU, "1st Kyu 🟤"),
-    (SHODAN, "1st Dan ⚫️"),
-    (NIDAN, "2nd  Dan ⚫️"),
-    (SANDAN, "3rd Dan ⚫️"),
-    (YONDAN, "4th Dan ⚫️"),
-    (GODAN, "5th Dan ⚫️"),
-    (ROKUDAN, "6th Dan ⚫️"),
-]
-
-DOJO_CHOICES = [
-    ("AAR", "Aikido am Rhein"),
-    ("AVE", "Aikido Verein Emmendingen"),
-    ("AVF", "Aikido Verein Freiburg"),
-    ("TVD", "Turnverein Denzlingen"),
-]
-
-
-class User(AbstractUser):
-    pass
+from danbw_website import constants
+from users.models import User, UserProfile
 
 
 class Course(models.Model):
@@ -183,15 +117,17 @@ class UserCourseRegistration(models.Model):
     registration_date = models.DateTimeField(auto_now_add=True)
     exam = models.BooleanField(default=False)
     exam_grade = models.IntegerField(
-        choices=EXAM_GRADE_CHOICES, default=RED_BELT
+        choices=constants.EXAM_GRADE_CHOICES, default=constants.RED_BELT
     )
     exam_passed = models.BooleanField(null=True)
     grade_updated = models.BooleanField(default=False)
     accept_terms = models.BooleanField(default=False)
     discount = models.BooleanField(default=False)
     final_fee = models.IntegerField(default=0)
-    payment_status = models.IntegerField(choices=PAYMENT_STATUS, default=0)
-    payment_method = models.IntegerField(choices=PAYMENT_METHODS, default=0)
+    payment_status = models.IntegerField(
+        choices=constants.PAYMENT_STATUS, default=0)
+    payment_method = models.IntegerField(
+        choices=constants.PAYMENT_METHODS, default=0)
     comment = models.TextField(blank=True)
 
     class Meta:
@@ -231,18 +167,21 @@ class GuestCourseRegistration(models.Model):
     course = models.ForeignKey(InternalCourse, on_delete=models.CASCADE)
     selected_sessions = models.ManyToManyField(CourseSession, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)
-    dojo = models.CharField(max_length=3, choices=DOJO_CHOICES, blank=False)
+    dojo = models.CharField(
+        max_length=3, choices=constants.DOJO_CHOICES, blank=False)
     grade = models.IntegerField(
-        choices=GRADE_CHOICES, default=RED_BELT, blank=False)
+        choices=constants.GRADE_CHOICES, default=constants.RED_BELT, blank=False)
     exam = models.BooleanField(default=False)
     exam_grade = models.IntegerField(
-        choices=EXAM_GRADE_CHOICES, blank=True, null=True
+        choices=constants.EXAM_GRADE_CHOICES, blank=True, null=True
     )
     accept_terms = models.BooleanField(default=False)
     discount = models.BooleanField(default=False)
     final_fee = models.IntegerField(default=0)
-    payment_status = models.IntegerField(choices=PAYMENT_STATUS, default=0)
-    payment_method = models.IntegerField(choices=PAYMENT_METHODS, default=0)
+    payment_status = models.IntegerField(
+        choices=constants.PAYMENT_STATUS, default=0)
+    payment_method = models.IntegerField(
+        choices=constants.PAYMENT_METHODS, default=0)
     comment = models.TextField(blank=True)
 
     class Meta:
@@ -270,26 +209,6 @@ class GuestCourseRegistration(models.Model):
                 self.exam_grade = self.grade + 1
             else:
                 self.exam = False
-
-
-class UserProfile(models.Model):
-    """Represents a user profile"""
-
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name="profile"
-    )
-    slug = models.SlugField(unique=True)
-    dojo = models.CharField(max_length=3, choices=DOJO_CHOICES)
-    grade = models.IntegerField(choices=GRADE_CHOICES, default=RED_BELT)
-
-    # Overriding save method: https://docs.djangoproject.com/en/4.2
-    # /topics/db/models/#overriding-predefined-model-methods
-    def save(self, *args, **kwargs):
-        # Create slug from another field: https://stackoverflow.com/a/837835
-        if not self.slug:
-            self.slug = slugify(
-                f"{self.user.first_name}-{self.user.last_name}")
-        super(UserProfile, self).save(*args, **kwargs)
 
 
 class Category(models.Model):

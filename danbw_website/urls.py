@@ -1,4 +1,4 @@
-"""aikido_course_website URL Configuration
+"""danbw_website URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -13,15 +13,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path(
-        "",
-        include("course_registration.urls"),
-        name="course_registration-urls",
-    ),
+    path("", include("course_registration.urls")),
+    path("", include("users.urls")),
     path("accounts/", include("allauth.urls")),
     path("summernote/", include("django_summernote.urls")),
 ]

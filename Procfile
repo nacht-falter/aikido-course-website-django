@@ -1,1 +1,1 @@
-web: gunicorn aikido_course_website.wsgi
+web: gunicorn danbw_website.wsgi

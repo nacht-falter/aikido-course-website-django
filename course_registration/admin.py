@@ -3,7 +3,6 @@ import tempfile
 import zipfile
 
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 from django.db import models
 from django.http import HttpResponse
 from django.utils.text import slugify
@@ -11,10 +10,8 @@ from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget
 
 from .models import (Category, CourseSession, ExternalCourse,
-                     GuestCourseRegistration, InternalCourse, Page, User,
-                     UserCourseRegistration, UserProfile)
-
-admin.site.register(User, UserAdmin)
+                     GuestCourseRegistration, InternalCourse, Page,
+                     UserCourseRegistration)
 
 
 class CourseSessionInline(admin.TabularInline):
@@ -316,18 +313,6 @@ class ExternalCourseAdmin(SummernoteModelAdmin):
                 organizer=course.organizer,
                 teacher=course.teacher,
             )
-
-
-class UserProfileInline(admin.StackedInline):
-    """Displays UserProfile as an inline model"""
-
-    model = UserProfile
-    extra = 0  # Set number of additional rows to 0
-    fields = ["grade"]
-
-
-# Add inlines to UserAdmin model: https://stackoverflow.com/a/35573797
-UserAdmin.inlines += (UserProfileInline,)
 
 
 @admin.register(Page)
