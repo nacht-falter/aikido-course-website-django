@@ -55,14 +55,12 @@ function calculateFinalFee(courseData) {
   if (discountCheckbox.checked) {
     finalFee *= courseData.discount_percentage / 100;
   }
-  finalFeeDisplay.innerText = finalFee;
   if (finalFee > 0) {
-    finalFeeContainer.classList.remove("alert-danger");
-    finalFeeContainer.classList.add("alert-success");
+    finalFeeContainer.classList.remove("d-none");
   } else {
-    finalFeeContainer.classList.remove("alert-success");
-    finalFeeContainer.classList.add("alert-danger");
+    finalFeeContainer.classList.add("d-none");
   }
+  finalFeeDisplay.innerText = finalFee;
 }
 
 /**
