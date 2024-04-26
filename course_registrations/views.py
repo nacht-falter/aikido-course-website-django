@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.views import View
 
-from course_registration.utils import send_registration_confirmation
+from danbw_website.utils import send_registration_confirmation
 from courses.models import InternalCourse
 
 from . import forms

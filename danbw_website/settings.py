@@ -64,7 +64,6 @@ INSTALLED_APPS = [
     "courses",
     "course_registrations",
     "pages",
-    "course_registration",
 ]
 
 SITE_ID = 1
@@ -129,7 +128,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "course_registration.context_processors.add_categories_to_context",
+                "pages.context_processors.add_categories_to_context",
             ],
         },
     },

@@ -1,9 +1,9 @@
 from allauth.account.signals import email_confirmed
 from django.dispatch import receiver
 
-from users.models import User
+from danbw_website.utils import send_email_confirmation
 
-from .utils import send_email_confirmation
+from .models import User
 
 # Instructions for using signals:
 # Instructionshttps://www.geeksforgeeks.org/how-to-create-and-use-signals-in-django/
