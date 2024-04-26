@@ -7,10 +7,10 @@ from django.http import HttpResponse
 from django.utils.text import slugify
 from django_summernote.admin import SummernoteModelAdmin
 
-from course_registration.models import (CourseSession, GuestCourseRegistration,
+from course_registration.models import (GuestCourseRegistration,
                                         UserCourseRegistration)
 
-from .models import ExternalCourse, InternalCourse
+from .models import CourseSession, ExternalCourse, InternalCourse
 
 
 class CourseSessionInline(admin.TabularInline):
