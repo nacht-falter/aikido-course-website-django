@@ -1,7 +1,8 @@
 from allauth.account.signals import email_confirmed
 from django.dispatch import receiver
 
-from .models import User
+from users.models import User
+
 from .utils import send_email_confirmation
 
 # Instructions for using signals:

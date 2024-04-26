@@ -7,8 +7,8 @@ from django.http import HttpResponse
 from django.utils.text import slugify
 from django_summernote.admin import SummernoteModelAdmin
 
-from course_registration.models import (GuestCourseRegistration,
-                                        UserCourseRegistration)
+from course_registrations.models import (GuestCourseRegistration,
+                                         UserCourseRegistration)
 
 from .models import CourseSession, ExternalCourse, InternalCourse
 

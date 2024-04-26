@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, render, reverse
 from django.urls import reverse_lazy
 from django.views import View
 
-from course_registration.models import UserCourseRegistration
+from course_registrations.models import UserCourseRegistration
 
 from . import forms
 from .models import User, UserProfile

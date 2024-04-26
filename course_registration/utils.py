@@ -3,8 +3,6 @@ import os
 from django.conf import settings
 from django.core.mail import send_mail
 
-from .models import User
-
 
 def send_email_confirmation(user, request):
     subject = "[Dynamic Aikido Nocquet BW] Email confirmation successful"
@@ -45,7 +43,7 @@ def send_registration_confirmation(
 
     if exam:
         message_parts += [
-            f"- You applied for an exam for {registration.get_grade_display()}\n"
+            f"- You applied for an exam for {registration.get_exam_grade_display()}\n"
         ]
 
     if registration.payment_method == 0:
