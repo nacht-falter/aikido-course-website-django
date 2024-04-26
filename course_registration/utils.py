@@ -3,6 +3,22 @@ import os
 from django.conf import settings
 from django.core.mail import send_mail
 
+from .models import User
+
+
+def send_email_confirmation(user, request, email_address, **kwargs):
+    send_mail(
+        "[DANBW e.V.] Email confirmation successful",
+        (
+            f"Hi, {user.first_name},\n"
+            "you have successfully confirmed your email address.\n"
+            "You can login to your account at: "
+            f"{request.META['HTTP_HOST']}/accounts/login"
+        ),
+        settings.EMAIL_HOST_USER,
+        [email_address],
+    )
+
 
 def send_registration_confirmation(
     registration,
