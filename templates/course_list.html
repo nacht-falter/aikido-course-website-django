@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+{% now "Y-m-d" as todays_date %}
 <h2>Courses</h2>
 <h3 class="mb-4">{% now "Y" %}</h3>
 {% if course_list %}
@@ -91,18 +92,22 @@
                     </li>
                     {% endfor %}
                 </ul>
-                {% if course.registration_status == 1 %}
                 <div class="text-end">
+                    {% if course.registration_status == 1 %}
                     <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
-                                               title="Sign up for {{ course.title }}">
+                       title="Sign up for {{ course.title }}">
                         Sign up for {{ course.title }}
                     </a>
-                    {% elif course.registration_status == 0 %}
+                    {% elif course.registration_start_date|date:"Y-m-d" > todays_date %}
                     <a class="btn btn-primary disabled">
                         Registration starts on {{ course.registration_start_date|date:"M j" }}
                     </a>
+                    {% else %}
+                    <a class="btn btn-primary disabled">
+                        Registration closed
+                    </a>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </div>
     </div>
