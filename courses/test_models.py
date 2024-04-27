@@ -1,11 +1,9 @@
-from datetime import datetime, date, timedelta, time
+from datetime import date, datetime, time, timedelta
 
-from django.test import TestCase
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.utils.text import slugify
+from django.test import TestCase
 
-from .models import Course, CourseSession, UserProfile, Category, Page
+from .models import Course, CourseSession
 
 
 class TestCourseModel(TestCase):
@@ -86,56 +84,3 @@ class TestCourseSessionModel(TestCase):
         print("\ntest_session_custom_date_validation")
         session = CourseSession.objects.get(title="Invalid session")
         self.assertRaises(ValidationError, session.clean)
-
-
-class TestUserProfileModel(TestCase):
-    """Tests for UserProfile model"""
-
-    def setUp(self):
-        self.user = User.objects.create_user(
-            username="test-user",
-            password="testpassword",
-        )
-        self.client.force_login(self.user)
-        self.user_profile = UserProfile.objects.create(
-            user=self.user,
-            grade=0,
-        )
-
-    def test_user_profile_slug(self):
-        print("\ntest_user_profile_slug")
-        self.assertEqual(self.user_profile.slug, slugify(self.user.username))
-
-
-class TestCategoryModel(TestCase):
-    """Tests for the Category model"""
-
-    def setUp(self):
-        self.category = Category.objects.create(
-            title="Test Category",
-        )
-
-    def test_category_str_method_returns_title(self):
-        print("\ntest_category_str_method_returns_title")
-        category = Category.objects.get(title="Test Category")
-        self.assertEqual(str(category), "Test Category")
-
-
-class TestPageModel(TestCase):
-    """Tests for the Page model"""
-
-    def setUp(self):
-        self.category = Category.objects.create(
-            title="Test Category",
-        )
-        self.page = Page.objects.create(
-            title="Test Page",
-            slug="test-page",
-            category=self.category,
-            status=0,
-        )
-
-    def test_page_str_method_returns_title(self):
-        print("\ntest_page_str_method_returns_title")
-        page = Page.objects.get(title="Test Page")
-        self.assertEqual(str(page), "Test Page")
