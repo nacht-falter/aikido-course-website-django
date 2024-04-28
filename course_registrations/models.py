@@ -29,6 +29,7 @@ class UserCourseRegistration(models.Model):
     payment_method = models.IntegerField(
         choices=constants.PAYMENT_METHODS, default=0)
     comment = models.TextField(blank=True)
+    dinner = models.BooleanField(blank=True, null=True)
 
     class Meta:
         # Set unique constraint: https://docs.djangoproject.com/en/4.2/
@@ -83,6 +84,7 @@ class GuestCourseRegistration(models.Model):
     payment_method = models.IntegerField(
         choices=constants.PAYMENT_METHODS, default=0)
     comment = models.TextField(blank=True)
+    dinner = models.BooleanField(blank=True, null=True)
 
     class Meta:
         # Set unique constraint: https://docs.djangoproject.com/en/4.2/
@@ -109,3 +111,9 @@ class GuestCourseRegistration(models.Model):
                 self.exam_grade = self.grade + 1
             else:
                 self.exam = False
+
+    def save(self, *args, **kwargs):
+        if not self.course.dinner:
+            self.dinner = 0
+        super().save(*args, **kwargs)
+

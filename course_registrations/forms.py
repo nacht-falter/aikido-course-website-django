@@ -13,9 +13,15 @@ class UserCourseRegistrationForm(forms.ModelForm):
         course = kwargs.pop("course", None)
         user_profile = kwargs.pop("user_profile", None)
         super().__init__(*args, **kwargs)
-        self.fields[
-            "selected_sessions"
-        ].queryset = CourseSession.objects.filter(course=course)
+
+        if course:
+            self.fields["selected_sessions"].queryset = CourseSession.objects.filter(
+                course=course)
+
+            if course.dinner:
+                self.fields['dinner'] = forms.BooleanField(
+                    required=True, label="I want to join the dinner")
+
         if user_profile.grade >= 6:
             self.fields["exam"].widget = forms.HiddenInput()
 
@@ -50,9 +56,13 @@ class GuestCourseRegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         course = kwargs.pop("course", None)
         super().__init__(*args, **kwargs)
-        self.fields[
-            "selected_sessions"
-        ].queryset = CourseSession.objects.filter(course=course)
+        if course:
+            self.fields["selected_sessions"].queryset = CourseSession.objects.filter(
+                course=course)
+
+            if course.dinner:
+                self.fields['dinner'] = forms.BooleanField(
+                    required=True, label="I want to join the dinner")
 
     accept_terms = forms.BooleanField(
         required=True, label="I accept the terms and conditions"

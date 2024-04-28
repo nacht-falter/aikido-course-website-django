@@ -41,6 +41,7 @@ class UserCourseRegistrationInline(admin.TabularInline):
         "payment_status",
         "payment_method",
         "discount",
+        "dinner",
     ]
     readonly_fields = [
         "user",
@@ -51,6 +52,7 @@ class UserCourseRegistrationInline(admin.TabularInline):
         "final_fee",
         "payment_method",
         "discount",
+        "dinner",
     ]
 
 
@@ -72,6 +74,7 @@ class GuestCourseRegistrationInline(admin.TabularInline):
         "payment_status",
         "payment_method",
         "discount",
+        "dinner",
     ]
     readonly_fields = [
         "email",
@@ -84,6 +87,7 @@ class GuestCourseRegistrationInline(admin.TabularInline):
         "final_fee",
         "payment_method",
         "discount",
+        "dinner",
     ]
 
 
@@ -102,6 +106,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         "course_fee_cash",
         "discount_percentage",
         "bank_transfer_until",
+        "dinner",
         "description",
     )
     list_display = (
@@ -148,6 +153,9 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 course_fee_cash=course.course_fee_cash,
                 organizer=course.organizer,
                 teacher=course.teacher,
+                discount_percentage=course.discount_percentage,
+                bank_transfer_until=course.bank_transfer_until,
+                dinner=course.dinner,
             )
 
             for session in course.sessions.all():
@@ -186,7 +194,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     def write_csv_data(self, writer, registrations):
         """Write registration data to CSV"""
 
-        writer.writerow([
+        # Write header row
+        header_row = [
             "First Name",
             "Last Name",
             "Email",
@@ -197,8 +206,12 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             "Accept Terms",
             "Final Fee",
             "Payment Status"
-        ])
+        ]
+        if registrations and registrations[0].course.dinner:
+            header_row.append("Dinner")
+        writer.writerow(header_row)
 
+        # Write data rows
         for registration in registrations:
             selected_sessions = ", ".join(
                 session.title for session in registration.selected_sessions.all())
@@ -208,7 +221,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             else:
                 user = None
 
-            writer.writerow([
+            data_row = [
                 user.first_name if user else registration.first_name,
                 user.last_name if user else registration.last_name,
                 user.email if user else registration.email,
@@ -218,8 +231,11 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 registration.get_exam_grade_display(),
                 "Yes" if registration.accept_terms else "No",
                 registration.final_fee,
-                registration.get_payment_status_display()
-            ])
+                registration.get_payment_status_display(),
+            ]
+            if registration.course.dinner:
+                data_row.append("Yes" if registration.dinner else "No")
+            writer.writerow(data_row)
 
     def export_csv(self, request, queryset):
         """Action for exporting course registrations to CSV or zip"""

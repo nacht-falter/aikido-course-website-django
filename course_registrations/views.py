@@ -110,6 +110,8 @@ class RegisterCourse(View):
                 course, selected_sessions
             )
 
+            registration.dinner = registration_form.cleaned_data.get("dinner")
+
             if request.user.is_authenticated:
                 registration.set_exam(request.user)
                 registration.user = request.user

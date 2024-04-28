@@ -56,6 +56,7 @@ class InternalCourse(Course):
     course_fee_cash = models.IntegerField()
     discount_percentage = models.IntegerField(default=50)
     bank_transfer_until = models.DateField(blank=False)
+    dinner = models.BooleanField("Course includes a Dinner", default=False)
 
     def save(self, *args, **kwargs):
         if self.registration_start_date <= date.today() <= self.registration_end_date:
