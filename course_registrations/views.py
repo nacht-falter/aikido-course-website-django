@@ -52,9 +52,10 @@ class RegisterCourse(View):
             user_profile = UserProfile.objects.filter(user=request.user)
             if not user_profile:
                 messages.warning(
-                    request, "Please create a user profile and try again."
+                    request, "Please create a user profile to contine."
                 )
-                return HttpResponseRedirect(reverse("userprofile"))
+                return redirect(reverse('userprofile') + '?next=' + request.path)
+
             user_registered = UserCourseRegistration.objects.filter(
                 user=request.user, course=course
             )

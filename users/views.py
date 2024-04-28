@@ -55,6 +55,10 @@ class UserProfileView(LoginRequiredMixin, View):
         else:
             profile_form = forms.UserProfileForm()
 
+        next_url = request.GET.get('next')
+        if next_url:
+            return HttpResponseRedirect(next_url)
+
         return HttpResponseRedirect(reverse("userprofile"))
 
 
