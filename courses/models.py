@@ -34,6 +34,13 @@ class Course(models.Model):
         ):
             raise ValidationError("Start date cannot be later than end date.")
 
+        if (self.registration_start_date
+                and self.registration_end_date
+                and self.registration_start_date > self.registration_end_date
+                ):
+            raise ValidationError(
+                "Registration start date cannot be later than registration end date.")
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
