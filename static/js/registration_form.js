@@ -106,7 +106,7 @@ function checkGrade() {
 function checkDojo() {
   if (dojoSelect.value != "other") {
     otherDojoDiv.style.display = "none";
-    otherDojoInput.value = "";
+    otherDojoInput.value = "Other Dojo";
   } else {
     otherDojoDiv.style.display = "block";
     otherDojoInput.value = "";
