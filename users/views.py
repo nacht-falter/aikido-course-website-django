@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.views import View
 
 from course_registrations.models import UserCourseRegistration
+from danbw_website import constants
 
 from . import forms
 from .models import User, UserProfile
@@ -39,7 +40,8 @@ class UserProfileView(LoginRequiredMixin, View):
             user_profile = UserProfile.objects.create(
                 user=request.user,
                 grade=profile_form.cleaned_data["grade"],
-                dojo=profile_form.cleaned_data["dojo"],
+                dojo=profile_form.cleaned_data["dojo"] if profile_form.cleaned_data[
+                    "dojo"] != "other" else profile_form.cleaned_data["other_dojo"],
             )
             user_profile.user.first_name = profile_form.cleaned_data[
                 "first_name"
@@ -69,15 +71,19 @@ class UpdateUserProfile(LoginRequiredMixin, View):
         queryset = UserProfile.objects.filter(user=request.user)
         user_profile = get_object_or_404(queryset, user=request.user)
 
+        dojos = {choice[0] for choice in constants.DOJO_CHOICES}
+
         profile_form = forms.UpdateUserProfileForm(
             initial={
                 "first_name": request.user.first_name,
                 "last_name": request.user.last_name,
                 "email": request.user.email,
                 "grade": user_profile.grade,
-                "dojo": user_profile.dojo,
+                "dojo": user_profile.dojo if user_profile.dojo in dojos else "other",
+                "other_dojo": user_profile.dojo if user_profile.dojo not in dojos else "",
             }
         )
+
         return render(
             request,
             "update_userprofile.html",
@@ -97,7 +103,10 @@ class UpdateUserProfile(LoginRequiredMixin, View):
             ]
             user_profile.user.email = profile_form.cleaned_data["email"]
             user_profile.grade = profile_form.cleaned_data["grade"]
-            user_profile.dojo = profile_form.cleaned_data["dojo"]
+            user_profile.dojo = profile_form.cleaned_data["dojo"] if profile_form.cleaned_data[
+                "dojo"] != "other" else profile_form.cleaned_data["other_dojo"]
+            user_profile.other_dojo = profile_form.cleaned_data[
+                "other_dojo"] if profile_form.cleaned_data["dojo"] == "other" else ""
             user_profile.user.save()
             user_profile.save()
             messages.info(

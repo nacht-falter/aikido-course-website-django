@@ -103,6 +103,16 @@ function checkGrade() {
   }
 }
 
+function checkDojo() {
+  if (dojoSelect.value != "other") {
+    otherDojoDiv.style.display = "none";
+    otherDojoInput.value = "";
+  } else {
+    otherDojoDiv.style.display = "block";
+    otherDojoInput.value = "";
+  }
+}
+
 // Receiving data from the template. Instructions from: https://adamj.eu/tech/
 // 2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/
 const courseData = document.currentScript
@@ -122,18 +132,29 @@ const gradeSelect = document.getElementById("id_grade");
 const examSection = document.getElementById("exam-section");
 const discountCheckbox = document.getElementById("id_discount");
 const paymentMethodSelect = document.getElementById("id_payment_method");
+const dojoSelect = document.getElementById("id_dojo");
+const otherDojoDiv = document.getElementById("div_id_other_dojo");
+const otherDojoInput = document.getElementById("id_other_dojo");
+
+otherDojoDiv.style.display = "none";
 
 // Add event listeners:
 entireCourseCheckbox.addEventListener("click", checkSessionCheckboxes);
 for (let checkbox of sessionsCheckboxes) {
   checkbox.addEventListener("click", checkEntireCourseCheckbox);
 }
+
 discountCheckbox.addEventListener("click", checkEntireCourseCheckbox);
+
 paymentMethodSelect.addEventListener("change", checkEntireCourseCheckbox);
+
 acceptTermsCheckbox.addEventListener("click", disableSubmitButton);
+
 if (gradeSelect) {
   gradeSelect.addEventListener("change", checkGrade);
 }
+
+dojoSelect.addEventListener("change", checkDojo);
 
 // Initial checks:
 checkEntireCourseCheckbox();

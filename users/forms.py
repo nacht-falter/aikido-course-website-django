@@ -21,6 +21,7 @@ class UserProfileForm(forms.ModelForm):
             "last_name",
             "grade",
             "dojo",
+            "other_dojo",
         ]
 
 
@@ -29,6 +30,7 @@ class UpdateUserProfileForm(forms.ModelForm):
     first_name = forms.CharField(max_length=100)
     last_name = forms.CharField(max_length=100)
     email = forms.EmailField()
+    other_dojo = forms.CharField(required=True, initial="Other Dojo")
 
     class Meta:
         model = UserProfile
@@ -37,5 +39,6 @@ class UpdateUserProfileForm(forms.ModelForm):
             "last_name",
             "email",
             "grade",
-            "dojo"
+            "dojo",
+            "other_dojo",
         ]

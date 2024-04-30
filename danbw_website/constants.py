@@ -60,4 +60,5 @@ DOJO_CHOICES = (
     ("AVE", "Aikido Verein Emmendingen"),
     ("AVF", "Aikido Verein Freiburg"),
     ("TVD", "Turnverein Denzlingen"),
+    ("other", "Other Dojo"),
 )

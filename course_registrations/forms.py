@@ -79,6 +79,8 @@ class GuestCourseRegistrationForm(forms.ModelForm):
     discount = forms.BooleanField(
         required=False, label="I am eligible for a discount")
 
+    other_dojo = forms.CharField(required=True, initial="Other Dojo")
+
     class Meta:
         model = GuestCourseRegistration
         fields = [
@@ -87,6 +89,7 @@ class GuestCourseRegistrationForm(forms.ModelForm):
             "last_name",
             "selected_sessions",
             "dojo",
+            "other_dojo",
             "grade",
             "exam",
             "payment_method",

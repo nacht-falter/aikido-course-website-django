@@ -58,6 +58,11 @@ class UserCourseRegistration(models.Model):
             else:
                 self.exam = False
 
+    def save(self, *args, **kwargs):
+        if not self.course.dinner:
+            self.dinner = 0
+        super().save(*args, **kwargs)
+
 
 class GuestCourseRegistration(models.Model):
     """Represents a registration for a course by a user"""
@@ -69,7 +74,8 @@ class GuestCourseRegistration(models.Model):
     selected_sessions = models.ManyToManyField(CourseSession, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)
     dojo = models.CharField(
-        max_length=3, choices=constants.DOJO_CHOICES, blank=False)
+        max_length=5, choices=constants.DOJO_CHOICES, blank=False)
+    other_dojo = models.CharField(max_length=100, blank=True)
     grade = models.IntegerField(
         choices=constants.GRADE_CHOICES, default=constants.RED_BELT, blank=False)
     exam = models.BooleanField(default=False)
@@ -115,5 +121,7 @@ class GuestCourseRegistration(models.Model):
     def save(self, *args, **kwargs):
         if not self.course.dinner:
             self.dinner = 0
-        super().save(*args, **kwargs)
 
+        if self.dojo == "other":
+            self.dojo = self.other_dojo
+        super().save(*args, **kwargs)
