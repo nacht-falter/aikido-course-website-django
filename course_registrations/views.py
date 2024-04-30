@@ -8,11 +8,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.views import View
 
-from danbw_website.utils import send_registration_confirmation
 from courses.models import InternalCourse
+from danbw_website.utils import send_registration_confirmation
 
 from . import forms
-from .models import UserCourseRegistration, UserProfile
+from .models import (GuestCourseRegistration, UserCourseRegistration,
+                     UserProfile)
 
 
 class RegisterCourse(View):
@@ -99,6 +100,15 @@ class RegisterCourse(View):
             )
 
         if registration_form.is_valid():
+            if not request.user.is_authenticated:
+                email = registration_form.cleaned_data.get("email")
+                if GuestCourseRegistration.objects.filter(email=email, course=course).exists():
+                    messages.warning(
+                        request,
+                        "A registration with this email address already exists."
+                    )
+                    return HttpResponseRedirect(reverse("course_list"))
+
             registration = registration_form.save(commit=False)
             registration.course = course
 
