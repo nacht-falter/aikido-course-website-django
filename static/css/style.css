@@ -305,7 +305,7 @@ a.badge:hover {
 }
 
 
-.registration-form-content textarea {
+.registration-form-content textarea, .membership_form textarea {
   max-height: 10vh;
   width: 100%;
 }

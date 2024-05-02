@@ -57,3 +57,20 @@ def send_registration_confirmation(
     recipient = registration.user.email if is_authenticated else registration.email
     message = "".join(message_parts)
     send_mail(subject, message, sender, [recipient])
+
+
+def send_membership_confirmation(first_name, email):
+    """Sends a membership confirmation email"""
+    subject = "[Dynamic Aikido Nocquet BW] Your membership application"
+    message_parts = [
+        f"Hi {first_name},\n",
+        "We have received your membership application.\n",
+        "The membership fee for the current year will be deducted from your account.\n\n"
+        "In the meantime, we will issue your passport. You don't need to do anything else.\n\n",
+        "Best regards,\n"
+        "The DANBW team\n"
+    ]
+    sender = settings.EMAIL_HOST_USER
+    recipient = email
+    message = "".join(message_parts)
+    send_mail(subject, message, sender, [recipient])

@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "courses",
     "course_registrations",
     "pages",
+    "memberships",
 ]
 
 SITE_ID = 1
