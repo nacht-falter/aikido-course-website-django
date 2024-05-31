@@ -136,7 +136,9 @@ const dojoSelect = document.getElementById("id_dojo");
 const otherDojoDiv = document.getElementById("div_id_other_dojo");
 const otherDojoInput = document.getElementById("id_other_dojo");
 
-otherDojoDiv.style.display = "none";
+if (otherDojoDiv) {
+  otherDojoDiv.style.display = "none";
+}
 
 // Add event listeners:
 entireCourseCheckbox.addEventListener("click", checkSessionCheckboxes);
@@ -154,7 +156,9 @@ if (gradeSelect) {
   gradeSelect.addEventListener("change", checkGrade);
 }
 
-dojoSelect.addEventListener("change", checkDojo);
+if (dojoSelect) {
+  dojoSelect.addEventListener("change", checkDojo);
+}
 
 // Initial checks:
 checkEntireCourseCheckbox();
