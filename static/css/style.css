@@ -12,24 +12,14 @@ body {
 }
 
 main {
-  margin: 3em 1vw;
+  margin: 3em auto;
+  max-width: 1000px;
+  min-width: 100vw;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1000px) {
   main {
-    margin: 3em 10vw;
-  }
-}
-
-@media (min-width: 1400px) {
-  main {
-    margin: 3em 15vw;
-  }
-}
-
-@media (min-width: 1600px) {
-  main {
-    margin: 3em 20vw;
+    min-width: 1000px;
   }
 }
 
