@@ -49,7 +49,8 @@
     </a>
     {% if course.registration_status == 1 %}
     <a class="ms-2 badge text-bg-success" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
-      title="Register for this course"><i class="fa-solid fa-user-plus"></i> Registration open</a>
+      title="Register for this course"><i class="fa-solid fa-user-plus"></i> Registration {{ course.get_registration_status_display }}
+    </a>
     {% endif %}
     {% for registration in upcoming_registrations %}
     {% if registration.course == course %}

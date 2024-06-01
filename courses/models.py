@@ -52,7 +52,7 @@ class Course(models.Model):
 class InternalCourse(Course):
     """Represents a course organized by the organization"""
 
-    REGISTRATION_STATUS = ((0, "Closed"), (1, "Open"))
+    REGISTRATION_STATUS = ((0, "closed"), (1, "open"))
 
     COURSE_TYPE = (
         ("regional", "Regional Course"),

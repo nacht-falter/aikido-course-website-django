@@ -56,8 +56,8 @@
                             <span>{{ course.teacher }}</span>
                         </div>
                         <div class="col-12 col-md-2 col-lg-2 text-md-end">
-                            {% if course.registration_status == 1 %}
-                            <span class="badge text-bg-success">
+                            {% if course.registration_status == 1 and not course.user_registered %}
+                            <span class="badge text-bg-success"><i class="fa-solid fa-user-plus"></i>
                                 {% trans "Registration" %} {{ course.get_registration_status_display }}
                             </span>
                             {% endif %}
@@ -99,7 +99,11 @@
                     {% endfor %}
                 </ul>
                 <div class="text-end">
-                    {% if course.registration_status == 1 %}
+                    {% if course.user_registered %}
+                    <a class="btn btn-primary disabled">
+                        {% trans "You are already signed up" %}
+                    </a>
+                    {% elif course.registration_status == 1 %}
                     <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
                        title="{% trans "Sign up for" %} {{ course.title }}">
                         {% trans "Sign up for" %} {{ course.title }}
@@ -140,23 +144,6 @@
                         <div class="col-3 d-md-none">{% trans "Teacher" %}: </div>
                         <div class="col-9 col-md-2 col-lg-2">
                             <span>{{ course.teacher }}</span>
-                        </div>
-                        <div class="col-12 col-md-2 col-lg-2 text-md-end">
-                            {% if course.registration_status == 1 %}
-                            <span class="badge text-bg-success">
-                                {% trans "Registration" %} {{ course.get_registration_status_display }}
-                            </span>
-                            {% endif %}
-                            {% if user.is_authenticated %}
-                            {% for registration in user.registrations.all %}
-                            {% if registration.course == course %}
-                            <span class="badge text-bg-primary"><i class="fa-regular fa-circle-check"></i> {% trans "Signed up" %}</span>
-                            {% if registration.exam == True %}
-                            <span class="badge text-bg-warning"><i class="fa-regular fa-circle-check"></i> {% trans "Exam" %}</span>
-                            {% endif %}
-                            {% endif %}
-                            {% endfor %}
-                            {% endif %}
                         </div>
                     </div>
                 </div>
