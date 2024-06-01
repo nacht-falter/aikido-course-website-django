@@ -144,22 +144,9 @@ class RegisterCourse(View):
             # edManager.set
             registration.selected_sessions.set(selected_sessions)
 
-            sessions = [
-                f"{session.date.strftime('%b %d')}, "
-                f"{session.start_time.strftime('%H:%M')}-"
-                f"{session.end_time.strftime('%H:%M')}: "
-                f"{session.title}"
-                for session in selected_sessions
-            ]
-
-            if request.user.is_authenticated:
-                send_registration_confirmation(
-                    registration, course, sessions, is_authenticated=True
-                )
-            else:
-                send_registration_confirmation(
-                    registration, course, sessions, is_authenticated=False
-                )
+            send_registration_confirmation(
+                request, registration
+            )
 
             messages.info(
                 request, f"You have successfully signed up for {course.title}"

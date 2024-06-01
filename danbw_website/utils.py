@@ -2,6 +2,9 @@ import os
 
 from django.conf import settings
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils import translation
+from django.utils.formats import date_format, time_format
 
 
 def send_email_confirmation(user, request):
@@ -19,44 +22,37 @@ def send_email_confirmation(user, request):
 
 
 def send_registration_confirmation(
+    request,
     registration,
-    course,
-    sessions,
-    is_authenticated=False
 ):
     """Sends a registration confirmation email"""
 
-    subject = f"[Dynamic Aikido Nocquet BW] You signed up for {registration.course}"
-    message_parts = [
-        f"Hi {registration.user.first_name if is_authenticated else registration.first_name},\n",
-        "You have successfully signed up ",
-        f"for {course}\n",
-        f"\nCourse dates: {course.start_date.strftime('%b %d')} to ",
-        f"{course.end_date.strftime('%b %d, %Y')}\n",
-        "\nRegistration details:\n",
-        "- Selected sessions: \n    ",
-        "\n    ".join(sessions),
-        "\n",
-        f"- Fee: {registration.final_fee} €\n",
-        f"- Payment method: {registration.get_payment_method_display()}\n",
+    translation.activate(request.LANGUAGE_CODE)
+
+    sessions = [
+        f"{date_format(session.date)}, "
+        f"{time_format(session.start_time)} to "
+        f"{time_format(session.end_time)}: "
+        f"{session.title}"
+        for session in registration.selected_sessions.all()
     ]
 
-    if registration.exam:
-        message_parts += [
-            f"- You applied for an exam for {registration.get_exam_grade_display()}\n"
-        ]
+    subject = f"[Dynamic Aikido Nocquet BW] You signed up for {registration.course}"
+    context = {
+        'request': request,
+        'registration': registration,
+        'sessions': sessions,
+        'subject': subject,
+        'bank_account': os.environ.get('BANK_ACCOUNT'),
+    }
 
-    if registration.payment_method == 0:
-        message_parts += [
-            "\n\nPlease transfer the fee to the following account until ",
-            f"{course.bank_transfer_until.strftime('%b %d, %Y')}:\n",
-            f"{os.environ.get('BANK_ACCOUNT')}\n",
-        ]
+    message = render_to_string('registration_confirmation.html', context)
 
     sender = settings.EMAIL_HOST_USER
-    recipient = registration.user.email if is_authenticated else registration.email
-    message = "".join(message_parts)
-    send_mail(subject, message, sender, [recipient])
+    recipient = registration.user.email if request.user.is_authenticated else registration.email
+    send_mail(subject, message, sender, [recipient], html_message=message)
+
+    translation.deactivate()
 
 
 def send_membership_confirmation(first_name, email):

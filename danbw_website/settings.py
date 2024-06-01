@@ -24,6 +24,7 @@ development = os.environ.get("DEVELOPMENT", "False").lower() == "true"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+EMAIL_TEMPLATES_DIR = os.path.join(BASE_DIR, "templates", "email")
 
 
 # Quick-start development settings - unsuitable for production
@@ -115,6 +116,7 @@ SUMMERNOTE_CONFIG = {
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -127,7 +129,7 @@ ROOT_URLCONF = "danbw_website.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [TEMPLATES_DIR],
+        "DIRS": [TEMPLATES_DIR, EMAIL_TEMPLATES_DIR],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -179,11 +181,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+# LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "CET"
 
-DATE_FORMAT = "j M Y"
+# DATE_FORMAT = "j M Y"
+FORMAT_MODULE_PATH = "danbw_website.formats"
 
 USE_I18N = True
 

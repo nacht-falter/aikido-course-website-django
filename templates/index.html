@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+{% load l10n %}
 
 {% block header %}
 <div id="carouselHome" class="carousel slide" data-bs-ride="carousel">
@@ -43,7 +45,7 @@
   {% for course in upcoming_courses %}
   <li class="mb-2">
     <a class="blue-link" title="Go to {{ course.title }}" href="{% url 'course_list' %}#{{ course.id }}">
-      {{ course.start_date|date:"M j" }} to {{ course.end_date|date:"M j, Y" }}: {{ course.title }}
+      {{ course.start_date|localize }} to {{ course.end_date|localize }}: {{ course.title }}
     </a>
     {% if course.registration_status == 1 %}
     <a class="ms-2 badge text-bg-success" href="{% url 'register_course' course.slug %}?next={{ request.path }}"

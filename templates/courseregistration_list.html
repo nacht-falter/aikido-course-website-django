@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load i18n %}
+{% load l10n %}
 
 {% block content %}
 
@@ -13,7 +15,7 @@
         <table class="table">
             <tr>
                 <th scope="col">Dates:</th>
-                <td>{{ registration.course.start_date|date:"M j" }} to {{ registration.course.end_date|date:"M j, Y" }}
+                <td>{{ registration.course.start_date|localize }} to {{ registration.course.end_date|localize }}
                 </td>
             </tr>
             <tr>
@@ -23,8 +25,8 @@
                         {% for session in registration.selected_sessions.all %}
                         <li>
                             <strong>{{ session.title }}</strong>
-                            ({{ session.date|date:"M j" }},
-                            {{ session.start_time|time:"H:s" }}-{{ session.end_time|time:"H:s" }})
+                            ({{ session.date|localize }},
+                            {{ session.start_time|localize }}-{{ session.end_time|localize }})
                         </li>
                         {% endfor %}
                     </ul>
@@ -98,7 +100,7 @@
         <table class="table">
             <tr>
                 <th scope="col">Dates:</th>
-                <td>{{ registration.course.start_date|date:"M j" }} to {{ registration.course.end_date|date:"M j, Y" }}</td>
+                <td>{{ registration.course.start_date|localize }} to {{ registration.course.end_date|localize }}</td>
             </tr>
         </table>
         <p class="badge text-bg-secondary mb-0">
