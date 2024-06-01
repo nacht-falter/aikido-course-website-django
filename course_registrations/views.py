@@ -28,6 +28,7 @@ class RegisterCourse(View):
         counter = 0
         for session in course.sessions.all():
             course_data[f"session_{counter}_fee"] = session.session_fee
+            course_data[f"session_{counter}_fee_cash"] = session.session_fee_cash
             counter += 1
         return course_data
 
@@ -264,6 +265,7 @@ class UpdateUserCourseRegistration(LoginRequiredMixin, View):
         counter = 0
         for session in course.sessions.all():
             course_data[f"session_{counter}_fee"] = session.session_fee
+            course_data[f"session_{counter}_fee_cash"] = session.session_fee_cash
             counter += 1
         return course_data
 
