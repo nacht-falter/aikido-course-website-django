@@ -44,11 +44,11 @@
 <ul>
   {% for course in upcoming_courses %}
   <li class="mb-2">
-    <a class="blue-link" title="Go to {{ course.title }}" href="{% url 'course_list' %}#{{ course.id }}">
+    <a class="me-2 blue-link" title="Go to {{ course.title }}" href="{% url 'course_list' %}#{{ course.id }}">
       {{ course.start_date|localize }} to {{ course.end_date|localize }}: {{ course.title }}
     </a>
-    {% if course.registration_status == 1 %}
-    <a class="ms-2 badge text-bg-success" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
+    {% if course.registration_status == 1 and not course.user_registered %}
+    <a class="badge text-bg-success" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
       title="Register for this course"><i class="fa-solid fa-user-plus"></i> Registration {{ course.get_registration_status_display }}
     </a>
     {% endif %}

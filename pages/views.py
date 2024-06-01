@@ -22,6 +22,10 @@ class HomePage(View):
             list(ExternalCourse.objects.all())
 
         for course in all_courses:
+            if request.user.is_authenticated:
+                course.user_registered = UserCourseRegistration.objects.filter(
+                    user=request.user, course=course
+                )
             course.save()
 
         upcoming_courses = [
@@ -37,6 +41,7 @@ class HomePage(View):
                 for registration in all_registrations
                 if registration.course.end_date >= date.today()
             ]
+
 
         return render(
             request,
