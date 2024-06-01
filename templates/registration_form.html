@@ -17,12 +17,12 @@
         <div class="col-3 mb-2">Dojo:</div>
         <div class="col-9 mb-2">{{ user.profile.get_dojo_display }}</div>
         {% else %}
-        <div class="col-12 mb-2">{{ form.first_name|as_crispy_field }}</div>
-        <div class="col-12 mb-2">{{ form.last_name|as_crispy_field }}</div>
-        <div class="col-12 mb-2">{{ form.email|as_crispy_field }}</div>
-        <div class="col-12 mb-2">{{ form.grade|as_crispy_field }}</div>
-        <div class="col-12 mb-2">{{ form.dojo|as_crispy_field }}</div>
-        <div class="col-12 mb-2">{{ form.other_dojo|as_crispy_field }}</div>
+        <div class="col-12 col-md-6 mb-2">{{ form.first_name|as_crispy_field }}</div>
+        <div class="col-12 col-md-6 mb-2">{{ form.last_name|as_crispy_field }}</div>
+        <div class="col-12 col-md-6 mb-2">{{ form.email|as_crispy_field }}</div>
+        <div class="col-12 col-md-6 mb-2">{{ form.grade|as_crispy_field }}</div>
+        <div class="col-12 col-md-6 mb-2">{{ form.dojo|as_crispy_field }}</div>
+        <div class="col-12 col-md-6 mb-2">{{ form.other_dojo|as_crispy_field }}</div>
         {% endif %}
       </div>
       {% if user.is_authenticated %}
