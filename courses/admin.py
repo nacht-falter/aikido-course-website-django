@@ -98,21 +98,22 @@ class GuestCourseRegistrationInline(admin.TabularInline):
 @admin.register(InternalCourse)
 class InternalCourseAdmin(SummernoteModelAdmin):
     fieldsets = (
-        ('Course Details', {
-            'fields': ('title', 'course_type', 'organizer', 'teacher', 'description')
+        ("Course Details", {
+            "fields": ("title", "course_type", "status", "organizer", "teacher", "description")
         }),
-        ('Dates', {
-            'fields': ('start_date', 'end_date', 'registration_status', 'registration_start_date', 'registration_end_date')
+        ("Dates", {
+            "fields": ("start_date", "end_date", "registration_status", "registration_start_date", "registration_end_date")
         }),
-        ('Payment Information', {
-            'fields': ('course_fee', 'course_fee_cash', 'discount_percentage', 'bank_transfer_until')
+        ("Payment Information", {
+            "fields": ("course_fee", "course_fee_cash", "discount_percentage", "bank_transfer_until")
         }),
-        ('Additional Information', {
-            'fields': ('additional_info',)
+        ("Additional Information", {
+            "fields": ("additional_info",)
         }),
     )
     list_display = (
         "title",
+        "status",
         "registration_status",
         "start_date",
         "end_date",
@@ -220,7 +221,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             selected_sessions = ", ".join(
                 session.title for session in registration.selected_sessions.all())
 
-            if hasattr(registration, 'user'):
+            if hasattr(registration, "user"):
                 user = registration.user
             else:
                 user = None
@@ -263,7 +264,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             return response
 
         zip_buffer = tempfile.TemporaryFile()
-        with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
             for course in queryset:
                 csv_filename = f"{slugify(course.title)}_registrations.csv"
 
@@ -273,7 +274,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                     GuestCourseRegistration.objects.filter(course=course))
 
                 with tempfile.NamedTemporaryFile(
-                    delete=False, mode='w', newline=''
+                    delete=False, mode="w", newline=""
                 ) as csv_file:
                     writer = csv.writer(csv_file)
                     self.write_csv_data(
@@ -282,9 +283,9 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         zip_buffer.seek(0)
 
         response = HttpResponse(
-            zip_buffer.read(), content_type='application/zip')
-        response['Content-Disposition'] = (
-            'attachment; filename=courses_registrations.zip'
+            zip_buffer.read(), content_type="application/zip")
+        response["Content-Disposition"] = (
+            "attachment; filename=courses_registrations.zip"
         )
 
         return response

@@ -12,8 +12,8 @@ class Course(models.Model):
 
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateField(default=date.today)
+    end_date = models.DateField(default=date.today)
     teacher = models.CharField(max_length=200, blank=True)
 
     class Meta:
@@ -53,12 +53,16 @@ class InternalCourse(Course):
     """Represents a course organized by the organization"""
 
     REGISTRATION_STATUS = ((0, "Closed"), (1, "Open"))
+
     COURSE_TYPE = (
         ("regional", "Regional Course"),
         ("international", "International Course"),
         ("family_reunion", "Family Reunion"),
     )
 
+    STATUS_CHOICES = ((0, "Preview"), (1, "Published"))
+
+    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
     registration_status = models.IntegerField(
         choices=REGISTRATION_STATUS, default=0
     )
@@ -66,10 +70,10 @@ class InternalCourse(Course):
     registration_start_date = models.DateField(blank=True)
     registration_end_date = models.DateField(blank=True)
     organizer = models.CharField(max_length=200, blank=True, default="DANBW")
-    course_fee = models.IntegerField()
-    course_fee_cash = models.IntegerField()
+    course_fee = models.IntegerField(default=0)
+    course_fee_cash = models.IntegerField(default=0)
     discount_percentage = models.IntegerField(default=50)
-    bank_transfer_until = models.DateField(blank=False)
+    bank_transfer_until = models.DateField(default=date.today)
     course_type = models.CharField(choices=COURSE_TYPE, max_length=200)
     additional_info = models.TextField("Additional information", blank=True)
 
@@ -95,9 +99,9 @@ class CourseSession(models.Model):
     course = models.ForeignKey(
         InternalCourse, on_delete=models.CASCADE, related_name="sessions"
     )
-    date = models.DateField()
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    date = models.DateField(default=date.today)
+    start_time = models.TimeField(default="00:00")
+    end_time = models.TimeField(default="00:00")
     session_fee = models.IntegerField(default=0)
     session_fee_cash = models.IntegerField(default=0)
 
