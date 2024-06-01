@@ -48,6 +48,7 @@ class RegisterCourse(View):
             return HttpResponseRedirect(reverse("course_list"))
 
         if not request.user.is_authenticated and not request.GET.get("allow_guest"):
+            messages.info(request, "Please log in to your account or continue as a guest.")
             return redirect('/accounts/login/?next=' + request.path + '&allow_guest=True')
 
         if request.user.is_authenticated:
