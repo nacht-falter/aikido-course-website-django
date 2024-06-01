@@ -4,10 +4,10 @@
 {% block content %}
 <h2>Sign up for {{ course.title }}</h2>
 <p>
-{% if not user.authenticated %}
-<span>Please provide your personal details and select the sessions you want to attend.</span>
-{% else %}
+{% if user.is_authenticated %}
 <span>Please select the sessions you want to attend.</span>
+{% else %}
+<span>Please provide your personal details and select the sessions you want to attend.</span>
 {% endif %}
 <span>The course fee will be displayed below the form</span>
 </p>

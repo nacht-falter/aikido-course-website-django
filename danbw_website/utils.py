@@ -22,7 +22,6 @@ def send_registration_confirmation(
     registration,
     course,
     sessions,
-    exam,
     is_authenticated=False
 ):
     """Sends a registration confirmation email"""
@@ -35,13 +34,14 @@ def send_registration_confirmation(
         f"\nCourse dates: {course.start_date.strftime('%b %d')} to ",
         f"{course.end_date.strftime('%b %d, %Y')}\n",
         "\nRegistration details:\n",
-        "- Selected sessions: ",
-        f"{(', '.join(sessions))}\n",
+        "- Selected sessions: \n    ",
+        "\n    ".join(sessions),
+        "\n",
         f"- Fee: {registration.final_fee} €\n",
         f"- Payment method: {registration.get_payment_method_display()}\n",
     ]
 
-    if exam:
+    if registration.exam:
         message_parts += [
             f"- You applied for an exam for {registration.get_exam_grade_display()}\n"
         ]
@@ -63,10 +63,10 @@ def send_membership_confirmation(first_name, email):
     """Sends a membership confirmation email"""
     subject = "[Dynamic Aikido Nocquet BW] Your membership application"
     message_parts = [
-        f"Hi {first_name},\n",
+        f"Hi {first_name},\n\n",
         "We have received your membership application.\n",
         "The membership fee for the current year will be deducted from your account.\n\n"
-        "In the meantime, we will issue your passport. You don't need to do anything else.\n\n",
+        "In the meantime, we will issue your passport. You don't need to do anything else for now.\n\n",
         "Best regards,\n"
         "The DANBW team\n"
     ]

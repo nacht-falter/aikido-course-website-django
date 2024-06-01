@@ -30,6 +30,7 @@ class UserCourseRegistration(models.Model):
         choices=constants.PAYMENT_METHODS, default=0)
     comment = models.TextField(blank=True)
     dinner = models.BooleanField(blank=True, null=True)
+    overnight_stay = models.BooleanField(blank=True, null=True)
 
     class Meta:
         # Set unique constraint: https://docs.djangoproject.com/en/4.2/
@@ -59,8 +60,10 @@ class UserCourseRegistration(models.Model):
                 self.exam = False
 
     def save(self, *args, **kwargs):
-        if not self.course.dinner:
+        if not self.course.course_type == "international":
             self.dinner = 0
+            self.overnight_stay = 0
+
         super().save(*args, **kwargs)
 
 
@@ -91,6 +94,7 @@ class GuestCourseRegistration(models.Model):
         choices=constants.PAYMENT_METHODS, default=0)
     comment = models.TextField(blank=True)
     dinner = models.BooleanField(blank=True, null=True)
+    overnight_stay = models.BooleanField(blank=True, null=True)
 
     class Meta:
         # Set unique constraint: https://docs.djangoproject.com/en/4.2/
@@ -119,8 +123,9 @@ class GuestCourseRegistration(models.Model):
                 self.exam = False
 
     def save(self, *args, **kwargs):
-        if not self.course.dinner:
+        if not self.course.course_type == "international":
             self.dinner = 0
+            self.overnight_stay = 0
 
         if self.dojo == "other":
             self.dojo = self.other_dojo

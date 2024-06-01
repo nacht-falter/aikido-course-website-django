@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
 
+from danbw_website import constants
+
 
 class Course(models.Model):
     """Represents a course a user can sign up for"""
@@ -51,6 +53,11 @@ class InternalCourse(Course):
     """Represents a course organized by the organization"""
 
     REGISTRATION_STATUS = ((0, "Closed"), (1, "Open"))
+    COURSE_TYPE = (
+        ("regional", "Regional Course"),
+        ("international", "International Course"),
+        ("family_reunion", "Family Reunion"),
+    )
 
     registration_status = models.IntegerField(
         choices=REGISTRATION_STATUS, default=0
@@ -63,7 +70,8 @@ class InternalCourse(Course):
     course_fee_cash = models.IntegerField()
     discount_percentage = models.IntegerField(default=50)
     bank_transfer_until = models.DateField(blank=False)
-    dinner = models.BooleanField("Course includes a Dinner", default=False)
+    course_type = models.CharField(choices=COURSE_TYPE, max_length=200)
+    additional_info = models.TextField("Additional information", blank=True)
 
     def save(self, *args, **kwargs):
         if self.registration_start_date <= date.today() <= self.registration_end_date:
@@ -94,7 +102,7 @@ class CourseSession(models.Model):
     session_fee_cash = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.title
+        return f"{constants.WEEKDAYS[self.date.weekday()][1]}, {self.date.strftime('%d.%m.%Y')}, {self.start_time.strftime('%H:%M')}-{self.end_time.strftime('%H:%M')}: {self.title}"
 
     # https://docs.djangoproject.com/en/4.2/ref/models/instances
     # /#django.db.models.Model.clean
