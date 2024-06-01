@@ -42,6 +42,7 @@ class UserCourseRegistrationInline(admin.TabularInline):
         "payment_method",
         "discount",
         "dinner",
+        "overnight_stay"
     ]
     readonly_fields = [
         "user",
@@ -53,6 +54,7 @@ class UserCourseRegistrationInline(admin.TabularInline):
         "payment_method",
         "discount",
         "dinner",
+        "overnight_stay"
     ]
 
 
@@ -75,6 +77,7 @@ class GuestCourseRegistrationInline(admin.TabularInline):
         "payment_method",
         "discount",
         "dinner",
+        "overnight_stay",
     ]
     readonly_fields = [
         "email",
@@ -88,26 +91,25 @@ class GuestCourseRegistrationInline(admin.TabularInline):
         "payment_method",
         "discount",
         "dinner",
+        "overnight_stay"
     ]
 
 
 @admin.register(InternalCourse)
 class InternalCourseAdmin(SummernoteModelAdmin):
-    fields = (
-        "title",
-        "start_date",
-        "end_date",
-        "registration_status",
-        "registration_start_date",
-        "registration_end_date",
-        "organizer",
-        "teacher",
-        "course_fee",
-        "course_fee_cash",
-        "discount_percentage",
-        "bank_transfer_until",
-        "dinner",
-        "description",
+    fieldsets = (
+        ('Course Details', {
+            'fields': ('title', 'course_type', 'organizer', 'teacher', 'description')
+        }),
+        ('Dates', {
+            'fields': ('start_date', 'end_date', 'registration_status', 'registration_start_date', 'registration_end_date')
+        }),
+        ('Payment Information', {
+            'fields': ('course_fee', 'course_fee_cash', 'discount_percentage', 'bank_transfer_until')
+        }),
+        ('Additional Information', {
+            'fields': ('additional_info',)
+        }),
     )
     list_display = (
         "title",
@@ -155,7 +157,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 teacher=course.teacher,
                 discount_percentage=course.discount_percentage,
                 bank_transfer_until=course.bank_transfer_until,
-                dinner=course.dinner,
+                course_type=course.course_type,
+                additional_info=course.additional_info,
             )
 
             for session in course.sessions.all():
@@ -207,8 +210,9 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             "Final Fee",
             "Payment Status"
         ]
-        if registrations and registrations[0].course.dinner:
+        if registrations and registrations[0].course.course_type == "international":
             header_row.append("Dinner")
+            header_row.append("Overnight Stay")
         writer.writerow(header_row)
 
         # Write data rows
@@ -233,8 +237,9 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 registration.final_fee,
                 registration.get_payment_status_display(),
             ]
-            if registration.course.dinner:
+            if registration.course.course_type == "international":
                 data_row.append("Yes" if registration.dinner else "No")
+                data_row.append("Yes" if registration.overnight_stay else "No")
             writer.writerow(data_row)
 
     def export_csv(self, request, queryset):
