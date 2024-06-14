@@ -1,4 +1,3 @@
-from cloudinary.models import CloudinaryField
 from django.db import models
 
 
@@ -30,7 +29,7 @@ class Page(models.Model):
         Category, on_delete=models.CASCADE, related_name="pages"
     )
     status = models.IntegerField(choices=STATUS, default=0)
-    featured_image = CloudinaryField("image", default="placeholder")
+    featured_image = models.ImageField(upload_to="images/")
     content = models.TextField()
     menu_position = models.IntegerField(default=0)
 

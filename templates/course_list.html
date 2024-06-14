@@ -33,25 +33,29 @@
     <div class="accordion-item border-0 mb-2" id="accordion-{{ course.id }}">
         <div class="accordion-header">
             <a id="button-{{ course.id }}" class="accordion-button collapsed text-decoration-none" role="button"
-               data-bs-toggle="collapse" title="{{ course.title }}" data-bs-target="#collapseCourse{{ course.id }}"
-               aria-expanded="false" aria-controls="collapseCourse{{ course.id }}">
+                data-bs-toggle="collapse" title="{{ course.title }}" data-bs-target="#collapseCourse{{ course.id }}"
+                aria-expanded="false" aria-controls="collapseCourse{{ course.id }}">
                 <div class="container m-0 text-left">
                     <div class="row align-items-center">
                         <div class="col-12 d-md-none fs-5">
                             <span><strong>{{ course.title }}</strong></span>
                         </div>
-                        <div class="col-3 d-md-none">{% trans "Dates" %}: </div>
+                        <div class="col-3 d-md-none">{% trans "Dates" %}</div>
                         <div class="col-9 col-md-2 col-lg-2">
+                            {% if course.start_date == course.end_date %}
+                            <span>{{ course.start_date|localize }}</span>
+                            {% else %}
                             <span>{{ course.start_date|localize }} to {{ course.end_date|localize }}</span>
+                            {% endif %}
                         </div>
-                        <div class="col-3 d-md-none">{% trans "Organizer" %}: </div>
+                        <div class="col-3 d-md-none">{% trans "Organizer" %}</div>
                         <div class="col-9 col-md-2 col-lg-2">
                             <span>{{ course.organizer }}</span>
                         </div>
                         <div class="col-md-4 col-lg-4 d-none d-md-block">
                             <span><strong>{{ course.title }}</strong></span>
                         </div>
-                        <div class="col-3 d-md-none">{% trans "Teacher" %}: </div>
+                        <div class="col-3 d-md-none">{% trans "Teacher" %}</div>
                         <div class="col-9 col-md-2 col-lg-2">
                             <span>{{ course.teacher }}</span>
                         </div>
@@ -64,9 +68,11 @@
                             {% if user.is_authenticated %}
                             {% for registration in user.registrations.all %}
                             {% if registration.course == course %}
-                            <span class="badge text-bg-primary"><i class="fa-regular fa-circle-check"></i> {% trans "Signed up" %}</span>
+                            <span class="badge text-bg-primary"><i class="fa-regular fa-circle-check"></i> {% trans
+                                "Signed up" %}</span>
                             {% if registration.exam == True %}
-                            <span class="badge text-bg-warning"><i class="fa-regular fa-circle-check"></i> {% trans "Exam" %}</span>
+                            <span class="badge text-bg-warning"><i class="fa-regular fa-circle-check"></i> {% trans
+                                "Exam" %}</span>
                             {% endif %}
                             {% endif %}
                             {% endfor %}
@@ -78,34 +84,89 @@
         </div>
         <div id="collapseCourse{{ course.id }}" class="accordion-collapse collapse" data-bs-parent="#accordion">
             <div class="accordion-body px-5 py-4">
-                <h5 class="mb-4">{{ course.title }}</h5>
-                <h6 class="border-bottom border-dark-subtle">{% trans "Dates" %}:</h6>
-                {% if course.start_date == course.end_date %}
-                <p>{{ course.start_date|date:"l" }}, {{ course.start_date|localize }}</p>
-                {% else %}
-                <p>{{ course.start_date|localize }} to {{ course.end_date|localize }}</p>
-                {% endif %}
-                {% if course.description %}
-                <h6 class="border-bottom border-dark-subtle">{% trans "Description" %}:</h6>
-                <p>{{ course.description|safe }}</p>
-                {% endif %}
-                <h6 class="border-bottom border-dark-subtle">{% trans "Sessions" %}:</h6>
-                <ul>
-                    {% for session in course.sessions.all %}
-                    <li>
-                        {{ session.date|date:"l" }}, {{ session.date|localize }}, {{ session.start_time|localize }} to {{ session.end_time|localize }}:
-                        <strong>{{ session.title }}</strong><br>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <div class="text-end">
+                <h5 class="mb-4 border-bottom border-dark-subtle">{{ course.title }}</h5>
+                <div class="row">
+                    <div class="d-flex d-md-none mb-3 mb-md-0">
+                        {% if course.flyer %}
+                        <img src="{{ course.flyer.url }}" class="img-fluid" alt="Image for {{ course.title }}">
+                        {% else %}
+                        <img src="{% static 'images/placeholder.jpg' %}" class="img-fluid"
+                            alt="Image for {{ course.title }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row">
+                            <div class="col-md-4 fw-bold mt-1">{% trans "Dates" %}</div>
+                            {% if course.start_date == course.end_date %}
+                            <div class="col-md-8 mt-md-1">{{ course.start_date|date:"l" }}, {{ course.start_date|localize }}
+                            </div>
+                            {% else %}
+                            <div class="col-md-8 mt-md-1">{{ course.start_date|localize }} to {{ course.end_date|localize }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <hr>
+                        {% if course.location %}
+                        <div class="row">
+                            <div class="col-md-4 fw-bold mt-1">{% trans "Location" %}</div>
+                            <div class="col-md-8 mt-md-1">{{ course.location }}</div>
+                        </div>
+                        <hr>
+                        {% endif %}
+                        {% if course.description %}
+                        <div class="row">
+                            <div class="col-md-4 fw-bold mt-1">{% trans "Description" %}</div>
+                            <div class="col-md-8 mt-md-1 mt-1">{{ course.description|safe }}</div>
+                        </div>
+                        <hr>
+                        {% endif %}
+                        {% if course.additional_info %}
+                        <div class="row">
+                            <div class="col-md-4 fw-bold mt-1">{% trans "Additional Information" %}</div>
+                            <div class="col-md-8 mt-md-1">{{ course.additional_info|safe }}</div>
+                        </div>
+                        <hr>
+                        {% endif %}
+                        <div class="row">
+                            <div class="fw-bold mt-1">{% trans "Sessions" %}</div>
+                            {% regroup course.sessions.all by date as session_dates %}
+                            {% for date_group in session_dates %}
+                            <div class="col-md-4 mt-2 mt-md-0">
+                                {{ date_group.grouper|date:"l, F j, Y" }}
+                            </div>
+                            <div class="col-md-8">
+                                {% for session in date_group.list %}
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{ session.start_time|localize }} to {{ session.end_time|localize }}
+                                    </div>
+                                    <div class="col-7">
+                                        <strong>{{ session.title }}</strong><br>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="d-none d-md-block col-md-4 mb-3 mb-md-0">
+                        {% if course.flyer %}
+                        <img src="{{ course.flyer.url }}" class="img-fluid" alt="Image for {{ course.title }}">
+                        {% else %}
+                        <img src="{% static 'images/placeholder.jpg' %}" class="img-fluid"
+                            alt="Image for {{ course.title }}">
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">
                     {% if course.user_registered %}
                     <a class="btn btn-primary disabled">
                         {% trans "You are already signed up" %}
                     </a>
                     {% elif course.registration_status == 1 %}
                     <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
-                       title="{% trans "Sign up for" %} {{ course.title }}">
+                        title="{% trans " Sign up for" %} {{ course.title }}">
                         {% trans "Sign up for" %} {{ course.title }}
                     </a>
                     {% elif course.registration_start_date|date:"Y-m-d" > todays_date %}
@@ -124,24 +185,25 @@
     {% elif course.get_course_type == "InternalCourse" and course.status == 0 %}
     <div class="accordion-item border-0 mb-2" id="accordion-{{ course.id }}">
         <div class="accordion-header">
-            <span id="button-{{ course.id }}" class="accordion-button accordion-button-no-link text-dark" title="{{ course.title }}">
+            <span id="button-{{ course.id }}" class="accordion-button accordion-button-no-link text-dark"
+                title="{{ course.title }}">
                 <div class="container m-0 text-left">
                     <div class="row align-items-center">
                         <div class="col-12 d-md-none fs-5">
                             <span><strong>{{ course.title }}</strong></span>
                         </div>
-                        <div class="col-3 d-md-none">{% trans "Dates" %}: </div>
+                        <div class="col-3 d-md-none">{% trans "Dates" %} </div>
                         <div class="col-9 col-md-2 col-lg-2">
                             <span>{{ course.start_date|localize }} to {{ course.end_date|localize }}</span>
                         </div>
-                        <div class="col-3 d-md-none">{% trans "Organizer" %}: </div>
+                        <div class="col-3 d-md-none">{% trans "Organizer" %} </div>
                         <div class="col-9 col-md-2 col-lg-2">
                             <span>{{ course.organizer }}</span>
                         </div>
                         <div class="col-md-4 col-lg-4 d-none d-md-block">
                             <span><strong>{{ course.title }}</strong></span>
                         </div>
-                        <div class="col-3 d-md-none">{% trans "Teacher" %}: </div>
+                        <div class="col-3 d-md-none">{% trans "Teacher" %} </div>
                         <div class="col-9 col-md-2 col-lg-2">
                             <span>{{ course.teacher }}</span>
                         </div>
@@ -153,29 +215,31 @@
     {% elif course.get_course_type == "ExternalCourse" %}
     <div class="accordion-item border-0 mb-2" id="accordion-{{ course.id }}">
         <div class="accordion-header">
-            <span id="button-{{ course.id }}" class="accordion-button accordion-button-no-link text-dark" title="{{ course.title }}">
+            <span id="button-{{ course.id }}" class="accordion-button accordion-button-no-link text-dark"
+                title="{{ course.title }}">
                 <div class="container m-0 text-left">
                     <div class="row align-items-center">
                         <div class="col-12 d-md-none fs-5">
                             <span><strong>{{ course.title }}</strong></span>
                         </div>
-                        <div class="col-3 d-md-none">{% trans "Dates" %}: </div>
+                        <div class="col-3 d-md-none">{% trans "Dates" %} </div>
                         <div class="col-9 col-md-2 col-lg-2">
                             <span>{{ course.start_date|localize }} to {{ course.end_date|localize }}</span>
                         </div>
-                        <div class="col-3 d-md-none">{% trans "Organizer" %}: </div>
+                        <div class="col-3 d-md-none">{% trans "Organizer" %} </div>
                         <div class="col-9 col-md-2 col-lg-2">
                             <span>{{ course.organizer }}</span>
                         </div>
                         <div class="col-md-4 col-lg-4 d-none d-md-block">
                             <span><strong>{{ course.title }}</strong></span>
                         </div>
-                        <div class="col-3 d-md-none">{% trans "Teacher" %}: </div>
+                        <div class="col-3 d-md-none">{% trans "Teacher" %} </div>
                         <div class="col-9 col-md-2 col-lg-2">
                             <span>{{ course.teacher }}</span>
                         </div>
                         <div class="col-12 col-md-2 col-lg-2 text-md-end">
-                            <a href="{{ course.url }}" class="badge btn btn-sm btn-outline-primary" title="{% trans "Go to" %} {{ course.title }}" target="_blank">
+                            <a href="{{ course.url }}" class="badge btn btn-sm btn-outline-primary" title="{% trans " Go
+                                to" %} {{ course.title }}" target="_blank">
                                 <small><i class="fas fa-external-link-alt"></i></small>
                                 {% trans "Course website" %}
                             </a>

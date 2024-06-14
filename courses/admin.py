@@ -99,7 +99,7 @@ class GuestCourseRegistrationInline(admin.TabularInline):
 class InternalCourseAdmin(SummernoteModelAdmin):
     fieldsets = (
         ("Course Details", {
-            "fields": ("title", "course_type", "status", "organizer", "teacher", "description")
+            "fields": ("title", "course_type", "status", "organizer", "teacher", "description", "flyer", "location")
         }),
         ("Dates", {
             "fields": ("start_date", "end_date", "registration_status", "registration_start_date", "registration_end_date")

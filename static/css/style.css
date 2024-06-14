@@ -17,9 +17,15 @@ main {
   min-width: 100vw;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   main {
-    min-width: 1000px;
+    min-width: 1100px;
+  }
+}
+
+@media (min-width: 1400px) {
+  main {
+    min-width: 1200px;
   }
 }
 
@@ -294,6 +300,9 @@ a.badge:hover {
   padding: 0.5em;
 }
 
+.course-details th {
+  width: 40%;
+}
 
 .registration-form-content textarea, .membership_form textarea {
   max-height: 10vh;

@@ -15,6 +15,7 @@ class Course(models.Model):
     start_date = models.DateField(default=date.today)
     end_date = models.DateField(default=date.today)
     teacher = models.CharField(max_length=200, blank=True)
+    location = models.CharField(max_length=200, blank=True)
 
     class Meta:
         ordering = ["start_date"]
@@ -35,13 +36,6 @@ class Course(models.Model):
             and self.start_date > self.end_date
         ):
             raise ValidationError("Start date cannot be later than end date.")
-
-        if (self.registration_start_date
-                and self.registration_end_date
-                and self.registration_start_date > self.registration_end_date
-                ):
-            raise ValidationError(
-                "Registration start date cannot be later than registration end date.")
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -67,18 +61,33 @@ class InternalCourse(Course):
         choices=REGISTRATION_STATUS, default=0
     )
     description = models.TextField(blank=True)
-    registration_start_date = models.DateField(blank=True)
-    registration_end_date = models.DateField(blank=True)
+    registration_start_date = models.DateField(blank=True, null=True)
+    registration_end_date = models.DateField(blank=True, null=True)
     organizer = models.CharField(max_length=200, blank=True, default="DANBW")
     course_fee = models.IntegerField(default=0)
     course_fee_cash = models.IntegerField(default=0)
     discount_percentage = models.IntegerField(default=50)
     bank_transfer_until = models.DateField(default=date.today)
     course_type = models.CharField(choices=COURSE_TYPE, max_length=200)
+    flyer = models.ImageField(
+        upload_to="images/", default="images/placeholder.jpg", blank=True
+    )
     additional_info = models.TextField("Additional information", blank=True)
 
+    # https://docs.djangoproject.com/en/4.2/ref/models/instances
+    # /#django.db.models.Model.clean
+    def clean(self):
+        """Custom validation for Internal Course model"""
+        if (self.registration_start_date
+            and self.registration_end_date
+            and self.registration_start_date > self.registration_end_date
+            ):
+            raise ValidationError(
+                "Registration start date cannot be later than registration end date.")
+
     def save(self, *args, **kwargs):
-        if self.registration_start_date <= date.today() <= self.registration_end_date:
+        if self.registration_start_date and self.registration_end_date \
+                and self.registration_start_date <= date.today() <= self.registration_end_date:
             self.registration_status = 1  # Open
         else:
             self.registration_status = 0  # Closed
