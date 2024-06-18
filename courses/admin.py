@@ -138,10 +138,14 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             new_title = f"Copy of {course.title}"
             new_slug = f"copy-of-{course.slug}"
             counter = 2
-            while InternalCourse.objects.filter(title=new_title).exists():
+            while InternalCourse.objects.filter(slug=new_slug).exists():
                 new_title = f"Copy {counter} of {course.title}"
                 new_slug = f"copy-{counter}-of-{course.slug}"
                 counter += 1
+
+            print("\n\n\n\n\n\n\n\n")
+            print(new_title, new_slug)
+            print("\n\n\n\n\n\n\n\n")
 
             InternalCourse.objects.create(
                 title=new_title,

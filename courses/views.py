@@ -1,9 +1,12 @@
+from datetime import date
+
 from django.shortcuts import render
 from django.views import View
 
+from course_registrations.models import UserCourseRegistration
+
 from .models import ExternalCourse, InternalCourse
 
-from course_registrations.models import UserCourseRegistration
 
 class CourseList(View):
     """Displays a list of all internal and external courses"""
@@ -11,7 +14,6 @@ class CourseList(View):
     def get(self, request):
         internal_courses = InternalCourse.objects.all()
         external_courses = ExternalCourse.objects.all()
-
 
         # Update the registration status for each course and set users registration status
         for course in internal_courses:
@@ -23,12 +25,18 @@ class CourseList(View):
                 )
 
         all_courses = list(internal_courses) + list(external_courses)
-        course_list = sorted(all_courses, key=lambda course: course.start_date)
+        all_courses = sorted(all_courses, key=lambda course: course.start_date)
+        all_courses = sorted(all_courses, key=lambda course: course.start_date.year, reverse=True)
+        past_courses = filter(
+                lambda course: course.start_date.year < date.today().year, all_courses)
+        current_courses = filter(
+            lambda course: course.start_date.year >= date.today().year, all_courses)
 
         return render(
             request,
             "course_list.html",
             {
-                "course_list": course_list,
+                "past_courses": past_courses,
+                "current_courses": current_courses,
             },
         )

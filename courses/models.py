@@ -10,7 +10,7 @@ from danbw_website import constants
 class Course(models.Model):
     """Represents a course a user can sign up for"""
 
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     start_date = models.DateField(default=date.today)
     end_date = models.DateField(default=date.today)
@@ -69,9 +69,7 @@ class InternalCourse(Course):
     discount_percentage = models.IntegerField(default=50)
     bank_transfer_until = models.DateField(default=date.today)
     course_type = models.CharField(choices=COURSE_TYPE, max_length=200)
-    flyer = models.ImageField(
-        upload_to="images/", default="images/placeholder.jpg", blank=True
-    )
+    flyer = models.ImageField(upload_to="images/", blank=True)
     additional_info = models.TextField("Additional information", blank=True)
 
     # https://docs.djangoproject.com/en/4.2/ref/models/instances
@@ -91,6 +89,9 @@ class InternalCourse(Course):
             self.registration_status = 1  # Open
         else:
             self.registration_status = 0  # Closed
+
+        if self.end_date < date.today():
+            self.status = 0
         super().save(*args, **kwargs)
 
 
