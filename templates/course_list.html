@@ -13,7 +13,7 @@
 {% regroup past_courses by start_date.year as past_course_years %}
 
 {% for year in current_course_years %}
-<h3 class="my-4">{{ year.grouper }}</h3>
+<h3 class="mb-4 mt-5">{{ year.grouper }}</h3>
 
 {% if year.list %}
 {% include "course_list_header.html" %}
@@ -27,13 +27,17 @@
 <p>{% trans "There are currently no courses available." %}</p>
 {% endfor %}
 
-<button class="btn btn-outline-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePastCourses"
-    aria-expanded="false" aria-controls="collapsePastCourses">
-    {%trans "Show/Hide past years" %}
-</button>
+<div class="text-center">
+    <button id="past-courses-btn" class="btn btn-outline-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePastCourses"
+        aria-expanded="false" aria-controls="collapsePastCourses">
+        <span id="show-past-courses" class="d-inline">{%trans "Show past courses" %}</span>
+        <span id="hide-past-courses" class="d-none">{%trans "Hide past courses" %}</span>
+    </button>
+</div>
 <div class="collapse" id="collapsePastCourses">
+    <h2 class="mt-5">{% trans "Past Courses" %}</h2>
     {% for year in past_course_years %}
-    <h3 class="my-4">{{ year.grouper }}</h3>
+    <h3 class="mb-4 mt-5">{{ year.grouper }}</h3>
     {% if year.list %}
     {% include "course_list_header.html" %}
     {% endif %}

@@ -51,7 +51,7 @@
                         {% for registration in user.registrations.all %}
                         {% if registration.course == course %}
                         <span class="badge text-bg-primary"><i class="fa-regular fa-circle-check"></i>
-                            {% if year >= todays_date|date:"Y" %}
+                            {% if course.start_date|date:"Y-m-d" >= todays_date %}
                                 {% trans "Signed up" %}
                             {% else %}
                                 {% trans "Attended" %}

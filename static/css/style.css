@@ -225,6 +225,10 @@ a.badge:hover {
   background-color: #ffffff;
 }
 
+.accordion-button-no-link {
+  cursor: auto !important;
+}
+
 .accordion-button-no-link::after {
   background-image: none !important;
 }
@@ -304,7 +308,8 @@ a.badge:hover {
   width: 40%;
 }
 
-.registration-form-content textarea, .membership_form textarea {
+.registration-form-content textarea,
+.membership_form textarea {
   max-height: 10vh;
   width: 100%;
 }
