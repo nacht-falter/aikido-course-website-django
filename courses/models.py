@@ -76,6 +76,7 @@ class InternalCourse(Course):
     # /#django.db.models.Model.clean
     def clean(self):
         """Custom validation for Internal Course model"""
+        super().clean()
         if (self.registration_start_date
             and self.registration_end_date
             and self.registration_start_date > self.registration_end_date

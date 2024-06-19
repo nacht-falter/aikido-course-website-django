@@ -128,6 +128,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                GuestCourseRegistrationInline]
     actions = [
         "duplicate_selected_courses",
+        "toggle_status",
         "toggle_registration_status",
         "export_csv"
     ]
@@ -188,6 +189,17 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     toggle_registration_status.short_description = (
         "Toggle registration status of selected courses"
     )
+
+    def toggle_status(self, request, queryset):
+        """Action for toggling course status"""
+        for course in queryset:
+            if course.status == 0:
+                course.status = 1
+            else:
+                course.status = 0
+            course.save()
+
+    toggle_status.short_description = "Toggle status of selected courses"
 
     def get_course_registration_count(self, course):
         """Gets the number of registrations for a course"""
