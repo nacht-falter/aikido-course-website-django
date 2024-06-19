@@ -7,48 +7,58 @@
 {% now "Y-m-d" as todays_date %}
 {% now "Y" as current_year %}
 
-<h2>{% trans "Current Courses" %}</h2>
+<div class="card">
+    <div class="card-header">
+        <h2 class="my-1">{% trans "Current Courses" %}</h2>
+    </div>
+    {% regroup current_courses by start_date.year as current_course_years %}
+    {% regroup past_courses by start_date.year as past_course_years %}
 
-{% regroup current_courses by start_date.year as current_course_years %}
-{% regroup past_courses by start_date.year as past_course_years %}
-
-{% for year in current_course_years %}
-<h3 class="mb-4 mt-5">{{ year.grouper }}</h3>
-
-{% if year.list %}
-{% include "course_list_header.html" %}
-{% endif %}
-<div class="accordion" id="accordion-{{ year.grouper }}">
-    {% for course in year.list %}
-    {% include "course_list_item.html" with course=course year=year.grouper %}
-    {% endfor %}
+    <div class="card-body pt-0">
+        {% for year in current_course_years %}
+        <h3 class="mt-4 mb-2">{{ year.grouper }}</h3>
+        {% if year.list %}
+        {% include "course_list_header.html" %}
+        {% endif %}
+        <div class="accordion" id="accordion-{{ year.grouper }}">
+            {% for course in year.list %}
+            {% include "course_list_item.html" with course=course year=year.grouper %}
+            {% endfor %}
+        </div>
+        {% empty %}
+        <p>{% trans "There are currently no courses available." %}</p>
+        {% endfor %}
+    </div>
 </div>
-{% empty %}
-<p>{% trans "There are currently no courses available." %}</p>
-{% endfor %}
 
 <div class="text-center">
-    <button id="past-courses-btn" class="btn btn-outline-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePastCourses"
-        aria-expanded="false" aria-controls="collapsePastCourses">
-        <span id="show-past-courses" class="d-inline">{%trans "Show past courses" %}</span>
-        <span id="hide-past-courses" class="d-none">{%trans "Hide past courses" %}</span>
+    <button id="past-courses-btn" class="btn btn-outline-primary mt-5 mb-3 w-25" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapsePastCourses" aria-expanded="false" aria-controls="collapsePastCourses">
+        <span id="show-past-courses" class="d-inline">{%trans "Show past courses" %}<i class="fa fa-chevron-down ms-2"></i></span>
+        <span id="hide-past-courses" class="d-none">{%trans "Hide past courses" %}<i class="fa fa-chevron-up ms-2"></i></span>
+            
     </button>
 </div>
 <div class="collapse" id="collapsePastCourses">
-    <h2 class="mt-5">{% trans "Past Courses" %}</h2>
-    {% for year in past_course_years %}
-    <h3 class="mb-4 mt-5">{{ year.grouper }}</h3>
-    {% if year.list %}
-    {% include "course_list_header.html" %}
-    {% endif %}
-    <div class="accordion" id="accordion-{{ year.grouper }}">
-        {% for course in year.list %}
-        {% include "course_list_item.html" with course=course year=year.grouper %}
+    <div class="card">
+        <div class="card-header">
+            <h2 class="my-1">{% trans "Past Courses" %}</h2>
+        </div>
+        <div class="card-body pt-0">
+        {% for year in past_course_years %}
+        <h3 class="mt-4 mb-2">{{ year.grouper }}</h3>
+        {% if year.list %}
+        {% include "course_list_header.html" %}
+        {% endif %}
+        <div class="accordion" id="accordion-{{ year.grouper }}">
+            {% for course in year.list %}
+            {% include "course_list_item.html" with course=course year=year.grouper %}
+            {% endfor %}
+        </div>
+        {% empty %}
+        <p>{% trans "There are no past courses." %}</p>
         {% endfor %}
     </div>
-    {% empty %}
-    <p>{% trans "There are no past courses." %}</p>
-    {% endfor %}
 </div>
 
 {% endblock content %}
