@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.db import models
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget
+from django.utils.translation import gettext_lazy as _
 
 from .models import Category, Page
 
@@ -23,6 +24,8 @@ class PageAdmin(SummernoteModelAdmin):
             else:
                 page.status = 0
             page.save()
+
+    toggle_status.short_description = _("Toggle page status")
 
 
 class PageInline(admin.StackedInline):

@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, reverse
+from django.utils.translation import gettext as _
 from django.views import View, generic
 
 from course_registrations.models import UserCourseRegistration
@@ -81,10 +82,11 @@ class ContactPage(View):
                 )
             except BadHeaderError:
                 messages.warning(
-                    request, "Invalid Header found. Please try again."
+                    request, _("Invalid Header found. Please try again.")
                 )
                 return HttpResponseRedirect(reverse("contact"))
-            messages.success(request, "Thank you! Your message has been sent.")
+            messages.success(request, _(
+                "Thank you! Your message has been sent."))
         else:
             contact_form = forms.ContactForm()
             return render(
