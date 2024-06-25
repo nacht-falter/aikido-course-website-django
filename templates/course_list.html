@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% load i18n %}
 {% load l10n %}
 
@@ -32,7 +32,7 @@
 </div>
 
 <div class="text-center">
-    <button id="past-courses-btn" class="btn btn-outline-primary mt-5 mb-3 w-25" type="button" data-bs-toggle="collapse"
+    <button id="past-courses-btn" class="btn btn-outline-primary mt-5 mb-3" type="button" data-bs-toggle="collapse"
         data-bs-target="#collapsePastCourses" aria-expanded="false" aria-controls="collapsePastCourses">
         <span id="show-past-courses" class="d-inline">{%trans "Show past courses" %}<i class="fa fa-chevron-down ms-2"></i></span>
         <span id="hide-past-courses" class="d-none">{%trans "Hide past courses" %}<i class="fa fa-chevron-up ms-2"></i></span>

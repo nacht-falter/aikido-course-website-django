@@ -50,17 +50,15 @@
                         {% if user.is_authenticated %}
                         {% for registration in user.registrations.all %}
                         {% if registration.course == course %}
-                        <span class="badge text-bg-primary"><i class="fa-regular fa-circle-check"></i>
-                            {% if course.start_date|date:"Y-m-d" >= todays_date %}
+                        <a class="badge text-bg-primary" href="{% url 'courseregistration_list' %}#{{ registration.id }}" title="{% trans "Show registration" %}"><i class="fa-regular fa-circle-check"></i>
+                            {% if course.start_date|date:"" >= todays_date %}
                                 {% trans "Signed up" %}
                             {% else %}
                                 {% trans "Attended" %}
                             {% endif %}
-                        </span>
+                        </a>
                         {% if registration.exam == True %}
-                        <span class="badge text-bg-warning"><i class="fa-regular fa-circle-check"></i>
-                            {% trans "Exam" %}
-                        </span>
+                        <a class="badge text-bg-warning" href="{% url 'courseregistration_list' %}#{{ registration.id }}" title="{% trans "Show registration" %}"><i class="fa-regular fa-circle-check"></i> {% trans "Exam" %}</a>
                         {% endif %}
                         {% endif %}
                         {% endfor %}
@@ -137,7 +135,7 @@
                             {% for session in date_group.list %}
                             <div class="row">
                                 <div class="col-5">
-                                    {{ session.start_time|localize }} to {{ session.end_time|localize }}
+                                    {{ session.start_time|localize }} to {{ session.end_time|localize }} {% if session.start_time|localize == session.start_time|date:"H:i" %} Uhr {% endif %}
                                 </div>
                                 <div class="col-7">
                                     <strong>{{ session.title }}</strong><br>
@@ -160,9 +158,13 @@
             <hr>
             <div class="text-center">
                 {% if course.user_registered %}
-                <a class="btn btn-primary disabled">
-                    {% trans "You are already signed up" %}
+                {% for registration in user.registrations.all %}
+                {% if registration.course == course %}
+                <a class="btn btn-primary" href="{% url 'courseregistration_list' %}#{{ registration.id }}">
+                    {% trans "You are already signed up. Go to your registration" %}
                 </a>
+                {% endif %}
+                {% endfor %}
                 {% elif course.registration_status == 1 %}
                 <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
                     title="{% trans " Sign up for" %} {{ course.title }}">
