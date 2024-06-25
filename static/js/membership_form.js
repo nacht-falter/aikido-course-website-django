@@ -1,8 +1,10 @@
 function checkDojo() {
-  if (dojoSelect.value != "other") {
+  if (dojoSelect.value !== "other") {
     otherDojoDiv.style.display = "none";
+    otherDojoInput.removeAttribute("required");
   } else {
     otherDojoDiv.style.display = "block";
+    otherDojoInput.setAttribute("required", "required");
   }
 }
 

@@ -43,12 +43,12 @@ function autoCloseMessages() {
 const pastCoursesBtn = document.getElementById("past-courses-btn");
 const showPastCourses = document.getElementById("show-past-courses");
 const hidePastCourses = document.getElementById("hide-past-courses");
-pastCoursesBtn.addEventListener("click", updatePastCoursesButton);
+if (pastCoursesBtn) {
+  pastCoursesBtn.addEventListener("click", updatePastCoursesButton);
+}
 
 showAccordionItem();
 autoCloseMessages();
-
-
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { showAccordionItem, autoCloseMessages };
