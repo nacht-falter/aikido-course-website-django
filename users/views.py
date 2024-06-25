@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, reverse
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
 from django.views import View
 
 from course_registrations.models import UserCourseRegistration
@@ -52,7 +53,8 @@ class UserProfileView(LoginRequiredMixin, View):
             user_profile.user.save()
             user_profile.save()
             messages.info(
-                request, "You have successfully created a user profile."
+                request,
+                _("You have successfully created a user profile.")
             )
         else:
             profile_form = forms.UserProfileForm()
@@ -110,7 +112,8 @@ class UpdateUserProfile(LoginRequiredMixin, View):
             user_profile.user.save()
             user_profile.save()
             messages.info(
-                request, "You have successfully updated your user profile."
+                request,
+                _("You have successfully updated your user profile.")
             )
         else:
             profile_form = forms.UpdateUserProfileForm()
@@ -154,13 +157,13 @@ class UpdateGrade(View):
             exam_registration.save()
             messages.info(
                 request,
-                "Congratulations! Your grade has been updated to"
-                f" {user_profile.get_grade_display()}.",
+                _("Congratulations! Your grade has been updated to ") +
+                f"{user_profile.get_grade_display()}.",
             )
         else:
             exam_registration.grade_updated = True
             exam_registration.save()
-            messages.info(request, "Your grade has not been updated.")
+            messages.info(request, _("Your grade has not been updated."))
 
         return HttpResponseRedirect(reverse("home"))
 
@@ -176,8 +179,8 @@ class DeactivateUser(LoginRequiredMixin, View):
     def get(self, request):
         messages.warning(
             request,
-            "Please use the button on the user profile page for "
-            "deactivating your account.",
+            _("Please use the button on the user profile page for ") +
+            _("deactivating your account."),
         )
         return HttpResponseRedirect(reverse("userprofile"))
 
@@ -187,13 +190,13 @@ class DeactivateUser(LoginRequiredMixin, View):
             user.is_active = False
             user.save()
             messages.info(
-                request, "You have successfully deactivated your account."
+                request, _("You have successfully deactivated your account.")
             )
             return HttpResponseRedirect(reverse("course_list"))
         messages.warning(
             request,
-            "Staff accounts can not be deactivated."
-            " Please contact us if you want to deactivate your account.",
+            _("Staff accounts can not be deactivated.") +
+            _(" Please contact us if you want to deactivate your account."),
         )
         return HttpResponseRedirect(reverse("userprofile"))
 
