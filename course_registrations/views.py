@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.utils.translation import gettext as _
 from django.views import View
 
 from courses.models import InternalCourse
@@ -43,19 +44,23 @@ class RegisterCourse(View):
         if course.registration_status == 0:
             messages.warning(
                 request,
-                "Registration for this course is not possible at the moment."
+                _("Registration for this course is not possible at the moment.")
             )
             return HttpResponseRedirect(reverse("course_list"))
 
         if not request.user.is_authenticated and not request.GET.get("allow_guest"):
-            messages.info(request, "Please log in to your account or continue as a guest.")
+            messages.info(
+                request,
+                _("Please log in to your account or continue as a guest.")
+            )
             return redirect('/accounts/login/?next=' + request.path + '&allow_guest=True')
 
         if request.user.is_authenticated:
             user_profile = UserProfile.objects.filter(user=request.user)
             if not user_profile:
                 messages.warning(
-                    request, "Please create a user profile to contine."
+                    request,
+                    _("Please create a user profile to contine.")
                 )
                 return redirect(reverse('userprofile') + '?next=' + request.path)
 
@@ -65,7 +70,8 @@ class RegisterCourse(View):
 
             if user_registered:
                 messages.warning(
-                    request, "You are already registered for this course."
+                    request,
+                    _("You are already registered for this course.")
                 )
                 return HttpResponseRedirect(reverse("course_list"))
 
@@ -107,7 +113,7 @@ class RegisterCourse(View):
                 if GuestCourseRegistration.objects.filter(email=email, course=course).exists():
                     messages.warning(
                         request,
-                        "A registration with this email address already exists."
+                        _("A registration with this email address already exists.")
                     )
                     return HttpResponseRedirect(reverse("course_list"))
 
@@ -150,14 +156,15 @@ class RegisterCourse(View):
             )
 
             messages.info(
-                request, f"You have successfully signed up for {course.title}"
+                request,
+                _("You have successfully signed up for ") + course.title
             )
         else:
             if not registration_form.cleaned_data.get("selected_sessions"):
                 messages.warning(
                     request,
-                    "Registration not submitted. "
-                    "Please select at least one session.",
+                    _("Registration not submitted. "
+                      "Please select at least one session.")
                 )
 
             if request.user.is_authenticated:
@@ -221,8 +228,7 @@ class CancelUserCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View
             raise PermissionDenied
         messages.warning(
             request,
-            "Please cancel registrations by clicking the button from the "
-            "'My Registrations' page.",
+            _("Please cancel registrations by clicking the button from the 'My Registrations' page.")
         )
 
         return HttpResponseRedirect(reverse("courseregistration_list"))
@@ -236,8 +242,8 @@ class CancelUserCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View
 
         messages.success(
             request,
-            f"Your registration for {registration.course.title} "
-            "has been cancelled.",
+            _("Your registration for ") +
+            registration.course.title + _("has been cancelled.")
         )
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
@@ -316,15 +322,14 @@ class UpdateUserCourseRegistration(LoginRequiredMixin, View):
 
             messages.info(
                 request,
-                "You have successfully updated your registration for "
+                _("You have successfully updated your registration for ") +
                 f"{course.title}",
             )
         else:
             if not registration_form.cleaned_data.get("selected_sessions"):
                 messages.warning(
                     request,
-                    "Registration not submitted. "
-                    "Please select at least one session.",
+                    _("Registration not submitted. Please select at least one session.")
                 )
             registration_form = forms.UserCourseRegistrationForm(
                 instance=registration,

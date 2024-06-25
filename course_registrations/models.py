@@ -1,5 +1,6 @@
 from django.db import models
 from django.shortcuts import get_object_or_404
+from django.utils.translation import gettext_lazy as _
 
 from courses.models import CourseSession, InternalCourse
 from danbw_website import constants
@@ -10,27 +11,30 @@ class UserCourseRegistration(models.Model):
     """Represents a registration for a course by a user"""
 
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="registrations"
+        User, on_delete=models.CASCADE, related_name="registrations", verbose_name=_("User")
     )
-    course = models.ForeignKey(InternalCourse, on_delete=models.CASCADE)
-    selected_sessions = models.ManyToManyField(CourseSession, blank=False)
-    registration_date = models.DateTimeField(auto_now_add=True)
-    exam = models.BooleanField(default=False)
+    course = models.ForeignKey(
+        InternalCourse, on_delete=models.CASCADE, verbose_name=_("Course"))
+    selected_sessions = models.ManyToManyField(
+        CourseSession, verbose_name=_("Selected sessions"), blank=False)
+    registration_date = models.DateTimeField(
+        _("Registration date"),  auto_now_add=True)
+    exam = models.BooleanField(_("Exam"), default=False)
     exam_grade = models.IntegerField(
-        choices=constants.EXAM_GRADE_CHOICES, default=constants.RED_BELT
-    )
-    exam_passed = models.BooleanField(null=True)
-    grade_updated = models.BooleanField(default=False)
-    accept_terms = models.BooleanField(default=False)
-    discount = models.BooleanField(default=False)
-    final_fee = models.IntegerField(default=0)
+        _("Exam Grade"),  choices=constants.EXAM_GRADE_CHOICES, default=constants.RED_BELT)
+    exam_passed = models.BooleanField(_("Exam passed"), null=True)
+    grade_updated = models.BooleanField(_("Grade updated"),  default=False)
+    accept_terms = models.BooleanField(_("Accept terms"),  default=False)
+    discount = models.BooleanField(_("Discount"), default=False)
+    final_fee = models.IntegerField(_("Final fee"), default=0)
     payment_status = models.IntegerField(
-        choices=constants.PAYMENT_STATUS, default=0)
+        _("Payment status"), choices=constants.PAYMENT_STATUS, default=0)
     payment_method = models.IntegerField(
-        choices=constants.PAYMENT_METHODS, default=0)
-    comment = models.TextField(blank=True)
-    dinner = models.BooleanField(blank=True, null=True)
-    overnight_stay = models.BooleanField(blank=True, null=True)
+        _("Payment method"), choices=constants.PAYMENT_METHODS, default=0)
+    comment = models.TextField(_("Comment"), blank=True)
+    dinner = models.BooleanField(_("Dinner"),  blank=True, null=True)
+    overnight_stay = models.BooleanField(
+        _("Overnight stay"),  blank=True, null=True)
 
     class Meta:
         # Set unique constraint: https://docs.djangoproject.com/en/4.2/
@@ -41,6 +45,8 @@ class UserCourseRegistration(models.Model):
                 name="unique_user_registration"
             )
         ]
+        verbose_name = _("Course Registration (User)")
+        verbose_name_plural = _("Course Registrations (User)")
 
     def calculate_fees(self, course, selected_sessions):
         final_fee = 0
@@ -68,33 +74,36 @@ class UserCourseRegistration(models.Model):
 
 
 class GuestCourseRegistration(models.Model):
-    """Represents a registration for a course by a user"""
+    """Represents a registration for a course by a guest"""
 
-    email = models.EmailField()
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    course = models.ForeignKey(InternalCourse, on_delete=models.CASCADE)
-    selected_sessions = models.ManyToManyField(CourseSession, blank=False)
-    registration_date = models.DateTimeField(auto_now_add=True)
-    dojo = models.CharField(
-        max_length=5, choices=constants.DOJO_CHOICES, blank=False)
-    other_dojo = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(_("Email"))
+    first_name = models.CharField(_("First name"), max_length=100)
+    last_name = models.CharField(_("Last name"), max_length=100)
+    course = models.ForeignKey(
+        InternalCourse, on_delete=models.CASCADE, verbose_name=_("Course"))
+    selected_sessions = models.ManyToManyField(
+        CourseSession, blank=False, verbose_name=_("Selected sessions"))
+    registration_date = models.DateTimeField(
+        _("Registration date"), auto_now_add=True)
+    dojo = models.CharField(_("Dojo"), max_length=5,
+                            choices=constants.DOJO_CHOICES, blank=False)
+    other_dojo = models.CharField(_("Other dojo"), max_length=100, blank=True)
     grade = models.IntegerField(
-        choices=constants.GRADE_CHOICES, default=constants.RED_BELT, blank=False)
-    exam = models.BooleanField(default=False)
+        _("Grade"), choices=constants.GRADE_CHOICES, default=constants.RED_BELT, blank=False)
+    exam = models.BooleanField(_("Exam"), default=False)
     exam_grade = models.IntegerField(
-        choices=constants.EXAM_GRADE_CHOICES, blank=True, null=True
-    )
-    accept_terms = models.BooleanField(default=False)
-    discount = models.BooleanField(default=False)
-    final_fee = models.IntegerField(default=0)
+        _("Exam Grade"), choices=constants.EXAM_GRADE_CHOICES, blank=True, null=True)
+    accept_terms = models.BooleanField(_("Accept terms"), default=False)
+    discount = models.BooleanField(_("Discount"), default=False)
+    final_fee = models.IntegerField(_("Final Fee"), default=0)
     payment_status = models.IntegerField(
-        choices=constants.PAYMENT_STATUS, default=0)
+        _("Payment status"), choices=constants.PAYMENT_STATUS, default=0)
     payment_method = models.IntegerField(
-        choices=constants.PAYMENT_METHODS, default=0)
-    comment = models.TextField(blank=True)
-    dinner = models.BooleanField(blank=True, null=True)
-    overnight_stay = models.BooleanField(blank=True, null=True)
+        _("Payment method"), choices=constants.PAYMENT_METHODS, default=0)
+    comment = models.TextField(_("Comment"), blank=True)
+    dinner = models.BooleanField(_("Dinner"), blank=True, null=True)
+    overnight_stay = models.BooleanField(
+        _("Overnight stay"), blank=True, null=True)
 
     class Meta:
         # Set unique constraint: https://docs.djangoproject.com/en/4.2/
@@ -105,6 +114,8 @@ class GuestCourseRegistration(models.Model):
                 name="unique_guest_registration"
             )
         ]
+        verbose_name = _("Course Registration (Guest)")
+        verbose_name_plural = _("Guest Course Registrations (Guest)")
 
     def calculate_fees(self, course, selected_sessions):
         final_fee = 0
