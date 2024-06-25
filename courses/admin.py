@@ -100,21 +100,46 @@ class GuestCourseRegistrationInline(admin.TabularInline):
 class InternalCourseAdmin(SummernoteModelAdmin):
     fieldsets = (
         ("Course Details", {
-            "fields": ("title", "course_type", "status", "organizer", "teacher", "description", "flyer", "location")
+            "fields": (
+                "title",
+                "course_type",
+                "status",
+                "publication_date",
+                "organizer",
+                "teacher",
+                "description",
+                "flyer",
+                "location"
+            )
         }),
         ("Dates", {
-            "fields": ("start_date", "end_date", "registration_status", "registration_start_date", "registration_end_date")
+            "fields": (
+                "start_date",
+                "end_date",
+                "registration_status",
+                "registration_start_date",
+                "registration_end_date"
+            )
         }),
         ("Payment Information", {
-            "fields": ("course_fee", "course_fee_cash", "discount_percentage", "bank_transfer_until")
+            "fields": (
+                "course_fee",
+                "course_fee_cash",
+                "discount_percentage",
+                "bank_transfer_until"
+            )
         }),
         ("Additional Information", {
-            "fields": ("additional_info",)
+            "fields": (
+                "additional_info",
+            )
         }),
     )
+
     list_display = (
         "title",
         "status",
+        "publication_date",
         "registration_status",
         "start_date",
         "end_date",

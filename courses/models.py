@@ -16,7 +16,6 @@ class Course(models.Model):
     start_date = models.DateField(_("Start Date"), default=date.today)
     end_date = models.DateField(_("End Date"), default=date.today)
     teacher = models.CharField(_("Teacher"), max_length=200, blank=True)
-    location = models.CharField(_("Location"), max_length=200, blank=True)
 
     class Meta:
         ordering = ["start_date"]
@@ -62,9 +61,11 @@ class InternalCourse(Course):
 
     status = models.IntegerField(
         _("Status"), choices=STATUS_CHOICES, default=0)
+    publication_date = models.DateField(_("Publication Date"), blank=True, null=True)
     registration_status = models.IntegerField(
         _("Registration Status"), choices=REGISTRATION_STATUS, default=0)
     description = models.TextField(_("Description"), blank=True)
+    location = models.CharField(_("Location"), max_length=200, blank=True)
     registration_start_date = models.DateField(
         _("Registration Start Date"), blank=True, null=True)
     registration_end_date = models.DateField(
@@ -92,9 +93,12 @@ class InternalCourse(Course):
     def save(self, *args, **kwargs):
         if self.registration_start_date and self.registration_end_date \
                 and self.registration_start_date <= date.today() <= self.registration_end_date:
-            self.registration_status = 1  # Open
+            self.registration_status = 1
         else:
-            self.registration_status = 0  # Closed
+            self.registration_status = 0
+
+        if self.publication_date and self.publication_date <= date.today():
+            self.status = 1
 
         if self.end_date < date.today():
             self.status = 0
