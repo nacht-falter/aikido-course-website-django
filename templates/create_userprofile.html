@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 <div class="card form-card text-center">
   <div class="card-header">
-    <h2>Create User Profile</h2>
+    <h2>{% trans "Create User Profile" %}</h2>
   </div>
   <form method="post">
     <div class="card-body">
-      <p>Before being able to sign up for courses you need to create a user profile. Please fill out the form below.</p>
+      <p>{% trans "Before being able to sign up for courses you need to create a user profile. Please fill out the form below." %}</p>
       {% csrf_token %}
       <div class="text-start">
         {{ form|crispy }}
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-primary btn-sm" type="submit">Create Profile</button>
+      <button class="btn btn-primary btn-sm" type="submit">{% trans "Create Profile" %}</button>
     </div>
   </form>
 </div>

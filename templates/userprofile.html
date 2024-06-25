@@ -1,32 +1,33 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<h2>My Profile</h2>
-<table class="table table-striped">
+{% load i18n %}
 
+{% block content %}
+<h2>{% trans "My Profile" %}</h2>
+<table class="table table-striped">
     <tr>
-        <td>Name</td>
+        <td>{% trans "Name" %}</td>
         <td>{{ profile.user.first_name }} {{ profile.user.last_name }}</td>
     </tr>
     <tr>
-        <td>E-mail</td>
+        <td>{% trans "E-mail" %}</td>
         <td>{{ profile.user.email }}</td>
     </tr>
     <tr>
-        <td>Grade</td>
+        <td>{% trans "Grade" %}</td>
         <td>{{ profile.get_grade_display }}</td>
     </tr>
     <tr>
-        <td>Dojo</td>
+        <td>{% trans "Dojo" %}</td>
         <td>{{ profile.get_dojo_display }}</td>
+    </tr>
 </table>
 
-<a class="btn btn-primary btn-sm" href="{% url 'update_userprofile' %}" title="Update Profile">Update Profile</a>
-<a class="btn btn-primary btn-sm" href="{% url 'account_change_password' %}" title="Change Password">Change
-    password</a>
+<a class="btn btn-primary btn-sm" href="{% url 'update_userprofile' %}" title="{% trans "Update Profile" %}">{% trans "Update Profile" %}</a>
+<a class="btn btn-primary btn-sm" href="{% url 'account_change_password' %}" title="{% trans "Change Password" %}">{% trans "Change Password" %}</a>
 {% if not user.is_staff %}
-<a class="btn btn-danger btn-sm" href="#" title="Deactivate Account" data-bs-toggle="modal"
-    data-bs-target="#deactivateAccountModal">Deactivate Account</a></p>
+<a class="btn btn-danger btn-sm" href="#" title="{% trans "Deactivate Account" %}" data-bs-toggle="modal"
+    data-bs-target="#deactivateAccountModal">{% trans "Deactivate Account" %}</a></p>
 
 <!-- Deactivate Account Modal -->
 <div class="modal fade" id="deactivateAccountModal" tabindex="-1" aria-labelledby="deactivateAccountModalLabel"
@@ -34,12 +35,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="deactivateAccountModalLabel">Deactivate Account</h4>
+                <h4 class="modal-title" id="deactivateAccountModalLabel">{% trans "Deactivate Account" %}</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h2 class="mt-2">Deactivate your Account?</h2>
-                <p>Are you sure you want to deactivate your account?
+                <h2 class="mt-2">{% trans "Deactivate your Account?" %}</h2>
+                <p>{% trans "Are you sure you want to deactivate your account?" %}
                 <p>
             </div>
             <div class="modal-footer">
@@ -48,9 +49,8 @@
                     {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                     {% endif %}
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No, go
-                        back</button>
-                    <input class="btn btn-sm btn-danger" type="submit" value="Yes, deactivate my account">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">{% trans "No, go back" %}</button>
+                    <input class="btn btn-sm btn-danger" type="submit" value="{% trans "Yes, deactivate my account" %}">
                 </form>
             </div>
         </div>

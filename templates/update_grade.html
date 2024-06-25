@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% block content %}
 <div class="card form-card text-center">
     <div class="card-header">
-        <h3 class="mt-2">Did you pass your exam?</h3>
+        <h3 class="mt-2">{% trans "Did you pass your exam?" %}</h3>
     </div>
     <div class="card-body">
-        <p>You have applied for an exam with your registration for {{ exam_registration.course }}</p>
-        <p>Did you pass the exam?</p>
+        <p>{% blocktrans %}You have applied for an exam with your registration for {{ exam_registration.course }}{% endblocktrans %}</p>
+        <p>{% trans "Did you pass the exam?" %}</p>
         <form method="post" action="{% url 'update_grade' %}">
             {% csrf_token %}
-            <button class="btn btn-secondary btn-sm" type="submit" name="answer" value="no">No, I didn't</button>
-            <button class="btn btn-success btn-sm" type="submit" name="answer" value="yes">Yes, I passed</button>
+            <button class="btn btn-secondary btn-sm" type="submit" name="answer" value="no">{% trans "No, I didn't" %}</button>
+            <button class="btn btn-success btn-sm" type="submit" name="answer" value="yes">{% trans "Yes, I passed" %}</button>
         </form>
     </div>
 </div>

@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
 {% load crispy_forms_tags %}
+{% load static %}
+{% load i18n %}
 
 {% block content %}
 <div class="card form-card text-center">
     <div class="card-header">
-        <h2>Update User Profile</h2>
+        <h2>{% trans "Update User Profile" %}</h2>
     </div>
     <form method="post">
         <div class="card-body">
@@ -23,9 +23,9 @@
                       {% url 'userprofile' %}
                       {% endif %}"
                class="btn btn-secondary btn-sm">
-                Cancel
+                {% trans "Cancel" %}
             </a>
-            <button class="btn btn-primary btn-sm" type="submit">Update information</button>
+            <button class="btn btn-primary btn-sm" type="submit">{% trans "Update profile" %}</button>
         </div>
     </form>
 </div>
