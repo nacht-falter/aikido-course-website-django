@@ -1,4 +1,6 @@
-{% load i18n %} {% load l10n %}
+{% load i18n %}
+{% load l10n %}
+
 <!doctype html>
 <html lang="{{ request.LANGUAGE_CODE }}">
 
@@ -9,18 +11,18 @@
 
 <body>
   <p>
-    {% if request.user.is_authenticated %} Hi {{ request.user.first_name }},
-    {% else %} Hi {{ registration.first_name }}, {% endif %}
+    {% if request.user.is_authenticated %} {% trans "Hi" %} {{ request.user.first_name }},
+    {% else %} {% trans "Hi" %} {{ registration.first_name }}, {% endif %}
   </p>
-  <p>You have successfully signed up for <strong>{{ registration.course.title }}</strong></p>
+  <p>{% trans "You have successfully signed up for" %} <strong>{{ registration.course.title }}</strong></p>
   <p>
-    Course dates: {{ registration.course.start_date|localize }} to {{ registration.course.end_date|localize }}
+    {% trans "Course dates:" %} {{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}
   </p>
 
-  <p>Registration details:</p>
+  <p>{% trans "Registration details:" %}</p>
   <ul>
     <li>
-      Selected sessions:
+      {% trans "Selected sessions:" %}
       <ul>
         {% for session in sessions %}
         <li>{{ session }}</li>
@@ -29,24 +31,25 @@
     </li>
     {% if registration.exam %}
     <li>
-      You applied for an exam for {{ registration.get_exam_grade_display }}
+      {% trans "You applied for an exam for" %} {{ registration.get_exam_grade_display }}
     </li>
     {% endif %}
-    <li>Course Fee: <strong>{{ registration.final_fee }}</strong> €</li>
-    <li>Payment method: {{ registration.get_payment_method_display }}</li>
+    <li>{% trans "Course Fee:" %} <strong>{{ registration.final_fee }}</strong> €</li>
+    <li>{% trans "Payment method:" %} {{ registration.get_payment_method_display }}</li>
   </ul>
   {% if registration.payment_method == 0 %}
   <p>
-    Please transfer the course fee to the following account until <strong>{{ registration.course.bank_transfer_until|localize }}</strong>:</p>
+    {% trans "Please transfer the course fee to the following account until" %} <strong>{{ registration.course.bank_transfer_until|localize }}</strong>:
+  </p>
   <p style="margin-left: 1rem;">
     {{ bank_account|linebreaksbr }}
   </p>
-  </p>
   {% endif %}
   <p>
-    Kind regards,<br />
+    {% trans "Kind regards," %}<br />
     DANBW e.V.
   </p>
 </body>
 
 </html>
+
