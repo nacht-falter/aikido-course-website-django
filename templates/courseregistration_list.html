@@ -1,58 +1,54 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
 {% load l10n %}
 
 {% block content %}
 
-
-<h3>Your upcoming courses</h3>
+<h3>{% trans "Your upcoming courses" %}</h3>
 
 {% for registration in upcoming_registrations %}
 <div class="card my-4 registration-card">
-    <h4 id="registration-{{ registration.id }}" class="card-header bg-secondary-subtle">{{ registration.course.title }}
-    </h4>
+    <h4 id="registration-{{ registration.id }}" class="card-header bg-secondary-subtle">{{ registration.course.title }}</h4>
     <div class="card-body">
         <table class="table">
             <tr>
-                <th scope="col">Dates:</th>
-                <td>{{ registration.course.start_date|localize }} to {{ registration.course.end_date|localize }}
-                </td>
+                <th scope="col">{% trans "Dates:" %}</th>
+                <td>{{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}</td>
             </tr>
             <tr>
-                <th scope="col">Selected Sessions:</th>
+                <th scope="col">{% trans "Selected Sessions:" %}</th>
                 <td>
                     <ul>
                         {% for session in registration.selected_sessions.all %}
                         <li>
-                            <strong>{{ session.title }}</strong>
-                            ({{ session.date|localize }},
-                            {{ session.start_time|localize }}-{{ session.end_time|localize }})
+                            <strong>{{ session.title }}</strong> ({{ session.date|localize }}, {{ session.start_time|localize }}-{{ session.end_time|localize }})
                         </li>
                         {% endfor %}
                     </ul>
                 </td>
             <tr>
-                <th scope="col">Course Fee:</th>
+                <th scope="col">{% trans "Course Fee:" %}</th>
                 <td>{{ registration.final_fee }} €</td>
             </tr>
             {% if registration.comment %}
             <tr>
-                <th scope="col">Your Comment:</th>
+                <th scope="col">{% trans "Your Comment:" %}</th>
                 <td>{{ registration.comment }}</td>
             </tr>
             {% endif %}
         </table>
 
         {% if registration.exam %}
-        <p class="badge text-bg-warning">You have applied for an exam for {{ registration.get_exam_grade_display }}.</p>
+        <p class="badge text-bg-warning">{% trans "You have applied for an exam for" %} {{ registration.get_exam_grade_display }}.</p>
         {% endif %}
 
     </div>
     <div class="card-footer bg-secondary-subtle text-center">
-        <a class="btn btn-sm btn-primary course-signup-button m-2 my-sm-0" title="Update Registration"
-            href="{% url 'update_courseregistration' registration.pk %}">Update registration</a>
-        <a class="btn btn-sm btn-danger m-2 my-sm-0" title="Cancel Registration" data-bs-toggle="modal"
-            data-bs-target="#cancelRegistrationModal{{ registration.pk }}" href="#">Cancel registration</a>
+        <a class="btn btn-sm btn-primary course-signup-button m-2 my-sm-0" title="{% trans "Update Registration" %}"
+            href="{% url 'update_courseregistration' registration.pk %}">{% trans "Update registration" %}</a>
+        <a class="btn btn-sm btn-danger m-2 my-sm-0" title="{% trans "Cancel Registration" %}" data-bs-toggle="modal"
+            data-bs-target="#cancelRegistrationModal{{ registration.pk }}" href="#">{% trans "Cancel registration" %}</a>
     </div>
 
     <!-- Cancel Registration Modal -->
@@ -61,12 +57,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cancelRegistrationModalLabel">Cancel Registration</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="cancelRegistrationModalLabel">{% trans "Cancel Registration" %}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans "Close" %}"></button>
                 </div>
                 <div class="modal-body">
-                    <h2 class="mt-2">Cancel Registration for {{ registration.course.title }}?</h2>
-                    <p>Are you sure you want to cancel your registration for {{ registration.course.title }}?</p>
+                    <h2 class="mt-2">{% trans "Cancel Registration for" %} {{ registration.course.title }}?</h2>
+                    <p>{% trans "Are you sure you want to cancel your registration for" %} {{ registration.course.title }}?</p>
                 </div>
                 <div class="modal-footer">
                     <form method="post" action="{% url 'cancel_courseregistration' registration.pk %}">
@@ -74,9 +70,8 @@
                         {% if redirect_field_value %}
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                         {% endif %}
-                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No, go
-                            back</button>
-                        <input class="btn btn-sm btn-danger" type="submit" value="Yes, cancel my registration">
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">{% trans "No, go back" %}</button>
+                        <input class="btn btn-sm btn-danger" type="submit" value="{% trans "Yes, cancel my registration" %}">
                     </form>
                 </div>
             </div>
@@ -84,39 +79,36 @@
     </div>
 </div>
 {% empty %}
-<p>
-    You are currently not signed up for any courses. You can find a <a href="{% url 'course_list' %}" class="blue-link"
-        title="Go to course list">list of all courses here.</a>
-</p>
+<p>{% trans "You are currently not signed up for any courses. You can find a" %} <a href="{% url 'course_list' %}" class="blue-link" title="{% trans "Go to course list" %}">{% trans "list of all courses here." %}</a></p>
 {% endfor %}
 
-<h3 class="mt-5 mb-4">Your past courses</h3>
+<h3 class="mt-5 mb-4">{% trans "Your past courses" %}</h3>
 
 {% for registration in past_registrations %}
 <div class="card my-4 registration-card">
-    <h5 id="registration-{{ registration.id }}" class="card-header bg-secondary-subtle">{{ registration.course.title }}
-    </h5>
+    <h5 id="registration-{{ registration.id }}" class="card-header bg-secondary-subtle">{{ registration.course.title }}</h5>
     <div class="card-body">
         <table class="table">
             <tr>
-                <th scope="col">Dates:</th>
-                <td>{{ registration.course.start_date|localize }} to {{ registration.course.end_date|localize }}</td>
+                <th scope="col">{% trans "Dates:" %}</th>
+                <td>{{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}</td>
             </tr>
         </table>
         <p class="badge text-bg-secondary mb-0">
             {% if registration.exam and registration.exam_passed %}
-            You have passed your {{ registration.get_exam_grade_display }} exam on this course.
+            {% trans "You have passed your" %} {{ registration.get_exam_grade_display }} {% trans "exam on this course." %}
             {% elif registration.exam and registration.exam_passed == False %}
-            You did not pass your {{ registration.get_exam_grade_display }} exam on this course.
+            {% trans "You did not pass your" %} {{ registration.get_exam_grade_display }} {% trans "exam on this course." %}
             {% elif registration.exam %}
-            You applied for your {{ registration.get_exam_grade_display }} exam on this course.
+            {% trans "You applied for your" %} {{ registration.get_exam_grade_display }} {% trans "exam on this course." %}
             {% else %}
-            No exam
+            {% trans "No exam" %}
             {% endif %}
         </p>
     </div>
 </div>
 {% empty %}
-<p>You did not sign up for any courses in the past.</p>
+<p>{% trans "You did not sign up for any courses in the past." %}</p>
 {% endfor %}
 {% endblock content %}
+

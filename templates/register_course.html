@@ -1,39 +1,39 @@
 {% extends 'base.html' %}
+
+{% load i18n %}
 {% load static %}
 
 {% block content %}
-<h2>Sign up for {{ course.title }}</h2>
+
+<h2>{% trans "Sign up for" %} {{ course.title }}</h2>
 <p>
 {% if user.is_authenticated %}
-<span>Please select the sessions you want to attend.</span>
+<span>{% trans "Please select the sessions you want to attend." %}</span>
 {% else %}
-<span>Please provide your personal details and select the sessions you want to attend.</span>
+<span>{% trans "Please provide your personal details and select the sessions you want to attend." %}</span>
 {% endif %}
-<span>The course fee will be displayed below the form</span>
+<span>{% trans "The course fee will be displayed below the form" %}</span>
 </p>
 <div class="registration-form-wrapper">
   <form method="post">
     {% csrf_token %}
     {% include "registration_form.html" %}
-    <a href="{% url 'course_list' %}" class="btn btn-secondary">Cancel</a>
-    <button id="submit-button" class="btn btn-primary disabled" type="submit">Sign up</button>
+    <a href="{% url 'course_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    <button id="submit-button" class="btn btn-primary disabled" type="submit">{% trans "Sign up" %}</button>
   </form>
   <hr class="mt-4">
-  <h3 id="discount-conditions">Discount Conditions</h3>
-  <p>The following groups are eligible for a discount:</p>
+  <h3 id="discount-conditions">{% trans "Discount Conditions" %}</h3>
+  <p>{% trans "The following groups are eligible for a discount:" %}</p>
   <ul>
-    <li>Students</li>
-    <li>Trainees</li>
-    <li>Handicapped persons</li>
-    <li>Unemployed persons</li>
+    <li>{% trans "Students" %}</li>
+    <li>{% trans "Trainees" %}</li>
+    <li>{% trans "Handicapped persons" %}</li>
+    <li>{% trans "Unemployed persons" %}</li>
   </ul>
-  <p>If one of the above conditions applies to you, please check the "Discount" box in the registration form and bring proof of
-  eligibility to the course. Otherwise, the full course fee will be charged.</p>
-  <h3 id="terms-and-conditions">Terms and Conditions</h3>
-  <p>The organizer (DANBW e. V.) does not provide insurance coverage.</p>
-  <p>Also, the organizer may take photos during the course, which could be published without mentioning names (e.g., on
-  the DANBW website). If you do not wish to have your photos published, please inform the organizer before the start
-  of the course.</p>
+  <p>{% trans "If one of the above conditions applies to you, please check the \"Discount\" box in the registration form and bring proof of eligibility to the course. Otherwise, the full course fee will be charged." %}</p>
+  <h3 id="terms-and-conditions">{% trans "Terms and Conditions" %}</h3>
+  <p>{% trans "The organizer (DANBW e. V.) does not provide insurance coverage." %}</p>
+  <p>{% trans "Also, the organizer may take photos during the course, which could be published without mentioning names (e.g., on the DANBW website). If you do not wish to have your photos published, please inform the organizer before the start of the course." %}</p>
 </div>
 
 <!-- Instructions for safely passing data to JavaScript: -->

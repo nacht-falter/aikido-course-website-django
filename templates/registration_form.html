@@ -1,20 +1,22 @@
 {% load crispy_forms_tags %}
 
+{% load i18n %}
+
 <div class="registration-form-content">
   <div class="card mb-3">
     <div class="card-header">
-      <h4 class="card-title">Personal Details</h4>
+      <h4 class="card-title">{% trans "Personal Details" %}</h4>
     </div>
     <div class="card-body">
       <div class="row">
         {% if user.is_authenticated %}
-        <div class="col-3 mb-2">Name:</div>
+        <div class="col-3 mb-2">{% trans "Name:" %}</div>
         <div class="col-9 mb-2">{{ user.first_name }} {{ user.last_name }}</div>
-        <div class="col-3 mb-2">E-mail:</div>
+        <div class="col-3 mb-2">{% trans "E-mail:" %}</div>
         <div class="col-9 mb-2">{{ user.email }}</div>
-        <div class="col-3 mb-2">Grade:</div>
+        <div class="col-3 mb-2">{% trans "Grade:" %}</div>
         <div class="col-9 mb-2">{{ user.profile.get_grade_display }}</div>
-        <div class="col-3 mb-2">Dojo:</div>
+        <div class="col-3 mb-2">{% trans "Dojo:" %}</div>
         <div class="col-9 mb-2">{{ user.profile.get_dojo_display }}</div>
         {% else %}
         <div class="col-12 col-md-6 mb-2">{{ form.first_name|as_crispy_field }}</div>
@@ -28,7 +30,7 @@
       {% if user.is_authenticated %}
       <hr>
       <a href="{% url 'update_userprofile' %}?next={{ request.path }}" class="btn btn-sm btn-outline-primary">
-        Edit Profile
+        {% trans "Edit Profile" %}
       </a>
       {% endif %}
     </div>
@@ -36,12 +38,12 @@
 
   <div class="card mb-3">
     <div class="card-header">
-      <h4 class="card-title">Course Details</h4>
+      <h4 class="card-title">{% trans "Course Details" %}</h4>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-3 mb-2">
-          <strong>Sessions:</strong>
+          <strong>{% trans "Sessions:" %}</strong>
         </div>
         <div class="col-9 mb-2">
           <div id="id_selected_sessions">
@@ -49,11 +51,11 @@
           </div>
           <div class="form-check">
             <input type="checkbox" name="entire-course" id="entire-course" class="form-check-input"/>
-            <label for="entire-course" class="form-check-label">Entire Course</label>
+            <label for="entire-course" class="form-check-label">{% trans "Entire Course" %}</label>
           </div>
           <span id="session-validation-msg" class="badge text-bg-light text-danger">
-            Please select at least one session.
-          </span >
+            {% trans "Please select at least one session." %}
+          </span>
         </div>
       </div>
 
@@ -61,7 +63,7 @@
       <hr>
       <div id="exam-section" class="row">
         <div class="col-3 mb-2">
-          <strong>Exam:</strong>
+          <strong>{% trans "Exam:" %}</strong>
         </div>
         <div class="col-9 mb-2">
           {{ form.exam|as_crispy_field }}
@@ -73,12 +75,12 @@
 
   <div class="card mb-3">
     <div class="card-header">
-      <h4 class="card-title">Payment Details</h4>
+      <h4 class="card-title">{% trans "Payment Details" %}</h4>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-3 mb-2">
-          <strong>Payment:</strong>
+          <strong>{% trans "Payment:" %}</strong>
         </div>
         <div class="col-9 mb-2">
           {{ form.payment_method|as_crispy_field }}
@@ -87,11 +89,15 @@
       <hr>
       <div class="row">
         <div class="col-3 mb-2">
-          <strong>Discount:</strong>
+          <strong>{% trans "Discount:" %}</strong>
         </div>
         <div class="col-9 mb-2">
           {{ form.discount|as_crispy_field }}
-          <p>Please refer to the <a href="#discount-conditions">Discount Conditions</a> below for more information.</p>
+          <p>{% trans "Please refer to the" %}
+            <a href="#discount-conditions">
+              {% trans "Discount Conditions" %}
+            </a> {% trans "below for more information." %}
+          </p>
         </div>
       </div>
     </div>
@@ -99,7 +105,7 @@
 
   <div class="card mb-3">
     <div class="card-header">
-      <h4 class="card-title">Additional Information</h4>
+      <h4 class="card-title">{% trans "Additional Information" %}</h4>
     </div>
     <div class="card-body">
       <div class="row">
@@ -111,15 +117,20 @@
         <div>
           <hr>
           {{ form.accept_terms|as_crispy_field }}
-          <a href="#terms-and-conditions">Terms and Conditions</a>
+          <a href="#terms-and-conditions">{% trans "Terms and Conditions" %}</a>
           <span id="terms-validation-msg" class="badge text-bg-light text-danger">
-            Please accept the terms and conditions below.
+            {% trans "Please accept the terms and conditions below." %}
           </span>
         </div>
       </div>
     </div>
   </div>
   <div class="col-12 mb-3 fs-5">
-    <div id="final-fee-container" class="alert alert-success d-none"><strong>Registration Fee: <span id="final-fee-display">0</span> €</strong></div>
+    <div id="final-fee-container" class="alert alert-success d-none">
+      <strong>{% trans "Registration Fee:" %}
+      <span id="final-fee-display">0</span> €
+      </strong>
+    </div>
   </div>
 </div>
+
