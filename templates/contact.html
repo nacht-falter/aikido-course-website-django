@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% load crispy_forms_tags %}
 
-{% load static %}
-
 {% block content %}
-<h1>Contact Us</h1>
-<p>Leave a message. We'll get back to you.</p>
+<h1>{% trans "Contact Us" %}</h1>
+<p>{% trans "Leave a message. We'll get back to you." %}</p>
 <form method="post">
   {% csrf_token %}
   {{ form|crispy }}
-  <button class="btn btn-primary btn-sm" type="submit">Send</button>
+  <button class="btn btn-primary btn-sm" type="submit">{% trans "Send" %}</button>
 </form>
 {% endblock content %}
