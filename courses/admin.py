@@ -5,6 +5,7 @@ import zipfile
 from django.contrib import admin
 from django.http import HttpResponse
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 from django_summernote.admin import SummernoteModelAdmin
 
 from course_registrations.models import (GuestCourseRegistration,
@@ -144,10 +145,6 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 new_slug = f"copy-{counter}-of-{course.slug}"
                 counter += 1
 
-            print("\n\n\n\n\n\n\n\n")
-            print(new_title, new_slug)
-            print("\n\n\n\n\n\n\n\n")
-
             InternalCourse.objects.create(
                 title=new_title,
                 slug=new_slug,
@@ -177,6 +174,9 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                     session_fee=session.session_fee,
                 )
 
+    duplicate_selected_courses.short_description = _(
+        "Duplicate selected courses")
+
     def toggle_registration_status(self, request, queryset):
         """Action for toggling course registration status"""
         for course in queryset:
@@ -186,9 +186,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 course.registration_status = 0
             course.save()
 
-    toggle_registration_status.short_description = (
-        "Toggle registration status of selected courses"
-    )
+    toggle_registration_status.short_description = _(
+        "Toggle registration status of selected courses")
 
     def toggle_status(self, request, queryset):
         """Action for toggling course status"""
@@ -199,7 +198,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 course.status = 0
             course.save()
 
-    toggle_status.short_description = "Toggle status of selected courses"
+    toggle_status.short_description = _("Toggle status of selected courses")
 
     def get_course_registration_count(self, course):
         """Gets the number of registrations for a course"""
@@ -210,6 +209,9 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             GuestCourseRegistration.objects.filter(course=course))
 
         return len(registrations)
+
+    # Customize property name: https://stackoverflow.com/a/64352815
+    get_course_registration_count.short_description = _("Registrations")
 
     def write_csv_data(self, writer, registrations):
         """Write registration data to CSV"""
@@ -306,8 +308,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
 
         return response
 
-    # Customize property name: https://stackoverflow.com/a/64352815
-    get_course_registration_count.short_description = "Registrations"
+    export_csv.short_description = _("Export selected courses registrations")
 
 
 @admin.register(ExternalCourse)

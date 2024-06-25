@@ -3,6 +3,7 @@ from datetime import date
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 
 from danbw_website import constants
 
@@ -10,15 +11,17 @@ from danbw_website import constants
 class Course(models.Model):
     """Represents a course a user can sign up for"""
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(_("Title"), max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    start_date = models.DateField(default=date.today)
-    end_date = models.DateField(default=date.today)
-    teacher = models.CharField(max_length=200, blank=True)
-    location = models.CharField(max_length=200, blank=True)
+    start_date = models.DateField(_("Start Date"), default=date.today)
+    end_date = models.DateField(_("End Date"), default=date.today)
+    teacher = models.CharField(_("Teacher"), max_length=200, blank=True)
+    location = models.CharField(_("Location"), max_length=200, blank=True)
 
     class Meta:
         ordering = ["start_date"]
+        verbose_name = _("Course")
+        verbose_name_plural = _("Courses")
 
     def __str__(self):
         return self.title
@@ -26,16 +29,11 @@ class Course(models.Model):
     def get_course_type(self):
         return self.__class__.__name__
 
-    # https://docs.djangoproject.com/en/4.2/ref/models/instances
-    # /#django.db.models.Model.clean
     def clean(self):
         """Custom validation for Course model"""
-        if (
-            self.start_date
-            and self.end_date
-            and self.start_date > self.end_date
-        ):
-            raise ValidationError("Start date cannot be later than end date.")
+        if self.start_date and self.end_date and self.start_date > self.end_date:
+            raise ValidationError(
+                _("Start date cannot be later than end date."))
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -46,43 +44,50 @@ class Course(models.Model):
 class InternalCourse(Course):
     """Represents a course organized by the organization"""
 
-    REGISTRATION_STATUS = ((0, "closed"), (1, "open"))
+    REGISTRATION_STATUS = (
+        (0, _("closed")),
+        (1, _("open")),
+    )
 
     COURSE_TYPE = (
-        ("regional", "Regional Course"),
-        ("international", "International Course"),
-        ("family_reunion", "Family Reunion"),
+        ("regional", _("Regional Course")),
+        ("international", _("International Course")),
+        ("family_reunion", _("Family Reunion")),
     )
 
-    STATUS_CHOICES = ((0, "Preview"), (1, "Published"))
+    STATUS_CHOICES = (
+        (0, _("Preview")),
+        (1, _("Published")),
+    )
 
-    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
+    status = models.IntegerField(
+        _("Status"), choices=STATUS_CHOICES, default=0)
     registration_status = models.IntegerField(
-        choices=REGISTRATION_STATUS, default=0
-    )
-    description = models.TextField(blank=True)
-    registration_start_date = models.DateField(blank=True, null=True)
-    registration_end_date = models.DateField(blank=True, null=True)
-    organizer = models.CharField(max_length=200, blank=True, default="DANBW")
-    course_fee = models.IntegerField(default=0)
-    course_fee_cash = models.IntegerField(default=0)
-    discount_percentage = models.IntegerField(default=50)
-    bank_transfer_until = models.DateField(default=date.today)
-    course_type = models.CharField(choices=COURSE_TYPE, max_length=200)
-    flyer = models.ImageField(upload_to="images/", blank=True)
-    additional_info = models.TextField("Additional information", blank=True)
+        _("Registration Status"), choices=REGISTRATION_STATUS, default=0)
+    description = models.TextField(_("Description"), blank=True)
+    registration_start_date = models.DateField(
+        _("Registration Start Date"), blank=True, null=True)
+    registration_end_date = models.DateField(
+        _("Registration End Date"), blank=True, null=True)
+    organizer = models.CharField(
+        _("Organizer"), max_length=200, blank=True, default="DANBW")
+    course_fee = models.IntegerField(_("Course Fee"), default=0)
+    course_fee_cash = models.IntegerField(_("Course Fee (Cash)"), default=0)
+    discount_percentage = models.IntegerField(
+        _("Discount Percentage"), default=50)
+    bank_transfer_until = models.DateField(
+        _("Bank Transfer Until"), default=date.today)
+    course_type = models.CharField(
+        _("Course Type"), choices=COURSE_TYPE, max_length=200)
+    flyer = models.ImageField(_("Flyer"), upload_to="images/", blank=True)
+    additional_info = models.TextField(_("Additional Information"), blank=True)
 
-    # https://docs.djangoproject.com/en/4.2/ref/models/instances
-    # /#django.db.models.Model.clean
     def clean(self):
         """Custom validation for Internal Course model"""
         super().clean()
-        if (self.registration_start_date
-            and self.registration_end_date
-            and self.registration_start_date > self.registration_end_date
-            ):
+        if (self.registration_start_date and self.registration_end_date and self.registration_start_date > self.registration_end_date):
             raise ValidationError(
-                "Registration start date cannot be later than registration end date.")
+                _("Registration start date cannot be later than registration end date."))
 
     def save(self, *args, **kwargs):
         if self.registration_start_date and self.registration_end_date \
@@ -95,36 +100,43 @@ class InternalCourse(Course):
             self.status = 0
         super().save(*args, **kwargs)
 
+    class Meta:
+        verbose_name = _("Internal Course")
+        verbose_name_plural = _("Internal Courses")
+
 
 class ExternalCourse(Course):
     """Represents a course organized by an external organization"""
 
-    organizer = models.CharField(max_length=200, blank=True)
-    url = models.URLField()
+    organizer = models.CharField(_("Organizer"), max_length=200, blank=True)
+    url = models.URLField(_("URL"))
+
+    class Meta:
+        verbose_name = _("External Course")
+        verbose_name_plural = _("External Courses")
 
 
 class CourseSession(models.Model):
     """Represents a session within a course"""
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(_("Title"), max_length=200)
     course = models.ForeignKey(
-        InternalCourse, on_delete=models.CASCADE, related_name="sessions"
+        InternalCourse, on_delete=models.CASCADE, related_name="sessions", verbose_name=_("Course")
     )
-    date = models.DateField(default=date.today)
-    start_time = models.TimeField(default="00:00")
-    end_time = models.TimeField(default="00:00")
-    session_fee = models.IntegerField(default=0)
-    session_fee_cash = models.IntegerField(default=0)
+    date = models.DateField(_("Date"), default=date.today)
+    start_time = models.TimeField(_("Start Time"), default="00:00")
+    end_time = models.TimeField(_("End Time"), default="00:00")
+    session_fee = models.IntegerField(_("Session Fee"), default=0)
+    session_fee_cash = models.IntegerField(_("Session Fee (Cash)"), default=0)
 
     def __str__(self):
         return f"{constants.WEEKDAYS[self.date.weekday()][1]}, {self.date.strftime('%d.%m.%Y')}, {self.start_time.strftime('%H:%M')}-{self.end_time.strftime('%H:%M')}: {self.title}"
 
-    # https://docs.djangoproject.com/en/4.2/ref/models/instances
-    # /#django.db.models.Model.clean
     def clean(self):
-        if (
-            self.start_time
-            and self.end_time
-            and self.start_time > self.end_time
-        ):
-            raise ValidationError("Start time cannot be later than end time.")
+        if self.start_time and self.end_time and self.start_time > self.end_time:
+            raise ValidationError(
+                _("Start time cannot be later than end time."))
+
+    class Meta:
+        verbose_name = _("Course Session")
+        verbose_name_plural = _("Course Sessions")
