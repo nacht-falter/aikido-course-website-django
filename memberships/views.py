@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
 from django.views import generic
 
 from danbw_website import utils
@@ -27,7 +28,10 @@ class DanIntMembershipCreateView(generic.CreateView):
 
             utils.send_membership_confirmation(first_name, email)
 
-            message = "We have received your membership application. Please check your email for a confirmation."
+            message = (
+                _("We have received your membership application.") +
+                _(" Please check your email for confirmation.")
+            )
             messages.success(self.request, message)
 
             return super().form_valid(form)

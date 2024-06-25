@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from danbw_website import constants
 
@@ -28,22 +29,22 @@ class DanIntMembershipForm(forms.ModelForm):
                 if request.user.profile.dojo not in dojos
                 else ""
             )
-            self.fields["other_dojo"].required = True
 
     sepa = forms.BooleanField(
         required=True,
-        label="I agree that the membership fee will be collected by SEPA direct debit from my account below.",
+        label=_(
+            "I agree that the membership fee will be collected by SEPA direct debit from my account below."),
     )
     accept_terms = forms.BooleanField(
         required=True,
-        label=(
+        label=_(
             "I accept the above terms and conditions regarding cancellation and data processing and apply for "
             "a membership with DAN International."
         ),
     )
     liability_disclaimer = forms.BooleanField(
         required=True,
-        label=(
+        label=_(
             "I am aware that Aikido is a potentially dangerous sport and that the above-mentioned organization "
             "and its representatives are not liable for accidents or injuries that occur during the practice of "
             "Aikido, except within the scope of legal regulations in cases of intent or gross negligence."
@@ -53,3 +54,6 @@ class DanIntMembershipForm(forms.ModelForm):
     class Meta:
         model = DanIntMembership
         fields = "__all__"
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'})
+        }
