@@ -24,9 +24,13 @@ class DanIntMembershipCreateView(generic.CreateView):
         if form.is_valid():
 
             first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
             email = form.cleaned_data["email"]
 
-            utils.send_membership_confirmation(first_name, email)
+            utils.send_membership_confirmation(
+                first_name, email, "DAN International")
+            utils.send_membership_notification(
+                first_name, last_name, email, "DAN International")
 
             message = (
                 _("We have received your membership application.") +

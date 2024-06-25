@@ -10,7 +10,7 @@ from django.utils.translation import gettext as _
 from django.views import View
 
 from courses.models import InternalCourse
-from danbw_website.utils import send_registration_confirmation
+from danbw_website import utils
 
 from . import forms
 from .models import (GuestCourseRegistration, UserCourseRegistration,
@@ -151,9 +151,8 @@ class RegisterCourse(View):
             # edManager.set
             registration.selected_sessions.set(selected_sessions)
 
-            send_registration_confirmation(
-                request, registration
-            )
+            utils.send_registration_confirmation(request, registration)
+            utils.send_registration_notification(request, registration)
 
             messages.info(
                 request,
