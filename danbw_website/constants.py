@@ -1,3 +1,5 @@
+from django.utils.translation import gettext_lazy as _
+
 # Documentation for defining choices for CharFields:
 # https://docs.djangoproject.com/en/4.2/ref/models/fields/#choices
 # Assign increasing integer values to a list of variables:
@@ -23,36 +25,36 @@
     CASH,
 ) = range(2)
 
-PAYMENT_STATUS = ((0, "Unpaid"), (1, "Paid"))
+PAYMENT_STATUS = ((0, _("Unpaid")), (1, _("Paid")))
 
 PAYMENT_METHODS = (
-    (BANK, "Bank Transfer"),
-    (CASH, "Cash"),
+    (BANK, _("Bank Transfer")),
+    (CASH, _("Cash")),
 )
 
 EXAM_GRADE_CHOICES = (
-    (SIXTH_KYU, "7th Kyu ⚪️"),
-    (FIFTH_KYU, "5th Kyu 🟡"),
-    (FOURTH_KYU, "4th Kyu 🟠"),
-    (THIRD_KYU, "3rd Kyu 🟢"),
-    (SECOND_KYU, "2nd Kyu 🔵"),
-    (FIRST_KYU, "1st Kyu 🟤"),
+    (SIXTH_KYU, _("7th Kyu ⚪️")),
+    (FIFTH_KYU, _("5th Kyu 🟡")),
+    (FOURTH_KYU, _("4th Kyu 🟠")),
+    (THIRD_KYU, _("3rd Kyu 🟢")),
+    (SECOND_KYU, _("2nd Kyu 🔵")),
+    (FIRST_KYU, _("1st Kyu 🟤")),
 )
 
 GRADE_CHOICES = (
-    (RED_BELT, "Red Belt 🔴"),
-    (SIXTH_KYU, "6th Kyu ⚪️"),
-    (FIFTH_KYU, "5th Kyu 🟡"),
-    (FOURTH_KYU, "4th Kyu 🟠"),
-    (THIRD_KYU, "3rd Kyu 🟢"),
-    (SECOND_KYU, "2nd Kyu 🔵"),
-    (FIRST_KYU, "1st Kyu 🟤"),
-    (SHODAN, "1st Dan ⚫️"),
-    (NIDAN, "2nd  Dan ⚫️"),
-    (SANDAN, "3rd Dan ⚫️"),
-    (YONDAN, "4th Dan ⚫️"),
-    (GODAN, "5th Dan ⚫️"),
-    (ROKUDAN, "6th Dan ⚫️"),
+    (RED_BELT, _("Red Belt 🔴")),
+    (SIXTH_KYU, _("6th Kyu ⚪️")),
+    (FIFTH_KYU, _("5th Kyu 🟡")),
+    (FOURTH_KYU, _("4th Kyu 🟠")),
+    (THIRD_KYU, _("3rd Kyu 🟢")),
+    (SECOND_KYU, _("2nd Kyu 🔵")),
+    (FIRST_KYU, _("1st Kyu 🟤")),
+    (SHODAN, _("1st Dan ⚫️")),
+    (NIDAN, _("2nd  Dan ⚫️")),
+    (SANDAN, _("3rd Dan ⚫️")),
+    (YONDAN, _("4th Dan ⚫️")),
+    (GODAN, _("5th Dan ⚫️")),
+    (ROKUDAN, _("6th Dan ⚫️")),
 )
 
 DOJO_CHOICES = (
@@ -64,11 +66,11 @@ DOJO_CHOICES = (
 )
 
 WEEKDAYS = (
-    (0, "Monday"),
-    (1, "Tuesday"),
-    (2, "Wednesday"),
-    (3, "Thursday"),
-    (4, "Friday"),
-    (5, "Saturday"),
-    (6, "Sunday"),
+    (0, _("Monday")),
+    (1, _("Tuesday")),
+    (2, _("Wednesday")),
+    (3, _("Thursday")),
+    (4, _("Friday")),
+    (5, _("Saturday")),
+    (6, _("Sunday")),
 )
