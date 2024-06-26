@@ -37,6 +37,7 @@ class CourseRegistrationInline(admin.TabularInline):
         "selected_sessions",
         "exam",
         "exam_grade",
+        "exam_passed",
         "accept_terms",
         "final_fee",
         "payment_status",
