@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views import View
 
-from course_registrations.models import UserCourseRegistration
+from course_registrations.models import CourseRegistration
 from danbw_website import constants
 
 from . import forms
@@ -129,7 +129,7 @@ class UpdateGrade(View):
     """Updates a user's grade"""
 
     def get(self, request):
-        exam_registration = UserCourseRegistration.objects.filter(
+        exam_registration = CourseRegistration.objects.filter(
             user=request.user, grade_updated=False
         ).first()
         if (
@@ -145,7 +145,7 @@ class UpdateGrade(View):
 
     def post(self, request):
         answer = request.POST.get("answer")
-        exam_registration = UserCourseRegistration.objects.filter(
+        exam_registration = CourseRegistration.objects.filter(
             user=request.user, grade_updated=False
         ).first()
         if answer == "yes":

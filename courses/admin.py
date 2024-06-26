@@ -8,8 +8,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_summernote.admin import SummernoteModelAdmin
 
-from course_registrations.models import (GuestCourseRegistration,
-                                         UserCourseRegistration)
+from course_registrations.models import CourseRegistration
 
 from .models import CourseSession, ExternalCourse, InternalCourse
 
@@ -25,50 +24,16 @@ class CourseSessionInline(admin.TabularInline):
     extra = 0  # Set number of additional rows to 0
 
 
-class UserCourseRegistrationInline(admin.TabularInline):
-    """Displays UserCourseRegistrations as an inline model"""
+class CourseRegistrationInline(admin.TabularInline):
+    """Displays CourseRegistrations as an inline model"""
 
-    model = UserCourseRegistration
+    model = CourseRegistration
     extra = 0  # Set number of additional rows to 0
     max_num = 0  # Hide option to add more rows
     fields = [
-        "user",
-        "selected_sessions",
-        "exam",
-        "exam_grade",
-        "exam_passed",
-        "accept_terms",
-        "final_fee",
-        "payment_status",
-        "payment_method",
-        "discount",
-        "dinner",
-        "overnight_stay"
-    ]
-    readonly_fields = [
-        "user",
-        "selected_sessions",
-        "exam",
-        "exam_grade",
-        "accept_terms",
-        "final_fee",
-        "payment_method",
-        "discount",
-        "dinner",
-        "overnight_stay"
-    ]
-
-
-class GuestCourseRegistrationInline(admin.TabularInline):
-    """Displays GuestCourseRegistrations as an inline model"""
-
-    model = GuestCourseRegistration
-    extra = 0  # Set number of additional rows to 0
-    max_num = 0  # Hide option to add more rows
-    fields = [
-        "email",
         "first_name",
         "last_name",
+        "email",
         "selected_sessions",
         "exam",
         "exam_grade",
@@ -81,9 +46,9 @@ class GuestCourseRegistrationInline(admin.TabularInline):
         "overnight_stay",
     ]
     readonly_fields = [
-        "email",
         "first_name",
         "last_name",
+        "email",
         "selected_sessions",
         "exam",
         "exam_grade",
@@ -150,8 +115,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     search_fields = ["title", "description"]
     list_filter = ("registration_status",)
     summernote_fields = ("description",)
-    inlines = [CourseSessionInline, UserCourseRegistrationInline,
-               GuestCourseRegistrationInline]
+    inlines = [CourseSessionInline, CourseRegistrationInline]
+
     actions = [
         "duplicate_selected_courses",
         "toggle_status",
@@ -228,10 +193,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     def get_course_registration_count(self, course):
         """Gets the number of registrations for a course"""
 
-        registrations = list(
-            UserCourseRegistration.objects.filter(course=course))
-        registrations += list(
-            GuestCourseRegistration.objects.filter(course=course))
+        registrations = CourseRegistration.objects.filter(course=course)
 
         return len(registrations)
 
@@ -297,10 +259,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             )
             writer = csv.writer(response)
 
-            registrations = list(
-                UserCourseRegistration.objects.filter(course=course))
-            registrations += list(
-                GuestCourseRegistration.objects.filter(course=course))
+            registrations = CourseRegistration.objects.filter(course=course)
 
             self.write_csv_data(writer, registrations)
 
@@ -311,10 +270,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             for course in queryset:
                 csv_filename = f"{slugify(course.title)}_registrations.csv"
 
-                registrations = list(
-                    UserCourseRegistration.objects.filter(course=course))
-                registrations += list(
-                    GuestCourseRegistration.objects.filter(course=course))
+                registrations = CourseRegistration.objects.filter(
+                    course=course)
 
                 with tempfile.NamedTemporaryFile(
                     delete=False, mode="w", newline=""
@@ -333,7 +290,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
 
         return response
 
-    export_csv.short_description = _("Export selected courses registrations")
+    export_csv.short_description = _("Export selected courses registrations to CSV")
 
 
 @admin.register(ExternalCourse)

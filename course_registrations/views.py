@@ -13,8 +13,7 @@ from courses.models import InternalCourse
 from danbw_website import utils
 
 from . import forms
-from .models import (GuestCourseRegistration, UserCourseRegistration,
-                     UserProfile)
+from .models import CourseRegistration, UserProfile
 
 
 class RegisterCourse(View):
@@ -64,7 +63,7 @@ class RegisterCourse(View):
                 )
                 return redirect(reverse('userprofile') + '?next=' + request.path)
 
-            user_registered = UserCourseRegistration.objects.filter(
+            user_registered = CourseRegistration.objects.filter(
                 user=request.user, course=course
             )
 
@@ -75,11 +74,11 @@ class RegisterCourse(View):
                 )
                 return HttpResponseRedirect(reverse("course_list"))
 
-            registration_form = forms.UserCourseRegistrationForm(
+            registration_form = forms.CourseRegistrationForm(
                 course=course, user_profile=request.user.profile
             )
         else:
-            registration_form = forms.GuestCourseRegistrationForm(
+            registration_form = forms.CourseRegistrationForm(
                 course=course
             )
 
@@ -99,18 +98,18 @@ class RegisterCourse(View):
         course_data = self.prepare_course_data(course)
 
         if request.user.is_authenticated:
-            registration_form = forms.UserCourseRegistrationForm(
+            registration_form = forms.CourseRegistrationForm(
                 data=request.POST, course=course, user_profile=request.user.profile
             )
         else:
-            registration_form = forms.GuestCourseRegistrationForm(
+            registration_form = forms.CourseRegistrationForm(
                 data=request.POST, course=course
             )
 
         if registration_form.is_valid():
             if not request.user.is_authenticated:
                 email = registration_form.cleaned_data.get("email")
-                if GuestCourseRegistration.objects.filter(email=email, course=course).exists():
+                if CourseRegistration.objects.filter(email=email, course=course).exists():
                     messages.warning(
                         request,
                         _("A registration with this email address already exists.")
@@ -131,8 +130,8 @@ class RegisterCourse(View):
             registration.dinner = registration_form.cleaned_data.get("dinner")
 
             if request.user.is_authenticated:
-                registration.set_exam(request.user)
                 registration.user = request.user
+                registration.set_exam(request.user)
             else:
                 registration.set_exam()
                 registration.email = registration_form.cleaned_data.get(
@@ -167,11 +166,11 @@ class RegisterCourse(View):
                 )
 
             if request.user.is_authenticated:
-                registration_form = forms.UserCourseRegistrationForm(
+                registration_form = forms.CourseRegistrationForm(
                     course=course, user_profile=request.user.profile
                 )
             else:
-                registration_form = forms.GuestCourseRegistrationForm(
+                registration_form = forms.CourseRegistrationForm(
                     course=course
                 )
             return render(
@@ -190,11 +189,11 @@ class RegisterCourse(View):
         return HttpResponseRedirect(reverse("course_list"))
 
 
-class UserCourseRegistrationList(LoginRequiredMixin, View):
+class CourseRegistrationList(LoginRequiredMixin, View):
     """Displays a list of a users course registrations"""
 
     def get(self, request):
-        user_registrations = UserCourseRegistration.objects.filter(
+        user_registrations = CourseRegistration.objects.filter(
             user=request.user
         )
         past_registrations = [
@@ -218,11 +217,11 @@ class UserCourseRegistrationList(LoginRequiredMixin, View):
         )
 
 
-class CancelUserCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
+class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
     """Deletes a course registration instance"""
 
     def get(self, request, pk):
-        registration = get_object_or_404(UserCourseRegistration, pk=pk)
+        registration = get_object_or_404(CourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
         messages.warning(
@@ -233,7 +232,7 @@ class CancelUserCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
     def post(self, request, pk):
-        registration = get_object_or_404(UserCourseRegistration, pk=pk)
+        registration = get_object_or_404(CourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
 
@@ -247,7 +246,7 @@ class CancelUserCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
-class UpdateUserCourseRegistration(LoginRequiredMixin, View):
+class UpdateCourseRegistration(LoginRequiredMixin, View):
     """Updates a course registration"""
 
     def prepare_course_data(self, course):
@@ -264,12 +263,12 @@ class UpdateUserCourseRegistration(LoginRequiredMixin, View):
         return course_data
 
     def get(self, request, pk):
-        registration = get_object_or_404(UserCourseRegistration, pk=pk)
+        registration = get_object_or_404(CourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
 
         course = registration.course
-        registration_form = forms.UserCourseRegistrationForm(
+        registration_form = forms.CourseRegistrationForm(
             instance=registration,
             course=course,
             user_profile=request.user.profile,
@@ -287,12 +286,12 @@ class UpdateUserCourseRegistration(LoginRequiredMixin, View):
         )
 
     def post(self, request, pk):
-        registration = get_object_or_404(UserCourseRegistration, pk=pk)
+        registration = get_object_or_404(CourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
 
         course = registration.course
-        registration_form = forms.UserCourseRegistrationForm(
+        registration_form = forms.CourseRegistrationForm(
             data=request.POST,
             instance=registration,
             course=course,
@@ -330,7 +329,7 @@ class UpdateUserCourseRegistration(LoginRequiredMixin, View):
                     request,
                     _("Registration not submitted. Please select at least one session.")
                 )
-            registration_form = forms.UserCourseRegistrationForm(
+            registration_form = forms.CourseRegistrationForm(
                 instance=registration,
                 course=course,
                 user_profile=request.user.profile,

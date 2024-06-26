@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, render, reverse
 from django.utils.translation import gettext as _
 from django.views import View, generic
 
-from course_registrations.models import UserCourseRegistration
+from course_registrations.models import CourseRegistration
 from courses.models import ExternalCourse, InternalCourse
 
 from . import forms
@@ -24,7 +24,7 @@ class HomePage(View):
 
         for course in all_courses:
             if request.user.is_authenticated and course.get_course_type == "InternalCourse":
-                course.user_registered = UserCourseRegistration.objects.filter(
+                course.user_registered = CourseRegistration.objects.filter(
                     user=request.user, course=course
                 )
             course.save()
@@ -34,7 +34,7 @@ class HomePage(View):
         ]
         upcoming_registrations = []
         if request.user.is_authenticated:
-            all_registrations = UserCourseRegistration.objects.filter(
+            all_registrations = CourseRegistration.objects.filter(
                 user=request.user
             )
             upcoming_registrations = [

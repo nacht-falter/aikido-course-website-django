@@ -33,7 +33,7 @@ PAYMENT_METHODS = (
 )
 
 EXAM_GRADE_CHOICES = (
-    (SIXTH_KYU, _("7th Kyu ⚪️")),
+    (SIXTH_KYU, _("6th Kyu ⚪️")),
     (FIFTH_KYU, _("5th Kyu 🟡")),
     (FOURTH_KYU, _("4th Kyu 🟠")),
     (THIRD_KYU, _("3rd Kyu 🟢")),

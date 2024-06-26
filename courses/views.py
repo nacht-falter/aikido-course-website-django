@@ -3,7 +3,7 @@ from datetime import date
 from django.shortcuts import render
 from django.views import View
 
-from course_registrations.models import UserCourseRegistration
+from course_registrations.models import CourseRegistration
 
 from .models import ExternalCourse, InternalCourse
 
@@ -20,7 +20,7 @@ class CourseList(View):
             course.save()
 
             if request.user.is_authenticated:
-                course.user_registered = UserCourseRegistration.objects.filter(
+                course.user_registered = CourseRegistration.objects.filter(
                     user=request.user, course=course
                 )
 
