@@ -11,11 +11,31 @@ from danbw_website import constants
 class Course(models.Model):
     """Represents a course a user can sign up for"""
 
-    title = models.CharField(_("Title"), max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
-    start_date = models.DateField(_("Start Date"), default=date.today)
-    end_date = models.DateField(_("End Date"), default=date.today)
-    teacher = models.CharField(_("Teacher"), max_length=200, blank=True)
+    title = models.CharField(
+        _("Title"),
+        max_length=200,
+        help_text=_("The name of the course.")
+    )
+    slug = models.SlugField(
+        max_length=200,
+        unique=True
+    )
+    start_date = models.DateField(
+        _("Start Date"),
+        default=date.today,
+        help_text=_("The start date of the course.")
+    )
+    end_date = models.DateField(
+        _("End Date"),
+        default=date.today,
+        help_text=_("The end date of the course.")
+    )
+    teacher = models.CharField(
+        _("Teacher(s)"),
+        max_length=200,
+        blank=True,
+        help_text=_("The teacher(s) of the course (optional).")
+    )
 
     class Meta:
         ordering = ["start_date"]
@@ -60,28 +80,101 @@ class InternalCourse(Course):
     )
 
     status = models.IntegerField(
-        _("Status"), choices=STATUS_CHOICES, default=0)
-    publication_date = models.DateField(_("Publication Date"), blank=True, null=True)
+        _("Status"),
+        choices=STATUS_CHOICES,
+        default=0,
+        help_text=_(
+            "Courses set to 'Preview' will appear in the course list without all details.")
+    )
+    publication_date = models.DateField(
+        _("Publication Date"),
+        blank=True,
+        null=True,
+        help_text=_(
+            "If this date is set, the course will automatically be set to 'Published' on this date.")
+    )
     registration_status = models.IntegerField(
-        _("Registration Status"), choices=REGISTRATION_STATUS, default=0)
-    description = models.TextField(_("Description"), blank=True)
-    location = models.CharField(_("Location"), max_length=200, blank=True)
+        _("Registration Status"),
+        choices=REGISTRATION_STATUS,
+        default=0,
+        help_text=_(
+            "If the registration status is set to 'open', users can sign up for the course.")
+    )
+    description = models.TextField(
+        _("Description"),
+        blank=True,
+        help_text=_("A short description of the course (optional).")
+    )
+    location = models.CharField(
+        _("Location"),
+        max_length=200,
+        blank=True,
+        help_text=_("The location of the course (optional).")
+    )
     registration_start_date = models.DateField(
-        _("Registration Start Date"), blank=True, null=True)
+        _("Registration Start Date"),
+        blank=True,
+        null=True,
+        help_text=_(
+            "If this date is set, the registration status will be automatically set to 'open' on this date.")
+    )
     registration_end_date = models.DateField(
-        _("Registration End Date"), blank=True, null=True)
+        _("Registration End Date"),
+        blank=True,
+        null=True,
+        help_text=_(
+            "If this date is set, the registration status will be automatically set to 'closed' on this date.")
+    )
     organizer = models.CharField(
-        _("Organizer"), max_length=200, blank=True, default="DANBW")
-    course_fee = models.IntegerField(_("Course Fee"), default=0)
-    course_fee_cash = models.IntegerField(_("Course Fee (Cash)"), default=0)
+        _("Organizer"),
+        max_length=200,
+        blank=True,
+        default="DANBW",
+        help_text=_("The organizer of the course (optional).")
+    )
+    course_fee = models.IntegerField(
+        _("Course Fee"),
+        default=0,
+        help_text=_(
+            "The fee for the entire course (payments via bank transfer).")
+    )
+    course_fee_cash = models.IntegerField(
+        _("Course Fee (Cash)"),
+        default=0,
+        help_text=_("The fee for the entire course (cash payments).")
+    )
     discount_percentage = models.IntegerField(
-        _("Discount Percentage"), default=50)
+        _("Discount Percentage"),
+        default=50,
+        help_text=_(
+            "The discount percentage specified here will automatically be applied for users eligible for a discount.")
+    )
     bank_transfer_until = models.DateField(
-        _("Bank Transfer Until"), default=date.today)
+        _("Bank Transfer Until"),
+        default=date.today,
+        help_text=_(
+            "The date until which the course fee has to be paid via bank transfer.")
+    )
     course_type = models.CharField(
-        _("Course Type"), choices=COURSE_TYPE, max_length=200)
-    flyer = models.ImageField(_("Flyer"), upload_to="images/", blank=True)
-    additional_info = models.TextField(_("Additional Information"), blank=True)
+        _("Course Type"),
+        choices=COURSE_TYPE,
+        max_length=200,
+        help_text=_(
+            "The type of the course will determine which fields will be displayed in the registration form.")
+    )
+    flyer = models.ImageField(
+        _("Flyer"),
+        upload_to="images/",
+        blank=True,
+        null=True,
+        help_text=_(
+            "The course flyer. Needs to be uploaded as an image file (JPEG, PNG, etc.).")
+    )
+    additional_info = models.TextField(
+        _("Additional Information"),
+        blank=True,
+        help_text=_("Additional information about the course (optional).")
+    )
 
     def clean(self):
         """Custom validation for Internal Course model"""
@@ -112,7 +205,12 @@ class InternalCourse(Course):
 class ExternalCourse(Course):
     """Represents a course organized by an external organization"""
 
-    organizer = models.CharField(_("Organizer"), max_length=200, blank=True)
+    organizer = models.CharField(
+        _("Organizer"),
+        max_length=200,
+        blank=True,
+        help_text=_("The organizer of the course (optional).")
+    )
     url = models.URLField(_("URL"))
 
     class Meta:
@@ -123,15 +221,44 @@ class ExternalCourse(Course):
 class CourseSession(models.Model):
     """Represents a session within a course"""
 
-    title = models.CharField(_("Title"), max_length=200)
-    course = models.ForeignKey(
-        InternalCourse, on_delete=models.CASCADE, related_name="sessions", verbose_name=_("Course")
+    title = models.CharField(
+        _("Title"),
+        max_length=200,
+        help_text=_("The name of the session.")
     )
-    date = models.DateField(_("Date"), default=date.today)
-    start_time = models.TimeField(_("Start Time"), default="00:00")
-    end_time = models.TimeField(_("End Time"), default="00:00")
-    session_fee = models.IntegerField(_("Session Fee"), default=0)
-    session_fee_cash = models.IntegerField(_("Session Fee (Cash)"), default=0)
+    course = models.ForeignKey(
+        InternalCourse,
+        on_delete=models.CASCADE,
+        related_name="sessions",
+        verbose_name=_("Course"),
+        help_text=_("The course to which this session belongs.")
+    )
+    date = models.DateField(
+        _("Date"),
+        default=date.today,
+        help_text=_("The date on which the session takes place.")
+    )
+    start_time = models.TimeField(
+        _("Start Time"),
+        default="00:00",
+        help_text=_("The time at which the session starts.")
+    )
+    end_time = models.TimeField(
+        _("End Time"),
+        default="00:00",
+        help_text=_("The time at which the session ends.")
+    )
+    session_fee = models.IntegerField(
+        _("Session Fee"),
+        default=0,
+        help_text=_(
+            "The fee for attending this session if paid via bank transfer.")
+    )
+    session_fee_cash = models.IntegerField(
+        _("Session Fee (Cash)"),
+        default=0,
+        help_text=_("The fee for attending this session if paid in cash.")
+    )
 
     def __str__(self):
         return f"{constants.WEEKDAYS[self.date.weekday()][1]}, {self.date.strftime('%d.%m.%Y')}, {self.start_time.strftime('%H:%M')}-{self.end_time.strftime('%H:%M')}: {self.title}"
