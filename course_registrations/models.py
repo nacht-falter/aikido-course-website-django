@@ -93,6 +93,14 @@ class CourseRegistration(models.Model):
         null=True,
         help_text=_("The grade of the exam the participant would like to take.")
     )
+    exam_passed = models.BooleanField(
+        _("Exam Passed"),
+        null=True,
+    )
+    grade_updated = models.BooleanField(
+        _("Grade Updated"),
+        default=False,
+    )
     accept_terms = models.BooleanField(
         _("Accept terms"),
         default=False,
@@ -191,8 +199,8 @@ class CourseRegistration(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.course.course_type == "international":
-            self.dinner = False
-            self.overnight_stay = False
+            self.dinner = None
+            self.overnight_stay = None
 
         if self.email and self.dojo == "other":
             self.dojo = self.other_dojo
@@ -207,4 +215,4 @@ class CourseRegistration(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Registration: {self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name}"
