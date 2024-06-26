@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
 <div class="card form-card text-center">
@@ -21,4 +22,7 @@
     </div>
   </form>
 </div>
+
+<script src="{% static 'js/user_profile_form.js' %}"></script>
+
 {% endblock content %}
