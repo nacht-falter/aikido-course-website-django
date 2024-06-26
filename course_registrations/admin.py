@@ -1,8 +1,12 @@
+import csv
 from datetime import date
 
 from django.contrib import admin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+
+from danbw_website import utils
 
 from .models import CourseRegistration
 
@@ -97,7 +101,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
                    "payment_method", "exam"]
     ordering = ["course__start_date", "-registration_date"]
     actions = [
-        "toggle_payment_status"
+        "toggle_payment_status", "export_csv"
     ]
 
     def get_list_display_links(self, request, list_display):
@@ -122,3 +126,18 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
     toggle_payment_status.short_description = _(
         "Toggle payment status of selected registrations"
     )
+
+    def export_csv(self, request, queryset):
+        """Action for exporting course registrations to CSV"""
+
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = (
+            f"attachment; filename={_('registrations')}_{slugify(date.today())}.csv"
+        )
+        writer = csv.writer(response)
+
+        utils.write_csv_data(writer, queryset)
+
+        return response
+
+    export_csv.short_description = _("Export selected course registrations to CSV")

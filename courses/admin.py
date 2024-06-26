@@ -1,6 +1,7 @@
 import csv
 import tempfile
 import zipfile
+from datetime import date
 
 from django.contrib import admin
 from django.http import HttpResponse
@@ -9,6 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from django_summernote.admin import SummernoteModelAdmin
 
 from course_registrations.models import CourseRegistration
+from danbw_website import utils
 
 from .models import CourseSession, ExternalCourse, InternalCourse
 
@@ -65,7 +67,7 @@ class CourseRegistrationInline(admin.TabularInline):
 @admin.register(InternalCourse)
 class InternalCourseAdmin(SummernoteModelAdmin):
     fieldsets = (
-        ("Course Details", {
+        (_("Course Details"), {
             "fields": (
                 "title",
                 "course_type",
@@ -78,7 +80,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 "location"
             )
         }),
-        ("Dates", {
+        (_("Dates"), {
             "fields": (
                 "start_date",
                 "end_date",
@@ -87,7 +89,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 "registration_end_date"
             )
         }),
-        ("Payment Information", {
+        (_("Payment Information"), {
             "fields": (
                 "course_fee",
                 "course_fee_cash",
@@ -95,7 +97,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 "bank_transfer_until"
             )
         }),
-        ("Additional Information", {
+        (_("Additional Information"), {
             "fields": (
                 "additional_info",
             )
@@ -201,54 +203,6 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     # Customize property name: https://stackoverflow.com/a/64352815
     get_course_registration_count.short_description = _("Registrations")
 
-    def write_csv_data(self, writer, registrations):
-        """Write registration data to CSV"""
-
-        # Write header row
-        header_row = [
-            "First Name",
-            "Last Name",
-            "Email",
-            "Grade",
-            "Selected Sessions",
-            "Exam",
-            "Exam Grade",
-            "Accept Terms",
-            "Final Fee",
-            "Payment Status"
-        ]
-        if registrations and registrations[0].course.course_type == "international":
-            header_row.append("Dinner")
-            header_row.append("Overnight Stay")
-        writer.writerow(header_row)
-
-        # Write data rows
-        for registration in registrations:
-            selected_sessions = ", ".join(
-                session.title for session in registration.selected_sessions.all())
-
-            if hasattr(registration, "user"):
-                user = registration.user
-            else:
-                user = None
-
-            data_row = [
-                user.first_name if user else registration.first_name,
-                user.last_name if user else registration.last_name,
-                user.email if user else registration.email,
-                user.profile.get_grade_display() if user else registration.get_grade_display(),
-                selected_sessions,
-                "Yes" if registration.exam else "No",
-                registration.get_exam_grade_display(),
-                "Yes" if registration.accept_terms else "No",
-                registration.final_fee,
-                registration.get_payment_status_display(),
-            ]
-            if registration.course.course_type == "international":
-                data_row.append("Yes" if registration.dinner else "No")
-                data_row.append("Yes" if registration.overnight_stay else "No")
-            writer.writerow(data_row)
-
     def export_csv(self, request, queryset):
         """Action for exporting course registrations to CSV or zip"""
 
@@ -256,20 +210,20 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             course = queryset.first()
             response = HttpResponse(content_type="text/csv")
             response["Content-Disposition"] = (
-                f"attachment; filename={slugify(course.title)}_registrations.csv"
+                f"attachment; filename={slugify(course.title)}_{_('registrations')}.csv"
             )
             writer = csv.writer(response)
 
             registrations = CourseRegistration.objects.filter(course=course)
 
-            self.write_csv_data(writer, registrations)
+            utils.write_registrations_csv(writer, registrations)
 
             return response
 
         zip_buffer = tempfile.TemporaryFile()
         with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
             for course in queryset:
-                csv_filename = f"{slugify(course.title)}_registrations.csv"
+                csv_filename = f"{slugify(course.title)}_{_('registrations')}.csv"
 
                 registrations = CourseRegistration.objects.filter(
                     course=course)
@@ -278,7 +232,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                     delete=False, mode="w", newline=""
                 ) as csv_file:
                     writer = csv.writer(csv_file)
-                    self.write_csv_data(
+                    utils.write_registrations_csv(
                         writer, registrations)
                 zip_file.write(csv_file.name, arcname=csv_filename)
         zip_buffer.seek(0)
@@ -286,12 +240,13 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         response = HttpResponse(
             zip_buffer.read(), content_type="application/zip")
         response["Content-Disposition"] = (
-            "attachment; filename=courses_registrations.zip"
+            f"attachment; filename={slugify(_('course_registrations'))}_{slugify(date.today())}.zip"
         )
 
         return response
 
-    export_csv.short_description = _("Export selected courses registrations to CSV")
+    export_csv.short_description = _(
+        "Export selected course registrations to CSV")
 
 
 @admin.register(ExternalCourse)

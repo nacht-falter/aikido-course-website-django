@@ -11,12 +11,11 @@ from django.utils.translation import gettext as _
 def send_email_confirmation(user, request):
     subject = _("[Dynamic Aikido Nocquet BW] Email confirmation successful")
     message_parts = [
-        _(
-            "Hi,\n",
-            f"you have successfully confirmed your email address {user.email}.\n",
-            "You can login to your account at: ",
-            f"{request.META['HTTP_HOST']}/accounts/login",
-        )
+        _("Hi,\n"),
+        _("you have successfully confirmed your email address {email}.\n").format(
+            email=user.email),
+        _("You can login to your account at: {login_url}").format(
+            login_url=f"{request.META['HTTP_HOST']}/accounts/login")
     ]
     sender = settings.EMAIL_HOST_USER
     recipient = user.email
@@ -121,3 +120,50 @@ def send_membership_notification(first_name, last_name, email, membership_type):
     recipient = os.environ.get("TREASURER_EMAIL")
     message = "".join(message_parts)
     send_mail(subject, message, sender, [recipient])
+
+
+def write_registrations_csv(writer, registrations):
+    """Write registration data to CSV"""
+
+    header_row = [
+        "First Name",
+        "Last Name",
+        "Email",
+        "Grade",
+        "Selected Sessions",
+        "Exam",
+        "Exam Grade",
+        "Accept Terms",
+        "Final Fee",
+        "Payment Status"
+    ]
+    if registrations and registrations[0].course.course_type == "international":
+        header_row.append("Dinner")
+        header_row.append("Overnight Stay")
+    writer.writerow(header_row)
+
+    for registration in registrations:
+        selected_sessions = ", ".join(
+            session.title for session in registration.selected_sessions.all())
+
+        if hasattr(registration, "user"):
+            user = registration.user
+        else:
+            user = None
+
+        data_row = [
+            user.first_name if user else registration.first_name,
+            user.last_name if user else registration.last_name,
+            user.email if user else registration.email,
+            user.profile.get_grade_display() if user else registration.get_grade_display(),
+            selected_sessions,
+            "Yes" if registration.exam else "No",
+            registration.get_exam_grade_display(),
+            "Yes" if registration.accept_terms else "No",
+            registration.final_fee,
+            registration.get_payment_status_display(),
+        ]
+        if registration.course.course_type == "international":
+            data_row.append("Yes" if registration.dinner else "No")
+            data_row.append("Yes" if registration.overnight_stay else "No")
+        writer.writerow(data_row)
