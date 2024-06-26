@@ -1,4 +1,5 @@
 from datetime import date
+from smtplib import SMTPException
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -150,8 +151,21 @@ class RegisterCourse(View):
             # edManager.set
             registration.selected_sessions.set(selected_sessions)
 
-            utils.send_registration_confirmation(request, registration)
-            utils.send_registration_notification(request, registration)
+            try:
+                utils.send_registration_confirmation(request, registration)
+                utils.send_registration_notification(request, registration)
+            except SMTPException as e:
+                messages.error(request, e)
+                registration.delete()
+                return render(
+                    request,
+                    "register_course.html",
+                    {
+                        "course": course,
+                        "form": registration_form,
+                        "course_data": course_data,
+                    },
+                )
 
             messages.info(
                 request,

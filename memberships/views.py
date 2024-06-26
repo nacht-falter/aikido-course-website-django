@@ -1,3 +1,5 @@
+from smtplib import SMTPException
+
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
@@ -27,10 +29,14 @@ class DanIntMembershipCreateView(generic.CreateView):
             last_name = form.cleaned_data["last_name"]
             email = form.cleaned_data["email"]
 
-            utils.send_membership_confirmation(
-                first_name, email, "DAN International")
-            utils.send_membership_notification(
-                first_name, last_name, email, "DAN International")
+            try:
+                utils.send_membership_confirmation(
+                    first_name, email, "DAN International")
+                utils.send_membership_notification(
+                    first_name, last_name, email, "DAN International")
+            except SMTPException as e:
+                messages.error(self.request, e)
+                return self.form_invalid(form)
 
             message = (
                 _("We have received your membership application.") +

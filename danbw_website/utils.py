@@ -1,6 +1,8 @@
 import os
+from smtplib import SMTPException
 
 from django.conf import settings
+from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils import translation
@@ -20,13 +22,14 @@ def send_email_confirmation(user, request):
     sender = settings.EMAIL_HOST_USER
     recipient = user.email
     message = "".join(message_parts)
-    send_mail(subject, message, sender, [recipient])
+    try:
+        send_mail(subject, message, sender, [recipient])
+    except SMTPException:
+        messages.error(request, _(
+            "Failed to send email confirmation email. Please contact the course team."))
 
 
-def send_registration_confirmation(
-    request,
-    registration,
-):
+def send_registration_confirmation(request, registration):
     """Sends a registration confirmation email"""
 
     translation.activate(request.LANGUAGE_CODE)
@@ -38,6 +41,8 @@ def send_registration_confirmation(
         f"{session.title}"
         for session in registration.selected_sessions.all()
     ]
+
+    translation.deactivate()
 
     subject = _("[Dynamic Aikido Nocquet BW] Your Registration for ") + \
         registration.course.title
@@ -53,9 +58,12 @@ def send_registration_confirmation(
 
     sender = settings.EMAIL_HOST_USER
     recipient = registration.user.email if request.user.is_authenticated else registration.email
-    send_mail(subject, message, sender, [recipient], html_message=message)
 
-    translation.deactivate()
+    try:
+        send_mail(subject, message, sender, [recipient], html_message=message)
+    except SMTPException as e:
+        raise SMTPException(
+            _("Invalid email address. Please try again with a valid email address.")) from e
 
 
 def send_registration_notification(request, registration):
@@ -79,7 +87,11 @@ def send_registration_notification(request, registration):
     sender = settings.EMAIL_HOST_USER
     recipient = os.environ.get("COURSE_TEAM_EMAIL")
     message = "".join(message_parts)
-    send_mail(subject, message, sender, [recipient])
+    try:
+        send_mail(subject, message, sender, [recipient])
+    except SMTPException as e:
+        raise SMTPException(
+            _("Failed to send registration notification email. Please contact the course team.")) from e
 
 
 def send_membership_confirmation(first_name, email, membership_type):
@@ -99,7 +111,11 @@ def send_membership_confirmation(first_name, email, membership_type):
     sender = settings.EMAIL_HOST_USER
     recipient = email
     message = "".join(message_parts)
-    send_mail(subject, message, sender, [recipient])
+    try:
+        send_mail(subject, message, sender, [recipient])
+    except SMTPException as e:
+        raise SMTPException(
+            _("Invalid email address. Please try again with a valid email address.")) from e
 
 
 def send_membership_notification(first_name, last_name, email, membership_type):
@@ -119,7 +135,11 @@ def send_membership_notification(first_name, last_name, email, membership_type):
     sender = settings.EMAIL_HOST_USER
     recipient = os.environ.get("TREASURER_EMAIL")
     message = "".join(message_parts)
-    send_mail(subject, message, sender, [recipient])
+    try:
+        send_mail(subject, message, sender, [recipient])
+    except SMTPException as e:
+        raise SMTPException(
+            _("Failed to send membership notification email. Please contact the course team.")) from e
 
 
 def write_registrations_csv(writer, registrations):
