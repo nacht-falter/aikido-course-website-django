@@ -74,3 +74,18 @@ WEEKDAYS = (
     (5, _("Saturday")),
     (6, _("Sunday")),
 )
+
+MEMBERSHIP_TYPES = (
+    ("dan_international", _("DAN International Membership")),
+    ("childrens_passport", _("Childrens Passport")),
+    ("danbw", _("DANBW Membership")),
+)
+
+MEMBERSHIP_FEES = (
+    ("dan_international", 35),
+    ("dan_int_2nd_quarter", 31),
+    ("dan_int_3rd_quarter", 27),
+    ("dan_int_4th_quarter", 23),
+    ("childrens_passport", 15),
+    ("danbw", 5),
+)

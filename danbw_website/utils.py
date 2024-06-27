@@ -9,6 +9,8 @@ from django.utils import translation
 from django.utils.formats import date_format, time_format
 from django.utils.translation import gettext as _
 
+from danbw_website import constants
+
 
 def send_email_confirmation(user, request):
     subject = _("[Dynamic Aikido Nocquet BW] Email confirmation successful")
@@ -96,21 +98,35 @@ def send_registration_notification(request, registration):
 
 def send_membership_confirmation(first_name, email, membership_type):
     """Sends a membership confirmation email"""
-    subject = _("[Dynamic Aikido Nocquet BW] Your {membership_type} membership application").format(
-        membership_type=membership_type)
+    membership = get_tuple_value(constants.MEMBERSHIP_TYPES, membership_type)
+    subject = _("[Dynamic Aikido Nocquet BW] Your {membership} application").format(
+        membership=membership)
+    bank_details = os.environ.get("BANK_ACCOUNT")
+
+    if membership_type == "dan_international" or membership_type == "danbw":
+        payment_information = _(
+            "The membership fee for the current year will be deducted from your account.\n")
+    else:
+        fee = get_tuple_value(constants.MEMBERSHIP_FEES, membership_type)
+        payment_information = _(
+            f"Please transfer the fee of {fee} € to the account below:\n\n")
+
     message_parts = [
         _("Hi {first_name},\n\n").format(first_name=first_name),
-        _("We have received your {membership_type} membership application.\n\n").format(
-            membership_type=membership_type),
-        _("The membership fee for the current year will be deducted from your account.\n"),
+        _("We have received your {membership} application.\n\n").format(
+            membership=membership),
+        payment_information,
+        f"{bank_details}\n\n" if membership_type == 'childrens_passport' else "",
         _("In the meantime, we will issue your passport."),
         _("You don't need to do anything else for now.\n\n"),
         _("Best regards,\n"),
         _("The DANBW team\n"),
     ]
+
     sender = settings.EMAIL_HOST_USER
     recipient = email
     message = "".join(message_parts)
+
     try:
         send_mail(subject, message, sender, [recipient])
     except SMTPException as e:
@@ -118,17 +134,19 @@ def send_membership_confirmation(first_name, email, membership_type):
             _("Invalid email address. Please try again with a valid email address.")) from e
 
 
-def send_membership_notification(first_name, last_name, email, membership_type):
+def send_membership_notification(first_name, last_name, email, dojo, membership_type):
     """Sends a membership notification email"""
-    subject = _("[Dynamic Aikido Nocquet BW] New {membership_type} membership application").format(
-        membership_type=membership_type)
+    membership = get_tuple_value(constants.MEMBERSHIP_TYPES, membership_type)
+    subject = _("[Dynamic Aikido Nocquet BW] New {membership} application").format(
+        membership=membership)
     message_parts = [
         _("Hi,\n\n"),
-        _("A new {membership_type} membership application has been received.\n\n").format(
-            membership_type=membership_type),
+        _("A new {membership} application has been received.\n\n").format(
+            membership=membership),
         _("Name: {first_name} {last_name}\n").format(
             first_name=first_name, last_name=last_name),
-        _("Email: {email}\n\n").format(email=email),
+        _("Email: {email}\n").format(email=email),
+        _("Dojo: {dojo}\n\n").format(dojo=dojo),
         _("Please check the admin panel at {site_url}/admin for more details.\n\n").format(
             site_url=os.environ.get("SITE_URL")),
     ]
@@ -187,3 +205,9 @@ def write_registrations_csv(writer, registrations):
             data_row.append("Yes" if registration.dinner else "No")
             data_row.append("Yes" if registration.overnight_stay else "No")
         writer.writerow(data_row)
+
+def get_tuple_value(tuple_of_tuples, key):
+    for k, v in tuple_of_tuples:
+        if k == key:
+            return v
+    return None
