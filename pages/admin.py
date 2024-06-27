@@ -19,10 +19,7 @@ class PageAdmin(SummernoteModelAdmin):
     def toggle_status(self, request, queryset):
         """Action for toggling page status"""
         for page in queryset:
-            if page.status == 0:
-                page.status = 1
-            else:
-                page.status = 0
+            page.status = not page.status
             page.save()
 
     toggle_status.short_description = _("Toggle page status")

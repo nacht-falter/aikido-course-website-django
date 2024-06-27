@@ -117,10 +117,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
     def toggle_payment_status(self, request, queryset):
         """Action for toggling the payment status of registrations"""
         for registration in queryset:
-            if registration.payment_status == 0:
-                registration.payment_status = 1
-            else:
-                registration.payment_status = 0
+            registration.payment_status = not registration.payment_status
             registration.save()
 
     toggle_payment_status.short_description = _(
@@ -136,7 +133,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         )
         writer = csv.writer(response)
 
-        utils.write_csv_data(writer, queryset)
+        utils.write_registrations_csv(writer, queryset)
 
         return response
 

@@ -173,10 +173,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     def toggle_registration_status(self, request, queryset):
         """Action for toggling course registration status"""
         for course in queryset:
-            if course.registration_status == 0:
-                course.registration_status = 1
-            else:
-                course.registration_status = 0
+            course.registration_status = not course.registration_status
             course.save()
 
     toggle_registration_status.short_description = _(
@@ -185,10 +182,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     def toggle_status(self, request, queryset):
         """Action for toggling course status"""
         for course in queryset:
-            if course.status == 0:
-                course.status = 1
-            else:
-                course.status = 0
+            course.status = not course.status
             course.save()
 
     toggle_status.short_description = _("Toggle status of selected courses")

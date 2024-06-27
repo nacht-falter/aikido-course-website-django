@@ -179,16 +179,20 @@ class InternalCourse(Course):
     def clean(self):
         """Custom validation for Internal Course model"""
         super().clean()
-        if (self.registration_start_date and self.registration_end_date and self.registration_start_date > self.registration_end_date):
-            raise ValidationError(
-                _("Registration start date cannot be later than registration end date."))
+        if self.registration_start_date and self.registration_end_date:
+            if self.registration_start_date > self.registration_end_date:
+                raise ValidationError(
+                    _("Registration start date cannot be later than registration end date."))
 
     def save(self, *args, **kwargs):
-        if self.registration_start_date and self.registration_end_date \
-                and self.registration_start_date <= date.today() <= self.registration_end_date:
-            self.registration_status = 1
-        else:
-            self.registration_status = 0
+        if self.registration_start_date or self.registration_end_date:
+            start_ok = self.registration_start_date is None or self.registration_start_date <= date.today()
+            end_ok = self.registration_end_date is None or date.today() <= self.registration_end_date
+
+            if start_ok and end_ok:
+                self.registration_status = 1
+            else:
+                self.registration_status = 0
 
         if self.publication_date and self.publication_date <= date.today():
             self.status = 1
