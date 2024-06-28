@@ -14,7 +14,7 @@ class CourseRegistration(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name="registrations",
-        verbose_name=_("Participant)"),
+        verbose_name=_("Participant"),
         help_text=_("The user who is registering for the course."),
         null=True,
         blank=True

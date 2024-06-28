@@ -15,9 +15,9 @@
     </div>
     <form class="login" method="POST" action="{% url 'account_login' %}">
       <div class="card-body">
-        <p>{% blocktrans %}
-        If you have not created an account yet, then please
-        <a class="blue-link" href="{{ signup_url }}">sign up</a> first.
+        <p>
+        {% blocktrans %}
+        If you have not created an account yet, then please <a class="blue-link" href="{{ signup_url }}">sign up</a> first.
         {% endblocktrans %}
         </p>
         <div class="text-start px-5">

@@ -14,7 +14,7 @@
   <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
     <div class="card-body">
       <p>
-        {% blocktrans %}
+        {% blocktrans trimmed %}
         Already have an account? Then please <a class="blue-link" href="{{ login_url }}">sign in</a>.
         {% endblocktrans %}
       </p>
