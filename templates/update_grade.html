@@ -8,7 +8,11 @@
         <h3 class="mt-2">{% trans "Did you pass your exam?" %}</h3>
     </div>
     <div class="card-body">
-        <p>{% blocktrans %}You have applied for an exam with your registration for {{ exam_registration.course }}{% endblocktrans %}</p>
+        <p>
+            {% blocktrans with course=exam_registration.course %}
+            You have applied for an exam with your registration for {{ course }}
+            {% endblocktrans %}
+        </p>
         <p>{% trans "Did you pass the exam?" %}</p>
         <form method="post" action="{% url 'update_grade' %}">
             {% csrf_token %}

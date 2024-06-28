@@ -5,11 +5,6 @@
 {% load static %}
 
 {% block content %}
-{% with full_fee=fees.dan_international %}
-{% with fee_2nd=fees.dan_int_2nd_quarter %}
-{% with fee_3rd=fees.dan_int_3rd_quarter %}
-{% with fee_4th=fees.dan_int_4th_quarter %}
-{% with danbw_fee=fees.danbw %}
 
 <h2>{% trans "Membership Application" %}</h2>
 <form method="post" class="membership_form">
@@ -79,12 +74,14 @@
     <div class="card-body">
       <div class="alert alert-secondary">
         <p>
-          {% trans "The membership fee per year is" %} {{ full_fee }} €.
+          {% blocktrans with full_fee=fees.dan_international %}
+          The membership fee is <strong>{{ full_fee }} €</strong> per year.
+          {% endblocktrans %}
         </p>
         <p>
-          {% blocktrans %}
+          {% blocktrans with full_fee=fees.dan_international fee_2nd=fees.dan_int_2nd_quarter fee_3rd=fees.dan_int_3rd_quarter fee_4th=fees.dan_int_4th_quarter %}
           New members who apply for membership from the 2nd, 3rd, or 4th quarter of the year are only charged a reduced
-          fee of  {{ fee_2nd }} €, {{ fee_3rd }} €, or {{ fee_4th }} €, respectively.
+          fee of <strong>{{ fee_2nd }} €</strong>, <strong>{{ fee_3rd }} €</strong>, or <strong>{{ fee_4th }} €</strong>, respectively.
           {% endblocktrans %}
         </p>
         <p>
@@ -135,11 +132,5 @@
 </form>
 
 <script src="{% static 'js/membership_form.js' %}"></script>
-
-{% endwith %}
-{% endwith %}
-{% endwith %}
-{% endwith %}
-{% endwith %}
 
 {% endblock content %}

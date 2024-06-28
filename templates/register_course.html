@@ -30,10 +30,20 @@
     <li>{% trans "Handicapped persons" %}</li>
     <li>{% trans "Unemployed persons" %}</li>
   </ul>
-  <p>{% trans "If one of the above conditions applies to you, please check the \"Discount\" box in the registration form and bring proof of eligibility to the course. Otherwise, the full course fee will be charged." %}</p>
+  <p>
+    {% blocktrans %}
+    If one of the above conditions applies to you, please check the \count\" box in the registration form and bring proof
+    of eligibility to the course. Otherwise, the full course fee will be charged.
+    {% endblocktrans %}
+  </p>
   <h3 id="terms-and-conditions">{% trans "Terms and Conditions" %}</h3>
   <p>{% trans "The organizer (DANBW e. V.) does not provide insurance coverage." %}</p>
-  <p>{% trans "Also, the organizer may take photos during the course, which could be published without mentioning names (e.g., on the DANBW website). If you do not wish to have your photos published, please inform the organizer before the start of the course." %}</p>
+  <p>
+    {% blocktrans %}
+    Also, the organizer may take photos during the course, which could be published without mentioning names (e.g., on
+    the DANBW website). If you do not wish to have your photos published, please inform the organizer before the start of the course.
+    {% endblocktrans %}
+  </p>
 </div>
 
 <!-- Instructions for safely passing data to JavaScript: -->

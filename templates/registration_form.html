@@ -93,10 +93,10 @@
         </div>
         <div class="col-9 mb-2">
           {{ form.discount|as_crispy_field }}
-          <p>{% trans "Please refer to the" %}
-            <a href="#discount-conditions">
-              {% trans "Discount Conditions" %}
-            </a> {% trans "below for more information." %}
+          <p>
+            {% blocktrans %}
+            Please refer to the <a href="#discount-conditions"> Discount Conditions </a> below for more information.
+            {% endblocktrans %}
           </p>
         </div>
       </div>

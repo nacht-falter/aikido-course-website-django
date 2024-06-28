@@ -78,7 +78,7 @@
             {% for category in categories %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle {% if category.slug == slug %}active{% endif %}" href="#" role="button"
-                                                                                                           data-bs-toggle="dropdown" aria-expanded="false">
+                data-bs-toggle="dropdown" aria-expanded="false">
                 {{ category.title }}
               </a>
               <ul class="dropdown-menu">
@@ -180,7 +180,7 @@
         </ul>
       </nav>
       <div class="copyright bg-dark text-light p-4 text-center">
-        <i class="fa-regular fa-copyright"></i> {% trans "Dynamic Aikido Nocquet Baden-Württemberg e. V." %} {% now "Y" %}
+        <i class="fa-regular fa-copyright"></i>Dynamic Aikido Nocquet Baden-Württemberg e. V. {% now "Y" %}
       </div>
     </footer>
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
