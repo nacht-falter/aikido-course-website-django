@@ -7,10 +7,23 @@
 {% block content %}
 
 <h2>{% trans "Children's Passport Application" %}</h2>
-<p>Prerequisite for registering for the Aikido exam is an application for a children's pass with D.A.N. in Baden-Württemberg e. V. The children's pass will only be issued once this application is completely filled out and a fee of €15 has been received in the account listed below. This fee includes the issuance of the children's pass, the Aikido guide for children and teenagers, as well as the provision of a colored belt upon passing the exam.</p>
-<p>Before the exam, a photo of the child must be added to the children's pass. Please provide the trainer with a current passport photo or similar.</p>
+<p>
+  {% blocktrans %}
+  Prerequisite for registering for exams is an application for a children's passport with
+  D.A.N. in Baden-Württemberg. The children's passport  will only be issued once this application
+  is completely filled out and the fee of {{ fee }} € has been received in the account listed below. This fee includes
+  the issuance of the children's passport, the Aikido guide for children and teenagers, as well as the provision
+  of a colored belt upon passing the exam.
+  {% endblocktrans %}
+</p>
+<p>
+  {% blocktrans %}
+  Before the exam, a photo of the child must be added to the children's passport. Please provide
+  your teacher with a current passport photo or similar.
+  {% endblocktrans %}
+</p>
 
-<p><strong>Bank details:</strong><br>
+<p><strong>{% trans "Bank details:" %}</strong><br>
 DAN in Baden-Württemberg e.V.<br>
 IBAN: DE59 6809 0000 0017 8619 05<br>
 BIC: GENODE61FR1<br>
@@ -89,7 +102,12 @@ Volksbank Freiburg</p>
     </div>
     <div class="card-body">
       <div class="alert alert-secondary pb-0">
-        <p>{% trans "All personal data received will be processed and stored in compliance with the legal provisions of the Federal Data Protection Act. No data will be passed on to third parties outside the above-mentioned organization." %}</p>
+        <p>
+          {% blocktrans %}
+          All personal data received will be processed and stored in compliance with the legal provisions of the Federal Data
+          Protection Act. No data will be passed on to third parties outside the above-mentioned organization.
+          {% endblocktrans %}
+        </p>
       </div>
       {{ form.accept_terms|as_crispy_field }}
       {{ form.liability_disclaimer|as_crispy_field }}

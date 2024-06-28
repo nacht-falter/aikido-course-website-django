@@ -5,11 +5,10 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views import generic
 
-from danbw_website import utils
-from danbw_website.constants import DOJO_CHOICES
+from danbw_website import constants, utils
 
-from .forms import DanIntMembershipForm, ChildrensPassportForm
-from .models import DanIntMembership, ChildrensPassport
+from .forms import ChildrensPassportForm, DanIntMembershipForm
+from .models import ChildrensPassport, DanIntMembership
 
 
 class DanIntMembershipCreateView(generic.CreateView):
@@ -23,12 +22,17 @@ class DanIntMembershipCreateView(generic.CreateView):
         kwargs["request"] = self.request
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["fees"] = dict(constants.MEMBERSHIP_FEES)
+        return context
+
     def form_valid(self, form):
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
         email = form.cleaned_data["email"]
         dojo = utils.get_tuple_value(
-            DOJO_CHOICES, form.cleaned_data["dojo"])
+            constants.DOJO_CHOICES, form.cleaned_data["dojo"])
 
         try:
             utils.send_membership_confirmation(
@@ -59,12 +63,17 @@ class ChildrensPassportCreateView(generic.CreateView):
         kwargs["request"] = self.request
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["fee"] = utils.get_tuple_value(constants.MEMBERSHIP_FEES, "childrens_passport")
+        return context
+
     def form_valid(self, form):
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
         email = form.cleaned_data["email"]
         dojo = utils.get_tuple_value(
-            DOJO_CHOICES, form.cleaned_data["dojo"])
+            constants.DOJO_CHOICES, form.cleaned_data["dojo"])
 
         try:
             utils.send_membership_confirmation(

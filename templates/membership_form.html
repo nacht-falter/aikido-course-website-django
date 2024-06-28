@@ -5,6 +5,11 @@
 {% load static %}
 
 {% block content %}
+{% with full_fee=fees.dan_international %}
+{% with fee_2nd=fees.dan_int_2nd_quarter %}
+{% with fee_3rd=fees.dan_int_3rd_quarter %}
+{% with fee_4th=fees.dan_int_4th_quarter %}
+{% with danbw_fee=fees.danbw %}
 
 <h2>{% trans "Membership Application" %}</h2>
 <form method="post" class="membership_form">
@@ -73,9 +78,21 @@
     </div>
     <div class="card-body">
       <div class="alert alert-secondary">
-        <p>{% trans "The membership fee is 35,-€ per year." %}</p>
-        <p>{% trans "New members who apply for membership from the 2nd, 3rd, or 4th quarter of the year are only charged a reduced fee of €31, €27, or €23, respectively." %}</p>
-        <p>{% trans "The membership fee is collected annually in December for the following year by SEPA direct debit from DANBW e.V. as a representative for DAN International." %}</p>
+        <p>
+          {% trans "The membership fee per year is" %} {{ full_fee }} €.
+        </p>
+        <p>
+          {% blocktrans %}
+          New members who apply for membership from the 2nd, 3rd, or 4th quarter of the year are only charged a reduced
+          fee of  {{ fee_2nd }} €, {{ fee_3rd }} €, or {{ fee_4th }} €, respectively.
+          {% endblocktrans %}
+        </p>
+        <p>
+          {% blocktrans %}
+          The membership fee is collected annually in December for the following year by SEPA direct debit from DANBW e.V.
+          as a representative for DAN International.
+          {% endblocktrans %}
+        </p>
       </div>
       {{ form.sepa|as_crispy_field }}
       {{ form.iban|as_crispy_field }}
@@ -88,11 +105,26 @@
     </div>
     <div class="card-body">
       <div class="alert alert-secondary pb-0">
-        <p>{% trans "Membership is automatically renewed for another year at the end of the year. A termination of membership must be made by December 1st in order to take effect at the end of the year." %}</p>
-        <p>{% trans "Suspending the direct debit procedure or reclaiming the amount collected does not constitute termination. In this case, DANBW e.V. charges an administrative fee of €5 for the additional effort." %}</p>
+        <p>
+          {% blocktrans %}
+          Membership is automatically renewed for another year at the end of the year. A termination of membership must be
+          made by December 1st in order to take effect at the end of the year.
+          {% endblocktrans %}
+        </p>
+        <p>
+          {% blocktrans %}
+          Suspending the direct debit procedure or reclaiming the amount collected does not constitute termination. In this
+          case, DANBW e.V. charges an administrative fee of €5 for the additional effort.
+          {% endblocktrans %}
+        </p>
       </div>
       <div class="alert alert-secondary pb-0">
-        <p>{% trans "All personal data received will be processed and stored in compliance with the legal provisions of the Federal Data Protection Act. No data will be passed on to third parties outside the above-mentioned organization." %}</p>
+        <p>
+          {% blocktrans %}
+          All personal data received will be processed and stored in compliance with the legal provisions of the Federal Data
+          Protection Act. No data will be passed on to third parties outside the above-mentioned organization.
+          {% endblocktrans %}
+        </p>
       </div>
       {{ form.accept_terms|as_crispy_field }}
       {{ form.liability_disclaimer|as_crispy_field }}
@@ -103,5 +135,11 @@
 </form>
 
 <script src="{% static 'js/membership_form.js' %}"></script>
+
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
 
 {% endblock content %}
