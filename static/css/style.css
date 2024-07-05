@@ -313,3 +313,7 @@ a.badge:hover {
   max-height: 10vh;
   width: 100%;
 }
+
+.registration-form-content legend {
+  font-size: 1rem;
+}
