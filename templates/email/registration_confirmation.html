@@ -34,7 +34,7 @@
       {% trans "You applied for an exam for" %} {{ registration.get_exam_grade_display }}
     </li>
     {% endif %}
-    <li>{% trans "Course Fee:" %} <strong>{{ registration.final_fee }}</strong> €</li>
+    <li>{% trans "Course Fee:" %} <strong>€{{ registration.final_fee }}</strong></li>
     <li>{% trans "Payment method:" %} {{ registration.get_payment_method_display }}</li>
   </ul>
   {% if registration.payment_method == 0 %}

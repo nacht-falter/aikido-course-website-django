@@ -6,6 +6,9 @@
 
 {% block content %}
 
+{% static 'documents/2022.05.15_DANBW-Satzung.pdf' as danbw_statutes_url %}
+{% static 'documents/UKAU_Satzung.pdf' as ukau_statutes_url %}
+
 <h2>{% trans "Membership Application" %}</h2>
 <form method="post" class="membership_form">
   {% csrf_token %}
@@ -67,6 +70,7 @@
       </div>
     </div>
   </div>
+  {% if membership_type == "dan_international" %}
   <div class="card mb-3">
     <div class="card-header">
       <h4 class="card-title">{% trans "Payment Details" %}</h4>
@@ -75,13 +79,13 @@
       <div class="alert alert-secondary">
         <p>
           {% blocktrans with full_fee=fees.dan_international %}
-          The membership fee is <strong>{{ full_fee }} €</strong> per year.
+          The membership fee is <strong>€{{ full_fee }}</strong> per year.
           {% endblocktrans %}
         </p>
         <p>
           {% blocktrans with full_fee=fees.dan_international fee_2nd=fees.dan_int_2nd_quarter fee_3rd=fees.dan_int_3rd_quarter fee_4th=fees.dan_int_4th_quarter %}
           New members who apply for membership from the 2nd, 3rd, or 4th quarter of the year are only charged a reduced
-          fee of <strong>{{ fee_2nd }} €</strong>, <strong>{{ fee_3rd }} €</strong>, or <strong>{{ fee_4th }} €</strong>, respectively.
+          fee of <strong>€{{ fee_2nd }}</strong>, <strong>€{{ fee_3rd }}</strong>, or <strong>€{{ fee_4th }}</strong>, respectively.
           {% endblocktrans %}
         </p>
         <p>
@@ -95,12 +99,14 @@
       {{ form.iban|as_crispy_field }}
       {{ form.account_holder|as_crispy_field }}
     </div>
+    {% endif %}
   </div>
   <div class="card mb-3">
     <div class="card-header">
       <h4 class="card-title">{% trans "Additional Information" %}</h4>
     </div>
     <div class="card-body">
+      {% if membership_type == "dan_international" %}
       <div class="alert alert-secondary pb-0">
         <p>
           {% blocktrans trimmed %}
@@ -115,6 +121,16 @@
           {% endblocktrans %}
         </p>
       </div>
+      {% else %}
+      <div class="alert alert-secondary">
+        <p>
+          {% blocktrans with danbw_fee=fees.danbw %}
+          I will transfer the annual membership fee of €{{ danbw_fee }} to the following account:
+          {% endblocktrans %}
+        </p>
+        {{ bank_details|linebreaks }}
+      </div>
+      {% endif %}
       <div class="alert alert-secondary pb-0">
         <p>
           {% blocktrans trimmed %}
@@ -124,6 +140,17 @@
         </p>
       </div>
       {{ form.accept_terms|as_crispy_field }}
+      <p class="ms-4">
+        {% if membership_type == "dan_international" %}
+        <a href="{{ ukau_statutes_url }}" target="_blank">
+          <i class="fas fa-file-arrow-down"></i> {% trans "Statutes of DAN International" %}
+        </a>
+        {% else %}
+        <a href="{{ danbw_statutes_url }}" target="_blank">
+          <i class="fas fa-file-arrow-down"></i> {% trans "Statutes of DANBW e.V." %}
+        </a>
+        {% endif %}
+      </p>
       {{ form.liability_disclaimer|as_crispy_field }}
       {{ form.comment|as_crispy_field }}
     </div>

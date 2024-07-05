@@ -8,10 +8,10 @@
 
 <h2>{% trans "Children's Passport Application" %}</h2>
 <p>
-  {% blocktrans trimmed %}
+  {% blocktrans with fee=fees.childrens_passport %}
   Prerequisite for registering for exams is an application for a children's passport with
   D.A.N. in Baden-Württemberg. The children's passport  will only be issued once this application
-  is completely filled out and the fee of {{ fee }} € has been received in the account listed below. This fee includes
+  is completely filled out and the fee of <strong>€{{ fee }}</strong> has been received in the account listed below. This fee includes
   the issuance of the children's passport, the Aikido guide for children and teenagers, as well as the provision
   of a colored belt upon passing the exam.
   {% endblocktrans %}
