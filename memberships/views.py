@@ -1,3 +1,4 @@
+import os
 from smtplib import SMTPException
 
 from django.contrib import messages
@@ -7,15 +8,13 @@ from django.views import generic
 
 from danbw_website import constants, utils
 
-from .forms import ChildrensPassportForm, DanIntMembershipForm
-from .models import ChildrensPassport, DanIntMembership
+from .forms import (ChildrensPassportForm, DanBwMembershipForm,
+                    DanIntMembershipForm)
+from .models import ChildrensPassport, DanBwMembership, DanIntMembership
 
 
-class DanIntMembershipCreateView(generic.CreateView):
-    model = DanIntMembership
-    template_name = "membership_form.html"
+class BaseMembershipCreateView(generic.CreateView):
     success_url = reverse_lazy("home")
-    form_class = DanIntMembershipForm
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -25,6 +24,8 @@ class DanIntMembershipCreateView(generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fees"] = dict(constants.MEMBERSHIP_FEES)
+        context["bank_details"] = os.environ.get("BANK_ACCOUNT")
+        context["membership_type"] = self.membership_type
         return context
 
     def form_valid(self, form):
@@ -36,9 +37,9 @@ class DanIntMembershipCreateView(generic.CreateView):
 
         try:
             utils.send_membership_confirmation(
-                first_name, email, "dan_international")
+                first_name, email, self.membership_type)
             utils.send_membership_notification(
-                first_name, last_name, email, dojo, "dan_international")
+                first_name, last_name, email, dojo, self.membership_type)
         except SMTPException as e:
             messages.error(self.request, e)
             return self.form_invalid(form)
@@ -52,42 +53,24 @@ class DanIntMembershipCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-class ChildrensPassportCreateView(generic.CreateView):
-    model = ChildrensPassport
+class DanIntMembershipCreateView(BaseMembershipCreateView):
+    template_name = "membership_form.html"
+    model = DanIntMembership
+    form_class = DanIntMembershipForm
+    membership_type = "dan_international"
+
+    from .forms import ChildrensPassportForm
+
+
+class ChildrensPassportCreateView(BaseMembershipCreateView):
     template_name = "childrens_passport_form.html"
-    success_url = reverse_lazy("home")
+    model = ChildrensPassport
     form_class = ChildrensPassportForm
+    membership_type = "childrens_passport"
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["request"] = self.request
-        return kwargs
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["fee"] = utils.get_tuple_value(constants.MEMBERSHIP_FEES, "childrens_passport")
-        return context
-
-    def form_valid(self, form):
-        first_name = form.cleaned_data["first_name"]
-        last_name = form.cleaned_data["last_name"]
-        email = form.cleaned_data["email"]
-        dojo = utils.get_tuple_value(
-            constants.DOJO_CHOICES, form.cleaned_data["dojo"])
-
-        try:
-            utils.send_membership_confirmation(
-                first_name, email, _("childrens_passport"))
-            utils.send_membership_notification(
-                first_name, last_name, email, dojo, "childrens_passport")
-        except SMTPException as e:
-            messages.error(self.request, e)
-            return self.form_invalid(form)
-
-        message = (
-            _("We have received your application.") +
-            _(" Please check your email for confirmation.")
-        )
-        messages.success(self.request, message)
-
-        return super().form_valid(form)
+class DanBwMembershipCreateView(BaseMembershipCreateView):
+    model = DanBwMembership
+    template_name = "membership_form.html"
+    form_class = DanBwMembershipForm
+    membership_type = "danbw"

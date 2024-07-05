@@ -7,4 +7,6 @@ urlpatterns = [
          name="dan-international-membership"),
     path("membership/childrens-passport/", views.ChildrensPassportCreateView.as_view(),
          name="childrens-passport"),
+    path("membership/danbw/", views.DanBwMembershipCreateView.as_view(),
+         name="danbw-membership"),
 ]
