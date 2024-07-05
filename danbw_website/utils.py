@@ -109,7 +109,7 @@ def send_membership_confirmation(first_name, email, membership_type):
     else:
         fee = get_tuple_value(constants.MEMBERSHIP_FEES, membership_type)
         payment_information = _(
-            f"Please transfer the fee of {fee} € to the account below:\n\n")
+            f"Please transfer the fee of €{fee} to the account below:\n\n")
 
     message_parts = [
         _("Hi {first_name},\n\n").format(first_name=first_name),
