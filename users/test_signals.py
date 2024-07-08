@@ -24,5 +24,5 @@ class SignalTest(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(
             mail.outbox[0].subject,
-            "[DANBW e.V.] Email confirmation successful",
+            "[D.A.N. BW e.V.] Email confirmation successful",
         )

@@ -120,7 +120,7 @@ def send_membership_confirmation(first_name, email, membership_type):
         _("In the meantime, we will issue your passport."),
         _("You don't need to do anything else for now.\n\n"),
         _("Best regards,\n"),
-        _("The DANBW team\n"),
+        _("The D.A.N. BW team\n"),
     ]
 
     sender = settings.EMAIL_HOST_USER

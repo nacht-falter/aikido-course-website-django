@@ -129,7 +129,7 @@ class InternalCourse(Course):
         _("Organizer"),
         max_length=200,
         blank=True,
-        default="DANBW",
+        default="D.A.N. BW",
         help_text=_("The organizer of the course (optional).")
     )
     course_fee = models.IntegerField(

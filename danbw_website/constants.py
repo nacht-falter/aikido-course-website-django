@@ -76,9 +76,9 @@ WEEKDAYS = (
 )
 
 MEMBERSHIP_TYPES = (
-    ("dan_international", _("DAN International Membership")),
+    ("dan_international", _("D.A.N. International Membership")),
     ("childrens_passport", _("Childrens Passport")),
-    ("danbw", _("DANBW Membership")),
+    ("danbw", _("D.A.N. BW Membership")),
 )
 
 MEMBERSHIP_FEES = (

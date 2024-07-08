@@ -14,19 +14,19 @@
     {% regroup current_courses by start_date.year as current_course_years %}
     {% regroup past_courses by start_date.year as past_course_years %}
 
-    <div class="card-body pt-0">
+    <div class="card-body py-0">
         {% for year in current_course_years %}
         <h3 class="mt-4 mb-2">{{ year.grouper }}</h3>
         {% if year.list %}
         {% include "course_list_header.html" %}
         {% endif %}
-        <div class="accordion" id="accordion-{{ year.grouper }}">
+        <div class="accordion mb-3" id="accordion-{{ year.grouper }}">
             {% for course in year.list %}
             {% include "course_list_item.html" with course=course year=year.grouper %}
             {% endfor %}
         </div>
         {% empty %}
-        <p>{% trans "There are currently no courses available." %}</p>
+        <p class="my-3">{% trans "There are currently no courses available." %}</p>
         {% endfor %}
     </div>
 </div>

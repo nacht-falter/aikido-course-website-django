@@ -70,7 +70,7 @@ class CourseRegistration(models.Model):
         _("Other Dojo"),
         max_length=100,
         blank=True,
-        help_text=_("The name of the participant's Dojo outside of DANBW.")
+        help_text=_("The name of the participant's Dojo outside of D.A.N. BW.")
     )
     grade = models.IntegerField(
         _("Grade"),
