@@ -9,7 +9,11 @@
 {% static 'documents/2022.05.15_DANBW-Satzung.pdf' as danbw_statutes_url %}
 {% static 'documents/UKAU_Satzung.pdf' as ukau_statutes_url %}
 
-<h2>{% trans "Membership Application" %}</h2>
+{% if membership_type == "dan_international" %}
+<h2 class="mb-4">{% trans "D.A.N. International Membership Application" %}</h2>
+{% else %}
+<h2 class="mb-4">{% trans "D.A.N. BW Membership Application" %}</h2>
+{% endif %}
 <form method="post" class="membership_form">
   {% csrf_token %}
   <div class="card mb-3">
@@ -90,8 +94,8 @@
         </p>
         <p>
           {% blocktrans trimmed %}
-          The membership fee is collected annually in December for the following year by SEPA direct debit from DANBW e.V.
-          as a representative for DAN International.
+          The membership fee is collected annually in December for the following year by SEPA direct debit from D.A.N. BW e.V.
+          as a representative for D.A.N. International.
           {% endblocktrans %}
         </p>
       </div>
@@ -117,7 +121,7 @@
         <p>
           {% blocktrans trimmed %}
           Suspending the direct debit procedure or reclaiming the amount collected does not constitute termination. In this
-          case, DANBW e.V. charges an administrative fee of €5 for the additional effort.
+          case, D.A.N.BW e.V. charges an administrative fee of €5 for the additional effort.
           {% endblocktrans %}
         </p>
       </div>
@@ -143,15 +147,17 @@
       <p class="ms-4">
         {% if membership_type == "dan_international" %}
         <a href="{{ ukau_statutes_url }}" target="_blank">
-          <i class="fas fa-file-arrow-down"></i> {% trans "Statutes of DAN International" %}
+          <i class="fas fa-file-arrow-down"></i> {% trans "Statutes of D.A.N. International" %}
         </a>
         {% else %}
         <a href="{{ danbw_statutes_url }}" target="_blank">
-          <i class="fas fa-file-arrow-down"></i> {% trans "Statutes of DANBW e.V." %}
+          <i class="fas fa-file-arrow-down"></i> {% trans "Statutes of D.A.N.BW e.V." %}
         </a>
         {% endif %}
       </p>
+      {% if membership_type == "dan_international" %}
       {{ form.liability_disclaimer|as_crispy_field }}
+      {% endif %}
       {{ form.comment|as_crispy_field }}
     </div>
   </div>

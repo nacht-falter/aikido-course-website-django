@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+{% static 'documents/2023.04_Merkblatt_DanInt-Mitgliedschaft.pdf' as dan_international_memo_url %}
+{% static 'documents/Merkblatt_-_Kinderpass_Nov_2021.pdf' as dan_bw_childrens_passport_url %}
+<h2>{% trans "Become a Member" %}</h2>
+
+<h3 class="mt-5">{% trans "D.A.N. International Membership" %}</h3>
+<p>
+  {% trans "Once you become a member of D.A.N. International, you will receive an international D.A.N. passport and will be eligible for Kyu and Dan grade examinations." %}
+</p>
+<p>
+  {% blocktrans %} 
+  If you would like to apply for membership, please read <a href="{{ dan_international_memo_url }}" title="Merkblatt D.A.N. International" target="_blank">this information sheet</a> carefully and start the application process below.
+  {% endblocktrans %}
+</p>
+<a href="{% url 'dan-international-membership' %}" class="btn btn-outline-primary">{% trans "Apply for D.A.N. International Membership" %}</a>
+
+<h3 class="mt-5">{% trans "D.A.N. BW Children's Passport" %}</h3>
+<p>
+  {% trans "Children under the age of 14 need a children's passport to be admitted to Kyu examinations according to the children's examination program." %}
+</p>
+{% blocktrans %}
+<p>If you would like to apply for a D.A.N. BW children's passport, please read <a href="{{ dan_bw_childrens_passport_url }}" title="Merkblatt Kinderpass" target="_blank">this information sheet</a> carefully and start the application process below.</p>
+{% endblocktrans %}
+<a href="{% url 'childrens-passport' %}" class="btn btn-outline-primary">{% trans "Apply for D.A.N. BW Children's Passport" %}</a>
+
+<h3 class="mt-5">{% trans "D.A.N. BW Membership" %}</h3>
+<p>
+  {% trans "D.A.N. BW membership is usually intended or necessary for teachers, functionaries, and all those who wish to be active in the association. If you are interested in an active membership, please start the application process below." %}
+</p>
+<a href="{% url 'danbw-membership' %}" class="btn btn-outline-primary">{% trans "Apply for D.A.N. BW Membership" %}</a>
+{% endblock content %}
