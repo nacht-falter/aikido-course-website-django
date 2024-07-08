@@ -55,13 +55,7 @@ class BaseMembership(models.Model):
         default=False,
         blank=False
     )
-    liability_disclaimer = models.BooleanField(
-        _("Liability Disclaimer"),
-        default=False,
-        blank=False
-    )
     comment = models.TextField(_("Comment"), blank=True)
-    passport_issued = models.BooleanField(_("Passport Issued"), default=False)
 
     class Meta:
         abstract = True
@@ -71,14 +65,20 @@ class BaseMembership(models.Model):
 
 
 class DanIntMembership(BaseMembership):
-    """Represents a DAN International Membership"""
+    """Represents a D.A.N. International Membership"""
     sepa = models.BooleanField(_("SEPA Mandate"), default=False)
     account_holder = models.CharField(_("Account Holder"), max_length=100)
     iban = models.CharField(_("IBAN"), max_length=34)
+    liability_disclaimer = models.BooleanField(
+        _("Liability Disclaimer"),
+        default=False,
+        blank=False
+    )
+    passport_issued = models.BooleanField(_("Passport Issued"), default=False)
 
     class Meta:
-        verbose_name = _("DAN International Membership")
-        verbose_name_plural = _("DAN International Memberships")
+        verbose_name = _("D.A.N. International Membership")
+        verbose_name_plural = _("D.A.N. International Memberships")
 
 
 class ChildrensPassport(BaseMembership):
@@ -87,6 +87,12 @@ class ChildrensPassport(BaseMembership):
         _("Name of Legal Guardian"),
         max_length=100
     )
+    liability_disclaimer = models.BooleanField(
+        _("Liability Disclaimer"),
+        default=False,
+        blank=False
+    )
+    passport_issued = models.BooleanField(_("Passport Issued"), default=False)
 
     class Meta:
         verbose_name = _("Childrens Passport")
@@ -94,8 +100,8 @@ class ChildrensPassport(BaseMembership):
 
 
 class DanBwMembership(BaseMembership):
-    """Represents a DANBW Membership"""
+    """Represents a D.A.N. BW Membership"""
 
     class Meta:
-        verbose_name = _("DANBW Membership")
-        verbose_name_plural = _("DANBW Memberships")
+        verbose_name = _("D.A.N. BW Membership")
+        verbose_name_plural = _("D.A.N. BW Memberships")

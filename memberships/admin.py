@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext as _
 
-from .models import ChildrensPassport, DanIntMembership
+from .models import ChildrensPassport, DanIntMembership, DanBwMembership
 
 
 def toggle_passport_issued(modeladmin, request, queryset):
@@ -71,3 +71,25 @@ class ChildrensPassportAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return ("add" in request.path or "change" in request.path)
+
+
+@admin.register(DanBwMembership)
+class DanBwMembershipAdmin(admin.ModelAdmin):
+    list_display = ["first_name", "last_name", "email", "dojo"]
+    readonly_fields = [
+        "first_name",
+        "last_name",
+        "date_of_birth",
+        "street",
+        "street_number",
+        "city",
+        "postcode",
+        "email",
+        "phone_home",
+        "phone_mobile",
+        "grade",
+        "dojo",
+        "other_dojo",
+        "accept_terms",
+        "comment"
+    ]

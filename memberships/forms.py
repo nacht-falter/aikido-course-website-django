@@ -12,6 +12,25 @@ class BaseMembershipForm(forms.ModelForm):
         self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
 
+        # Get first element of each tuple in DOJO_CHOICES
+        dojos = {choice[0] for choice in constants.DOJO_CHOICES}
+
+        if self.request and self.request.user.is_authenticated:
+            self.fields["first_name"].initial = self.request.user.first_name
+            self.fields["last_name"].initial = self.request.user.last_name
+            self.fields["email"].initial = self.request.user.email
+            self.fields["grade"].initial = self.request.user.profile.grade
+            self.fields["dojo"].initial = (
+                self.request.user.profile.dojo
+                if self.request.user.profile.dojo in dojos
+                else "other"
+            )
+            self.fields["other_dojo"].initial = (
+                self.request.user.profile.dojo
+                if self.request.user.profile.dojo not in dojos
+                else ""
+            )
+
     first_name = forms.CharField(label=_("First Name"), max_length=100)
     last_name = forms.CharField(label=_("Last Name"), max_length=100)
     date_of_birth = forms.DateField(label=_("Date of Birth"))
@@ -79,8 +98,8 @@ class DanIntMembershipForm(BaseMembershipForm):
     accept_terms = forms.BooleanField(
         required=True,
         label=_(
-            "I have read and accept the statutes of DAN International and agree to the terms and conditions "
-            "regarding cancellation and data processing. I hereby apply for membership with DAN International."
+            "I have read and accept the statutes of D.A.N.  International and agree to the terms and conditions "
+            "regarding cancellation and data processing. I hereby apply for membership with D.A.N. International."
         ),
     )
     account_holder = forms.CharField(label=_("Account Holder"), max_length=100)
@@ -110,8 +129,8 @@ class DanBwMembershipForm(BaseMembershipForm):
     accept_terms = forms.BooleanField(
         required=True,
         label=_(
-            "I have read the statutes of DANBW e.V. and agree to the terms and conditions above. "
-            "I hereby apply for a membership with DANBW."
+            "I have read the statutes of D.A.N. BW e.V. and agree to the terms and conditions above. "
+            "I hereby apply for a membership with D.A.N. BW."
         ),
     )
     class Meta:
