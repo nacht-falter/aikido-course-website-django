@@ -33,7 +33,8 @@ class BaseMembershipForm(forms.ModelForm):
 
     first_name = forms.CharField(label=_("First Name"), max_length=100)
     last_name = forms.CharField(label=_("Last Name"), max_length=100)
-    date_of_birth = forms.DateField(label=_("Date of Birth"))
+    date_of_birth = forms.DateField(
+        label=_("Date of Birth"), widget=forms.DateInput(attrs={'type': 'date'}))
     street = forms.CharField(label=_("Street"), max_length=100)
     street_number = forms.CharField(label=_("Street Number"), max_length=10)
     city = forms.CharField(label=_("City"), max_length=100)
@@ -72,14 +73,6 @@ class BaseMembershipForm(forms.ModelForm):
     dojo = forms.ChoiceField(label=_("Dojo"), choices=constants.DOJO_CHOICES)
     other_dojo = forms.CharField(
         label=_("Other Dojo"), max_length=100, required=False)
-    liability_disclaimer = forms.BooleanField(
-        required=True,
-        label=_(
-            "I am aware that Aikido is a potentially dangerous sport and that the above-mentioned organization "
-            "and its representatives are not liable for accidents or injuries that occur during the practice of "
-            "Aikido, except within the scope of legal regulations in cases of intent or gross negligence."
-        ),
-    )
     comment = forms.CharField(
         label=_("Comment"), widget=forms.Textarea, required=False)
     passport_issued = forms.BooleanField(
@@ -102,6 +95,14 @@ class DanIntMembershipForm(BaseMembershipForm):
             "regarding cancellation and data processing. I hereby apply for membership with D.A.N. International."
         ),
     )
+    liability_disclaimer = forms.BooleanField(
+        required=True,
+        label=_(
+            "I am aware that Aikido is a potentially dangerous sport and that the above-mentioned organization "
+            "and its representatives are not liable for accidents or injuries that occur during the practice of "
+            "Aikido, except within the scope of legal regulations in cases of intent or gross negligence."
+        ),
+    )
     account_holder = forms.CharField(label=_("Account Holder"), max_length=100)
     iban = forms.CharField(label=_("IBAN"), max_length=34)
 
@@ -115,14 +116,21 @@ class ChildrensPassportForm(BaseMembershipForm):
         label=_("Name of Legal Guardian"), max_length=100)
     accept_terms = forms.BooleanField(
         required=True,
-        label=_("I accept the above terms and conditions and apply for a children's passport."),
+        label=_(
+            "I accept the above terms and conditions and apply for a children's passport."),
+    )
+    liability_disclaimer = forms.BooleanField(
+        required=True,
+        label=_(
+            "I am aware that Aikido is a potentially dangerous sport and that the above-mentioned organization "
+            "and its representatives are not liable for accidents or injuries that occur during the practice of "
+            "Aikido, except within the scope of legal regulations in cases of intent or gross negligence."
+        ),
     )
 
     class Meta:
         model = ChildrensPassport
         fields = '__all__'
-
-        from django import forms
 
 
 class DanBwMembershipForm(BaseMembershipForm):
@@ -133,6 +141,7 @@ class DanBwMembershipForm(BaseMembershipForm):
             "I hereby apply for a membership with D.A.N. BW."
         ),
     )
+
     class Meta:
         model = DanBwMembership
         fields = '__all__'

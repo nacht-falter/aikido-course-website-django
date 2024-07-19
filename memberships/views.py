@@ -75,6 +75,7 @@ class DanBwMembershipCreateView(BaseMembershipCreateView):
     form_class = DanBwMembershipForm
     membership_type = "danbw"
 
+
 class MembershipPage(generic.TemplateView):
     """Displays a page with links to the membership forms"""
     template_name = "memberships.html"

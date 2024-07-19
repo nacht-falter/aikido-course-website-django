@@ -103,22 +103,31 @@ def send_membership_confirmation(first_name, email, membership_type):
         membership=membership)
     bank_details = os.environ.get("BANK_ACCOUNT")
 
-    if membership_type == "dan_international" or membership_type == "danbw":
+    if membership_type == "dan_international":
         payment_information = _(
-            "The membership fee for the current year will be deducted from your account.\n")
+            "The membership fees will be deducted from your account.\n")
     else:
         fee = get_tuple_value(constants.MEMBERSHIP_FEES, membership_type)
-        payment_information = _(
-            f"Please transfer the fee of €{fee} to the account below:\n\n")
+        if membership_type == 'danbw':
+            payment_information = _(
+            "Please transfer the annual fee of €{fee} to the account below:\n\n").format(fee=fee)
+        else:
+            payment_information = _(
+            "Please transfer the fee of €{fee} to the account below:\n\n").format(fee=fee)
+
+    if membership_type == "danbw":
+        passport = ""
+    else:
+        passport = _("We will issue your passport as soon as possible.\n\n"
+                     "You don't need to do anything else for now.\n\n")
 
     message_parts = [
         _("Hi {first_name},\n\n").format(first_name=first_name),
         _("We have received your {membership} application.\n\n").format(
             membership=membership),
         payment_information,
-        f"{bank_details}\n\n" if membership_type == 'childrens_passport' else "",
-        _("In the meantime, we will issue your passport."),
-        _("You don't need to do anything else for now.\n\n"),
+        f"{bank_details}\n\n" if membership_type != 'dan_international' else "",
+        f"{passport}\n" if membership_type != 'danbw' else "",
         _("Best regards,\n"),
         _("The D.A.N. BW team\n"),
     ]
@@ -164,16 +173,16 @@ def write_registrations_csv(writer, registrations):
     """Write registration data to CSV"""
 
     header_row = [
-        "First Name",
-        "Last Name",
-        "Email",
-        "Grade",
-        "Selected Sessions",
-        "Exam",
-        "Exam Grade",
-        "Accept Terms",
-        "Final Fee",
-        "Payment Status"
+        _("First Name"),
+        _("Last Name"),
+        _("Email"),
+        _("Grade"),
+        _("Selected Sessions"),
+        _("Exam"),
+        _("Exam Grade"),
+        _("Accept Terms"),
+        _("Final Fee"),
+        _("Payment Status"),
     ]
     if registrations and registrations[0].course.course_type == "international":
         header_row.append("Dinner")
@@ -205,6 +214,42 @@ def write_registrations_csv(writer, registrations):
             data_row.append("Yes" if registration.dinner else "No")
             data_row.append("Yes" if registration.overnight_stay else "No")
         writer.writerow(data_row)
+
+
+def write_membership_csv(writer, memberships):
+    """Write membership data to CSV"""
+
+    header_row = [
+        _("First Name"),
+        _("Last Name"),
+        _("Date of Birth"),
+        _("Email"),
+        _("Street"),
+        _("Street Number"),
+        _("Postcode"),
+        _("City"),
+        _("Phone Home"),
+        _("Phone Mobile"),
+        _("Grade"),
+        _("Dojo"),
+        _("Accept Terms"),
+    ]
+    writer.writerow(header_row)
+
+    for membership in memberships:
+        if hasattr(membership, "user"):
+            user = membership.user
+        else:
+            user = None
+
+        data_row = [
+            user.first_name if user else membership.first_name,
+            user.last_name if user else membership.last_name,
+            user.email if user else membership.email,
+            membership.accept_terms,
+        ]
+        writer.writerow(data_row)
+
 
 def get_tuple_value(tuple_of_tuples, key):
     for k, v in tuple_of_tuples:

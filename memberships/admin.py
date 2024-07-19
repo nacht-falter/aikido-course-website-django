@@ -1,7 +1,14 @@
+import csv
+from datetime import date
+
 from django.contrib import admin
+from django.http import HttpResponse
+from django.utils.text import slugify
 from django.utils.translation import gettext as _
 
-from .models import ChildrensPassport, DanIntMembership, DanBwMembership
+from danbw_website import utils
+
+from .models import ChildrensPassport, DanBwMembership, DanIntMembership
 
 
 def toggle_passport_issued(modeladmin, request, queryset):
@@ -13,69 +20,26 @@ def toggle_passport_issued(modeladmin, request, queryset):
 toggle_passport_issued.short_description = _("Toggle Passport Status")
 
 
-@admin.register(DanIntMembership)
-class DanIntMembershipAdmin(admin.ModelAdmin):
-    list_display = ["first_name", "last_name",
-                    "email", "dojo", "passport_issued"]
-    readonly_fields = [
-        "first_name",
-        "last_name",
-        "date_of_birth",
-        "street",
-        "street_number",
-        "city",
-        "postcode",
-        "email",
-        "phone_home",
-        "phone_mobile",
-        "grade",
-        "dojo",
-        "other_dojo",
-        "accept_terms",
-        "liability_disclaimer",
-        "comment",
-        "sepa",
-        "account_holder",
-        "iban"
-    ]
-    actions = [toggle_passport_issued]
+def export_csv(self, request, queryset):
+    """Action for exporting course memberships to CSV"""
 
-    def has_add_permission(self, request):
-        return ("add" in request.path or "change" in request.path)
+    membership_type = queryset.first().__class__.__name__.lower()
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = (
+        f"attachment; filename={membership_type}s_{slugify(date.today())}.csv"
+    )
+    writer = csv.writer(response)
+
+    utils.write_membership_csv(writer, queryset)
+
+    return response
 
 
-@admin.register(ChildrensPassport)
-class ChildrensPassportAdmin(admin.ModelAdmin):
-    list_display = ["first_name", "last_name",
-                    "email", "dojo", "passport_issued"]
-    readonly_fields = [
-        "first_name",
-        "last_name",
-        "date_of_birth",
-        "street",
-        "street_number",
-        "city",
-        "postcode",
-        "name_legal_guardian",
-        "email",
-        "phone_home",
-        "phone_mobile",
-        "grade",
-        "dojo",
-        "other_dojo",
-        "accept_terms",
-        "liability_disclaimer",
-        "comment",
-    ]
-    actions = [toggle_passport_issued]
-
-    def has_add_permission(self, request):
-        return ("add" in request.path or "change" in request.path)
+export_csv.short_description = _("Export selected entries to CSV")
 
 
-@admin.register(DanBwMembership)
-class DanBwMembershipAdmin(admin.ModelAdmin):
-    list_display = ["first_name", "last_name", "email", "dojo"]
+class BaseMembershipAdmin(admin.ModelAdmin):
+    list_display = ["first_name", "last_name", "email", "dojo", "other_dojo"]
     readonly_fields = [
         "first_name",
         "last_name",
@@ -93,3 +57,32 @@ class DanBwMembershipAdmin(admin.ModelAdmin):
         "accept_terms",
         "comment"
     ]
+    actions = [toggle_passport_issued, export_csv]
+
+    def has_add_permission(self, request):
+        return "add" in request.path or "change" in request.path
+
+
+@admin.register(DanIntMembership)
+class DanIntMembershipAdmin(BaseMembershipAdmin):
+    list_display = BaseMembershipAdmin.list_display + ["passport_issued"]
+    readonly_fields = BaseMembershipAdmin.readonly_fields + [
+        "liability_disclaimer",
+        "sepa",
+        "account_holder",
+        "iban",
+    ]
+
+
+@admin.register(ChildrensPassport)
+class ChildrensPassportAdmin(BaseMembershipAdmin):
+    list_display = BaseMembershipAdmin.list_display + ["passport_issued"]
+    readonly_fields = BaseMembershipAdmin.readonly_fields + [
+        "name_legal_guardian",
+        "liability_disclaimer",
+    ]
+
+
+@admin.register(DanBwMembership)
+class DanBwMembershipAdmin(BaseMembershipAdmin):
+    list_display = BaseMembershipAdmin.list_display
