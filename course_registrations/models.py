@@ -178,24 +178,17 @@ class CourseRegistration(models.Model):
 
     def set_exam(self, user=None):
         if self.exam:
-            print(f"User: {self.user}")
             if self.user:
                 user_profile = get_object_or_404(UserProfile, user=user)
                 if user_profile.grade < 6:
-                    print(f"User Grade: {user_profile.grade}")
                     self.exam_grade = user_profile.grade + 1
-                    print(f"Exam Grade: {self.exam_grade}")
                 else:
                     self.exam = False
-                    print("No exam for user.")
             else:
                 if self.grade < 6:
-                    print(f"Grade: {self.grade}")
                     self.exam_grade = self.grade + 1
-                    print(f"Exam Grade: {self.exam_grade}")
                 else:
                     self.exam = False
-                    print("No exam for guest.")
 
     def save(self, *args, **kwargs):
         if not self.course.course_type == "international":

@@ -137,4 +137,5 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
 
         return response
 
-    export_csv.short_description = _("Export selected course registrations to CSV")
+    export_csv.short_description = _(
+        "Export selected course registrations to CSV")
