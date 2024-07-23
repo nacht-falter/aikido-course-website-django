@@ -9,5 +9,4 @@ urlpatterns = [
          name="childrens-passport"),
     path("membership/danbw/", views.DanBwMembershipCreateView.as_view(),
          name="danbw-membership"),
-    path("membership/", views.MembershipPage.as_view(), name="membership"),
 ]

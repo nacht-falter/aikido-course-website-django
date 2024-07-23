@@ -73,7 +73,7 @@
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link {% if url_name == 'home' %}active{% endif %}" aria-current="page"
-                                                                               href="{% url 'home' %}">{% trans "Home" %}</a>
+                 href="{% url 'home' %}">{% trans "Home" %}</a>
             </li>
             {% for category in categories %}
             <li class="nav-item dropdown">
@@ -83,11 +83,13 @@
               </a>
               <ul class="dropdown-menu">
                 {% for page in category.pages.all %}
-                <li>
-                  <a class="dropdown-item" href="{% url 'page_list' category_slug=category.slug%}#{{ page.slug }}">
-                    {{ page.title }}
-                  </a>
-                </li>
+                {% if page.status == 1 %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'page_detail' slug=page.slug%}">
+                      {{ page.title }}
+                    </a>
+                  </li>
+                {% endif %}
                 {% endfor %}
               </ul>
             </li>
@@ -148,7 +150,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans "Close" %}"></button>
           </div>
           <div class="modal-body">
-            <h2 class="mt-2">{% trans "Logout" %}</h2>
+            <h2>{% trans "Logout" %}</h2>
             <p>{% trans "Are you sure you want to log out?" %}</p>
           </div>
           <div class="modal-footer">

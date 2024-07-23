@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "django_summernote",
     "crispy_forms",
     "crispy_bootstrap5",
+    "easy_thumbnails",
     "users",
     "courses",
     "course_registrations",
@@ -142,6 +143,15 @@ TEMPLATES = [
     },
 ]
 
+# Thumbnails
+THUMBNAIL_ALIASES = {
+    "": {
+        "thumbnail": {"size": (100, 100), "crop": True},
+    },
+}
+
+THUMBNAIL_BASEDIR = "thumbnails"
+
 WSGI_APPLICATION = "danbw_website.wsgi.application"
 
 
@@ -199,7 +209,7 @@ LANGUAGES = [
 ]
 
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, "locale"),
 ]
 
 # Static files (CSS, JavaScript, Images)

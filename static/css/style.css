@@ -72,10 +72,16 @@ footer {
 h1,
 h2 {
   color: #1e3c95;
+  margin: 1rem 0 1rem;
+}
+
+h2 {
+  margin-top: 0;
 }
 
 h3 {
   color: #b5172c;
+  margin: 0.5rem 0 0.5rem;
 }
 
 h4 {
@@ -128,6 +134,10 @@ i {
     width: 100% !important;
     object-fit: cover;
   }
+  .featured-image {
+    max-height: 30vh;
+    object-fit: cover;
+  }
 }
 
 @media (min-width: 575px) {
@@ -136,6 +146,10 @@ i {
     max-height: 300px;
     object-fit: cover;
     margin: 0 0.5em;
+  }
+  .featured-image {
+    max-height: 40vh;
+    object-fit: cover;
   }
 }
 
@@ -316,4 +330,10 @@ a.badge:hover {
 
 .registration-form-content legend {
   font-size: 1rem;
+}
+
+.page-thumbnail:hover {
+  opacity: 0.8;
+}
+
 }

@@ -98,13 +98,19 @@ class ContactPage(View):
         return HttpResponseRedirect(reverse("home"))
 
 
-class PageList(generic.ListView):
-    """Displays a list of pages from a category"""
-
+class PageDetail(generic.DetailView):
+    """Displays a single page"""
     model = Page
-    template_name = "page_list.html"
+    template_name = "page_detail.html"
+    context_object_name = "page"
+    slug_field = "slug"
+    slug_url_kwarg = "slug"
+    queryset = Page.objects.filter(status=1)
 
-    def get_queryset(self):
-        category_slug = self.kwargs.get("category_slug")
-        category = get_object_or_404(Category, slug=category_slug)
-        return Page.objects.filter(status=1, category=category)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        page = self.get_object()
+        similar_pages = Page.objects.filter(
+            category=page.category, status=1).exclude(id=page.id)
+        context['similar_pages'] = similar_pages
+        return context

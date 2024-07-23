@@ -69,7 +69,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans "Close" %}"></button>
                 </div>
                 <div class="modal-body">
-                    <h2 class="mt-2">{% trans "Cancel Registration for" %} {{ registration.course.title }}?</h2>
+                    <h2>{% trans "Cancel Registration for" %} {{ registration.course.title }}?</h2>
                     <p>
                         {% blocktrans with course_title=registration.course.title %}
                         Are you sure you want to cancel your registration for {{ registration.course.title }}?
@@ -99,7 +99,7 @@
 </p>
 {% endfor %}
 
-<h3 class="mt-5 mb-4">{% trans "Your past courses" %}</h3>
+<h3>{% trans "Your past courses" %}</h3>
 
 {% for registration in past_registrations %}
 <div class="card my-4 registration-card">

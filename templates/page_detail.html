@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="row">
+  <h2 id="{{ page.slug }}">{{ page.title }}</h2>
+  {% if not "placeholder" in page.featured_image.url %}
+  <div class="col-12 px-md-0 py-2">
+    <img class="featured-image" src="{{ page.featured_image.url }}" width="100%">
+  </div>
+  {% endif %}
+  <div class="page-content col-12 mt-3">
+    {{ page.content|safe }}
+  </div>
+</div>
+
+<!-- Similar Pages Section -->
+{% if similar_pages %}
+<hr class="mt-5">
+<h4>Similar Pages</h4>
+<div class="row">
+  {% for similar_page in similar_pages %}
+    <div class="col me-3 mt-2">
+      <a class="d-flex flex-row flex-md-column align-items-center blue-link"
+        href="{% url 'page_detail' similar_page.slug %}">
+        {% if similar_page.get_thumbnail_url %}
+          <img class="rounded page-thumbnail" src="{{ similar_page.get_thumbnail_url }}" alt="{{ similar_page.title }} thumbnail" style="width: 100px; height: auto;">
+        {% else %}
+          <img class="rounded page-thumbnail" src="{% static 'images/default-thumbnail.jpg' %}" alt="default thumbnail" style="width: 100px; height: auto;">
+        {% endif %}
+        <span class="ms-2 ms-md-0">{{ similar_page.title }}</span>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

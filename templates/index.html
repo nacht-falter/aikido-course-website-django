@@ -32,7 +32,7 @@
 {% endblock header %}
 
 {% block content %}
-<h2 class="mb-4">D.A.N. BW – Dynamic Aikido Nocquet in Baden-Württemberg</h2>
+<h2>D.A.N. BW – Dynamic Aikido Nocquet in Baden-Württemberg</h2>
   <p>
     {% blocktrans trimmed %}
     Welcome to the official website of D.A.N. BW, the association of Aikido clubs in Baden-Württemberg, which practice Aikido
@@ -51,7 +51,8 @@
     {% endblocktrans %}
   </p>
 <hr>
-<h3 class="mt-4 mb-3">{% trans "Our Next Courses:" %}</h3>
+{% }
+<h3>{% trans "Our Next Courses:" %}</h3>
 <ul>
   {% for course in upcoming_courses %}
   <li class="mb-2">

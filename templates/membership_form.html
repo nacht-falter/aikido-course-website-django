@@ -10,9 +10,9 @@
 {% static 'documents/UKAU_Satzung.pdf' as ukau_statutes_url %}
 
 {% if membership_type == "dan_international" %}
-<h2 class="mb-4">{% trans "D.A.N. International Membership Application" %}</h2>
+<h2>{% trans "D.A.N. International Membership Application" %}</h2>
 {% else %}
-<h2 class="mb-4">{% trans "D.A.N. BW Membership Application" %}</h2>
+<h2>{% trans "D.A.N. BW Membership Application" %}</h2>
 {% endif %}
 <form method="post" class="membership_form">
   {% csrf_token %}
