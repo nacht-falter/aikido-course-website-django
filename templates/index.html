@@ -50,8 +50,8 @@
     Whether you're a beginner or an experienced Aikidoka, we invite you to join us on the mat and start your Aikido journey with us today!
     {% endblocktrans %}
   </p>
-<hr>
-{% }
+{% if upcoming_courses|length > 1 %}
+<hr class="mt-5">
 <h3>{% trans "Our Next Courses:" %}</h3>
 <ul>
   {% for course in upcoming_courses %}
@@ -84,4 +84,5 @@
   <p>{% trans "There are no courses available at the moment." %}</p>
   {% endfor %}
 </ul>
+{% endif %}
 {% endblock content %}
