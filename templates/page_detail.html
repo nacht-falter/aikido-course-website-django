@@ -19,9 +19,9 @@
 {% if similar_pages %}
 <hr class="mt-5">
 <h4>Similar Pages</h4>
-<div class="row">
+<div class="d-flex flex-column flex-md-row">
   {% for similar_page in similar_pages %}
-    <div class="col me-3 mt-2">
+    <div class="me-3 mt-2">
       <a class="d-flex flex-row flex-md-column align-items-center blue-link"
         href="{% url 'page_detail' similar_page.slug %}">
         {% if similar_page.get_thumbnail_url %}
