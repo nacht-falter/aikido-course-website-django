@@ -112,5 +112,7 @@ class PageDetail(generic.DetailView):
         page = self.get_object()
         similar_pages = Page.objects.filter(
             category=page.category, status=1).exclude(id=page.id)
+        context['category_slug'] = page.category.slug
+        context['page_slug'] = page.slug
         context['similar_pages'] = similar_pages
         return context

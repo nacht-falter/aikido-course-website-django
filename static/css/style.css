@@ -49,15 +49,11 @@ main {
   color: #b5172c;
 }
 
-#main-navigation {
+#main-navigation, .footer-top {
   background: linear-gradient(90deg, #eeeeee, #f8f9fa);
 }
 
-footer {
-  background: linear-gradient(90deg, #f8f9fa, #eeeeee);
-}
-
-@media (max-width: 1400px) {
+@media (max-width: 1500px) {
   .main-title {
     max-width: 25%;
   }
@@ -72,20 +68,14 @@ footer {
 h1,
 h2 {
   color: #1e3c95;
-  margin: 1rem 0 1rem;
 }
 
 h2 {
-  margin-top: 0;
+  margin-bottom: 1.5rem;
 }
 
 h3 {
   color: #b5172c;
-  margin: 0.5rem 0 0.5rem;
-}
-
-h4 {
-  margin-top: 0.5em;
 }
 
 i {
@@ -153,6 +143,14 @@ i {
   }
 }
 
+.page-content h3 {
+  margin-top: 1.5em;
+}
+
+.page-content h3:first-of-type {
+  margin-top: 0;
+}
+
 #auth_bar {
   font-size: 80%;
 }
@@ -176,6 +174,10 @@ i {
 
 .active:hover {
   color: #1e3c95 !important;
+}
+
+.dropdown-item-active {
+  background-color: #f8f9fa !important;
 }
 
 a.badge {
@@ -307,8 +309,8 @@ a.badge:hover {
 
 .form-card {
   width: 35vw;
-  min-width: 300px;
-  max-width: 400px;
+  min-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
   margin-top: 1.5em;
   box-shadow: 0 3px 3px lightgrey;
@@ -336,4 +338,20 @@ a.badge:hover {
   opacity: 0.8;
 }
 
+.footer-logo {
+  height: 5rem;
+  filter: brightness(0) invert(1);
+}
+
+.footer-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: darkgrey;
+}
+
+.footer-link.active {
+  color: #e06474 !important;
 }
