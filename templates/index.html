@@ -50,14 +50,16 @@
     Whether you're a beginner or an experienced Aikidoka, we invite you to join us on the mat and start your Aikido journey with us today!
     {% endblocktrans %}
   </p>
-{% if upcoming_courses|length > 1 %}
+{% if upcoming_courses|length > 0 %}
 <hr class="mt-5">
-<h3>{% trans "Our Next Courses:" %}</h3>
-<ul>
+<h3>{% trans "Upcoming Courses:" %}</h3>
+<div class="mt-3">
   {% for course in upcoming_courses %}
-  <li class="mb-2">
+  <div class="mb-2">
+    {% if course.get_course_type == "InternalCourse" %}
     <a class="me-2 blue-link" title="{% trans "Go to" %} {{ course.title }}" href="{% url 'course_list' %}#{{ course.id }}">
-      {{ course.start_date|localize }} {% trans "to" %} {{ course.end_date|localize }}: {{ course.title }}
+      <i class="fa-solid fa-circle-right"></i>
+      {{ course.start_date|localize }}-{{ course.end_date|localize }}: <strong>{{ course.title }}</strong>
     </a>
     {% if course.registration_status == 1 and not course.user_registered %}
     <a class="badge text-bg-success" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
@@ -79,10 +81,21 @@
     {% endif %}
     {% endif %}
     {% endfor %}
-  </li>
+    {% else %}
+    <a class="me-2 blue-link" title="{% trans "Go to" %} {{ course.title }}" href="{% url 'course_list' %}#{{ course.id }}">
+      <i class="fa-solid fa-circle-right"></i>
+      {{ course.start_date|localize }}-{{ course.end_date|localize }}: <strong>{{ course.title }}</strong> {% if course.organizer %}({{ course.organizer }}){% endif %}
+    </a>
+    <a href="{{ course.url }}" class="badge btn btn-sm btn-outline-primary"
+        title="{% trans " Go to" %} {{ course.title }}" target="_blank">
+        <small><i class="fas fa-external-link-alt"></i></small>
+        {% trans "Course website" %}
+    </a>
+    {% endif %}
+  </div>
   {% empty %}
   <p>{% trans "There are no courses available at the moment." %}</p>
   {% endfor %}
-</ul>
+</div>
 {% endif %}
 {% endblock content %}

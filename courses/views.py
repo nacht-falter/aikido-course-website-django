@@ -28,9 +28,9 @@ class CourseList(View):
         all_courses = sorted(
             all_courses, key=lambda course: course.start_date, reverse=True)
         past_courses = filter(
-            lambda course: course.start_date < date.today(), all_courses)
+            lambda course: course.end_date < date.today(), all_courses)
         current_courses = filter(
-            lambda course: course.start_date >= date.today(), all_courses)
+            lambda course: course.end_date >= date.today(), all_courses)
 
         return render(
             request,
