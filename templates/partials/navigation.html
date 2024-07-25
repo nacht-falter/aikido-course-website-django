@@ -1,0 +1,84 @@
+{% load static %}
+{% load i18n %}
+<nav id="main-navigation" class="navbar navbar-expand-lg px-2 px-md-5 py-2 py-md-3 bg-body-tertiary shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}" title={% trans "Home" %}>
+      <img class="main-logo" src="{% static 'images/danbw-logo.png' %}" alt="{% trans "Dynamic Aikido Nocquet BW Logo" %}">
+      <h1 class="main-title d-none d-md-inline-block ms-5 align-middle text-wrap">
+        <span class="text-nowrap">{% trans "Dynamic Aikido Nocquet" %}</span>
+        <span class="text-nowrap">{% trans "in Baden-Württemberg" %}</span>
+      </h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="{% trans "Toggle navigation" %}">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end mt-4" id="navbarNavDropdown">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link {% if url_name == 'home' %}active{% endif %}" aria-current="page"
+             href="{% url 'home' %}">{% trans "Home" %}</a>
+        </li>
+        {% for category in categories %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {% if category.slug == category_slug %}active{% endif %}" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            {{ category.title }}
+          </a>
+          <ul class="dropdown-menu">
+            {% for page in category.pages.all %}
+            {% if page.status == 1 %}
+              <li>
+                <a class="dropdown-item {% if page.slug == page_slug %}dropdown-item-active active{% endif %}" href="{% url 'page_detail' slug=page.slug%}" title="{{ page.title }}">
+                  {{ page.title }}
+                </a>
+              </li>
+            {% endif %}
+            {% if not forloop.last %}
+            <hr class="dropdown-divider">
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+        <li class="nav-item">
+          <a class="nav-link {% if url_name == 'course_list' %}active{% endif %}"
+             href="{% url 'course_list' %}">{% trans "Courses" %}</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {% if url_name == 'userprofile' or url_name == 'courseregistration_list' %}active{% endif %}"
+             href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {% trans "My Account" %}
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="{% url 'userprofile' %}">
+                <i class="fa-solid fa-user"></i> {% trans "My Profile" %}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'courseregistration_list' %}">
+                <i class="fa-solid fa-pen-to-square"></i> {% trans "My Registrations" %}</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal" href="#">
+                <i class="fa-solid fa-right-from-bracket"></i> {% trans "Logout" %}</a>
+            </li>
+          </ul>
+        </li>
+        {% else %}
+        <li class="nav-item ms-lg-5">
+          <a class="nav-link" href="{% url 'account_login' %}">{% trans "Login" %}</a>
+        </li>
+        <li class="nav-item text-nowrap">
+          <a class="btn btn-outline-primary btn-sm signup-button" href="{% url 'account_signup' %}">
+            <i class="fa-solid fa-user"></i> {% trans "Sign Up" %}</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

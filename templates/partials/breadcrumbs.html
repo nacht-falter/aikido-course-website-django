@@ -1,0 +1,54 @@
+{% load i18n %}
+<!-- Breadcrumbs -->
+{% if url_name != 'home' %}
+<div class="container mt-3">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% if url_name == 'page_detail' %}
+      <li class="breadcrumb-item"><a class="blue-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+      {% for category in categories %}
+      {% if category.slug == category_slug %}
+      <li class="breadcrumb-item">{{ category.title }}</li>
+      {% endif %}
+      {% for page in category.pages.all %}
+      {% if page.slug == page_slug %}
+        <li class="breadcrumb-item" aria-current="page">{{ page.title }}</li>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+      {% endif %}
+      {% if url_name == 'course_list' %}
+      <li class="breadcrumb-item"><a class="blue-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+      <li class="breadcrumb-item" aria-current="page">{% trans "Courses" %}</li>
+      {% endif %}
+      {% if url_name == 'userprofile' %}
+      <li class="breadcrumb-item"><a class="blue-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+      <li class="breadcrumb-item">{% trans "Account" %}</li>
+      <li class="breadcrumb-item" aria-current="page">{% trans "My Profile" %}</li>
+      {% endif %}
+      {% if url_name == 'update_userprofile' %}
+      <li class="breadcrumb-item"><a class="blue-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+      <li class="breadcrumb-item">{% trans "Account" %}</li>
+      <li class="breadcrumb-item" aria-current="page">{% trans "Update Profile" %}</li>
+      {% endif %}
+      {% if url_name == 'courseregistration_list' %}
+      <li class="breadcrumb-item"><a class="blue-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+      <li class="breadcrumb-item">{% trans "Account" %}</li>
+      <li class="breadcrumb-item" aria-current="page">{% trans "My Registrations" %}</li>
+      {% endif %}
+      {% if url_name == 'contact' %}
+      <li class="breadcrumb-item"><a class="blue-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+      <li class="breadcrumb-item" aria-current="page">{% trans "Contact" %}</li>
+      {% endif %}
+      {% if url_name == 'privacy' %}
+      <li class="breadcrumb-item"><a class="blue-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+      <li class="breadcrumb-item" aria-current="page">{% trans "Privacy Policy" %}</li>
+      {% endif %}
+      {% if url_name == 'imprint' %}
+      <li class="breadcrumb-item"><a class="blue-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+      <li class="breadcrumb-item" aria-current="page">{% trans "Imprint" %}</li>
+      {% endif %}
+    </ol>
+  </nav>
+</div>
+{% endif %}

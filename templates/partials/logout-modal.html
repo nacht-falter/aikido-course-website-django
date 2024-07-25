@@ -1,0 +1,27 @@
+{% load i18n %}
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="logoutModalLabel">{% trans "Logout" %}</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans "Close" %}"></button>
+      </div>
+      <div class="modal-body">
+        <h2>{% trans "Logout" %}</h2>
+        <p>{% trans "Are you sure you want to log out?" %}</p>
+      </div>
+      <div class="modal-footer">
+        <form method="post" action="{% url 'account_logout' %}">
+          {% csrf_token %}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+          <button class="btn btn-sm btn-primary" type="submit">{% trans "Logout" %}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
