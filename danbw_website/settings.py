@@ -138,6 +138,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "pages.context_processors.add_categories_to_context",
+                "pages.context_processors.breadcrumb_context",
             ],
         },
     },

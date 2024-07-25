@@ -10,4 +10,9 @@ urlpatterns = [
         views.PageDetail.as_view(),
         name="page_detail",
     ),
+    path(
+        "category/<slug:category_slug>/",
+        views.PageList.as_view(),
+        name="page_list",
+    ),
 ]
