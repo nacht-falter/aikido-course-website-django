@@ -6,6 +6,7 @@ Django==5.0.6
 django-allauth==0.63.3
 django-crispy-forms==2.2
 django-summernote==0.8.20.0
+easy-thumbnails==2.8.5
 pillow==10.4.0
 six==1.16.0
 sqlparse==0.5.0
