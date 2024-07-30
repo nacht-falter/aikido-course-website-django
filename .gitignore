@@ -1,4 +1,5 @@
 venv/
+danbw_venv/
 env.py
 __pycache__/
 *.sqlite3*
