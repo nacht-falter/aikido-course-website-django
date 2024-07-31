@@ -11,8 +11,9 @@ def add_categories_to_context(request):
     https://docs.djangoproject.com/en/4.2/ref/templates/api/#writing-
     your-own-context-processors
     """
-    categories = Category.objects.all()
-    return {"categories": categories}
+    categories = Category.objects.exclude(slug="footer-links")
+    footer_links = Category.objects.get(slug="footer-links")
+    return {"categories": categories, "footer_links": footer_links}
 
 
 def breadcrumb_context(request):
@@ -28,9 +29,5 @@ def breadcrumb_context(request):
         page_name = _("Courses")
     elif url_name == "contact":
         page_name = _("Contact us")
-    elif url_name == "privacy":
-        page_name = _("Privacy Policy")
-    elif url_name == "imprint":
-        page_name = _("Imprint")
 
     return {"page_name": page_name}

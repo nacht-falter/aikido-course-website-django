@@ -26,6 +26,12 @@
             {% endfor %}
           {% endif %}
         {% endfor %}
+        {% for page in footer_links.pages.all %}
+        {% if page.status == 1 and page.slug == page_slug %}
+        <li class="breadcrumb-item" aria-current="page">{{ page.title }}</li>
+        {% endif %}
+        {% endfor %}
+
 
       {% else %}
         <li class="breadcrumb-item" aria-current="page">{{ page_name }}</li>

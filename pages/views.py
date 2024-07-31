@@ -111,11 +111,17 @@ class PageDetail(generic.DetailView):
         context = super().get_context_data(**kwargs)
         page = self.get_object()
         similar_pages = Page.objects.filter(
-            category=page.category, status=1).exclude(id=page.id)
+            category=page.category, status=1
+        ).exclude(
+            id=page.id
+        ).exclude(
+            category__slug="footer-links"
+        )
         context['category_slug'] = page.category.slug
         context['page_slug'] = page.slug
         context['similar_pages'] = similar_pages
         return context
+
 
 class PageList(generic.ListView):
     """Displays a list of pages of a given category"""
@@ -123,9 +129,12 @@ class PageList(generic.ListView):
     template_name = "page_list.html"
     context_object_name = "pages"
     paginate_by = 10
+
     def get_queryset(self):
-        category = get_object_or_404(Category, slug=self.kwargs['category_slug'])
+        category = get_object_or_404(
+            Category, slug=self.kwargs['category_slug'])
         return Page.objects.filter(category=category, status=1)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category_slug'] = self.kwargs['category_slug']
