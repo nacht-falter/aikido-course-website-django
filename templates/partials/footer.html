@@ -18,17 +18,21 @@
           <div class="col-md-3 mb-3 mb-md-0">
             <h5 class="border-bottom border-secondary">{% trans "Navigation" %}</h5>
             <ul class="list-unstyled">
-              <li>
-                <a class="footer-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}" title="{% trans 'Home' %}"
-                  <i class="fa-solid fa-circle-chevron-right small"></i> {% trans "Home" %}
+              <li class="mt-2">
+                <a class="footer-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
+                  <i class="fa-solid fa-home"></i> {% trans "Home" %}
                 </a>
               </li>
               {% for category in categories %}
-              <h6 class="mt-2 mb-1">{{ category.title }}</h6>
+              <li class="mt-2">
+                <a class="footer-link {% if page.slug == page_list and category_slug == category.slug %}active{% endif %}" href="{% url 'page_list' category_slug=category.slug %}" title="{% trans 'Category' %}: {{ category.title }}">
+                  <i class="fa-solid fa-tag"></i> {{ category.title }}
+                </a>
+              </li>
               {% for page in category.pages.all %}
               {% if page.status == 1 %}
               <li class="ms-3">
-                <a class="footer-link {% if page.slug == page_slug %}active{% endif %}" href="{% url 'page_detail' slug=page.slug %}" title="{{ page.title }}">
+                <a class="footer-link {% if page.slug == page_slug %}active{% endif %}" href="{% url 'page_detail' slug=page.slug %}">
                   <i class="fa-solid fa-circle-chevron-right small"></i> {{ page.title }}
                 </a>
               </li>
@@ -36,8 +40,8 @@
               {% endfor %}
               {% endfor %}
               <li class="mt-2">
-                <a class="footer-link {% if url_name == 'courses' %}active{% endif %}" href="{% url 'course_list' %}" title="{% trans 'Courses' %}">
-                  <i class="fa-solid fa-circle-chevron-right small"></i> {% trans "Courses" %}
+                <a class="footer-link {% if url_name == 'courses' %}active{% endif %}" href="{% url 'course_list' %}">
+                  <i class="fa-solid fa-user-plus"></i> {% trans "Courses" %}
                 </a>
               </li>
             </ul>
@@ -48,23 +52,23 @@
             <ul class="list-unstyled">
               {% if user.is_authenticated %}
               <li class="mt-2">
-                <a class="footer-link {% if url_name == 'userprofile' %}active{% endif %}" href="{% url 'userprofile' %}" title="{% trans 'My Profile' %}"><i class="fa-solid fa-user"></i> {% trans "My Profile" %}</a>
+                <a class="footer-link {% if url_name == 'userprofile' %}active{% endif %}" href="{% url 'userprofile' %}"><i class="fa-solid fa-user"></i> {% trans "My Profile" %}</a>
               </li>
               <li class="mt-2">
                 <li>
-                  <a class="footer-link" data-bs-toggle="modal" data-bs-target="#logoutModal" href="#" title="{% trans 'Logout' %}">
+                  <a class="footer-link" data-bs-toggle="modal" data-bs-target="#logoutModal" href="#">
                     <i class="fa-solid fa-right-from-bracket"></i> {% trans "Logout" %}</a>
                 </li>
               {% else %}
               <li class="mt-2">
-                <a class="footer-link {% if url_name == 'account_login' %}active{% endif %}" href="{% url 'account_login' %}" title="{% trans 'Login' %}"><i class="fa-solid fa-sign-in-alt"></i> {% trans 'Login' %}</a>
+                <a class="footer-link {% if url_name == 'account_login' %}active{% endif %}" href="{% url 'account_login' %}"><i class="fa-solid fa-sign-in-alt"></i> {% trans 'Login' %}</a>
               </li>
               <li class="mt-2">
-                <a class="footer-link {% if url_name == 'account_signup' %}active{% endif %}" href="{% url 'account_signup' %}" title="{% trans 'Sign Up' %}"><i class="fa-solid fa-user-plus"></i> {% trans 'Sign Up' %}</a>
+                <a class="footer-link {% if url_name == 'account_signup' %}active{% endif %}" href="{% url 'account_signup' %}"><i class="fa-solid fa-user-plus"></i> {% trans 'Sign Up' %}</a>
               </li>
               {% endif %}
               <li class="mt-2">
-                <a class="footer-link" href="{% url 'admin:index' %}" title="{% trans 'Admin Panel' %}"><i class="fa-solid fa-cogs"></i> {% trans "Admin Panel" %}</a>
+                <a class="footer-link" href="{% url 'admin:index' %}"><i class="fa-solid fa-cogs"></i> {% trans "Admin Panel" %}</a>
               </li>
             </ul>
           </div>
@@ -80,7 +84,7 @@
               {% for page in footer_links.pages.all %}
               {% if page.status == 1 %}
               <li class="mt-2">
-                <a class="footer-link {% if page.slug == page_slug %}active{% endif %}" href="{% url 'page_detail' slug=page.slug %}" title="{{ page.title }}">
+                <a class="footer-link {% if page.slug == page_slug %}active{% endif %}" href="{% url 'page_detail' slug=page.slug %}">
                   {% if page.slug == "imprint" %}
                   <i class="fa-solid fa-address-card"></i> {% trans "Imprint" %}
                   {% elif page.slug == "privacy" %}
@@ -93,7 +97,7 @@
               {% endif %}
               {% endfor %}
               <li class="mt-2">
-                <a class="footer-link" href="{% static 'documents/2022.05.15_DANBW-Satzung.pdf' %}" title="{% trans 'Statutes' %}" target="_blank">
+                <a class="footer-link" href="{% static 'documents/2022.05.15_DANBW-Satzung.pdf' %}" target="_blank">
                   <i class="fa-solid fa-scroll"></i> {% trans "Statutes" %}
                 </a>
               </li>

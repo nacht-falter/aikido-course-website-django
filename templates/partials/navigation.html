@@ -2,7 +2,7 @@
 {% load i18n %}
 <nav id="main-navigation" class="navbar navbar-expand-lg px-2 px-md-5 py-2 py-md-3 bg-body-tertiary shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home' %}" title={% trans "Home" %}>
+    <a class="navbar-brand" href="{% url 'home' %}">
       <img class="main-logo" src="{% static 'images/danbw-logo.png' %}" alt="{% trans "Dynamic Aikido Nocquet BW Logo" %}">
       <h1 class="main-title d-none d-md-inline-block ms-5 align-middle text-wrap">
         <span class="text-nowrap">{% trans "Dynamic Aikido Nocquet" %}</span>
@@ -29,7 +29,7 @@
             {% for page in category.pages.all %}
             {% if page.status == 1 %}
               <li>
-                <a class="dropdown-item {% if page.slug == page_slug %}dropdown-item-active active{% endif %}" href="{% url 'page_detail' slug=page.slug%}" title="{{ page.title }}">
+                <a class="dropdown-item {% if page.slug == page_slug %}dropdown-item-active active{% endif %}" href="{% url 'page_detail' slug=page.slug%}">
                   {{ page.title }}
                 </a>
               </li>

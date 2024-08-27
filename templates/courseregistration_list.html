@@ -50,11 +50,11 @@
 
     </div>
     <div class="card-footer bg-secondary-subtle text-center">
-        <a class="btn btn-sm btn-primary course-signup-button m-2 my-sm-0" title="{% trans "Update Registration" %}"
+        <a class="btn btn-sm btn-primary course-signup-button m-2 my-sm-0"
             href="{% url 'update_courseregistration' registration.pk %}">
             {% trans "Update registration" %}
         </a>
-        <a class="btn btn-sm btn-danger m-2 my-sm-0" title="{% trans "Cancel Registration" %}" data-bs-toggle="modal"
+        <a class="btn btn-sm btn-danger m-2 my-sm-0" data-bs-toggle="modal"
             data-bs-target="#cancelRegistrationModal{{ registration.pk }}" href="#">
             {% trans "Cancel registration" %}
         </a>

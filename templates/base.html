@@ -39,12 +39,12 @@
       <span>{% trans "You are logged in" %}
         {% if user.first_name %}{% trans "as" %}
         <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover"
-           href="{% url 'userprofile' %}" title="{% trans "Go to User Profile" %}">{{ user.first_name }}
+           href="{% url 'userprofile' %}">{{ user.first_name }}
            <i class="fa-solid fa-circle-user"></i></a>
         {% endif %}
         &nbsp;|&nbsp;
         <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover"
-           data-bs-toggle="modal" data-bs-target="#logoutModal" href="#" title="{% trans "Logout" %}">
+           data-bs-toggle="modal" data-bs-target="#logoutModal" href="#">
           {% trans "Logout" %} <i class="fa-solid fa-right-from-bracket"></i>
         </a>
       </span>

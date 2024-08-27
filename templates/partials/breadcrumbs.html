@@ -5,7 +5,11 @@
 <div class="container mt-3">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a class="blue-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+      <li class="breadcrumb-item">
+        <a class="blue-link" href="{% url 'home' %}">
+          {% trans "Home" %}
+        </a>
+      </li>
 
       {% if url_name == "page_list" %}
         {% for category in categories %}
@@ -17,10 +21,13 @@
       {% elif url_name == "page_detail" %}
         {% for category in categories %}
           {% if category.slug == category_slug %}
-            <li class="breadcrumb-item"><a class="blue-link" href="{% url 'page_list' category_slug=category.slug %}">{{ category.title }}</a></li>
+            <li class="breadcrumb-item">
+              <a class="blue-link" href="{% url 'page_list' category_slug=category.slug %}" title="{%trans 'Category' %}: {{ category.title }}">
+                {{ category.title }}
+              </a>
+            </li>
             {% for page in category.pages.all %}
               {% if page.slug == page_slug %}
-                <!-- Current page -->
                 <li class="breadcrumb-item" aria-current="page">{{ page.title }}</li>
               {% endif %}
             {% endfor %}

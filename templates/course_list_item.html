@@ -170,8 +170,7 @@
                 {% endif %}
                 {% endfor %}
                 {% elif course.registration_status == 1 %}
-                <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
-                    title="{% trans " Sign up for" %} {{ course.title }}">
+                <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}">
                     {% trans "Sign up for" %} {{ course.title }}
                 </a>
                 {% elif course.registration_start_date|date:"Y-m-d" > todays_date %}
