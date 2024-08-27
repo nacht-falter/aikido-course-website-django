@@ -56,11 +56,11 @@
     <!-- https://docs.djangoproject.com/en/4.2/ref/urlresolvers/#django.urls.ResolverMatch -->
     {% with request.resolver_match.url_name as url_name %}
 
+    <header>
     {% include 'partials/navigation.html' %}
 
-    <header>
-      {% block header %}
-      {% endblock header %}
+    {% block carousel %}
+    {% endblock carousel %}
     </header>
 
     {% include 'partials/breadcrumbs.html' %}
