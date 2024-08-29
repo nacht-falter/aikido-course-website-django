@@ -103,7 +103,6 @@ class UpdateUserProfile(LoginRequiredMixin, View):
             user_profile.user.last_name = profile_form.cleaned_data[
                 "last_name"
             ]
-            user_profile.user.email = profile_form.cleaned_data["email"]
             user_profile.grade = profile_form.cleaned_data["grade"]
             user_profile.dojo = profile_form.cleaned_data["dojo"] if profile_form.cleaned_data[
                 "dojo"] != "other" else profile_form.cleaned_data["other_dojo"]

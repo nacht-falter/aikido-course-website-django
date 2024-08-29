@@ -1,11 +1,9 @@
 function checkDojo() {
   if (dojoSelect.value != "other") {
     otherDojoDiv.style.display = "none";
-    otherDojoInput.value = "Other Dojo";
     otherDojoInput.removeAttribute("required");
   } else {
     otherDojoDiv.style.display = "block";
-    otherDojoInput.value = "";
     otherDojoInput.setAttribute("required", "required");
   }
 }
