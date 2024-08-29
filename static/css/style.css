@@ -309,12 +309,18 @@ a.badge:hover {
 }
 
 .form-card {
-  width: 35vw;
-  min-width: 400px;
-  max-width: 500px;
+  width: 90vw;
   margin: 0 auto;
   margin-top: 1.5em;
   box-shadow: 0 3px 3px lightgrey;
+}
+
+@media (min-width: 576px) {
+  .form-card {
+    width: 50vw;
+    min-width: 400px;
+    max-width: 600px;
+  }
 }
 
 .form-table td {

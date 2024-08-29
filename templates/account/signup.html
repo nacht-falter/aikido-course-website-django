@@ -18,7 +18,7 @@
         Already have an account? Then please <a class="blue-link" href="{{ login_url }}">sign in</a>.
         {% endblocktrans %}
       </p>
-      <div class="text-start px-5">
+      <div class="text-start px-2 px-md-5">
         {% csrf_token %}
         {{ form|crispy }}
         {% if redirect_field_value %}
