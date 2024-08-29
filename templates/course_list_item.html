@@ -70,7 +70,7 @@
                     {% else %}
                         {% if course.end_date|date:"Y-m-d" >= todays_date %}
                         <a href="{{ course.url }}" class="badge btn btn-sm btn-outline-primary"
-                            title="{% trans " Go to" %} {{ course.title }}" target="_blank">
+                            title="{% trans " Go to" %} {{ course.title }}" target="_blank" rel="noopener noreferrer">
                             <small><i class="fas fa-external-link-alt"></i></small>
                             {% trans "Course website" %}
                         </a>

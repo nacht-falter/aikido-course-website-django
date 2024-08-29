@@ -88,7 +88,7 @@
       {{ course.start_date|localize }}-{{ course.end_date|localize }}: <strong>{{ course.title }}</strong> {% if course.organizer %}({{ course.organizer }}){% endif %}
     </a>
     <a href="{{ course.url }}" class="badge btn btn-sm btn-outline-primary"
-        title="{% trans " Go to" %} {{ course.title }}" target="_blank">
+        title="{% trans " Go to" %} {{ course.title }}" target="_blank" rel="noopener noreferrer">
         <small><i class="fas fa-external-link-alt"></i></small>
         {% trans "Course website" %}
     </a>
