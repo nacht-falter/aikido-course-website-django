@@ -12,7 +12,12 @@ def add_categories_to_context(request):
     your-own-context-processors
     """
     categories = Category.objects.exclude(slug="footer-links")
-    footer_links = Category.objects.get(slug="footer-links")
+
+    try:
+        footer_links = Category.objects.get(slug="footer-links")
+    except Category.DoesNotExist:
+        footer_links = None
+
     return {"categories": categories, "footer_links": footer_links}
 
 
