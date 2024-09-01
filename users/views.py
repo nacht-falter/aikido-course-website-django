@@ -4,7 +4,7 @@ from allauth.account.views import PasswordChangeView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render, reverse
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views import View
@@ -148,7 +148,7 @@ class UpdateGrade(View):
             user=request.user, grade_updated=False
         ).first()
         if answer == "yes":
-            user_profile = UserProfile.objects.get(user=request.user)
+            user_profile = get_object_or_404(UserProfile, user=request.user)
             user_profile.grade = exam_registration.exam_grade
             user_profile.save()
             exam_registration.grade_updated = True
@@ -183,21 +183,28 @@ class DeactivateUser(LoginRequiredMixin, View):
         )
         return HttpResponseRedirect(reverse("userprofile"))
 
+
     def post(self, request):
-        if not request.user.is_staff:
-            user = User.objects.get(pk=request.user.pk)
-            user.is_active = False
-            user.save()
-            messages.info(
-                request, _("You have successfully deactivated your account.")
+        if request.user.is_authenticated:
+            if not request.user.is_staff:
+                request.user.is_active = False
+                request.user.save()
+                messages.info(
+                    request, _(
+                        "You have successfully deactivated your account.")
+                )
+                return redirect(reverse("course_list"))
+            else:
+                messages.warning(
+                    request,
+                    _("Staff accounts cannot be deactivated. Please contact us if you want to deactivate your account."),
+                )
+                return redirect(reverse("userprofile"))
+        else:
+            messages.error(
+                request, _("You must be logged in to deactivate your account.")
             )
-            return HttpResponseRedirect(reverse("course_list"))
-        messages.warning(
-            request,
-            _("Staff accounts can not be deactivated.") +
-            _(" Please contact us if you want to deactivate your account."),
-        )
-        return HttpResponseRedirect(reverse("userprofile"))
+            return redirect(reverse("userprofile"))
 
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
