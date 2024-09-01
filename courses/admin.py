@@ -138,7 +138,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 new_slug = f"copy-{counter}-of-{course.slug}"
                 counter += 1
 
-            InternalCourse.objects.create(
+            new_course = InternalCourse.objects.create(
                 title=new_title,
                 slug=new_slug,
                 description=course.description,
@@ -160,7 +160,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             for session in course.sessions.all():
                 CourseSession.objects.create(
                     title=session.title,
-                    course=InternalCourse.objects.get(title=new_title),
+                    course=new_course,
                     date=session.date,
                     start_time=session.start_time,
                     end_time=session.end_time,
