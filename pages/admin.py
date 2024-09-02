@@ -37,6 +37,7 @@ class PageInline(admin.StackedInline):
         "status",
         "featured_image",
         "content",
+        "menu_position"
     ]
     prepopulated_fields = {"slug": ("title",)}
     # Add summernote field to inline model:
