@@ -60,7 +60,7 @@ main {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
   .main-title {
     font-size: 1.2rem;
   }
