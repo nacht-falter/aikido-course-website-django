@@ -81,6 +81,7 @@
                   <i class="fa-solid fa-envelope"></i> {% trans "Get in touch" %}
                 </a>
               </li>
+              {% if footer_links %}
               {% for page in footer_links.pages.all %}
               {% if page.status == 1 %}
               <li class="mt-2">
@@ -96,6 +97,7 @@
               </li>
               {% endif %}
               {% endfor %}
+              {% endif %}
               <li class="mt-2">
                 <a class="footer-link" href="{% static 'documents/2022.05.15_DANBW-Satzung.pdf' %}" target="_blank">
                   <i class="fa-solid fa-scroll"></i> {% trans "Statutes" %}
