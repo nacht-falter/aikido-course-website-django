@@ -18,7 +18,7 @@ def add_categories_to_context(request):
     except Category.DoesNotExist:
         footer_links = None
 
-    return {"categories": categories, "footer_links": footer_links}
+    return {"categories": categories, "footer_links": footer_links, "category_slug": None, "page_slug": None}
 
 
 def breadcrumb_context(request):

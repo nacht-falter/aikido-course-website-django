@@ -13,14 +13,14 @@
 
       {% if url_name == "page_list" %}
         {% for category in categories %}
-          {% if category.slug == category_slug %}
+          {% if category_slug and category.slug == category_slug %}
           <li class="breadcrumb-item">{{ category.title }}</li>
           {% endif %}
         {% endfor %}
 
       {% elif url_name == "page_detail" %}
         {% for category in categories %}
-          {% if category.slug == category_slug %}
+          {% if category_slug and category.slug == category_slug %}
             <li class="breadcrumb-item">
               <a class="blue-link" href="{% url 'page_list' category_slug=category.slug %}" title="{%trans 'Category' %}: {{ category.title }}">
                 {{ category.title }}

@@ -21,7 +21,7 @@
         </li>
         {% for category in categories %}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle {% if category.slug == category_slug %}active{% endif %}" href="#" role="button"
+          <a class="nav-link dropdown-toggle {% if category_slug and category.slug == category_slug %}active{% endif %}" href="#" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             {{ category.title }}
           </a>
