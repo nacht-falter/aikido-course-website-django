@@ -1,7 +1,7 @@
-from django.urls import path
+from django.urls import re_path
 
 from . import views
 
 urlpatterns = [
-    path("courses/", views.CourseList.as_view(), name="course_list"),
+    re_path(r"^courses/?$", views.CourseList.as_view(), name="course_list"),
 ]
