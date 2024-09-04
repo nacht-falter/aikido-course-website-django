@@ -152,18 +152,24 @@ THUMBNAIL_BASEDIR = "thumbnails"
 WSGI_APPLICATION = "danbw_website.wsgi.application"
 
 
-if development:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-else:
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL", ""))
-    }
+# if development:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": BASE_DIR / "db.sqlite3",
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         "default": dj_database_url.parse(os.environ.get("DATABASE_URL", ""))
+#     }
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -183,7 +189,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOG_FILE = os.path.join(BASE_DIR, "server.log")
+LOG_FILE = os.path.join(BASE_DIR, "django.log")
 
 LOGGING = {
     "version": 1,
@@ -200,7 +206,7 @@ LOGGING = {
     },
     "handlers": {
         "file": {
-            "level": "DEBUG",
+            "level": "ERROR",
             "class": "logging.FileHandler",
             "filename": LOG_FILE,
             "formatter": "verbose",
@@ -209,8 +215,8 @@ LOGGING = {
     "loggers": {
         "django": {
             "handlers": ["file"],
-            "level": "DEBUG",
-            "propagate": True,
+            "level": "ERROR",
+            "propagate": False,
         },
     },
 }
