@@ -3,7 +3,7 @@ from datetime import date
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import BadHeaderError, send_mail
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render, reverse
 from django.utils.translation import gettext as _
 from django.views import View, generic
@@ -139,3 +139,6 @@ class PageList(generic.ListView):
         context = super().get_context_data(**kwargs)
         context['category_slug'] = self.kwargs['category_slug']
         return context
+
+def catch_all_404_view(request):
+    raise Http404("Page not found")
