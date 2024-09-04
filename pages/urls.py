@@ -9,5 +9,4 @@ urlpatterns = [
             views.PageList.as_view(), name="page_list"),
     re_path(r"^(?P<slug>[\w-]+)/?$",
             views.PageDetail.as_view(), name="page_detail"),
-    re_path(r'^.*$', views.catch_all_404_view, name='catch-all'),
 ]
