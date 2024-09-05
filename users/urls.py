@@ -1,26 +1,35 @@
-from django.urls import re_path
+from django.urls import path
 
-from . import views
 from .views import CustomPasswordChangeView
 
+from . import views
+
 urlpatterns = [
-    # User profile view
-    re_path(r"^user/profile/?$",
-            views.UserProfileView.as_view(), name="userprofile"),
-
-    # Update user profile view
-    re_path(r"^user/profile/update/?$",
-            views.UpdateUserProfile.as_view(), name="update_userprofile"),
-
-    # Deactivate user view
-    re_path(r"^user/deactivate/?$", views.DeactivateUser.as_view(),
-            name="deactivate_user"),
-
-    # Update grade view
-    re_path(r"^user/update-grade/?$",
-            views.UpdateGrade.as_view(), name="update_grade"),
-
-    # Custom password change view
-    re_path(r"^accounts/password/change/?$",
-            CustomPasswordChangeView.as_view(), name="account_change_password"),
+    path(
+        "user/profile/",
+        views.UserProfileView.as_view(),
+        name="userprofile",
+    ),
+    path(
+        "user/profile/update/",
+        views.UpdateUserProfile.as_view(),
+        name="update_userprofile",
+    ),
+    path(
+        "user/deactivate/",
+        views.DeactivateUser.as_view(),
+        name="deactivate_user",
+    ),
+    path(
+        "user/update-grade/",
+        views.UpdateGrade.as_view(),
+        name="update_grade",
+    ),
+    # Override default allauth password redirect url
+    # https://stackoverflow.com/a/56599071
+    path(
+        "accounts/password/change/",
+        CustomPasswordChangeView.as_view(),
+        name="account_change_password",
+    ),
 ]

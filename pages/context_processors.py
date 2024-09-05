@@ -1,4 +1,4 @@
-from django.urls import resolve
+from django.urls import Resolver404, resolve
 from django.utils.translation import gettext as _
 
 from .models import Category
@@ -22,7 +22,10 @@ def add_categories_to_context(request):
 
 
 def breadcrumb_context(request):
-    url_name = resolve(request.path_info).url_name
+    try:
+        url_name = resolve(request.path_info).url_name
+    except Resolver404:
+        url_name = None
 
     page_name = ""
 

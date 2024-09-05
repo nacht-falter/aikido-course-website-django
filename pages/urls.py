@@ -1,12 +1,18 @@
-from django.urls import re_path
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    re_path(r"^$", views.HomePage.as_view(), name="home"),
-    re_path(r"^contact/?$", views.ContactPage.as_view(), name="contact"),
-    re_path(r"^category/(?P<category_slug>[\w-]+)/?$",
-            views.PageList.as_view(), name="page_list"),
-    re_path(r"^(?P<slug>[\w-]+)/?$",
-            views.PageDetail.as_view(), name="page_detail"),
+    path("", views.HomePage.as_view(), name="home"),
+    path("contact/", views.ContactPage.as_view(), name="contact"),
+    path(
+        "category/<slug:category_slug>/",
+        views.PageList.as_view(),
+        name="page_list",
+    ),
+    path(
+        "<slug:slug>/",
+        views.PageDetail.as_view(),
+        name="page_detail",
+    ),
 ]

@@ -1,25 +1,25 @@
-from django.urls import re_path
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    re_path(
-        r"^courses/register/(?P<slug>[\w-]+)/?$",
+    path(
+        "courses/register/<slug:slug>/",
         views.RegisterCourse.as_view(),
         name="register_course",
     ),
-    re_path(
-        r"^user/registrations/?$",
+    path(
+        "user/registrations/",
         views.CourseRegistrationList.as_view(),
         name="courseregistration_list",
     ),
-    re_path(
-        r"^user/registrations/cancel/(?P<pk>\d+)/?$",
+    path(
+        "user/registrations/cancel/<int:pk>/",
         views.CancelCourseRegistration.as_view(),
         name="cancel_courseregistration",
     ),
-    re_path(
-        r"^user/registrations/update/(?P<pk>\d+)/?$",
+    path(
+        "user/registrations/update/<int:pk>/",
         views.UpdateCourseRegistration.as_view(),
         name="update_courseregistration",
     ),
