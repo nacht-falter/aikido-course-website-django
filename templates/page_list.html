@@ -6,7 +6,7 @@
 {% block content %}
 {% for category in categories %}
 {% if category.slug == category_slug %}
-<h2>{% trans "Category" %}: {{ category.title }}</h2>
+<h2>{{ category.title }}</h2>
 {% for page in category.pages.all %}
 <div class="mb-3">
   <a class="blue-link" href="{% url 'page_detail' slug=page.slug %}">
