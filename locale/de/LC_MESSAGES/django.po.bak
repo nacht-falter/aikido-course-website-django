@@ -1,0 +1,3427 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-06 00:16+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: course_registrations/admin.py:19
+msgid "Course Date"
+msgstr "Lehrgangsdatum"
+
+#: course_registrations/admin.py:24
+msgid "Future Courses"
+msgstr "Zukünftige Lehrgänge"
+
+#: course_registrations/admin.py:25 templates/course_list.html:45
+msgid "Past Courses"
+msgstr "Vergangene Lehrgänge"
+
+#: course_registrations/admin.py:39 course_registrations/models.py:45
+#: courses/models.py:42 courses/models.py:237
+msgid "Course"
+msgstr "Lehrgang"
+
+#: course_registrations/admin.py:112 templates/course_list_item.html:47
+#: templates/index.html:68
+msgid "Registration"
+msgstr "Anmeldung"
+
+#: course_registrations/admin.py:124
+msgid "Toggle payment status of selected registrations"
+msgstr "Zahlungsstatus der ausgewählten Anmeldungen umschalten"
+
+#: course_registrations/admin.py:141 courses/admin.py:243
+msgid "Export selected course registrations to CSV"
+msgstr "Ausgewählte Lehrgangsanmeldungen als CSV exportieren"
+
+#: course_registrations/forms.py:25
+msgid "I would like to join the dinner"
+msgstr "Ich möchte am Abendessen teilnehmen"
+
+#: course_registrations/forms.py:27
+msgid "I need a place to stay overnight"
+msgstr "Ich brauche eine Übernachtungsmöglichkeit"
+
+#: course_registrations/forms.py:45 course_registrations/models.py:70
+#: memberships/forms.py:75 memberships/models.py:52 users/forms.py:19
+#: users/forms.py:45 users/models.py:23
+msgid "Other Dojo"
+msgstr "Anderes Dojo"
+
+#: course_registrations/forms.py:48
+msgid "I accept the terms and conditions"
+msgstr "Ich akzeptiere die Allgemeinen Geschäftsbedingungen"
+
+#: course_registrations/forms.py:51
+msgid "I will attend the following sessions:"
+msgstr "Ich werde an den folgenden Einheiten teilnehmen:"
+
+#: course_registrations/forms.py:57
+msgid "I want to apply for an exam"
+msgstr "Ich möchte mich für eine Prüfung anmelden"
+
+#: course_registrations/forms.py:60
+msgid "I am eligible for a discount"
+msgstr "Ich bin für einen Rabatt berechtigt"
+
+#: course_registrations/models.py:17
+msgid "Participant"
+msgstr "Teilnehmer"
+
+#: course_registrations/models.py:18
+msgid "The user who is registering for the course."
+msgstr "Der Benutzer, der sich für den Lehrgang anmeldet."
+
+#: course_registrations/models.py:23 danbw_website/utils.py:178
+#: danbw_website/utils.py:226 memberships/forms.py:50 memberships/models.py:25
+msgid "Email"
+msgstr "E-Mail"
+
+#: course_registrations/models.py:24
+msgid "The email address of the participant."
+msgstr "Die E-Mail-Adresse des Teilnehmers."
+
+#: course_registrations/models.py:29 danbw_website/utils.py:176
+#: danbw_website/utils.py:223 memberships/forms.py:34 memberships/models.py:10
+#: users/forms.py:11 users/forms.py:37
+msgid "First Name"
+msgstr "Vorname"
+
+#: course_registrations/models.py:31
+msgid "The first name of the participant."
+msgstr "Der Vorname des Teilnehmers."
+
+#: course_registrations/models.py:36 danbw_website/utils.py:177
+#: danbw_website/utils.py:224 memberships/forms.py:35 memberships/models.py:11
+#: users/forms.py:15 users/forms.py:41
+msgid "Last Name"
+msgstr "Nachname"
+
+#: course_registrations/models.py:38
+msgid "The last name of the participant."
+msgstr "Der Nachname des Teilnehmers."
+
+#: course_registrations/models.py:46
+msgid "The course for which the participant is registering."
+msgstr "Der Lehrgang, für den sich der Teilnehmer anmeldet."
+
+#: course_registrations/models.py:51
+msgid "Selected sessions"
+msgstr "Ausgewählte Einheiten"
+
+#: course_registrations/models.py:53
+msgid "The sessions within the course that the participant has selected."
+msgstr ""
+"Die Einheiten innerhalb des Lehrgangs, die der Teilnehmer ausgewählt hat."
+
+#: course_registrations/models.py:56
+msgid "Registration date"
+msgstr "Anmeldedatum"
+
+#: course_registrations/models.py:59
+msgid "The date and time when the participant registered for the course."
+msgstr ""
+"Das Datum und die Uhrzeit, zu der sich der Teilnehmer für den Lehrgang "
+"angemeldet hat."
+
+#: course_registrations/models.py:62 danbw_website/utils.py:234
+#: memberships/forms.py:73 memberships/models.py:48
+#: templates/userprofile.html:21 users/models.py:22
+msgid "Dojo"
+msgstr "Dojo"
+
+#: course_registrations/models.py:67
+msgid "The dojo the participant belongs to."
+msgstr "Das Dojo, zu dem der Teilnehmer gehört."
+
+#: course_registrations/models.py:73
+msgid "The name of the participant's Dojo outside of D.A.N. BW."
+msgstr "Der Name des Dojos des Teilnehmers außerhalb von DANBW."
+
+#: course_registrations/models.py:76 danbw_website/utils.py:179
+#: danbw_website/utils.py:233 memberships/forms.py:72 memberships/models.py:46
+#: templates/userprofile.html:17 users/models.py:25
+msgid "Grade"
+msgstr "Graduierung"
+
+#: course_registrations/models.py:81
+msgid "The grade of the participant."
+msgstr "Die Graduierung des Teilnehmers."
+
+#: course_registrations/models.py:84 danbw_website/utils.py:181
+#: templates/course_list_item.html:64 templates/index.html:80
+msgid "Exam"
+msgstr "Prüfung"
+
+#: course_registrations/models.py:87
+msgid "Indicates whether the participant would like to take an exam."
+msgstr "Gibt an, ob der Teilnehmer eine Prüfung ablegen möchte."
+
+#: course_registrations/models.py:90 danbw_website/utils.py:182
+msgid "Exam Grade"
+msgstr "Prüfungsgrad"
+
+#: course_registrations/models.py:94
+msgid "The grade of the exam the participant would like to take."
+msgstr "Der Grad der Prüfung, die der Teilnehmer ablegen möchte."
+
+#: course_registrations/models.py:97
+msgid "Exam Passed"
+msgstr "Prüfung bestanden"
+
+#: course_registrations/models.py:101
+msgid "Grade Updated"
+msgstr "Graduierung aktualisiert"
+
+#: course_registrations/models.py:105
+msgid "Accept terms"
+msgstr "Bedingungen akzeptieren"
+
+#: course_registrations/models.py:108
+msgid ""
+"Indicates whether the participant has accepted the terms and conditions."
+msgstr ""
+"Gibt an, ob der Teilnehmer die Allgemeinen Geschäftsbedingungen akzeptiert "
+"hat."
+
+#: course_registrations/models.py:111
+msgid "Discount"
+msgstr "Rabatt"
+
+#: course_registrations/models.py:114
+msgid "Indicates whether the participant is eligible for a discount."
+msgstr "Gibt an, ob der Teilnehmer für einen Rabatt berechtigt ist."
+
+#: course_registrations/models.py:117 danbw_website/utils.py:184
+msgid "Final Fee"
+msgstr "Endgebühr"
+
+#: course_registrations/models.py:119
+msgid "The final fee the participant needs to pay."
+msgstr "Die Endgebühr, die der Teilnehmer zahlen muss."
+
+#: course_registrations/models.py:122
+msgid "Payment status"
+msgstr "Zahlungsstatus"
+
+#: course_registrations/models.py:125
+msgid "The status of the participant's payment for the course."
+msgstr "Der Status der Zahlung des Teilnehmers für den Lehrgang."
+
+#: course_registrations/models.py:128
+msgid "Payment method"
+msgstr "Zahlungsmethode"
+
+#: course_registrations/models.py:132
+msgid "The method by which the participant will make the payment."
+msgstr "Die Methode, mit der der Teilnehmer die Zahlung vornehmen wird."
+
+#: course_registrations/models.py:135 memberships/forms.py:77
+#: memberships/models.py:58
+msgid "Comment"
+msgstr "Kommentar"
+
+#: course_registrations/models.py:138
+msgid "Any additional comments or notes regarding the registration."
+msgstr "Zusätzliche Kommentare oder Anmerkungen zur Anmeldung."
+
+#: course_registrations/models.py:141
+msgid "Dinner"
+msgstr "Abendessen"
+
+#: course_registrations/models.py:144
+msgid "Indicates whether the participant will attend the dinner."
+msgstr "Gibt an, ob der Teilnehmer am Abendessen teilnehmen wird."
+
+#: course_registrations/models.py:147
+msgid "Overnight stay"
+msgstr "Übernachtung"
+
+#: course_registrations/models.py:151
+msgid "Indicates whether the participant needs a place to stay overnight."
+msgstr "Gibt an, ob der Teilnehmer eine Übernachtungsmöglichkeit benötigt."
+
+#: course_registrations/models.py:167
+msgid "Course Registration"
+msgstr "Lehrgangsanmeldung"
+
+#: course_registrations/models.py:168
+msgid "Course Registrations"
+msgstr "Lehrgangsanmeldungen"
+
+#: course_registrations/urls.py:8
+msgid "courses/register/<slug:slug>/"
+msgstr "lehrgaenge/anmelden/<slug:slug>/"
+
+#: course_registrations/urls.py:13
+msgid "user/registrations/"
+msgstr "user/anmeldungen/"
+
+#: course_registrations/urls.py:18
+msgid "user/registrations/cancel/<int:pk>/"
+msgstr "user/anmeldungen/abmelden/<int:pk>/"
+
+#: course_registrations/urls.py:23
+msgid "user/registrations/update/<int:pk>/"
+msgstr "user/anmeldungen/aktualisieren/<int:pk>/"
+
+#: course_registrations/views.py:47
+msgid "Registration for this course is not possible at the moment."
+msgstr "Die Anmeldung für diesen Lehrgang ist derzeit nicht möglich."
+
+#: course_registrations/views.py:54
+msgid "Please log in to your account or continue as a guest."
+msgstr ""
+"Bitte melden Sie sich bei Ihrem Konto an oder fahren Sie als Gast fort."
+
+#: course_registrations/views.py:63
+msgid "Please create a user profile to contine."
+msgstr "Bitte erstellen Sie ein Benutzerprofil, um fortzufahren."
+
+#: course_registrations/views.py:74
+msgid "You are already registered for this course."
+msgstr "Sie sind bereits für diesen Lehrgang angemeldet."
+
+#: course_registrations/views.py:116
+msgid "A registration with this email address already exists."
+msgstr "Eine Anmeldung mit dieser E-Mail-Adresse existiert bereits."
+
+#: course_registrations/views.py:172
+msgid "You have successfully signed up for "
+msgstr "Sie haben sich erfolgreich angemeldet für "
+
+#: course_registrations/views.py:178 course_registrations/views.py:344
+msgid "Registration not submitted. Please select at least one session."
+msgstr ""
+"Anmeldung nicht eingereicht. Bitte wählen Sie mindestens eine Einheit aus."
+
+#: course_registrations/views.py:243
+msgid ""
+"Please cancel registrations by clicking the button from the 'My "
+"Registrations' page."
+msgstr ""
+"Bitte stornieren Sie Anmeldungen, indem Sie auf der Seite 'Meine "
+"Anmeldungen' auf den Button klicken."
+
+#: course_registrations/views.py:257
+msgid "Your registration for "
+msgstr "Ihre Anmeldung für "
+
+#: course_registrations/views.py:258
+msgid "has been cancelled."
+msgstr "wurde storniert."
+
+#: course_registrations/views.py:337
+msgid "You have successfully updated your registration for "
+msgstr "Sie haben Ihre Anmeldung für erfolgreich aktualisiert."
+
+#: courses/admin.py:70 templates/registration_form.html:41
+msgid "Course Details"
+msgstr "Lehrgangsdetails"
+
+#: courses/admin.py:83 templates/course_list_header.html:7
+#: templates/course_list_item.html:24 templates/course_list_item.html:98
+msgid "Dates"
+msgstr "Termine"
+
+#: courses/admin.py:92
+msgid "Payment Information"
+msgstr "Zahlungsinformationen"
+
+#: courses/admin.py:100 courses/models.py:174
+#: templates/childrens_passport_form.html:101
+#: templates/course_list_item.html:126 templates/membership_form.html:110
+#: templates/registration_form.html:108
+msgid "Additional Information"
+msgstr "Zusätzliche Informationen"
+
+#: courses/admin.py:171
+msgid "Duplicate selected courses"
+msgstr "Ausgewählte Lehrgänge duplizieren"
+
+#: courses/admin.py:180
+msgid "Toggle registration status of selected courses"
+msgstr "Registrierungsstatus der ausgewählten Lehrgänge umschalten"
+
+#: courses/admin.py:188
+msgid "Toggle status of selected courses"
+msgstr "Status der ausgewählten Lehrgänge umschalten"
+
+#: courses/admin.py:198
+msgid "Registrations"
+msgstr "Anmeldungen"
+
+#: courses/models.py:15 courses/models.py:229
+#: templates/course_list_header.html:13
+msgid "Title"
+msgstr "Titel"
+
+#: courses/models.py:17
+msgid "The name of the course."
+msgstr "Der Name des Lehrgangs."
+
+#: courses/models.py:24
+msgid "Start Date"
+msgstr "Startdatum"
+
+#: courses/models.py:26
+msgid "The start date of the course."
+msgstr "Das Startdatum des Lehrgangs."
+
+#: courses/models.py:29
+msgid "End Date"
+msgstr "Enddatum"
+
+#: courses/models.py:31
+msgid "The end date of the course."
+msgstr "Das Enddatum des Lehrgangs."
+
+#: courses/models.py:34
+msgid "Teacher(s)"
+msgstr "Lehrer"
+
+#: courses/models.py:37
+msgid "The teacher(s) of the course (optional)."
+msgstr "Die Lehrer des Lehrgangs (optional)."
+
+#: courses/models.py:43 pages/context_processors.py:37
+#: templates/partials/footer.html:45 templates/partials/navigation.html:46
+msgid "Courses"
+msgstr "Lehrgänge"
+
+#: courses/models.py:55
+msgid "Start date cannot be later than end date."
+msgstr "Startdatum kann nicht später als Enddatum sein."
+
+#: courses/models.py:67
+msgid "closed"
+msgstr "geschlossen"
+
+#: courses/models.py:68
+msgid "open"
+msgstr "offen"
+
+#: courses/models.py:72
+msgid "Regional Course"
+msgstr "Regionaler Lehrgang"
+
+#: courses/models.py:73
+msgid "International Course"
+msgstr "Internationaler Lehrgang"
+
+#: courses/models.py:74
+msgid "Family Reunion"
+msgstr "Familientreffen"
+
+#: courses/models.py:78
+msgid "Preview"
+msgstr "Vorschau"
+
+#: courses/models.py:79
+msgid "Published"
+msgstr "Veröffentlicht"
+
+#: courses/models.py:83
+msgid "Status"
+msgstr "Status"
+
+#: courses/models.py:87
+msgid ""
+"Courses set to 'Preview' will appear in the course list without all details."
+msgstr ""
+"Lehrgänge, die auf 'Vorschau' gesetzt sind, erscheinen in der Lehrgangsliste "
+"ohne alle Details."
+
+#: courses/models.py:90
+msgid "Publication Date"
+msgstr "Veröffentlichungsdatum"
+
+#: courses/models.py:94
+msgid ""
+"If this date is set, the course will automatically be set to 'Published' on "
+"this date."
+msgstr ""
+
+#: courses/models.py:97
+msgid "Registration Status"
+msgstr ""
+
+#: courses/models.py:101
+msgid ""
+"If the registration status is set to 'open', users can sign up for the "
+"course."
+msgstr ""
+
+#: courses/models.py:104 templates/course_list_item.html:119
+msgid "Description"
+msgstr ""
+
+#: courses/models.py:106
+msgid "A short description of the course (optional)."
+msgstr ""
+
+#: courses/models.py:109 templates/course_list_item.html:112
+msgid "Location"
+msgstr ""
+
+#: courses/models.py:112
+msgid "The location of the course (optional)."
+msgstr ""
+
+#: courses/models.py:115
+msgid "Registration Start Date"
+msgstr ""
+
+#: courses/models.py:119
+msgid ""
+"If this date is set, the registration status will be automatically set to "
+"'open' on this date."
+msgstr ""
+
+#: courses/models.py:122
+msgid "Registration End Date"
+msgstr ""
+
+#: courses/models.py:126
+msgid ""
+"If this date is set, the registration status will be automatically set to "
+"'closed' on this date."
+msgstr ""
+
+#: courses/models.py:129 courses/models.py:213
+#: templates/course_list_header.html:10 templates/course_list_item.html:32
+msgid "Organizer"
+msgstr ""
+
+#: courses/models.py:133 courses/models.py:216
+msgid "The organizer of the course (optional)."
+msgstr ""
+
+#: courses/models.py:136
+msgid "Course Fee"
+msgstr ""
+
+#: courses/models.py:139
+msgid "The fee for the entire course (payments via bank transfer)."
+msgstr ""
+
+#: courses/models.py:142
+msgid "Course Fee (Cash)"
+msgstr ""
+
+#: courses/models.py:144
+msgid "The fee for the entire course (cash payments)."
+msgstr ""
+
+#: courses/models.py:147
+msgid "Discount Percentage"
+msgstr ""
+
+#: courses/models.py:150
+msgid ""
+"The discount percentage specified here will automatically be applied for "
+"users eligible for a discount."
+msgstr ""
+
+#: courses/models.py:153
+msgid "Bank Transfer Until"
+msgstr ""
+
+#: courses/models.py:156
+msgid "The date until which the course fee has to be paid via bank transfer."
+msgstr ""
+
+#: courses/models.py:159
+msgid "Course Type"
+msgstr ""
+
+#: courses/models.py:163
+msgid ""
+"The type of the course will determine which fields will be displayed in the "
+"registration form."
+msgstr ""
+
+#: courses/models.py:166
+msgid "Flyer"
+msgstr ""
+
+#: courses/models.py:171
+msgid ""
+"The course flyer. Needs to be uploaded as an image file (JPEG, PNG, etc.)."
+msgstr ""
+
+#: courses/models.py:176
+msgid "Additional information about the course (optional)."
+msgstr ""
+
+#: courses/models.py:185
+msgid "Registration start date cannot be later than registration end date."
+msgstr ""
+
+#: courses/models.py:205
+msgid "Internal Course"
+msgstr ""
+
+#: courses/models.py:206
+msgid "Internal Courses"
+msgstr ""
+
+#: courses/models.py:218
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2628
+msgid "URL"
+msgstr ""
+
+#: courses/models.py:221
+msgid "External Course"
+msgstr ""
+
+#: courses/models.py:222
+msgid "External Courses"
+msgstr ""
+
+#: courses/models.py:231
+msgid "The name of the session."
+msgstr ""
+
+#: courses/models.py:238
+msgid "The course to which this session belongs."
+msgstr ""
+
+#: courses/models.py:241
+msgid "Date"
+msgstr ""
+
+#: courses/models.py:243
+msgid "The date on which the session takes place."
+msgstr ""
+
+#: courses/models.py:246
+msgid "Start Time"
+msgstr ""
+
+#: courses/models.py:248
+msgid "The time at which the session starts."
+msgstr ""
+
+#: courses/models.py:251
+msgid "End Time"
+msgstr ""
+
+#: courses/models.py:253
+msgid "The time at which the session ends."
+msgstr ""
+
+#: courses/models.py:256
+msgid "Session Fee"
+msgstr ""
+
+#: courses/models.py:259
+msgid "The fee for attending this session if paid via bank transfer."
+msgstr ""
+
+#: courses/models.py:262
+msgid "Session Fee (Cash)"
+msgstr ""
+
+#: courses/models.py:264
+msgid "The fee for attending this session if paid in cash."
+msgstr ""
+
+#: courses/models.py:273
+msgid "Start time cannot be later than end time."
+msgstr ""
+
+#: courses/models.py:276
+msgid "Course Session"
+msgstr ""
+
+#: courses/models.py:277
+msgid "Course Sessions"
+msgstr ""
+
+#: courses/urls.py:7
+msgid "courses/"
+msgstr "lehrgaenge/"
+
+#: danbw_website/constants.py:28
+msgid "Unpaid"
+msgstr ""
+
+#: danbw_website/constants.py:28
+msgid "Paid"
+msgstr ""
+
+#: danbw_website/constants.py:31
+msgid "Bank Transfer"
+msgstr ""
+
+#: danbw_website/constants.py:32
+msgid "Cash"
+msgstr ""
+
+#: danbw_website/constants.py:36 danbw_website/constants.py:46
+msgid "6th Kyu ⚪️"
+msgstr ""
+
+#: danbw_website/constants.py:37 danbw_website/constants.py:47
+msgid "5th Kyu 🟡"
+msgstr ""
+
+#: danbw_website/constants.py:38 danbw_website/constants.py:48
+msgid "4th Kyu 🟠"
+msgstr ""
+
+#: danbw_website/constants.py:39 danbw_website/constants.py:49
+msgid "3rd Kyu 🟢"
+msgstr ""
+
+#: danbw_website/constants.py:40 danbw_website/constants.py:50
+msgid "2nd Kyu 🔵"
+msgstr ""
+
+#: danbw_website/constants.py:41 danbw_website/constants.py:51
+msgid "1st Kyu 🟤"
+msgstr ""
+
+#: danbw_website/constants.py:45
+msgid "Red Belt 🔴"
+msgstr ""
+
+#: danbw_website/constants.py:52
+msgid "1st Dan ⚫️"
+msgstr ""
+
+#: danbw_website/constants.py:53
+msgid "2nd  Dan ⚫️"
+msgstr ""
+
+#: danbw_website/constants.py:54
+msgid "3rd Dan ⚫️"
+msgstr ""
+
+#: danbw_website/constants.py:55
+msgid "4th Dan ⚫️"
+msgstr ""
+
+#: danbw_website/constants.py:56
+msgid "5th Dan ⚫️"
+msgstr ""
+
+#: danbw_website/constants.py:57
+msgid "6th Dan ⚫️"
+msgstr ""
+
+#: danbw_website/constants.py:69
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:7
+msgid "Monday"
+msgstr ""
+
+#: danbw_website/constants.py:70
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:8
+msgid "Tuesday"
+msgstr ""
+
+#: danbw_website/constants.py:71
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:9
+msgid "Wednesday"
+msgstr ""
+
+#: danbw_website/constants.py:72
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:10
+msgid "Thursday"
+msgstr ""
+
+#: danbw_website/constants.py:73
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:11
+msgid "Friday"
+msgstr ""
+
+#: danbw_website/constants.py:74
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:12
+msgid "Saturday"
+msgstr ""
+
+#: danbw_website/constants.py:75
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:13
+msgid "Sunday"
+msgstr ""
+
+#: danbw_website/constants.py:79 memberships/models.py:80
+msgid "D.A.N. International Membership"
+msgstr "Internationaler Lehrgang"
+
+#: danbw_website/constants.py:80 memberships/models.py:98
+msgid "Childrens Passport"
+msgstr ""
+
+#: danbw_website/constants.py:81 memberships/models.py:106
+msgid "D.A.N. BW Membership"
+msgstr ""
+
+#: danbw_website/utils.py:16
+msgid "[Dynamic Aikido Nocquet BW] Email confirmation successful"
+msgstr ""
+
+#: danbw_website/utils.py:18
+msgid "Hi,\n"
+msgstr ""
+
+#: danbw_website/utils.py:19
+#, python-brace-format
+msgid "you have successfully confirmed your email address {email}.\n"
+msgstr ""
+
+#: danbw_website/utils.py:21
+#, python-brace-format
+msgid "You can login to your account at: {login_url}"
+msgstr ""
+
+#: danbw_website/utils.py:31
+msgid ""
+"Failed to send email confirmation email. Please contact the course team."
+msgstr ""
+
+#: danbw_website/utils.py:49
+msgid "[Dynamic Aikido Nocquet BW] Your Registration for "
+msgstr ""
+
+#: danbw_website/utils.py:68 danbw_website/utils.py:143
+msgid "Invalid email address. Please try again with a valid email address."
+msgstr ""
+
+#: danbw_website/utils.py:73
+msgid "[Dynamic Aikido Nocquet BW] New registration for "
+msgstr ""
+
+#: danbw_website/utils.py:79 danbw_website/utils.py:152
+msgid ""
+"Hi,\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:80
+#, python-brace-format
+msgid ""
+"A new registration for {course} has been received.\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:82 danbw_website/utils.py:155
+#, python-brace-format
+msgid "Name: {first_name} {last_name}\n"
+msgstr ""
+
+#: danbw_website/utils.py:84 danbw_website/utils.py:157
+#, python-brace-format
+msgid "Email: {email}\n"
+msgstr ""
+
+#: danbw_website/utils.py:85
+#, python-brace-format
+msgid ""
+"Course: {course}\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:86 danbw_website/utils.py:159
+#, python-brace-format
+msgid ""
+"Please check the admin panel at {site_url}/admin for more details.\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:96
+msgid ""
+"Failed to send registration notification email. Please contact the course "
+"team."
+msgstr ""
+
+#: danbw_website/utils.py:102
+#, python-brace-format
+msgid "[Dynamic Aikido Nocquet BW] Your {membership} application"
+msgstr ""
+
+#: danbw_website/utils.py:108
+msgid "The membership fees will be deducted from your account.\n"
+msgstr ""
+
+#: danbw_website/utils.py:113
+#, python-brace-format
+msgid ""
+"Please transfer the annual fee of €{fee} to the account below:\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:116
+#, python-brace-format
+msgid ""
+"Please transfer the fee of €{fee} to the account below:\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:121
+msgid ""
+"We will issue your passport as soon as possible.\n"
+"\n"
+"You don't need to do anything else for now.\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:125
+#, python-brace-format
+msgid ""
+"Hi {first_name},\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:126
+#, python-brace-format
+msgid ""
+"We have received your {membership} application.\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:131
+msgid "Best regards,\n"
+msgstr ""
+
+#: danbw_website/utils.py:132
+msgid "The D.A.N. BW team\n"
+msgstr ""
+
+#: danbw_website/utils.py:149
+#, python-brace-format
+msgid "[Dynamic Aikido Nocquet BW] New {membership} application"
+msgstr ""
+
+#: danbw_website/utils.py:153
+#, python-brace-format
+msgid ""
+"A new {membership} application has been received.\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:158
+#, python-brace-format
+msgid ""
+"Dojo: {dojo}\n"
+"\n"
+msgstr ""
+
+#: danbw_website/utils.py:169
+msgid ""
+"Failed to send membership notification email. Please contact the course team."
+msgstr ""
+
+#: danbw_website/utils.py:180
+msgid "Selected Sessions"
+msgstr "Ausgewählte Einheiten"
+
+#: danbw_website/utils.py:183 danbw_website/utils.py:235
+#: memberships/models.py:54
+msgid "Accept Terms"
+msgstr ""
+
+#: danbw_website/utils.py:185
+msgid "Payment Status"
+msgstr "Zahlungsstatus"
+
+#: danbw_website/utils.py:225 memberships/forms.py:37 memberships/models.py:12
+msgid "Date of Birth"
+msgstr ""
+
+#: danbw_website/utils.py:227 memberships/forms.py:38 memberships/models.py:13
+msgid "Street"
+msgstr ""
+
+#: danbw_website/utils.py:228 memberships/forms.py:39 memberships/models.py:14
+msgid "Street Number"
+msgstr ""
+
+#: danbw_website/utils.py:229 memberships/forms.py:42 memberships/models.py:17
+msgid "Postcode"
+msgstr ""
+
+#: danbw_website/utils.py:230 memberships/forms.py:40 memberships/models.py:15
+msgid "City"
+msgstr ""
+
+#: danbw_website/utils.py:231
+msgid "Phone Home"
+msgstr ""
+
+#: danbw_website/utils.py:232
+msgid "Phone Mobile"
+msgstr ""
+
+#: memberships/admin.py:20
+msgid "Toggle Passport Status"
+msgstr ""
+
+#: memberships/admin.py:38
+msgid "Export selected entries to CSV"
+msgstr "Ausgewählte Einträge als CSV exportieren"
+
+#: memberships/forms.py:46 memberships/models.py:21
+msgid "Enter a valid postcode."
+msgstr ""
+
+#: memberships/forms.py:52 memberships/models.py:27
+msgid "Home Phone"
+msgstr ""
+
+#: memberships/forms.py:56 memberships/forms.py:66 memberships/models.py:31
+#: memberships/models.py:41
+msgid "Enter a valid phone number."
+msgstr ""
+
+#: memberships/forms.py:62 memberships/models.py:37
+msgid "Mobile Phone"
+msgstr ""
+
+#: memberships/forms.py:79 memberships/models.py:77 memberships/models.py:95
+msgid "Passport Issued"
+msgstr ""
+
+#: memberships/forms.py:89
+msgid ""
+"I agree that the membership fee will be collected by SEPA direct debit from "
+"my account below."
+msgstr ""
+
+#: memberships/forms.py:94
+msgid ""
+"I have read and accept the statutes of D.A.N.  International and agree to "
+"the terms and conditions regarding cancellation and data processing. I "
+"hereby apply for membership with D.A.N. International."
+msgstr ""
+
+#: memberships/forms.py:101 memberships/forms.py:125
+msgid ""
+"I am aware that Aikido is a potentially dangerous sport and that the above-"
+"mentioned organization and its representatives are not liable for accidents "
+"or injuries that occur during the practice of Aikido, except within the "
+"scope of legal regulations in cases of intent or gross negligence."
+msgstr ""
+
+#: memberships/forms.py:106 memberships/models.py:70
+msgid "Account Holder"
+msgstr ""
+
+#: memberships/forms.py:107 memberships/models.py:71
+msgid "IBAN"
+msgstr ""
+
+#: memberships/forms.py:116 memberships/models.py:87
+msgid "Name of Legal Guardian"
+msgstr ""
+
+#: memberships/forms.py:120
+msgid ""
+"I accept the above terms and conditions and apply for a children's passport."
+msgstr "Ich akzeptiere die Allgemeinen Geschäftsbedingungen"
+
+#: memberships/forms.py:140
+msgid ""
+"I have read the statutes of D.A.N. BW e.V. and agree to the terms and "
+"conditions above. I hereby apply for a membership with D.A.N. BW."
+msgstr ""
+
+#: memberships/models.py:69
+msgid "SEPA Mandate"
+msgstr ""
+
+#: memberships/models.py:73 memberships/models.py:91
+msgid "Liability Disclaimer"
+msgstr ""
+
+#: memberships/models.py:81
+msgid "D.A.N. International Memberships"
+msgstr "Internationaler Lehrgang"
+
+#: memberships/models.py:99
+msgid "Childrens Passports"
+msgstr ""
+
+#: memberships/models.py:107
+msgid "D.A.N. BW Memberships"
+msgstr ""
+
+#: memberships/urls.py:7
+msgid "membership/dan-international/"
+msgstr "mitgliedschaft/dan-international/"
+
+#: memberships/urls.py:9
+msgid "membership/childrens-passport/"
+msgstr "mitgliedschaft/kinderpass/"
+
+#: memberships/urls.py:11
+msgid "membership/danbw/"
+msgstr "mitgliedschaft/danbw/"
+
+#: memberships/views.py:48
+msgid "We have received your membership application."
+msgstr "Wir haben deinen Mitgliedschaftsantrag erhalten."
+
+#: memberships/views.py:49
+msgid " Please check your email for confirmation."
+msgstr "Bitte schaue in deine E-Mails für die Bestätigung."
+
+#: pages/admin.py:25
+msgid "Toggle page status"
+msgstr "Seitenstatus umschalten"
+
+#: pages/context_processors.py:33 templates/partials/footer.html:56
+#: templates/partials/navigation.html:57 templates/userprofile.html:6
+msgid "My Profile"
+msgstr "Mein Profil"
+
+#: pages/context_processors.py:35 templates/partials/navigation.html:61
+msgid "My Registrations"
+msgstr "Meine Anmeldungen"
+
+#: pages/context_processors.py:39
+msgid "Contact us"
+msgstr "Kontakt"
+
+#: pages/forms.py:6
+msgid "Your email"
+msgstr "Deine E-Mail-Adresse"
+
+#: pages/models.py:9 pages/models.py:30
+msgid "title"
+msgstr "Titel"
+
+#: pages/models.py:11 pages/models.py:62
+msgid "menu position"
+msgstr "Menüposition"
+
+#: pages/models.py:16 pages/models.py:43
+msgid "category"
+msgstr "kategorie"
+
+#: pages/models.py:17
+msgid "categories"
+msgstr ""
+
+#: pages/models.py:33
+msgid "The title of the page"
+msgstr "Der Name des Lehrgangs."
+
+#: pages/models.py:38
+msgid "The URL of the page"
+msgstr "Der Name des Lehrgangs."
+
+#: pages/models.py:45
+msgid "The category of the page (determines the menu position)"
+msgstr ""
+
+#: pages/models.py:48
+msgid "status"
+msgstr ""
+
+#: pages/models.py:51
+msgid "The status of the page (published or draft)"
+msgstr ""
+
+#: pages/models.py:54
+msgid "featured image"
+msgstr ""
+
+#: pages/models.py:56
+msgid "The featured image of the page"
+msgstr "Der Name des Lehrgangs."
+
+#: pages/models.py:60
+msgid "content"
+msgstr ""
+
+#: pages/models.py:60
+msgid "The page content"
+msgstr ""
+
+#: pages/models.py:64
+msgid "The position in the menu (lower numbers appear first)"
+msgstr ""
+
+#: pages/models.py:73
+msgid "page"
+msgstr ""
+
+#: pages/models.py:74
+msgid "pages"
+msgstr ""
+
+#: pages/urls.py:8
+msgid "contact/"
+msgstr "kontakt/"
+
+#: pages/urls.py:10
+msgid "category/<slug:category_slug>/"
+msgstr "kategorie/<slug:category_slug>/"
+
+#: pages/views.py:85
+msgid "Invalid Header found. Please try again."
+msgstr ""
+
+#: pages/views.py:89
+msgid "Thank you! Your message has been sent."
+msgstr ""
+
+#: templates/403.html:7
+msgid "You don't have permission to view this page, sorry!"
+msgstr ""
+
+#: templates/403.html:8 templates/404.html:8 templates/500.html:8
+msgid "Go back home"
+msgstr ""
+
+#: templates/404.html:7
+msgid "The page you are looking for does not exist."
+msgstr ""
+
+#: templates/500.html:7
+msgid "Internal server error. We're sorry for the inconvenience."
+msgstr ""
+
+#: templates/account/account_inactive.html:5
+#: templates/account/account_inactive.html:8
+msgid "Account Inactive"
+msgstr ""
+
+#: templates/account/account_inactive.html:10
+msgid "This account is inactive."
+msgstr ""
+
+#: templates/account/email.html:5 templates/account/email.html:8
+msgid "E-mail Addresses"
+msgstr ""
+
+#: templates/account/email.html:10
+msgid "The following e-mail addresses are associated with your account:"
+msgstr ""
+
+#: templates/account/email.html:24
+msgid "Verified"
+msgstr ""
+
+#: templates/account/email.html:26
+msgid "Unverified"
+msgstr ""
+
+#: templates/account/email.html:28
+msgid "Primary"
+msgstr ""
+
+#: templates/account/email.html:34
+msgid "Make Primary"
+msgstr ""
+
+#: templates/account/email.html:35
+msgid "Re-send Verification"
+msgstr ""
+
+#: templates/account/email.html:36
+msgid "Remove"
+msgstr ""
+
+#: templates/account/email.html:43
+msgid "Warning:"
+msgstr ""
+
+#: templates/account/email.html:43
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+
+#: templates/account/email.html:48
+msgid "Add E-mail Address"
+msgstr ""
+
+#: templates/account/email.html:53
+msgid "Add E-mail"
+msgstr ""
+
+#: templates/account/email.html:63
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: templates/account/email/account_already_exists_message.txt:4
+#, python-format
+msgid ""
+"You are receiving this e-mail because you or someone else tried to signup "
+"for an\n"
+"account using e-mail address:\n"
+"\n"
+"%(email)s\n"
+"\n"
+"However, an account using that e-mail address already exists.  In case you "
+"have\n"
+"forgotten about this, please use the password forgotten procedure to "
+"recover\n"
+"your account:\n"
+"\n"
+"%(password_reset_url)s"
+msgstr ""
+
+#: templates/account/email/account_already_exists_subject.txt:3
+msgid "Account Already Exists"
+msgstr ""
+
+#: templates/account/email/base_message.txt:1
+msgid "Hi,"
+msgstr ""
+
+#: templates/account/email/base_message.txt:5
+#, python-format
+msgid ""
+"Thank you!\n"
+"\n"
+"%(site_name)s\n"
+"%(site_domain)s"
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.txt:5
+#, python-format
+msgid ""
+"You're receiving this e-mail because you or someone else has given your e-"
+"mail address to register an account on %(site_domain)s.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s"
+msgstr ""
+
+#: templates/account/email/email_confirmation_subject.txt:3
+msgid "Please Confirm Your E-mail Address"
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.txt:4
+msgid ""
+"You're receiving this e-mail because you or someone else has requested a "
+"password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password."
+msgstr ""
+
+#: templates/account/email/password_reset_key_subject.txt:3
+#: templates/account/email/unknown_account_subject.txt:3
+msgid "Password Reset E-mail"
+msgstr ""
+
+#: templates/account/email/unknown_account_message.txt:6
+#, python-format
+msgid ""
+"\n"
+"You are receiving this e-mail because you or someone else has requested a "
+"password for your user account. However, we do not have any record of a user "
+"with email %(email)s in our database.\n"
+"\n"
+"This mail can be safely ignored if you did not request a password reset.\n"
+"\n"
+"If it was you, you can sign up for an account using the link below.\n"
+msgstr ""
+
+#: templates/account/email_confirm.html:6
+#: templates/account/email_confirm.html:10
+msgid "Confirm E-mail Address"
+msgstr ""
+
+#: templates/account/email_confirm.html:15
+#, python-format
+msgid ""
+"\n"
+"    Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is your e-"
+"mail address.\n"
+"    "
+msgstr ""
+
+#: templates/account/email_confirm.html:22
+msgid "Confirm"
+msgstr ""
+
+#: templates/account/email_confirm.html:30
+#, python-format
+msgid ""
+"\n"
+"    This e-mail confirmation link expired or is invalid. Please\n"
+"    <a href=\"%(email_url)s\">issue a new e-mail confirmation request</a>.\n"
+"    "
+msgstr ""
+
+#: templates/account/login.html:7 templates/account/login.html:14
+#: templates/account/login.html:32 templates/partials/footer.html:65
+#: templates/partials/navigation.html:74
+msgid "Login"
+msgstr ""
+
+#: templates/account/login.html:19
+#, python-format
+msgid ""
+"\n"
+"        If you have not created an account yet, then please <a class=\"blue-"
+"link\" href=\"%(signup_url)s\">sign up</a> first.\n"
+"        "
+msgstr ""
+
+#: templates/account/login.html:34 templates/account/password_change.html:27
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/account/messages/logged_in.txt:3
+msgid "You have successfully signed in."
+msgstr "Sie haben sich erfolgreich angemeldet für "
+
+#: templates/account/password_change.html:7
+#: templates/account/password_change.html:12
+#: templates/account/password_change.html:24
+#: templates/account/password_reset_from_key.html:6
+#: templates/account/password_reset_from_key.html:9
+#: templates/account/password_reset_from_key_done.html:4
+#: templates/account/password_reset_from_key_done.html:7
+#: templates/userprofile.html:30
+msgid "Change Password"
+msgstr ""
+
+#: templates/account/password_reset.html:8
+#: templates/account/password_reset.html:12
+#: templates/account/password_reset_done.html:6
+#: templates/account/password_reset_done.html:9
+msgid "Password Reset"
+msgstr ""
+
+#: templates/account/password_reset.html:18
+msgid ""
+"\n"
+"    Forgotten your password? Enter your e-mail address below, and we'll send "
+"you an e-mail allowing you to reset it.\n"
+"    "
+msgstr ""
+
+#: templates/account/password_reset.html:26
+msgid "Reset My Password"
+msgstr ""
+
+#: templates/account/password_reset.html:29
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: templates/account/password_reset_done.html:15
+msgid ""
+"We have sent you an e-mail. If you have not received it please check your "
+"spam folder. Otherwise contact us if you do not receive it in a few minutes."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:9
+msgid "Bad Token"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:14
+#, python-format
+msgid ""
+"\n"
+"    The password reset link was invalid, possibly because it has already "
+"been used. Please request a\n"
+"    <a href=\"%(passwd_reset_url)s\">new password reset</a>.\n"
+"    "
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:22
+msgid "change password"
+msgstr ""
+
+#: templates/account/password_reset_from_key_done.html:8
+msgid "Your password is now changed."
+msgstr ""
+
+#: templates/account/password_set.html:5 templates/account/password_set.html:8
+#: templates/account/password_set.html:13
+msgid "Set Password"
+msgstr ""
+
+#: templates/account/signup.html:7
+msgid "Signup"
+msgstr ""
+
+#: templates/account/signup.html:12 templates/account/signup.html:30
+#: templates/partials/footer.html:68 templates/partials/navigation.html:78
+msgid "Sign Up"
+msgstr ""
+
+#: templates/account/signup.html:17
+#, python-format
+msgid ""
+"Already have an account? Then please <a class=\"blue-link\" "
+"href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: templates/account/verification_sent.html:5
+#: templates/account/verification_sent.html:8
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: templates/account/verification_sent.html:10
+msgid ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. If you do not see the verification e-mail in "
+"your main inbox, check your spam folder. Please contact us if you do not "
+"receive the verification e-mail within a few minutes."
+msgstr ""
+
+#: templates/base.html:11
+msgid "Dynamic Aikido Nocquet BW"
+msgstr ""
+
+#: templates/base.html:29 templates/courseregistration_list.html:70
+#: templates/partials/logout-modal.html:7
+msgid "Close"
+msgstr ""
+
+#: templates/base.html:39
+msgid "You are logged in"
+msgstr ""
+
+#: templates/base.html:40
+msgid "as"
+msgstr ""
+
+#: templates/base.html:48 templates/partials/footer.html:61
+#: templates/partials/logout-modal.html:6
+#: templates/partials/logout-modal.html:10
+#: templates/partials/logout-modal.html:20
+#: templates/partials/navigation.html:68
+msgid "Logout"
+msgstr ""
+
+#: templates/childrens_passport_form.html:9
+msgid "Children's Passport Application"
+msgstr ""
+
+#: templates/childrens_passport_form.html:11
+#, python-format
+msgid ""
+"\n"
+"  Prerequisite for registering for exams is an application for a children's "
+"passport with\n"
+"  D.A.N. in Baden-Württemberg. The children's passport  will only be issued "
+"once this application\n"
+"  is completely filled out and the fee of <strong>€%(fee)s</strong> has been "
+"received in the account listed below. This fee includes\n"
+"  the issuance of the children's passport, the Aikido guide for children and "
+"teenagers, as well as the provision\n"
+"  of a colored belt upon passing the exam.\n"
+"  "
+msgstr ""
+
+#: templates/childrens_passport_form.html:20
+msgid ""
+"Before the exam, a photo of the child must be added to the children's "
+"passport. Please provide your teacher with a current passport photo or "
+"similar."
+msgstr ""
+
+#: templates/childrens_passport_form.html:26
+msgid "Bank details:"
+msgstr ""
+
+#: templates/childrens_passport_form.html:36 templates/membership_form.html:21
+#: templates/registration_form.html:8
+msgid "Personal Details"
+msgstr ""
+
+#: templates/childrens_passport_form.html:62 templates/membership_form.html:47
+msgid "Contact Information"
+msgstr ""
+
+#: templates/childrens_passport_form.html:106
+#: templates/membership_form.html:140
+msgid ""
+"All personal data received will be processed and stored in compliance with "
+"the legal provisions of the Federal Data Protection Act. No data will be "
+"passed on to third parties outside the above-mentioned organization."
+msgstr ""
+
+#: templates/childrens_passport_form.html:117
+#: templates/membership_form.html:164
+msgid "Send Application"
+msgstr ""
+
+#: templates/contact.html:8
+msgid "Contact Us"
+msgstr ""
+
+#: templates/contact.html:9
+msgid "Leave a message. We'll get back to you."
+msgstr ""
+
+#: templates/contact.html:13
+msgid "Send"
+msgstr ""
+
+#: templates/course_list.html:12
+msgid "Current Courses"
+msgstr ""
+
+#: templates/course_list.html:29
+msgid "There are currently no courses available."
+msgstr ""
+
+#: templates/course_list.html:37
+msgid "Show past courses"
+msgstr ""
+
+#: templates/course_list.html:38
+msgid "Hide past courses"
+msgstr ""
+
+#: templates/course_list.html:59
+msgid "There are no past courses."
+msgstr ""
+
+#: templates/course_list_header.html:16 templates/course_list_item.html:39
+msgid "Teacher"
+msgstr ""
+
+#: templates/course_list_item.html:54 templates/course_list_item.html:63
+#: templates/index.html:74 templates/index.html:79
+msgid "Show registration"
+msgstr ""
+
+#: templates/course_list_item.html:56 templates/index.html:75
+msgid "Signed up"
+msgstr ""
+
+#: templates/course_list_item.html:58
+msgid "Attended"
+msgstr ""
+
+#: templates/course_list_item.html:73 templates/index.html:91
+msgid " Go to"
+msgstr ""
+
+#: templates/course_list_item.html:75 templates/index.html:93
+msgid "Course website"
+msgstr ""
+
+#: templates/course_list_item.html:132
+msgid "Sessions"
+msgstr ""
+
+#: templates/course_list_item.html:168
+msgid "You are already signed up. Go to your registration"
+msgstr ""
+
+#: templates/course_list_item.html:174 templates/register_course.html:8
+msgid "Sign up for"
+msgstr ""
+
+#: templates/course_list_item.html:178
+msgid "Registration starts on"
+msgstr ""
+
+#: templates/course_list_item.html:182
+msgid "Registration closed"
+msgstr ""
+
+#: templates/courseregistration_list.html:7
+msgid "Your Course Registrations"
+msgstr "Lehrgangsanmeldungen"
+
+#: templates/courseregistration_list.html:9
+msgid "Your upcoming courses"
+msgstr ""
+
+#: templates/courseregistration_list.html:17
+#: templates/courseregistration_list.html:111
+msgid "Dates:"
+msgstr ""
+
+#: templates/courseregistration_list.html:18
+#: templates/courseregistration_list.html:112
+#: templates/email/registration_confirmation.html:19
+msgid "to"
+msgstr ""
+
+#: templates/courseregistration_list.html:21
+msgid "Selected Sessions:"
+msgstr ""
+
+#: templates/courseregistration_list.html:32
+#: templates/email/registration_confirmation.html:37
+msgid "Course Fee:"
+msgstr ""
+
+#: templates/courseregistration_list.html:37
+msgid "Your Comment:"
+msgstr ""
+
+#: templates/courseregistration_list.html:45
+#, python-format
+msgid ""
+"\n"
+"            You have applied for an exam for %(exam_grade)s.\n"
+"            "
+msgstr ""
+
+#: templates/courseregistration_list.html:55
+#: templates/update_courseregistration.html:13
+msgid "Update registration"
+msgstr ""
+
+#: templates/courseregistration_list.html:59
+msgid "Cancel registration"
+msgstr ""
+
+#: templates/courseregistration_list.html:69
+msgid "Cancel Registration"
+msgstr ""
+
+#: templates/courseregistration_list.html:73
+msgid "Cancel Registration for"
+msgstr ""
+
+#: templates/courseregistration_list.html:75
+#, python-format
+msgid ""
+"\n"
+"                        Are you sure you want to cancel your registration "
+"for %(registration.course.title)s?\n"
+"                        "
+msgstr ""
+
+#: templates/courseregistration_list.html:86 templates/userprofile.html:56
+msgid "No, go back"
+msgstr ""
+
+#: templates/courseregistration_list.html:87
+msgid "Yes, cancel my registration"
+msgstr ""
+
+#: templates/courseregistration_list.html:96
+msgid "You are currently not signed up for any courses. "
+msgstr ""
+
+#: templates/courseregistration_list.html:97
+msgid "Go to course list"
+msgstr ""
+
+#: templates/courseregistration_list.html:98
+msgid "You can find a list of all courses here."
+msgstr ""
+
+#: templates/courseregistration_list.html:103
+msgid "Your past courses"
+msgstr ""
+
+#: templates/courseregistration_list.html:117
+#, python-format
+msgid ""
+"\n"
+"                You have passed your %(exam_grade)s exam on this course.\n"
+"            "
+msgstr ""
+
+#: templates/courseregistration_list.html:121
+#, python-format
+msgid ""
+"\n"
+"                You did not pass your %(exam_grade)s exam on this course.\n"
+"            "
+msgstr ""
+
+#: templates/courseregistration_list.html:125
+#, python-format
+msgid ""
+"\n"
+"                You applied for your %(exam_grade)s exam on this course.\n"
+"            "
+msgstr ""
+
+#: templates/courseregistration_list.html:129
+msgid "No exam"
+msgstr ""
+
+#: templates/courseregistration_list.html:135
+msgid "You did not sign up for any courses in the past."
+msgstr ""
+
+#: templates/create_userprofile.html:10
+msgid "Create User Profile"
+msgstr ""
+
+#: templates/create_userprofile.html:15
+msgid ""
+"Before being able to sign up for courses you need to create a user profile. "
+"Please fill out the form below."
+msgstr ""
+
+#: templates/create_userprofile.html:23
+msgid "Create Profile"
+msgstr ""
+
+#: templates/email/registration_confirmation.html:14
+#: templates/email/registration_confirmation.html:15
+msgid "Hi"
+msgstr ""
+
+#: templates/email/registration_confirmation.html:17
+msgid "You have successfully signed up for"
+msgstr ""
+
+#: templates/email/registration_confirmation.html:19
+msgid "Course dates:"
+msgstr ""
+
+#: templates/email/registration_confirmation.html:22
+msgid "Registration details:"
+msgstr ""
+
+#: templates/email/registration_confirmation.html:25
+msgid "Selected sessions:"
+msgstr ""
+
+#: templates/email/registration_confirmation.html:34
+msgid "You applied for an exam for"
+msgstr ""
+
+#: templates/email/registration_confirmation.html:38
+msgid "Payment method:"
+msgstr ""
+
+#: templates/email/registration_confirmation.html:42
+msgid "Please transfer the course fee to the following account until"
+msgstr ""
+
+#: templates/email/registration_confirmation.html:49
+msgid "Kind regards,"
+msgstr ""
+
+#: templates/index.html:25
+msgid "Previous"
+msgstr ""
+
+#: templates/index.html:29
+msgid "Next"
+msgstr ""
+
+#: templates/index.html:37
+msgid ""
+"Welcome to the official website of D.A.N. BW, the association of Aikido "
+"clubs in Baden-Württemberg, which practice Aikido in the tradition of Master "
+"André Nocquet. On this website, you can find information about our "
+"organization and our clubs, about Aikido and our lineage."
+msgstr ""
+
+#: templates/index.html:46
+msgid "Sign up for our courses"
+msgstr ""
+
+#: templates/index.html:50
+msgid ""
+"Whether you're a beginner or an experienced Aikidoka, we invite you to join "
+"us on the mat and start your Aikido journey with us today!"
+msgstr ""
+
+#: templates/index.html:56
+msgid "Upcoming Courses:"
+msgstr ""
+
+#: templates/index.html:61 templates/index.html:86
+msgid "Go to"
+msgstr ""
+
+#: templates/index.html:67
+msgid "Register for this course"
+msgstr ""
+
+#: templates/index.html:98
+msgid "There are no courses available at the moment."
+msgstr ""
+
+#: templates/membership_form.html:13
+msgid "D.A.N. International Membership Application"
+msgstr ""
+
+#: templates/membership_form.html:15
+msgid "D.A.N. BW Membership Application"
+msgstr ""
+
+#: templates/membership_form.html:80 templates/registration_form.html:78
+msgid "Payment Details"
+msgstr ""
+
+#: templates/membership_form.html:85
+#, python-format
+msgid ""
+"\n"
+"          The membership fee is <strong>€%(full_fee)s</strong> per year.\n"
+"          "
+msgstr ""
+
+#: templates/membership_form.html:90
+#, python-format
+msgid ""
+"\n"
+"          New members who apply for membership from the 2nd, 3rd, or 4th "
+"quarter of the year are only charged a reduced\n"
+"          fee of <strong>€%(fee_2nd)s</strong>, <strong>€%(fee_3rd)s</"
+"strong>, or <strong>€%(fee_4th)s</strong>, respectively.\n"
+"          "
+msgstr ""
+
+#: templates/membership_form.html:96
+msgid ""
+"The membership fee is collected annually in December for the following year "
+"by SEPA direct debit from D.A.N. BW e.V. as a representative for D.A.N. "
+"International."
+msgstr ""
+
+#: templates/membership_form.html:116
+msgid ""
+"Membership is automatically renewed for another year at the end of the year. "
+"A termination of membership must be made by December 1st in order to take "
+"effect at the end of the year."
+msgstr ""
+
+#: templates/membership_form.html:122
+msgid ""
+"Suspending the direct debit procedure or reclaiming the amount collected "
+"does not constitute termination. In this case, D.A.N.BW e.V. charges an "
+"administrative fee of €5 for the additional effort."
+msgstr ""
+
+#: templates/membership_form.html:131
+#, python-format
+msgid ""
+"\n"
+"          I will transfer the annual membership fee of €%(danbw_fee)s to the "
+"following account:\n"
+"          "
+msgstr ""
+
+#: templates/membership_form.html:150
+msgid "Statutes of D.A.N. International"
+msgstr ""
+
+#: templates/membership_form.html:154
+msgid "Statutes of D.A.N.BW e.V."
+msgstr ""
+
+#: templates/partials/breadcrumbs.html:10 templates/partials/footer.html:23
+#: templates/partials/navigation.html:20
+msgid "Home"
+msgstr ""
+
+#: templates/partials/breadcrumbs.html:25 templates/partials/footer.html:29
+msgid "Category"
+msgstr "Kategorie"
+
+#: templates/partials/footer.html:7
+msgid "Curious? Drop us a line!"
+msgstr ""
+
+#: templates/partials/footer.html:14 templates/partials/footer.html:110
+#: templates/partials/navigation.html:6
+msgid "Dynamic Aikido Nocquet BW Logo"
+msgstr ""
+
+#: templates/partials/footer.html:19
+msgid "Navigation"
+msgstr ""
+
+#: templates/partials/footer.html:52
+msgid "Account"
+msgstr "Rabatt"
+
+#: templates/partials/footer.html:72
+msgid "Admin Panel"
+msgstr ""
+
+#: templates/partials/footer.html:78
+msgid "Organization"
+msgstr ""
+
+#: templates/partials/footer.html:82
+msgid "Get in touch"
+msgstr ""
+
+#: templates/partials/footer.html:91
+msgid "Imprint"
+msgstr ""
+
+#: templates/partials/footer.html:93
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/partials/footer.html:104
+msgid "Statutes"
+msgstr "Status"
+
+#: templates/partials/logout-modal.html:11
+msgid "Are you sure you want to log out?"
+msgstr ""
+
+#: templates/partials/logout-modal.html:19 templates/register_course.html:21
+#: templates/update_courseregistration.html:12
+#: templates/update_userprofile.html:26
+msgid "Cancel"
+msgstr ""
+
+#: templates/partials/navigation.html:13
+msgid "Toggle navigation"
+msgstr ""
+
+#: templates/partials/navigation.html:52
+msgid "My Account"
+msgstr ""
+
+#: templates/register_course.html:11
+msgid "Please select the sessions you want to attend."
+msgstr ""
+
+#: templates/register_course.html:13
+msgid ""
+"Please provide your personal details and select the sessions you want to "
+"attend."
+msgstr ""
+
+#: templates/register_course.html:15
+msgid "The course fee will be displayed below the form"
+msgstr ""
+
+#: templates/register_course.html:22
+msgid "Sign up"
+msgstr ""
+
+#: templates/register_course.html:25
+msgid "Discount Conditions"
+msgstr ""
+
+#: templates/register_course.html:26
+msgid "The following groups are eligible for a discount:"
+msgstr ""
+
+#: templates/register_course.html:28
+msgid "Students"
+msgstr ""
+
+#: templates/register_course.html:29
+msgid "Trainees"
+msgstr ""
+
+#: templates/register_course.html:30
+msgid "Handicapped persons"
+msgstr ""
+
+#: templates/register_course.html:31
+msgid "Unemployed persons"
+msgstr ""
+
+#: templates/register_course.html:34
+msgid ""
+"If one of the above conditions applies to you, please check the \"Discount\" "
+"box in the registration form and bring proof of eligibility to the course. "
+"Otherwise, the full course fee will be charged."
+msgstr ""
+
+#: templates/register_course.html:39 templates/registration_form.html:120
+#: templates/update_courseregistration.html:16
+msgid "Terms and Conditions"
+msgstr ""
+
+#: templates/register_course.html:40
+#: templates/update_courseregistration.html:18
+msgid "The organizer (D.A.N. BW e. V.) does not provide insurance coverage."
+msgstr ""
+
+#: templates/register_course.html:42
+#: templates/update_courseregistration.html:23
+msgid ""
+"Also, the organizer may take photos during the course, which could be "
+"published without mentioning names (e.g., on the D.A.N. BW website). If you "
+"do not wish to have your photos published, please inform the organizer "
+"before the start of the course."
+msgstr ""
+
+#: templates/registration_form.html:13
+msgid "Name:"
+msgstr ""
+
+#: templates/registration_form.html:15
+msgid "E-mail:"
+msgstr ""
+
+#: templates/registration_form.html:17
+msgid "Grade:"
+msgstr ""
+
+#: templates/registration_form.html:19
+msgid "Dojo:"
+msgstr ""
+
+#: templates/registration_form.html:33
+msgid "Edit Profile"
+msgstr ""
+
+#: templates/registration_form.html:46
+msgid "Sessions:"
+msgstr ""
+
+#: templates/registration_form.html:54
+msgid "Entire Course"
+msgstr ""
+
+#: templates/registration_form.html:57
+msgid "Please select at least one session."
+msgstr ""
+
+#: templates/registration_form.html:66
+msgid "Exam:"
+msgstr ""
+
+#: templates/registration_form.html:83
+msgid "Payment:"
+msgstr ""
+
+#: templates/registration_form.html:92
+msgid "Discount:"
+msgstr ""
+
+#: templates/registration_form.html:97
+msgid ""
+"Please refer to the <a href=\"#discount-conditions\"> Discount Conditions </"
+"a> below for more information."
+msgstr ""
+
+#: templates/registration_form.html:122
+msgid "Please accept the terms and conditions below."
+msgstr ""
+
+#: templates/registration_form.html:130
+msgid "Registration Fee:"
+msgstr ""
+
+#: templates/update_courseregistration.html:7
+msgid "Update registration for"
+msgstr ""
+
+#: templates/update_grade.html:8
+msgid "Did you pass your exam?"
+msgstr ""
+
+#: templates/update_grade.html:12
+#, python-format
+msgid ""
+"\n"
+"            You have applied for an exam with your registration for "
+"%(course)s\n"
+"            "
+msgstr ""
+
+#: templates/update_grade.html:16
+msgid "Did you pass the exam?"
+msgstr ""
+
+#: templates/update_grade.html:19
+msgid "No, I didn't"
+msgstr ""
+
+#: templates/update_grade.html:20
+msgid "Yes, I passed"
+msgstr ""
+
+#: templates/update_userprofile.html:10
+msgid "Update User Profile"
+msgstr ""
+
+#: templates/update_userprofile.html:28
+msgid "Update profile"
+msgstr ""
+
+#: templates/userprofile.html:9
+msgid "Name"
+msgstr ""
+
+#: templates/userprofile.html:13
+msgid "E-mail"
+msgstr ""
+
+#: templates/userprofile.html:27
+msgid "Update Profile"
+msgstr ""
+
+#: templates/userprofile.html:34 templates/userprofile.html:43
+msgid "Deactivate Account"
+msgstr ""
+
+#: templates/userprofile.html:47
+msgid "Deactivate your Account?"
+msgstr ""
+
+#: templates/userprofile.html:48
+msgid "Are you sure you want to deactivate your account?"
+msgstr ""
+
+#: templates/userprofile.html:57
+msgid "Yes, deactivate my account"
+msgstr ""
+
+#: users/forms.py:20 users/forms.py:46
+msgid "Enter the name of your Dojo"
+msgstr ""
+
+#: users/views.py:57
+msgid "You have successfully created a user profile."
+msgstr ""
+
+#: users/views.py:115
+msgid "You have successfully updated your user profile."
+msgstr ""
+
+#: users/views.py:159
+msgid "Congratulations! Your grade has been updated to "
+msgstr ""
+
+#: users/views.py:165
+msgid "Your grade has not been updated."
+msgstr ""
+
+#: users/views.py:181
+msgid "Please use the button on the user profile page for "
+msgstr ""
+
+#: users/views.py:182
+msgid "deactivating your account."
+msgstr ""
+
+#: users/views.py:194
+msgid "You have successfully deactivated your account."
+msgstr ""
+
+#: users/views.py:200
+msgid ""
+"Staff accounts cannot be deactivated. Please contact us if you want to "
+"deactivate your account."
+msgstr ""
+
+#: users/views.py:205
+msgid "You must be logged in to deactivate your account."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
+msgid "Messages"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/contrib/sitemaps/apps.py:8
+msgid "Site Maps"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/contrib/syndication/apps.py:7
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:30
+msgid "…"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:32
+msgid "That page number is not an integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:33
+msgid "That page number is less than 1"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:34
+msgid "That page contains no results"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:22
+msgid "Enter a valid value."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:104
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:760
+msgid "Enter a valid URL."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:165
+msgid "Enter a valid integer."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:176
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: venv/lib/python3.12/site-packages/django/core/validators.py:259
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:267
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:279
+#: venv/lib/python3.12/site-packages/django/core/validators.py:306
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:286
+#: venv/lib/python3.12/site-packages/django/core/validators.py:307
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:298
+#: venv/lib/python3.12/site-packages/django/core/validators.py:305
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:341
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:347
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:382
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:391
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:400
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:407
+#, python-format
+msgid ""
+"Ensure this value is a multiple of step size %(limit_value)s, starting from "
+"%(offset)s, e.g. %(offset)s, %(valid_value1)s, %(valid_value2)s, and so on."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:439
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:457
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:480
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:355
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:394
+msgid "Enter a number."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:482
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:487
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:492
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:563
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:624
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/base.py:1477
+#: venv/lib/python3.12/site-packages/django/forms/models.py:906
+msgid "and"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/base.py:1479
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/constraints.py:20
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:133
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:134
+msgid "This field cannot be null."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:135
+msgid "This field cannot be blank."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:136
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:140
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:179
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1155
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1156
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1158
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1208
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1210
+msgid "String (unlimited)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1314
+msgid "Comma-separated integers"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1415
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1419
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1554
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1423
+msgid "Date (without time)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1550
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
+"uuuuuu]][TZ] format."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1558
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1563
+msgid "Date (with time)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1690
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1692
+msgid "Decimal number"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1853
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
+"uuuuuu] format."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1857
+msgid "Duration"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1909
+msgid "Email address"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1934
+msgid "File path"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2012
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2014
+msgid "Floating point number"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2054
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2056
+msgid "Integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2152
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2169
+msgid "Small integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2177
+msgid "IPv4 address"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2208
+msgid "IP address"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2301
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2302
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2304
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2355
+msgid "Positive big integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2370
+msgid "Positive integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2385
+msgid "Positive small integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2401
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2437
+msgid "Text"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2512
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2516
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2520
+msgid "Time"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2652
+msgid "Raw binary data"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2717
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2719
+msgid "Universally unique identifier"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:232
+msgid "File"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:393
+msgid "Image"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:26
+msgid "A JSON object"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:28
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:939
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:941
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1235
+msgid "One-to-one relationship"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1292
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1294
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1342
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: venv/lib/python3.12/site-packages/django/forms/boundfield.py:185
+msgid ":?.!"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:95
+msgid "This field is required."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:304
+msgid "Enter a whole number."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:475
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1252
+msgid "Enter a valid date."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:498
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1253
+msgid "Enter a valid time."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:525
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:559
+msgid "Enter a valid duration."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:560
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:629
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:630
+msgid "No file was submitted."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:631
+msgid "The submitted file is empty."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:633
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:638
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:702
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:874
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:960
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1585
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:962
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1081
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1583
+msgid "Enter a list of values."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1082
+msgid "Enter a complete value."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1321
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1351
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: venv/lib/python3.12/site-packages/django/forms/forms.py:94
+msgid ":"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/forms.py:231
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:61
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:65
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:70
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:484
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:491
+msgid "Order"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:499
+msgid "Delete"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:899
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:904
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:911
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:920
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1357
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1448
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1587
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/utils.py:227
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:461
+msgid "Clear"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:462
+msgid "Currently"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:463
+msgid "Change"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:800
+msgid "Unknown"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:801
+msgid "Yes"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:802
+msgid "No"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:876
+msgid "yes,no,maybe"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:906
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:923
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:925
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:927
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:929
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:931
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:933
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:74
+msgid "p.m."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:75
+msgid "a.m."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:80
+msgid "PM"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:81
+msgid "AM"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:153
+msgid "midnight"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:155
+msgid "noon"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:16
+msgid "Mon"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:17
+msgid "Tue"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:18
+msgid "Wed"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:19
+msgid "Thu"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:20
+msgid "Fri"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:21
+msgid "Sat"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:22
+msgid "Sun"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:25
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:26
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:27
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:28
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:29
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:30
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:31
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:32
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:33
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:34
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:35
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:36
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:39
+msgid "jan"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:40
+msgid "feb"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:41
+msgid "mar"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:42
+msgid "apr"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:43
+msgid "may"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:44
+msgid "jun"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:45
+msgid "jul"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:46
+msgid "aug"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:47
+msgid "sep"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:48
+msgid "oct"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:49
+msgid "nov"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:50
+msgid "dec"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/ipv6.py:8
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/text.py:123
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/text.py:323
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: venv/lib/python3.12/site-packages/django/utils/text.py:342
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:135
+msgid ", "
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:29
+msgid "Forbidden"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:30
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:34
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:40
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:45
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:54
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:60
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:66
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:44
+msgid "No year specified"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:64
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:115
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:214
+msgid "Date out of range"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:94
+msgid "No month specified"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:147
+msgid "No day specified"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:194
+msgid "No week specified"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:349
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:380
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:652
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:692
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/list.py:169
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/static.py:49
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/static.py:51
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/static.py:68
+#: venv/lib/python3.12/site-packages/django/views/templates/directory_index.html:8
+#: venv/lib/python3.12/site-packages/django/views/templates/directory_index.html:11
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:7
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:220
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:221
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:229
+msgid "Django Documentation"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:230
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:238
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:239
+msgid "Get started with Django"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:247
+msgid "Django Community"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:248
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django_summernote/views.py:72
+msgid "Only POST method is allowed"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django_summernote/views.py:86
+msgid "Attachment module is disabled"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django_summernote/views.py:93
+msgid "Only authenticated users are allowed"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django_summernote/views.py:99
+msgid "No files were requested"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django_summernote/views.py:140
+msgid "File size exceeds the limit allowed and cannot be saved"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django_summernote/views.py:160
+msgid "Failed to save attachment"
+msgstr ""

@@ -7,6 +7,5 @@ __pycache__/
 .coveragerc
 migrations/
 media/images
-locale/
 static/documents
 *.log
