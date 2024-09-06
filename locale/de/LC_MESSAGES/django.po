@@ -1566,11 +1566,11 @@ msgstr "Antrag absenden"
 
 #: templates/contact.html:8
 msgid "Contact Us"
-msgstr "Kontaktiere uns"
+msgstr "Kontakt"
 
 #: templates/contact.html:9
 msgid "Leave a message. We'll get back to you."
-msgstr "Hinterlasse eine Nachricht. Wir melden uns bei dir."
+msgstr "Hinterlasse uns eine Nachricht. Wir melden uns bei dir."
 
 #: templates/contact.html:13
 msgid "Send"
@@ -1877,11 +1877,11 @@ msgstr "Derzeit sind keine Kurse verfügbar."
 
 #: templates/membership_form.html:13
 msgid "D.A.N. International Membership Application"
-msgstr "D.A.N. International Mitgliedsantrag"
+msgstr "D.A.N. International Mitgliedschaftsantrag"
 
 #: templates/membership_form.html:15
 msgid "D.A.N. BW Membership Application"
-msgstr "D.A.N. BW Mitgliedsantrag"
+msgstr "D.A.N. BW Mitgliedschaftsantrag"
 
 #: templates/membership_form.html:80 templates/registration_form.html:78
 msgid "Payment Details"
@@ -2000,7 +2000,7 @@ msgstr "Organisation"
 
 #: templates/partials/footer.html:82
 msgid "Get in touch"
-msgstr "Kontakt aufnehmen"
+msgstr "Kontakt"
 
 #: templates/partials/footer.html:91
 msgid "Imprint"
