@@ -39,7 +39,7 @@
       <span>{% trans "You are logged in" %}
         {% if user.first_name %}{% trans "as" %}
         <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover"
-           href="{% url 'userprofile' %}">{{ user.first_name }}
+           href="{% url 'userprofile' %}" title="{% trans 'Go to your profile' %}">{{ user.first_name }}
            <i class="fa-solid fa-circle-user"></i></a>
         {% endif %}
         &nbsp;|&nbsp;

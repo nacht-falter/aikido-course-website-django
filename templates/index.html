@@ -41,15 +41,15 @@
     {% endblocktrans %}
   </p>
   <p>
+    {% blocktrans trimmed %}
+    Whether you're a beginner or an experienced Aikidoka, we invite you to join us on the mat and start your Aikido journey with us today!
+    {% endblocktrans %}
+  </p>
+  <p>
     <a class="btn btn-outline-primary" href="{% url 'course_list' %}">
       <i class="fa-solid fa-user-plus"></i>
       {% trans "Sign up for our courses" %}
     </a>
-  </p>
-  <p>
-    {% blocktrans trimmed %}
-    Whether you're a beginner or an experienced Aikidoka, we invite you to join us on the mat and start your Aikido journey with us today!
-    {% endblocktrans %}
   </p>
 {% if upcoming_courses|length > 0 %}
 <hr class="mt-5">
