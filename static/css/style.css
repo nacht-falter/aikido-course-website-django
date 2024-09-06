@@ -156,16 +156,20 @@ i {
   font-size: 80%;
 }
 
-.blue-link {
+.page-content a, .blue-link {
   color: #1e3c95;
   text-decoration: none;
 }
 
-.blue-link:hover {
+.page-content a:hover, .blue-link:hover {
   text-decoration: underline;
 }
 
 .nav-link:hover {
+  color: #1e3c95;
+}
+
+.nav-link.show {
   color: #1e3c95;
 }
 

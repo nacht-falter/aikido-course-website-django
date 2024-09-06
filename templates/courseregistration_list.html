@@ -28,6 +28,7 @@
                         {% endfor %}
                     </ul>
                 </td>
+            </tr>
             <tr>
                 <th scope="col">{% trans "Course Fee:" %}</th>
                 <td>€{{ registration.final_fee }}</td>
@@ -92,11 +93,14 @@
     </div>
 </div>
 {% empty %}
-<p>
+<p class="my-4">
     {% trans "You are currently not signed up for any courses. " %}
-    <a href="{% url 'course_list' %}" class="blue-link" title="{% trans "Go to course list" %}">
-        {% trans "You can find a list of all courses here." %}
-    </a>
+</p>
+<p>
+<a class="btn btn-outline-primary" href="{% url 'course_list' %}" title="{% trans 'Go to course list' %}">
+      <i class="fa-solid fa-user-plus"></i>
+      {% trans "Sign up now" %}
+  </a>
 </p>
 {% endfor %}
 
@@ -132,7 +136,7 @@
     </div>
 </div>
 {% empty %}
-<p>{% trans "You did not sign up for any courses in the past." %}</p>
+<p class="mt-4">{% trans "You did not sign up for any courses in the past." %}</p>
 {% endfor %}
 {% endblock content %}
 
