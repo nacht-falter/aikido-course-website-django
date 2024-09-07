@@ -413,7 +413,7 @@ msgstr "Internationaler Lehrgang"
 
 #: courses/models.py:74
 msgid "Family Reunion"
-msgstr "Familientreffen"
+msgstr "Family Reunion"
 
 #: courses/models.py:78
 msgid "Preview"
@@ -459,6 +459,10 @@ msgstr "Eine kurze Beschreibung des Lehrgangs (optional)."
 msgid "Location"
 msgstr "Ort"
 
+#: courses/models.py:109 templates/course_list_item.html:112
+msgid "to"
+msgstr "bis"
+
 #: courses/models.py:112
 msgid "The location of the course (optional)."
 msgstr "Der Ort des Lehrgangs (optional)."
@@ -478,6 +482,10 @@ msgstr "Anmeldeschluss"
 #: courses/models.py:126
 msgid "If this date is set, the registration status will be automatically set to 'closed' on this date."
 msgstr "Wenn dieses Datum festgelegt ist, wird der Anmeldestatus an diesem Datum automatisch auf 'geschlossen' gesetzt."
+
+#: courses/models.py:139
+msgid "Course Fee"
+msgstr "Lehrgangsgebühr"
 
 #: courses/models.py:139
 msgid "The fee for the entire course (payments via bank transfer)."
@@ -586,7 +594,7 @@ msgstr "Die Zeit, zu der die Einheit endet."
 
 #: courses/models.py:256
 msgid "Session Fee"
-msgstr "Einheitsgebühr"
+msgstr "Kosten für Einheit"
 
 #: courses/models.py:259
 msgid "The fee for attending this session if paid via bank transfer."
@@ -594,7 +602,7 @@ msgstr "Die Gebühr für die Teilnahme an dieser Einheit bei Zahlung per Überwe
 
 #: courses/models.py:262
 msgid "Session Fee (Cash)"
-msgstr "Einheitsgebühr (Bar)"
+msgstr "Kosten für Einheit (Bar)"
 
 #: courses/models.py:264
 msgid "The fee for attending this session if paid in cash."
@@ -1623,7 +1631,7 @@ msgstr "Zum Lehrgang"
 
 #: templates/course_list_item.html:132
 msgid "Sessions"
-msgstr "Sitzungen"
+msgstr "Einheiten"
 
 #: templates/course_list_item.html:168
 msgid "You are already signed up. Go to your registration"
@@ -1662,7 +1670,7 @@ msgstr "bis"
 
 #: templates/courseregistration_list.html:21
 msgid "Selected Sessions:"
-msgstr "Ausgewählte Sitzungen:"
+msgstr "Ausgewählte Einheiten:"
 
 #: templates/courseregistration_list.html:32
 #: templates/email/registration_confirmation.html:37
@@ -1817,7 +1825,7 @@ msgstr "Anmeldedaten:"
 
 #: templates/email/registration_confirmation.html:25
 msgid "Selected sessions:"
-msgstr "Ausgewählte Sitzungen:"
+msgstr "Ausgewählte Einheiten:"
 
 #: templates/email/registration_confirmation.html:34
 msgid "You applied for an exam for"
@@ -2038,14 +2046,14 @@ msgstr "Mein Konto"
 
 #: templates/register_course.html:11
 msgid "Please select the sessions you want to attend."
-msgstr "Bitte wähle die Sitzungen aus, an denen Du teilnehmen möchtest."
+msgstr "Bitte wähle die Einheiten aus, an denen Du teilnehmen möchtest."
 
 #: templates/register_course.html:13
 msgid ""
 "Please provide your personal details and select the sessions you want to "
 "attend."
 msgstr ""
-"Bitte gib deine persönlichen Daten an und wähle die Sitzungen aus, an denen "
+"Bitte gib deine persönlichen Daten an und wähle die Einheiten aus, an denen "
 "Du teilnehmen möchtest."
 
 #: templates/register_course.html:15
