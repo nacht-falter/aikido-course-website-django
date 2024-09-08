@@ -41,7 +41,7 @@
           <div class="col-12 d-md-none fs-5">
             <span><strong>{{ course.title }}</strong></span>
           </div>
-          <div class="col-3 d-md-none">{% trans "Dates" %}</div>
+          <div class="d-none d-md-inline d-md-none">{% trans "Dates" %}</div>
           <div class="col-9 col-md-2 col-lg-2">
             {% if course.start_date == course.end_date %}
               <span>{{ course.start_date|localize }}</span>
@@ -49,17 +49,19 @@
               <span>{{ course.start_date|localize }} {% trans "to"%} {{ course.end_date|localize }}</span>
             {% endif %}
           </div>
-          <div class="col-3 d-md-none">{% trans "Organizer" %}</div>
-          <div class="col-9 col-md-2 col-lg-2">
+          {% if course.organizer %}
+          <div class="d-none d-md-inline col-md-2 col-lg-2">
             <span>{{ course.organizer }}</span>
           </div>
+          {% endif %}
           <div class="col-md-4 col-lg-4 d-none d-md-block">
             <span><strong>{{ course.title }}</strong></span>
           </div>
-          <div class="col-3 d-md-none">{% trans "Teacher" %}</div>
-          <div class="col-9 col-md-2 col-lg-2">
+          {% if course.teacher %}
+          <div class="d-none d-md-inline col-md-2 col-lg-2">
             <span>{{ course.teacher }}</span>
           </div>
+          {% endif %}
           <div class="col-12 col-md-2 col-lg-2 text-md-end">
             {% if course.get_course_type == "InternalCourse" %}
               {% if course.registration_status == 1 and not course.user_registered %}
@@ -150,7 +152,7 @@
             <hr>
           {% endif %}
           <div class="row">
-            <div class="fw-bold mt-1">{% trans "Sessions" %}</div>
+            <div class="fw-bold mt-1">{% trans "Sessions " %}</div>
             {% regroup course.sessions.all by date as session_dates %}
             {% for date_group in session_dates %}
               <div class="col-md-4 mt-2 mt-md-0">
@@ -193,7 +195,7 @@
           {% endfor %}
           {% elif course.registration_status == 1 %}
           <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}">
-              {% trans "Sign up for" %} {{ course.title }}
+              {% trans "Go to registration form" %}
           </a>
           {% elif course.registration_start_date|date:"Y-m-d" > todays_date %}
           <a class="btn btn-primary disabled" title="{% trans "Registration closed" %}">

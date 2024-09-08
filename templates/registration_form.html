@@ -10,13 +10,13 @@
     <div class="card-body">
       <div class="row">
         {% if user.is_authenticated %}
-        <div class="col-3 mb-2">{% trans "Name:" %}</div>
+        <div class="col-3 mb-2">{% trans "Name" %}:</div>
         <div class="col-9 mb-2">{{ user.first_name }} {{ user.last_name }}</div>
-        <div class="col-3 mb-2">{% trans "E-mail:" %}</div>
+        <div class="col-3 mb-2">{% trans "E-mail" %}:</div>
         <div class="col-9 mb-2">{{ user.email }}</div>
-        <div class="col-3 mb-2">{% trans "Grade:" %}</div>
+        <div class="col-3 mb-2">{% trans "Grade" %}:</div>
         <div class="col-9 mb-2">{{ user.profile.get_grade_display }}</div>
-        <div class="col-3 mb-2">{% trans "Dojo:" %}</div>
+        <div class="col-3 mb-2">{% trans "Dojo" %}:</div>
         <div class="col-9 mb-2">{{ user.profile.get_dojo_display }}</div>
         {% else %}
         <div class="col-12 col-md-6 mb-2">{{ form.first_name|as_crispy_field }}</div>
@@ -63,7 +63,7 @@
       <hr>
       <div id="exam-section" class="row">
         <div class="col-3 mb-2">
-          <strong>{% trans "Exam:" %}</strong>
+          <strong>{% trans "Exam" %}:</strong>
         </div>
         <div class="col-9 mb-2">
           {{ form.exam|as_crispy_field }}
@@ -80,7 +80,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-3 mb-2">
-          <strong>{% trans "Payment:" %}</strong>
+          <strong>{% trans "Payment" %}:</strong>
         </div>
         <div class="col-9 mb-2">
           {{ form.payment_method|as_crispy_field }}
@@ -89,7 +89,7 @@
       <hr>
       <div class="row">
         <div class="col-3 mb-2">
-          <strong>{% trans "Discount:" %}</strong>
+          <strong>{% trans "Discount" %}:</strong>
         </div>
         <div class="col-9 mb-2">
           {{ form.discount|as_crispy_field }}
@@ -127,7 +127,7 @@
   </div>
   <div class="col-12 mb-3 fs-5">
     <div id="final-fee-container" class="alert alert-success d-none">
-      <strong>{% trans "Registration Fee:" %}
+      <strong>{% trans "Registration Fee" %}:
       {% get_current_language as LANGUAGE_CODE %}
       {% if LANGUAGE_CODE == 'en' %}
       <span>€</span><span id="final-fee-display">0</span>

@@ -37,9 +37,9 @@
   </div>
 
   {% if request.GET.allow_guest %}
-  <p class="mt-3 fs-4">or</p>
+  <p class="mt-3 fs-4">{% trans "or" %}</p>
   <a href="{{ request.GET.next }}?allow_guest=True" class="btn btn-outline-primary">
-    Continue as guest
+    {% trans "Continue as guest" %}
   </a>
 </div>
 
