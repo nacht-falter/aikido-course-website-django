@@ -248,7 +248,7 @@ a.badge:hover {
 
 .accordion-body {
   box-shadow: 0 0 5px lightgrey inset;
-  background-color: #ffffff;
+  background-color: #f2f2f2;
 }
 
 .accordion-button-no-link {
