@@ -62,6 +62,9 @@ msgstr "Ich benötige eine Übernachtungsmöglichkeit"
 msgid "Other Dojo"
 msgstr "Anderes Dojo"
 
+msgid "Select your Dojo"
+msgstr "Wähle dein Dojo aus"
+
 #: course_registrations/forms.py:48
 msgid "I accept the terms and conditions"
 msgstr "Ich akzeptiere die Teilnahmebedingungen"
@@ -196,7 +199,7 @@ msgstr "Bedingungen akzeptieren"
 #: course_registrations/models.py:108
 msgid ""
 "Indicates whether the participant has accepted the terms and conditions."
-msgstr "Gibt an, ob Du die Allgemeinen Geschäftsbedingungen akzeptiert hast."
+msgstr "Gibt an, ob Du die Teilnahmebedingungen akzeptiert hast."
 
 #: course_registrations/models.py:111 templates/registration_form.html:92
 msgid "Discount"
@@ -552,7 +555,7 @@ msgstr "Überweisung bis"
 #: courses/models.py:156
 msgid "The date until which the course fee has to be paid via bank transfer."
 msgstr ""
-"Das Datum, bis zu dem die Lehrgangsgebühr per Überweisung bezahlt werden "
+"Das Datum, bis zu dem die Teilnahmegebühr per Überweisung bezahlt werden "
 "muss."
 
 #: courses/models.py:159
@@ -713,7 +716,7 @@ msgstr "1. Kyu 🟤"
 
 #: danbw_website/constants.py:45
 msgid "Red Belt 🔴"
-msgstr "Roter Gürtel 🔴"
+msgstr "Rotgurt 🔴"
 
 #: danbw_website/constants.py:52
 msgid "1st Dan ⚫️"
@@ -1647,19 +1650,7 @@ msgid "Children's Passport Application"
 msgstr "Antrag auf Kinderpass"
 
 #: templates/childrens_passport_form.html:11
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  Prerequisite for registering for exams is an application for a "
-#| "children's passport with\n"
-#| "  D.A.N. in Baden-Württemberg. The children's passport will only be "
-#| "issued once this application\n"
-#| "  is completely filled out and the fee of <strong>€%(fee)s</strong> has "
-#| "been received in the account listed below. This fee includes\n"
-#| "  the issuance of the children's passport, the Aikido guide for children "
-#| "and teenagers, as well as the provision\n"
-#| "  of a colored belt upon passing the exam.\n"
-#| "  "
+#, python-format
 msgid ""
 "\n"
 "  Prerequisite for registering for exams is an application for a children's "
@@ -1780,8 +1771,6 @@ msgid "Attended"
 msgstr "Teilgenommen"
 
 #: templates/course_list_item.html:95 templates/index.html:91
-#, fuzzy
-#| msgid "Go to"
 msgid " Go to"
 msgstr "Zeige"
 
@@ -1834,7 +1823,7 @@ msgstr "Ausgewählte Einheiten:"
 #: templates/courseregistration_list.html:33
 #: templates/email/registration_confirmation.html:37
 msgid "Course Fee:"
-msgstr "Lehrgangsgebühr:"
+msgstr "Teilnahmegebühr"
 
 #: templates/courseregistration_list.html:38
 msgid "Your Comment:"
@@ -1996,7 +1985,7 @@ msgstr "Zahlungsmethode:"
 
 #: templates/email/registration_confirmation.html:42
 msgid "Please transfer the course fee to the following account until"
-msgstr "Bitte überweise die Lehrgangsgebühr bis zum"
+msgstr "Bitte überweise die Teilnahmebühr bis zum"
 
 #: templates/email/registration_confirmation.html:49
 msgid "Kind regards,"
@@ -2034,6 +2023,9 @@ msgstr ""
 #: templates/index.html:51
 msgid "Sign up for our courses"
 msgstr "Melde dich für unsere Lehrgänge an"
+
+msgid "Sign up for"
+msgstr "Anmeldung für"
 
 #: templates/index.html:56
 msgid "Upcoming Courses:"
@@ -2224,7 +2216,7 @@ msgstr ""
 
 #: templates/register_course.html:15
 msgid "The course fee will be displayed below the form"
-msgstr "Die Lehrgangsgebühr wird unten im Formular angezeigt"
+msgstr "Die Teilnahmegebühr wird unten im Formular angezeigt"
 
 #: templates/register_course.html:25
 msgid "Discount Conditions"
@@ -2251,11 +2243,6 @@ msgid "Unemployed persons"
 msgstr "Arbeitslose Personen"
 
 #: templates/register_course.html:34
-#, fuzzy
-#| msgid ""
-#| "If one of the above conditions applies to you, please check the "
-#| "'Discount' box in the registration form and bring proof of eligibility to "
-#| "the course. Otherwise, the full course fee will be charged."
 msgid ""
 "If one of the above conditions applies to you, please check the \"Discount\" "
 "box in the registration form and bring proof of eligibility to the course. "
@@ -2268,7 +2255,7 @@ msgstr ""
 #: templates/register_course.html:39 templates/registration_form.html:120
 #: templates/update_courseregistration.html:16
 msgid "Terms and Conditions"
-msgstr "Allgemeine Geschäftsbedingungen"
+msgstr "Teilnahmebedingungen"
 
 #: templates/register_course.html:40
 #: templates/update_courseregistration.html:18
@@ -2290,38 +2277,28 @@ msgstr ""
 "informiere den Veranstalter bitte vor Beginn des Lehrgangs."
 
 #: templates/registration_form.html:13 templates/userprofile.html:9
-#, fuzzy
-#| msgid "Last Name"
 msgid "Name"
-msgstr "Nachname"
+msgstr "Name"
 
 #: templates/registration_form.html:15 templates/userprofile.html:13
-#, fuzzy
-#| msgid "Email"
 msgid "E-mail"
 msgstr "E-Mail"
 
 #: templates/registration_form.html:33
-#, fuzzy
-#| msgid "My Profile"
 msgid "Edit Profile"
-msgstr "Mein Profil"
+msgstr "Profil bearbeiten"
 
 #: templates/registration_form.html:46
 msgid "Sessions:"
 msgstr "Einheiten:"
 
 #: templates/registration_form.html:54
-#, fuzzy
-#| msgid "Future Courses"
 msgid "Entire Course"
-msgstr "Zukünftige Lehrgänge"
+msgstr "Gesamter Lehrgang"
 
 #: templates/registration_form.html:57
-#, fuzzy
-#| msgid "Registration not submitted. Please select at least one session."
 msgid "Please select at least one session."
-msgstr "Anmeldung nicht übermittelt. Bitte wähle mindestens eine Einheit aus."
+msgstr "Bitte wähle mindestens eine Einheit aus."
 
 #: templates/registration_form.html:83
 msgid "Payment"
@@ -2332,35 +2309,26 @@ msgid ""
 "Please refer to the <a href=\"#discount-conditions\"> Discount Conditions </"
 "a> below for more information."
 msgstr ""
+"Weitere Informationen findest du in den <a href=\"#discount-conditions\"> Ermäßigungsbedingungen</a> unten."
 
 #: templates/registration_form.html:122
-#, fuzzy
-#| msgid "I accept the terms and conditions"
 msgid "Please accept the terms and conditions below."
-msgstr "Ich akzeptiere die Teilnahmebedingungen"
+msgstr "Bitte akzeptiere die untenstehenden Bedingungen."
 
 #: templates/registration_form.html:130
-#, fuzzy
-#| msgid "Registration"
 msgid "Registration Fee"
-msgstr "Anmeldung"
+msgstr "Teilnahmegebühr"
 
 #: templates/update_courseregistration.html:7
-#, fuzzy
-#| msgid "Update registration"
 msgid "Update registration for"
-msgstr "Anmeldung aktualisieren"
+msgstr "Anmeldung aktualisieren für"
 
 #: templates/update_grade.html:8
 msgid "Did you pass your exam?"
-msgstr ""
+msgstr "Hast Du deine Prüfung bestanden?"
 
 #: templates/update_grade.html:12
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "            You have applied for an exam for %(exam_grade)s.\n"
-#| "            "
+#, python-format
 msgid ""
 "\n"
 "            You have applied for an exam with your registration for "
@@ -2368,104 +2336,84 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"            Du hast dich für eine Prüfung zum %(exam_grade)s angemeldet.\n"
+"            Du hast dich für eine Prüfung mit deiner Anmeldung für %(course)s "
 "            "
 
 #: templates/update_grade.html:16
 msgid "Did you pass the exam?"
-msgstr ""
+msgstr "Hast Du die Prüfung bestanden?"
 
 #: templates/update_grade.html:19
 msgid "No, I didn't"
-msgstr ""
+msgstr "Nein"
 
 #: templates/update_grade.html:20
 msgid "Yes, I passed"
-msgstr ""
+msgstr "Ja, ich habe bestanden."
 
 #: templates/update_userprofile.html:10
-#, fuzzy
-#| msgid "Create User Profile"
 msgid "Update User Profile"
-msgstr "Benutzerprofil erstellen"
+msgstr "Benutzerprofil aktualisieren"
 
 #: templates/update_userprofile.html:28
-#, fuzzy
-#| msgid "Create Profile"
 msgid "Update profile"
-msgstr "Profil erstellen"
-
-#: templates/userprofile.html:27
-#, fuzzy
-#| msgid "Create Profile"
-msgid "Update Profile"
-msgstr "Profil erstellen"
+msgstr "Profil aktualisieren"
 
 #: templates/userprofile.html:34 templates/userprofile.html:43
 msgid "Deactivate Account"
-msgstr ""
+msgstr "Konto deaktivieren"
 
 #: templates/userprofile.html:47
 msgid "Deactivate your Account?"
-msgstr ""
+msgstr "Konto deaktivieren?"
 
 #: templates/userprofile.html:48
-#, fuzzy
-#| msgid "Are you sure you want to log out?"
 msgid "Are you sure you want to deactivate your account?"
-msgstr "Bist Du sicher, dass Du dich abmelden möchtest?"
+msgstr "Bist Du sicher, dass Du Dein Konto deaktivieren möchtest?"
 
 #: templates/userprofile.html:57
 msgid "Yes, deactivate my account"
-msgstr ""
+msgstr "Ja, deaktiviere mein Konto"
 
 #: users/forms.py:20 users/forms.py:46
 msgid "Enter the name of your Dojo"
-msgstr ""
+msgstr "Gib den Namen deines Dojos an"
 
 #: users/views.py:57
-#, fuzzy
-#| msgid "You have successfully signed in."
 msgid "You have successfully created a user profile."
-msgstr "Du hast dich erfolgreich angemeldet."
+msgstr "Du hast dein Benutzerprofil erfolgreich erstellt."
 
 #: users/views.py:115
-#, fuzzy
-#| msgid "You have successfully updated your registration for "
 msgid "You have successfully updated your user profile."
-msgstr "Du hast deine Anmeldung erfolgreich aktualisiert für "
+msgstr "Du hast dein Benutzerprofil erfolgreich aktualisiert."
 
 #: users/views.py:159
 msgid "Congratulations! Your grade has been updated to "
-msgstr ""
+msgstr "Herzlichen Glückwunsch! Du bist jetzt "
 
 #: users/views.py:165
 msgid "Your grade has not been updated."
-msgstr ""
+msgstr "Deine Graduierung wurde nicht aktualisiert."
 
 #: users/views.py:181
-msgid "Please use the button on the user profile page for "
-msgstr ""
-
-#: users/views.py:182
-msgid "deactivating your account."
-msgstr ""
+msgid "Please use the button on the user profile page for deactivating your account."
+msgstr "Bitte benutze den Button auf der Benutzerprofilseite zum Deaktivieren deines Kontos."
 
 #: users/views.py:194
-#, fuzzy
-#| msgid "You have successfully updated your registration for "
 msgid "You have successfully deactivated your account."
-msgstr "Du hast deine Anmeldung erfolgreich aktualisiert für "
+msgstr "Du hast Dein Konto erfolgreich deaktiviert."
 
 #: users/views.py:200
 msgid ""
 "Staff accounts cannot be deactivated. Please contact us if you want to "
 "deactivate your account."
 msgstr ""
+"Benutzerkonten mit Mitarbeiterstatus können nicht deaktiviert werden. Bitte "
+"kontaktiere uns, wenn Du dein Konto deaktivieren möchtest."
 
 #: users/views.py:205
 msgid "You must be logged in to deactivate your account."
-msgstr ""
+msgstr "Du musst angemeldet sein, um dein Konto zu deaktivieren."
 
 #: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
 msgid "Messages"
