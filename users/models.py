@@ -18,9 +18,7 @@ class UserProfile(models.Model):
         User, on_delete=models.CASCADE, related_name="profile"
     )
     slug = models.SlugField(unique=True)
-    dojo = models.CharField(
-        _("Dojo"), max_length=5, choices=constants.DOJO_CHOICES)
-    other_dojo = models.CharField(_("Other Dojo"), max_length=100, blank=True)
+    dojo = models.CharField(_("Dojo"), max_length=100)
     grade = models.IntegerField(
         _("Grade"), choices=constants.GRADE_CHOICES, default=constants.RED_BELT)
 

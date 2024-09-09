@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from courses.models import CourseSession
-from users.models import UserProfile
+from danbw_website import constants, utils
 
 from .models import CourseRegistration
 
@@ -59,6 +59,16 @@ class CourseRegistrationForm(forms.ModelForm):
     discount = forms.BooleanField(
         required=False, label=_("I am eligible for a discount")
     )
+    dojo = forms.ChoiceField(
+        required=False,
+        choices=constants.DOJO_CHOICES,
+    )
+    other_dojo = forms.CharField(
+        required=False,
+        label=_("Other Dojo"),
+        widget=forms.TextInput(
+            attrs={"placeholder": _("Enter the name of your Dojo")}),
+    )
 
     class Meta:
         model = CourseRegistration
@@ -68,7 +78,6 @@ class CourseRegistrationForm(forms.ModelForm):
             "last_name",
             "selected_sessions",
             "dojo",
-            "other_dojo",
             "grade",
             "exam",
             "payment_method",
@@ -78,3 +87,19 @@ class CourseRegistrationForm(forms.ModelForm):
             "dinner",
             "overnight_stay",
         ]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        dojo = cleaned_data.get("dojo")
+        other_dojo = cleaned_data.get("other_dojo")
+        if dojo == "other":
+            if not other_dojo:
+                self.add_error("other_dojo", _(
+                    "Please specify a dojo if you select 'Other'."))
+            cleaned_data["dojo"] = other_dojo
+        else:
+            dojo_display_value = utils.get_tuple_value(
+                constants.DOJO_CHOICES, dojo)
+            cleaned_data["dojo"] = dojo_display_value
+
+        return cleaned_data

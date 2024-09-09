@@ -10,7 +10,7 @@ from django.utils.translation import gettext as _
 from django.views import View
 
 from course_registrations.models import CourseRegistration
-from danbw_website import constants
+from danbw_website import constants, utils
 
 from . import forms
 from .models import User, UserProfile
@@ -41,8 +41,7 @@ class UserProfileView(LoginRequiredMixin, View):
             user_profile = UserProfile.objects.create(
                 user=request.user,
                 grade=profile_form.cleaned_data["grade"],
-                dojo=profile_form.cleaned_data["dojo"] if profile_form.cleaned_data[
-                    "dojo"] != "other" else profile_form.cleaned_data["other_dojo"],
+                dojo=profile_form.cleaned_data["dojo"]
             )
             user_profile.user.first_name = profile_form.cleaned_data[
                 "first_name"
@@ -56,24 +55,36 @@ class UserProfileView(LoginRequiredMixin, View):
                 request,
                 _("You have successfully created a user profile.")
             )
+
+            next_url = request.GET.get('next')
+            if next_url:
+                return HttpResponseRedirect(next_url)
+            return HttpResponseRedirect(reverse("userprofile"))
+
         else:
-            profile_form = forms.UserProfileForm()
-
-        next_url = request.GET.get('next')
-        if next_url:
-            return HttpResponseRedirect(next_url)
-
-        return HttpResponseRedirect(reverse("userprofile"))
+            return render(
+                request,
+                "create_userprofile.html",
+                {"form": profile_form}
+            )
 
 
 class UpdateUserProfile(LoginRequiredMixin, View):
     """Displays a form to update user information"""
 
     def get(self, request):
-        queryset = UserProfile.objects.filter(user=request.user)
-        user_profile = get_object_or_404(queryset, user=request.user)
+        user_profile = get_object_or_404(UserProfile, user=request.user)
 
         dojos = {choice[0] for choice in constants.DOJO_CHOICES}
+        dojo_key = utils.get_tuple_key(
+            constants.DOJO_CHOICES, user_profile.dojo)
+
+        if dojo_key in dojos:
+            dojo_initial = dojo_key
+            other_dojo_initial = ""
+        else:
+            dojo_initial = "other"
+            other_dojo_initial = user_profile.dojo
 
         profile_form = forms.UpdateUserProfileForm(
             initial={
@@ -81,8 +92,8 @@ class UpdateUserProfile(LoginRequiredMixin, View):
                 "last_name": request.user.last_name,
                 "email": request.user.email,
                 "grade": user_profile.grade,
-                "dojo": user_profile.dojo if user_profile.dojo in dojos else "other",
-                "other_dojo": user_profile.dojo if user_profile.dojo not in dojos else "",
+                "dojo": dojo_initial,
+                "other_dojo": other_dojo_initial,
             }
         )
 
@@ -104,24 +115,25 @@ class UpdateUserProfile(LoginRequiredMixin, View):
                 "last_name"
             ]
             user_profile.grade = profile_form.cleaned_data["grade"]
-            user_profile.dojo = profile_form.cleaned_data["dojo"] if profile_form.cleaned_data[
-                "dojo"] != "other" else profile_form.cleaned_data["other_dojo"]
-            user_profile.other_dojo = profile_form.cleaned_data[
-                "other_dojo"] if profile_form.cleaned_data["dojo"] == "other" else ""
+            user_profile.dojo = profile_form.cleaned_data["dojo"]
             user_profile.user.save()
             user_profile.save()
             messages.info(
                 request,
                 _("You have successfully updated your user profile.")
             )
+
+            next_url = request.GET.get('next')
+            if next_url:
+                return HttpResponseRedirect(next_url)
+            return HttpResponseRedirect(reverse("userprofile"))
+
         else:
-            profile_form = forms.UpdateUserProfileForm()
-
-        next_url = request.GET.get('next')
-        if next_url:
-            return HttpResponseRedirect(next_url)
-
-        return HttpResponseRedirect(reverse("userprofile"))
+            return render(
+                request,
+                "update_userprofile.html",
+                {"form": profile_form},
+            )
 
 
 class UpdateGrade(View):
@@ -178,11 +190,9 @@ class DeactivateUser(LoginRequiredMixin, View):
     def get(self, request):
         messages.warning(
             request,
-            _("Please use the button on the user profile page for ") +
-            _("deactivating your account."),
+            _("Please use the button on the user profile page for deactivating your account."),
         )
         return HttpResponseRedirect(reverse("userprofile"))
-
 
     def post(self, request):
         if request.user.is_authenticated:

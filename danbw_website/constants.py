@@ -58,11 +58,12 @@ GRADE_CHOICES = (
 )
 
 DOJO_CHOICES = (
+    ("", _("Select your Dojo")),
     ("AAR", "Aikido am Rhein"),
     ("AVE", "Aikido Verein Emmendingen"),
     ("AVF", "Aikido Verein Freiburg"),
     ("TVD", "Turnverein Denzlingen"),
-    ("other", "Other Dojo"),
+    ("other", _("Other Dojo")),
 )
 
 WEEKDAYS = (

@@ -11,7 +11,7 @@ class UserProfileInline(admin.StackedInline):
 
     model = UserProfile
     extra = 0  # Set number of additional rows to 0
-    fields = ["grade"]
+    fields = ["grade", "dojo"]
 
 
 # Add inlines to UserAdmin model: https://stackoverflow.com/a/35573797

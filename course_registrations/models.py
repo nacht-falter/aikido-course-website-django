@@ -60,17 +60,10 @@ class CourseRegistration(models.Model):
     )
     dojo = models.CharField(
         _("Dojo"),
-        max_length=5,
-        choices=constants.DOJO_CHOICES,
+        max_length=100,
         blank=True,
         null=True,
         help_text=_("The dojo the participant belongs to.")
-    )
-    other_dojo = models.CharField(
-        _("Other Dojo"),
-        max_length=100,
-        blank=True,
-        help_text=_("The name of the participant's Dojo outside of D.A.N. BW.")
     )
     grade = models.IntegerField(
         _("Grade"),
@@ -194,9 +187,6 @@ class CourseRegistration(models.Model):
         if not self.course.course_type == "international":
             self.dinner = None
             self.overnight_stay = None
-
-        if self.email and self.dojo == "other":
-            self.dojo = self.other_dojo
 
         if self.user:
             self.email = self.user.email

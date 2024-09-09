@@ -46,10 +46,8 @@ class BaseMembership(models.Model):
     grade = models.IntegerField(_("Grade"), choices=constants.GRADE_CHOICES)
     dojo = models.CharField(
         _("Dojo"),
-        choices=constants.DOJO_CHOICES,
         max_length=100
     )
-    other_dojo = models.CharField(_("Other Dojo"), max_length=100, blank=True)
     accept_terms = models.BooleanField(
         _("Accept Terms"),
         default=False,

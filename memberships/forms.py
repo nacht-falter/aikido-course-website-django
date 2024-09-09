@@ -12,7 +12,6 @@ class BaseMembershipForm(forms.ModelForm):
         self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
 
-        # Get first element of each tuple in DOJO_CHOICES
         dojos = {choice[0] for choice in constants.DOJO_CHOICES}
 
         if self.request and self.request.user.is_authenticated:

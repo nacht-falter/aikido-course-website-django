@@ -110,10 +110,10 @@ def send_membership_confirmation(first_name, email, membership_type):
         fee = get_tuple_value(constants.MEMBERSHIP_FEES, membership_type)
         if membership_type == 'danbw':
             payment_information = _(
-            "Please transfer the annual fee of €{fee} to the account below:\n\n").format(fee=fee)
+                "Please transfer the annual fee of €{fee} to the account below:\n\n").format(fee=fee)
         else:
             payment_information = _(
-            "Please transfer the fee of €{fee} to the account below:\n\n").format(fee=fee)
+                "Please transfer the fee of €{fee} to the account below:\n\n").format(fee=fee)
 
     if membership_type == "danbw":
         passport = ""
@@ -255,4 +255,11 @@ def get_tuple_value(tuple_of_tuples, key):
     for k, v in tuple_of_tuples:
         if k == key:
             return v
+    return None
+
+
+def get_tuple_key(tuple_of_tuples, value):
+    for k, v in tuple_of_tuples:
+        if v == value:
+            return k
     return None

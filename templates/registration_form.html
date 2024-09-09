@@ -17,7 +17,7 @@
         <div class="col-3 mb-2">{% trans "Grade" %}:</div>
         <div class="col-9 mb-2">{{ user.profile.get_grade_display }}</div>
         <div class="col-3 mb-2">{% trans "Dojo" %}:</div>
-        <div class="col-9 mb-2">{{ user.profile.get_dojo_display }}</div>
+        <div class="col-9 mb-2">{{ user.profile.dojo }}</div>
         {% else %}
         <div class="col-12 col-md-6 mb-2">{{ form.first_name|as_crispy_field }}</div>
         <div class="col-12 col-md-6 mb-2">{{ form.last_name|as_crispy_field }}</div>

@@ -39,7 +39,7 @@ export_csv.short_description = _("Export selected entries to CSV")
 
 
 class BaseMembershipAdmin(admin.ModelAdmin):
-    list_display = ["first_name", "last_name", "email", "dojo", "other_dojo"]
+    list_display = ["first_name", "last_name", "email", "dojo"]
     readonly_fields = [
         "first_name",
         "last_name",
@@ -53,7 +53,6 @@ class BaseMembershipAdmin(admin.ModelAdmin):
         "phone_mobile",
         "grade",
         "dojo",
-        "other_dojo",
         "accept_terms",
         "comment"
     ]
