@@ -42,6 +42,17 @@ class Course(models.Model):
         verbose_name = _("Course")
         verbose_name_plural = _("Courses")
 
+    def _generate_unique_slug(self):
+        slug = slugify(self.title)
+        unique_slug = slug
+        num = 1
+
+        while Course.objects.filter(slug=unique_slug).exists():
+            unique_slug = f'{slug}-{num}'
+            num += 1
+
+        return unique_slug
+
     def __str__(self):
         return self.title
 
@@ -56,7 +67,7 @@ class Course(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = self._generate_unique_slug()
         super().save(*args, **kwargs)
 
 
@@ -215,7 +226,8 @@ class ExternalCourse(Course):
         blank=True,
         help_text=_("The organizer of the course (optional).")
     )
-    url = models.URLField(_("URL"))
+    url = models.URLField(_("URL"), help_text=_(
+        "The URL of the course."), blank=True)
 
     class Meta:
         verbose_name = _("External Course")

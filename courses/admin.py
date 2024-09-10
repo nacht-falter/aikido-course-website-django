@@ -70,6 +70,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         (_("Course Details"), {
             "fields": (
                 "title",
+                "slug",
                 "course_type",
                 "status",
                 "publication_date",
@@ -247,6 +248,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
 class ExternalCourseAdmin(SummernoteModelAdmin):
     fields = (
         "title",
+        "slug",
         "start_date",
         "end_date",
         "organizer",
