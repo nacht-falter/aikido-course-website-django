@@ -1886,6 +1886,9 @@ msgstr "Du bist aktuell für keine Lehrgänge angemeldet."
 msgid "Go to course list"
 msgstr "Zur Lehrgangsliste"
 
+msgid "Go to our course list"
+msgstr "Zur Lehrgangsliste"
+
 #: templates/courseregistration_list.html:102
 msgid "Sign up now"
 msgstr "Jetzt anmelden"
