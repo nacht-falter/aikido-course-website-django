@@ -58,7 +58,7 @@ def send_registration_confirmation(request, registration):
 
     message = render_to_string('registration_confirmation.html', context)
 
-    sender = settings.EMAIL_HOST_USER
+    sender = settings.DEFAULT_FROM_EMAIL
     recipient = registration.user.email if request.user.is_authenticated else registration.email
 
     try:
@@ -132,7 +132,7 @@ def send_membership_confirmation(first_name, email, membership_type):
         _("The D.A.N. BW team\n"),
     ]
 
-    sender = settings.EMAIL_HOST_USER
+    sender = os.environ.get("CONTACT_EMAIL")
     recipient = email
     message = "".join(message_parts)
 

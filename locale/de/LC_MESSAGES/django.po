@@ -871,7 +871,7 @@ msgid ""
 "Please check the admin panel at {site_url}/admin for more details.\n"
 "\n"
 msgstr ""
-"Bitte überprüfe das Admin-Panel unter {site_url}/admin für weitere Details.\n"
+"Weitere Infos findest du im Admin-Bereich unter {site_url}/admin.\n"
 "\n"
 
 #: danbw_website/utils.py:96

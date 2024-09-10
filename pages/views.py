@@ -1,8 +1,8 @@
+import os
 from datetime import date
 
-from django.conf import settings
 from django.contrib import messages
-from django.core.mail import BadHeaderError, send_mail
+from django.core.mail import BadHeaderError, EmailMessage
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, reverse
 from django.utils.translation import gettext as _
@@ -71,20 +71,26 @@ class ContactPage(View):
         contact_form = forms.ContactForm(data=request.POST)
         if contact_form.is_valid():
             subject = contact_form.cleaned_data["subject"]
-            from_email = contact_form.cleaned_data["from_email"]
+            user_email = contact_form.cleaned_data["from_email"]
             message = contact_form.cleaned_data["message"]
+
+            from_email = os.environ.get("EMAIL_HOST_USER")
+
             try:
-                send_mail(
+                email = EmailMessage(
                     subject,
                     message,
-                    from_email,
-                    [settings.EMAIL_HOST_USER],
+                    from_email, 
+                    [os.environ.get("CONTACT_EMAIL")],
+                    reply_to=[user_email],
                 )
+                email.send(fail_silently=False)
             except BadHeaderError:
                 messages.warning(
                     request, _("Invalid Header found. Please try again.")
                 )
                 return HttpResponseRedirect(reverse("contact"))
+
             messages.success(request, _(
                 "Thank you! Your message has been sent."))
         else:
