@@ -2,7 +2,7 @@ from django import forms
 from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
 
-from danbw_website import constants
+from danbw_website import constants, utils
 
 from .models import ChildrensPassport, DanBwMembership, DanIntMembership
 
@@ -19,14 +19,16 @@ class BaseMembershipForm(forms.ModelForm):
             self.fields["last_name"].initial = self.request.user.last_name
             self.fields["email"].initial = self.request.user.email
             self.fields["grade"].initial = self.request.user.profile.grade
+            dojo_key = utils.get_tuple_key(
+                constants.DOJO_CHOICES, self.request.user.profile.dojo)
             self.fields["dojo"].initial = (
-                self.request.user.profile.dojo
-                if self.request.user.profile.dojo in dojos
+                dojo_key
+                if dojo_key in dojos
                 else "other"
             )
             self.fields["other_dojo"].initial = (
                 self.request.user.profile.dojo
-                if self.request.user.profile.dojo not in dojos
+                if dojo_key not in dojos
                 else ""
             )
 
@@ -79,6 +81,22 @@ class BaseMembershipForm(forms.ModelForm):
 
     class Meta:
         abstract = True
+
+    def clean(self):
+        cleaned_data = super().clean()
+        dojo = cleaned_data.get("dojo")
+        other_dojo = cleaned_data.get("other_dojo")
+        if dojo == "other":
+            if not other_dojo:
+                self.add_error("other_dojo", _(
+                    "Please specify a dojo if you select 'Other'."))
+            cleaned_data["dojo"] = other_dojo
+        else:
+            dojo_display_value = utils.get_tuple_value(
+                constants.DOJO_CHOICES, dojo)
+            cleaned_data["dojo"] = dojo_display_value
+
+        return cleaned_data
 
 
 class DanIntMembershipForm(BaseMembershipForm):

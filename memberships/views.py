@@ -32,8 +32,7 @@ class BaseMembershipCreateView(generic.CreateView):
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
         email = form.cleaned_data["email"]
-        dojo = utils.get_tuple_value(
-            constants.DOJO_CHOICES, form.cleaned_data["dojo"])
+        dojo = form.cleaned_data["dojo"]
 
         try:
             utils.send_membership_confirmation(

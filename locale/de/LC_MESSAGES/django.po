@@ -936,7 +936,7 @@ msgid ""
 "We have received your {membership} application.\n"
 "\n"
 msgstr ""
-"Wir haben deinen {membership} Antrag erhalten.\n"
+"Wir haben deinen Antrag auf {membership} erhalten.\n"
 "\n"
 
 #: danbw_website/utils.py:131
