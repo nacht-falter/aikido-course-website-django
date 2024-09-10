@@ -4,7 +4,7 @@
 
 {% now "Y-m-d" as todays_date %}
 
-<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="Flyer" aria-hidden="true">
+<div class="modal fade" id="{{ course.slug }}-imageModal" tabindex="-1" aria-labelledby="Flyer" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -107,7 +107,7 @@
         <div class="d-flex d-md-none mb-3 mb-md-0">
           {% if course.flyer %}
             <img src="{{ course.flyer.url }}" class="img-fluid flyer-img-link" alt="Image for {{ course.title }}" 
-              data-bs-toggle="modal" data-bs-target="#imageModal">
+              data-bs-toggle="modal" data-bs-target="#{{ course.slug }}-imageModal">
           {% else %}
             <img src="{% static '/images/placeholder.jpg' %}" class="img-fluid" alt="Image for {{ course.title }}">
           {% endif %}
@@ -172,7 +172,7 @@
         <div class="d-none d-md-block col-md-4 mb-3 mb-md-0">
           {% if course.flyer %}
             <img src="{{ course.flyer.url }}" class="img-fluid flyer-img-link" alt="Image for {{ course.title }}"
-              data-bs-toggle="modal" data-bs-target="#imageModal">
+              data-bs-toggle="modal" data-bs-target="#{{ course.slug }}-imageModal">
           {% else %}
             <img src="{% static '/images/placeholder.jpg' %}" class="img-fluid" alt="Image for {{ course.title }}">
           {% endif %}
