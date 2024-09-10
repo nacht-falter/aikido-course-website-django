@@ -371,3 +371,7 @@ a.badge:hover {
 .footer-link.active {
   color: #e06474 !important;
 }
+
+.flyer-img-link {
+  cursor: pointer;
+}
