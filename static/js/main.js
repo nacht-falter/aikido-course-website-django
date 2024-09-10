@@ -2,7 +2,7 @@
  * Show accordion item if it is targeted from id in url
  */
 function showAccordionItem() {
-  if (document.getElementById("accordion")) {
+  if (document.getElementById("course-list")) {
     // Get Course id from url:
     // https://stackoverflow.com/a/1036564
     const id = location.hash.replace("#", "");
