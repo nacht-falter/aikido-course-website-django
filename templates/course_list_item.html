@@ -49,19 +49,19 @@
               <span>{{ course.start_date|localize }} {% trans "to"%} {{ course.end_date|localize }}</span>
             {% endif %}
           </div>
-          {% if course.organizer %}
           <div class="d-none d-md-inline col-md-2 col-lg-2">
+          {% if course.organizer %}
             <span>{{ course.organizer }}</span>
-          </div>
           {% endif %}
+          </div>
           <div class="col-md-4 col-lg-4 d-none d-md-block">
             <span><strong>{{ course.title }}</strong></span>
           </div>
-          {% if course.teacher %}
           <div class="d-inline col-md-2 col-lg-2">
+          {% if course.teacher %}
             <span>{{ course.teacher }}</span>
-          </div>
           {% endif %}
+          </div>
           <div class="col-12 col-md-2 col-lg-2 text-md-end">
             {% if course.get_course_type == "InternalCourse" %}
               {% if course.registration_status == 1 and not course.user_registered %}
@@ -156,7 +156,7 @@
             {% regroup course.sessions.all by date as session_dates %}
             {% for date_group in session_dates %}
               <div class="col-md-4 mt-2 mt-md-0">
-                {{ date_group.grouper|date:"l, F j, Y" }}
+                {{ date_group.grouper|localize }}
               </div>
               <div class="col-md-8">
                 {% for session in date_group.list %}

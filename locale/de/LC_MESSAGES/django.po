@@ -1776,7 +1776,7 @@ msgstr "Zeige"
 
 #: templates/course_list_item.html:97 templates/index.html:93
 msgid "Course website"
-msgstr "Zum Lehrgang"
+msgstr "Kurs-Website"
 
 #: templates/course_list_item.html:155
 msgid "Sessions "
