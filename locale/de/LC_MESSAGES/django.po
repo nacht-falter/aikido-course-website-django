@@ -2032,8 +2032,8 @@ msgid "Upcoming Courses:"
 msgstr "Bevorstehende Lehrgänge:"
 
 #: templates/index.html:61 templates/index.html:86
-msgid "Go to"
-msgstr "Zeige"
+msgid "Go to %(course_title)s"
+msgstr "%(course_title)s anzeigen"
 
 #: templates/index.html:67
 msgid "Register for this course"
@@ -2164,6 +2164,7 @@ msgstr "Konto"
 msgid "Admin Panel"
 msgstr "Admin-Bereich"
 
+#: templates/partials/footer.html:72
 msgid "Go to the Admin Panel"
 msgstr "Admin-Bereich öffnen"
 
