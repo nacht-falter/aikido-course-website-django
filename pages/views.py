@@ -19,19 +19,24 @@ class HomePage(View):
     """Displays the home page"""
 
     def get(self, request):
-        all_courses = list(InternalCourse.objects.all()) + \
+        all_courses = (
+            list(InternalCourse.objects.all()) +
             list(ExternalCourse.objects.all())
-
-        for course in all_courses:
-            if request.user.is_authenticated and course.get_course_type == "InternalCourse":
-                course.user_registered = CourseRegistration.objects.filter(
-                    user=request.user, course=course
-                )
-            course.save()
+        )
 
         upcoming_courses = [
             course for course in all_courses if course.end_date >= date.today()
         ]
+
+        for course in upcoming_courses:
+            if (
+                request.user.is_authenticated and
+                course.get_course_type() == "InternalCourse"
+            ):
+                course.user_registered = CourseRegistration.objects.filter(
+                    user=request.user, course=course
+                ).exists()
+
         upcoming_registrations = []
         if request.user.is_authenticated:
             all_registrations = CourseRegistration.objects.filter(
@@ -80,7 +85,7 @@ class ContactPage(View):
                 email = EmailMessage(
                     subject,
                     message,
-                    from_email, 
+                    from_email,
                     [os.environ.get("CONTACT_EMAIL")],
                     reply_to=[user_email],
                 )
