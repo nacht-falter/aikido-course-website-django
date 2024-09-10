@@ -105,6 +105,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         }),
     )
 
+    readonly_fields = ["slug"]
+
     list_display = (
         "title",
         "status",
@@ -255,6 +257,8 @@ class ExternalCourseAdmin(SummernoteModelAdmin):
         "teacher",
         "url",
     )
+
+    readonly_fields = ["slug"]
 
     list_display = (
         "title",
