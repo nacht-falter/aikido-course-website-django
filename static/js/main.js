@@ -10,6 +10,7 @@ function showAccordionItem() {
     if (item) {
       item.click();
     }
+    item.scrollIntoView();
   }
 }
 
