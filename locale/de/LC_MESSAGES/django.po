@@ -2164,6 +2164,9 @@ msgstr "Konto"
 msgid "Admin Panel"
 msgstr "Admin-Bereich"
 
+msgid "Go to the Admin Panel"
+msgstr "Admin-Bereich öffnen"
+
 #: templates/partials/footer.html:78
 msgid "Organization"
 msgstr "Organisation"

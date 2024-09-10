@@ -153,6 +153,7 @@ i {
 }
 
 #auth_bar {
+  background: linear-gradient(90deg, #31679f , #1e3c95 60%);
   font-size: 80%;
 }
 

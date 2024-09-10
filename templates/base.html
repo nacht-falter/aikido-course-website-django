@@ -41,17 +41,22 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-    <div id="auth_bar" class="w-100 bg-secondary text-end text-uppercase text-light border-bottom px-5 py-1">
-      <span>{% trans "You are logged in" %}
-        {% if user.first_name %}{% trans "as" %}
-        <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover"
-           href="{% url 'userprofile' %}" title="{% trans 'Go to your profile' %}">{{ user.first_name }}
-           <i class="fa-solid fa-circle-user"></i></a>
+    <div id="auth_bar" class="w-100 text-end text-uppercase text-light border-bottom px-2 py-1">
+      <span>
+        {% if user.first_name %}
+        <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover" href="{% url 'userprofile' %}" title="{% trans 'Go to your profile' %}">
+          {{ user.first_name }}&nbsp;&nbsp;<i class="fa-solid fa-circle-user"></i></a>
+        <span>&nbsp;|&nbsp;</span>
         {% endif %}
-        &nbsp;|&nbsp;
+        {% if user.is_staff %}
+        <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover"
+          href="{% url 'admin:index' %}" title="{% trans 'Go to the Admin Panel' %}">
+          {% trans "Admin Panel" %}&nbsp;&nbsp;<i class="fa-solid fa-cogs"></i></a>
+        <span>&nbsp;|&nbsp;</span>
+        {% endif %}
         <a class="link-light link-underline-opacity-0 link-underline-opacity-75-hover"
            data-bs-toggle="modal" data-bs-target="#logoutModal" href="#">
-          {% trans "Logout" %} <i class="fa-solid fa-right-from-bracket"></i>
+          {% trans "Logout" %}&nbsp;&nbsp;<i class="fa-solid fa-right-from-bracket"></i>
         </a>
       </span>
     </div>
