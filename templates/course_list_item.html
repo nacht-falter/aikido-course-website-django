@@ -12,12 +12,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <!-- Larger Image -->
       {% if course.flyer %}
         <img src="{{ course.flyer.url }}" class="img-fluid" alt="Image for {{ course.title }}">
-      {% else %}
-        <img src="{% static 'images/placeholder.jpg' %}" class="img-fluid"
-          alt="Image for {{ course.title }}">
       {% endif %}
       </div>
     </div>
@@ -178,7 +174,7 @@
             <img src="{{ course.flyer.url }}" class="img-fluid flyer-img-link" alt="Image for {{ course.title }}"
               data-bs-toggle="modal" data-bs-target="#imageModal">
           {% else %}
-            <img src="{% static 'images/placeholder.jpg' %}" class="img-fluid" alt="Image for {{ course.title }}">
+            <img src="{% static '/images/placeholder.jpg' %}" class="img-fluid" alt="Image for {{ course.title }}">
           {% endif %}
         </div>
       </div>
