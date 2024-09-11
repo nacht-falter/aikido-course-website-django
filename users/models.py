@@ -31,6 +31,8 @@ class UserProfile(models.Model):
             unique_slug = f'{slug}-{num}'
             num += 1
 
+        return unique_slug
+
     # Overriding save method: https://docs.djangoproject.com/en/4.2
     # /topics/db/models/#overriding-predefined-model-methods
     def save(self, *args, **kwargs):
