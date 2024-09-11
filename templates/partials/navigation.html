@@ -71,11 +71,12 @@
         </li>
         {% else %}
         <li class="nav-item ms-lg-5">
-          <a class="nav-link" href="{% url 'account_login' %}">{% trans "Login" %}</a>
+          <a class="nav-link" href="{% url 'account_login' %}">
+            <i class="fa-solid fa-right-to-bracket"></i>Login</a>
         </li>
         <li class="nav-item text-nowrap">
           <a class="btn btn-outline-primary btn-sm signup-button" href="{% url 'account_signup' %}">
-            <i class="fa-solid fa-user"></i> {% trans "Sign Up" %}</a>
+            <i class="fa-solid fa-user-plus"></i> {% trans "Sign Up" %}</a>
         </li>
         {% endif %}
       </ul>
