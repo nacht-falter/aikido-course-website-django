@@ -9,8 +9,8 @@ function showAccordionItem() {
     let item = document.getElementById(`button-${id}`);
     if (item) {
       item.click();
+      item.scrollIntoView();
     }
-    item.scrollIntoView();
   }
 }
 
