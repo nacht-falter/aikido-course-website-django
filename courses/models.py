@@ -14,7 +14,6 @@ class Course(models.Model):
     title = models.CharField(
         _("Title"),
         max_length=200,
-        help_text=_("The name of the course.")
     )
     slug = models.SlugField(
         max_length=200,
@@ -23,18 +22,15 @@ class Course(models.Model):
     start_date = models.DateField(
         _("Start Date"),
         default=date.today,
-        help_text=_("The start date of the course.")
     )
     end_date = models.DateField(
         _("End Date"),
         default=date.today,
-        help_text=_("The end date of the course.")
     )
     teacher = models.CharField(
         _("Teacher(s)"),
         max_length=200,
         blank=True,
-        help_text=_("The teacher(s) of the course (optional).")
     )
 
     class Meta:
@@ -94,97 +90,72 @@ class InternalCourse(Course):
         _("Status"),
         choices=STATUS_CHOICES,
         default=0,
-        help_text=_(
-            "Courses set to 'Preview' will appear in the course list without all details.")
     )
     publication_date = models.DateField(
         _("Publication Date"),
         blank=True,
         null=True,
-        help_text=_(
-            "If this date is set, the course will automatically be set to 'Published' on this date.")
     )
     registration_status = models.IntegerField(
         _("Registration Status"),
         choices=REGISTRATION_STATUS,
         default=0,
-        help_text=_(
-            "If the registration status is set to 'open', users can sign up for the course.")
     )
     description = models.TextField(
         _("Description"),
         blank=True,
-        help_text=_("A short description of the course (optional).")
     )
     location = models.CharField(
         _("Location"),
         max_length=200,
         blank=True,
-        help_text=_("The location of the course (optional).")
     )
     registration_start_date = models.DateField(
         _("Registration Start Date"),
         blank=True,
         null=True,
-        help_text=_(
-            "If this date is set, the registration status will be automatically set to 'open' on this date.")
     )
     registration_end_date = models.DateField(
         _("Registration End Date"),
         blank=True,
         null=True,
-        help_text=_(
-            "If this date is set, the registration status will be automatically set to 'closed' on this date.")
     )
     organizer = models.CharField(
         _("Organizer"),
         max_length=200,
         blank=True,
         default="D.A.N. BW",
-        help_text=_("The organizer of the course (optional).")
     )
     course_fee = models.IntegerField(
         _("Course Fee"),
         default=0,
-        help_text=_(
-            "The fee for the entire course (payments via bank transfer).")
     )
     course_fee_cash = models.IntegerField(
         _("Course Fee (Cash)"),
         default=0,
-        help_text=_("The fee for the entire course (cash payments).")
     )
     discount_percentage = models.IntegerField(
         _("Discount Percentage"),
         default=50,
-        help_text=_(
-            "The discount percentage specified here will automatically be applied for users eligible for a discount.")
     )
     bank_transfer_until = models.DateField(
         _("Bank Transfer Until"),
         default=date.today,
-        help_text=_(
-            "The date until which the course fee has to be paid via bank transfer.")
     )
     course_type = models.CharField(
         _("Course Type"),
         choices=COURSE_TYPE,
         max_length=200,
-        help_text=_(
-            "The type of the course will determine which fields will be displayed in the registration form.")
     )
     flyer = models.ImageField(
         _("Flyer"),
         upload_to="images/",
         blank=True,
         null=True,
-        help_text=_(
-            "The course flyer. Needs to be uploaded as an image file (JPEG, PNG, etc.).")
     )
     additional_info = models.TextField(
         _("Additional Information"),
         blank=True,
-        help_text=_("Additional information about the course (optional).")
     )
 
     def clean(self):
@@ -224,10 +195,8 @@ class ExternalCourse(Course):
         _("Organizer"),
         max_length=200,
         blank=True,
-        help_text=_("The organizer of the course (optional).")
     )
-    url = models.URLField(_("URL"), help_text=_(
-        "The URL of the course."), blank=True)
+    url = models.URLField(_("URL"), blank=True)
 
     class Meta:
         verbose_name = _("External Course")
@@ -240,40 +209,32 @@ class CourseSession(models.Model):
     title = models.CharField(
         _("Title"),
         max_length=200,
-        help_text=_("The name of the session.")
     )
     course = models.ForeignKey(
         InternalCourse,
         on_delete=models.CASCADE,
         related_name="sessions",
         verbose_name=_("Course"),
-        help_text=_("The course to which this session belongs.")
     )
     date = models.DateField(
         _("Date"),
         default=date.today,
-        help_text=_("The date on which the session takes place.")
     )
     start_time = models.TimeField(
         _("Start Time"),
         default="00:00",
-        help_text=_("The time at which the session starts.")
     )
     end_time = models.TimeField(
         _("End Time"),
         default="00:00",
-        help_text=_("The time at which the session ends.")
     )
     session_fee = models.IntegerField(
         _("Session Fee"),
         default=0,
-        help_text=_(
-            "The fee for attending this session if paid via bank transfer.")
     )
     session_fee_cash = models.IntegerField(
         _("Session Fee (Cash)"),
         default=0,
-        help_text=_("The fee for attending this session if paid in cash.")
     )
 
     def __str__(self):

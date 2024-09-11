@@ -15,27 +15,23 @@ class CourseRegistration(models.Model):
         on_delete=models.CASCADE,
         related_name="registrations",
         verbose_name=_("Participant"),
-        help_text=_("The user who is registering for the course."),
         null=True,
         blank=True
     )
     email = models.EmailField(
         _("Email"),
-        help_text=_("The email address of the participant."),
         null=True,
         blank=True
     )
     first_name = models.CharField(
         _("First Name"),
         max_length=100,
-        help_text=_("The first name of the participant."),
         null=True,
         blank=True
     )
     last_name = models.CharField(
         _("Last Name"),
         max_length=100,
-        help_text=_("The last name of the participant."),
         null=True,
         blank=True
     )
@@ -43,27 +39,21 @@ class CourseRegistration(models.Model):
         InternalCourse,
         on_delete=models.CASCADE,
         verbose_name=_("Course"),
-        help_text=_("The course for which the participant is registering.")
     )
     selected_sessions = models.ManyToManyField(
         CourseSession,
         blank=False,
         verbose_name=_("Selected sessions"),
-        help_text=_(
-            "The sessions within the course that the participant has selected.")
     )
     registration_date = models.DateTimeField(
         _("Registration date"),
         auto_now_add=True,
-        help_text=_(
-            "The date and time when the participant registered for the course.")
     )
     dojo = models.CharField(
         _("Dojo"),
         max_length=100,
         blank=True,
         null=True,
-        help_text=_("The dojo the participant belongs to.")
     )
     grade = models.IntegerField(
         _("Grade"),
@@ -71,20 +61,16 @@ class CourseRegistration(models.Model):
         default=constants.RED_BELT,
         blank=True,
         null=True,
-        help_text=_("The grade of the participant.")
     )
     exam = models.BooleanField(
         _("Exam"),
         default=False,
-        help_text=_(
-            "Indicates whether the participant would like to take an exam.")
     )
     exam_grade = models.IntegerField(
         _("Exam Grade"),
         choices=constants.EXAM_GRADE_CHOICES,
         blank=True,
         null=True,
-        help_text=_("The grade of the exam the participant would like to take.")
     )
     exam_passed = models.BooleanField(
         _("Exam Passed"),
@@ -97,51 +83,38 @@ class CourseRegistration(models.Model):
     accept_terms = models.BooleanField(
         _("Accept terms"),
         default=False,
-        help_text=_(
-            "Indicates whether the participant has accepted the terms and conditions.")
     )
     discount = models.BooleanField(
         _("Discount"),
         default=False,
-        help_text=_(
-            "Indicates whether the participant is eligible for a discount.")
     )
     final_fee = models.IntegerField(
         _("Final Fee"),
         default=0,
-        help_text=_("The final fee the participant needs to pay.")
     )
     payment_status = models.IntegerField(
         _("Payment status"),
         choices=constants.PAYMENT_STATUS,
         default=0,
-        help_text=_("The status of the participant's payment for the course.")
     )
     payment_method = models.IntegerField(
         _("Payment method"),
         choices=constants.PAYMENT_METHODS,
         default=0,
-        help_text=_(
-            "The method by which the participant will make the payment.")
     )
     comment = models.TextField(
         _("Comment"),
         blank=True,
-        help_text=_(
-            "Any additional comments or notes regarding the registration.")
     )
     dinner = models.BooleanField(
         _("Dinner"),
         blank=True,
         null=True,
-        help_text=_("Indicates whether the participant will attend the dinner.")
     )
     overnight_stay = models.BooleanField(
         _("Overnight stay"),
         blank=True,
         null=True,
-        help_text=_(
-            "Indicates whether the participant needs a place to stay overnight.")
     )
 
     class Meta:

@@ -30,38 +30,32 @@ class Page(models.Model):
         _("title"),
         max_length=200,
         unique=True,
-        help_text=_("The title of the page")
     )
     slug = models.SlugField(
         max_length=200,
         unique=True,
-        help_text=_("The URL of the page")
     )
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
         verbose_name=_("category"),
         related_name="pages",
-        help_text=_("The category of the page (determines the menu position)")
     )
     status = models.IntegerField(
         _("status"),
         choices=STATUS,
         default=0,
-        help_text=_("The status of the page (published or draft)")
     )
     featured_image = ThumbnailerImageField(
         _("featured image"),
         upload_to="images/",
-        help_text=_("The featured image of the page"),
         blank=True,
         default="placeholder"
     )
-    content = models.TextField(_("content"), help_text=_("The page content"))
+    content = models.TextField(_("content"))
     menu_position = models.IntegerField(
         _("menu position"),
         default=0,
-        help_text=_("The position in the menu (lower numbers appear first)")
     )
 
     def __str__(self):
