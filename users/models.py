@@ -22,11 +22,19 @@ class UserProfile(models.Model):
     grade = models.IntegerField(
         _("Grade"), choices=constants.GRADE_CHOICES, default=constants.RED_BELT)
 
+    def _generate_unique_slug(self):
+        slug = slugify(f"{self.user.first_name}-{self.user.last_name}").lower()
+        unique_slug = slug
+        num = 1
+
+        while UserProfile.objects.filter(slug=unique_slug).exists():
+            unique_slug = f'{slug}-{num}'
+            num += 1
+
     # Overriding save method: https://docs.djangoproject.com/en/4.2
     # /topics/db/models/#overriding-predefined-model-methods
     def save(self, *args, **kwargs):
         # Create slug from another field: https://stackoverflow.com/a/837835
         if not self.slug:
-            self.slug = slugify(
-                f"{self.user.first_name}-{self.user.last_name}")
+            self.slug = self._generate_unique_slug()
         super().save(*args, **kwargs)
