@@ -65,6 +65,7 @@ class CourseRegistration(models.Model):
     exam = models.BooleanField(
         _("Exam"),
         default=False,
+        null=True,
     )
     exam_grade = models.IntegerField(
         _("Exam Grade"),

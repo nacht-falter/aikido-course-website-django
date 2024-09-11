@@ -428,6 +428,10 @@ msgstr "Internationaler Lehrgang"
 msgid "Family Reunion"
 msgstr "Family Reunion"
 
+#: courses/models.py:75
+msgid "Dan Preparation/Dan Seminar"
+msgstr "Dan-Vorbereitung/Dan-Seminar"
+
 #: courses/models.py:78
 msgid "Preview"
 msgstr "Vorschau"
@@ -2386,6 +2390,10 @@ msgstr "Ja, deaktiviere mein Konto"
 #: users/forms.py:20 users/forms.py:46
 msgid "Enter the name of your Dojo"
 msgstr "Gib den Namen deines Dojos an"
+
+#: course_registrations/forms.py:106
+msgid "You need to be 1st Kyu or higher to register for this course."
+msgstr "Du musst mindestens 1. Kyu sein, um dich für diesen Lehrgang anmelden zu können."
 
 #: users/views.py:57
 msgid "You have successfully created a user profile."

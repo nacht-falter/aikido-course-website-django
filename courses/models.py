@@ -79,6 +79,7 @@ class InternalCourse(Course):
         ("regional", _("Regional Course")),
         ("international", _("International Course")),
         ("family_reunion", _("Family Reunion")),
+        ("dan_preparation_seminar", _("Dan Preparation/Dan Seminar")),
     )
 
     STATUS_CHOICES = (
@@ -145,7 +146,7 @@ class InternalCourse(Course):
     course_type = models.CharField(
         _("Course Type"),
         choices=COURSE_TYPE,
-        max_length=200,
+        max_length=100,
     )
     flyer = models.ImageField(
         _("Flyer"),

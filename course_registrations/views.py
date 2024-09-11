@@ -111,23 +111,25 @@ class RegisterCourse(View):
             if not request.user.is_authenticated:
                 email = registration_form.cleaned_data.get("email")
                 if CourseRegistration.objects.filter(email=email, course=course).exists():
-                    messages.warning(
+                    registration_form.add_error("email", _(
+                        "A registration with this email address already exists."))
+                    return render(
                         request,
-                        _("A registration with this email address already exists.")
+                        "register_course.html",
+                        {
+                            "course": course,
+                            "form": registration_form,
+                            "course_data": course_data,
+                        },
                     )
-                    return HttpResponseRedirect(reverse("course_list"))
 
             registration = registration_form.save(commit=False)
             registration.course = course
 
             selected_sessions = registration_form.cleaned_data.get(
-                "selected_sessions"
-            )
-
+                "selected_sessions")
             registration.final_fee = registration.calculate_fees(
-                course, selected_sessions
-            )
-
+                course, selected_sessions)
             registration.dinner = registration_form.cleaned_data.get("dinner")
 
             if request.user.is_authenticated:
@@ -144,18 +146,13 @@ class RegisterCourse(View):
 
             registration.save()
 
-            # Update the registration to include the selected sessions.
-            # Instructions on how to save objects with a many-
-            # to-many field: https://docs.djangoproject.com/en/4.2/ref
-            # /models/relations/#django.db.models.fields.related.Relat
-            # edManager.set
             registration.selected_sessions.set(selected_sessions)
 
             try:
                 utils.send_registration_confirmation(request, registration)
                 utils.send_registration_notification(request, registration)
             except SMTPException as e:
-                messages.error(request, e)
+                registration_form.add_error("email", e)
                 registration.delete()
                 return render(
                     request,
@@ -171,22 +168,11 @@ class RegisterCourse(View):
                 request,
                 _("You have successfully signed up for ") + course.title
             )
-        else:
-            if not registration_form.cleaned_data.get("selected_sessions"):
-                messages.warning(
-                    request,
-                    _("Registration not submitted. "
-                      "Please select at least one session.")
-                )
-
             if request.user.is_authenticated:
-                registration_form = forms.CourseRegistrationForm(
-                    course=course, user_profile=request.user.profile
-                )
-            else:
-                registration_form = forms.CourseRegistrationForm(
-                    course=course
-                )
+                return HttpResponseRedirect(reverse("courseregistration_list"))
+            return HttpResponseRedirect(reverse("course_list"))
+
+        else:
             return render(
                 request,
                 "register_course.html",
@@ -196,11 +182,6 @@ class RegisterCourse(View):
                     "course_data": course_data,
                 },
             )
-
-        if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse("courseregistration_list"))
-
-        return HttpResponseRedirect(reverse("course_list"))
 
 
 class CourseRegistrationList(LoginRequiredMixin, View):

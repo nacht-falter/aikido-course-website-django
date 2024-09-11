@@ -63,9 +63,11 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "payment_method",
         "discount",
         "dinner",
-        "overnight_stay"
+        "overnight_stay",
+        "registration_date",
     ]
     fields = [
+        "registration_date",
         "course",
         "first_name",
         "last_name",
@@ -82,6 +84,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "overnight_stay"
     ]
     readonly_fields = [
+        "registration_date",
         "course",
         "first_name",
         "last_name",

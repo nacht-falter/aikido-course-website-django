@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from courses.models import CourseSession
@@ -8,17 +9,18 @@ from .models import CourseRegistration
 
 
 class CourseRegistrationForm(forms.ModelForm):
-    # Pass course instance to form (adapted from:
-    # https://medium.com/analytics-vidhya/django-how-to-pass-the-
-    # user-object-into-form-classes-ee322f02948c):
     def __init__(self, *args, **kwargs):
         course = kwargs.pop("course", None)
         user_profile = kwargs.pop("user_profile", None)
         super().__init__(*args, **kwargs)
 
+        self.course = course
+        self.user_profile = user_profile
+
         if course:
             self.fields["selected_sessions"].queryset = CourseSession.objects.filter(
-                course=course).order_by("date", "start_time")
+                course=course
+            ).order_by("date", "start_time")
 
             if course.course_type == "international":
                 self.fields['dinner'] = forms.BooleanField(
@@ -27,7 +29,10 @@ class CourseRegistrationForm(forms.ModelForm):
                     required=False, label=_("I need a place to stay overnight"))
 
         if user_profile:
-            if user_profile.grade >= 6:
+            if (
+                user_profile.grade >= 6 or
+                course.course_type == "dan_preparation_seminar"
+            ):
                 self.fields["exam"].widget = forms.HiddenInput()
 
             self.fields["email"].widget = forms.HiddenInput()
@@ -90,8 +95,22 @@ class CourseRegistrationForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+
+        grade = cleaned_data.get("grade")
+        selected_sessions = cleaned_data.get("selected_sessions")
         dojo = cleaned_data.get("dojo")
         other_dojo = cleaned_data.get("other_dojo")
+
+        if (
+            self.course.course_type == "dan_preparation_seminar" and
+            grade <= 5
+        ):
+            raise ValidationError(
+                _("You need to be 1st Kyu or higher to register for this course."))
+
+        if not selected_sessions:
+            raise ValidationError(_("Please select at least one session."))
+
         if dojo == "other":
             if not other_dojo:
                 self.add_error("other_dojo", _(

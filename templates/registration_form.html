@@ -1,7 +1,13 @@
 {% load crispy_forms_tags %}
 
 {% load i18n %}
-
+{% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+            <p class="mb-0">{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
 <div class="registration-form-content">
   <div class="card mb-3">
     <div class="card-header">
@@ -59,7 +65,7 @@
         </div>
       </div>
 
-      {% if not user.profile.grade > 5 %}
+      {% if user.profile.grade < 6 and course.course_type != "dan_preparation_seminar" %}
       <hr>
       <div id="exam-section" class="row">
         <div class="col-3 mb-2">
