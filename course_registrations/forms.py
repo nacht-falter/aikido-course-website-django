@@ -101,12 +101,16 @@ class CourseRegistrationForm(forms.ModelForm):
         dojo = cleaned_data.get("dojo")
         other_dojo = cleaned_data.get("other_dojo")
 
-        if (
-            self.course.course_type == "dan_preparation_seminar" and
-            grade <= 5
-        ):
-            raise ValidationError(
-                _("You need to be 1st Kyu or higher to register for this course."))
+        user_profile_grade = self.user_profile.grade if self.user_profile else None
+
+        if self.course.course_type == "dan_preparation_seminar":
+            if (
+                (user_profile_grade is not None and user_profile_grade <= 5) or
+                (grade is not None and grade <= 5)
+            ):
+                raise ValidationError(
+                    _("You need to be 1st Kyu or higher to register for this course.")
+                )
 
         if not selected_sessions:
             raise ValidationError(_("Please select at least one session."))
