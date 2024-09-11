@@ -136,10 +136,6 @@ const dojoSelect = document.getElementById("id_dojo");
 const otherDojoDiv = document.getElementById("div_id_other_dojo");
 const otherDojoInput = document.getElementById("id_other_dojo");
 
-if (otherDojoDiv) {
-  otherDojoDiv.style.display = "none";
-}
-
 // Add event listeners:
 entireCourseCheckbox.addEventListener("click", checkSessionCheckboxes);
 for (let checkbox of sessionsCheckboxes) {
@@ -161,6 +157,7 @@ if (dojoSelect) {
 }
 
 // Initial checks:
+checkDojo();
 checkEntireCourseCheckbox();
 
 if (typeof module !== "undefined" && module.exports) {

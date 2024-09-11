@@ -62,6 +62,10 @@ msgstr "Ich benötige eine Übernachtungsmöglichkeit"
 msgid "Other Dojo"
 msgstr "Anderes Dojo"
 
+#: templates/membership_form:92
+msgid "Please specify a dojo if you select 'Other'."
+msgstr "Bitte gib ein Dojo an, wenn du 'Anderes Dojo' auswählst."
+
 msgid "Select your Dojo"
 msgstr "Wähle dein Dojo aus"
 
