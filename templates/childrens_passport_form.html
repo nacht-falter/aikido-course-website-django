@@ -7,6 +7,13 @@
 {% block content %}
 
 <h2>{% trans "Children's Passport Application" %}</h2>
+{% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+            <p class="mb-0">{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
 <p>
   {% blocktrans with fee=fees.childrens_passport %}
   Prerequisite for registering for exams is an application for a children's passport with

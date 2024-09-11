@@ -40,7 +40,7 @@ class BaseMembershipCreateView(generic.CreateView):
             utils.send_membership_notification(
                 first_name, last_name, email, dojo, self.membership_type)
         except SMTPException as e:
-            messages.error(self.request, e)
+            form.add_error("email", e)
             return self.form_invalid(form)
 
         message = (

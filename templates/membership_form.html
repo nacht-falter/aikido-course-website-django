@@ -14,6 +14,13 @@
 {% else %}
 <h2>{% trans "D.A.N. BW Membership Application" %}</h2>
 {% endif %}
+{% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+            <p class="mb-0">{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
 <form method="post" class="membership_form">
   {% csrf_token %}
   <div class="card mb-3">

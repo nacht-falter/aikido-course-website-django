@@ -2610,7 +2610,7 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/db/models/base.py:1479
 #, python-format
 msgid "%(model_name)s with this %(field_labels)s already exists."
-msgstr ""
+msgstr "%(model_name)s mit %(field_labels)s existiert bereits."
 
 #: venv/lib/python3.12/site-packages/django/db/models/constraints.py:20
 #, python-format
@@ -2633,7 +2633,7 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:136
 #, python-format
 msgid "%(model_name)s with this %(field_label)s already exists."
-msgstr ""
+msgstr "%(model_name)s mit %(field_label)s existiert bereits."
 
 #. Translators: The 'lookup_type' is one of 'date', 'year' or
 #. 'month'. Eg: "Title must be unique for pub_date year"
