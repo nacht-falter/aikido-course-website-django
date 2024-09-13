@@ -1476,6 +1476,26 @@ msgstr ""
 "    <a href=\"%(email_url)s\">fordere eine neue E-Mail-Bestätigung an</a>.\n"
 "    "
 
+#: templates/account/login.html:7
+msgid "Maximize your experience!"
+msgstr "Hol das Beste raus!"
+
+#: templates/account/login.html:7
+msgid "You're not logged in! You can register for courses without logging in, but you'll miss out on some nice features:"
+msgstr "Du bist nicht eingeloggt! Du kannst dich zwar auch ohne Account für Lehrgänge anmelden, aber du verpasst einige nützliche Features:"
+
+#: templates/account/login.html:7
+msgid "Manage your registrations: Update course registrations with just a few clicks."
+msgstr "Aktualisiere deine Lehrgangsanmeldungen mit nur wenigen Klicks."
+
+#: templates/account/login.html:7
+msgid "Save time: No need to re-enter your personal details for every registration."
+msgstr "Spare Zeit: Du musst deine persönlichen Daten nicht bei jeder Anmeldung neu eingeben."
+
+#: templates/account/login.html:7
+msgid "Track your progress: Keep track of your past courses and examinations."
+msgstr "Behalte einen Überblick über deine bisherigen Lehrgänge und Prüfungen."
+
 #: templates/account/login.html:7 templates/account/login.html:14
 #: templates/account/login.html:32 templates/partials/footer.html:65
 #: templates/partials/navigation.html:74

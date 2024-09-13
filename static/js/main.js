@@ -44,10 +44,15 @@ function autoCloseMessages() {
 const pastCoursesBtn = document.getElementById("past-courses-btn");
 const showPastCourses = document.getElementById("show-past-courses");
 const hidePastCourses = document.getElementById("hide-past-courses");
+const loginToast = new bootstrap.Toast(document.getElementById('loginToast'));
 if (pastCoursesBtn) {
   pastCoursesBtn.addEventListener("click", updatePastCoursesButton);
 }
 
+if (loginToast) {
+  console.log("loginToast")
+  loginToast.show();
+}
 showAccordionItem();
 autoCloseMessages();
 
