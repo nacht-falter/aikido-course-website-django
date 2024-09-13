@@ -15,7 +15,7 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end mt-4" id="navbarNavDropdown">
       <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item text-nowrap">
           <a class="nav-link {% if url_name == 'home' %}active{% endif %}" aria-current="page"
              href="{% url 'home' %}">{% trans "Home" %}</a>
         </li>
@@ -41,7 +41,7 @@
           </ul>
         </li>
         {% endfor %}
-        <li class="nav-item">
+        <li class="nav-item text-nowrap">
           <a class="nav-link {% if url_name == 'course_list' %}active{% endif %}"
              href="{% url 'course_list' %}">{% trans "Courses" %}</a>
         </li>
@@ -70,7 +70,7 @@
           </ul>
         </li>
         {% else %}
-        <li class="nav-item ms-lg-5">
+        <li class="nav-item ms-lg-5 text-nowrap">
           <a class="nav-link" href="{% url 'account_login' %}">
             <i class="fa-solid fa-right-to-bracket"></i>Login</a>
         </li>
