@@ -28,7 +28,7 @@
           <ul class="dropdown-menu">
             {% for page in category.pages.all %}
             {% if page.status == 1 %}
-              <li>
+              <li class="text-nowrap">
                 <a class="dropdown-item {% if page.slug == page_slug %}dropdown-item-active active{% endif %}" href="{% url 'page_detail' slug=page.slug%}">
                   {{ page.title }}
                 </a>
@@ -52,18 +52,18 @@
             {% trans "My Account" %}
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
+            <li class="text-nowrap">
               <a class="dropdown-item" href="{% url 'userprofile' %}">
                 <i class="fa-solid fa-user"></i> {% trans "My Profile" %}</a>
             </li>
-            <li>
+            <li class="text-nowrap">
               <a class="dropdown-item" href="{% url 'courseregistration_list' %}">
                 <i class="fa-solid fa-pen-to-square"></i> {% trans "My Registrations" %}</a>
             </li>
-            <li>
+            <li class="text-nowrap">
               <hr class="dropdown-divider">
             </li>
-            <li>
+            <li class="text-nowrap">
               <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal" href="#">
                 <i class="fa-solid fa-right-from-bracket"></i> {% trans "Logout" %}</a>
             </li>
