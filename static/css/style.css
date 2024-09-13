@@ -54,8 +54,8 @@ main {
   background: linear-gradient(90deg, #eeeeee, #f8f9fa);
 }
 
-@media (max-width: 1500px) {
-  .main-title {
+@media (max-width: 1800px) {
+  .navbar-brand {
     max-width: 25%;
   }
 }
