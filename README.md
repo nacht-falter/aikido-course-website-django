@@ -4,10 +4,6 @@
 
 This website aims at offering an easy and straightforward way for DANBW members to sign up for courses and manage their course registrations and exams. Furthermore the website allows DANBW staff members to manage courses and course registrations as well as the website content.
 
-DANBW already has a [website](https://www.danbw.de), which is slowly becoming outdated. This project therefore aims at replacing the current website, which has been approved by the DANBW board. The project replicated the most important features of the existing website, added a couple of new features and dropped some obsolete features.
-
-The deployed version of the website can be found here: https://aikido-course-website-django-ddffe52bc952.herokuapp.com/
-
 ![Aikido Course Website Mockups](media/screenshots/mockups.jpg)
 
 ## Table of contents
@@ -1639,29 +1635,7 @@ The progress of the project was tracked with a burndown chart ([Burndown Chart T
 
 ## Deployment
 
-The project was deployed to [Heroku](https://heroku.com). The live version of the project can be found at https://aikido-course-website-django-ddffe52bc952.herokuapp.com/
-
-The necessary steps to deploy the project are:
-  - Clone or fork the repository.
-  - Create an account at https://cloudinary.com and get your Cloudinary URL from the dashboard.
-  - Create a PostgreSQL database, for example at https://www.elephantsql.com/, and find the database address.
-  - Create a new app from the [Heroku dashboard](https://dashboard.heroku.com).
-  - Go to the Settings tab and click on `Reveal Config Vars` in the *Config Vars* section.
-  - Now add the following config vars:
-    |Name|Value|
-    |---|---|
-    |CLOUDINARY_URL|\<Your cloudinary url\>|
-    |DATABASE_URL|\<Your database url\>|
-    |DEFAULT_FROM_EMAIL|\<your email address\>|
-    |DEVELOPMENT|FALSE|
-    [EMAIL_HOST_PASSWORD|\<your email password\>|
-    |EMAIL_HOST_USER|\<your email address\>|
-    |PORT|8000|
-    |SECRET_KEY|\<some random string\>|
-
-  - Add `Python` to the *Buildpacks* section.
-  - Click on the *Deploy* tab and connect the Heroku app to your GitHub repository.
-  - Choose the branch you want to deploy in the *Manual deploy* section and click on **Deploy Branch**.
+In order to deploy the project follow the [instructions in the official Django Docs](https://docs.djangoproject.com/en/5.1/howto/deployment/).
 
 ## Credits
 
