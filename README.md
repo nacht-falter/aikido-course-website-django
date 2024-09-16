@@ -1,5 +1,5 @@
 # DANBW Aikido Course Website
-## A Django-based course registration website for Dynamic Aikido Nocquet BW (DANBW)
+## A course registration website built with Django
 **Dynamic Aikido Nocquet BW** is an Aikido organization based in Baden-Württemberg, Germany. The organization offers Aikido courses several times a year. Members of the organization can sign up for those courses.
 
 This website aims at offering an easy and straightforward way for DANBW members to sign up for courses and manage their course registrations and exams. Furthermore the website allows DANBW staff members to manage courses and course registrations as well as the website content.
