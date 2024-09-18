@@ -64,10 +64,10 @@ msgstr "Anderes Dojo"
 
 #: templates/membership_form:92
 msgid "Please specify a dojo if you select 'Other'."
-msgstr "Bitte gib ein Dojo an, wenn du 'Anderes Dojo' auswählst."
+msgstr "Bitte gib ein Dojo an, wenn Du 'Anderes Dojo' auswählst."
 
 msgid "Select your Dojo"
-msgstr "Wähle dein Dojo aus"
+msgstr "Wähle Dein Dojo aus"
 
 #: course_registrations/forms.py:48
 msgid "I accept the terms and conditions"
@@ -227,7 +227,7 @@ msgstr "Zahlungsstatus"
 
 #: course_registrations/models.py:125
 msgid "The status of the participant's payment for the course."
-msgstr "Der Status deiner Zahlung für den Lehrgang."
+msgstr "Der Status Deiner Zahlung für den Lehrgang."
 
 #: course_registrations/models.py:128
 msgid "Payment method"
@@ -292,7 +292,7 @@ msgstr "Eine Anmeldung für diesen Lehrgang ist momentan nicht möglich."
 
 #: course_registrations/views.py:54
 msgid "Please log in to your account or continue as a guest."
-msgstr "Bitte melde dich in deinem Konto an oder fahre als Gast fort."
+msgstr "Bitte melde Dich in Deinem Konto an oder fahre als Gast fort."
 
 #: course_registrations/views.py:63
 msgid "Please create a user profile to contine."
@@ -308,7 +308,7 @@ msgstr "Eine Anmeldung mit dieser E-Mail-Adresse existiert bereits."
 
 #: course_registrations/views.py:172
 msgid "You have successfully signed up for "
-msgstr "Du hast dich erfolgreich angemeldet für "
+msgstr "Du hast Dich erfolgreich angemeldet für "
 
 #: course_registrations/views.py:178 course_registrations/views.py:344
 msgid "Registration not submitted. Please select at least one session."
@@ -332,7 +332,7 @@ msgstr "wurde storniert."
 
 #: course_registrations/views.py:337
 msgid "You have successfully updated your registration for "
-msgstr "Du hast deine Anmeldung erfolgreich aktualisiert für "
+msgstr "Du hast Deine Anmeldung erfolgreich aktualisiert für "
 
 #: courses/admin.py:70 templates/registration_form.html:41
 msgid "Course Details"
@@ -808,13 +808,13 @@ msgstr "Hallo,\n"
 #: danbw_website/utils.py:19
 #, python-brace-format
 msgid "you have successfully confirmed your email address {email}.\n"
-msgstr "Du hast deine E-Mail-Adresse {email} erfolgreich bestätigt.\n"
+msgstr "Du hast Deine E-Mail-Adresse {email} erfolgreich bestätigt.\n"
 
 #: danbw_website/utils.py:21
 #, python-brace-format
 msgid "You can login to your account at: {login_url}"
 msgstr ""
-"Du kannst dich unter folgendem Link in dein Konto einloggen: {login_url}"
+"Du kannst Dich unter folgendem Link in Dein Konto einloggen: {login_url}"
 
 #: danbw_website/utils.py:31
 msgid ""
@@ -879,7 +879,7 @@ msgid ""
 "Please check the admin panel at {site_url}/admin for more details.\n"
 "\n"
 msgstr ""
-"Weitere Infos findest du im Admin-Bereich unter {site_url}/admin.\n"
+"Weitere Infos findest Du im Admin-Bereich unter {site_url}/admin.\n"
 "\n"
 
 #: danbw_website/utils.py:96
@@ -897,7 +897,7 @@ msgstr "[Dynamic Aikido Nocquet BW] Dein {membership} Antrag"
 
 #: danbw_website/utils.py:108
 msgid "The membership fees will be deducted from your account.\n"
-msgstr "Die Mitgliedsbeiträge werden von deinem Konto abgebucht.\n"
+msgstr "Die Mitgliedsbeiträge werden von Deinem Konto abgebucht.\n"
 
 #: danbw_website/utils.py:113
 #, python-brace-format
@@ -924,7 +924,7 @@ msgid ""
 "You don't need to do anything else for now.\n"
 "\n"
 msgstr ""
-"Wir werden deinen Pass so schnell wie möglich ausstellen.\n"
+"Wir werden Deinen Pass so schnell wie möglich ausstellen.\n"
 "\n"
 "Du musst bis dahin nichts weiter tun.\n"
 "\n"
@@ -944,7 +944,7 @@ msgid ""
 "We have received your {membership} application.\n"
 "\n"
 msgstr ""
-"Wir haben deinen Antrag auf {membership} erhalten.\n"
+"Wir haben Deinen Antrag auf {membership} erhalten.\n"
 "\n"
 
 #: danbw_website/utils.py:131
@@ -1147,7 +1147,7 @@ msgstr "mitgliedschaft/danbw/"
 
 #: memberships/views.py:48
 msgid "We have received your membership application."
-msgstr "Wir haben deinen Mitgliedschaftsantrag erhalten."
+msgstr "Wir haben Deinen Mitgliedschaftsantrag erhalten."
 
 #: memberships/views.py:49
 msgid " Please check your email for confirmation."
@@ -1285,7 +1285,7 @@ msgstr "E-Mail-Adressen"
 
 #: templates/account/email.html:10
 msgid "The following e-mail addresses are associated with your account:"
-msgstr "Die folgenden E-Mail-Adressen sind mit deinem Konto verknüpft:"
+msgstr "Die folgenden E-Mail-Adressen sind mit Deinem Konto verknüpft:"
 
 #: templates/account/email.html:24
 msgid "Verified"
@@ -1321,7 +1321,7 @@ msgid ""
 "an e-mail address so you can receive notifications, reset your password, etc."
 msgstr ""
 "Du hast aktuell keine E-Mail-Adresse eingerichtet. Du solltest wirklich eine "
-"hinzufügen, damit Du Benachrichtigungen erhalten, dein Passwort zurücksetzen "
+"hinzufügen, damit Du Benachrichtigungen erhalten, Dein Passwort zurücksetzen "
 "usw. kannst."
 
 #: templates/account/email.html:48
@@ -1360,7 +1360,7 @@ msgstr ""
 "\n"
 "zu registrieren. Ein Konto mit dieser E-Mail-Adresse existiert jedoch "
 "bereits. Falls Du das vergessen hast, benutze die Passwort-vergessen-"
-"Prozedur, um dein Konto wiederherzustellen:\n"
+"Prozedur, um Dein Konto wiederherzustellen:\n"
 "\n"
 "%(password_reset_url)s"
 
@@ -1393,14 +1393,14 @@ msgid ""
 "\n"
 "To confirm this is correct, go to %(activate_url)s"
 msgstr ""
-"Du erhältst diese E-Mail, weil Du oder jemand anderes deine E-Mail-Adresse "
+"Du erhältst diese E-Mail, weil Du oder jemand anderes Deine E-Mail-Adresse "
 "benutzt hat, um ein Konto auf %(site_domain)s zu registrieren.\n"
 "\n"
 "Um dies zu bestätigen, gehe zu %(activate_url)s"
 
 #: templates/account/email/email_confirmation_subject.txt:3
 msgid "Please Confirm Your E-mail Address"
-msgstr "Bitte bestätige deine E-Mail-Adresse"
+msgstr "Bitte bestätige Deine E-Mail-Adresse"
 
 #: templates/account/email/password_reset_key_message.txt:4
 msgid ""
@@ -1409,10 +1409,10 @@ msgid ""
 "It can be safely ignored if you did not request a password reset. Click the "
 "link below to reset your password."
 msgstr ""
-"Du erhältst diese E-Mail, weil Du oder jemand anderes ein Passwort für dein "
+"Du erhältst diese E-Mail, weil Du oder jemand anderes ein Passwort für Dein "
 "Benutzerkonto angefordert hat.\n"
 "Du kannst sie ignorieren, falls Du kein Passwort-Reset angefordert hast. "
-"Klicke auf den untenstehenden Link, um dein Passwort zurückzusetzen."
+"Klicke auf den untenstehenden Link, um Dein Passwort zurückzusetzen."
 
 #: templates/account/email/password_reset_key_subject.txt:3
 #: templates/account/email/unknown_account_subject.txt:3
@@ -1432,7 +1432,7 @@ msgid ""
 "If it was you, you can sign up for an account using the link below.\n"
 msgstr ""
 "\n"
-"Du erhältst diese E-Mail, weil Du oder jemand anderes ein Passwort für dein "
+"Du erhältst diese E-Mail, weil Du oder jemand anderes ein Passwort für Dein "
 "Benutzerkonto angefordert hat. Allerdings haben wir keinen Benutzer mit der "
 "E-Mail-Adresse %(email)s in unserer Datenbank.\n"
 "\n"
@@ -1455,7 +1455,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Bitte bestätige, dass <a href=\"mailto:%(email)s\">%(email)s</a> deine E-"
+"    Bitte bestätige, dass <a href=\"mailto:%(email)s\">%(email)s</a> Deine E-"
 "Mail-Adresse ist.\n"
 "    "
 
@@ -1482,19 +1482,19 @@ msgstr "Hol das Beste raus!"
 
 #: templates/account/login.html:7
 msgid "You're not logged in! You can register for courses without logging in, but you'll miss out on some nice features:"
-msgstr "Du bist nicht eingeloggt! Du kannst dich zwar auch ohne Account für Lehrgänge anmelden, aber du verpasst einige nützliche Features:"
+msgstr "Du bist nicht eingeloggt! Du kannst Dich zwar auch ohne Account für Lehrgänge anmelden, aber Du verpasst einige nützliche Features:"
 
 #: templates/account/login.html:7
 msgid "Manage your registrations: Update course registrations with just a few clicks."
-msgstr "Aktualisiere deine Lehrgangsanmeldungen mit nur wenigen Klicks."
+msgstr "Aktualisiere Deine Lehrgangsanmeldungen mit nur wenigen Klicks."
 
 #: templates/account/login.html:7
 msgid "Save time: No need to re-enter your personal details for every registration."
-msgstr "Spare Zeit: Du musst deine persönlichen Daten nicht bei jeder Anmeldung neu eingeben."
+msgstr "Spare Zeit: Du musst Deine persönlichen Daten nicht bei jeder Anmeldung neu eingeben."
 
 #: templates/account/login.html:7
 msgid "Track your progress: Keep track of your past courses and examinations."
-msgstr "Behalte einen Überblick über deine bisherigen Lehrgänge und Prüfungen."
+msgstr "Behalte einen Überblick über Deine bisherigen Lehrgänge und Prüfungen."
 
 #: templates/account/login.html:7 templates/account/login.html:14
 #: templates/account/login.html:32 templates/partials/footer.html:65
@@ -1525,7 +1525,7 @@ msgstr "Als Gast fortfahren"
 
 #: templates/account/messages/logged_in.txt:3
 msgid "You have successfully signed in."
-msgstr "Du hast dich erfolgreich angemeldet."
+msgstr "Du hast Dich erfolgreich angemeldet."
 
 #: templates/account/password_change.html:7
 #: templates/account/password_change.html:12
@@ -1553,8 +1553,8 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Passwort vergessen? Gib unten deine E-Mail-Adresse ein und wir senden "
-"dir eine E-Mail, um es zurückzusetzen.\n"
+"    Passwort vergessen? Gib unten Deine E-Mail-Adresse ein und wir senden "
+"Dir eine E-Mail, um es zurückzusetzen.\n"
 "    "
 
 #: templates/account/password_reset.html:26
@@ -1564,7 +1564,7 @@ msgstr "Mein Passwort zurücksetzen"
 #: templates/account/password_reset.html:29
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
-"Bitte kontaktiere uns, wenn Du Probleme beim Zurücksetzen deines Passworts "
+"Bitte kontaktiere uns, wenn Du Probleme beim Zurücksetzen Deines Passworts "
 "hast."
 
 #: templates/account/password_reset_done.html:15
@@ -1572,8 +1572,8 @@ msgid ""
 "We have sent you an e-mail. If you have not received it please check your "
 "spam folder. Otherwise contact us if you do not receive it in a few minutes."
 msgstr ""
-"Wir haben dir eine E-Mail gesendet. Falls Du sie nicht erhalten hast, "
-"überprüfe bitte deinen Spam-Ordner. Andernfalls kontaktiere uns, wenn Du sie "
+"Wir haben Dir eine E-Mail gesendet. Falls Du sie nicht erhalten hast, "
+"überprüfe bitte Deinen Spam-Ordner. Andernfalls kontaktiere uns, wenn Du sie "
 "in ein paar Minuten nicht erhältst."
 
 #: templates/account/password_reset_from_key.html:9
@@ -1624,12 +1624,12 @@ msgid ""
 "href=\"%(login_url)s\">sign in</a>."
 msgstr ""
 "Hast Du bereits ein Konto? Dann <a class=\"blue-link\" "
-"href=\"%(login_url)s\">melde dich an</a>."
+"href=\"%(login_url)s\">melde Dich an</a>."
 
 #: templates/account/verification_sent.html:5
 #: templates/account/verification_sent.html:8
 msgid "Verify Your E-mail Address"
-msgstr "Bestätige deine E-Mail-Adresse"
+msgstr "Bestätige Deine E-Mail-Adresse"
 
 #: templates/account/verification_sent.html:10
 msgid ""
@@ -1638,9 +1638,9 @@ msgid ""
 "your main inbox, check your spam folder. Please contact us if you do not "
 "receive the verification e-mail within a few minutes."
 msgstr ""
-"Wir haben dir eine E-Mail zur Verifizierung gesendet. Folge dem darin "
+"Wir haben Dir eine E-Mail zur Verifizierung gesendet. Folge dem darin "
 "enthaltenen Link, um den Anmeldeprozess abzuschließen. Falls Du die "
-"Verifizierungs-E-Mail nicht im Posteingang findest, überprüfe bitte deinen "
+"Verifizierungs-E-Mail nicht im Posteingang findest, überprüfe bitte Deinen "
 "Spam-Ordner. Kontaktiere uns, wenn Du die E-Mail innerhalb weniger Minuten "
 "nicht erhältst."
 
@@ -1709,7 +1709,7 @@ msgid ""
 "similar."
 msgstr ""
 "Vor der Prüfung muss dem Kinderausweis ein Foto des Kindes hinzugefügt "
-"werden. Bitte gib deinem Lehrer ein aktuelles Passfoto oder ähnliches."
+"werden. Bitte gib Deinem Lehrer ein aktuelles Passfoto oder ähnliches."
 
 #: templates/childrens_passport_form.html:26
 msgid "Bank details:"
@@ -1865,7 +1865,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"            Du hast dich für eine Prüfung zum %(exam_grade)s angemeldet.\n"
+"            Du hast Dich für eine Prüfung zum %(exam_grade)s angemeldet.\n"
 "            "
 
 #: templates/courseregistration_list.html:56
@@ -1894,7 +1894,7 @@ msgid ""
 "                        "
 msgstr ""
 "\n"
-"                        Bist Du sicher, dass Du deine Anmeldung für "
+"                        Bist Du sicher, dass Du Deine Anmeldung für "
 "%(registration.course.title)s stornieren möchtest?\n"
 "                        "
 
@@ -1934,7 +1934,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Du hast deine %(exam_grade)s-Prüfung in diesem Lehrgang "
+"                Du hast Deine %(exam_grade)s-Prüfung in diesem Lehrgang "
 "bestanden.\n"
 "            "
 
@@ -1946,7 +1946,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Du hast deine %(exam_grade)s-Prüfung in diesem Lehrgang "
+"                Du hast Deine %(exam_grade)s-Prüfung in diesem Lehrgang "
 "nicht bestanden.\n"
 "            "
 
@@ -1958,7 +1958,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Du hast dich für deine %(exam_grade)s-Prüfung in diesem "
+"                Du hast Dich für Deine %(exam_grade)s-Prüfung in diesem "
 "Lehrgang angemeldet.\n"
 "            "
 
@@ -1968,7 +1968,7 @@ msgstr "Keine Prüfung"
 
 #: templates/courseregistration_list.html:139
 msgid "You did not sign up for any courses in the past."
-msgstr "Du hast dich in der Vergangenheit für keine Lehrgänge angemeldet."
+msgstr "Du hast Dich in der Vergangenheit für keine Lehrgänge angemeldet."
 
 #: templates/create_userprofile.html:10
 msgid "Create User Profile"
@@ -1979,7 +1979,7 @@ msgid ""
 "Before being able to sign up for courses you need to create a user profile. "
 "Please fill out the form below."
 msgstr ""
-"Bevor Du dich für Lehrgänge anmelden kannst, musst Du ein Benutzerprofil "
+"Bevor Du Dich für Lehrgänge anmelden kannst, musst Du ein Benutzerprofil "
 "erstellen. Bitte fülle das folgende Formular aus."
 
 #: templates/create_userprofile.html:23
@@ -1993,7 +1993,7 @@ msgstr "Hallo"
 
 #: templates/email/registration_confirmation.html:17
 msgid "You have successfully signed up for"
-msgstr "Du hast dich erfolgreich angemeldet für"
+msgstr "Du hast Dich erfolgreich angemeldet für"
 
 #: templates/email/registration_confirmation.html:19
 msgid "Course dates:"
@@ -2009,7 +2009,7 @@ msgstr "Ausgewählte Einheiten:"
 
 #: templates/email/registration_confirmation.html:34
 msgid "You applied for an exam for"
-msgstr "Du hast dich für eine Prüfung angemeldet für"
+msgstr "Du hast Dich für eine Prüfung angemeldet für"
 
 #: templates/email/registration_confirmation.html:38
 msgid "Payment method:"
@@ -2050,11 +2050,11 @@ msgid ""
 "us on the mat and start your Aikido journey with us today!"
 msgstr ""
 "Egal, ob Du Anfänger bist oder schon Aikido-Erfahrung hast, wir freuen uns "
-"darauf, dich kennen zu lernen und mit dir zu trainieren!"
+"darauf, Dich kennen zu lernen und mit Dir zu trainieren!"
 
 #: templates/index.html:51
 msgid "Sign up for our courses"
-msgstr "Melde dich für unsere Lehrgänge an"
+msgstr "Melde Dich für unsere Lehrgänge an"
 
 msgid "Sign up for"
 msgstr "Anmeldung für"
@@ -2222,7 +2222,7 @@ msgstr "Satzung"
 
 #: templates/partials/logout-modal.html:11
 msgid "Are you sure you want to log out?"
-msgstr "Bist Du sicher, dass Du dich abmelden möchtest?"
+msgstr "Bist Du sicher, dass Du Dich abmelden möchtest?"
 
 #: templates/partials/logout-modal.html:19 templates/register_course.html:21
 #: templates/update_courseregistration.html:12
@@ -2247,7 +2247,7 @@ msgid ""
 "Please provide your personal details and select the sessions you want to "
 "attend."
 msgstr ""
-"Bitte gib deine persönlichen Daten an und wähle die Einheiten aus, an denen "
+"Bitte gib Deine persönlichen Daten an und wähle die Einheiten aus, an denen "
 "Du teilnehmen möchtest."
 
 #: templates/register_course.html:15
@@ -2284,7 +2284,7 @@ msgid ""
 "box in the registration form and bring proof of eligibility to the course. "
 "Otherwise, the full course fee will be charged."
 msgstr ""
-"Wenn eine der oben genannten Bedingungen auf dich zutrifft, setze bitte ein "
+"Wenn eine der oben genannten Bedingungen auf Dich zutrifft, setze bitte ein "
 "Häkchen bei 'Ermäßigung' im Anmeldeformular und bringe bei Lehrgangsbeginn "
 "einen Nachweis mit. Andernfalls wird die volle Lehrgangsgebühr berechnet."
 
@@ -2309,7 +2309,7 @@ msgid ""
 msgstr ""
 "Der Veranstalter kann während des Lehrgangs Fotos machen, die ohne "
 "Namensnennung (z.B. auf der Website von D.A.N. BW) veröffentlicht werden "
-"können. Wenn Du nicht möchtest, dass deine Fotos veröffentlicht werden, "
+"können. Wenn Du nicht möchtest, dass Deine Fotos veröffentlicht werden, "
 "informiere den Veranstalter bitte vor Beginn des Lehrgangs."
 
 #: templates/registration_form.html:13 templates/userprofile.html:9
@@ -2345,7 +2345,7 @@ msgid ""
 "Please refer to the <a href=\"#discount-conditions\"> Discount Conditions </"
 "a> below for more information."
 msgstr ""
-"Weitere Informationen findest du in den <a href=\"#discount-conditions\"> Ermäßigungsbedingungen</a> unten."
+"Weitere Informationen findest Du in den <a href=\"#discount-conditions\"> Ermäßigungsbedingungen</a> unten."
 
 #: templates/registration_form.html:122
 msgid "Please accept the terms and conditions below."
@@ -2361,7 +2361,7 @@ msgstr "Anmeldung aktualisieren für"
 
 #: templates/update_grade.html:8
 msgid "Did you pass your exam?"
-msgstr "Hast Du deine Prüfung bestanden?"
+msgstr "Hast Du Deine Prüfung bestanden?"
 
 #: templates/update_grade.html:12
 #, python-format
@@ -2372,7 +2372,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"            Du hast dich für eine Prüfung mit deiner Anmeldung für %(course)s "
+"            Du hast Dich für eine Prüfung mit Deiner Anmeldung für %(course)s "
 "            "
 
 #: templates/update_grade.html:16
@@ -2413,19 +2413,19 @@ msgstr "Ja, deaktiviere mein Konto"
 
 #: users/forms.py:20 users/forms.py:46
 msgid "Enter the name of your Dojo"
-msgstr "Gib den Namen deines Dojos an"
+msgstr "Gib den Namen Deines Dojos an"
 
 #: course_registrations/forms.py:106
 msgid "You need to be 1st Kyu or higher to register for this course."
-msgstr "Du musst mindestens 1. Kyu sein, um dich für diesen Lehrgang anmelden zu können."
+msgstr "Du musst mindestens 1. Kyu sein, um Dich für diesen Lehrgang anmelden zu können."
 
 #: users/views.py:57
 msgid "You have successfully created a user profile."
-msgstr "Du hast dein Benutzerprofil erfolgreich erstellt."
+msgstr "Du hast Dein Benutzerprofil erfolgreich erstellt."
 
 #: users/views.py:115
 msgid "You have successfully updated your user profile."
-msgstr "Du hast dein Benutzerprofil erfolgreich aktualisiert."
+msgstr "Du hast Dein Benutzerprofil erfolgreich aktualisiert."
 
 #: users/views.py:159
 msgid "Congratulations! Your grade has been updated to "
@@ -2437,7 +2437,7 @@ msgstr "Deine Graduierung wurde nicht aktualisiert."
 
 #: users/views.py:181
 msgid "Please use the button on the user profile page for deactivating your account."
-msgstr "Bitte benutze den Button auf der Benutzerprofilseite zum Deaktivieren deines Kontos."
+msgstr "Bitte benutze den Button auf der Benutzerprofilseite zum Deaktivieren Deines Kontos."
 
 #: users/views.py:194
 msgid "You have successfully deactivated your account."
@@ -2449,11 +2449,11 @@ msgid ""
 "deactivate your account."
 msgstr ""
 "Benutzerkonten mit Mitarbeiterstatus können nicht deaktiviert werden. Bitte "
-"kontaktiere uns, wenn Du dein Konto deaktivieren möchtest."
+"kontaktiere uns, wenn Du Dein Konto deaktivieren möchtest."
 
 #: users/views.py:205
 msgid "You must be logged in to deactivate your account."
-msgstr "Du musst angemeldet sein, um dein Konto zu deaktivieren."
+msgstr "Du musst angemeldet sein, um Dein Konto zu deaktivieren."
 
 #: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
 msgid "Messages"
