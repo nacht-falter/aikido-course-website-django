@@ -14,7 +14,6 @@ body {
 main {
   margin: 3em auto;
   max-width: 1000px;
-  min-width: 100vw;
 }
 
 @media (min-width: 1200px) {
