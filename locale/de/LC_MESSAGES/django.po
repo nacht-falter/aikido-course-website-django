@@ -40,6 +40,18 @@ msgstr "Lehrgang"
 msgid "Registration"
 msgstr "Anmeldung"
 
+#: templates/course_list_item.html:175
+msgid "Important Dates"
+msgstr "Termine"
+
+#: templates/course_list_item.html:175
+msgid "Registration ends:"
+msgstr "Anmeldung bis:"
+
+#: templates/course_list_item.html:175
+msgid "Bank transfer until:"
+msgstr "Überweisung bis:"
+
 #: course_registrations/admin.py:124
 msgid "Toggle payment status of selected registrations"
 msgstr "Zahlungsstatus der ausgewählten Anmeldungen umschalten"
@@ -1121,6 +1133,10 @@ msgstr "SEPA-Mandat"
 msgid "Liability Disclaimer"
 msgstr "Haftungsausschluss"
 
+#: memberships/apps.py:8
+msgid "Memberships"
+msgstr "Mitgliedschaften"
+
 #: memberships/models.py:81
 msgid "D.A.N. International Memberships"
 msgstr "D.A.N. International Mitgliedschaften"
@@ -1152,6 +1168,10 @@ msgstr "Wir haben Deinen Mitgliedschaftsantrag erhalten."
 #: memberships/views.py:49
 msgid " Please check your email for confirmation."
 msgstr " Du erhältst eine Bestätigung per E-Mail."
+
+#: pages/apps.py:8
+msgid "Pages"
+msgstr "Seiten"
 
 #: pages/admin.py:25
 msgid "Toggle page status"
@@ -2410,6 +2430,10 @@ msgstr "Bist Du sicher, dass Du Dein Konto deaktivieren möchtest?"
 #: templates/userprofile.html:57
 msgid "Yes, deactivate my account"
 msgstr "Ja, deaktiviere mein Konto"
+
+#: users/apps.py:8
+msgid "Users"
+msgstr "Benutzer"
 
 #: users/forms.py:20 users/forms.py:46
 msgid "Enter the name of your Dojo"
