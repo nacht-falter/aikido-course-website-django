@@ -75,6 +75,11 @@ class ContactPage(View):
     def post(self, request):
         contact_form = forms.ContactForm(data=request.POST)
         if contact_form.is_valid():
+
+            # Check if the honeypot field called "website" is filled in
+            if contact_form.cleaned_data.get("website"):
+                return HttpResponseRedirect(reverse("home"))
+
             subject = contact_form.cleaned_data["subject"]
             user_email = contact_form.cleaned_data["from_email"]
             message = contact_form.cleaned_data["message"]
@@ -83,7 +88,7 @@ class ContactPage(View):
 
             try:
                 email = EmailMessage(
-                    subject,
+                    f"[D.A.N.BW Contact Form]: {subject}",
                     message,
                     from_email,
                     [os.environ.get("CONTACT_EMAIL")],
@@ -98,15 +103,15 @@ class ContactPage(View):
 
             messages.success(request, _(
                 "Thank you! Your message has been sent."))
+
+            return HttpResponseRedirect(reverse("home"))
         else:
-            contact_form = forms.ContactForm()
             return render(
                 request,
                 "contact.html",
                 {"form": contact_form},
             )
 
-        return HttpResponseRedirect(reverse("home"))
 
 
 class PageDetail(generic.DetailView):
