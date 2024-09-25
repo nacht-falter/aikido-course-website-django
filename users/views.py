@@ -141,7 +141,7 @@ class UpdateGrade(View):
 
     def get(self, request):
         exam_registration = CourseRegistration.objects.filter(
-            user=request.user, grade_updated=False
+            user=request.user, grade_updated=False, exam=True
         ).first()
         if (
             exam_registration
