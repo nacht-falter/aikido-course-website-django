@@ -1,5 +1,4 @@
 {% load crispy_forms_tags %}
-
 {% load i18n %}
 {% if form.non_field_errors %}
     <div class="alert alert-danger">
@@ -53,12 +52,34 @@
         </div>
         <div class="col-9 mb-2">
           <div id="id_selected_sessions">
-            {{ form.selected_sessions|as_crispy_field }}
+            {% for session in form.fields.selected_sessions.queryset %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" 
+                       name="selected_sessions" 
+                       value="{{ session.id }}" 
+                       id="session-{{ session.id }}"
+                       {% if session in form.instance.selected_sessions.all %}checked{% endif %} 
+                       data-dan-preparation="{{ session.is_dan_preparation }}" />
+                <label class="form-check-label" for="session-{{ session.id }}">{{ session }}</label>
+            </div>
+            {% endfor %}
           </div>
-          <div class="form-check">
-            <input type="checkbox" name="entire-course" id="entire-course" class="form-check-input"/>
-            <label for="entire-course" class="form-check-label">{% trans "Entire Course" %}</label>
-          </div>
+          <hr>
+          {% if course.course_type == 'international' %}
+            <div class="form-check">
+              <input type="checkbox" name="entire-course-without-dan-preparation" id="entire-course-without-dan-preparation" class="form-check-input"/>
+              <label for="entire-course-without-dan-preparation" class="form-check-label">{% trans "Entire Course without Dan Preparation" %}</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" name="entire-course" id="entire-course" class="form-check-input"/>
+              <label for="entire-course" class="form-check-label">{% trans "Entire Course with Dan Preparation" %}</label>
+            </div>
+          {% else %}
+            <div class="form-check">
+              <input type="checkbox" name="entire-course-without-dan-preparation" id="entire-course-without-dan-preparation" class="form-check-input"/>
+              <label for="entire-course-without-dan-preparation" class="form-check-label">{% trans "Entire Course" %}</label>
+            </div>
+          {% endif %}
           <span id="session-validation-msg" class="badge text-bg-light text-danger">
             {% trans "Please select at least one session." %}
           </span>

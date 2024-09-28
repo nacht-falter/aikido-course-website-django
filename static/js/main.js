@@ -63,8 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
     honeypotDiv.classList.add("d-none");
   }
   
-  console.log("honeypot");
-
   showAccordionItem();
   autoCloseMessages();
 });
