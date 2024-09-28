@@ -62,7 +62,7 @@
             {% if course.get_course_type == "InternalCourse" %}
               {% if course.registration_status == 1 and not course.user_registered %}
                 <span class="badge text-bg-success"><i class="fa-solid fa-user-plus"></i>
-                  {% trans "Registration" %} {{ course.get_registration_status_display }}
+                  <span class="text-wrap">{% trans "Registration" %} {{ course.get_registration_status_display }}</span>
                 </span>
               {% endif %}
               {% if user.is_authenticated %}
@@ -91,7 +91,7 @@
                   title="{% blocktrans with course_title=course.title %}Go to {{ course_title }}{% endblocktrans %}"
                   target="_blank" rel="noopener noreferrer">
                   <small><i class="fas fa-external-link-alt"></i></small>
-                  {% trans "Course website" %}
+                  <span class="text-wrap">{% trans "Course website" %}</span>
                 </a>
               {% endif %}
             {% endif %}

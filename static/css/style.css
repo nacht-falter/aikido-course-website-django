@@ -14,6 +14,7 @@ body {
 main {
   margin: 3em auto;
   max-width: 1000px;
+  min-width: 100%;
 }
 
 @media (min-width: 1200px) {
@@ -372,5 +373,6 @@ a.badge:hover {
 }
 
 .flyer-img-link {
+  box-shadow: 1px 1px 5px #555;
   cursor: pointer;
 }
