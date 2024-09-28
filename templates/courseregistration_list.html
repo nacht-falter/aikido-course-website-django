@@ -20,7 +20,7 @@
             <tr>
                 <th scope="col">{% trans "Selected Sessions:" %}</th>
                 <td>
-                    <ul>
+                    <ul class="list-unstyled">
                         {% for session in registration.selected_sessions.all %}
                         <li>
                             <strong>{{ session.title }}</strong> ({{ session.date|localize }}, {{ session.start_time|localize }}-{{ session.end_time|localize }})
