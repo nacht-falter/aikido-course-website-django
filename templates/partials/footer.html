@@ -56,6 +56,9 @@
             <a class="footer-link {% if url_name == 'userprofile' %}active{% endif %}" href="{% url 'userprofile' %}"><i class="fa-solid fa-user"></i> {% trans "My Profile" %}</a>
           </li>
           <li class="mt-2">
+            <a class="footer-link {% if url_name == 'courseregistration_list' %}active{% endif %}" href="{% url 'userprofile' %}"><i class="fa-solid fa-pen-to-square"></i> {% trans "My Registrations" %}</a>
+          </li>
+          <li class="mt-2">
             <li>
               <a class="footer-link" data-bs-toggle="modal" data-bs-target="#logoutModal" href="#">
                 <i class="fa-solid fa-right-from-bracket"></i> {% trans "Logout" %}</a>
