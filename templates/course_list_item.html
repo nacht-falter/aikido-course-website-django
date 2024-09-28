@@ -144,12 +144,12 @@
             <div class="fw-bold mt-1">{% trans "Sessions " %}</div>
             {% regroup course.sessions.all by date as session_dates %}
             {% for date_group in session_dates %}
-              <div class="col-md-4 mt-2 mt-md-0">
+              <div class="col-md-4 mt-2">
                 {{ date_group.grouper|localize }}
               </div>
               <div class="col-md-8">
                 {% for session in date_group.list %}
-                  <div class="row mb-2 mb-sm-0">
+                <div class="row mb-2 mb-sm-0 {% if forloop.first %}mt-md-2{% endif %}">
                     <div class="col-12 col-sm-5">
                       {{ session.start_time|localize }}  {% trans "to"%} {{ session.end_time|localize }} {% if session.start_time|localize == session.start_time|date:"H:i" %} Uhr {% endif %}
                     </div>
