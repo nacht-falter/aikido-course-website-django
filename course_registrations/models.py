@@ -187,3 +187,13 @@ class CourseRegistration(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    def admin_session_display(self):
+        all_sessions = self.course.sessions.all()
+        if len(self.selected_sessions.all()) == len(all_sessions):
+            return _("Entire Course")
+        else:
+            return ", ".join([str(session.title) for session in self.selected_sessions.all()])
+
+    admin_session_display.short_description = _("Selected Sessions")
+
