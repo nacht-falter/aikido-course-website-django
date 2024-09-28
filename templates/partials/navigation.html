@@ -53,11 +53,11 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li class="text-nowrap">
-              <a class="dropdown-item" href="{% url 'userprofile' %}">
+              <a class="dropdown-item {% if url_name == 'userprofile' %}dropdown-item-active active{% endif %}" href="{% url 'userprofile' %}">
                 <i class="fa-solid fa-user"></i> {% trans "My Profile" %}</a>
             </li>
             <li class="text-nowrap">
-              <a class="dropdown-item" href="{% url 'courseregistration_list' %}">
+              <a class="dropdown-item {% if url_name == 'courseregistration_list' %}dropdown-item-active active{% endif %}" href="{% url 'courseregistration_list' %}">
                 <i class="fa-solid fa-pen-to-square"></i> {% trans "My Registrations" %}</a>
             </li>
             <li class="text-nowrap">
