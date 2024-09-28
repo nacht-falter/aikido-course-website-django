@@ -94,6 +94,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
             "fields": (
                 "course_fee",
                 "course_fee_cash",
+                "course_fee_with_dan_preparation",
+                "course_fee_with_dan_preparation_cash",
                 "discount_percentage",
                 "bank_transfer_until"
             )
@@ -152,6 +154,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 registration_end_date=course.registration_end_date,
                 course_fee=course.course_fee,
                 course_fee_cash=course.course_fee_cash,
+                course_fee_with_dan_preparation=course.course_fee_with_dan_preparation,
+                course_fee_with_dan_preparation_cash=course.course_fee_with_dan_preparation_cash,
                 organizer=course.organizer,
                 teacher=course.teacher,
                 discount_percentage=course.discount_percentage,

@@ -77,8 +77,9 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "final_fee",
         "payment_status",
         "payment_method",
-        "grade",
         "exam",
+        "exam_grade",
+        "exam_passed",
         "discount",
         "dinner",
         "overnight_stay"

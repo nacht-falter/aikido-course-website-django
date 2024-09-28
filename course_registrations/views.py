@@ -1,3 +1,4 @@
+import os
 from datetime import date
 from smtplib import SMTPException
 
@@ -24,6 +25,8 @@ class RegisterCourse(View):
         """Prepares data to be passed to the template"""
         course_data = {"course_fee": course.course_fee,
                        "course_fee_cash": course.course_fee_cash,
+                       "course_fee_with_dan_preparation": course.course_fee_with_dan_preparation,
+                       "course_fee_with_dan_preparation_cash": course.course_fee_with_dan_preparation_cash,
                        "discount_percentage": course.discount_percentage
                        }
         counter = 0
@@ -208,6 +211,7 @@ class CourseRegistrationList(LoginRequiredMixin, View):
             {
                 "past_registrations": past_registrations,
                 "upcoming_registrations": upcoming_registrations,
+                "bank_account": os.environ.get("BANK_ACCOUNT"),
             },
         )
 
@@ -248,6 +252,8 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
         """Prepares data to be passed to the template"""
         course_data = {"course_fee": course.course_fee,
                        "course_fee_cash": course.course_fee_cash,
+                       "course_fee_with_dan_preparation": course.course_fee_with_dan_preparation,
+                       "course_fee_with_dan_preparation_cash": course.course_fee_with_dan_preparation_cash,
                        "discount_percentage": course.discount_percentage
                        }
         counter = 0
@@ -263,10 +269,14 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             raise PermissionDenied
 
         course = registration.course
+
+        selected_sessions = registration.selected_sessions.all()
+
         registration_form = forms.CourseRegistrationForm(
             instance=registration,
             course=course,
             user_profile=request.user.profile,
+            initial={"selected_sessions": selected_sessions},
         )
         course_data = self.prepare_course_data(course)
 
@@ -282,10 +292,13 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
 
     def post(self, request, pk):
         registration = get_object_or_404(CourseRegistration, pk=pk)
+
         if registration.user != request.user:
             raise PermissionDenied
 
         course = registration.course
+        course_data = self.prepare_course_data(course)
+
         registration_form = forms.CourseRegistrationForm(
             data=request.POST,
             instance=registration,
@@ -293,24 +306,16 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             user_profile=request.user.profile,
         )
 
-        course_data = self.prepare_course_data(course)
-
         if registration_form.is_valid():
             registration = registration_form.save(commit=False)
-
             selected_sessions = registration_form.cleaned_data.get(
-                "selected_sessions"
-            )
+                "selected_sessions")
 
             registration.final_fee = registration.calculate_fees(
-                course, selected_sessions
-            )
-
+                course, selected_sessions)
             registration.set_exam(request.user)
-
             registration.save()
 
-            # Update the registration to include the selected sessions.
             registration.selected_sessions.set(selected_sessions)
 
             messages.info(
@@ -318,17 +323,15 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                 _("You have successfully updated your registration for ") +
                 f"{course.title}",
             )
+
+            return HttpResponseRedirect(reverse("courseregistration_list"))
+
         else:
             if not registration_form.cleaned_data.get("selected_sessions"):
                 messages.warning(
                     request,
                     _("Registration not submitted. Please select at least one session.")
                 )
-            registration_form = forms.CourseRegistrationForm(
-                instance=registration,
-                course=course,
-                user_profile=request.user.profile,
-            )
 
             return render(
                 request,
@@ -339,5 +342,3 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                     "course_data": course_data,
                 },
             )
-
-        return HttpResponseRedirect(reverse("courseregistration_list"))
