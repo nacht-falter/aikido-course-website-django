@@ -34,7 +34,7 @@
       {% trans "You applied for an exam for" %} {{ registration.get_exam_grade_display }}
     </li>
     {% endif %}
-    <li>{% trans "Course Fee:" %} <strong>€{{ registration.final_fee }}</strong></li>
+    <li>{% trans "Course Fee:" %} <strong>€ {{ registration.final_fee|floatformat:2 }}</strong>
     <li>{% trans "Payment method:" %} {{ registration.get_payment_method_display }}</li>
   </ul>
   {% if registration.payment_method == 0 %}
@@ -43,6 +43,12 @@
   </p>
   <p style="margin-left: 1rem;">
     {{ bank_account|linebreaksbr }}
+  </p>
+  {% endif %}
+  {% if registration.dinner %}
+  <p>
+    {% trans "You have signed up for the dinner." %}&nbsp;
+    {% trans "Please note that this is a binding reservation." %}
   </p>
   {% endif %}
   <p>

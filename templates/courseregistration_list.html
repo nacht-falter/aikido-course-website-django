@@ -33,6 +33,39 @@
                 <th scope="col">{% trans "Course Fee:" %}</th>
                 <td>€{{ registration.final_fee }}</td>
             </tr>
+            {% if registration.payment_method == 0 %}
+            <tr>
+                <th scope="col"></th>
+                <td>
+                    {% trans "Please transfer the course fee to the following account until" %} <strong>{{ registration.course.bank_transfer_until|localize }}</strong>:
+                    <div class="mt-2">{{ bank_account|linebreaksbr }}</div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <th scope="col"></th>
+                <td>
+                    {% trans "Please pay the course fee in cash at the beginning of the course." %}
+                </td>
+            </tr>
+            {% endif %}
+            {% if registration.dinner %}
+            <tr>
+                <th scope="col">{% trans "Dinner" %}:</th>
+                <td>
+                    {% trans "You have signed up for the dinner." %}<br>
+                    <small>{% trans "Please note that this is a binding reservation." %}</small>
+                </td>
+            </tr>
+            {% endif %}
+            {% if registration.overnight_stay %}
+            <tr>
+                <th scope="col">{% trans "Overnight stay" %}:</th>
+                <td>
+                    {% trans "You have specified that you need a place to stay overnight." %}<br>
+                </td>
+            </tr>
+            {% endif %}
             {% if registration.comment %}
             <tr>
                 <th scope="col">{% trans "Your Comment:" %}</th>
@@ -116,23 +149,23 @@
                 <td>{{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}</td>
             </tr>
         </table>
+        {% if registration.exam %}
         <p class="badge text-bg-secondary mb-0">
-            {% if registration.exam and registration.exam_passed %}
+            {% if registration.exam_passed %}
             {% blocktrans with exam_grade=registration.get_exam_grade_display %}
                 You have passed your {{ exam_grade }} exam on this course.
             {% endblocktrans %}
-            {% elif registration.exam and not registration.exam_passed %}
+            {% elif registration.exam_passed == False %}
             {% blocktrans with exam_grade=registration.get_exam_grade_display %}
                 You did not pass your {{ exam_grade }} exam on this course.
             {% endblocktrans %}
-            {% elif registration.exam %}
+            {% elif registration.exam_passed is None %}
             {% blocktrans with exam_grade=registration.get_exam_grade_display %}
                 You applied for your {{ exam_grade }} exam on this course.
             {% endblocktrans %}
-            {% else %}
-                {% trans "No exam" %}
             {% endif %}
         </p>
+        {% endif %}
     </div>
 </div>
 {% empty %}

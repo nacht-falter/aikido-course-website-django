@@ -140,13 +140,6 @@
             </div>
             <hr>
           {% endif %}
-          {% if course.additional_info %}
-            <div class="row">
-              <div class="col-md-4 fw-bold mt-1">{% trans "Additional Information" %}</div>
-              <div class="col-md-8 mt-md-1">{{ course.additional_info|safe }}</div>
-            </div>
-            <hr>
-          {% endif %}
           <div class="row">
             <div class="fw-bold mt-1">{% trans "Sessions " %}</div>
             {% regroup course.sessions.all by date as session_dates %}
@@ -197,6 +190,14 @@
                 {% endif %}
               </div>
             </div>
+            <hr>
+          {% endif %}
+          {% if course.additional_info %}
+            <div class="row">
+              <div class="col-md-4 fw-bold mt-1">{% trans "Additional Information" %}</div>
+              <div class="col-md-8 mt-md-1">{{ course.additional_info|safe }}</div>
+            </div>
+            <hr>
           {% endif %}
         </div>
         <div class="d-none d-md-block col-md-4 mb-3 mb-md-0">
