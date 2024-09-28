@@ -76,10 +76,10 @@ class InternalCourse(Course):
     )
 
     COURSE_TYPE = (
-        ("regional", _("Regional Course")),
+        ("specialized", _("Specialized Course")),
+        ("dan_preparation_seminar", _("Dan Preparation/Dan Seminar")),
         ("international", _("International Course")),
         ("family_reunion", _("Family Reunion")),
-        ("dan_preparation_seminar", _("Dan Preparation/Dan Seminar")),
     )
 
     STATUS_CHOICES = (
@@ -135,6 +135,16 @@ class InternalCourse(Course):
         _("Course Fee (Cash)"),
         default=0,
     )
+    course_fee_with_dan_preparation = models.IntegerField(
+        _("Course Fee with Dan Preparation"),
+        default=0,
+        blank=True,
+    )
+    course_fee_with_dan_preparation_cash = models.IntegerField(
+        _("Course Fee with Dan Preparation (Cash)"),
+        default=0,
+        blank=True,
+    )
     discount_percentage = models.IntegerField(
         _("Discount Percentage"),
         default=50,
@@ -167,6 +177,11 @@ class InternalCourse(Course):
                 raise ValidationError(
                     _("Registration start date cannot be later than registration end date."))
 
+        if self.course_type == "international":
+            if not self.course_fee_with_dan_preparation or not self.course_fee_with_dan_preparation_cash:
+                raise ValidationError(
+                    _("For courses of type 'International Course', the fields for course fees with dan preparation must be filled out."))
+
     def save(self, *args, **kwargs):
         if self.registration_start_date or self.registration_end_date:
             start_ok = self.registration_start_date is None or self.registration_start_date <= date.today()
@@ -182,6 +197,7 @@ class InternalCourse(Course):
 
         if self.end_date < date.today():
             self.status = 0
+
         super().save(*args, **kwargs)
 
     class Meta:
@@ -236,6 +252,10 @@ class CourseSession(models.Model):
     session_fee_cash = models.IntegerField(
         _("Session Fee (Cash)"),
         default=0,
+    )
+    is_dan_preparation = models.BooleanField(
+        _("Dan Preparation"),
+        default=False,
     )
 
     def __str__(self):

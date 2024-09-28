@@ -136,12 +136,26 @@ class CourseRegistration(models.Model):
 
     def calculate_fees(self, course, selected_sessions):
         final_fee = 0
-        if len(selected_sessions) == len(course.sessions.all()):
+        all_sessions = course.sessions.all()
+        count_dan_preparation = sum(
+            1 for session in all_sessions if session.is_dan_preparation)
+
+        if len(selected_sessions) == len(all_sessions):
+            if course.course_type == "international":
+                final_fee = (
+                    course.course_fee_with_dan_preparation
+                    if self.payment_method == 0
+                    else course.course_fee_with_dan_preparation_cash
+                )
+            else:
+                final_fee = course.course_fee if self.payment_method == 0 else course.course_fee_cash
+        elif len(selected_sessions) == len(all_sessions) - count_dan_preparation:
             final_fee = course.course_fee if self.payment_method == 0 else course.course_fee_cash
         else:
             for session in selected_sessions:
                 final_fee += session.session_fee if self.payment_method == 0 else session.session_fee_cash
-        return final_fee * course.discount_percentage / 100 if self.discount else final_fee
+
+        return final_fee * (1 - course.discount_percentage / 100) if self.discount else final_fee
 
     def set_exam(self, user=None):
         if self.exam:
