@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-28 21:55+0200\n"
+"POT-Creation-Date: 2024-09-28 23:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,12 +53,12 @@ msgid "Course Registrations"
 msgstr "Lehrgangsanmeldungen"
 
 #: course_registrations/forms.py:27
-msgid "I would like to join the dinner"
-msgstr "Ich möchte am Abendessen teilnehmen"
+msgid "I would like to join the dinner on Saturday evening."
+msgstr "Ich möchte am Samstagabend am gemeinsamen Abendessen teilnehmen."
 
 #: course_registrations/forms.py:29
-msgid "I need a place to stay overnight"
-msgstr "Ich benötige eine Übernachtungsmöglichkeit"
+msgid "I need a place to stay overnight."
+msgstr "Ich benötige eine Übernachtungsmöglichkeit."
 
 #: course_registrations/forms.py:50 course_registrations/forms.py:73
 #: danbw_website/constants.py:66 memberships/forms.py:76 users/forms.py:25
@@ -67,20 +67,20 @@ msgid "Other Dojo"
 msgstr "Anderes Dojo"
 
 #: course_registrations/forms.py:53
-msgid "I accept the terms and conditions"
-msgstr "Ich akzeptiere die Teilnahmebedingungen"
+msgid "I accept the terms and conditions below."
+msgstr "Ich akzeptiere die untenstehenden Teilnahmebedingungen."
 
 #: course_registrations/forms.py:56
 msgid "I will attend the following sessions:"
 msgstr "Ich werde an folgenden Einheiten teilnehmen:"
 
 #: course_registrations/forms.py:62
-msgid "I want to apply for an exam"
-msgstr "Ich möchte mich zur Prüfung anmelden"
+msgid "I want to apply for an exam."
+msgstr "Ich möchte mich zur Prüfung anmelden."
 
 #: course_registrations/forms.py:65
-msgid "I am eligible for a discount"
-msgstr "Ich habe Anspruch auf eine Ermäßigung"
+msgid "I am eligible for a discount."
+msgstr "Ich habe Anspruch auf eine Ermäßigung."
 
 #: course_registrations/forms.py:75 users/forms.py:27 users/forms.py:75
 msgid "Enter the name of your Dojo"
@@ -1685,16 +1685,17 @@ msgid "Please pay the course fee in cash at the beginning of the course."
 msgstr "Bitte bezahle die Teilnahmegebühr in bar zu Beginn des Lehrgangs."
 
 #: templates/courseregistration_list.html:56
+#: templates/email/registration_confirmation.html:50
 msgid "You have signed up for the dinner."
 msgstr "Du hast Dich für das Abendessen angemeldet."
 
 #: templates/courseregistration_list.html:57
+#: templates/email/registration_confirmation.html:51
 msgid "Please note that this is a binding reservation."
 msgstr "Die Anmeldung ist verbindlich."
 
 #: templates/courseregistration_list.html:65
-msgid ""
-"You have specified that you need a place to stay overnight."
+msgid "You have specified that you need a place to stay overnight."
 msgstr "Du hast angegeben, dass Du eine Übernachtungsmöglichkeit benötigst."
 
 #: templates/courseregistration_list.html:71
@@ -1851,9 +1852,13 @@ msgstr "Du hast Dich für eine Prüfung angemeldet für"
 msgid "Payment method:"
 msgstr "Zahlungsmethode:"
 
-#: templates/email/registration_confirmation.html:49
-msgid "Kind regards,"
-msgstr "Viele Grüße,"
+#: templates/email/registration_confirmation.html:55
+msgid "Kind regards"
+msgstr "Viele Grüße"
+
+#: templates/email/registration_confirmation.html:56
+msgid "Your Course Team"
+msgstr "Dein Lehrgangsteam"
 
 #: templates/index.html:31
 msgid "Previous"
@@ -2126,7 +2131,8 @@ msgstr "Teilnahmebedingungen"
 #: templates/update_courseregistration.html:18
 msgid "The organizer (D.A.N. BW e. V.) does not provide insurance coverage."
 msgstr ""
-"Der Veranstalter (D.A.N. BW e.V.) bietet keinen Versicherungsschutz an."
+"Von Seiten des Veranstalters (D.A.N. BW e. V.) besteht kein "
+"Versicherungsschutz."
 
 #: templates/register_course.html:42
 #: templates/update_courseregistration.html:23
@@ -3492,213 +3498,3 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:160
 msgid "Failed to save attachment"
 msgstr ""
-
-#~ msgid "No exam"
-#~ msgstr "Keine Prüfung"
-
-#~ msgid "The user who is registering for the course."
-#~ msgstr "Der Benutzer, der sich für den Lehrgang anmeldet."
-
-#~ msgid "The email address of the participant."
-#~ msgstr "Die E-Mail-Adresse des Teilnehmers."
-
-#~ msgid "The first name of the participant."
-#~ msgstr "Der Vorname des Teilnehmers."
-
-#~ msgid "The last name of the participant."
-#~ msgstr "Der Nachname des Teilnehmers."
-
-#~ msgid "The course for which the participant is registering."
-#~ msgstr "Der Lehrgang, für den sich der Teilnehmer anmeldet."
-
-#~ msgid "The sessions within the course that the participant has selected."
-#~ msgstr "Die vom Teilnehmer ausgewählten Einheiten innerhalb des Lehrgangs."
-
-#~ msgid "The date and time when the participant registered for the course."
-#~ msgstr ""
-#~ "Das Datum und die Uhrzeit, zu der sich der Teilnehmer für den Lehrgang "
-#~ "angemeldet hat."
-
-#~ msgid "The dojo the participant belongs to."
-#~ msgstr "Das Dojo, zu dem der Teilnehmer gehört."
-
-#~ msgid "The name of the participant's Dojo outside of D.A.N. BW."
-#~ msgstr "Der Name des Dojos des Teilnehmers außerhalb von D.A.N. BW."
-
-#~ msgid "The grade of the participant."
-#~ msgstr "Die Graduierung des Teilnehmers."
-
-#~ msgid "Indicates whether the participant would like to take an exam."
-#~ msgstr "Gibt an, ob Du eine Prüfung ablegen möchtest."
-
-#~ msgid "The grade of the exam the participant would like to take."
-#~ msgstr "Der Grad der Prüfung, die der Teilnehmer ablegen möchte."
-
-#~ msgid ""
-#~ "Indicates whether the participant has accepted the terms and conditions."
-#~ msgstr "Gibt an, ob Du die Teilnahmebedingungen akzeptiert hast."
-
-#~ msgid "Indicates whether the participant is eligible for a discount."
-#~ msgstr "Gibt an, ob Du für eine Ermäßigung berechtigt bist."
-
-#~ msgid "The final fee the participant needs to pay."
-#~ msgstr "Der endgültige Betrag, den Du zu zahlen hast."
-
-#~ msgid "The status of the participant's payment for the course."
-#~ msgstr "Der Status Deiner Zahlung für den Lehrgang."
-
-#~ msgid "The method by which the participant will make the payment."
-#~ msgstr "Die Methode, mit der Du die Zahlung vornehmen wirst."
-
-#~ msgid "Any additional comments or notes regarding the registration."
-#~ msgstr "Zusätzliche Kommentare oder Anmerkungen zur Anmeldung."
-
-#~ msgid "Indicates whether the participant will attend the dinner."
-#~ msgstr "Gibt an, ob Du am Abendessen teilnehmen wirst."
-
-#~ msgid "Indicates whether the participant needs a place to stay overnight."
-#~ msgstr "Gibt an, ob Du eine Übernachtungsmöglichkeit benötigst."
-
-#~ msgid "The name of the course."
-#~ msgstr "Der Name des Lehrgangs."
-
-#~ msgid "The start date of the course."
-#~ msgstr "Das Startdatum des Lehrgangs."
-
-#~ msgid "The end date of the course."
-#~ msgstr "Das Enddatum des Lehrgangs."
-
-#~ msgid "The teacher(s) of the course (optional)."
-#~ msgstr "Die Lehrer des Lehrgangs (optional)."
-
-#~ msgid ""
-#~ "Courses set to 'Preview' will appear in the course list without all "
-#~ "details."
-#~ msgstr ""
-#~ "Lehrgänge, die auf 'Vorschau' gesetzt sind, erscheinen in der "
-#~ "Lehrgangsliste ohne alle Details."
-
-#~ msgid ""
-#~ "If this date is set, the course will automatically be set to 'Published' "
-#~ "on this date."
-#~ msgstr ""
-#~ "Wenn dieses Datum festgelegt ist, wird der Lehrgang an diesem Datum "
-#~ "automatisch auf 'Veröffentlicht' gesetzt."
-
-#~ msgid ""
-#~ "If the registration status is set to 'open', users can sign up for the "
-#~ "course."
-#~ msgstr ""
-#~ "Wenn der Anmeldestatus auf 'offen' gesetzt ist, können sich Benutzer für "
-#~ "den Lehrgang anmelden."
-
-#~ msgid "A short description of the course (optional)."
-#~ msgstr "Eine kurze Beschreibung des Lehrgangs (optional)."
-
-#~ msgid "The location of the course (optional)."
-#~ msgstr "Der Ort des Lehrgangs (optional)."
-
-#~ msgid ""
-#~ "If this date is set, the registration status will be automatically set to "
-#~ "'open' on this date."
-#~ msgstr ""
-#~ "Wenn dieses Datum festgelegt ist, wird der Anmeldestatus an diesem Datum "
-#~ "automatisch auf 'offen' gesetzt."
-
-#~ msgid ""
-#~ "If this date is set, the registration status will be automatically set to "
-#~ "'closed' on this date."
-#~ msgstr ""
-#~ "Wenn dieses Datum festgelegt ist, wird der Anmeldestatus an diesem Datum "
-#~ "automatisch auf 'geschlossen' gesetzt."
-
-#~ msgid "The fee for the entire course (payments via bank transfer)."
-#~ msgstr "Die Gebühr für den gesamten Lehrgang (Zahlungen per Überweisung)."
-
-#~ msgid "The fee for the entire course (cash payments)."
-#~ msgstr "Die Gebühr für den gesamten Lehrgang (Barzahlungen)."
-
-#~ msgid ""
-#~ "The discount percentage specified here will automatically be applied for "
-#~ "users eligible for a discount."
-#~ msgstr ""
-#~ "Der hier angegebene Ermäßigungsprozentsatz wird automatisch für "
-#~ "ermäßigungsberechtigte Benutzer angewendet."
-
-#~ msgid ""
-#~ "The date until which the course fee has to be paid via bank transfer."
-#~ msgstr ""
-#~ "Das Datum, bis zu dem die Teilnahmegebühr per Überweisung bezahlt werden "
-#~ "muss."
-
-#~ msgid ""
-#~ "The type of the course will determine which fields will be displayed in "
-#~ "the registration form."
-#~ msgstr ""
-#~ "Der Typ des Lehrgangs bestimmt, welche Felder im Anmeldeformular "
-#~ "angezeigt werden."
-
-#~ msgid ""
-#~ "The course flyer. Needs to be uploaded as an image file (JPEG, PNG, etc.)."
-#~ msgstr ""
-#~ "Der Lehrgangsflyer. Muss als Bilddatei hochgeladen werden (JPEG, PNG, "
-#~ "etc.)."
-
-#~ msgid "Additional information about the course (optional)."
-#~ msgstr "Zusätzliche Informationen zum Lehrgang (optional)."
-
-#~ msgid "The name of the session."
-#~ msgstr "Der Name der Einheit."
-
-#~ msgid "The course to which this session belongs."
-#~ msgstr "Der Lehrgang, zu dem diese Einheit gehört."
-
-#~ msgid "The date on which the session takes place."
-#~ msgstr "Das Datum, an dem die Einheit stattfindet."
-
-#~ msgid "The time at which the session starts."
-#~ msgstr "Die Zeit, zu der die Einheit beginnt."
-
-#~ msgid "The time at which the session ends."
-#~ msgstr "Die Zeit, zu der die Einheit endet."
-
-#~ msgid "The fee for attending this session if paid via bank transfer."
-#~ msgstr ""
-#~ "Die Gebühr für die Teilnahme an dieser Einheit bei Zahlung per "
-#~ "Überweisung."
-
-#~ msgid "The fee for attending this session if paid in cash."
-#~ msgstr "Die Gebühr für die Teilnahme an dieser Einheit bei Barzahlung."
-
-#~ msgid "The title of the page"
-#~ msgstr "Der Seitentitel"
-
-#~ msgid "The URL of the page"
-#~ msgstr "Die URL der Seite"
-
-#~ msgid "The category of the page (determines the menu position)"
-#~ msgstr "Die Kategorie der Seite (bestimmt die Menüposition)"
-
-#~ msgid "The status of the page (published or draft)"
-#~ msgstr "Der Status der Seite (veröffentlicht oder Entwurf)"
-
-#~ msgid "The featured image of the page"
-#~ msgstr "Das Titelbild der Seite"
-
-#~ msgid "The page content"
-#~ msgstr "Der Seiteninhalt"
-
-#~ msgid "The position in the menu (lower numbers appear first)"
-#~ msgstr "Die Position im Menü (niedrigere Zahlen erscheinen zuerst)"
-
-#~ msgid "You are logged in"
-#~ msgstr "Du bist angemeldet"
-
-#~ msgid "as"
-#~ msgstr "als"
-
-#~ msgid "Sign up for our courses"
-#~ msgstr "Melde Dich für unsere Lehrgänge an"
-
-#~ msgid "You can find a list of all courses here."
-#~ msgstr "Eine Liste aller Lehrgänge findest Du hier."

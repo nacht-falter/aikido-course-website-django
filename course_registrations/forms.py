@@ -24,9 +24,9 @@ class CourseRegistrationForm(forms.ModelForm):
 
             if course.course_type == "international":
                 self.fields['dinner'] = forms.BooleanField(
-                    required=False, label=_("I would like to join the dinner"))
+                    required=False, label=_("I would like to join the dinner on Saturday evening."))
                 self.fields['overnight_stay'] = forms.BooleanField(
-                    required=False, label=_("I need a place to stay overnight"))
+                    required=False, label=_("I need a place to stay overnight."))
 
         if user_profile:
             if (
@@ -50,7 +50,7 @@ class CourseRegistrationForm(forms.ModelForm):
             self.fields["other_dojo"].initial = _("Other Dojo")
 
     accept_terms = forms.BooleanField(
-        required=True, label=_("I accept the terms and conditions")
+        required=True, label=_("I accept the terms and conditions below.")
     )
     selected_sessions = forms.ModelMultipleChoiceField(
         label=_("I will attend the following sessions:"),
@@ -59,10 +59,10 @@ class CourseRegistrationForm(forms.ModelForm):
         required=True,
     )
     exam = forms.BooleanField(
-        required=False, label=_("I want to apply for an exam")
+        required=False, label=_("I want to apply for an exam.")
     )
     discount = forms.BooleanField(
-        required=False, label=_("I am eligible for a discount")
+        required=False, label=_("I am eligible for a discount.")
     )
     dojo = forms.ChoiceField(
         required=False,
