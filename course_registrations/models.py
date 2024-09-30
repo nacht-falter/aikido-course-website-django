@@ -189,15 +189,13 @@ class CourseRegistration(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-    def admin_session_display(self):
+    def truncated_session_display(self):
         all_sessions = self.course.sessions.all()
         if len(self.selected_sessions.all()) == len(all_sessions):
             return _("Entire Course")
         else:
-            sessions = ", ".join([str(session.title)
-                                 for session in self.selected_sessions.all()])
+            sessions = "\n".join([str(session) for session in self.selected_sessions.all()])
             truncated = sessions[:30] + \
                 "..." if len(sessions) > 30 else sessions
             return format_html('<span title="{}">{}</span>', sessions, truncated)
-
-    admin_session_display.short_description = _("Selected Sessions")
+    truncated_session_display.short_description = _("Selected Sessions")

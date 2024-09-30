@@ -57,7 +57,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "registration_str",
         "course",
         "email",
-        "admin_session_display",
+        "truncated_session_display",
         "final_fee",
         "payment_status",
         "payment_method",
