@@ -2110,7 +2110,7 @@ msgstr "Menschen mit Behinderung"
 
 #: templates/register_course.html:31
 msgid "Unemployed persons"
-msgstr "Arbeitslose Personen"
+msgstr "Arbeitslose"
 
 #: templates/register_course.html:34
 msgid ""
