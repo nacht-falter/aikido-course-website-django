@@ -46,6 +46,18 @@
       <h4 class="card-title">{% trans "Course Details" %}</h4>
     </div>
     <div class="card-body">
+      {% if course.course_type != "dan_preparation_seminar" %}
+      <div id="description-section" class="row">
+        <div class="col-3 mb-2">
+          <strong>{% trans "Description" %}:</strong>
+        </div>
+        <div class="col-9 mb-2">
+          {{ course.description|safe }}
+        </div>
+      </div>
+      <hr>
+      {% endif %}
+
       <div class="row">
         <div class="col-3 mb-2">
           <strong>{% trans "Sessions:" %}</strong>
