@@ -1678,7 +1678,7 @@ msgstr "Teilnahmegebühr"
 #: templates/courseregistration_list.html:40
 #: templates/email/registration_confirmation.html:42
 msgid "Please transfer the course fee to the following account until"
-msgstr "Bitte überweise die Teilnahmebühr auf folgendes Konto bis spätestens"
+msgstr "Bitte überweise die Teilnahmegebühr auf folgendes Konto bis spätestens"
 
 #: templates/courseregistration_list.html:48
 msgid "Please pay the course fee in cash at the beginning of the course."

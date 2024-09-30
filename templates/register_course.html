@@ -21,29 +21,9 @@
     <a href="{% url 'course_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
     <button id="submit-button" class="btn btn-primary disabled" type="submit">{% trans "Sign up" %}</button>
   </form>
-  <hr class="mt-4">
-  <h3 id="discount-conditions">{% trans "Discount Conditions" %}</h3>
-  <p>{% trans "The following groups are eligible for a discount:" %}</p>
-  <ul>
-    <li>{% trans "Students" %}</li>
-    <li>{% trans "Trainees" %}</li>
-    <li>{% trans "Handicapped persons" %}</li>
-    <li>{% trans "Unemployed persons" %}</li>
-  </ul>
-  <p>
-    {% blocktrans trimmed %}
-    If one of the above conditions applies to you, please check the "Discount" box in the registration form and bring proof
-    of eligibility to the course. Otherwise, the full course fee will be charged.
-    {% endblocktrans %}
-  </p>
-  <h3 id="terms-and-conditions">{% trans "Terms and Conditions" %}</h3>
-  <p>{% trans "The organizer (D.A.N. BW e. V.) does not provide insurance coverage." %}</p>
-  <p>
-    {% blocktrans trimmed %}
-    Also, the organizer may take photos during the course, which could be published without mentioning names (e.g., on
-    the D.A.N. BW website). If you do not wish to have your photos published, please inform the organizer before the start of the course.
-    {% endblocktrans %}
-  </p>
+
+  {% include "partials/registration_conditions.html" %}
+
 </div>
 
 <!-- Instructions for safely passing data to JavaScript: -->
