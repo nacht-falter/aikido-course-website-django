@@ -86,16 +86,18 @@
         </div>
       </div>
 
-      {% if user.profile.grade < 6 and course.course_type != "dan_preparation_seminar" %}
-      <hr>
-      <div id="exam-section" class="row">
-        <div class="col-3 mb-2">
-          <strong>{% trans "Exam" %}:</strong>
+      {% if not user.profile or user.profile.grade < 6 %}
+        {% if course.course_type != "dan_preparation_seminar" %}
+        <hr>
+        <div id="exam-section" class="row">
+          <div class="col-3 mb-2">
+            <strong>{% trans "Exam" %}:</strong>
+          </div>
+          <div class="col-9 mb-2">
+            {{ form.exam|as_crispy_field }}
+          </div>
         </div>
-        <div class="col-9 mb-2">
-          {{ form.exam|as_crispy_field }}
-        </div>
-      </div>
+        {% endif %}
       {% endif %}
     </div>
   </div>
