@@ -1,3 +1,4 @@
+from django.utils.html import format_html
 import csv
 from datetime import date
 
@@ -62,6 +63,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "discount",
         "grade",
         "exam",
+        "truncated_comment",
         "dinner",
         "overnight_stay",
         "registration_date",
@@ -81,8 +83,9 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "exam_grade",
         "exam_passed",
         "discount",
+        "comment",
         "dinner",
-        "overnight_stay"
+        "overnight_stay",
     ]
     readonly_fields = [
         "registration_date",
@@ -97,8 +100,9 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "final_fee",
         "payment_method",
         "discount",
+        "comment",
         "dinner",
-        "overnight_stay"
+        "overnight_stay",
     ]
     search_fields = ["course__title", "first_name", "last_name", "email"]
     list_filter = [FutureCourseFilter, CourseFilter, "payment_status",
@@ -108,12 +112,17 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "toggle_payment_status", "export_csv"
     ]
 
-    def get_list_display_links(self, request, list_display):
-        return ["registration_str"]
+    def truncated_comment(self, obj):
+        if obj.comment:
+            truncated = obj.comment[:30] + \
+            "..." if len(obj.comment) > 30 else obj.comment
+            return format_html('<span title="{}">{}</span>', obj.comment, truncated)
+        return ""
+    truncated_comment.short_description = _("Comment")
 
     def registration_str(self, obj):
         return str(obj)
-    registration_str.short_description = _("Registration")
+    registration_str.short_description = _("Name")
 
     def has_add_permission(self, request):
         return ("add" in request.path or "change" in request.path)

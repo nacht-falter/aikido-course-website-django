@@ -43,6 +43,7 @@ class CourseRegistrationInline(admin.TabularInline):
         "final_fee",
         "payment_method",
         "payment_status",
+        "comment",
         "dinner",
         "overnight_stay",
     ]
@@ -56,8 +57,9 @@ class CourseRegistrationInline(admin.TabularInline):
         "final_fee",
         "payment_method",
         "discount",
+        "comment",
         "dinner",
-        "overnight_stay"
+        "overnight_stay",
     ]
 
 

@@ -172,7 +172,7 @@ msgstr "Ermäßigung"
 
 #: course_registrations/models.py:93 danbw_website/utils.py:184
 msgid "Final Fee"
-msgstr "Endgültiger Betrag"
+msgstr "Gesamtbetrag"
 
 #: course_registrations/models.py:97
 msgid "Payment status"
