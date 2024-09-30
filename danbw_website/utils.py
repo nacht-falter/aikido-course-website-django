@@ -3,7 +3,7 @@ from smtplib import SMTPException
 
 from django.conf import settings
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.formats import date_format, time_format
@@ -60,12 +60,22 @@ def send_registration_confirmation(request, registration):
 
     sender = settings.DEFAULT_FROM_EMAIL
     recipient = registration.user.email if request.user.is_authenticated else registration.email
+    bcc_recipient = os.environ.get('EMAIL_HOST_USER')
 
     try:
-        send_mail(subject, message, sender, [recipient], html_message=message)
+        email = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email=sender,
+            to=[recipient],
+            bcc=[bcc_recipient],
+        )
+        email.content_subtype = 'html'
+        email.send()
     except SMTPException as e:
         raise SMTPException(
-            _("Invalid email address. Please try again with a valid email address.")) from e
+            _("Invalid email address. Please try again with a valid email address.")
+        ) from e
 
 
 def send_registration_notification(request, registration):
