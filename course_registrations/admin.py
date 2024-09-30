@@ -1,9 +1,9 @@
-from django.utils.html import format_html
 import csv
 from datetime import date
 
 from django.contrib import admin
 from django.http import HttpResponse
+from django.utils.html import format_html
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
@@ -57,6 +57,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "registration_str",
         "course",
         "email",
+        "admin_session_display",
         "final_fee",
         "payment_status",
         "payment_method",
@@ -115,10 +116,15 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
     def truncated_comment(self, obj):
         if obj.comment:
             truncated = obj.comment[:30] + \
-            "..." if len(obj.comment) > 30 else obj.comment
+                "..." if len(obj.comment) > 30 else obj.comment
             return format_html('<span title="{}">{}</span>', obj.comment, truncated)
         return ""
     truncated_comment.short_description = _("Comment")
+
+    def truncated_sessions(self, obj):
+        return ", ".join(
+            session.title for session in obj.selected_sessions.all())
+    truncated_sessions.short_description = _("Selected Sessions")
 
     def registration_str(self, obj):
         return str(obj)

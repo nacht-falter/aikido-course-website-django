@@ -1,5 +1,6 @@
 from django.db import models
 from django.shortcuts import get_object_or_404
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 from courses.models import CourseSession, InternalCourse
@@ -193,7 +194,10 @@ class CourseRegistration(models.Model):
         if len(self.selected_sessions.all()) == len(all_sessions):
             return _("Entire Course")
         else:
-            return ", ".join([str(session.title) for session in self.selected_sessions.all()])
+            sessions = ", ".join([str(session.title)
+                                 for session in self.selected_sessions.all()])
+            truncated = sessions[:30] + \
+                "..." if len(sessions) > 30 else sessions
+            return format_html('<span title="{}">{}</span>', sessions, truncated)
 
     admin_session_display.short_description = _("Selected Sessions")
-
