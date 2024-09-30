@@ -2094,7 +2094,7 @@ msgstr "Ermäßigungsbedingungen"
 
 #: templates/register_course.html:26
 msgid "The following groups are eligible for a discount:"
-msgstr "Die folgenden Gruppen sind für eine Ermäßigung berechtigt:"
+msgstr "Die folgenden Gruppen haben Anspruch auf eine Ermäßigung:"
 
 #: templates/register_course.html:28
 msgid "Students"
