@@ -42,7 +42,7 @@ class CourseFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         courses = CourseRegistration.objects.values_list(
-            "course__title", flat=True).distinct()
+            "course__title", flat=True).distinct().order_by("-course__start_date")
         return tuple((course, course) for course in courses)
 
     def queryset(self, request, queryset):
