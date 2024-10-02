@@ -199,3 +199,11 @@ class CourseRegistration(models.Model):
                 "..." if len(sessions) > 30 else sessions
             return format_html('<span title="{}">{}</span>', sessions, truncated)
     truncated_session_display.short_description = _("Selected Sessions")
+
+    def truncated_comment(self):
+        if self.comment:
+            truncated = self.comment[:30] + \
+                "..." if len(self.comment) > 30 else self.comment
+            return format_html('<span title="{}">{}</span>', self.comment, truncated)
+        return ""
+    truncated_comment.short_description = _("Comment")

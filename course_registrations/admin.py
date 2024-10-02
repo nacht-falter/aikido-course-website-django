@@ -57,12 +57,13 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "registration_str",
         "course",
         "email",
+        "grade",
+        "dojo",
         "truncated_session_display",
         "final_fee",
+        "discount",
         "payment_status",
         "payment_method",
-        "discount",
-        "grade",
         "exam",
         "truncated_comment",
         "dinner",
@@ -75,15 +76,17 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "first_name",
         "last_name",
         "email",
+        "grade",
+        "dojo",
         "selected_sessions",
-        "accept_terms",
         "final_fee",
+        "discount",
         "payment_status",
         "payment_method",
         "exam",
         "exam_grade",
         "exam_passed",
-        "discount",
+        "accept_terms",
         "comment",
         "dinner",
         "overnight_stay",
@@ -94,6 +97,8 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "first_name",
         "last_name",
         "email",
+        "grade",
+        "dojo",
         "selected_sessions",
         "exam",
         "exam_grade",
@@ -112,19 +117,6 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
     actions = [
         "toggle_payment_status", "export_csv"
     ]
-
-    def truncated_comment(self, obj):
-        if obj.comment:
-            truncated = obj.comment[:30] + \
-                "..." if len(obj.comment) > 30 else obj.comment
-            return format_html('<span title="{}">{}</span>', obj.comment, truncated)
-        return ""
-    truncated_comment.short_description = _("Comment")
-
-    def truncated_sessions(self, obj):
-        return ", ".join(
-            session.title for session in obj.selected_sessions.all())
-    truncated_sessions.short_description = _("Selected Sessions")
 
     def registration_str(self, obj):
         return str(obj)
