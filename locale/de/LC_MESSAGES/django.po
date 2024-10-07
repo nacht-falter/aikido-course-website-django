@@ -164,7 +164,7 @@ msgstr "Graduierung aktualisiert"
 
 #: course_registrations/models.py:86
 msgid "Accept terms"
-msgstr "Bedingungen akzeptieren"
+msgstr "Bedingungen akzeptiert"
 
 #: course_registrations/models.py:90 danbw_website/utils.py:194
 #: templates/registration_form.html:133
@@ -823,7 +823,7 @@ msgstr "Zahlungsstatus"
 #: danbw_website/utils.py:200 danbw_website/utils.py:257
 #: memberships/models.py:52
 msgid "Accept Terms"
-msgstr "Bedingungen akzeptieren"
+msgstr "Bedingungen akzeptiert"
 
 #: danbw_website/utils.py:201
 msgid "Registration Date"
