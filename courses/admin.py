@@ -110,7 +110,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         }),
     )
 
-    readonly_fields = ["slug"]
+    prepopulated_fields = {'slug': ('title',)}
 
     list_display = (
         "title",
