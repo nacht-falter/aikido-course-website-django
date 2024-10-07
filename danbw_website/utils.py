@@ -207,7 +207,10 @@ def write_registrations_csv(writer, registrations):
 
     for registration in registrations:
         selected_sessions = ", ".join(
-            session.title for session in registration.selected_sessions.all())
+            f"{session.date.strftime('%d.%m.%Y')}, {session.start_time.strftime('%H:%M')}"
+            f"-{session.end_time.strftime('%H:%M')}: {session.title}"
+            for session in registration.selected_sessions.all()
+        )
 
         if hasattr(registration, "user"):
             user = registration.user
@@ -234,7 +237,8 @@ def write_registrations_csv(writer, registrations):
         ]
         if registration.course.course_type == "international":
             data_row.append(_("Yes") if registration.dinner else _("No"))
-            data_row.append(_("Yes") if registration.overnight_stay else _("No"))
+            data_row.append(
+                _("Yes") if registration.overnight_stay else _("No"))
         writer.writerow(data_row)
 
 
