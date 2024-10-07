@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-08 00:27+0200\n"
+"POT-Creation-Date: 2024-10-08 01:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -271,6 +271,10 @@ msgstr "Du hast Deine Anmeldung erfolgreich aktualisiert für "
 #: course_registrations/views.py:335
 msgid "Registration not submitted. Please select at least one session."
 msgstr "Anmeldung nicht übermittelt. Bitte wähle mindestens eine Einheit aus."
+
+#: course_registrations/views.py:362
+msgid "No registrations found for this course."
+msgstr "Es wurden keine Anmeldungen für diesen Lehrgang gefunden."
 
 #: courses/admin.py:73 templates/registration_form.html:46
 msgid "Course Details"
@@ -3513,6 +3517,3 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:160
 msgid "Failed to save attachment"
 msgstr ""
-
-#~ msgid "course_registrations"
-#~ msgstr "lehrgangsanmeldungen"

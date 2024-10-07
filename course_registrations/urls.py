@@ -25,7 +25,7 @@ urlpatterns = [
         name="update_courseregistration",
     ),
     path(
-        _("export-csv/<slug:slug>/"),
+        "export-csv/<slug:slug>/",
         views.ExportCourseRegistrations.as_view(),
         name="export_course_registrations",
     ),
