@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-07 23:33+0200\n"
+"POT-Creation-Date: 2024-10-08 00:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,18 +106,18 @@ msgid "Participant"
 msgstr "Teilnehmer"
 
 #: course_registrations/models.py:23 danbw_website/utils.py:189
-#: danbw_website/utils.py:248 memberships/forms.py:51 memberships/models.py:25
+#: danbw_website/utils.py:252 memberships/forms.py:51 memberships/models.py:25
 msgid "Email"
 msgstr "E-Mail"
 
 #: course_registrations/models.py:28 danbw_website/utils.py:187
-#: danbw_website/utils.py:245 memberships/forms.py:35 memberships/models.py:10
+#: danbw_website/utils.py:249 memberships/forms.py:35 memberships/models.py:10
 #: users/forms.py:13 users/forms.py:61
 msgid "First Name"
 msgstr "Vorname"
 
 #: course_registrations/models.py:34 danbw_website/utils.py:188
-#: danbw_website/utils.py:246 memberships/forms.py:36 memberships/models.py:11
+#: danbw_website/utils.py:250 memberships/forms.py:36 memberships/models.py:11
 #: users/forms.py:17 users/forms.py:65
 msgid "Last Name"
 msgstr "Nachname"
@@ -131,14 +131,14 @@ msgid "Registration date"
 msgstr "Anmeldedatum"
 
 #: course_registrations/models.py:54 danbw_website/utils.py:191
-#: danbw_website/utils.py:256 memberships/forms.py:74 memberships/models.py:48
+#: danbw_website/utils.py:260 memberships/forms.py:74 memberships/models.py:48
 #: templates/registration_form.html:24 templates/userprofile.html:21
 #: users/models.py:21
 msgid "Dojo"
 msgstr "Dojo"
 
 #: course_registrations/models.py:60 danbw_website/utils.py:190
-#: danbw_website/utils.py:255 memberships/forms.py:73 memberships/models.py:46
+#: danbw_website/utils.py:259 memberships/forms.py:73 memberships/models.py:46
 #: templates/registration_form.html:22 templates/userprofile.html:17
 #: users/models.py:23
 msgid "Grade"
@@ -224,31 +224,31 @@ msgstr "benutzer/anmeldungen/stornieren/<int:pk>/"
 msgid "user/registrations/update/<int:pk>/"
 msgstr "benutzer/anmeldungen/aktualisieren/<int:pk>/"
 
-#: course_registrations/views.py:50
+#: course_registrations/views.py:52
 msgid "Registration for this course is not possible at the moment."
 msgstr "Eine Anmeldung für diesen Lehrgang ist momentan nicht möglich."
 
-#: course_registrations/views.py:57
+#: course_registrations/views.py:59
 msgid "Please log in to your account or continue as a guest."
 msgstr "Bitte melde Dich in Deinem Konto an oder fahre als Gast fort."
 
-#: course_registrations/views.py:66
+#: course_registrations/views.py:68
 msgid "Please create a user profile to contine."
 msgstr "Bitte erstelle ein Benutzerprofil, um fortzufahren."
 
-#: course_registrations/views.py:77
+#: course_registrations/views.py:79
 msgid "You are already registered for this course."
 msgstr "Du bist bereits für diesen Lehrgang angemeldet."
 
-#: course_registrations/views.py:118
+#: course_registrations/views.py:120
 msgid "A registration with this email address already exists."
 msgstr "Eine Anmeldung mit dieser E-Mail-Adresse existiert bereits."
 
-#: course_registrations/views.py:172
+#: course_registrations/views.py:174
 msgid "You have successfully signed up for "
 msgstr "Du hast Dich erfolgreich angemeldet für "
 
-#: course_registrations/views.py:228
+#: course_registrations/views.py:230
 msgid ""
 "Please cancel registrations by clicking the button from the 'My "
 "Registrations' page."
@@ -256,19 +256,19 @@ msgstr ""
 "Bitte storniere Anmeldungen durch Klicken auf den Button auf der 'Meine "
 "Anmeldungen' Seite."
 
-#: course_registrations/views.py:242
+#: course_registrations/views.py:244
 msgid "Your registration for "
 msgstr "Deine Anmeldung für "
 
-#: course_registrations/views.py:243
+#: course_registrations/views.py:245
 msgid "has been cancelled."
 msgstr "wurde storniert."
 
-#: course_registrations/views.py:323
+#: course_registrations/views.py:325
 msgid "You have successfully updated your registration for "
 msgstr "Du hast Deine Anmeldung erfolgreich aktualisiert für "
 
-#: course_registrations/views.py:333
+#: course_registrations/views.py:335
 msgid "Registration not submitted. Please select at least one session."
 msgstr "Anmeldung nicht übermittelt. Bitte wähle mindestens eine Einheit aus."
 
@@ -820,7 +820,7 @@ msgstr "Zahlungsmethode"
 msgid "Payment Status"
 msgstr "Zahlungsstatus"
 
-#: danbw_website/utils.py:200 danbw_website/utils.py:257
+#: danbw_website/utils.py:200 danbw_website/utils.py:261
 #: memberships/models.py:52
 msgid "Accept Terms"
 msgstr "Bedingungen akzeptiert"
@@ -829,45 +829,45 @@ msgstr "Bedingungen akzeptiert"
 msgid "Registration Date"
 msgstr "Anmeldedatum"
 
-#: danbw_website/utils.py:226 danbw_website/utils.py:229
-#: danbw_website/utils.py:232 danbw_website/utils.py:236
-#: danbw_website/utils.py:237
+#: danbw_website/utils.py:229 danbw_website/utils.py:232
+#: danbw_website/utils.py:235 danbw_website/utils.py:239
+#: danbw_website/utils.py:241
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:801
 msgid "Yes"
 msgstr ""
 
-#: danbw_website/utils.py:226 danbw_website/utils.py:229
-#: danbw_website/utils.py:232 danbw_website/utils.py:236
-#: danbw_website/utils.py:237
+#: danbw_website/utils.py:229 danbw_website/utils.py:232
+#: danbw_website/utils.py:235 danbw_website/utils.py:239
+#: danbw_website/utils.py:241
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:802
 msgid "No"
 msgstr ""
 
-#: danbw_website/utils.py:247 memberships/forms.py:38 memberships/models.py:12
+#: danbw_website/utils.py:251 memberships/forms.py:38 memberships/models.py:12
 msgid "Date of Birth"
 msgstr "Geburtsdatum"
 
-#: danbw_website/utils.py:249 memberships/forms.py:39 memberships/models.py:13
+#: danbw_website/utils.py:253 memberships/forms.py:39 memberships/models.py:13
 msgid "Street"
 msgstr "Straße"
 
-#: danbw_website/utils.py:250 memberships/forms.py:40 memberships/models.py:14
+#: danbw_website/utils.py:254 memberships/forms.py:40 memberships/models.py:14
 msgid "Street Number"
 msgstr "Hausnummer"
 
-#: danbw_website/utils.py:251 memberships/forms.py:43 memberships/models.py:17
+#: danbw_website/utils.py:255 memberships/forms.py:43 memberships/models.py:17
 msgid "Postcode"
 msgstr "PLZ"
 
-#: danbw_website/utils.py:252 memberships/forms.py:41 memberships/models.py:15
+#: danbw_website/utils.py:256 memberships/forms.py:41 memberships/models.py:15
 msgid "City"
 msgstr "Stadt"
 
-#: danbw_website/utils.py:253
+#: danbw_website/utils.py:257
 msgid "Phone Home"
 msgstr "Telefon Festnetz"
 
-#: danbw_website/utils.py:254
+#: danbw_website/utils.py:258
 msgid "Phone Mobile"
 msgstr "Telefon Mobil"
 
