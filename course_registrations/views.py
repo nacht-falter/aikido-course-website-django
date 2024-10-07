@@ -1,13 +1,15 @@
+import csv
 import os
 from datetime import date
 from smtplib import SMTPException
 
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.views import View
 
@@ -342,3 +344,34 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                     "course_data": course_data,
                 },
             )
+
+
+class ExportCourseRegistrations(UserPassesTestMixin, View):
+    def test_func(self):
+        return (
+                self.request.user.is_authenticated
+                and self.request.user.is_staff
+                and self.request.user.groups.filter(name='Course Team').exists()
+        )
+
+    def get(self, request, slug):
+        queryset = CourseRegistration.objects.filter(course__slug=slug)
+        if not queryset:
+            messages.warning(
+            request,
+            _("No registrations found for this course.")
+            )
+            return HttpResponseRedirect(reverse("home"))
+
+        filename = f"csv_export_{slugify(date.today())}_{queryset.first().course.slug}.csv"
+
+        response = HttpResponse(content_type='text/csv')
+        response["Content-Disposition"] = (
+            f"attachment; filename={filename}"
+        )
+
+        writer = csv.writer(response)
+
+        utils.write_registrations_csv(writer, queryset)
+
+        return response

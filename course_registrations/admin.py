@@ -140,7 +140,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
 
         response = HttpResponse(content_type="text/csv")
         response["Content-Disposition"] = (
-            f"attachment; filename={_('course_registrations')}_{slugify(date.today())}.csv"
+            f"attachment; filename={_('csv_export')}_{slugify(date.today())}.csv"
         )
         writer = csv.writer(response)
 
