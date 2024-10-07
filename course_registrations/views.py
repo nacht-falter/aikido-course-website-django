@@ -363,7 +363,7 @@ class ExportCourseRegistrations(UserPassesTestMixin, View):
             )
             return HttpResponseRedirect(reverse("home"))
 
-        filename = f"csv_export_{slugify(date.today())}_{queryset.first().course.slug}.csv"
+        filename = f"csv_export_{queryset.first().course.slug}_{slugify(date.today())}.csv"
 
         response = HttpResponse(content_type='text/csv')
         response["Content-Disposition"] = (
