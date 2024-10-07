@@ -183,16 +183,22 @@ def write_registrations_csv(writer, registrations):
     """Write registration data to CSV"""
 
     header_row = [
+        _("Course"),
         _("First Name"),
         _("Last Name"),
         _("Email"),
         _("Grade"),
+        _("Dojo"),
         _("Selected Sessions"),
+        _("Final Fee"),
+        _("Discount"),
+        _("Payment Method"),
+        _("Payment Status"),
         _("Exam"),
         _("Exam Grade"),
+        _("Comment"),
         _("Accept Terms"),
-        _("Final Fee"),
-        _("Payment Status"),
+        _("Registration Date"),
     ]
     if registrations and registrations[0].course.course_type == "international":
         header_row.append("Dinner")
@@ -209,20 +215,26 @@ def write_registrations_csv(writer, registrations):
             user = None
 
         data_row = [
+            registration.course.title,
             user.first_name if user else registration.first_name,
             user.last_name if user else registration.last_name,
             user.email if user else registration.email,
             user.profile.get_grade_display() if user else registration.get_grade_display(),
+            user.profile.dojo if user else registration.dojo,
             selected_sessions,
-            "Yes" if registration.exam else "No",
-            registration.get_exam_grade_display(),
-            "Yes" if registration.accept_terms else "No",
             registration.final_fee,
+            _("Yes") if registration.discount else _("No"),
+            registration.get_payment_method_display(),
             registration.get_payment_status_display(),
+            _("Yes") if registration.exam else _("No"),
+            registration.get_exam_grade_display(),
+            registration.comment,
+            _("Yes") if registration.accept_terms else _("No"),
+            registration.registration_date.strftime("%d.%m.%Y, %H:%M:%S"),
         ]
         if registration.course.course_type == "international":
-            data_row.append("Yes" if registration.dinner else "No")
-            data_row.append("Yes" if registration.overnight_stay else "No")
+            data_row.append(_("Yes") if registration.dinner else _("No"))
+            data_row.append(_("Yes") if registration.overnight_stay else _("No"))
         writer.writerow(data_row)
 
 

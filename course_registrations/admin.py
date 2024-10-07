@@ -113,7 +113,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
     search_fields = ["course__title", "first_name", "last_name", "email"]
     list_filter = [FutureCourseFilter, CourseFilter, "payment_status",
                    "payment_method", "exam"]
-    ordering = ["course__start_date", "-registration_date"]
+    ordering = ["-course__start_date", "-registration_date"]
     actions = [
         "toggle_payment_status", "export_csv"
     ]
@@ -140,7 +140,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
 
         response = HttpResponse(content_type="text/csv")
         response["Content-Disposition"] = (
-            f"attachment; filename={_('registrations')}_{slugify(date.today())}.csv"
+            f"attachment; filename={_('course_registrations')}_{slugify(date.today())}.csv"
         )
         writer = csv.writer(response)
 
