@@ -8,7 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
+                              redirect, render, reverse)
+from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.views import View
@@ -346,32 +348,39 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             )
 
 
-class ExportCourseRegistrations(UserPassesTestMixin, View):
+class ExportCourseRegistrations(LoginRequiredMixin, UserPassesTestMixin, View):
+    """Exports course registrations as a CSV file"""
+
     def test_func(self):
-        return (
-                self.request.user.is_authenticated
-                and self.request.user.is_staff
-                and self.request.user.groups.filter(name='Course Team').exists()
-        )
+        return self.request.user.is_staff and self.request.user.groups.filter(name='Course Team').exists()
 
     def get(self, request, slug):
         queryset = CourseRegistration.objects.filter(course__slug=slug)
-        if not queryset:
-            messages.warning(
-            request,
-            _("No registrations found for this course.")
-            )
+        if not queryset.exists():
+            messages.warning(request, _(
+                "No registrations found for this course."))
             return HttpResponseRedirect(reverse("home"))
 
-        filename = f"csv_export_{queryset.first().course.slug}_{slugify(date.today())}.csv"
+        messages.success(request, _("Download started"))
 
-        response = HttpResponse(content_type='text/csv')
-        response["Content-Disposition"] = (
-            f"attachment; filename={filename}"
-        )
+        return render(request, 'export_redirect.html', {'slug': slug})
 
-        writer = csv.writer(response)
+    def post(self, request, slug):
+        if request.method == "POST":
+            queryset = CourseRegistration.objects.filter(course__slug=slug)
+            if not queryset.exists():
+                messages.warning(request, _(
+                    "No registrations found for this course."))
+                return HttpResponseRedirect(reverse("home"))
 
-        utils.write_registrations_csv(writer, queryset)
+            filename = f"csv_export_{slugify(slug)}_{date.today()}.csv"
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = f'attachment; filename={filename}'
 
-        return response
+            writer = csv.writer(response)
+            utils.write_registrations_csv(writer, queryset)
+
+            return response
+        else:
+            messages.error(request, _("Invalid request method."))
+            return HttpResponseRedirect(reverse("home"))
