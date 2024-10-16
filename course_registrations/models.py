@@ -118,6 +118,10 @@ class CourseRegistration(models.Model):
         blank=True,
         null=True,
     )
+    attended = models.BooleanField(
+        _("Attended"),
+        default=True,
+    )
 
     class Meta:
         constraints = [

@@ -86,6 +86,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "exam",
         "exam_grade",
         "exam_passed",
+        "attended",
         "accept_terms",
         "comment",
         "dinner",

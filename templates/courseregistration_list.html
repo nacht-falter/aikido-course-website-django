@@ -10,7 +10,11 @@
 
 {% for registration in upcoming_registrations %}
 <div class="card my-4 registration-card">
-    <h4 id="registration-{{ registration.id }}" class="card-header bg-secondary-subtle">{{ registration.course.title }}</h4>
+    <div class="card-header bg-secondary-subtle d-sm-flex justify-content-between">
+        <h4 id="registration-{{ registration.id }}" class="my-1 card-title">
+            {{ registration.course.title }}
+        </h4>
+    </div>
     <div class="card-body">
         <table class="table">
             <tr>
@@ -141,7 +145,22 @@
 
 {% for registration in past_registrations %}
 <div class="card my-4 registration-card">
-    <h5 id="registration-{{ registration.id }}" class="card-header bg-secondary-subtle">{{ registration.course.title }}</h5>
+    <div class="card-header bg-secondary-subtle d-sm-flex justify-content-between">
+        <h4 id="registration-{{ registration.id }}" class="my-1 card-title">
+            {{ registration.course.title }}
+        </h4>
+        <form method="post" action="{% url 'set_attendence_status' registration.pk %}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            {% if registration.exam_passed is None %}
+            <button type="submit" class="btn btn-sm btn-outline-primary">
+                <i class="fa fa-user-slash"></i> {% trans "Mark as not attended" %}
+            </button>
+            {% endif %}
+        </form>
+    </div>
     <div class="card-body">
         <table class="table">
             <tr>
@@ -149,7 +168,7 @@
                 <td>{{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}</td>
             </tr>
         </table>
-        {% if registration.exam %}
+        {% if registration.exam and registration.attended %}
         <p class="badge text-bg-secondary mb-0">
             {% if registration.exam_passed %}
             {% blocktrans with exam_grade=registration.get_exam_grade_display %}
@@ -169,7 +188,39 @@
     </div>
 </div>
 {% empty %}
-<p class="mt-4">{% trans "You did not sign up for any courses in the past." %}</p>
+<p class="mt-4">{% trans "No past courses." %}</p>
 {% endfor %}
-{% endblock content %}
 
+{% if unattended_registrations %}
+<div>
+    <button id="past-courses-btn" class="btn btn-sm btn-outline-secondary my-2" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapsePastCourses" aria-expanded="false" aria-controls="collapsePastCourses">
+        <span id="show-past-courses" class="d-inline">{%trans "Show unattended courses" %}<i class="fa fa-chevron-down ms-2"></i></span>
+        <span id="hide-past-courses" class="d-none">{%trans "Hide unattended courses" %}<i class="fa fa-chevron-up ms-2"></i></span>
+    </button>
+</div>
+<div class="collapse" id="collapsePastCourses">
+    <table class="table table-striped registration-card">
+        <tbody>
+            {% for registration in unattended_registrations %}
+            <tr>
+                <th class="align-middle ps-3" scope="row">{{ registration.course.title }}</th>
+                <td class="align-middle">{{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}</td>
+                <td class="align-middle text-end pe-3">
+                    <form method="post" action="{% url 'set_attendence_status' registration.pk %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <button type="submit" class="text-nowrap btn btn-sm btn-outline-primary">
+                            <i class="fa fa-user-plus"></i> {% trans "Mark as attended" %}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock content %}

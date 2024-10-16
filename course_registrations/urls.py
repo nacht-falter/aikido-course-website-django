@@ -29,4 +29,9 @@ urlpatterns = [
         views.ExportCourseRegistrations.as_view(),
         name="export_course_registrations",
     ),
+    path(
+        _("set-attendence-status/<int:pk>/"),
+        views.SetRegistrationAttendenceStatus.as_view(),
+        name="set_attendence_status",
+    )
 ]

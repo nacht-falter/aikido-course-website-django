@@ -202,11 +202,18 @@ class CourseRegistrationList(LoginRequiredMixin, View):
             registration
             for registration in user_registrations
             if registration.course.end_date < date.today()
+            and registration.attended
         ]
         upcoming_registrations = [
             registration
             for registration in user_registrations
             if registration.course.end_date >= date.today()
+        ]
+        unattended_registrations = [
+            registration
+            for registration in user_registrations
+            if registration.course.end_date < date.today()
+            and not registration.attended
         ]
 
         return render(
@@ -215,6 +222,7 @@ class CourseRegistrationList(LoginRequiredMixin, View):
             {
                 "past_registrations": past_registrations,
                 "upcoming_registrations": upcoming_registrations,
+                "unattended_registrations": unattended_registrations,
                 "bank_account": os.environ.get("BANK_ACCOUNT"),
             },
         )
@@ -384,3 +392,34 @@ class ExportCourseRegistrations(LoginRequiredMixin, UserPassesTestMixin, View):
         else:
             messages.error(request, _("Invalid request method."))
             return HttpResponseRedirect(reverse("home"))
+
+
+class SetRegistrationAttendenceStatus(LoginRequiredMixin, View):
+    """Marks a Course Registrations as attended or not attended"""
+
+    def get(self, request, pk):
+        registration = get_object_or_404(CourseRegistration, pk=pk)
+        if registration.user != request.user:
+            raise PermissionDenied
+        messages.warning(
+            request,
+            _("Please set the attendence status of registrations by clicking the button from the 'My Registrations' page.")
+        )
+
+        return HttpResponseRedirect(reverse("courseregistration_list"))
+
+    def post(self, request, pk):
+        registration = get_object_or_404(CourseRegistration, pk=pk)
+        if registration.user != request.user:
+            raise PermissionDenied
+
+        registration.attended = not registration.attended
+
+        registration.save()
+
+        messages.success(
+            request,
+            _("Your registration for ") +
+            registration.course.title + _(" has been updated.")
+        )
+        return HttpResponseRedirect(reverse("courseregistration_list"))
