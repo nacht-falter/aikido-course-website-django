@@ -120,6 +120,7 @@ class CourseRegistration(models.Model):
     )
     attended = models.BooleanField(
         _("Attended"),
+        null=True,
         default=True,
     )
 

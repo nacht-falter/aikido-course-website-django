@@ -202,7 +202,7 @@ class CourseRegistrationList(LoginRequiredMixin, View):
             registration
             for registration in user_registrations
             if registration.course.end_date < date.today()
-            and registration.attended
+            and registration.attended or registration.attended == None
         ]
         upcoming_registrations = [
             registration
@@ -213,7 +213,7 @@ class CourseRegistrationList(LoginRequiredMixin, View):
             registration
             for registration in user_registrations
             if registration.course.end_date < date.today()
-            and not registration.attended
+            and registration.attended == False
         ]
 
         return render(

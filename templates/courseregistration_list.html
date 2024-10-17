@@ -154,9 +154,9 @@
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}
-            {% if registration.exam_passed is None %}
+            {% if registration.attended != False %}
             <button type="submit" class="btn btn-sm btn-outline-primary">
-                <i class="fa fa-user-slash"></i> {% trans "Mark as not attended" %}
+                <i class="fa fa-eye-slash"></i> {% trans "Mark as not attended" %}
             </button>
             {% endif %}
         </form>
@@ -217,7 +217,7 @@
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                         {% endif %}
                         <button type="submit" class="text-nowrap btn btn-sm btn-outline-primary">
-                            <i class="fa fa-user-plus"></i> {% trans "Mark as attended" %}
+                            <i class="fa fa-check"></i> {% trans "Mark as attended" %}
                         </button>
                     </form>
                 </td>
