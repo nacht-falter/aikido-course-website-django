@@ -68,14 +68,17 @@
               {% if user.is_authenticated %}
                 {% for registration in user.registrations.all %}
                   {% if registration.course == course %}
-                    <a class="badge text-bg-primary" href="{% url 'courseregistration_list' %}#{{ registration.id }}"
-                      title="{% trans "Show registration" %}"><i class="fa-regular fa-circle-check"></i>
                       {% if course.start_date|date:"Y-m-d" >= todays_date %}
-                        {% trans "Signed up" %}
-                      {% else %}
-                        {% trans "Attended" %}
+                        <a class="badge text-bg-primary" href="{% url 'courseregistration_list' %}#{{ registration.id }}"
+                          title="{% trans "Show registration" %}"><i class="fa-regular fa-circle-check"></i>
+                          {% trans "Signed up" %}
+                        </a>
+                      {% elif registration.attended != False %}
+                        <a class="badge text-bg-primary" href="{% url 'courseregistration_list' %}#{{ registration.id }}"
+                          title="{% trans "Show registration" %}"><i class="fa-regular fa-circle-check"></i>
+                          {% trans "Attended" %}
+                        </a>
                       {% endif %}
-                    </a>
                     {% if registration.exam == True %}
                       <a class="badge text-bg-warning" href="{% url 'courseregistration_list' %}#{{ registration.id }}"
                         title="{% trans "Show registration" %}">
