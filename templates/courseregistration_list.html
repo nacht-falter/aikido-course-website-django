@@ -141,7 +141,7 @@
 </p>
 {% endfor %}
 
-<h3>{% trans "Your past courses" %}</h3>
+<h3 class='mt-5'>{% trans "Your past courses" %}</h3>
 
 {% for registration in past_registrations %}
 <div class="card my-4 registration-card">
@@ -166,6 +166,10 @@
             <tr>
                 <th scope="col">{% trans "Dates:" %}</th>
                 <td>{{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}</td>
+            </tr>
+            <tr>
+                <th scope="col">{% trans "Teacher" %}</th>
+                <td>{{ registration.course.teacher }}</td>
             </tr>
         </table>
         {% if registration.exam and registration.attended %}
@@ -193,13 +197,13 @@
 
 {% if unattended_registrations %}
 <div>
-    <button id="past-courses-btn" class="btn btn-sm btn-outline-secondary my-2" type="button" data-bs-toggle="collapse"
-        data-bs-target="#collapsePastCourses" aria-expanded="false" aria-controls="collapsePastCourses">
-        <span id="show-past-courses" class="d-inline">{%trans "Show unattended courses" %}<i class="fa fa-chevron-down ms-2"></i></span>
-        <span id="hide-past-courses" class="d-none">{%trans "Hide unattended courses" %}<i class="fa fa-chevron-up ms-2"></i></span>
+    <button id="show-hide-courses-btn" class="btn btn-sm btn-outline-secondary bt-2 mb-4" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseCourses" aria-expanded="false" aria-controls="collapseCourses">
+        <span id="show-courses" class="d-inline">{%trans "Show unattended courses" %}<i class="fa fa-chevron-down ms-2"></i></span>
+        <span id="hide-courses" class="d-none">{%trans "Hide unattended courses" %}<i class="fa fa-chevron-up ms-2"></i></span>
     </button>
 </div>
-<div class="collapse" id="collapsePastCourses">
+<div class="collapse" id="collapseCourses">
     <table class="table table-striped registration-card">
         <tbody>
             {% for registration in unattended_registrations %}

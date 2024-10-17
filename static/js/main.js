@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
   /**
    * Update show/hide past courses button according to aria-expanded attribute
    */
-  function updatePastCoursesButton() {
-    if (pastCoursesBtn && showPastCourses && hidePastCourses) {
-      if (pastCoursesBtn.getAttribute("aria-expanded") === "true") {
-        showPastCourses.classList.add("d-none");
-        hidePastCourses.classList.remove("d-none");
+  function updateCoursesButton() {
+    if (showHideCoursesBtn && showCourses && hideCourses) {
+      if (showHideCoursesBtn.getAttribute("aria-expanded") === "true") {
+        showCourses.classList.add("d-none");
+        hideCourses.classList.remove("d-none");
       } else {
-        showPastCourses.classList.remove("d-none");
-        hidePastCourses.classList.add("d-none");
+        showCourses.classList.remove("d-none");
+        hideCourses.classList.add("d-none");
       }
     }
   }
@@ -41,15 +41,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  const pastCoursesBtn = document.getElementById("past-courses-btn");
-  const showPastCourses = document.getElementById("show-past-courses");
-  const hidePastCourses = document.getElementById("hide-past-courses");
+  const showHideCoursesBtn = document.getElementById("show-hide-courses-btn");
+  const showCourses = document.getElementById("show-courses");
+  const hideCourses = document.getElementById("hide-courses");
   const loginToastElement = document.getElementById('loginToast');
   const honeypotDiv = document.getElementById("div_id_website");
   const honeypot = document.getElementById("id_website");
 
-  if (pastCoursesBtn) {
-    pastCoursesBtn.addEventListener("click", updatePastCoursesButton);
+  if (showHideCoursesBtn) {
+    showHideCoursesBtn.addEventListener("click", updateCoursesButton);
   }
 
   if (loginToastElement) {
