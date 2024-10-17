@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-15 23:39+0200\n"
+"POT-Creation-Date: 2024-10-17 17:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,11 +188,11 @@ msgstr "Zahlungsmethode"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: course_registrations/models.py:112 templates/courseregistration_list.html:54
+#: course_registrations/models.py:112 templates/courseregistration_list.html:58
 msgid "Dinner"
 msgstr "Abendessen"
 
-#: course_registrations/models.py:117 templates/courseregistration_list.html:63
+#: course_registrations/models.py:117 templates/courseregistration_list.html:67
 msgid "Overnight stay"
 msgstr "Übernachtung"
 
@@ -261,8 +261,8 @@ msgid ""
 "Please cancel registrations by clicking the button from the 'My "
 "Registrations' page."
 msgstr ""
-"Bitte storniere Anmeldungen durch Klicken auf den Button auf der 'Meine "
-"Anmeldungen' Seite."
+"Bitte storniere Anmeldungen durch Klicken auf den Button auf der Seite 'Meine "
+"Anmeldungen'."
 
 #: course_registrations/views.py:254 course_registrations/views.py:422
 msgid "Your registration for "
@@ -297,8 +297,8 @@ msgid ""
 "Please set the attendence status of registrations by clicking the button "
 "from the 'My Registrations' page."
 msgstr ""
-"Bitte bestätige, dass du teilgenommen hast durch Klicken auf den Button auf der 'Meine "
-"Anmeldungen' Seite."
+"Bitte bestätige, dass du teilgenommen hast durch Klicken auf den Button auf "
+"der Seite 'Meine Anmeldungen'."
 
 #: course_registrations/views.py:423
 msgid " has been updated."
@@ -1523,7 +1523,7 @@ msgstr ""
 msgid "Dynamic Aikido Nocquet BW"
 msgstr "Dynamic Aikido Nocquet BW"
 
-#: templates/base.html:35 templates/courseregistration_list.html:104
+#: templates/base.html:35 templates/courseregistration_list.html:108
 #: templates/partials/logout-modal.html:7
 msgid "Close"
 msgstr "Schließen"
@@ -1654,9 +1654,9 @@ msgstr "Lehrer"
 
 #: templates/course_list_item.html:45 templates/course_list_item.html:124
 #: templates/course_list_item.html:154
-#: templates/courseregistration_list.html:18
-#: templates/courseregistration_list.html:164
-#: templates/courseregistration_list.html:204
+#: templates/courseregistration_list.html:22
+#: templates/courseregistration_list.html:168
+#: templates/courseregistration_list.html:208
 #: templates/email/registration_confirmation.html:19
 msgid "to"
 msgstr "bis"
@@ -1723,48 +1723,48 @@ msgstr "Deine Lehrgangsanmeldungen"
 msgid "Your upcoming courses"
 msgstr "Deine bevorstehenden Lehrgänge"
 
-#: templates/courseregistration_list.html:17
-#: templates/courseregistration_list.html:163
+#: templates/courseregistration_list.html:21
+#: templates/courseregistration_list.html:167
 msgid "Dates:"
 msgstr "Daten:"
 
-#: templates/courseregistration_list.html:21
+#: templates/courseregistration_list.html:25
 msgid "Selected Sessions:"
 msgstr "Ausgewählte Einheiten:"
 
-#: templates/courseregistration_list.html:33
+#: templates/courseregistration_list.html:37
 #: templates/email/registration_confirmation.html:37
 msgid "Course Fee:"
 msgstr "Teilnahmegebühr"
 
-#: templates/courseregistration_list.html:40
+#: templates/courseregistration_list.html:44
 #: templates/email/registration_confirmation.html:42
 msgid "Please transfer the course fee to the following account until"
 msgstr "Bitte überweise die Teilnahmegebühr auf folgendes Konto bis spätestens"
 
-#: templates/courseregistration_list.html:48
+#: templates/courseregistration_list.html:52
 msgid "Please pay the course fee in cash at the beginning of the course."
 msgstr "Bitte bezahle die Teilnahmegebühr in bar zu Beginn des Lehrgangs."
 
-#: templates/courseregistration_list.html:56
+#: templates/courseregistration_list.html:60
 #: templates/email/registration_confirmation.html:50
 msgid "You have signed up for the dinner."
 msgstr "Du hast Dich für das Abendessen angemeldet."
 
-#: templates/courseregistration_list.html:57
+#: templates/courseregistration_list.html:61
 #: templates/email/registration_confirmation.html:51
 msgid "Please note that this is a binding reservation."
 msgstr "Die Anmeldung ist verbindlich."
 
-#: templates/courseregistration_list.html:65
+#: templates/courseregistration_list.html:69
 msgid "You have specified that you need a place to stay overnight."
 msgstr "Du hast angegeben, dass Du eine Übernachtungsmöglichkeit benötigst."
 
-#: templates/courseregistration_list.html:71
+#: templates/courseregistration_list.html:75
 msgid "Your Comment:"
 msgstr "Dein Kommentar:"
 
-#: templates/courseregistration_list.html:79
+#: templates/courseregistration_list.html:83
 #, python-format
 msgid ""
 "\n"
@@ -1775,24 +1775,24 @@ msgstr ""
 "            Du hast Dich für eine Prüfung zum %(exam_grade)s angemeldet.\n"
 "            "
 
-#: templates/courseregistration_list.html:89
+#: templates/courseregistration_list.html:93
 #: templates/update_courseregistration.html:14
 msgid "Update registration"
 msgstr "Anmeldung aktualisieren"
 
-#: templates/courseregistration_list.html:93
+#: templates/courseregistration_list.html:97
 msgid "Cancel registration"
 msgstr "Anmeldung stornieren"
 
-#: templates/courseregistration_list.html:103
+#: templates/courseregistration_list.html:107
 msgid "Cancel Registration"
 msgstr "Anmeldung stornieren"
 
-#: templates/courseregistration_list.html:107
+#: templates/courseregistration_list.html:111
 msgid "Cancel Registration for"
 msgstr "Anmeldung stornieren für"
 
-#: templates/courseregistration_list.html:109
+#: templates/courseregistration_list.html:113
 #, python-format
 msgid ""
 "\n"
@@ -1805,35 +1805,35 @@ msgstr ""
 "%(registration.course.title)s stornieren möchtest?\n"
 "                        "
 
-#: templates/courseregistration_list.html:120 templates/userprofile.html:56
+#: templates/courseregistration_list.html:124 templates/userprofile.html:56
 msgid "No, go back"
 msgstr "Nein, zurück"
 
-#: templates/courseregistration_list.html:121
+#: templates/courseregistration_list.html:125
 msgid "Yes, cancel my registration"
 msgstr "Ja, Anmeldung stornieren"
 
-#: templates/courseregistration_list.html:130
+#: templates/courseregistration_list.html:134
 msgid "You are currently not signed up for any courses. "
 msgstr "Du bist aktuell für keine Lehrgänge angemeldet."
 
-#: templates/courseregistration_list.html:133 templates/index.html:55
+#: templates/courseregistration_list.html:137 templates/index.html:55
 msgid "Go to course list"
 msgstr "Zur Lehrgangsliste"
 
-#: templates/courseregistration_list.html:135
+#: templates/courseregistration_list.html:139
 msgid "Sign up now"
 msgstr "Jetzt anmelden"
 
-#: templates/courseregistration_list.html:140
+#: templates/courseregistration_list.html:144
 msgid "Your past courses"
 msgstr "Deine vergangenen Lehrgänge"
 
-#: templates/courseregistration_list.html:155
+#: templates/courseregistration_list.html:159
 msgid "Mark as not attended"
 msgstr "Als nicht besucht markieren"
 
-#: templates/courseregistration_list.html:170
+#: templates/courseregistration_list.html:174
 #, python-format
 msgid ""
 "\n"
@@ -1845,7 +1845,7 @@ msgstr ""
 "bestanden.\n"
 "            "
 
-#: templates/courseregistration_list.html:174
+#: templates/courseregistration_list.html:178
 #, python-format
 msgid ""
 "\n"
@@ -1857,7 +1857,7 @@ msgstr ""
 "nicht bestanden.\n"
 "            "
 
-#: templates/courseregistration_list.html:178
+#: templates/courseregistration_list.html:182
 #, python-format
 msgid ""
 "\n"
@@ -1869,19 +1869,19 @@ msgstr ""
 "Lehrgang angemeldet.\n"
 "            "
 
-#: templates/courseregistration_list.html:187
+#: templates/courseregistration_list.html:191
 msgid "No past courses."
 msgstr "Keine vergangenen Lehrgänge."
 
-#: templates/courseregistration_list.html:194
+#: templates/courseregistration_list.html:198
 msgid "Show unattended courses"
 msgstr "Nicht besuchte Lehrgänge anzeigen"
 
-#: templates/courseregistration_list.html:195
+#: templates/courseregistration_list.html:199
 msgid "Hide unattended courses"
 msgstr "Nicht besuchte Lehrgänge ausblenden"
 
-#: templates/courseregistration_list.html:212
+#: templates/courseregistration_list.html:216
 msgid "Mark as attended"
 msgstr "Als besucht markieren"
 
@@ -3558,6 +3558,3 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:160
 msgid "Failed to save attachment"
 msgstr ""
-
-#~ msgid "You did not sign up for any courses in the past."
-#~ msgstr "Du hast Dich in der Vergangenheit für keine Lehrgänge angemeldet."

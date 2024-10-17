@@ -110,7 +110,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         }),
     )
 
-    prepopulated_fields = {'slug': ('title',)}
+    readonly_fields = ("slug",)
 
     list_display = (
         "title",
@@ -139,16 +139,13 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         """Action for duplicating existing courses"""
         for course in queryset:
             new_title = f"Copy of {course.title}"
-            new_slug = f"copy-of-{course.slug}"
             counter = 2
-            while InternalCourse.objects.filter(slug=new_slug).exists():
+            while InternalCourse.objects.filter(title=new_title).exists():
                 new_title = f"Copy {counter} of {course.title}"
-                new_slug = f"copy-{counter}-of-{course.slug}"
                 counter += 1
 
             new_course = InternalCourse.objects.create(
                 title=new_title,
-                slug=new_slug,
                 description=course.description,
                 registration_status=0,
                 start_date=course.start_date,
@@ -265,14 +262,15 @@ class ExternalCourseAdmin(SummernoteModelAdmin):
         "url",
     )
 
-    readonly_fields = ["slug"]
-
     list_display = (
         "title",
         "url",
         "start_date",
         "end_date",
     )
+
+    readonly_fields = ("slug",)
+
     search_fields = ["title", "description"]
     summernote_fields = ("description",)
     actions = ["duplicate_selected_courses"]
@@ -281,15 +279,12 @@ class ExternalCourseAdmin(SummernoteModelAdmin):
         """Action for duplicating existing courses"""
         for course in queryset:
             new_title = f"Copy of {course.title}"
-            new_slug = f"copy-of-{course.slug}"
             counter = 2
             while ExternalCourse.objects.filter(title=new_title).exists():
                 new_title = f"Copy {counter} of {course.title}"
-                new_slug = f"copy-{counter}-of-{course.slug}"
                 counter += 1
             ExternalCourse.objects.create(
                 title=new_title,
-                slug=new_slug,
                 url=course.url,
                 start_date=course.start_date,
                 end_date=course.end_date,

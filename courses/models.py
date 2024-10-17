@@ -62,8 +62,7 @@ class Course(models.Model):
                 _("Start date cannot be later than end date."))
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self._generate_unique_slug()
+        self.slug = self._generate_unique_slug()
         super().save(*args, **kwargs)
 
 
