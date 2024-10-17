@@ -413,7 +413,10 @@ class SetRegistrationAttendenceStatus(LoginRequiredMixin, View):
         if registration.user != request.user:
             raise PermissionDenied
 
-        registration.attended = not registration.attended
+        if registration.attended != None:
+            registration.attended = not registration.attended
+        else:
+            registration.attended = False
 
         registration.save()
 
