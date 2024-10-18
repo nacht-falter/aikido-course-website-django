@@ -14,6 +14,25 @@ from danbw_website import utils
 
 from .models import CourseSession, ExternalCourse, InternalCourse
 
+class FutureCourseFilter(admin.SimpleListFilter):
+    """Filter for future and past courses
+    https://docs.djangoproject.com/en/5.0/ref/contrib/admin/filters/
+    """
+
+    title = _("Course Date")
+    parameter_name = "future_course"
+
+    def lookups(self, request, model_admin):
+        return (
+            ("future", _("Future Courses")),
+            ("past", _("Past Courses")),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == "future":
+            return queryset.filter(start_date__gte=date.today())
+        elif self.value() == "past":
+            return queryset.filter(start_date__lt=date.today())
 
 class CourseSessionInline(admin.TabularInline):
     """Displays CourseSessions as an inline model
@@ -124,10 +143,10 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         "get_course_registration_count",
     )
     search_fields = ["title", "description"]
-    list_filter = ("registration_status",)
+    list_filter = ("course_type", "status", "registration_status", FutureCourseFilter)
     summernote_fields = ("description",)
     inlines = [CourseSessionInline, CourseRegistrationInline]
-
+    ordering = ["-start_date"]
     actions = [
         "duplicate_selected_courses",
         "toggle_status",
