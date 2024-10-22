@@ -1,3 +1,4 @@
+import re
 from datetime import date
 
 from django.core.exceptions import ValidationError
@@ -40,6 +41,13 @@ class Course(models.Model):
 
     def _generate_unique_slug(self):
         slug = slugify(self.title)
+
+        if self.slug:
+            existing_slug_base = re.sub(r'-\d+$', '', self.slug)
+
+            if existing_slug_base == slug:
+                return self.slug
+
         unique_slug = slug
         num = 1
 
