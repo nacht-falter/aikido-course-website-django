@@ -42,16 +42,13 @@ class Course(models.Model):
     def _generate_unique_slug(self):
         slug = slugify(self.title)
 
-        if self.slug:
-            existing_slug_base = re.sub(r'-\d+$', '', self.slug)
-
-            if existing_slug_base == slug:
+        if self.slug and self.slug.startswith(slug):
                 return self.slug
 
         unique_slug = slug
         num = 1
 
-        while Course.objects.filter(slug=unique_slug).exists():
+        while Course.objects.filter(slug=unique_slug).exclude(pk=self.pk).exists():
             unique_slug = f'{slug}-{num}'
             num += 1
 
