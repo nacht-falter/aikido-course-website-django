@@ -64,7 +64,7 @@
   {% for course in upcoming_courses %}
   <div class="mb-2">
     {% if course.get_course_type == "InternalCourse" %}
-    <a class="me-2 blue-link" title="{% trans "Go to" %} {{ course.title }}" href="{% url 'course_list' %}#{{ course.id }}">
+    <a class="me-2 blue-link" title="{% trans "Go to" %} {{ course.title }}" href="{% url 'course_list' %}#{{ course.slug }}">
       <i class="fa-solid fa-circle-right"></i>
       {{ course.start_date|localize }}-{{ course.end_date|localize }}: <strong>{{ course.title }}</strong>
     </a>
@@ -89,7 +89,7 @@
     {% endif %}
     {% endfor %}
     {% else %}
-    <a class="me-2 blue-link" title="{% trans "Go to" %} {{ course.title }}" href="{% url 'course_list' %}#{{ course.id }}">
+    <a class="me-2 blue-link" title="{% trans "Go to" %} {{ course.title }}" href="{% url 'course_list' %}#{{ course.slug}}">
       <i class="fa-solid fa-circle-right"></i>
       {{ course.start_date|localize }}-{{ course.end_date|localize }}: <strong>{{ course.title }}</strong> {% if course.organizer %}({{ course.organizer }}){% endif %}
     </a>

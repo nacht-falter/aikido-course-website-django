@@ -22,7 +22,7 @@
 
 <div class="accordion-item border-0 mb-2" id="accordion-{{ course.id }}">
   <div class="accordion-header">
-    <button id="button-{{ course.id }}" class="accordion-button collapsed text-decoration-none
+    <button id="button-{{ course.slug }}" class="accordion-button collapsed text-decoration-none
       {% if course.get_course_type != "InternalCourse" or course.status == 0 %}
         accordion-button-no-link
       {% endif %}" 
