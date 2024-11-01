@@ -157,6 +157,8 @@ class InternalCourse(Course):
     bank_transfer_until = models.DateField(
         _("Bank Transfer Until"),
         default=date.today,
+        blank=True,
+        null=True,
     )
     course_type = models.CharField(
         _("Course Type"),
