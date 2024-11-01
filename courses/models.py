@@ -84,6 +84,7 @@ class InternalCourse(Course):
         ("dan_preparation_seminar", _("Dan Preparation/Dan Seminar")),
         ("international", _("International Course")),
         ("family_reunion", _("Family Reunion")),
+        ("no_registration", _("Course without Registration")),
     )
 
     STATUS_CHOICES = (

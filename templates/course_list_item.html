@@ -222,19 +222,23 @@
           </a>
           {% endif %}
           {% endfor %}
-          {% elif course.registration_status == 1 %}
+        {% elif course.course_type == "no_registration" %}
+          <a class="btn btn-primary disabled">
+            {% trans "Online registration not possible" %}
+          </a>
+        {% elif course.registration_status == 1 %}
           <a class="btn btn-primary" href="{% url 'register_course' course.slug %}?next={{ request.path }}">
               {% trans "Go to registration form" %}
           </a>
-          {% elif course.registration_start_date|date:"Y-m-d" > todays_date %}
+        {% elif course.registration_start_date|date:"Y-m-d" > todays_date %}
           <a class="btn btn-primary disabled" title="{% trans "Registration closed" %}">
               {% trans "Registration starts on" %} {{ course.registration_start_date|localize }}
           </a>
-          {% else %}
+        {% else %}
           <a class="btn btn-primary disabled">
               {% trans "Registration closed" %}
           </a>
-          {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>
