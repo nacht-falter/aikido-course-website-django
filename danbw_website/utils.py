@@ -281,7 +281,7 @@ def write_membership_csv(writer, memberships):
             membership.phone_mobile,
             user.profile.get_grade_display() if user else membership.get_grade_display(),
             user.profile.dojo if user else membership.dojo,
-            membership.accept_terms,
+            _("Yes") if membership.accept_terms else _("No"),
         ]
         writer.writerow(data_row)
 
