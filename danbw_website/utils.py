@@ -271,7 +271,16 @@ def write_membership_csv(writer, memberships):
         data_row = [
             user.first_name if user else membership.first_name,
             user.last_name if user else membership.last_name,
+            membership.date_of_birth,
             user.email if user else membership.email,
+            membership.street,
+            membership.street_number,
+            membership.postcode,
+            membership.city,
+            membership.phone_home,
+            membership.phone_mobile,
+            user.profile.get_grade_display() if user else membership.get_grade_display(),
+            user.profile.dojo if user else membership.dojo,
             membership.accept_terms,
         ]
         writer.writerow(data_row)
