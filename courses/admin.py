@@ -14,6 +14,23 @@ from danbw_website import utils
 
 from .models import CourseSession, ExternalCourse, InternalCourse
 
+
+class CoursesByYearFilter(admin.SimpleListFilter):
+    """Filter for displaying courses by year"""
+
+    title = _("Year")
+    parameter_name = "year"
+
+    def lookups(self, request, model_admin):
+        years = InternalCourse.objects.dates("start_date", "year")
+        return [(year.year, year.year) for year in years]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(start_date__year=self.value())
+        return queryset
+
+
 class FutureCourseFilter(admin.SimpleListFilter):
     """Filter for future and past courses
     https://docs.djangoproject.com/en/5.0/ref/contrib/admin/filters/
@@ -33,6 +50,7 @@ class FutureCourseFilter(admin.SimpleListFilter):
             return queryset.filter(start_date__gte=date.today())
         elif self.value() == "past":
             return queryset.filter(start_date__lt=date.today())
+
 
 class CourseSessionInline(admin.TabularInline):
     """Displays CourseSessions as an inline model
@@ -143,7 +161,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         "get_course_registration_count",
     )
     search_fields = ["title", "description"]
-    list_filter = ("course_type", "status", "registration_status", FutureCourseFilter)
+    list_filter = (CoursesByYearFilter, FutureCourseFilter,
+                   "course_type", "status", "registration_status")
     summernote_fields = ("description",)
     inlines = [CourseSessionInline, CourseRegistrationInline]
     ordering = ["-start_date"]
