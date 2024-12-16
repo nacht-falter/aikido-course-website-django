@@ -1,5 +1,5 @@
 import os
-from datetime import date
+from datetime import date, timedelta
 
 from django.contrib import messages
 from django.core.mail import BadHeaderError, EmailMessage
@@ -24,8 +24,12 @@ class HomePage(View):
             list(ExternalCourse.objects.all())
         )
 
+        upcoming_courses = []
         upcoming_courses = [
-            course for course in all_courses if course.end_date >= date.today()
+            course
+            for course in all_courses
+            if course.end_date >= date.today()
+            and course.end_date <= date.today() + timedelta(days=90)
         ]
 
         for course in upcoming_courses:
@@ -46,6 +50,7 @@ class HomePage(View):
                 registration
                 for registration in all_registrations
                 if registration.course.end_date >= date.today()
+                and registration.course.end_date <= date.today() + timedelta(days=90)
             ]
 
         return render(
@@ -111,7 +116,6 @@ class ContactPage(View):
                 "contact.html",
                 {"form": contact_form},
             )
-
 
 
 class PageDetail(generic.DetailView):
