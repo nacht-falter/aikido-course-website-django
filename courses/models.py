@@ -79,12 +79,17 @@ class InternalCourse(Course):
         (1, _("open")),
     )
 
-    COURSE_TYPE = (
+    COURSE_TYPES = (
         ("specialized", _("Specialized Course")),
         ("dan_preparation_seminar", _("Dan Preparation/Dan Seminar")),
         ("international", _("International Course")),
         ("family_reunion", _("Family Reunion")),
         ("no_registration", _("Course without Registration")),
+        ("sensei_emmerson", _("Sensei Emmerson")),
+        ("hombu_dojo", _("Hombu Dojo Instructor")),
+        ("external_teacher", _("External Teacher")),
+        ("dan_bw_teacher", _("Dan BW Teacher")),
+        ("children", _("Children")),
     )
 
     STATUS_CHOICES = (
@@ -162,7 +167,7 @@ class InternalCourse(Course):
     )
     course_type = models.CharField(
         _("Course Type"),
-        choices=COURSE_TYPE,
+        choices=COURSE_TYPES,
         max_length=100,
     )
     flyer = models.ImageField(
@@ -174,6 +179,10 @@ class InternalCourse(Course):
     additional_info = models.TextField(
         _("Additional Information"),
         blank=True,
+    )
+    is_dan_seminar = models.BooleanField(
+        _("Dan Seminar"),
+        default=False,
     )
 
     def clean(self):

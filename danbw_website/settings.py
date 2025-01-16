@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "users",
     "courses",
+    "fees",
     "course_registrations",
     "pages",
     "memberships",

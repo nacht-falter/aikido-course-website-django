@@ -14,6 +14,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.views import View
+from fees.models import Fee
 
 from courses.models import InternalCourse
 from danbw_website import utils
@@ -22,29 +23,34 @@ from . import forms
 from .models import CourseRegistration, UserProfile
 
 
+def prepare_course_data(course):
+    """Prepares data to be passed to the template"""
+    fees = Fee.objects.filter(course_type=course.course_type)
+    course_data = {
+        "fees": [
+            {
+                "fee_type": fee.fee_type,
+                "fee_category": fee.fee_category,
+                "payment_method": "bank" if fee.payment_method == 0 else "cash",
+                "dan_discount": fee.dan_discount,
+                # Convert Decimal to float for JSON compatibility
+                "amount": float(fee.amount),
+            }
+            for fee in fees
+        ],
+        "discount_percentage": course.discount_percentage,
+    }
+    return course_data
+
+
 class RegisterCourse(View):
     """Creates a course registration"""
-
-    def prepare_course_data(self, course):
-        """Prepares data to be passed to the template"""
-        course_data = {"course_fee": course.course_fee,
-                       "course_fee_cash": course.course_fee_cash,
-                       "course_fee_with_dan_preparation": course.course_fee_with_dan_preparation,
-                       "course_fee_with_dan_preparation_cash": course.course_fee_with_dan_preparation_cash,
-                       "discount_percentage": course.discount_percentage
-                       }
-        counter = 0
-        for session in course.sessions.all():
-            course_data[f"session_{counter}_fee"] = session.session_fee
-            course_data[f"session_{counter}_fee_cash"] = session.session_fee_cash
-            counter += 1
-        return course_data
 
     def get(self, request, slug):
 
         courses = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
-        course_data = self.prepare_course_data(course)
+        course_data = prepare_course_data(course)
 
         course.save()
 
@@ -103,7 +109,7 @@ class RegisterCourse(View):
     def post(self, request, slug):
         queryset = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(queryset, slug=slug)
-        course_data = self.prepare_course_data(course)
+        course_data = prepare_course_data(course)
 
         if request.user.is_authenticated:
             registration_form = forms.CourseRegistrationForm(
@@ -260,21 +266,6 @@ class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
 class UpdateCourseRegistration(LoginRequiredMixin, View):
     """Updates a course registration"""
 
-    def prepare_course_data(self, course):
-        """Prepares data to be passed to the template"""
-        course_data = {"course_fee": course.course_fee,
-                       "course_fee_cash": course.course_fee_cash,
-                       "course_fee_with_dan_preparation": course.course_fee_with_dan_preparation,
-                       "course_fee_with_dan_preparation_cash": course.course_fee_with_dan_preparation_cash,
-                       "discount_percentage": course.discount_percentage
-                       }
-        counter = 0
-        for session in course.sessions.all():
-            course_data[f"session_{counter}_fee"] = session.session_fee
-            course_data[f"session_{counter}_fee_cash"] = session.session_fee_cash
-            counter += 1
-        return course_data
-
     def get(self, request, pk):
         registration = get_object_or_404(CourseRegistration, pk=pk)
         if registration.user != request.user:
@@ -290,7 +281,7 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             user_profile=request.user.profile,
             initial={"selected_sessions": selected_sessions},
         )
-        course_data = self.prepare_course_data(course)
+        course_data = prepare_course_data(course)
 
         return render(
             request,
@@ -309,7 +300,7 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             raise PermissionDenied
 
         course = registration.course
-        course_data = self.prepare_course_data(course)
+        course_data = prepare_course_data(course)
 
         registration_form = forms.CourseRegistrationForm(
             data=request.POST,

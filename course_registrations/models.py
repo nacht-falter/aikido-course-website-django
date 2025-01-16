@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 from courses.models import CourseSession, InternalCourse
 from danbw_website import constants
+from fees.models import Fee
 from users.models import User, UserProfile
 
 
@@ -90,6 +91,10 @@ class CourseRegistration(models.Model):
         _("Discount"),
         default=False,
     )
+    dan_member = models.BooleanField(
+        _("D.A.N. Member"),
+        default=False,
+    )
     final_fee = models.IntegerField(
         _("Final Fee"),
         default=0,
@@ -141,25 +146,48 @@ class CourseRegistration(models.Model):
         verbose_name_plural = _("Course Registrations")
 
     def calculate_fees(self, course, selected_sessions):
+        """Calculate the final fee for a course registration"""
         final_fee = 0
         all_sessions = course.sessions.all()
         count_dan_preparation = sum(
             1 for session in all_sessions if session.is_dan_preparation)
+        fee_type = "dan_seminar" if course.is_dan_seminar else "regular"
 
-        if len(selected_sessions) == len(all_sessions):
-            if course.course_type == "international":
-                final_fee = (
-                    course.course_fee_with_dan_preparation
-                    if self.payment_method == 0
-                    else course.course_fee_with_dan_preparation_cash
-                )
+        if fee_type == "dan_seminar":
+            session_dates = {session.date for session in selected_sessions}
+            if len(session_dates) == 1:
+                fee_category = "single_day"
             else:
-                final_fee = course.course_fee if self.payment_method == 0 else course.course_fee_cash
-        elif len(selected_sessions) == len(all_sessions) - count_dan_preparation:
-            final_fee = course.course_fee if self.payment_method == 0 else course.course_fee_cash
+                fee_category = "entire_course"
         else:
+            if len(selected_sessions) == len(all_sessions):
+                if course.course_type in ["international", "sensei_emmerson", "external_teacher"]:
+                    fee_category = "entire_course_dan_prep"
+                else:
+                    fee_category = "entire_course"
+            elif len(selected_sessions) == len(all_sessions) - count_dan_preparation:
+                fee_category = "entire_course"
+            else:
+                fee_category = "single_session"
+
+        if fee_category in ["entire_course", "entire_course_dan_prep", "single_day"]:
+            final_fee = Fee.get_fee(
+                course.course_type,
+                fee_type,
+                fee_category,
+                self.payment_method,
+                self.dan_member
+            )
+        elif fee_category == "single_session":
             for session in selected_sessions:
-                final_fee += session.session_fee if self.payment_method == 0 else session.session_fee_cash
+                fee_category = "dan_prep" if session.is_dan_preparation else "single_session"
+                final_fee += Fee.get_fee(
+                    course.course_type,
+                    fee_type,
+                    fee_category,
+                    self.payment_method,
+                    self.dan_member
+                )
 
         return final_fee * (1 - course.discount_percentage / 100) if self.discount else final_fee
 
@@ -199,7 +227,8 @@ class CourseRegistration(models.Model):
         if len(self.selected_sessions.all()) == len(all_sessions):
             return _("Entire Course")
         else:
-            sessions = "\n".join([str(session) for session in self.selected_sessions.all()])
+            sessions = "\n".join([str(session)
+                                 for session in self.selected_sessions.all()])
             truncated = sessions[:30] + \
                 "..." if len(sessions) > 30 else sessions
             return format_html('<span title="{}">{}</span>', sessions, truncated)
