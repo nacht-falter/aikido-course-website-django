@@ -1,4 +1,3 @@
-import re
 from datetime import date
 
 from django.core.exceptions import ValidationError
@@ -43,7 +42,7 @@ class Course(models.Model):
         slug = slugify(self.title)
 
         if self.slug and self.slug.startswith(slug):
-                return self.slug
+            return self.slug
 
         unique_slug = slug
         num = 1
@@ -137,24 +136,6 @@ class InternalCourse(Course):
         blank=True,
         default="D.A.N. BW",
     )
-    course_fee = models.IntegerField(
-        _("Course Fee"),
-        default=0,
-    )
-    course_fee_cash = models.IntegerField(
-        _("Course Fee (Cash)"),
-        default=0,
-    )
-    course_fee_with_dan_preparation = models.IntegerField(
-        _("Course Fee with Dan Preparation"),
-        default=0,
-        blank=True,
-    )
-    course_fee_with_dan_preparation_cash = models.IntegerField(
-        _("Course Fee with Dan Preparation (Cash)"),
-        default=0,
-        blank=True,
-    )
     discount_percentage = models.IntegerField(
         _("Discount Percentage"),
         default=50,
@@ -192,11 +173,6 @@ class InternalCourse(Course):
             if self.registration_start_date > self.registration_end_date:
                 raise ValidationError(
                     _("Registration start date cannot be later than registration end date."))
-
-        if self.course_type == "international":
-            if not self.course_fee_with_dan_preparation or not self.course_fee_with_dan_preparation_cash:
-                raise ValidationError(
-                    _("For courses of type 'International Course', the fields for course fees with dan preparation must be filled out."))
 
     def save(self, *args, **kwargs):
         if self.registration_start_date or self.registration_end_date:
@@ -260,14 +236,6 @@ class CourseSession(models.Model):
     end_time = models.TimeField(
         _("End Time"),
         default="00:00",
-    )
-    session_fee = models.IntegerField(
-        _("Session Fee"),
-        default=0,
-    )
-    session_fee_cash = models.IntegerField(
-        _("Session Fee (Cash)"),
-        default=0,
     )
     is_dan_preparation = models.BooleanField(
         _("Dan Preparation"),

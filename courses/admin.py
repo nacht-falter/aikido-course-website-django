@@ -132,10 +132,6 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         }),
         (_("Payment Information"), {
             "fields": (
-                "course_fee",
-                "course_fee_cash",
-                "course_fee_with_dan_preparation",
-                "course_fee_with_dan_preparation_cash",
                 "discount_percentage",
                 "bank_transfer_until"
             )
@@ -156,8 +152,6 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         "registration_status",
         "start_date",
         "end_date",
-        "course_fee",
-        "course_fee_cash",
         "get_course_registration_count",
     )
     search_fields = ["title", "description"]
@@ -190,10 +184,6 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 end_date=course.end_date,
                 registration_start_date=course.registration_start_date,
                 registration_end_date=course.registration_end_date,
-                course_fee=course.course_fee,
-                course_fee_cash=course.course_fee_cash,
-                course_fee_with_dan_preparation=course.course_fee_with_dan_preparation,
-                course_fee_with_dan_preparation_cash=course.course_fee_with_dan_preparation_cash,
                 organizer=course.organizer,
                 teacher=course.teacher,
                 discount_percentage=course.discount_percentage,
@@ -209,7 +199,6 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                     date=session.date,
                     start_time=session.start_time,
                     end_time=session.end_time,
-                    session_fee=session.session_fee,
                 )
 
     duplicate_selected_courses.short_description = _(
