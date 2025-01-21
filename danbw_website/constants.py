@@ -90,3 +90,33 @@ MEMBERSHIP_FEES = (
     ("childrens_passport", 15),
     ("danbw", 5),
 )
+
+COURSE_TYPES = (
+    ("sensei_emmerson", _("Sensei Emmerson")),
+    ("hombu_dojo", _("Hombu Dojo Instructor")),
+    ("external_teacher", _("External Teacher")),
+    ("dan_bw_teacher", _("D.A.N. BW Teacher")),
+    ("children", _("Children")),
+)
+
+INTERNATIONAL_COURSES = [
+    "sensei_emmerson",
+    "hombu_dojo",
+    "external_teacher",
+]
+
+EXAM_COURSES = [
+    "sensei_emmerson",
+    "external_teacher",
+    "dan_bw_teacher",
+]
+
+DAN_PREPARATION_COURSES = [
+    "sensei_emmerson",
+    "external_teacher",
+]
+
+FEE_CATEGORIES = (
+    ("regular", _("Regular Course")),
+    ("dan_seminar", _("Dan Seminar")),
+)

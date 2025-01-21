@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from danbw_website import constants
+from fees.models import Fee
 
 
 class Course(models.Model):
@@ -78,19 +79,6 @@ class InternalCourse(Course):
         (1, _("open")),
     )
 
-    COURSE_TYPES = (
-        ("specialized", _("Specialized Course")),
-        ("dan_preparation_seminar", _("Dan Preparation/Dan Seminar")),
-        ("international", _("International Course")),
-        ("family_reunion", _("Family Reunion")),
-        ("no_registration", _("Course without Registration")),
-        ("sensei_emmerson", _("Sensei Emmerson")),
-        ("hombu_dojo", _("Hombu Dojo Instructor")),
-        ("external_teacher", _("External Teacher")),
-        ("dan_bw_teacher", _("Dan BW Teacher")),
-        ("children", _("Children")),
-    )
-
     STATUS_CHOICES = (
         (0, _("Preview")),
         (1, _("Published")),
@@ -148,7 +136,12 @@ class InternalCourse(Course):
     )
     course_type = models.CharField(
         _("Course Type"),
-        choices=COURSE_TYPES,
+        choices=constants.COURSE_TYPES,
+        max_length=100,
+    )
+    fee_category = models.CharField(
+        _("Fee Category"),
+        choices=constants.FEE_CATEGORIES,
         max_length=100,
     )
     flyer = models.ImageField(
@@ -161,8 +154,12 @@ class InternalCourse(Course):
         _("Additional Information"),
         blank=True,
     )
-    is_dan_seminar = models.BooleanField(
-        _("Dan Seminar"),
+    dan_discount = models.BooleanField(
+        _("Course with D.A.N. Member Discount"),
+        default=False,
+    )
+    has_dan_preparation = models.BooleanField(
+        _("Course with Dan Preparation"),
         default=False,
     )
 
