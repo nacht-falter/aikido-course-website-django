@@ -22,16 +22,15 @@ class CourseRegistrationForm(forms.ModelForm):
                 course=course
             ).order_by("date", "start_time")
 
-            if course.course_type == "international":
-                self.fields['dinner'] = forms.BooleanField(
-                    required=False, label=_("I would like to join the dinner on Saturday evening."))
-                self.fields['overnight_stay'] = forms.BooleanField(
-                    required=False, label=_("I need a place to stay overnight."))
+            self.fields['dinner'] = forms.BooleanField(
+                required=False, label=_("I would like to join the dinner on Saturday evening."))
+            self.fields['overnight_stay'] = forms.BooleanField(
+                required=False, label=_("I need a place to stay overnight."))
 
         if user_profile:
             if (
                 user_profile.grade >= 6 or
-                course.course_type == "dan_preparation_seminar"
+                course.course_type not in constants.EXAM_COURSES
             ):
                 self.fields["exam"].widget = forms.HiddenInput()
 
@@ -90,6 +89,7 @@ class CourseRegistrationForm(forms.ModelForm):
             "exam",
             "payment_method",
             "discount",
+            "dan_member",
             "comment",
             "accept_terms",
             "dinner",
@@ -106,7 +106,7 @@ class CourseRegistrationForm(forms.ModelForm):
 
         user_profile_grade = self.user_profile.grade if self.user_profile else None
 
-        if self.course.course_type == "dan_preparation_seminar":
+        if self.course.fee_category == "dan_seminar":
             if (
                 (user_profile_grade is not None and user_profile_grade <= 5) or
                 (grade is not None and grade <= 5)
