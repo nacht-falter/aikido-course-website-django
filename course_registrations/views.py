@@ -14,10 +14,10 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.views import View
-from fees.models import Fee
 
 from courses.models import InternalCourse
-from danbw_website import utils
+from danbw_website import constants, utils
+from fees.models import Fee
 
 from . import forms
 from .models import CourseRegistration, UserProfile
@@ -25,20 +25,29 @@ from .models import CourseRegistration, UserProfile
 
 def prepare_course_data(course):
     """Prepares data to be passed to the template"""
-    fees = Fee.objects.filter(course_type=course.course_type)
+    fees = Fee.objects.filter(
+        course_type=course.course_type, fee_category=course.fee_category)
+
+    if not fees.exists():
+        raise ValueError(
+            f"No fees found for course type {course.course_type} and fee category {course.fee_category}"
+        )
+
     course_data = {
+        "course_type": course.course_type,
+        "fee_category": course.fee_category,
         "fees": [
             {
                 "fee_type": fee.fee_type,
-                "fee_category": fee.fee_category,
-                "payment_method": "bank" if fee.payment_method == 0 else "cash",
-                "dan_discount": fee.dan_discount,
                 # Convert Decimal to float for JSON compatibility
                 "amount": float(fee.amount),
+                "extra_fee_cash": float(fee.extra_fee_cash),
+                "extra_fee_external": float(fee.extra_fee_external)
             }
             for fee in fees
         ],
         "discount_percentage": course.discount_percentage,
+        "course_has_dan_preparation": course.has_dan_preparation,
     }
     return course_data
 
@@ -103,6 +112,8 @@ class RegisterCourse(View):
                 "course": course,
                 "form": registration_form,
                 "course_data": course_data,
+                "international_courses": constants.INTERNATIONAL_COURSES,
+                "exam_courses": constants.EXAM_COURSES
             },
         )
 
