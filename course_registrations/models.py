@@ -145,49 +145,81 @@ class CourseRegistration(models.Model):
         verbose_name = _("Course Registration")
         verbose_name_plural = _("Course Registrations")
 
+    def get_fee_type(self, course, selected_sessions):
+        """Determine the fee type based on course type and selected sessions."""
+        entire_course_selected = len(
+            selected_sessions) == len(course.sessions.all())
+        entire_course_without_dan_prep_selected = selected_sessions.filter(
+            is_dan_preparation=True).count() == 0 and course.has_dan_preparation
+        single_day = len({session.date for session in selected_sessions}) == 1
+
+        fee_type = ""
+
+        if course.course_type == "sensei_emmerson":
+            if course.fee_category == "dan_seminar":
+                fee_type = "single_day" if single_day else "entire_course_dan_preparation" if course.has_dan_preparation else "entire_course"
+            elif entire_course_selected:
+                fee_type = "entire_course_dan_preparation" if course.has_dan_preparation else "entire_course"
+            elif entire_course_without_dan_prep_selected:
+                fee_type = "entire_course"
+            else:
+                fee_type = "single_session"
+
+        elif course.course_type == "hombu_dojo":
+            if entire_course_selected:
+                fee_type = "entire_course"
+            else:
+                fee_type = "single_day" if single_day else "entire_course"
+
+        elif course.course_type == "external_teacher":
+            if course.fee_category == "dan_seminar":
+                fee_type = "single_session"
+            elif entire_course_selected:
+                fee_type = "entire_course_dan_preparation" if course.has_dan_preparation else "entire_course"
+            elif entire_course_without_dan_prep_selected:
+                fee_type = "entire_course"
+            else:
+                fee_type = "single_session"
+
+        elif course.course_type == "dan_bw_teacher":
+            fee_type = "single_session"
+
+        elif course.course_type == "children":
+            fee_type = "entire_course"
+
+        return fee_type
+
     def calculate_fees(self, course, selected_sessions):
         """Calculate the final fee for a course registration"""
         final_fee = 0
-        all_sessions = course.sessions.all()
-        count_dan_preparation = sum(
-            1 for session in all_sessions if session.is_dan_preparation)
-        fee_type = "dan_seminar" if course.is_dan_seminar else "regular"
+        fee_type = self.get_fee_type(course, selected_sessions)
 
-        if fee_type == "dan_seminar":
-            session_dates = {session.date for session in selected_sessions}
-            if len(session_dates) == 1:
-                fee_category = "single_day"
-            else:
-                fee_category = "entire_course"
-        else:
-            if len(selected_sessions) == len(all_sessions):
-                if course.course_type in ["international", "sensei_emmerson", "external_teacher"]:
-                    fee_category = "entire_course_dan_prep"
-                else:
-                    fee_category = "entire_course"
-            elif len(selected_sessions) == len(all_sessions) - count_dan_preparation:
-                fee_category = "entire_course"
-            else:
-                fee_category = "single_session"
-
-        if fee_category in ["entire_course", "entire_course_dan_prep", "single_day"]:
-            final_fee = Fee.get_fee(
-                course.course_type,
-                fee_type,
-                fee_category,
-                self.payment_method,
-                self.dan_member
-            )
-        elif fee_category == "single_session":
+        if "single_session" in fee_type:
             for session in selected_sessions:
-                fee_category = "dan_prep" if session.is_dan_preparation else "single_session"
-                final_fee += Fee.get_fee(
+                fee_type = "single_session_dan_preparation" if session.is_dan_preparation else "single_session"
+                fee = Fee.get_fee(
                     course.course_type,
+                    course.fee_category,
                     fee_type,
-                    fee_category,
                     self.payment_method,
                     self.dan_member
                 )
+                if fee == 0:
+                    raise ValueError(
+                        _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
+
+                final_fee += fee if fee else 0
+        else:
+            final_fee = Fee.get_fee(
+                course.course_type,
+                course.fee_category,
+                fee_type,
+                self.payment_method,
+                self.dan_member
+            )
+            if final_fee == 0:
+                raise ValueError(
+                    _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
 
         return final_fee * (1 - course.discount_percentage / 100) if self.discount else final_fee
 
