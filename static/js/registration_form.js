@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const gradeSelect = document.getElementById("id_grade");
   const examSection = document.getElementById("exam-section");
   const discountCheckbox = document.getElementById("id_discount");
+  const danMemberCheckbox = document.getElementById("id_dan_member");
   const paymentMethodSelect = document.getElementById("id_payment_method");
   const dojoSelect = document.getElementById("id_dojo");
   const otherDojoDiv = document.getElementById("div_id_other_dojo");
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function handleSessionCheckboxChange() {
     updateEntireCourseWithoutDanPreparation();
     updateEntireCourse();
-    calculateFinalFee(courseData);
+    displayFinalFee(courseData);
     disableSubmitButton();
   }
 
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
       entireCourse.checked = false;
     }
     updateEntireCourse();
-    calculateFinalFee(courseData);
+    displayFinalFee(courseData);
     disableSubmitButton();
   }
 
@@ -74,42 +75,164 @@ document.addEventListener("DOMContentLoaded", function () {
     const isChecked = entireCourse.checked;
     sessionCheckboxes.forEach((cb) => (cb.checked = isChecked));
     updateEntireCourseWithoutDanPreparation();
-    calculateFinalFee(courseData);
+    displayFinalFee(courseData);
     disableSubmitButton();
   }
 
   /**
-   * Calculate the final fee and display it
+   * Get fee type from course data according to selected sessions
+   */
+  function getFeeType(courseData) {
+    let feeType;
+    let sessionDates = new Set(
+      Array.from(sessionCheckboxes)
+        .filter((checkbox) => checkbox.checked)
+        .map((checkbox) => checkbox.dataset.date),
+    );
+    let singleDay = sessionDates.size === 1;
+
+    switch (courseData.course_type) {
+      case "sensei_emmerson":
+        if (courseData.fee_category === "dan_seminar") {
+          feeType = singleDay ? "single_day" : "entire_course";
+        } else if (
+          entireCourse.checked &&
+          courseData.course_has_dan_preparation
+        ) {
+          feeType = "entire_course_dan_preparation";
+        } else if (entireCourseWithoutDanPreparation.checked) {
+          feeType = "entire_course";
+        } else {
+          feeType = "single_session";
+        }
+        break;
+
+      case "hombu_dojo":
+        if (entireCourse?.checked) {
+          feeType = "entire_course";
+        } else {
+          feeType = singleDay ? "single_day" : "entire_course";
+        }
+        break;
+
+      case "external_teacher":
+        if (courseData.fee_category === "dan_seminar") {
+          feeType = "single_session";
+        } else if (
+          entireCourse.checked &&
+          courseData.course_has_dan_preparation
+        ) {
+          feeType = "entire_course_dan_preparation";
+        } else if (entireCourseWithoutDanPreparation.checked) {
+          feeType = "entire_course";
+        } else {
+          feeType = "single_session";
+        }
+        break;
+
+      case "dan_bw_teacher":
+        feeType = "single_session";
+        break;
+
+      case "children":
+        feeType = "entire_course";
+        break;
+
+      default:
+        feeType = null;
+    }
+
+    return feeType;
+  }
+
+  /**
+   * Get fee from fee data according to fee type, payment method
+   * and dan membership status
+   */
+  function getFee(feeType, paymentMethod, danMember, fees) {
+    const feeObj = fees.find((fee) => fee.fee_type === feeType);
+
+    if (feeObj) {
+      let fee = feeObj.amount;
+
+      if (paymentMethod === "cash") {
+        fee += feeObj.extra_fee_cash;
+      }
+      if (!danMember) {
+        fee += feeObj.extra_fee_external;
+      }
+
+      return fee;
+    } else {
+      console.error(`Fee not found for ${feeType}`);
+      return null;
+    }
+  }
+
+  /**
+   * Calculate fees for individual sessions and return the total
+   */
+  function calculateIndividualSessions(
+    sessionCheckboxes,
+    courseData,
+    paymentMethod,
+    danMember,
+  ) {
+    let finalFee = 0;
+
+    for (let checkbox of sessionCheckboxes) {
+      if (!checkbox.checked) continue;
+
+      const sessionType =
+        checkbox.getAttribute("data-dan-preparation") == "True"
+          ? "single_session_dan_preparation"
+          : "single_session";
+
+      let fee = getFee(sessionType, paymentMethod, danMember, courseData.fees);
+
+      finalFee += fee ? fee : 0;
+    }
+
+    return finalFee;
+  }
+
+  /**
+   * Calculate the final fee based on the selected sessions, payment method
+   * and dan membership status.
    */
   function calculateFinalFee(courseData) {
+    const paymentMethod = paymentMethodSelect.value == 0 ? "bank" : "cash";
+    const danMember = danMemberCheckbox ? danMemberCheckbox.checked : true;
+    const feeType = getFeeType(courseData);
     let finalFee = 0;
-    let paymentMethod = paymentMethodSelect.value;
-    if (entireCourseWithoutDanPreparation.checked) {
-      finalFee =
-        paymentMethod == 0 ? courseData.course_fee : courseData.course_fee_cash;
-    } else if (entireCourse && entireCourse.checked) {
-      finalFee =
-        paymentMethod == 0
-          ? courseData.course_fee_with_dan_preparation
-          : courseData.course_fee_with_dan_preparation_cash;
+
+    if (feeType.includes("single_session")) {
+      finalFee = calculateIndividualSessions(
+        sessionCheckboxes,
+        courseData,
+        paymentMethod,
+        danMember,
+      );
     } else {
-      let i = 0;
-      for (let checkbox of sessionCheckboxes) {
-        if (checkbox.checked) {
-          let sessionFee =
-            paymentMethod == 0
-              ? courseData[`session_${i}_fee`]
-              : courseData[`session_${i}_fee_cash`];
-          finalFee += sessionFee;
-        }
-        i++;
-      }
+      finalFee = getFee(feeType, paymentMethod, danMember, courseData.fees);
+    }
+    return finalFee ? finalFee : 0;
+  }
+
+  /**
+   * Display the final fee
+   */
+  function displayFinalFee() {
+    let finalFee = calculateFinalFee(courseData);
+    let sessionSelected = false;
+    for (let checkbox of sessionCheckboxes) {
+      sessionSelected = sessionSelected || checkbox.checked;
     }
 
     if (discountCheckbox.checked) {
       finalFee *= courseData.discount_percentage / 100;
     }
-    if (finalFee > 0) {
+    if (finalFee > 0 && sessionSelected) {
       finalFeeContainer.classList.remove("d-none");
     } else {
       finalFeeContainer.classList.add("d-none");
@@ -133,10 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionMsg.style.display = "inline";
       }
     }
-    if (
-      entireCourseWithoutDanPreparation.checked ||
-      (entireCourse && entireCourse.checked)
-    ) {
+    if (entireCourseWithoutDanPreparation.checked || entireCourse?.checked) {
       checkboxChecked = true;
     }
     if (acceptTermsCheckbox.checked) {
@@ -187,7 +307,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (discountCheckbox) {
     discountCheckbox.addEventListener("change", () =>
-      calculateFinalFee(courseData),
+      displayFinalFee(courseData),
+    );
+  }
+
+  if (danMemberCheckbox) {
+    danMemberCheckbox.addEventListener("change", () =>
+      displayFinalFee(courseData),
     );
   }
 
@@ -204,14 +330,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   paymentMethodSelect.addEventListener("change", () =>
-    calculateFinalFee(courseData),
+    displayFinalFee(courseData),
   );
 
   // Initial checks:
   checkDojo();
   updateEntireCourseWithoutDanPreparation();
   updateEntireCourse();
-  calculateFinalFee(courseData);
+  displayFinalFee(courseData);
   disableSubmitButton();
 
   // Expose functions for testing
@@ -223,6 +349,7 @@ document.addEventListener("DOMContentLoaded", function () {
       updateEntireCourseWithoutDanPreparation,
       updateEntireCourse,
       calculateFinalFee,
+      displayFinalFee,
       disableSubmitButton,
       finalFeeDisplay,
       entireCourse,
