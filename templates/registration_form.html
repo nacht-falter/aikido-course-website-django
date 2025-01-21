@@ -46,7 +46,6 @@
       <h4 class="card-title">{% trans "Course Details" %}</h4>
     </div>
     <div class="card-body">
-      {% if course.course_type != "dan_preparation_seminar" %}
       <div id="description-section" class="row">
         <div class="col-3 mb-2">
           <strong>{% trans "Description" %}:</strong>
@@ -56,7 +55,6 @@
         </div>
       </div>
       <hr>
-      {% endif %}
 
       <div class="row">
         <div class="col-3 mb-2">
@@ -66,18 +64,20 @@
           <div id="id_selected_sessions">
             {% for session in form.fields.selected_sessions.queryset %}
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" 
-                       name="selected_sessions" 
-                       value="{{ session.id }}" 
+                <input class="form-check-input" type="checkbox"
+                       name="selected_sessions"
+                       value="{{ session.id }}"
                        id="session-{{ session.id }}"
-                       {% if session in form.instance.selected_sessions.all %}checked{% endif %} 
-                       data-dan-preparation="{{ session.is_dan_preparation }}" />
+                       {% if session in form.instance.selected_sessions.all %}checked{% endif %}
+                       data-dan-preparation="{{ session.is_dan_preparation }}"
+                       data-date="{{ session.date }}"
+                       />
                 <label class="form-check-label" for="session-{{ session.id }}">{{ session }}</label>
             </div>
             {% endfor %}
           </div>
           <hr>
-          {% if course.course_type == 'international' %}
+          {% if course.has_dan_preparation %}
             <div class="form-check">
               <input type="checkbox" name="entire-course-without-dan-preparation" id="entire-course-without-dan-preparation" class="form-check-input"/>
               <label for="entire-course-without-dan-preparation" class="form-check-label">{% trans "Entire Course without Dan Preparation" %}</label>
@@ -99,7 +99,7 @@
       </div>
 
       {% if not user.profile or user.profile.grade < 6 %}
-        {% if course.course_type != "dan_preparation_seminar" %}
+        {% if course.course_type in exam_courses %}
         <hr>
         <div id="exam-section" class="row">
           <div class="col-3 mb-2">
@@ -141,6 +141,16 @@
           </p>
         </div>
       </div>
+      {% if course.dan_discount %}
+      <div class="row">
+        <div class="col-3 mb-2">
+          <strong>{% trans "D.A.N. Membership" %}:</strong>
+        </div>
+        <div class="col-9 mb-2">
+          {{ form.dan_member|as_crispy_field }}
+        </div>
+      </div>
+      {% endif %}
     </div>
   </div>
 
@@ -150,7 +160,7 @@
     </div>
     <div class="card-body">
       <div class="row">
-        {% if course.course_type == 'international' %}
+        {% if course.course_type in international_courses %}
         <div>{{ form.dinner|as_crispy_field }}</div>
         <div>{{ form.overnight_stay|as_crispy_field }}</div>
         {% endif %}
