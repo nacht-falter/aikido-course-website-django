@@ -112,13 +112,15 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 "title",
                 "slug",
                 "course_type",
+                "fee_category",
                 "status",
                 "publication_date",
                 "organizer",
                 "teacher",
                 "description",
                 "flyer",
-                "location"
+                "location",
+                "dan_discount",
             )
         }),
         (_("Dates"), {
@@ -189,6 +191,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 discount_percentage=course.discount_percentage,
                 bank_transfer_until=course.bank_transfer_until,
                 course_type=course.course_type,
+                fee_category=course.fee_category,
                 additional_info=course.additional_info,
             )
 
