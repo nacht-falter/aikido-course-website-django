@@ -200,7 +200,7 @@ def write_registrations_csv(writer, registrations):
         _("Accept Terms"),
         _("Registration Date"),
     ]
-    if registrations and registrations[0].course.course_type == "international":
+    if registrations and registrations[0].course.course_type in constants.INTERNATIONAL_COURSES:
         header_row.append("Dinner")
         header_row.append("Overnight Stay")
     writer.writerow(header_row)
@@ -235,7 +235,7 @@ def write_registrations_csv(writer, registrations):
             _("Yes") if registration.accept_terms else _("No"),
             registration.registration_date.strftime("%d.%m.%Y, %H:%M:%S"),
         ]
-        if registration.course.course_type == "international":
+        if registration.course.course_type in constants.INTERNATIONAL_COURSES:
             data_row.append(_("Yes") if registration.dinner else _("No"))
             data_row.append(
                 _("Yes") if registration.overnight_stay else _("No"))
