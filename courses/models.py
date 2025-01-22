@@ -288,6 +288,14 @@ class CourseSession(models.Model):
             raise ValidationError(
                 _("Start time cannot be later than end time."))
 
+        if self.is_dan_preparation and not self.course.course_type in constants.DAN_PREPARATION_COURSES:
+            raise ValidationError(
+                _("D.A.N. prepraration sessions are not allowed on this course."))
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.course.update_has_dan_preparation()
+
     class Meta:
         verbose_name = _("Course Session")
         verbose_name_plural = _("Course Sessions")
