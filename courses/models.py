@@ -171,6 +171,27 @@ class InternalCourse(Course):
                 raise ValidationError(
                     _("Registration start date cannot be later than registration end date."))
 
+        if not Fee.objects.filter(
+            course_type=self.course_type,
+            fee_category=self.fee_category,
+        ).exists():
+            raise ValidationError(
+                _(f"No fee found for course type '{self.course_type}' and fee category '{self.fee_category}' found.")
+            )
+
+        if (
+            self.dan_discount and (
+                self.course_type not in constants.INTERNATIONAL_COURSES or self.fee_category == "dan_seminar")
+        ):
+            raise ValidationError(
+                _("D.A.N. member discount not applicable for this course type/fee category.")
+            )
+
+        if self.registration_status == 1 and self.course_type == "children":
+            raise ValidationError(
+                _("Online Registration for children's courses is not allowed. Please change the registration status to 'closed'.")
+            )
+
     def save(self, *args, **kwargs):
         if self.registration_start_date or self.registration_end_date:
             start_ok = self.registration_start_date is None or self.registration_start_date <= date.today()
@@ -187,7 +208,27 @@ class InternalCourse(Course):
         if self.end_date < date.today():
             self.status = 0
 
+        if not Fee.objects.filter(
+            course_type=self.course_type,
+            fee_category=self.fee_category,
+        ).exists():
+            raise ValidationError(
+                _(f"No fee found for course type '{self.course_type}' and fee category '{self.fee_category}' found.")
+            )
+
+        if self.has_dan_preparation and self.course_type not in constants.DAN_PREPARATION_COURSES:
+            self.has_dan_preparation = False
+
         super().save(*args, **kwargs)
+
+    def update_has_dan_preparation(self):
+        has_dan_preparation = self.sessions.filter(
+            is_dan_preparation=True).exists()
+
+        if self.course_type in constants.DAN_PREPARATION_COURSES:
+            if self.has_dan_preparation != has_dan_preparation:
+                self.has_dan_preparation = has_dan_preparation
+                self.save()
 
     class Meta:
         verbose_name = _("Internal Course")
