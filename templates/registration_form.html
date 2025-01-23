@@ -160,7 +160,7 @@
     </div>
     <div class="card-body">
       <div class="row">
-        {% if course.course_type in international_courses %}
+        {% if course.course_type in international_courses and course.fee_category != "dan_seminar" %}
         <div>{{ form.dinner|as_crispy_field }}</div>
         <div>{{ form.overnight_stay|as_crispy_field }}</div>
         {% endif %}
