@@ -120,7 +120,6 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 "description",
                 "flyer",
                 "location",
-                "dan_discount",
             )
         }),
         (_("Dates"), {
@@ -135,7 +134,8 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         (_("Payment Information"), {
             "fields": (
                 "discount_percentage",
-                "bank_transfer_until"
+                "bank_transfer_until",
+                "dan_discount"
             )
         }),
         (_("Additional Information"), {

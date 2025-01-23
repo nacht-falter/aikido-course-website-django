@@ -64,7 +64,7 @@ class CourseRegistrationForm(forms.ModelForm):
         required=False, label=_("I am eligible for a discount.")
     )
     dan_member = forms.BooleanField(
-        required=False, label=_("I am a D.A.N. member.")
+        required=False, label=_("I am a D.A.N. International member.")
     )
     dojo = forms.ChoiceField(
         required=False,

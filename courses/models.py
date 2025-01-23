@@ -127,6 +127,7 @@ class InternalCourse(Course):
     discount_percentage = models.IntegerField(
         _("Discount Percentage"),
         default=50,
+        help_text=_("Discount for economically disadvantaged groups"),
     )
     bank_transfer_until = models.DateField(
         _("Bank Transfer Until"),
@@ -157,6 +158,7 @@ class InternalCourse(Course):
     dan_discount = models.BooleanField(
         _("Course with D.A.N. Member Discount"),
         default=False,
+        help_text=_("D.A.N. members receive a discount on this course."),
     )
     has_dan_preparation = models.BooleanField(
         _("Course with Dan Preparation"),
