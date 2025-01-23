@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function handleEntireCourseChange() {
-    const isChecked = entireCourse.checked;
+    const isChecked = entireCourse?.checked;
     sessionCheckboxes.forEach((cb) => (cb.checked = isChecked));
     updateEntireCourseWithoutDanPreparation();
     displayFinalFee(courseData);
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (courseData.fee_category === "dan_seminar") {
           feeType = singleDay ? "single_day" : "entire_course";
         } else if (
-          entireCourse.checked &&
+          entireCourse?.checked &&
           courseData.course_has_dan_preparation
         ) {
           feeType = "entire_course_dan_preparation";
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (courseData.fee_category === "dan_seminar") {
           feeType = "single_session";
         } else if (
-          entireCourse.checked &&
+          entireCourse?.checked &&
           courseData.course_has_dan_preparation
         ) {
           feeType = "entire_course_dan_preparation";
