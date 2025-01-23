@@ -210,14 +210,6 @@ class InternalCourse(Course):
         if self.end_date < date.today():
             self.status = 0
 
-        if not Fee.objects.filter(
-            course_type=self.course_type,
-            fee_category=self.fee_category,
-        ).exists():
-            raise ValidationError(
-                _(f"No fee found for course type '{self.course_type}' and fee category '{self.fee_category}' found.")
-            )
-
         if self.has_dan_preparation and self.course_type not in constants.DAN_PREPARATION_COURSES:
             self.has_dan_preparation = False
 
