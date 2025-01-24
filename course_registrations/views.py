@@ -48,6 +48,8 @@ def prepare_course_data(course):
             for fee in fees
         ],
         "discount_percentage": course.discount_percentage,
+        "discount_display": _("reduced"),
+        "dan_member_display": _("D.A.N. Member"),
         "course_has_dan_preparation": course.has_dan_preparation,
     }
     return course_data

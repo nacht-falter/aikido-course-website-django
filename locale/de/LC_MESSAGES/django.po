@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-23 01:50+0100\n"
+"POT-Creation-Date: 2025-01-24 14:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgid "Past Courses"
 msgstr "Vergangene Lehrgänge"
 
 #: course_registrations/admin.py:40 course_registrations/models.py:43
-#: courses/models.py:39 courses/models.py:266 danbw_website/utils.py:186
+#: courses/models.py:39 courses/models.py:258 danbw_website/utils.py:186
 msgid "Course"
 msgstr "Lehrgang"
 
@@ -176,7 +176,7 @@ msgstr "Bedingungen akzeptiert"
 msgid "Discount"
 msgstr "Ermäßigung"
 
-#: course_registrations/models.py:95
+#: course_registrations/models.py:95 course_registrations/views.py:44
 msgid "D.A.N. Member"
 msgstr "D.A.N. Mitglied"
 
@@ -252,31 +252,35 @@ msgstr "benutzer/anmeldungen/aktualisieren/<int:pk>/"
 msgid "set-attendence-status/<int:pk>/"
 msgstr "anmeldestatus-setzen/<int:pk>/"
 
-#: course_registrations/views.py:69
+#: course_registrations/views.py:43
+msgid "reduced"
+msgstr "ermäßigt"
+
+#: course_registrations/views.py:72
 msgid "Registration for this course is not possible at the moment."
 msgstr "Eine Anmeldung für diesen Lehrgang ist momentan nicht möglich."
 
-#: course_registrations/views.py:76
+#: course_registrations/views.py:79
 msgid "Please log in to your account or continue as a guest."
 msgstr "Bitte melde Dich in Deinem Konto an oder fahre als Gast fort."
 
-#: course_registrations/views.py:85
+#: course_registrations/views.py:88
 msgid "Please create a user profile to contine."
 msgstr "Bitte erstelle ein Benutzerprofil, um fortzufahren."
 
-#: course_registrations/views.py:96
+#: course_registrations/views.py:99
 msgid "You are already registered for this course."
 msgstr "Du bist bereits für diesen Lehrgang angemeldet."
 
-#: course_registrations/views.py:139
+#: course_registrations/views.py:142
 msgid "A registration with this email address already exists."
 msgstr "Eine Anmeldung mit dieser E-Mail-Adresse existiert bereits."
 
-#: course_registrations/views.py:193
+#: course_registrations/views.py:196
 msgid "You have successfully signed up for "
 msgstr "Du hast Dich erfolgreich angemeldet für "
 
-#: course_registrations/views.py:257
+#: course_registrations/views.py:260
 msgid ""
 "Please cancel registrations by clicking the button from the 'My "
 "Registrations' page."
@@ -284,35 +288,35 @@ msgstr ""
 "Bitte storniere Anmeldungen durch Klicken auf den Button auf der Seite "
 "'Meine Anmeldungen'."
 
-#: course_registrations/views.py:271 course_registrations/views.py:427
+#: course_registrations/views.py:274 course_registrations/views.py:430
 msgid "Your registration for "
 msgstr "Deine Anmeldung für "
 
-#: course_registrations/views.py:272
+#: course_registrations/views.py:275
 msgid "has been cancelled."
 msgstr "wurde storniert."
 
-#: course_registrations/views.py:337
+#: course_registrations/views.py:340
 msgid "You have successfully updated your registration for "
 msgstr "Du hast Deine Anmeldung erfolgreich aktualisiert für "
 
-#: course_registrations/views.py:347
+#: course_registrations/views.py:350
 msgid "Registration not submitted. Please select at least one session."
 msgstr "Anmeldung nicht übermittelt. Bitte wähle mindestens eine Einheit aus."
 
-#: course_registrations/views.py:371 course_registrations/views.py:383
+#: course_registrations/views.py:374 course_registrations/views.py:386
 msgid "No registrations found for this course."
 msgstr "Es wurden keine Anmeldungen für diesen Lehrgang gefunden."
 
-#: course_registrations/views.py:374
+#: course_registrations/views.py:377
 msgid "Download started"
 msgstr "Download gestartet"
 
-#: course_registrations/views.py:395
+#: course_registrations/views.py:398
 msgid "Invalid request method."
 msgstr ""
 
-#: course_registrations/views.py:408
+#: course_registrations/views.py:411
 msgid ""
 "Please set the attendence status of registrations by clicking the button "
 "from the 'My Registrations' page."
@@ -320,7 +324,7 @@ msgstr ""
 "Bitte bestätige, dass du teilgenommen hast durch Klicken auf den Button auf "
 "der Seite 'Meine Anmeldungen'."
 
-#: course_registrations/views.py:428
+#: course_registrations/views.py:431
 msgid " has been updated."
 msgstr " wurde aktualisiert."
 
@@ -369,7 +373,7 @@ msgstr "Anmeldungen"
 msgid "Courses"
 msgstr "Lehrgänge"
 
-#: courses/models.py:16 courses/models.py:259
+#: courses/models.py:16 courses/models.py:251
 #: templates/course_list_header.html:13
 msgid "Title"
 msgstr "Titel"
@@ -435,7 +439,7 @@ msgstr "Anmeldebeginn"
 msgid "Registration End Date"
 msgstr "Anmeldeschluss"
 
-#: courses/models.py:122 courses/models.py:244
+#: courses/models.py:122 courses/models.py:236
 #: templates/course_list_header.html:10
 msgid "Organizer"
 msgstr "Veranstalter"
@@ -470,8 +474,7 @@ msgstr "Lehrgang mit D.A.N.-Mitgliederrabatt"
 
 #: courses/models.py:161
 msgid "D.A.N. members receive a discount on this course."
-msgstr ""
-"D.A.N.-Mitglieder erhalten einen Rabatt auf diesen Lehrgang."
+msgstr "D.A.N.-Mitglieder erhalten einen Rabatt auf diesen Lehrgang."
 
 #: courses/models.py:164
 msgid "Course with Dan Preparation"
@@ -481,7 +484,7 @@ msgstr "Kurs mit Dan-Vorbereitung"
 msgid "Registration start date cannot be later than registration end date."
 msgstr "Das Anmeldestartdatum kann nicht nach dem Anmeldeschlussdatum liegen."
 
-#: courses/models.py:181 courses/models.py:218
+#: courses/models.py:181
 #, python-brace-format
 msgid ""
 "No fee found for course type '{self.course_type}' and fee category '{self."
@@ -504,56 +507,56 @@ msgstr ""
 "Online-Anmeldung für Kinderkurse ist nicht erlaubt. Bitte ändere den "
 "Anmeldestatus auf 'geschlossen'."
 
-#: courses/models.py:236
+#: courses/models.py:228
 msgid "Internal Course"
 msgstr "Interner Lehrgang"
 
-#: courses/models.py:237
+#: courses/models.py:229
 msgid "Internal Courses"
 msgstr "Interne Lehrgänge"
 
-#: courses/models.py:248
+#: courses/models.py:240
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2628
 msgid "URL"
 msgstr "URL"
 
-#: courses/models.py:251
+#: courses/models.py:243
 msgid "External Course"
 msgstr "Externer Lehrgang"
 
-#: courses/models.py:252
+#: courses/models.py:244
 msgid "External Courses"
 msgstr "Externe Lehrgänge"
 
-#: courses/models.py:269
+#: courses/models.py:261
 msgid "Date"
 msgstr "Datum"
 
-#: courses/models.py:273
+#: courses/models.py:265
 msgid "Start Time"
 msgstr "Startzeit"
 
-#: courses/models.py:277
+#: courses/models.py:269
 msgid "End Time"
 msgstr "Endzeit"
 
-#: courses/models.py:281
+#: courses/models.py:273
 msgid "Dan Preparation"
 msgstr "Dan-Vorbereitung"
 
-#: courses/models.py:291
+#: courses/models.py:283
 msgid "Start time cannot be later than end time."
 msgstr "Die Startzeit kann nicht nach der Endzeit liegen."
 
-#: courses/models.py:295
+#: courses/models.py:287
 msgid "D.A.N. prepraration sessions are not allowed on this course."
 msgstr "D.A.N. Vorbereitungseinheiten sind bei diesem Lehrgang nicht erlaubt."
 
-#: courses/models.py:302
+#: courses/models.py:294
 msgid "Course Session"
 msgstr "Lehrgangseinheit"
 
-#: courses/models.py:303
+#: courses/models.py:295
 msgid "Course Sessions"
 msgstr "Lehrgangseinheiten"
 
@@ -2350,8 +2353,8 @@ msgstr ""
 "Ermäßigungsbedingungen</a> unten."
 
 #: templates/registration_form.html:147
-msgid "D.A.N. Membership"
-msgstr "D.A.N. Mitgliedschaft"
+msgid "D.A.N. Member discount"
+msgstr "D.A.N. Mitgliederrabatt"
 
 #: templates/registration_form.html:173
 msgid "Please accept the terms and conditions below."

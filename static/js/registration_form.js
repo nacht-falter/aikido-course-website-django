@@ -262,10 +262,17 @@ document.addEventListener("DOMContentLoaded", function () {
       ? finalFee
       : finalFee.toFixed(2);
     if (sessionCount >= 1) {
-      finalFeeInfo.innerText = ` (${sessionCount} x ${feeTypeDisplay})`;
+      finalFeeInfo.innerText = ` (${sessionCount} x ${feeTypeDisplay}`;
     } else {
-      finalFeeInfo.innerText = ` (${feeTypeDisplay})`;
+      finalFeeInfo.innerText = ` (${feeTypeDisplay}`;
     }
+    if (danMemberCheckbox?.checked) {
+      finalFeeInfo.innerText += `, ${courseData.dan_member_display}`;
+    }
+    if (discountCheckbox?.checked) {
+      finalFeeInfo.innerText += `, ${courseData.discount_display}`;
+    }
+    finalFeeInfo.innerText += ")";
   }
 
   /**
