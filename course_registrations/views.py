@@ -23,7 +23,7 @@ from . import forms
 from .models import CourseRegistration, UserProfile
 
 
-def prepare_course_data(course):
+def prepare_context(course, form):
     """Prepares data to be passed to the template"""
     fees = Fee.objects.filter(
         course_type=course.course_type, fee_category=course.fee_category)
@@ -52,7 +52,14 @@ def prepare_course_data(course):
         "dan_member_display": _("D.A.N. Member"),
         "course_has_dan_preparation": course.has_dan_preparation,
     }
-    return course_data
+    context = {
+        "course": course,
+        "form": form,
+        "course_data": course_data,
+        "international_courses": constants.INTERNATIONAL_COURSES,
+        "exam_courses": constants.EXAM_COURSES
+    }
+    return context
 
 
 class RegisterCourse(View):
@@ -62,7 +69,6 @@ class RegisterCourse(View):
 
         courses = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
-        course_data = prepare_course_data(course)
 
         course.save()
 
@@ -111,19 +117,12 @@ class RegisterCourse(View):
         return render(
             request,
             "register_course.html",
-            {
-                "course": course,
-                "form": registration_form,
-                "course_data": course_data,
-                "international_courses": constants.INTERNATIONAL_COURSES,
-                "exam_courses": constants.EXAM_COURSES
-            },
+            prepare_context(course, registration_form),
         )
 
     def post(self, request, slug):
         queryset = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(queryset, slug=slug)
-        course_data = prepare_course_data(course)
 
         if request.user.is_authenticated:
             registration_form = forms.CourseRegistrationForm(
@@ -142,12 +141,7 @@ class RegisterCourse(View):
                         "A registration with this email address already exists."))
                     return render(
                         request,
-                        "register_course.html",
-                        {
-                            "course": course,
-                            "form": registration_form,
-                            "course_data": course_data,
-                        },
+                        prepare_context(course, registration_form),
                     )
 
             registration = registration_form.save(commit=False)
@@ -295,17 +289,12 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             user_profile=request.user.profile,
             initial={"selected_sessions": selected_sessions},
         )
-        course_data = prepare_course_data(course)
 
         return render(
             request,
             "update_courseregistration.html",
-            {
-                "course": course,
-                "form": registration_form,
-                "course_data": course_data,
-            },
-        )
+            prepare_context(course, registration_form),
+       )
 
     def post(self, request, pk):
         registration = get_object_or_404(CourseRegistration, pk=pk)
@@ -314,7 +303,6 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             raise PermissionDenied
 
         course = registration.course
-        course_data = prepare_course_data(course)
 
         registration_form = forms.CourseRegistrationForm(
             data=request.POST,
@@ -353,11 +341,7 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             return render(
                 request,
                 "update_courseregistration.html",
-                {
-                    "course": course,
-                    "form": registration_form,
-                    "course_data": course_data,
-                },
+                prepare_context(course, registration_form),
             )
 
 
