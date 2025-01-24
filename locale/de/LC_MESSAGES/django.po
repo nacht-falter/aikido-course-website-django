@@ -178,7 +178,7 @@ msgstr "Ermäßigung"
 
 #: course_registrations/models.py:95 course_registrations/views.py:44
 msgid "D.A.N. Member"
-msgstr "D.A.N. Mitglied"
+msgstr "D.A.N.-Mitglied"
 
 #: course_registrations/models.py:99 danbw_website/utils.py:193
 msgid "Final Fee"
@@ -497,7 +497,7 @@ msgstr ""
 msgid ""
 "D.A.N. member discount not applicable for this course type/fee category."
 msgstr ""
-"D.A.N. Mitgliederrabatt für Lehrgangstyp/Preiskategorie nicht anwendbar."
+"D.A.N.-Mitgliederrabatt für Lehrgangstyp/Preiskategorie nicht anwendbar."
 
 #: courses/models.py:194
 msgid ""
@@ -578,7 +578,7 @@ msgstr "Überweisung"
 
 #: danbw_website/constants.py:32
 msgid "Cash"
-msgstr "Bar"
+msgstr "Barzahlung"
 
 #: danbw_website/constants.py:36 danbw_website/constants.py:46
 msgid "6th Kyu ⚪️"
@@ -2354,7 +2354,7 @@ msgstr ""
 
 #: templates/registration_form.html:147
 msgid "D.A.N. Member discount"
-msgstr "D.A.N. Mitgliederrabatt"
+msgstr "D.A.N.-Mitgliederrabatt"
 
 #: templates/registration_form.html:173
 msgid "Please accept the terms and conditions below."

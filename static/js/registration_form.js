@@ -266,6 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       finalFeeInfo.innerText = ` (${feeTypeDisplay}`;
     }
+    finalFeeInfo.innerText += `, ${paymentMethodSelect.options[paymentMethodSelect.selectedIndex].text}`;
     if (danMemberCheckbox?.checked) {
       finalFeeInfo.innerText += `, ${courseData.dan_member_display}`;
     }
