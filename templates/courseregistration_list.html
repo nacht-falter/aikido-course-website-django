@@ -35,7 +35,12 @@
             </tr>
             <tr>
                 <th scope="col">{% trans "Course Fee:" %}</th>
-                <td>€{{ registration.final_fee }}</td>
+                {% get_current_language as LANGUAGE_CODE %}
+                {% if LANGUAGE_CODE == 'en' %}
+                    <td>€{{ registration.final_fee|floatformat:2 }}</td>
+                {% else %}
+                    <td>{{ registration.final_fee|floatformat:2 }} €</td>
+                {% endif %}
             </tr>
             {% if registration.payment_method == 0 %}
             <tr>

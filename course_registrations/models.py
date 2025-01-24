@@ -95,9 +95,11 @@ class CourseRegistration(models.Model):
         _("D.A.N. Member"),
         default=False,
     )
-    final_fee = models.IntegerField(
+    final_fee = models.DecimalField(
         _("Final Fee"),
         default=0,
+        decimal_places=2,
+        max_digits=10,
     )
     payment_status = models.IntegerField(
         _("Payment status"),
@@ -221,7 +223,7 @@ class CourseRegistration(models.Model):
                 raise ValueError(
                     _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
 
-        return final_fee * (1 - course.discount_percentage / 100) if self.discount else final_fee
+        return float(final_fee) * (1 - course.discount_percentage / 100) if self.discount else final_fee
 
     def set_exam(self, user=None):
         if self.exam:
