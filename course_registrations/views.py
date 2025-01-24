@@ -39,6 +39,7 @@ def prepare_course_data(course):
         "fees": [
             {
                 "fee_type": fee.fee_type,
+                "fee_type_display": fee.get_fee_type_display(),
                 # Convert Decimal to float for JSON compatibility
                 "amount": float(fee.amount),
                 "extra_fee_cash": float(fee.extra_fee_cash),
