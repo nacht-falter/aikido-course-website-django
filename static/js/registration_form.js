@@ -7,6 +7,7 @@ const courseData = document.currentScript
 document.addEventListener("DOMContentLoaded", function () {
   const finalFeeContainer = document.getElementById("final-fee-container");
   const finalFeeDisplay = document.getElementById("final-fee-display");
+  const finalFeeInfo = document.getElementById("final-fee-info");
   const entireCourseWithoutDanPreparation = document.getElementById(
     "entire-course-without-dan-preparation",
   );
@@ -84,6 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   function getFeeType(courseData) {
     let feeType;
+
+    // Check if all session checkboxes are on the same day
     let sessionDates = new Set(
       Array.from(sessionCheckboxes)
         .filter((checkbox) => checkbox.checked)
@@ -169,8 +172,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function getFeeTypeDisplay(feeType, fees) {
+    const feeObj = fees.find((fee) => fee.fee_type === feeType);
+
+    if (feeObj) {
+      return feeObj.fee_type_display;
+    } else {
+      console.error(`Fee not found for ${feeType}`);
+      return null;
+    }
+  }
+
   /**
-   * Calculate fees for individual sessions and return the total
+   * Calculate fees for individual sessions and return the total and count
    */
   function calculateIndividualSessions(
     sessionCheckboxes,
@@ -179,6 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
     danMember,
   ) {
     let finalFee = 0;
+    let sessionCount = 0;
 
     for (let checkbox of sessionCheckboxes) {
       if (!checkbox.checked) continue;
@@ -189,41 +204,46 @@ document.addEventListener("DOMContentLoaded", function () {
           : "single_session";
 
       let fee = getFee(sessionType, paymentMethod, danMember, courseData.fees);
-
       finalFee += fee ? fee : 0;
+      sessionCount++;
     }
 
-    return finalFee;
+    return { finalFee, sessionCount };
   }
 
   /**
    * Calculate the final fee based on the selected sessions, payment method
-   * and dan membership status.
+   * and dan membership status
    */
   function calculateFinalFee(courseData) {
     const paymentMethod = paymentMethodSelect.value == 0 ? "bank" : "cash";
     const danMember = danMemberCheckbox ? danMemberCheckbox.checked : true;
     const feeType = getFeeType(courseData);
     let finalFee = 0;
+    let sessionCount = 0;
 
     if (feeType.includes("single_session")) {
-      finalFee = calculateIndividualSessions(
+      const result = calculateIndividualSessions(
         sessionCheckboxes,
         courseData,
         paymentMethod,
         danMember,
       );
+      finalFee = result.finalFee;
+      sessionCount = result.sessionCount;
     } else {
       finalFee = getFee(feeType, paymentMethod, danMember, courseData.fees);
     }
-    return finalFee ? finalFee : 0;
+
+    return { finalFee: finalFee ? finalFee : 0, feeType, sessionCount };
   }
 
   /**
    * Display the final fee
    */
   function displayFinalFee() {
-    let finalFee = calculateFinalFee(courseData);
+    let { finalFee, feeType, sessionCount } = calculateFinalFee(courseData);
+    let feeTypeDisplay = getFeeTypeDisplay(feeType, courseData.fees);
     let sessionSelected = false;
     for (let checkbox of sessionCheckboxes) {
       sessionSelected = sessionSelected || checkbox.checked;
@@ -237,9 +257,15 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       finalFeeContainer.classList.add("d-none");
     }
+
     finalFeeDisplay.innerText = Number.isInteger(finalFee)
       ? finalFee
       : finalFee.toFixed(2);
+    if (sessionCount >= 1) {
+      finalFeeInfo.innerText = ` (${sessionCount} x ${feeTypeDisplay})`;
+    } else {
+      finalFeeInfo.innerText = ` (${feeTypeDisplay})`;
+    }
   }
 
   /**

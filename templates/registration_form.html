@@ -144,7 +144,7 @@
       {% if course.dan_discount %}
       <div class="row">
         <div class="col-3 mb-2">
-          <strong>{% trans "D.A.N. Membership" %}:</strong>
+          <strong>{% trans "D.A.N. Member discount" %}:</strong>
         </div>
         <div class="col-9 mb-2">
           {{ form.dan_member|as_crispy_field }}
@@ -186,6 +186,7 @@
       <span id="final-fee-display">0</span><span> €</span>
       {% endif %}
       </strong>
+      <span id="final-fee-info"></span>
     </div>
   </div>
 </div>
