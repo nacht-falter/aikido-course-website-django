@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row">
   <h2 id="{{ page.slug }}">{{ page.title }}</h2>
-  {% if not "placeholder" in page.featured_image.url %}
+  {% if not "placeholder" in page.featured_image.url and page.featured_image.url %}
   <div class="col-12 px-md-0 py-2">
     <img class="featured-image" src="{{ page.featured_image.url }}" width="100%">
   </div>
