@@ -5,7 +5,7 @@ const courseData = document.currentScript
   : {};
 
 document.addEventListener("DOMContentLoaded", function () {
-  const finalFeeContainer = document.getElementById("final-fee-container");
+  const stickyFeeRow = document.getElementById("sticky-fee-row");
   const finalFeeDisplay = document.getElementById("final-fee-display");
   const finalFeeInfo = document.getElementById("final-fee-info");
   const entireCourseWithoutDanPreparation = document.getElementById(
@@ -251,25 +251,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (discountCheckbox.checked) {
       finalFee *= 1 - courseData.discount_percentage / 100;
     }
-    const finalFeeContainer = document.getElementById("final-fee-container");
-    if (!finalFeeContainer) return;
 
     if (finalFee > 0 && sessionSelected) {
-      finalFeeContainer.classList.remove("d-none");
-
-      setTimeout(() => {
-        finalFeeContainer.classList.add("show");
-      }, 10);
+      stickyFeeRow.style.opacity = 0.9;
     } else {
-      finalFeeContainer.classList.remove("show");
-
-      finalFeeContainer.addEventListener(
-        "transitionend",
-        () => {
-          finalFeeContainer.classList.add("d-none");
-        },
-        { once: true },
-      );
+      stickyFeeRow.style.opacity = 0;
     }
 
     finalFeeDisplay.innerText = Number.isInteger(finalFee)
@@ -298,19 +284,19 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let checkbox of sessionCheckboxes) {
       if (checkbox.checked == true) {
         checkboxChecked = true;
-        sessionMsg.style.display = "none";
+        sessionMsg.style.visibility = "hidden";
         break;
       } else {
-        sessionMsg.style.display = "inline";
+        sessionMsg.style.visibility = "visible";
       }
     }
     if (entireCourseWithoutDanPreparation.checked || entireCourse?.checked) {
       checkboxChecked = true;
     }
     if (acceptTermsCheckbox.checked) {
-      termsMsg.style.display = "none";
+      termsMsg.style.visibility = "hidden";
     } else {
-      termsMsg.style.display = "inline";
+      termsMsg.style.visibility = "visible";
     }
     if (checkboxChecked == true && acceptTermsCheckbox.checked) {
       submitButton.classList.remove("disabled");

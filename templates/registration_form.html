@@ -57,10 +57,10 @@
       <hr>
 
       <div class="row">
-        <div class="col-3 mb-2">
+        <div class="col-3">
           <strong>{% trans "Sessions:" %}</strong>
         </div>
-        <div class="col-9 mb-2">
+        <div class="col-9">
           <div id="id_selected_sessions">
             {% for session in form.fields.selected_sessions.queryset %}
             <div class="form-check">
@@ -177,7 +177,7 @@
     </div>
   </div>
   <div id="sticky-fee-row" class="col-12 mt-3 px-2 fs-5 sticky-bottom">
-    <div id="final-fee-container" class="alert alert-success d-none fade border border-success">
+    <div id="final-fee-container" class="alert alert-success border border-success">
       <strong>{% trans "Registration Fee" %}:
       {% get_current_language as LANGUAGE_CODE %}
       {% if LANGUAGE_CODE == 'en' %}
