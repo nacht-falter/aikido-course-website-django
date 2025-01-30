@@ -244,18 +244,32 @@ document.addEventListener("DOMContentLoaded", function () {
   function displayFinalFee() {
     let { finalFee, feeType, sessionCount } = calculateFinalFee(courseData);
     let feeTypeDisplay = getFeeTypeDisplay(feeType, courseData.fees);
-    let sessionSelected = false;
-    for (let checkbox of sessionCheckboxes) {
-      sessionSelected = sessionSelected || checkbox.checked;
-    }
+    let sessionSelected = Array.from(sessionCheckboxes).some(
+      (cb) => cb.checked,
+    );
 
     if (discountCheckbox.checked) {
-      finalFee *= courseData.discount_percentage / 100;
+      finalFee *= 1 - courseData.discount_percentage / 100;
     }
+    const finalFeeContainer = document.getElementById("final-fee-container");
+    if (!finalFeeContainer) return;
+
     if (finalFee > 0 && sessionSelected) {
       finalFeeContainer.classList.remove("d-none");
+
+      setTimeout(() => {
+        finalFeeContainer.classList.add("show");
+      }, 10);
     } else {
-      finalFeeContainer.classList.add("d-none");
+      finalFeeContainer.classList.remove("show");
+
+      finalFeeContainer.addEventListener(
+        "transitionend",
+        () => {
+          finalFeeContainer.classList.add("d-none");
+        },
+        { once: true },
+      );
     }
 
     finalFeeDisplay.innerText = Number.isInteger(finalFee)
