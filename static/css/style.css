@@ -378,4 +378,5 @@ a.badge:hover {
 }
 #sticky-fee-row {
   bottom: 1rem;
+  opacity: 0.9;
 }
