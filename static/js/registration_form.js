@@ -253,9 +253,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (finalFee > 0 && sessionSelected) {
-      stickyFeeRow.style.opacity = 0.9;
+      stickyFeeRow.classList.remove("d-none");
     } else {
-      stickyFeeRow.style.opacity = 0;
+      stickyFeeRow.classList.add("d-none");
     }
 
     finalFeeDisplay.innerText = Number.isInteger(finalFee)
