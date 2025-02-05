@@ -43,11 +43,13 @@ class CourseRegistrationForm(forms.ModelForm):
             self.fields["other_dojo"].initial = _("Other Dojo")
 
         if (
-            (user_profile and user_profile.grade >= 6) or
             course.course_type not in constants.EXAM_COURSES or
             course.fee_category == 'dan_seminar'
         ):
             self.fields["exam"].widget = forms.HiddenInput()
+
+        if user_profile and user_profile.grade >= 6:
+            self.fields["exam"].disabled = True
 
     accept_terms = forms.BooleanField(
         required=True, label=_("I accept the terms and conditions below.")

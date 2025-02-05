@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const sessionMsg = document.getElementById("session-validation-msg");
   const termsMsg = document.getElementById("terms-validation-msg");
   const gradeSelect = document.getElementById("id_grade");
-  const examSection = document.getElementById("exam-section");
+  const examCheckbox = document.getElementById("id_exam");
   const discountCheckbox = document.getElementById("id_discount");
   const danMemberCheckbox = document.getElementById("id_dan_member");
   const paymentMethodSelect = document.getElementById("id_payment_method");
@@ -306,13 +306,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
-   * Hide exam section if grade is above 1st Kyu
+   * Disable exam checkbox if grade is above 1st Kyu
    */
   function checkGrade() {
     if (gradeSelect.value > 5) {
-      examSection.style.display = "none";
+      examCheckbox.disabled = true;
+      examCheckbox.checked = false;
     } else {
-      examSection.style.display = "flex";
+      examCheckbox.disabled = false;
     }
   }
 

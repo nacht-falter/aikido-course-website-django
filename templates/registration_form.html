@@ -98,18 +98,16 @@
         </div>
       </div>
 
-      {% if not user.profile or user.profile.grade < 6 %}
-        {% if course.course_type in exam_courses %}
-        <hr>
-        <div id="exam-section" class="row">
-          <div class="col-3 mb-2">
-            <strong>{% trans "Exam" %}:</strong>
-          </div>
-          <div class="col-9 mb-2">
-            {{ form.exam|as_crispy_field }}
-          </div>
+      {% if course.course_type in exam_courses %}
+      <hr>
+      <div id="exam-section" class="row">
+        <div class="col-3 mb-2">
+          <strong>{% trans "Exam" %}:</strong>
         </div>
-        {% endif %}
+        <div class="col-9 mb-2">
+          {{ form.exam|as_crispy_field }}
+        </div>
+      </div>
       {% endif %}
     </div>
   </div>
