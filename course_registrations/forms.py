@@ -30,7 +30,8 @@ class CourseRegistrationForm(forms.ModelForm):
         if user_profile:
             if (
                 user_profile.grade >= 6 or
-                course.course_type not in constants.EXAM_COURSES
+                course.course_type not in constants.EXAM_COURSES or
+                course.fee_category == 'dan_seminar'
             ):
                 self.fields["exam"].widget = forms.HiddenInput()
 

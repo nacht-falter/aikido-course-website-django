@@ -178,11 +178,7 @@ class RegisterCourse(View):
                 return render(
                     request,
                     "register_course.html",
-                    {
-                        "course": course,
-                        "form": registration_form,
-                        "course_data": course_data,
-                    },
+                    prepare_context(course, registration_form),
                 )
 
             messages.info(
@@ -197,11 +193,7 @@ class RegisterCourse(View):
             return render(
                 request,
                 "register_course.html",
-                {
-                    "course": course,
-                    "form": registration_form,
-                    "course_data": course_data,
-                },
+                prepare_context(course, registration_form),
             )
 
 
@@ -294,7 +286,7 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             request,
             "update_courseregistration.html",
             prepare_context(course, registration_form),
-       )
+        )
 
     def post(self, request, pk):
         registration = get_object_or_404(CourseRegistration, pk=pk)
