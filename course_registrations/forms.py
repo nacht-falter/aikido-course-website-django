@@ -28,13 +28,6 @@ class CourseRegistrationForm(forms.ModelForm):
                 required=False, label=_("I need a place to stay overnight."))
 
         if user_profile:
-            if (
-                user_profile.grade >= 6 or
-                course.course_type not in constants.EXAM_COURSES or
-                course.fee_category == 'dan_seminar'
-            ):
-                self.fields["exam"].widget = forms.HiddenInput()
-
             self.fields["email"].widget = forms.HiddenInput()
             self.fields["first_name"].widget = forms.HiddenInput()
             self.fields["last_name"].widget = forms.HiddenInput()
@@ -48,6 +41,13 @@ class CourseRegistrationForm(forms.ModelForm):
             self.fields["dojo"].required = True
             self.fields["grade"].required = True
             self.fields["other_dojo"].initial = _("Other Dojo")
+
+        if (
+            (user_profile and user_profile.grade >= 6) or
+            course.course_type not in constants.EXAM_COURSES or
+            course.fee_category == 'dan_seminar'
+        ):
+            self.fields["exam"].widget = forms.HiddenInput()
 
     accept_terms = forms.BooleanField(
         required=True, label=_("I accept the terms and conditions below.")
