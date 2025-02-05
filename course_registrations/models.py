@@ -240,7 +240,7 @@ class CourseRegistration(models.Model):
                     self.exam = False
 
     def save(self, *args, **kwargs):
-        if not self.course.course_type == "international":
+        if not self.course.has_dinner:
             self.dinner = None
             self.overnight_stay = None
 

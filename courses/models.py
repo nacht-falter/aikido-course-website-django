@@ -164,6 +164,10 @@ class InternalCourse(Course):
         _("Course with Dan Preparation"),
         default=False,
     )
+    has_dinner = models.BooleanField(
+        _("Course with Dinner"),
+        default=False,
+    )
 
     def clean(self):
         """Custom validation for Internal Course model"""

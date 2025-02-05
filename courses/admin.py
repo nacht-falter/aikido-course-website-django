@@ -120,6 +120,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 "description",
                 "flyer",
                 "location",
+                "has_dinner"
             )
         }),
         (_("Dates"), {

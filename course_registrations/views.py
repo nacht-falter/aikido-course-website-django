@@ -56,7 +56,6 @@ def prepare_context(course, form):
         "course": course,
         "form": form,
         "course_data": course_data,
-        "international_courses": constants.INTERNATIONAL_COURSES,
         "exam_courses": constants.EXAM_COURSES
     }
     return context
@@ -259,7 +258,7 @@ class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
         messages.success(
             request,
             _("Your registration for ") +
-            registration.course.title + _("has been cancelled.")
+            registration.course.title + _(" has been cancelled.")
         )
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
