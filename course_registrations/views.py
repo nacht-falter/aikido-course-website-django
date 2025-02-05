@@ -141,6 +141,7 @@ class RegisterCourse(View):
                         "A registration with this email address already exists."))
                     return render(
                         request,
+                        "register_course.html",
                         prepare_context(course, registration_form),
                     )
 
