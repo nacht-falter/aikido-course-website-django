@@ -26,7 +26,9 @@ urlpatterns = [
     path("", include("pages.urls")),
     path("accounts/", include("allauth.urls")),
     path("summernote/", include("django_summernote.urls")),
+    path('captcha/', include('captcha.urls')),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
