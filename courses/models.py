@@ -295,5 +295,6 @@ class CourseSession(models.Model):
         self.course.update_has_dan_preparation()
 
     class Meta:
+        ordering = ["date", "start_time"]
         verbose_name = _("Course Session")
         verbose_name_plural = _("Course Sessions")

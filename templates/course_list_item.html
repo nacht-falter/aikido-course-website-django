@@ -145,7 +145,7 @@
           {% endif %}
           <div class="row">
             <div class="fw-bold mt-1">{% trans "Sessions " %}</div>
-            {% regroup course.sessions.all|dictsort:"date" by date as session_dates %}
+            {% regroup course.sessions.all by date as session_dates %}
             {% for date_group in session_dates %}
               <div class="col-md-4 mt-2">
                 {{ date_group.grouper|localize }}

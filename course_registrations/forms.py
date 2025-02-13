@@ -20,7 +20,7 @@ class CourseRegistrationForm(forms.ModelForm):
         if course:
             self.fields["selected_sessions"].queryset = CourseSession.objects.filter(
                 course=course
-            ).order_by("date", "start_time")
+            )
 
             self.fields['dinner'] = forms.BooleanField(
                 required=False, label=_("I would like to join the dinner on Saturday evening."))
