@@ -67,7 +67,6 @@ def send_registration_confirmation(request, registration):
             body=message,
             from_email=sender,
             to=[recipient],
-            bcc=[bcc_recipient],
         )
         email.content_subtype = 'html'
         email.send()
