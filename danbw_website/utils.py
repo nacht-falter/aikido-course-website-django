@@ -60,7 +60,6 @@ def send_registration_confirmation(request, registration):
 
     sender = settings.DEFAULT_FROM_EMAIL
     recipient = registration.user.email if request.user.is_authenticated else registration.email
-    bcc_recipient = os.environ.get('EMAIL_HOST_USER')
 
     try:
         email = EmailMessage(
