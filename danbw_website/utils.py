@@ -58,7 +58,7 @@ def send_registration_confirmation(request, registration):
 
     message = render_to_string('registration_confirmation.html', context)
 
-    sender = settings.DEFAULT_FROM_EMAIL
+    sender = os.environ.get("COURSE_TEAM_EMAIL")
     recipient = registration.user.email if request.user.is_authenticated else registration.email
 
     try:
