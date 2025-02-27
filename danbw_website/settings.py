@@ -83,6 +83,7 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/user/profile/"
+ACCOUNT_FORMS = {'signup': 'danbw_website.forms.CustomSignupForm'}
 
 # Email Settings
 
