@@ -86,7 +86,6 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/user/profile/"
 ACCOUNT_FORMS = {'signup': 'danbw_website.forms.CustomSignupForm'}
 
 # Email Settings
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.ionos.de"
 EMAIL_PORT = 587
