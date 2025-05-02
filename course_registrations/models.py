@@ -139,7 +139,7 @@ class CourseRegistration(models.Model):
                 condition=models.Q(user__isnull=False)
             ),
             models.UniqueConstraint(
-                fields=["email", "course"],
+                fields=["email", "first_name", "last_name", "course"],
                 name="unique_guest_registration",
                 condition=models.Q(email__isnull=False)
             )

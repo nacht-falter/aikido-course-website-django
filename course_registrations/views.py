@@ -131,13 +131,21 @@ class RegisterCourse(View):
             registration_form = forms.CourseRegistrationForm(
                 data=request.POST, course=course
             )
+        print(registration_form.data)
 
         if registration_form.is_valid():
             if not request.user.is_authenticated:
                 email = registration_form.cleaned_data.get("email")
-                if CourseRegistration.objects.filter(email=email, course=course).exists():
-                    registration_form.add_error("email", _(
-                        "A registration with this email address already exists."))
+                first_name = registration_form.cleaned_data.get("first_name")
+                last_name = registration_form.cleaned_data.get("last_name")
+                if CourseRegistration.objects.filter(
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    course=course
+                ).exists():
+                    registration_form.add_error(
+                        None, _("A registration with this name and email address already exists."))
                     return render(
                         request,
                         "register_course.html",
