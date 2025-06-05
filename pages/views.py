@@ -24,12 +24,13 @@ class HomePage(View):
             list(ExternalCourse.objects.all())
         )
 
+        num_days = 120
         upcoming_courses = []
         upcoming_courses = [
             course
             for course in all_courses
             if course.end_date >= date.today()
-            and course.end_date <= date.today() + timedelta(days=90)
+            and course.end_date <= date.today() + timedelta(days=num_days)
         ]
 
         for course in upcoming_courses:
@@ -50,7 +51,7 @@ class HomePage(View):
                 registration
                 for registration in all_registrations
                 if registration.course.end_date >= date.today()
-                and registration.course.end_date <= date.today() + timedelta(days=90)
+                and registration.course.end_date <= date.today() + timedelta(days=num_days)
             ]
 
         return render(

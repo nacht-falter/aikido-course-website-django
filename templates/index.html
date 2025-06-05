@@ -38,6 +38,8 @@
 {% endblock carousel %}
 
 {% block content %}
+{% now "Y-m-d" as todays_date %}
+
 <h2>D.A.N. BW – Dynamic Aikido Nocquet in Baden-Württemberg</h2>
   <p>
     {% blocktrans trimmed %}
@@ -68,12 +70,22 @@
       <i class="fa-solid fa-circle-right"></i>
       {{ course.start_date|localize }}-{{ course.end_date|localize }}: <strong>{{ course.title }}</strong>
     </a>
-    {% if course.registration_status == 1 and not course.user_registered %}
+
+    {% if course.status == 1 and course.registration_status == 1 and not course.user_registered %}
     <a class="badge text-bg-success" href="{% url 'register_course' course.slug %}?next={{ request.path }}"
       title="{% trans "Register for this course" %}">
         <i class="fa-solid fa-user-plus"></i> {% trans "Registration" %} {{ course.get_registration_status_display }}
     </a>
+    {% elif course.status == 1 and course.registration_end_date|date:"Y-m-d" > todays_date and not course.user_registered %}
+    <span class="badge text-bg-warning" title="{% trans "Registration has not started yet" %}">
+        <i class="fa-solid fa-clock"></i> {% trans "Registration starts on" %} {{ course.registration_start_date|localize }}
+    </span>
+    {% elif course.status == 1 and not course.user_registered %}
+    <span class="badge text-bg-secondary" title="{% trans "Registration is closed for this course" %}">
+        <i class="fa-solid fa-lock"></i> {% trans "Registration Closed" %}
+    </span>
     {% endif %}
+
     {% for registration in upcoming_registrations %}
     {% if registration.course == course %}
     <a class="badge text-bg-primary" href="{% url 'courseregistration_list' %}#{{ registration.id }}"
