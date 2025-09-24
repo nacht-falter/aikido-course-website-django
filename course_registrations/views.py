@@ -131,21 +131,36 @@ class RegisterCourse(View):
             registration_form = forms.CourseRegistrationForm(
                 data=request.POST, course=course
             )
-        print(registration_form.data)
 
         if registration_form.is_valid():
             if not request.user.is_authenticated:
                 email = registration_form.cleaned_data.get("email")
                 first_name = registration_form.cleaned_data.get("first_name")
                 last_name = registration_form.cleaned_data.get("last_name")
+
                 if CourseRegistration.objects.filter(
                     email=email,
                     first_name=first_name,
                     last_name=last_name,
-                    course=course
+                    course=course,
                 ).exists():
                     registration_form.add_error(
-                        None, _("A registration with this name and email address already exists."))
+                        None, _("A registration with this name and email address already exists.")
+                    )
+                    return render(
+                        request,
+                        "register_course.html",
+                        prepare_context(course, registration_form),
+                    )
+
+                if CourseRegistration.objects.filter(
+                    user=None,
+                    email=email,
+                    course=course,
+                ).exists():
+                    registration_form.add_error(
+                        None, _("A registration with this email address already exists.")
+                    )
                     return render(
                         request,
                         "register_course.html",
@@ -155,10 +170,8 @@ class RegisterCourse(View):
             registration = registration_form.save(commit=False)
             registration.course = course
 
-            selected_sessions = registration_form.cleaned_data.get(
-                "selected_sessions")
-            registration.final_fee = registration.calculate_fees(
-                course, selected_sessions)
+            selected_sessions = registration_form.cleaned_data.get("selected_sessions")
+            registration.final_fee = registration.calculate_fees(course, selected_sessions)
             registration.dinner = registration_form.cleaned_data.get("dinner")
 
             if request.user.is_authenticated:
@@ -166,14 +179,21 @@ class RegisterCourse(View):
                 registration.set_exam(request.user)
             else:
                 registration.set_exam()
-                registration.email = registration_form.cleaned_data.get(
-                    "email")
-                registration.first_name = registration_form.cleaned_data.get(
-                    "first_name")
-                registration.last_name = registration_form.cleaned_data.get(
-                    "last_name")
+                registration.email = registration_form.cleaned_data.get("email")
+                registration.first_name = registration_form.cleaned_data.get("first_name")
+                registration.last_name = registration_form.cleaned_data.get("last_name")
 
-            registration.save()
+            try:
+                registration.save()
+            except IntegrityError:
+                registration_form.add_error(
+                    None, _("A registration with this email/name already exists for this course.")
+                )
+                return render(
+                    request,
+                    "register_course.html",
+                    prepare_context(course, registration_form),
+                )
 
             registration.selected_sessions.set(selected_sessions)
 
@@ -189,10 +209,7 @@ class RegisterCourse(View):
                     prepare_context(course, registration_form),
                 )
 
-            messages.info(
-                request,
-                _("You have successfully signed up for ") + course.title
-            )
+            messages.info(request, _("You have successfully signed up for ") + course.title)
             if request.user.is_authenticated:
                 return HttpResponseRedirect(reverse("courseregistration_list"))
             return HttpResponseRedirect(reverse("course_list"))
@@ -203,7 +220,6 @@ class RegisterCourse(View):
                 "register_course.html",
                 prepare_context(course, registration_form),
             )
-
 
 class CourseRegistrationList(LoginRequiredMixin, View):
     """Displays a list of a users course registrations"""
