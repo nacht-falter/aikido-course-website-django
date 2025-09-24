@@ -185,6 +185,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LOG_FILE = os.path.join(BASE_DIR, "django.log")
+DISALLOWED_LOG_FILE = os.path.join(BASE_DIR, "disallowed_hosts.log")
 
 LOGGING = {
     "version": 1,
@@ -206,11 +207,22 @@ LOGGING = {
             "filename": LOG_FILE,
             "formatter": "verbose",
         },
+        "disallowed_file": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": DISALLOWED_LOG_FILE,
+            "formatter": "verbose",
+        },
     },
     "loggers": {
         "django": {
             "handlers": ["file"],
             "level": "ERROR",
+            "propagate": False,
+        },
+        "django.security.DisallowedHost": {
+            "handlers": ["disallowed_file"],
+            "level": "WARNING",
             "propagate": False,
         },
     },
