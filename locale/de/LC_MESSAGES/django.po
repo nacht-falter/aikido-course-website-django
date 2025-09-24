@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-05 15:50+0200\n"
+"POT-Creation-Date: 2025-09-24 09:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -278,11 +278,22 @@ msgstr ""
 "Es existiert bereits eine Anmeldung mit diesem Name und dieser E-Mail-"
 "Adresse."
 
-#: course_registrations/views.py:194
+#: course_registrations/views.py:162
+msgid "A registration with this email address already exists."
+msgstr ""
+"Es existiert bereits eine Anmeldung mit dieser E-Mail-Adresse."
+
+#: course_registrations/views.py:190
+msgid "A registration with this email/name already exists for this course."
+msgstr ""
+"Es existiert bereits eine Anmeldung mit diesem Name und dieser E-Mail-"
+"Adresse."
+
+#: course_registrations/views.py:212
 msgid "You have successfully signed up for "
 msgstr "Du hast Dich erfolgreich angemeldet für "
 
-#: course_registrations/views.py:254
+#: course_registrations/views.py:270
 msgid ""
 "Please cancel registrations by clicking the button from the 'My "
 "Registrations' page."
@@ -290,35 +301,35 @@ msgstr ""
 "Bitte storniere Anmeldungen durch Klicken auf den Button auf der Seite "
 "'Meine Anmeldungen'."
 
-#: course_registrations/views.py:268 course_registrations/views.py:414
+#: course_registrations/views.py:284 course_registrations/views.py:430
 msgid "Your registration for "
 msgstr "Deine Anmeldung für "
 
-#: course_registrations/views.py:269
+#: course_registrations/views.py:285
 msgid " has been cancelled."
 msgstr " wurde storniert."
 
-#: course_registrations/views.py:328
+#: course_registrations/views.py:344
 msgid "You have successfully updated your registration for "
 msgstr "Du hast Deine Anmeldung erfolgreich aktualisiert für "
 
-#: course_registrations/views.py:338
+#: course_registrations/views.py:354
 msgid "Registration not submitted. Please select at least one session."
 msgstr "Anmeldung nicht übermittelt. Bitte wähle mindestens eine Einheit aus."
 
-#: course_registrations/views.py:358 course_registrations/views.py:370
+#: course_registrations/views.py:374 course_registrations/views.py:386
 msgid "No registrations found for this course."
 msgstr "Es wurden keine Anmeldungen für diesen Lehrgang gefunden."
 
-#: course_registrations/views.py:361
+#: course_registrations/views.py:377
 msgid "Download started"
 msgstr "Download gestartet"
 
-#: course_registrations/views.py:382
+#: course_registrations/views.py:398
 msgid "Invalid request method."
 msgstr ""
 
-#: course_registrations/views.py:395
+#: course_registrations/views.py:411
 msgid ""
 "Please set the attendence status of registrations by clicking the button "
 "from the 'My Registrations' page."
@@ -326,7 +337,7 @@ msgstr ""
 "Bitte bestätige, dass du teilgenommen hast durch Klicken auf den Button auf "
 "der Seite 'Meine Anmeldungen'."
 
-#: course_registrations/views.py:415
+#: course_registrations/views.py:431
 msgid " has been updated."
 msgstr " wurde aktualisiert."
 
