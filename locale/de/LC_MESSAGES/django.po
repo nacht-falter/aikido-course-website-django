@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-05 15:35+0200\n"
+"POT-Creation-Date: 2025-06-05 15:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -555,8 +555,8 @@ msgid "Start time cannot be later than end time."
 msgstr "Die Startzeit kann nicht nach der Endzeit liegen."
 
 #: courses/models.py:291
-msgid "D.A.N. prepraration sessions are not allowed on this course."
-msgstr "D.A.N. Vorbereitungseinheiten sind bei diesem Lehrgang nicht erlaubt."
+msgid "Dan preparation sessions are not allowed on this course."
+msgstr "Dan-Vorbereitungseinheiten sind bei diesem Lehrgang nicht erlaubt."
 
 #: courses/models.py:299
 msgid "Course Session"
