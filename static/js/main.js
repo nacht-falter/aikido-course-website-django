@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   function autoCloseMessages() {
     let messages = document.getElementsByClassName("msg");
-    let timeoutDelay = 3000;
+    let timeoutDelay = 5000;
     for (let message of messages) {
       setTimeout(function () {
         message.remove();
@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginToastElement = document.getElementById('loginToast');
   const honeypotDiv = document.getElementById("div_id_website");
   const honeypot = document.getElementById("id_website");
+  const linkedAccountModal = document.getElementById('linkedAccountModal');
 
   if (showHideCoursesBtn) {
     showHideCoursesBtn.addEventListener("click", updateCoursesButton);
@@ -55,6 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
   if (loginToastElement) {
     const loginToast = new bootstrap.Toast(loginToastElement);
     loginToast.show();
+  }
+
+  if (linkedAccountModal) {
+    const linkedModal = new bootstrap.Modal(linkedAccountModal);
+    linkedModal.show();
   }
 
   // Hide honeypot field in contact form

@@ -32,11 +32,14 @@ class CourseList(View):
         current_courses = filter(
             lambda course: course.end_date >= date.today(), all_courses)
 
+        show_linked_modal = request.session.pop("show_linked_modal", False)
+
         return render(
             request,
             "course_list.html",
             {
                 "past_courses": past_courses,
                 "current_courses": current_courses,
+                "show_linked_modal": show_linked_modal,
             },
         )

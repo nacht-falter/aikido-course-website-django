@@ -5,8 +5,10 @@ from smtplib import SMTPException
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
+from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
                               redirect, render, reverse)
@@ -21,6 +23,8 @@ from fees.models import Fee
 
 from . import forms
 from .models import CourseRegistration, UserProfile
+
+User = get_user_model()
 
 
 def prepare_context(course, form):
@@ -133,33 +137,31 @@ class RegisterCourse(View):
             )
 
         if registration_form.is_valid():
-            if not request.user.is_authenticated:
-                email = registration_form.cleaned_data.get("email")
-                first_name = registration_form.cleaned_data.get("first_name")
-                last_name = registration_form.cleaned_data.get("last_name")
+            email = registration_form.cleaned_data.get("email")
+            first_name = registration_form.cleaned_data.get("first_name")
+            last_name = registration_form.cleaned_data.get("last_name")
 
+            if not request.user.is_authenticated:
                 if CourseRegistration.objects.filter(
                     email=email,
                     first_name=first_name,
                     last_name=last_name,
-                    course=course,
+                    course=course
                 ).exists():
                     registration_form.add_error(
-                        None, _("A registration with this name and email address already exists.")
+                        None, _("A registration with this name and email already exists for this course.")
                     )
                     return render(
                         request,
                         "register_course.html",
                         prepare_context(course, registration_form),
                     )
-
-                if CourseRegistration.objects.filter(
-                    user=None,
-                    email=email,
-                    course=course,
+            elif CourseRegistration.objects.filter(
+                    user=request.user,
+                    course=course
                 ).exists():
                     registration_form.add_error(
-                        None, _("A registration with this email address already exists.")
+                        None, _("You have already registered for this course.")
                     )
                     return render(
                         request,
@@ -178,10 +180,16 @@ class RegisterCourse(View):
                 registration.user = request.user
                 registration.set_exam(request.user)
             else:
-                registration.set_exam()
-                registration.email = registration_form.cleaned_data.get("email")
-                registration.first_name = registration_form.cleaned_data.get("first_name")
-                registration.last_name = registration_form.cleaned_data.get("last_name")
+                user_match = User.objects.filter(email=email, first_name=first_name, last_name=last_name).first()
+                if user_match:
+                    registration.user = user_match
+                    registration.set_exam(user_match)
+                    request.session["show_linked_modal"] = True
+                else:
+                    registration.set_exam()
+                    registration.email = email
+                    registration.first_name = first_name
+                    registration.last_name = last_name
 
             try:
                 registration.save()
@@ -220,6 +228,8 @@ class RegisterCourse(View):
                 "register_course.html",
                 prepare_context(course, registration_form),
             )
+
+
 
 class CourseRegistrationList(LoginRequiredMixin, View):
     """Displays a list of a users course registrations"""
