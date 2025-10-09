@@ -76,6 +76,34 @@ def send_registration_confirmation(request, registration):
         ) from e
 
 
+def send_cancellation_notification(request, registration):
+    """Sends a cancellation notification email to staff"""
+    user = registration.user if request.user.is_authenticated else registration
+    course = registration.course.title
+    first_name = user.first_name
+    last_name = user.last_name
+    email = user.email
+    subject = _("[Dynamic Aikido Nocquet BW] A registration for {course} has been cancelled").format(course=course)
+    message_parts = [
+        _("Hi,\n\n"),
+        _("A registration for {course} has been cancelled.\n\n").format(course=course),
+        _("Name: {first_name} {last_name}\n").format(
+            first_name=first_name, last_name=last_name),
+        _("Email: {email}\n").format(email=email),
+        _("Course: {course}\n\n").format(course=course),
+        _("Please check the admin panel at {site_url}/admin for more details.\n\n").format(
+            site_url=os.environ.get("SITE_URL")),
+    ]
+    sender = settings.EMAIL_HOST_USER
+    recipient = os.environ.get("COURSE_TEAM_EMAIL")
+    message = "".join(message_parts)
+    try:
+        send_mail(subject, message, sender, [recipient])
+    except SMTPException as e:
+        raise SMTPException(
+            _("Failed to send cancellation notification email. Please contact the course team.")) from e
+
+
 def send_registration_notification(request, registration):
     """Sends a registration notification email"""
     subject = _("[Dynamic Aikido Nocquet BW] New registration for ") + \

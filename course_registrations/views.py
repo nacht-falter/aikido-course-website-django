@@ -230,7 +230,6 @@ class RegisterCourse(View):
             )
 
 
-
 class CourseRegistrationList(LoginRequiredMixin, View):
     """Displays a list of a users course registrations"""
 
@@ -286,6 +285,12 @@ class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
         registration = get_object_or_404(CourseRegistration, pk=pk)
         if registration.user != request.user:
             raise PermissionDenied
+
+        try:
+            utils.send_cancellation_notification(request, registration)
+        except SMTPException as e:
+            messages.error(request, e)
+            return HttpResponseRedirect(reverse("courseregistration_list"))
 
         registration.delete()
 
