@@ -60,7 +60,8 @@ def prepare_context(course, form):
         "course": course,
         "form": form,
         "course_data": course_data,
-        "exam_courses": constants.EXAM_COURSES
+        "exam_courses": constants.EXAM_COURSES,
+        "dan_preparation_courses": constants.DAN_PREPARATION_COURSES
     }
     return context
 
@@ -72,6 +73,10 @@ class RegisterCourse(View):
 
         courses = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
+
+        # Update dan preparation flag if needed
+        if course.course_type in constants.DAN_PREPARATION_COURSES:
+            course.update_has_dan_preparation()
 
         course.save()
 
@@ -311,6 +316,11 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             raise PermissionDenied
 
         course = registration.course
+
+        # Update dan preparation flag if needed
+        if course.course_type in constants.DAN_PREPARATION_COURSES:
+            course.update_has_dan_preparation()
+            course.save()
 
         selected_sessions = registration.selected_sessions.all()
 

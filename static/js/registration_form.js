@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const otherDojoInput = document.getElementById("id_other_dojo");
 
   function updateEntireCourseWithoutDanPreparation() {
+    // Check if all regular sessions are selected and no special sessions
     const allRegularChecked = Array.from(regularSessionCheckboxes).every(
       (cb) => cb.checked,
     );
@@ -47,9 +48,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateEntireCourse() {
     if (entireCourse) {
-      entireCourse.checked = Array.from(sessionCheckboxes).every(
+      // Check if all sessions are selected
+      const allChecked = Array.from(sessionCheckboxes).every(
         (cb) => cb.checked,
       );
+      entireCourse.checked = allChecked;
     }
   }
 
@@ -62,11 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleEntireCourseWithoutDanPreparationChange() {
     const isChecked = entireCourseWithoutDanPreparation.checked;
+
+    // Select all regular sessions, uncheck special sessions
     regularSessionCheckboxes.forEach((cb) => (cb.checked = isChecked));
     specialSessionCheckboxes.forEach((cb) => (cb.checked = false));
     if (entireCourse) {
       entireCourse.checked = false;
     }
+
     updateEntireCourse();
     displayFinalFee(courseData);
     disableSubmitButton();
@@ -74,7 +80,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleEntireCourseChange() {
     const isChecked = entireCourse?.checked;
+
+    // Select all sessions for all course types
     sessionCheckboxes.forEach((cb) => (cb.checked = isChecked));
+
     updateEntireCourseWithoutDanPreparation();
     displayFinalFee(courseData);
     disableSubmitButton();
@@ -139,6 +148,50 @@ document.addEventListener("DOMContentLoaded", function () {
 
       case "children":
         feeType = "entire_course";
+        break;
+
+      case "family_reunion":
+        // Check if entire course checkboxes are checked first
+        if (
+          entireCourse?.checked &&
+          courseData.course_has_dan_preparation
+        ) {
+          feeType = "entire_course_with_dan_seminar";
+        } else if (entireCourseWithoutDanPreparation.checked) {
+          feeType = "entire_course";
+        } else {
+          // Otherwise, check session selection
+          // Get all unique days in the course
+          const allCourseDays = new Set(
+            Array.from(sessionCheckboxes).map((cb) => cb.dataset.date),
+          );
+
+          // Get unique days with at least one selected session
+          const selectedDays = new Set(
+            Array.from(sessionCheckboxes)
+              .filter((cb) => cb.checked)
+              .map((cb) => cb.dataset.date),
+          );
+
+          // Entire course = at least one session selected on each unique day
+          const entireCourseSelected =
+            allCourseDays.size === selectedDays.size &&
+            [...allCourseDays].every((day) => selectedDays.has(day));
+
+          const hasDanSessions = Array.from(sessionCheckboxes).some(
+            (cb) => cb.checked && cb.dataset.danPreparation === "True",
+          );
+
+          if (entireCourseSelected) {
+            feeType = hasDanSessions
+              ? "entire_course_with_dan_seminar"
+              : "entire_course";
+          } else {
+            feeType = hasDanSessions
+              ? "single_day_with_dan_seminar"
+              : "single_day";
+          }
+        }
         break;
 
       default:
@@ -212,6 +265,41 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
+   * Calculate fees per day for family reunion courses
+   */
+  function calculateFamilyReunionDays(courseData, paymentMethod, danMember) {
+    // Group sessions by date
+    const sessionsByDate = {};
+    Array.from(sessionCheckboxes).forEach((cb) => {
+      if (cb.checked) {
+        const date = cb.dataset.date;
+        if (!sessionsByDate[date]) {
+          sessionsByDate[date] = [];
+        }
+        sessionsByDate[date].push(cb);
+      }
+    });
+
+    let finalFee = 0;
+    let dayCount = 0;
+
+    // Calculate fee for each day
+    for (const [date, daySessions] of Object.entries(sessionsByDate)) {
+      const hasDanSession = daySessions.some(
+        (cb) => cb.dataset.danPreparation === "True",
+      );
+      const dayFeeType = hasDanSession
+        ? "single_day_with_dan_seminar"
+        : "single_day";
+      const fee = getFee(dayFeeType, paymentMethod, danMember, courseData.fees);
+      finalFee += fee ? fee : 0;
+      dayCount++;
+    }
+
+    return { finalFee, dayCount };
+  }
+
+  /**
    * Calculate the final fee based on the selected sessions, payment method
    * and dan membership status
    */
@@ -231,6 +319,18 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       finalFee = result.finalFee;
       sessionCount = result.sessionCount;
+    } else if (
+      courseData.course_type === "family_reunion" &&
+      feeType.includes("single_day")
+    ) {
+      // Calculate per day for family reunion
+      const result = calculateFamilyReunionDays(
+        courseData,
+        paymentMethod,
+        danMember,
+      );
+      finalFee = result.finalFee;
+      sessionCount = result.dayCount;
     } else {
       finalFee = getFee(feeType, paymentMethod, danMember, courseData.fees);
     }
@@ -248,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
       (cb) => cb.checked,
     );
 
-    if (discountCheckbox.checked) {
+    if (discountCheckbox && discountCheckbox.checked) {
       finalFee *= 1 - courseData.discount_percentage / 100;
     }
 
@@ -261,11 +361,18 @@ document.addEventListener("DOMContentLoaded", function () {
     finalFeeDisplay.innerText = Number.isInteger(finalFee)
       ? finalFee
       : finalFee.toFixed(2);
+
+    // Show count for multi-item fees
     if (sessionCount >= 1) {
-      finalFeeInfo.innerText = ` (${sessionCount} x ${feeTypeDisplay}`;
+      const countLabel =
+        courseData.course_type === "family_reunion" && feeType.includes("single_day")
+          ? "days"
+          : "sessions";
+      finalFeeInfo.innerText = ` (${sessionCount} ${countLabel} x ${feeTypeDisplay}`;
     } else {
       finalFeeInfo.innerText = ` (${feeTypeDisplay}`;
     }
+
     finalFeeInfo.innerText += `, ${paymentMethodSelect.options[paymentMethodSelect.selectedIndex].text}`;
     if (danMemberCheckbox?.checked) {
       finalFeeInfo.innerText += `, ${courseData.dan_member_display}`;

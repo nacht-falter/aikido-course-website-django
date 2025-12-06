@@ -12,6 +12,8 @@ class Fee(models.Model):
         ("single_day", _("Single Day")),
         ("single_session_dan_preparation", _("Dan Preparation Session")),
         ("entire_course_dan_preparation", _("Entire Course with Dan Preparation")),
+        ("single_day_with_dan_seminar", _("Single Day with Dan Seminar")),
+        ("entire_course_with_dan_seminar", _("Entire Course with Dan Seminar")),
     ]
 
     course_type = models.CharField(

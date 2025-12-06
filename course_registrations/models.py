@@ -189,6 +189,18 @@ class CourseRegistration(models.Model):
         elif course.course_type == "children":
             fee_type = "entire_course"
 
+        elif course.course_type == "family_reunion":
+            # For family reunion: entire course = at least one session selected on each unique day
+            all_course_days = set(course.sessions.values_list('date', flat=True))
+            selected_days = set(selected_sessions.values_list('date', flat=True))
+            entire_course_selected = all_course_days == selected_days
+
+            has_dan_sessions = selected_sessions.filter(is_dan_preparation=True).exists()
+            if entire_course_selected:
+                fee_type = "entire_course_with_dan_seminar" if has_dan_sessions else "entire_course"
+            else:
+                fee_type = "single_day_with_dan_seminar" if has_dan_sessions else "single_day"
+
         return fee_type
 
     def calculate_fees(self, course, selected_sessions):
@@ -197,6 +209,7 @@ class CourseRegistration(models.Model):
         fee_type = self.get_fee_type(course, selected_sessions)
 
         if "single_session" in fee_type:
+            # Charge per session (e.g., for sensei_emmerson, external_teacher, dan_bw_teacher)
             for session in selected_sessions:
                 fee_type = "single_session_dan_preparation" if session.is_dan_preparation else "single_session"
                 fee = Fee.get_fee(
@@ -211,7 +224,34 @@ class CourseRegistration(models.Model):
                         _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
 
                 final_fee += fee if fee else 0
+
+        elif course.course_type == "family_reunion" and "single_day" in fee_type:
+            # Charge per unique day for family_reunion
+            # Group sessions by date
+            from collections import defaultdict
+            sessions_by_date = defaultdict(list)
+            for session in selected_sessions:
+                sessions_by_date[session.date].append(session)
+
+            # Charge for each day
+            for date, day_sessions in sessions_by_date.items():
+                has_dan_session = any(s.is_dan_preparation for s in day_sessions)
+                day_fee_type = "single_day_with_dan_seminar" if has_dan_session else "single_day"
+                fee = Fee.get_fee(
+                    course.course_type,
+                    course.fee_category,
+                    day_fee_type,
+                    self.payment_method,
+                    self.dan_member
+                )
+                if fee == 0:
+                    raise ValueError(
+                        _(f"No fee found for {course.course_type}, {course.fee_category}, {day_fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
+
+                final_fee += fee if fee else 0
+
         else:
+            # Charge once for entire course or other fixed fee types
             final_fee = Fee.get_fee(
                 course.course_type,
                 course.fee_category,
@@ -223,7 +263,10 @@ class CourseRegistration(models.Model):
                 raise ValueError(
                     _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
 
-        return float(final_fee) * (1 - course.discount_percentage / 100) if self.discount else final_fee
+        # Apply discount to course fee
+        final_fee = float(final_fee) * (1 - course.discount_percentage / 100) if self.discount else final_fee
+
+        return final_fee
 
     def set_exam(self, user=None):
         if self.exam:

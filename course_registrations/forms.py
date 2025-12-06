@@ -51,6 +51,15 @@ class CourseRegistrationForm(forms.ModelForm):
         if user_profile and user_profile.grade >= 6:
             self.fields["exam"].disabled = True
 
+        # Disable payment method for family reunion (always bank transfer)
+        if course.course_type == "family_reunion":
+            self.fields["payment_method"].disabled = True
+            self.fields["payment_method"].initial = constants.BANK
+
+        # Hide discount field if course has no discount
+        if course.discount_percentage == 0:
+            self.fields["discount"].widget = forms.HiddenInput()
+
     accept_terms = forms.BooleanField(
         required=True, label=_("I accept the terms and conditions below.")
     )

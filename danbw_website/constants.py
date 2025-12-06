@@ -97,6 +97,7 @@ COURSE_TYPES = (
     ("external_teacher", _("External Teacher")),
     ("dan_bw_teacher", _("D.A.N. BW Teacher")),
     ("children", _("Children")),
+    ("family_reunion", _("Family Reunion")),
 )
 
 INTERNATIONAL_COURSES = [
@@ -114,9 +115,11 @@ EXAM_COURSES = [
 DAN_PREPARATION_COURSES = [
     "sensei_emmerson",
     "external_teacher",
+    "family_reunion",
 ]
 
 FEE_CATEGORIES = (
     ("regular", _("Regular Course")),
     ("dan_seminar", _("Dan Seminar")),
+    ("family_reunion", _("Family Reunion")),
 )
