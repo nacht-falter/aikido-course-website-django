@@ -81,11 +81,19 @@
             {% if course.has_dan_preparation %}
               <div class="form-check">
                 <input type="checkbox" name="entire-course-without-dan-preparation" id="entire-course-without-dan-preparation" class="form-check-input"/>
-                <label for="entire-course-without-dan-preparation" class="form-check-label">{% trans "Entire Course without Dan Preparation" %}</label>
+                {% if course.course_type == "family_reunion" %}
+                  <label for="entire-course-without-dan-preparation" class="form-check-label">{% trans "Entire Course without Dan Seminar" %}</label>
+                {% else %}
+                  <label for="entire-course-without-dan-preparation" class="form-check-label">{% trans "Entire Course without Dan Preparation" %}</label>
+                {% endif %}
               </div>
               <div class="form-check">
                 <input type="checkbox" name="entire-course" id="entire-course" class="form-check-input"/>
-                <label for="entire-course" class="form-check-label">{% trans "Entire Course with Dan Preparation" %}</label>
+                {% if course.course_type == "family_reunion" %}
+                  <label for="entire-course" class="form-check-label">{% trans "Entire Course with Dan Seminar" %}</label>
+                {% else %}
+                  <label for="entire-course" class="form-check-label">{% trans "Entire Course with Dan Preparation" %}</label>
+                {% endif %}
               </div>
             {% else %}
               <div class="form-check">
