@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
-from courses.models import CourseSession, InternalCourse
+from courses.models import AccommodationOption, CourseSession, InternalCourse
 from danbw_website import constants
 from fees.models import Fee
 from users.models import User, UserProfile
@@ -124,6 +124,13 @@ class CourseRegistration(models.Model):
         _("Overnight stay"),
         blank=True,
         null=True,
+    )
+    accommodation_option = models.ForeignKey(
+        AccommodationOption,
+        on_delete=models.SET_NULL,
+        verbose_name=_("Accommodation Option"),
+        null=True,
+        blank=True,
     )
     attended = models.BooleanField(
         _("Attended"),
@@ -264,7 +271,11 @@ class CourseRegistration(models.Model):
                     _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
 
         # Apply discount to course fee
-        final_fee = float(final_fee) * (1 - course.discount_percentage / 100) if self.discount else final_fee
+        final_fee = float(final_fee) * (1 - course.discount_percentage / 100) if self.discount else float(final_fee)
+
+        # Add accommodation fee (not subject to discount)
+        if self.accommodation_option:
+            final_fee += float(self.accommodation_option.fee)
 
         return final_fee
 

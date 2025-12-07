@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from courses.models import CourseSession
+from courses.models import AccommodationOption, CourseSession
 from danbw_website import constants, utils
 
 from .models import CourseRegistration
@@ -56,6 +56,17 @@ class CourseRegistrationForm(forms.ModelForm):
             self.fields["payment_method"].disabled = True
             self.fields["payment_method"].initial = constants.BANK
 
+            # Configure accommodation options
+            self.fields["accommodation_option"].queryset = AccommodationOption.objects.filter(
+                course=course
+            ).order_by('order')
+            self.fields["accommodation_option"].required = True
+            self.fields["accommodation_option"].label = _("Accommodation")
+            self.fields["accommodation_option"].empty_label = _("Select accommodation option")
+        else:
+            # Hide accommodation option for non-family reunion courses
+            self.fields["accommodation_option"].widget = forms.HiddenInput()
+
         # Hide discount field if course has no discount
         if course.discount_percentage == 0:
             self.fields["discount"].widget = forms.HiddenInput()
@@ -106,6 +117,7 @@ class CourseRegistrationForm(forms.ModelForm):
             "accept_terms",
             "dinner",
             "overnight_stay",
+            "accommodation_option",
         ]
 
     def clean(self):

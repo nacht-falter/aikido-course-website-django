@@ -56,6 +56,20 @@ def prepare_context(course, form):
         "dan_member_display": _("D.A.N. Member"),
         "course_has_dan_preparation": course.has_dan_preparation,
     }
+
+    # Add accommodation options for family reunion courses
+    if course.course_type == "family_reunion":
+        from courses.models import AccommodationOption
+        accommodation_options = AccommodationOption.objects.filter(course=course).order_by('order')
+        course_data["accommodation_options"] = [
+            {
+                "id": option.id,
+                "name": option.name,
+                "fee": float(option.fee)
+            }
+            for option in accommodation_options
+        ]
+
     context = {
         "course": course,
         "form": form,

@@ -75,6 +75,12 @@
                 </td>
             </tr>
             {% endif %}
+            {% if registration.accommodation_option %}
+            <tr>
+                <th scope="col">{% trans "Accommodation" %}:</th>
+                <td>{{ registration.accommodation_option.name }}</td>
+            </tr>
+            {% endif %}
             {% if registration.comment %}
             <tr>
                 <th scope="col">{% trans "Your Comment:" %}</th>

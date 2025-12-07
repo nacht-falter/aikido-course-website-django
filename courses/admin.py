@@ -12,7 +12,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from course_registrations.models import CourseRegistration
 from danbw_website import utils
 
-from .models import CourseSession, ExternalCourse, InternalCourse
+from .models import AccommodationOption, CourseSession, ExternalCourse, InternalCourse
 
 
 class CoursesByYearFilter(admin.SimpleListFilter):
@@ -63,6 +63,14 @@ class CourseSessionInline(admin.TabularInline):
     extra = 0  # Set number of additional rows to 0
 
 
+class AccommodationOptionInline(admin.TabularInline):
+    """Displays AccommodationOptions as an inline model"""
+
+    model = AccommodationOption
+    extra = 0  # Set number of additional rows to 0
+    fields = ["name", "fee", "order"]
+
+
 class CourseRegistrationInline(admin.TabularInline):
     """Displays CourseRegistrations as an inline model"""
 
@@ -85,6 +93,7 @@ class CourseRegistrationInline(admin.TabularInline):
         "accept_terms",
         "dinner",
         "overnight_stay",
+        "accommodation_option",
     ]
     readonly_fields = [
         "first_name",
@@ -99,6 +108,7 @@ class CourseRegistrationInline(admin.TabularInline):
         "truncated_comment",
         "dinner",
         "overnight_stay",
+        "accommodation_option",
         "grade",
         "dojo",
     ]
@@ -161,7 +171,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
     list_filter = (CoursesByYearFilter, FutureCourseFilter,
                    "course_type", "status", "registration_status")
     summernote_fields = ("description",)
-    inlines = [CourseSessionInline, CourseRegistrationInline]
+    inlines = [CourseSessionInline, AccommodationOptionInline, CourseRegistrationInline]
     ordering = ["-start_date"]
     actions = [
         "duplicate_selected_courses",

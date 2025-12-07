@@ -167,6 +167,9 @@
     </div>
     <div class="card-body">
       <div class="row">
+        {% if course.course_type == "family_reunion" %}
+        <div>{{ form.accommodation_option|as_crispy_field }}</div>
+        {% endif %}
         {% if course.has_dinner %}
         <div>{{ form.dinner|as_crispy_field }}</div>
         <div>{{ form.overnight_stay|as_crispy_field }}</div>

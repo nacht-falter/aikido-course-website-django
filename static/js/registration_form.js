@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const dojoSelect = document.getElementById("id_dojo");
   const otherDojoDiv = document.getElementById("div_id_other_dojo");
   const otherDojoInput = document.getElementById("id_other_dojo");
+  const accommodationSelect = document.getElementById("id_accommodation_option");
 
   function updateEntireCourseWithoutDanPreparation() {
     // Check if all regular sessions are selected and no special sessions
@@ -352,6 +353,19 @@ document.addEventListener("DOMContentLoaded", function () {
       finalFee *= 1 - courseData.discount_percentage / 100;
     }
 
+    // Add accommodation fee (not subject to discount)
+    let accommodationFee = 0;
+    if (accommodationSelect && accommodationSelect.value && courseData.accommodation_options) {
+      const selectedId = parseInt(accommodationSelect.value);
+      const selectedAccommodation = courseData.accommodation_options.find(
+        option => option.id === selectedId
+      );
+      if (selectedAccommodation) {
+        accommodationFee = selectedAccommodation.fee;
+        finalFee += accommodationFee;
+      }
+    }
+
     if (finalFee > 0 && sessionSelected) {
       stickyFeeRow.classList.remove("d-none");
     } else {
@@ -379,6 +393,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (discountCheckbox?.checked) {
       finalFeeInfo.innerText += `, ${courseData.discount_display}`;
+    }
+    if (accommodationFee > 0) {
+      const selectedId = parseInt(accommodationSelect.value);
+      const selectedAccommodation = courseData.accommodation_options?.find(
+        option => option.id === selectedId
+      );
+      if (selectedAccommodation) {
+        finalFeeInfo.innerText += ` + ${selectedAccommodation.name}`;
+      }
     }
     finalFeeInfo.innerText += ")";
   }
@@ -474,6 +497,12 @@ document.addEventListener("DOMContentLoaded", function () {
   paymentMethodSelect.addEventListener("change", () =>
     displayFinalFee(courseData),
   );
+
+  if (accommodationSelect) {
+    accommodationSelect.addEventListener("change", () =>
+      displayFinalFee(courseData),
+    );
+  }
 
   // Initial checks:
   checkDojo();

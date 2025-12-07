@@ -298,3 +298,39 @@ class CourseSession(models.Model):
         ordering = ["date", "start_time"]
         verbose_name = _("Course Session")
         verbose_name_plural = _("Course Sessions")
+
+
+class AccommodationOption(models.Model):
+    """Accommodation option for a course (e.g., for Family Reunion courses)"""
+
+    course = models.ForeignKey(
+        InternalCourse,
+        on_delete=models.CASCADE,
+        related_name="accommodation_options",
+        verbose_name=_("Course"),
+    )
+    name = models.CharField(
+        _("Name"),
+        max_length=200,
+        help_text=_("e.g., 'No accommodation', '2 nights', 'Full week'"),
+    )
+    fee = models.DecimalField(
+        _("Fee"),
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        help_text=_("Additional fee for this accommodation option"),
+    )
+    order = models.IntegerField(
+        _("Order"),
+        default=0,
+        help_text=_("Display order (lower numbers appear first)"),
+    )
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = _("Accommodation Option")
+        verbose_name_plural = _("Accommodation Options")
+
+    def __str__(self):
+        return f"{self.name} ({self.fee}€)"

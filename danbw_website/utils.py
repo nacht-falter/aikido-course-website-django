@@ -118,10 +118,20 @@ def send_registration_notification(request, registration):
         _("Name: {first_name} {last_name}\n").format(
             first_name=first_name, last_name=last_name),
         _("Email: {email}\n").format(email=email),
-        _("Course: {course}\n\n").format(course=registration.course.title),
-        _("Please check the admin panel at {site_url}/admin for more details.\n\n").format(
-            site_url=os.environ.get("SITE_URL")),
+        _("Course: {course}\n").format(course=registration.course.title),
     ]
+
+    if registration.accommodation_option:
+        message_parts.append(
+            _("Accommodation: {accommodation}\n").format(
+                accommodation=registration.accommodation_option.name)
+        )
+
+    message_parts.append(
+        _("\nPlease check the admin panel at {site_url}/admin for more details.\n\n").format(
+            site_url=os.environ.get("SITE_URL"))
+    )
+
     sender = settings.EMAIL_HOST_USER
     recipient = os.environ.get("COURSE_TEAM_EMAIL")
     message = "".join(message_parts)
@@ -227,8 +237,10 @@ def write_registrations_csv(writer, registrations):
         _("Registration Date"),
     ]
     if registrations and registrations[0].course.has_dinner:
-        header_row.append("Dinner")
-        header_row.append("Overnight Stay")
+        header_row.append(_("Dinner"))
+        header_row.append(_("Overnight Stay"))
+    if registrations and registrations[0].course.course_type == "family_reunion":
+        header_row.append(_("Accommodation"))
     writer.writerow(header_row)
 
     for registration in registrations:
@@ -265,6 +277,9 @@ def write_registrations_csv(writer, registrations):
             data_row.append(_("Yes") if registration.dinner else _("No"))
             data_row.append(
                 _("Yes") if registration.overnight_stay else _("No"))
+        if registration.course.course_type == "family_reunion":
+            data_row.append(
+                registration.accommodation_option.name if registration.accommodation_option else "")
         writer.writerow(data_row)
 
 
