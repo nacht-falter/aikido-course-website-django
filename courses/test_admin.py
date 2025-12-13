@@ -1,12 +1,13 @@
 from datetime import date, timedelta
 
 from django.contrib.admin.sites import AdminSite
-from django.contrib.auth.models import User
-from django.test import TestCase
-from django.test import RequestFactory
+from django.test import RequestFactory, TestCase
 
-from .models import Course, CourseRegistration
-from .admin import CourseAdmin
+from course_registrations.models import CourseRegistration
+from users.models import User, UserProfile
+
+from .admin import InternalCourseAdmin
+from .models import InternalCourse
 
 
 # Testing Django admin instructions from:
@@ -16,23 +17,25 @@ request = request_factory.get("/admin")
 
 
 class TestCourseAdmin(TestCase):
-    """Tests for the CourseAdmin model"""
+    """Tests for the InternalCourseAdmin model"""
 
     def setUp(self):
         site = AdminSite()
-        self.admin = CourseAdmin(Course, site)
-        self.course = Course.objects.create(
+        self.admin = InternalCourseAdmin(InternalCourse, site)
+        self.course = InternalCourse.objects.create(
             title="Test course",
             slug="test-course",
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
             registration_status=0,
-            course_fee=50,
+            course_type="dan_bw_teacher",
+            fee_category="dan_member",
         )
         self.user = User.objects.create_user(
             username="test-user", password="testpassword"
         )
         self.client.force_login(self.user)
+        self.user_profile = UserProfile.objects.create(user=self.user)
         self.registration = CourseRegistration.objects.create(
             user=self.user,
             course=self.course,
@@ -45,12 +48,12 @@ class TestCourseAdmin(TestCase):
 
     def test_duplicate_course_action(self):
         print("\ntest_duplicate_course_action")
-        queryset = Course.objects.filter(title="Test course")
+        queryset = InternalCourse.objects.filter(title="Test course")
         for i in range(2):
             self.admin.duplicate_selected_courses(request, queryset)
 
-        first_copy = Course.objects.get(title="Copy of Test course")
-        second_copy = Course.objects.get(title="Copy 2 of Test course")
+        first_copy = InternalCourse.objects.get(title="Copy of Test course")
+        second_copy = InternalCourse.objects.get(title="Copy 2 of Test course")
         self.assertTrue(first_copy)
         self.assertTrue(second_copy)
         self.assertEqual(first_copy.slug, "copy-of-test-course")
@@ -66,7 +69,7 @@ class TestCourseAdmin(TestCase):
 
     def test_toggle_registration_status_action(self):
         print("\ntest_toggle_registration_status_action")
-        queryset = Course.objects.all()
+        queryset = InternalCourse.objects.all()
         self.admin.toggle_registration_status(request, queryset)
         self.course.refresh_from_db()
         self.assertEqual(self.course.registration_status, 1)

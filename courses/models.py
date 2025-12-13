@@ -312,6 +312,7 @@ class AccommodationOption(models.Model):
     name = models.CharField(
         _("Name"),
         max_length=200,
+        default="",
         help_text=_("e.g., 'No accommodation', '2 nights', 'Full week'"),
     )
     fee = models.DecimalField(
