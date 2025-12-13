@@ -35,7 +35,7 @@ describe("Auto close messages", () => {
     autoCloseMessages();
     jest.runAllTimers();
     expect(setTimeout).toHaveBeenCalledTimes(2);
-    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 6000);
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 5000);
     const messages = document.getElementsByClassName("msg");
     expect(messages.length).toBe(0);
   });

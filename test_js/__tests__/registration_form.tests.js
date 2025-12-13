@@ -1,14 +1,17 @@
 let source;
 let courseData = {
-  course_fee: 50,
-  session_0_fee: 30,
-  session_1_fee: 30,
+  course_type: "external_teacher",
+  fees: [
+    { fee_type: "entire_course", amount: 50, extra_fee_cash: 0, extra_fee_external: 0, fee_type_display: "Entire Course" },
+    { fee_type: "single_session", amount: 30, extra_fee_cash: 0, extra_fee_external: 0, fee_type_display: "Single Session" },
+  ],
 };
 
 describe("Registration form tests", () => {
   beforeAll(() => {
     document.body.innerHTML = `
-      <input type"checkbox" id="entire-course">
+      <input type="checkbox" id="entire-course">
+      <input type="checkbox" id="entire-course-without-dan-preparation">
       <div id="id_selected_sessions">
         <input type="checkbox" id="checkbox1">
         <input type="checkbox" id="checkbox2">
@@ -58,17 +61,19 @@ describe("Registration form tests", () => {
 
   describe("Final fee calculation", () => {
     test("Final fee equals course fee if entire course is selected", () => {
-      source.entireCourseCheckbox.checked = true;
-      source.calculateFinalFee(courseData);
-      expect(source.finalFeeDisplay.innerText).toEqual(courseData.course_fee);
+      checkbox1.checked = checkbox2.checked = true;
+      document.getElementById("entire-course-without-dan-preparation").checked = true;
+      const result = source.calculateFinalFee(courseData);
+      expect(result.finalFee).toEqual(50);
     });
 
     test("Final fee equals add fees of all selected sessions", () => {
       source.entireCourseCheckbox.checked = false;
+      document.getElementById("entire-course-without-dan-preparation").checked = false;
       checkbox1.checked = true;
       checkbox2.checked = false;
-      source.calculateFinalFee(courseData);
-      expect(source.finalFeeDisplay.innerText).toEqual(courseData.session_0_fee);
+      const result = source.calculateFinalFee(courseData);
+      expect(result.finalFee).toEqual(30);
     });
   });
 
