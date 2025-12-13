@@ -20,4 +20,5 @@ class TestUserProfileModel(TestCase):
 
     def test_user_profile_slug(self):
         print("\ntest_user_profile_slug")
-        self.assertEqual(self.user_profile.slug, slugify(self.user.username))
+        slug = slugify(f"{self.user.first_name}-{self.user.last_name}").lower()
+        self.assertEqual(self.user_profile.slug, slug)

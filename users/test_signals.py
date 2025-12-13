@@ -1,6 +1,7 @@
 from django.test import TestCase, RequestFactory
 from django.core import mail
-from django.contrib.auth.models import User
+
+from .models import User
 from .signals import email_confirmed
 
 
@@ -24,5 +25,5 @@ class SignalTest(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(
             mail.outbox[0].subject,
-            "[D.A.N. BW e.V.] Email confirmation successful",
+            "[Dynamic Aikido Nocquet BW] E-Mail-Bestätigung erfolgreich",
         )

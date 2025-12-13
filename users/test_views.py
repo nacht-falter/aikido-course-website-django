@@ -1,10 +1,12 @@
 from datetime import date, timedelta
 
 from django.contrib.messages import get_messages
+from django.urls import reverse
 from django.test import TestCase
 
-from .course_registrations.models import CourseRegistration
-from .courses.models import Course
+from course_registrations.models import CourseRegistration
+from courses.models import Course
+
 from .models import User, UserProfile
 
 
@@ -24,34 +26,34 @@ class UserProfileViewTest(TestCase):
             user=self.user,
             grade=0,
         )
-        response = self.client.get("/user/profile/")
+        response = self.client.get(reverse("userprofile"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "userprofile.html")
 
     def test_get_user_profile_form(self):
         print("\ntest_get_user_profile_form")
-        response = self.client.get("/user/profile/")
+        response = self.client.get(reverse("userprofile"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "create_userprofile.html")
 
     def test_post_valid_user_profile_form(self):
         print("\ntest_post_valid_user_profile_form")
         response = self.client.post(
-            "/user/profile/",
+            reverse("userprofile"),
             {
-                "username": "test_username",
                 "first_name": "Test",
                 "last_name": "User",
-                "email": "test@mail.com",
                 "grade": 0,
+                "dojo": "AAR",
             },
         )
-        self.assertRedirects(response, "/user/profile/", 302, 200)
+        self.assertRedirects(response, reverse("userprofile"), 302, 200)
 
     def test_post_invalid_user_profile_form(self):
         print("\ntest_post_invalid_user_profile_form")
-        response = self.client.post("/user/profile/")
-        self.assertRedirects(response, "/user/profile/", 302, 200)
+        response = self.client.post(reverse("userprofile"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "create_userprofile.html")
 
 
 class UpdateUserProfileViewTest(TestCase):
@@ -70,34 +72,32 @@ class UpdateUserProfileViewTest(TestCase):
 
     def test_get_update_user_profile_form(self):
         print("\ntest_get_update_user_profile_form")
-        response = self.client.get("/user/profile/update/")
+        response = self.client.get(reverse("update_userprofile"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "update_userprofile.html")
 
     def test_post_valid_update_user_profile_form(self):
         print("\ntest_post_valid_update_user_profile_form")
         changed_data = {
-            "username": "test_username_changed",
             "first_name": "Test_changed",
             "last_name": "User_changed",
-            "email": "test_changed@mail.com",
             "grade": 1,
+            "dojo": "AVF",
         }
-        response = self.client.post("/user/profile/update/", changed_data)
+        response = self.client.post(reverse("update_userprofile"), changed_data)
         user_profile = UserProfile.objects.get(user=self.user)
         user = user_profile.user
 
-        self.assertRedirects(response, "/user/profile/", 302, 200)
-        self.assertEqual(user_profile.user.username, changed_data["username"])
+        self.assertRedirects(response, reverse("userprofile"), 302, 200)
         self.assertEqual(user.first_name, changed_data["first_name"])
         self.assertEqual(user.last_name, changed_data["last_name"])
-        self.assertEqual(user.email, changed_data["email"])
         self.assertEqual(user_profile.grade, changed_data["grade"])
 
     def test_post_invalid_user_profile_form(self):
         print("\ntest_post_invalid_user_update_profile_form")
-        response = self.client.post("/user/profile/update/")
-        self.assertRedirects(response, "/user/profile/", 302, 200)
+        response = self.client.post(reverse("update_userprofile"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "update_userprofile.html")
 
 
 class DeactivateUserTest(TestCase):
@@ -113,13 +113,13 @@ class DeactivateUserTest(TestCase):
     def test_get_deactivate_user(self):
         print("\ntest_get_deactivate_user")
         response = self.client.get("/user/deactivate/")
-        self.assertRedirects(response, "/user/profile/", 302, 200)
+        self.assertRedirects(response, reverse("userprofile"), 302, 200)
 
     def test_post_deactivate_user(self):
         print("\ntest_post_deactivate_user")
         response = self.client.post("/user/deactivate/")
         user = User.objects.get(pk=self.user.pk)
-        self.assertRedirects(response, "/courses/", 302, 200)
+        self.assertRedirects(response, reverse("course_list"), 302, 200)
         self.assertFalse(user.is_active)
 
     def test_deactivate_staff_user(self):
@@ -128,13 +128,13 @@ class DeactivateUserTest(TestCase):
         user.is_staff = True
         user.save()
         response = self.client.post("/user/deactivate/")
-        self.assertRedirects(response, "/user/profile/", 302, 200)
+        self.assertRedirects(response, reverse("userprofile"), 302, 200)
 
         # Test messages: https://stackoverflow.com/a/46865530
         messages = [m.message for m in get_messages(response.wsgi_request)]
         self.assertIn(
-            "Staff accounts can not be deactivated."
-            " Please contact us if you want to deactivate your account.",
+            "Benutzerkonten mit Mitarbeiterstatus können nicht deaktiviert werden. "
+            "Bitte kontaktiere uns, wenn Du Dein Konto deaktivieren möchtest.",
             messages,
         )
 
@@ -143,13 +143,15 @@ class UpdateGradeTest(TestCase):
     """Tests for UpdateGrade view"""
 
     def setUp(self):
-        self.course = Course.objects.create(
+        from courses.models import InternalCourse
+        self.course = InternalCourse.objects.create(
             title="Test course",
             slug="test-course",
             start_date=date.today() - timedelta(days=2),
             end_date=date.today() - timedelta(days=1),
             registration_status=(1),
-            course_fee=50,
+            course_type="dan_bw_teacher",
+            fee_category="dan_member",
         )
         self.user = User.objects.create_user(
             username="test-user", password="testpassword"
@@ -169,7 +171,7 @@ class UpdateGradeTest(TestCase):
 
     def test_get_update_grade_after_course(self):
         print("\ntest_get_update_grade_after_course")
-        response = self.client.get("/user/update-grade/")
+        response = self.client.get(reverse("update_grade"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "update_grade.html")
 
@@ -177,25 +179,25 @@ class UpdateGradeTest(TestCase):
         print("\ntest_get_update_grade_before_course_ends")
         self.course.end_date = date.today() + timedelta(days=1)
         self.course.save()
-        response = self.client.get("/user/update-grade/")
-        self.assertRedirects(response, "/", 302, 200)
+        response = self.client.get(reverse("update_grade"))
+        self.assertRedirects(response, reverse("home"), 302, 200)
 
     def test_post_update_grade_confirmed(self):
         print("\ntest_post_update_grade_confirmed")
-        response = self.client.post("/user/update-grade/", {"answer": "yes"})
+        response = self.client.post(reverse("update_grade"), {"answer": "yes"})
         self.registration.refresh_from_db()
         self.user_profile.refresh_from_db()
         self.assertEqual(self.user_profile.grade, self.registration.exam_grade)
         self.assertEqual(self.registration.grade_updated, True)
-        self.assertRedirects(response, "/", 302, 200)
+        self.assertRedirects(response, reverse("home"), 302, 200)
 
     def test_post_update_grade_cancelled(self):
         print("\ntest_post_update_grade_cancelled")
-        response = self.client.post("/user/update-grade/", {"answer": "no"})
+        response = self.client.post(reverse("update_grade"), {"answer": "no"})
         self.registration.refresh_from_db()
         self.user_profile.refresh_from_db()
         self.assertEqual(
             self.user_profile.grade, self.registration.exam_grade - 1
         )
         self.assertEqual(self.registration.grade_updated, True)
-        self.assertRedirects(response, "/", 302, 200)
+        self.assertRedirects(response, reverse("home"), 302, 200)
