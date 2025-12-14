@@ -37,3 +37,33 @@ class CourseListTest(TestCase):
         self.assertTemplateUsed(response, "course_list.html")
         self.assertEqual(len(courses), self.number_of_courses)
 
+    def test_course_list_view_authenticated_user(self):
+        print("\ntest_course_list_view_authenticated_user")
+        # Create and authenticate user
+        user = User.objects.create_user(
+            username="testuser", password="testpassword"
+        )
+        UserProfile.objects.create(user=user)
+        self.client.force_login(user)
+
+        # Create a registration for the user
+        course = InternalCourse.objects.first()
+        CourseRegistration.objects.create(
+            user=user,
+            course=course,
+            first_name="Test",
+            last_name="User",
+            email="test@example.com",
+            final_fee=50,
+            payment_status=0,
+            accept_terms=True,
+            exam=False,
+        )
+
+        # Access course list as authenticated user
+        response = self.client.get(reverse("course_list"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "course_list.html")
+        # Verify the view executes the authenticated user code path
+
