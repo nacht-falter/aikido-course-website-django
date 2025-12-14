@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_summernote.admin import SummernoteModelAdmin
+from parler.admin import TranslatableAdmin, TranslatableTabularInline
 
 from course_registrations.models import CourseRegistration
 from danbw_website import utils
@@ -52,7 +53,7 @@ class FutureCourseFilter(admin.SimpleListFilter):
             return queryset.filter(start_date__lt=date.today())
 
 
-class CourseSessionInline(admin.TabularInline):
+class CourseSessionInline(TranslatableTabularInline):
     """Displays CourseSessions as an inline model
     Django documentation for inline models:
     https://docs.djangoproject.com/en/4.2/ref/contrib/admin
@@ -61,9 +62,10 @@ class CourseSessionInline(admin.TabularInline):
 
     model = CourseSession
     extra = 0  # Set number of additional rows to 0
+    fields = ('title', 'date', 'start_time', 'end_time', 'is_dan_preparation')
 
 
-class AccommodationOptionInline(admin.TabularInline):
+class AccommodationOptionInline(TranslatableTabularInline):
     """Displays AccommodationOptions as an inline model"""
 
     model = AccommodationOption
@@ -115,7 +117,7 @@ class CourseRegistrationInline(admin.TabularInline):
 
 
 @admin.register(InternalCourse)
-class InternalCourseAdmin(SummernoteModelAdmin):
+class InternalCourseAdmin(TranslatableAdmin, SummernoteModelAdmin):
     fieldsets = (
         (_("Course Details"), {
             "fields": (
@@ -185,13 +187,13 @@ class InternalCourseAdmin(SummernoteModelAdmin):
         for course in queryset:
             new_title = f"Copy of {course.title}"
             counter = 2
-            while InternalCourse.objects.filter(title=new_title).exists():
+            while InternalCourse.objects.filter(translations__title=new_title).exists():
                 new_title = f"Copy {counter} of {course.title}"
                 counter += 1
 
+            # Create new course with non-translated fields
             new_course = InternalCourse.objects.create(
-                title=new_title,
-                description=course.description,
+                title=new_title,  # Will use current language
                 registration_status=0,
                 start_date=course.start_date,
                 end_date=course.end_date,
@@ -203,17 +205,44 @@ class InternalCourseAdmin(SummernoteModelAdmin):
                 bank_transfer_until=course.bank_transfer_until,
                 course_type=course.course_type,
                 fee_category=course.fee_category,
-                additional_info=course.additional_info,
             )
 
+            # Copy all translations
+            from django.utils import translation as django_translation
+            current_lang = django_translation.get_language()
+
+            for trans in course.translations.all():
+                if trans.language_code == current_lang:
+                    # Update the existing translation created by .create(title=...)
+                    existing_trans = new_course.translations.get(language_code=current_lang)
+                    existing_trans.description = trans.description
+                    existing_trans.location = trans.location
+                    existing_trans.additional_info = trans.additional_info
+                    existing_trans.save()
+                else:
+                    # Create translation for other languages
+                    new_course.translations.create(
+                        language_code=trans.language_code,
+                        title=new_title,  # Use the new title
+                        description=trans.description,
+                        location=trans.location,
+                        additional_info=trans.additional_info,
+                    )
+
+            # Copy sessions with translations
             for session in course.sessions.all():
-                CourseSession.objects.create(
-                    title=session.title,
+                new_session = CourseSession.objects.create(
                     course=new_course,
                     date=session.date,
                     start_time=session.start_time,
                     end_time=session.end_time,
                 )
+                # Copy session translations
+                for trans in session.translations.all():
+                    new_session.translations.create(
+                        language_code=trans.language_code,
+                        title=trans.title,
+                    )
 
     duplicate_selected_courses.short_description = _(
         "Duplicate selected courses")
@@ -292,7 +321,7 @@ class InternalCourseAdmin(SummernoteModelAdmin):
 
 
 @admin.register(ExternalCourse)
-class ExternalCourseAdmin(SummernoteModelAdmin):
+class ExternalCourseAdmin(TranslatableAdmin, SummernoteModelAdmin):
     fields = (
         "title",
         "slug",
@@ -300,6 +329,8 @@ class ExternalCourseAdmin(SummernoteModelAdmin):
         "end_date",
         "organizer",
         "teacher",
+        "description",
+        "location",
         "url",
     )
 
@@ -312,7 +343,7 @@ class ExternalCourseAdmin(SummernoteModelAdmin):
 
     readonly_fields = ("slug",)
 
-    search_fields = ["title", "description"]
+    search_fields = ["translations__title", "translations__description"]
     summernote_fields = ("description",)
     actions = ["duplicate_selected_courses"]
 
@@ -321,14 +352,38 @@ class ExternalCourseAdmin(SummernoteModelAdmin):
         for course in queryset:
             new_title = f"Copy of {course.title}"
             counter = 2
-            while ExternalCourse.objects.filter(title=new_title).exists():
+            while ExternalCourse.objects.filter(translations__title=new_title).exists():
                 new_title = f"Copy {counter} of {course.title}"
                 counter += 1
-            ExternalCourse.objects.create(
-                title=new_title,
+
+            # Create new course with non-translated fields
+            new_course = ExternalCourse.objects.create(
+                title=new_title,  # Will use current language
                 url=course.url,
                 start_date=course.start_date,
                 end_date=course.end_date,
                 organizer=course.organizer,
                 teacher=course.teacher,
             )
+
+            # Copy all translations
+            from django.utils import translation as django_translation
+            current_lang = django_translation.get_language()
+
+            for trans in course.translations.all():
+                if trans.language_code == current_lang:
+                    # Update the existing translation created by .create(title=...)
+                    existing_trans = new_course.translations.get(language_code=current_lang)
+                    existing_trans.description = trans.description
+                    existing_trans.location = trans.location
+                    existing_trans.additional_info = trans.additional_info
+                    existing_trans.save()
+                else:
+                    # Create translation for other languages
+                    new_course.translations.create(
+                        language_code=trans.language_code,
+                        title=new_title,  # Use the new title
+                        description=trans.description,
+                        location=trans.location,
+                        additional_info=trans.additional_info,
+                    )

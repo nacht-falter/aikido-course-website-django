@@ -3,15 +3,17 @@ from django.db import models
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.widgets import SummernoteWidget
 from django.utils.translation import gettext_lazy as _
+from parler.admin import TranslatableAdmin, TranslatableStackedInline
 
 from .models import Category, Page
 
 
 @admin.register(Page)
-class PageAdmin(SummernoteModelAdmin):
+class PageAdmin(TranslatableAdmin, SummernoteModelAdmin):
+    fields = ("title", "slug", "category", "status", "featured_image", "content", "menu_position")
+    readonly_fields = ("slug",)
     list_display = ("title", "slug", "status", "category")
-    search_fields = ["title", "content"]
-    prepopulated_fields = {"slug": ("title",)}
+    search_fields = ["translations__title", "translations__content"]
     list_filter = ("status", "category")
     summernote_fields = ("content",)
     actions = ["toggle_status"]
@@ -25,7 +27,7 @@ class PageAdmin(SummernoteModelAdmin):
     toggle_status.short_description = _("Toggle page status")
 
 
-class PageInline(admin.StackedInline):
+class PageInline(TranslatableStackedInline):
     """Displays pages as an inline model"""
 
     model = Page
@@ -39,15 +41,17 @@ class PageInline(admin.StackedInline):
         "content",
         "menu_position"
     ]
-    prepopulated_fields = {"slug": ("title",)}
+    readonly_fields = ["slug"]
+    summernote_fields = ('content',)
     # Add summernote field to inline model:
     # https://github.com/summernote/django-summernote/issues/14
     formfield_overrides = {models.TextField: {"widget": SummernoteWidget}}
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslatableAdmin):
     fields = ("title", "slug", "menu_position")
+    readonly_fields = ("slug",)
     list_display = ("title",)
-    prepopulated_fields = {"slug": ("title",)}
+    search_fields = ["translations__title"]
     inlines = [PageInline]
