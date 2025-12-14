@@ -12,6 +12,12 @@ const dojoSelect = document.getElementById("id_dojo");
 const otherDojoDiv = document.getElementById("div_id_other_dojo");
 const otherDojoInput = document.getElementById("id_other_dojo");
 
-dojoSelect.addEventListener("change", checkDojo);
+if (dojoSelect) {
+  dojoSelect.addEventListener("change", checkDojo);
+  checkDojo();
+}
 
-checkDojo();
+// Export for testing
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { checkDojo };
+}

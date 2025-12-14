@@ -4,7 +4,9 @@ env.py
 __pycache__/
 *.sqlite3*
 .coverage
-.coveragerc
+coverage/
+coverage_js/
+htmlcov/
 migrations/
 media/images
 static/documents

@@ -3,4 +3,6 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ["static/js/**/*.js", "!static/js/**/*.spec.js", "test_js/**/*.js"],
   testEnvironment: "jsdom",
+  coverageReporters: ["text", "html"],
+  coverageDirectory: "coverage_js",
 };

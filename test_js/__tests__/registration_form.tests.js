@@ -13,8 +13,8 @@ describe("Registration form tests", () => {
       <input type="checkbox" id="entire-course">
       <input type="checkbox" id="entire-course-without-dan-preparation">
       <div id="id_selected_sessions">
-        <input type="checkbox" id="checkbox1">
-        <input type="checkbox" id="checkbox2">
+        <input type="checkbox" id="checkbox1" data-dan-preparation="False" data-date="2024-01-01">
+        <input type="checkbox" id="checkbox2" data-dan-preparation="False" data-date="2024-01-01">
       </div>
       <input type="checkbox" id="id_accept_terms">
       <button id="submit-button"></button>
@@ -115,4 +115,35 @@ describe("Registration form tests", () => {
       expect(source.termsMsg.style.display).toBe("none");
     })
   });
+
+  describe("DAN Preparation sessions", () => {
+    test("updateEntireCourseWithoutDanPreparation checks all regular sessions are selected", () => {
+      const entireCourseWithoutDanPreparation = document.getElementById("entire-course-without-dan-preparation");
+
+      // Check all regular sessions (checkbox1 and checkbox2 have data-dan-preparation="False")
+      checkbox1.checked = true;
+      checkbox2.checked = true;
+
+      source.updateEntireCourseWithoutDanPreparation();
+      expect(entireCourseWithoutDanPreparation.checked).toBe(true);
+    });
+
+    test("updateEntireCourse checks if all sessions selected", () => {
+      const entireCourse = document.getElementById("entire-course");
+
+      // All sessions checked
+      checkbox1.checked = true;
+      checkbox2.checked = true;
+
+      source.updateEntireCourse();
+      expect(entireCourse.checked).toBe(true);
+
+      // One unchecked
+      checkbox1.checked = false;
+      source.updateEntireCourse();
+      expect(entireCourse.checked).toBe(false);
+    });
+  });
+
 });
+
