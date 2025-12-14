@@ -94,13 +94,6 @@ class RegisterCourse(View):
 
         course.save()
 
-        if course.registration_status == 0:
-            messages.warning(
-                request,
-                _("Registration for this course is not possible at the moment.")
-            )
-            return HttpResponseRedirect(reverse("course_list"))
-
         if not request.user.is_authenticated and not request.GET.get("allow_guest"):
             messages.info(
                 request,
@@ -418,24 +411,20 @@ class ExportCourseRegistrations(LoginRequiredMixin, UserPassesTestMixin, View):
         return render(request, 'export_redirect.html', {'slug': slug})
 
     def post(self, request, slug):
-        if request.method == "POST":
-            queryset = CourseRegistration.objects.filter(course__slug=slug)
-            if not queryset.exists():
-                messages.warning(request, _(
-                    "No registrations found for this course."))
-                return HttpResponseRedirect(reverse("home"))
-
-            filename = f"csv_export_{slugify(slug)}_{date.today()}.csv"
-            response = HttpResponse(content_type='text/csv')
-            response['Content-Disposition'] = f'attachment; filename={filename}'
-
-            writer = csv.writer(response)
-            utils.write_registrations_csv(writer, queryset)
-
-            return response
-        else:
-            messages.error(request, _("Invalid request method."))
+        queryset = CourseRegistration.objects.filter(course__slug=slug)
+        if not queryset.exists():
+            messages.warning(request, _(
+                "No registrations found for this course."))
             return HttpResponseRedirect(reverse("home"))
+
+        filename = f"csv_export_{slugify(slug)}_{date.today()}.csv"
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = f'attachment; filename={filename}'
+
+        writer = csv.writer(response)
+        utils.write_registrations_csv(writer, queryset)
+
+        return response
 
 
 class SetRegistrationAttendenceStatus(LoginRequiredMixin, View):
