@@ -17,6 +17,7 @@ from .models import CourseRegistration
 
 class RegisterCourseTest(TestCase):
     """Tests for RegisterCourse view"""
+    fixtures = ["fees.json"]
 
     def setUp(self):
         self.course = InternalCourse.objects.create(
@@ -26,21 +27,9 @@ class RegisterCourseTest(TestCase):
             end_date=date.today() + timedelta(days=1),
             registration_status=(1),
             course_type="external_teacher",
-            fee_category="dan_member",
+            fee_category="regular",
             description="Test description",
             discount_percentage=0,
-        )
-        self.fee = Fee.objects.create(
-            course_type="external_teacher",
-            fee_category="dan_member",
-            fee_type="entire_course",
-            amount=50,
-        )
-        self.fee = Fee.objects.create(
-            course_type="external_teacher",
-            fee_category="dan_member",
-            fee_type="single_session",
-            amount=20,
         )
         self.session = CourseSession.objects.create(
             title="Test session",
@@ -92,7 +81,6 @@ class RegisterCourseTest(TestCase):
             messages,
         )
 
-
     def test_get_registration_form_anonymous_user(self):
         print("\ntest_get_registration_form_anonymous_user")
         # Logout the user (logged in by setUp)
@@ -140,14 +128,6 @@ class RegisterCourseTest(TestCase):
             start_time=datetime.now().time(),
             end_time=datetime.now().time(),
             is_dan_preparation=True,
-        )
-
-        # Create fee for sensei_emmerson course type
-        Fee.objects.create(
-            course_type="sensei_emmerson",
-            fee_category="dan_member",
-            fee_type="entire_course",
-            amount=100,
         )
 
         url = reverse("register_course", kwargs={"slug": self.course.slug})
@@ -247,9 +227,8 @@ class RegisterCourseTest(TestCase):
         print("\ntest_registration_fee_calculation_single_sessions")
         self.single_session_fee = Fee.objects.get(
             course_type="external_teacher",
-            fee_category="dan_member",
+            fee_category="regular",
             fee_type="single_session",
-            amount=20,
         )
         self.another_session = CourseSession.objects.create(
             title="Another test session",
@@ -456,14 +435,6 @@ class RegisterCourseTest(TestCase):
             fee_category="family_reunion",
         )
 
-        # Create fee for family reunion
-        Fee.objects.create(
-            course_type="family_reunion",
-            fee_category="family_reunion",
-            fee_type="entire_course",
-            amount=100,
-        )
-
         # Create accommodation option
         accommodation = AccommodationOption.objects.create(
             course=family_course, name="Full Week", fee=50, order=1
@@ -493,19 +464,16 @@ class RegisterCourseTest(TestCase):
         self.assertEqual(course_data["accommodation_options"][0]["fee"], 50.0)
 
     def test_prepare_context_no_fees_found(self):
-        print("\ntest_prepare_context_no_fees_found")
-        # Create course with course_type/fee_category combination that has no fees
         broken_course = InternalCourse.objects.create(
             title="Broken Course",
             slug="broken-course",
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
             registration_status=1,
-            course_type="dan_bw_teacher",
-            fee_category="regular",  # This combination doesn't have fees
+            course_type="children",
+            fee_category="dan-seminar",  # no fees
         )
 
-        # Create session
         CourseSession.objects.create(
             title="Broken Session",
             course=broken_course,
@@ -516,11 +484,15 @@ class RegisterCourseTest(TestCase):
 
         url = reverse("register_course", kwargs={"slug": broken_course.slug})
 
-        # This should raise ValueError in prepare_context
-        with self.assertRaises(ValueError) as context:
-            response = self.client.get(url)
+        response = self.client.get(url)
 
-        self.assertIn("No fees found", str(context.exception))
+        # Assert it redirected to course_list
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse("course_list"))
+
+        # Assert the error message is in messages
+        messages_list = list(response.wsgi_request._messages)
+        self.assertTrue(any("No fees found" in str(m) for m in messages_list))
 
     @patch("danbw_website.utils.send_registration_confirmation")
     def test_post_registration_smtp_error_confirmation(self, mock_send_confirmation):
@@ -594,8 +566,8 @@ class CancelUserCourseRegistrationTest(TestCase):
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
             registration_status=(1),
-            course_type="dan_bw_teacher",
-            fee_category="dan_member",
+            course_type="sensei_emmerson",
+            fee_category="regular",
             description="Test description",
             discount_percentage=0,
         )
@@ -698,6 +670,7 @@ class CancelUserCourseRegistrationTest(TestCase):
 
 class UpdateUserCourseRegistrationTest(TestCase):
     """Tests for UpdateUserCourseRegistration view"""
+    fixtures = ["fees.json"]
 
     def setUp(self):
         self.course = InternalCourse.objects.create(
@@ -706,22 +679,10 @@ class UpdateUserCourseRegistrationTest(TestCase):
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
             registration_status=(1),
-            course_type="dan_bw_teacher",
-            fee_category="dan_member",
+            course_type="sensei_emmerson",
+            fee_category="regular",
             description="Test description",
             discount_percentage=0,
-        )
-        self.fee = Fee.objects.create(
-            course_type="dan_bw_teacher",
-            fee_category="dan_member",
-            fee_type="entire_course",
-            amount=50,
-        )
-        self.fee_single = Fee.objects.create(
-            course_type="dan_bw_teacher",
-            fee_category="dan_member",
-            fee_type="single_session",
-            amount=50,
         )
         self.session = CourseSession.objects.create(
             title="Test session",
@@ -775,14 +736,6 @@ class UpdateUserCourseRegistrationTest(TestCase):
             registration_status=1,
             course_type="sensei_emmerson",
             fee_category="regular",
-        )
-
-        # Create fee
-        Fee.objects.create(
-            course_type="sensei_emmerson",
-            fee_category="regular",
-            fee_type="entire_course",
-            amount=100,
         )
 
         # Create DAN preparation session
@@ -955,7 +908,7 @@ class CourseRegistrationListTest(TestCase):
             slug="past-course",
             start_date=date.today() - timedelta(days=10),
             end_date=date.today() - timedelta(days=5),
-            course_type="dan_bw_teacher",
+            course_type="sensei_emmerson",
             fee_category="regular",
         )
 
@@ -965,7 +918,7 @@ class CourseRegistrationListTest(TestCase):
             slug="upcoming-course",
             start_date=date.today() + timedelta(days=5),
             end_date=date.today() + timedelta(days=10),
-            course_type="dan_bw_teacher",
+            course_type="sensei_emmerson",
             fee_category="regular",
         )
 
@@ -994,7 +947,7 @@ class CourseRegistrationListTest(TestCase):
             slug="unattended-course",
             start_date=date.today() - timedelta(days=20),
             end_date=date.today() - timedelta(days=15),
-            course_type="dan_bw_teacher",
+            course_type="sensei_emmerson",
             fee_category="regular",
         )
         self.unattended_registration = CourseRegistration.objects.create(
@@ -1054,7 +1007,7 @@ class ExportCourseRegistrationsTest(TestCase):
             slug="test-export-course",
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
-            course_type="dan_bw_teacher",
+            course_type="sensei_emmerson",
             fee_category="regular",
         )
 
@@ -1121,7 +1074,7 @@ class ExportCourseRegistrationsTest(TestCase):
             slug="empty-course",
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
-            course_type="dan_bw_teacher",
+            course_type="sensei_emmerson",
             fee_category="regular",
         )
 
@@ -1159,7 +1112,7 @@ class ExportCourseRegistrationsTest(TestCase):
             slug="empty-course",
             start_date=date.today(),
             end_date=date.today() + timedelta(days=1),
-            course_type="dan_bw_teacher",
+            course_type="sensei_emmerson",
             fee_category="regular",
         )
 
@@ -1184,7 +1137,7 @@ class SetRegistrationAttendenceStatusTest(TestCase):
             slug="test-attendence-course",
             start_date=date.today() - timedelta(days=10),
             end_date=date.today() - timedelta(days=5),
-            course_type="dan_bw_teacher",
+            course_type="sensei_emmerson",
             fee_category="regular",
         )
 

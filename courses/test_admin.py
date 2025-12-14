@@ -54,12 +54,12 @@ class TestCourseAdmin(TestCase):
 
     def test_duplicate_course_action(self):
         print("\ntest_duplicate_course_action")
-        queryset = InternalCourse.objects.filter(title="Test course")
+        queryset = InternalCourse.objects.filter(translations__title="Test course")
         for i in range(2):
             self.admin.duplicate_selected_courses(request, queryset)
 
-        first_copy = InternalCourse.objects.get(title="Copy of Test course")
-        second_copy = InternalCourse.objects.get(title="Copy 2 of Test course")
+        first_copy = InternalCourse.objects.get(translations__title="Copy of Test course")
+        second_copy = InternalCourse.objects.get(translations__title="Copy 2 of Test course")
         self.assertTrue(first_copy)
         self.assertTrue(second_copy)
         self.assertEqual(first_copy.slug, "copy-of-test-course")
@@ -303,11 +303,12 @@ class TestCourseAdmin(TestCase):
         self.admin.duplicate_selected_courses(request, queryset)
 
         # Get the duplicated course
-        duplicated_course = InternalCourse.objects.get(title="Copy of Test course")
+        duplicated_course = InternalCourse.objects.get(translations__title="Copy of Test course")
 
         # Verify sessions were duplicated
         duplicated_sessions = duplicated_course.sessions.all()
         self.assertEqual(duplicated_sessions.count(), 2)
+        # Access translated titles
         self.assertEqual(duplicated_sessions[0].title, "Session 1")
         self.assertEqual(duplicated_sessions[1].title, "Session 2")
 
@@ -330,17 +331,17 @@ class TestExternalCourseAdmin(TestCase):
 
     def test_external_course_duplicate(self):
         print("\ntest_external_course_duplicate")
-        queryset = ExternalCourse.objects.filter(title="Test external course")
+        queryset = ExternalCourse.objects.filter(translations__title="Test external course")
 
         # First duplication
         self.admin.duplicate_selected_courses(request, queryset)
-        first_copy = ExternalCourse.objects.get(title="Copy of Test external course")
+        first_copy = ExternalCourse.objects.get(translations__title="Copy of Test external course")
         self.assertTrue(first_copy)
         self.assertEqual(first_copy.slug, "copy-of-test-external-course")
         self.assertEqual(first_copy.url, "https://example.com")
 
         # Second duplication should create "Copy 2 of..."
         self.admin.duplicate_selected_courses(request, queryset)
-        second_copy = ExternalCourse.objects.get(title="Copy 2 of Test external course")
+        second_copy = ExternalCourse.objects.get(translations__title="Copy 2 of Test external course")
         self.assertTrue(second_copy)
         self.assertEqual(second_copy.slug, "copy-2-of-test-external-course")

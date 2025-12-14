@@ -1,0 +1,242 @@
+[
+{
+  "model": "fees.fee",
+  "pk": 1,
+  "fields": {
+    "course_type": "sensei_emmerson",
+    "fee_category": "regular",
+    "fee_type": "single_session",
+    "amount": "10.00",
+    "extra_fee_external": "5.00",
+    "extra_fee_cash": "5.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 2,
+  "fields": {
+    "course_type": "sensei_emmerson",
+    "fee_category": "regular",
+    "fee_type": "entire_course",
+    "amount": "50.00",
+    "extra_fee_external": "10.00",
+    "extra_fee_cash": "20.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 3,
+  "fields": {
+    "course_type": "sensei_emmerson",
+    "fee_category": "regular",
+    "fee_type": "single_session_dan_preparation",
+    "amount": "20.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "5.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 4,
+  "fields": {
+    "course_type": "sensei_emmerson",
+    "fee_category": "regular",
+    "fee_type": "entire_course_dan_preparation",
+    "amount": "60.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "20.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 5,
+  "fields": {
+    "course_type": "sensei_emmerson",
+    "fee_category": "dan_seminar",
+    "fee_type": "entire_course",
+    "amount": "60.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "10.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 6,
+  "fields": {
+    "course_type": "sensei_emmerson",
+    "fee_category": "dan_seminar",
+    "fee_type": "single_day",
+    "amount": "40.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "10.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 7,
+  "fields": {
+    "course_type": "hombu_dojo",
+    "fee_category": "regular",
+    "fee_type": "entire_course",
+    "amount": "75.00",
+    "extra_fee_external": "10.00",
+    "extra_fee_cash": "10.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 8,
+  "fields": {
+    "course_type": "hombu_dojo",
+    "fee_category": "regular",
+    "fee_type": "single_day",
+    "amount": "45.00",
+    "extra_fee_external": "5.00",
+    "extra_fee_cash": "10.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 9,
+  "fields": {
+    "course_type": "external_teacher",
+    "fee_category": "regular",
+    "fee_type": "single_session",
+    "amount": "10.00",
+    "extra_fee_external": "5.00",
+    "extra_fee_cash": "5.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 10,
+  "fields": {
+    "course_type": "external_teacher",
+    "fee_category": "regular",
+    "fee_type": "entire_course",
+    "amount": "35.00",
+    "extra_fee_external": "10.00",
+    "extra_fee_cash": "15.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 11,
+  "fields": {
+    "course_type": "external_teacher",
+    "fee_category": "regular",
+    "fee_type": "single_session_dan_preparation",
+    "amount": "15.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "5.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 12,
+  "fields": {
+    "course_type": "external_teacher",
+    "fee_category": "regular",
+    "fee_type": "entire_course_dan_preparation",
+    "amount": "45.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "15.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 13,
+  "fields": {
+    "course_type": "external_teacher",
+    "fee_category": "dan_seminar",
+    "fee_type": "single_session",
+    "amount": "15.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "5.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 14,
+  "fields": {
+    "course_type": "dan_bw_teacher",
+    "fee_category": "regular",
+    "fee_type": "single_session",
+    "amount": "8.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "2.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 15,
+  "fields": {
+    "course_type": "dan_bw_teacher",
+    "fee_category": "dan_seminar",
+    "fee_type": "single_session",
+    "amount": "10.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "5.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 16,
+  "fields": {
+    "course_type": "children",
+    "fee_category": "regular",
+    "fee_type": "entire_course",
+    "amount": "5.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "0.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 17,
+  "fields": {
+    "course_type": "family_reunion",
+    "fee_category": "family_reunion",
+    "fee_type": "single_day",
+    "amount": "30.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "0.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 18,
+  "fields": {
+    "course_type": "family_reunion",
+    "fee_category": "family_reunion",
+    "fee_type": "single_day_with_dan_seminar",
+    "amount": "40.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "0.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 19,
+  "fields": {
+    "course_type": "family_reunion",
+    "fee_category": "family_reunion",
+    "fee_type": "entire_course",
+    "amount": "120.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "0.00"
+  }
+},
+{
+  "model": "fees.fee",
+  "pk": 20,
+  "fields": {
+    "course_type": "family_reunion",
+    "fee_category": "family_reunion",
+    "fee_type": "entire_course_with_dan_seminar",
+    "amount": "150.00",
+    "extra_fee_external": "0.00",
+    "extra_fee_cash": "0.00"
+  }
+}
+]

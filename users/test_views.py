@@ -112,12 +112,12 @@ class DeactivateUserTest(TestCase):
 
     def test_get_deactivate_user(self):
         print("\ntest_get_deactivate_user")
-        response = self.client.get("/user/deactivate/")
+        response = self.client.get(reverse("deactivate_user"))
         self.assertRedirects(response, reverse("userprofile"), 302, 200)
 
     def test_post_deactivate_user(self):
         print("\ntest_post_deactivate_user")
-        response = self.client.post("/user/deactivate/")
+        response = self.client.post(reverse("deactivate_user"))
         user = User.objects.get(pk=self.user.pk)
         self.assertRedirects(response, reverse("course_list"), 302, 200)
         self.assertFalse(user.is_active)
@@ -127,7 +127,7 @@ class DeactivateUserTest(TestCase):
         user = User.objects.get(pk=self.user.pk)
         user.is_staff = True
         user.save()
-        response = self.client.post("/user/deactivate/")
+        response = self.client.post(reverse("deactivate_user"))
         self.assertRedirects(response, reverse("userprofile"), 302, 200)
 
         # Test messages: https://stackoverflow.com/a/46865530

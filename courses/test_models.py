@@ -32,12 +32,12 @@ class TestCourseModel(TestCase):
 
     def test_course_str_method_returns_title(self):
         print("\ntest_course_str_method_returns_title")
-        course = InternalCourse.objects.get(title="Valid course")
+        course = InternalCourse.objects.get(translations__title="Valid course")
         self.assertEqual(str(course), "Valid course")
 
     def test_course_custom_date_validation(self):
         print("\ntest_course_custom_date_validation")
-        course = InternalCourse.objects.get(title="Invalid course")
+        course = InternalCourse.objects.get(translations__title="Invalid course")
         # https://stackoverflow.com/questions/73188838/django-testcase-
         # check-validationerror-with-assertraises-in-is-throwing-validatio
         self.assertRaises(ValidationError, course.clean)
@@ -268,7 +268,7 @@ class TestCourseSessionModel(TestCase):
 
     def test_session_custom_date_validation(self):
         print("\ntest_session_custom_date_validation")
-        session = CourseSession.objects.get(title="Invalid session")
+        session = CourseSession.objects.get(translations__title="Invalid session")
         self.assertRaises(ValidationError, session.clean)
 
     def test_session_dan_preparation_validation(self):

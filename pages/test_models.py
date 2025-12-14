@@ -13,7 +13,7 @@ class TestCategoryModel(TestCase):
 
     def test_category_str_method_returns_title(self):
         print("\ntest_category_str_method_returns_title")
-        category = Category.objects.get(title="Test Category")
+        category = Category.objects.get(translations__title="Test Category")
         self.assertEqual(str(category), "Test Category")
 
 
@@ -33,5 +33,5 @@ class TestPageModel(TestCase):
 
     def test_page_str_method_returns_title(self):
         print("\ntest_page_str_method_returns_title")
-        page = Page.objects.get(title="Test Page")
+        page = Page.objects.get(translations__title="Test Page")
         self.assertEqual(str(page), "Test Page")
