@@ -26,6 +26,18 @@ from .models import CourseRegistration, UserProfile
 
 User = get_user_model()
 
+def validate_course_fees(course):
+    required_fee_types = {
+        'sensei_emmerson': {'single_session', 'single_session_dan_preparation', 'entire_course', 'entire_course_dan_preparation', 'single_day'},
+        'hombu_dojo': {'entire_course', 'single_day'},
+        'external_teacher': {'single_session', 'single_session_dan_preparation', 'entire_course', 'entire_course_dan_preparation'},
+        'dan_bw_teacher': {'single_session', 'single_session_dan_preparation'},
+        'children': {'entire_course'},
+        'family_reunion': {'single_day', 'single_day_with_dan_seminar', 'entire_course', 'entire_course_with_dan_seminar'},
+    }
+    missing = required_fee_types.get(course.course_type, set()) - {f.fee_type for f in Fee.objects.filter(course_type=course.course_type)}
+    if missing:
+        raise ValueError(f"Missing fees for {course.course_type}: {', '.join(sorted(missing))}")
 
 def prepare_context(course, form):
     """Prepares data to be passed to the template"""
@@ -36,6 +48,8 @@ def prepare_context(course, form):
         raise ValueError(
             f"No fees found for course type {course.course_type} and fee category {course.fee_category}"
         )
+
+#    validate_course_fees(course)
 
     course_data = {
         "course_type": course.course_type,
@@ -84,7 +98,6 @@ class RegisterCourse(View):
     """Creates a course registration"""
 
     def get(self, request, slug):
-
         courses = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(courses, slug=slug)
 
@@ -129,10 +142,19 @@ class RegisterCourse(View):
                 course=course
             )
 
+        try:
+            context = prepare_context(course, registration_form)
+        except ValueError as e:
+            messages.error(
+                request,
+                str(e)
+            )
+            return HttpResponseRedirect(reverse("course_list"))
+
         return render(
             request,
             "register_course.html",
-            prepare_context(course, registration_form),
+            context,
         )
 
     def post(self, request, slug):
@@ -163,10 +185,15 @@ class RegisterCourse(View):
                     registration_form.add_error(
                         None, _("A registration with this name and email already exists for this course.")
                     )
+                    try:
+                        context = prepare_context(course, registration_form)
+                    except ValueError as e:
+                        messages.error(request, str(e))
+                        return HttpResponseRedirect(reverse("course_list"))
                     return render(
                         request,
                         "register_course.html",
-                        prepare_context(course, registration_form),
+                        context,
                     )
             elif CourseRegistration.objects.filter(
                     user=request.user,
@@ -175,10 +202,15 @@ class RegisterCourse(View):
                     registration_form.add_error(
                         None, _("You have already registered for this course.")
                     )
+                    try:
+                        context = prepare_context(course, registration_form)
+                    except ValueError as e:
+                        messages.error(request, str(e))
+                        return HttpResponseRedirect(reverse("course_list"))
                     return render(
                         request,
                         "register_course.html",
-                        prepare_context(course, registration_form),
+                        context,
                     )
 
             registration = registration_form.save(commit=False)
@@ -209,10 +241,15 @@ class RegisterCourse(View):
                 registration_form.add_error(
                     None, _("A registration with this email/name already exists for this course.")
                 )
+                try:
+                    context = prepare_context(course, registration_form)
+                except ValueError as e:
+                    messages.error(request, str(e))
+                    return HttpResponseRedirect(reverse("course_list"))
                 return render(
                     request,
                     "register_course.html",
-                    prepare_context(course, registration_form),
+                    context,
                 )
 
             registration.selected_sessions.set(selected_sessions)
@@ -223,22 +260,34 @@ class RegisterCourse(View):
             except SMTPException as e:
                 registration_form.add_error("email", e)
                 registration.delete()
+                try:
+                    context = prepare_context(course, registration_form)
+                except ValueError as e:
+                    messages.error(request, str(e))
+                    return HttpResponseRedirect(reverse("course_list"))
                 return render(
                     request,
                     "register_course.html",
-                    prepare_context(course, registration_form),
+                    context,
                 )
 
             messages.info(request, _("You have successfully signed up for ") + course.title)
+
             if request.user.is_authenticated:
                 return HttpResponseRedirect(reverse("courseregistration_list"))
+
             return HttpResponseRedirect(reverse("course_list"))
 
         else:
+            try:
+                context = prepare_context(course, registration_form)
+            except ValueError as e:
+                messages.error(request, str(e))
+                return HttpResponseRedirect(reverse("course_list"))
             return render(
                 request,
                 "register_course.html",
-                prepare_context(course, registration_form),
+                context,
             )
 
 
@@ -311,6 +360,7 @@ class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
             _("Your registration for ") +
             registration.course.title + _(" has been cancelled.")
         )
+
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
@@ -338,10 +388,16 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             initial={"selected_sessions": selected_sessions},
         )
 
+        try:
+            context = prepare_context(course, registration_form)
+        except ValueError as e:
+            messages.error(request, str(e))
+            return HttpResponseRedirect(reverse("courseregistration_list"))
+
         return render(
             request,
             "update_courseregistration.html",
-            prepare_context(course, registration_form),
+            context,
         )
 
     def post(self, request, pk):
@@ -386,10 +442,16 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                     _("Registration not submitted. Please select at least one session.")
                 )
 
+            try:
+                context = prepare_context(course, registration_form)
+            except ValueError as e:
+                messages.error(request, str(e))
+                return HttpResponseRedirect(reverse("courseregistration_list"))
+
             return render(
                 request,
                 "update_courseregistration.html",
-                prepare_context(course, registration_form),
+                context,
             )
 
 

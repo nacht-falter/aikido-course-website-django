@@ -13,21 +13,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("accounts/", include("allauth.urls")),
+    path("summernote/", include("django_summernote.urls")),
+    path('captcha/', include('captcha.urls')),
+    path('i18n/', include('django.conf.urls.i18n')),
+]
+
+urlpatterns += i18n_patterns(
     path("", include("users.urls")),
     path("", include("courses.urls")),
     path("", include("course_registrations.urls")),
     path("", include("memberships.urls")),
     path("", include("pages.urls")),
-    path("accounts/", include("allauth.urls")),
-    path("summernote/", include("django_summernote.urls")),
-    path('captcha/', include('captcha.urls')),
-]
+)
 
 
 if settings.DEBUG:

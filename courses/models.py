@@ -4,17 +4,34 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+from parler.models import TranslatableModel, TranslatedFields
 
 from danbw_website import constants
 from fees.models import Fee
 
 
-class Course(models.Model):
+class Course(TranslatableModel):
     """Represents a course a user can sign up for"""
 
-    title = models.CharField(
-        _("Title"),
-        max_length=200,
+    translations = TranslatedFields(
+        title=models.CharField(
+            _("Title"),
+            max_length=200,
+        ),
+        description=models.TextField(
+            _("Description"),
+            blank=True,
+            null=True,
+        ),
+        location=models.CharField(
+            _("Location"),
+            max_length=200,
+            blank=True,
+        ),
+        additional_info=models.TextField(
+            _("Additional Information"),
+            blank=True,
+        ),
     )
     slug = models.SlugField(
         max_length=200,
@@ -40,7 +57,11 @@ class Course(models.Model):
         verbose_name_plural = _("Courses")
 
     def _generate_unique_slug(self):
-        slug = slugify(self.title)
+        from parler.utils.context import switch_language
+
+        # Always use German title for slug generation to ensure consistency
+        with switch_language(self, 'de'):
+            slug = slugify(self.title)
 
         if self.slug and self.slug.startswith(slug):
             return self.slug
@@ -99,15 +120,6 @@ class InternalCourse(Course):
         choices=REGISTRATION_STATUS,
         default=0,
     )
-    description = models.TextField(
-        _("Description"),
-        blank=True,
-    )
-    location = models.CharField(
-        _("Location"),
-        max_length=200,
-        blank=True,
-    )
     registration_start_date = models.DateField(
         _("Registration Start Date"),
         blank=True,
@@ -150,10 +162,6 @@ class InternalCourse(Course):
         upload_to="images/",
         blank=True,
         null=True,
-    )
-    additional_info = models.TextField(
-        _("Additional Information"),
-        blank=True,
     )
     dan_discount = models.BooleanField(
         _("Course with D.A.N. Member Discount"),
@@ -243,17 +251,15 @@ class ExternalCourse(Course):
     )
     url = models.URLField(_("URL"), blank=True)
 
-    class Meta:
-        verbose_name = _("External Course")
-        verbose_name_plural = _("External Courses")
 
-
-class CourseSession(models.Model):
+class CourseSession(TranslatableModel):
     """Represents a session within a course"""
 
-    title = models.CharField(
-        _("Title"),
-        max_length=200,
+    translations = TranslatedFields(
+        title=models.CharField(
+            _("Title"),
+            max_length=200,
+        )
     )
     course = models.ForeignKey(
         InternalCourse,
@@ -300,20 +306,21 @@ class CourseSession(models.Model):
         verbose_name_plural = _("Course Sessions")
 
 
-class AccommodationOption(models.Model):
+class AccommodationOption(TranslatableModel):
     """Accommodation option for a course (e.g., for Family Reunion courses)"""
 
+    translations = TranslatedFields(
+        name=models.CharField(
+            _("Name"),
+            max_length=200,
+            help_text=_("e.g., 'No accommodation', '2 nights', 'Full week'"),
+        )
+    )
     course = models.ForeignKey(
         InternalCourse,
         on_delete=models.CASCADE,
         related_name="accommodation_options",
         verbose_name=_("Course"),
-    )
-    name = models.CharField(
-        _("Name"),
-        max_length=200,
-        default="",
-        help_text=_("e.g., 'No accommodation', '2 nights', 'Full week'"),
     )
     fee = models.DecimalField(
         _("Fee"),

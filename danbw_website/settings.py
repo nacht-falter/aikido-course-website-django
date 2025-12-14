@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "django.contrib.staticfiles",
+    "parler",
     "django_summernote",
     "crispy_forms",
     "crispy_bootstrap5",
@@ -246,7 +247,22 @@ USE_TZ = True
 
 LANGUAGES = [
     ("de", "German"),
+    ("en", "English"),
+    ("fr", "French"),
 ]
+
+# Django-parler configuration
+PARLER_LANGUAGES = {
+    SITE_ID: (
+        {"code": "de"},
+        {"code": "en"},
+        {"code": "fr"},
+    ),
+    "default": {
+        "fallbacks": ["de"],  # German as fallback
+        "hide_untranslated": False,  # Show content even if translation is missing
+    },
+}
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, "locale"),

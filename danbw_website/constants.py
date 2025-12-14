@@ -123,3 +123,8 @@ FEE_CATEGORIES = (
     ("dan_seminar", _("Dan Seminar")),
     ("family_reunion", _("Family Reunion")),
 )
+
+LANGUAGE_FLAGS = {
+    "de": "🇩🇪",
+    "en": "🇬🇧",
+}

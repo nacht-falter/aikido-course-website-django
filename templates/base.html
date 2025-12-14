@@ -21,6 +21,24 @@
     <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg'}" color="#1e3c95">
     <meta name="msapplication-TileColor" content="#b5172c">
     <meta name="theme-color" content="#ffffff">
+    <style>
+      .flag-switcher a {
+        display: inline-block; /* Needed for padding and border */
+        padding-bottom: 4px;
+        border-bottom: 2px solid transparent; /* Placeholder border */
+        transition: all 0.2s ease-in-out;
+      }
+      .flag-switcher a:hover {
+        transform: scale(1.1);
+      }
+      .flag-switcher a.active {
+        border-bottom-color: white;
+      }
+      .flag-switcher .flag-icon {
+        width: 24px;
+        display: block; /* Prevents extra space under the image */
+      }
+    </style>
   </head>
 
   <body class="d-flex flex-column min-vh-100">

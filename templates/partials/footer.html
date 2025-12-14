@@ -115,4 +115,16 @@
       </div>
     </div>
   </div>
+
+  <div class="container-fluid text-center border-top border-secondary py-2 flag-switcher">
+    {% load i18n %}
+    {% load i18n_tags %}
+    {% get_available_languages as LANGUAGES %}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% for lang_code, lang_name in LANGUAGES %}
+      <a href="{% change_lang lang_code %}" class="mx-1 {% if lang_code == LANGUAGE_CODE %}active{% endif %}" title="{{ lang_name }}">
+        <img src="{% static 'images/flags/'|add:lang_code|add:'.svg' %}" alt="{{ lang_name }}" class="flag-icon">
+      </a>
+    {% endfor %}
+  </div>
 </footer>
