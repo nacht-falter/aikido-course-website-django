@@ -3,146 +3,145 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-15 00:43+0100\n"
-"PO-Revision-Date: 2025-10-01 09:20+0200\n"
-"Last-Translator: Johannes <your-email@domain.com>\n"
-"Language-Team: German <de@li.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2025-12-15 23:25\n"
+"Last-Translator: DeepL API\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: course_registrations/admin.py:20 courses/admin.py:40
 msgid "Course Date"
-msgstr "Lehrgangsdatum"
+msgstr "Date du cours"
 
 #: course_registrations/admin.py:25 courses/admin.py:45
 msgid "Future Courses"
-msgstr "Zukünftige Lehrgänge"
+msgstr "Cours futur"
 
 #: course_registrations/admin.py:26 courses/admin.py:46
 #: templates/course_list.html:45
 msgid "Past Courses"
-msgstr "Vergangene Lehrgänge"
+msgstr "Cours passés"
 
 #: course_registrations/admin.py:40 course_registrations/models.py:43
 #: courses/models.py:56 courses/models.py:268 courses/models.py:323
 #: danbw_website/utils.py:235
 msgid "Course"
-msgstr "Lehrgang"
+msgstr "Course"
 
 #: course_registrations/admin.py:124 courses/models.py:314
 #: templates/registration_form.html:18 templates/userprofile.html:9
 msgid "Name"
-msgstr "Name"
+msgstr "Nom"
 
 #: course_registrations/admin.py:136
 msgid "Toggle payment status of selected registrations"
-msgstr "Zahlungsstatus der ausgewählten Anmeldungen umschalten"
+msgstr "Modifier le statut de paiement des inscriptions sélectionnées"
 
 #: course_registrations/admin.py:153 courses/admin.py:320
 msgid "Export selected course registrations to CSV"
-msgstr "Ausgewählte Lehrgangs-Anmeldungen als CSV exportieren"
+msgstr "Exportation des enregistrements de cours sélectionnés au format CSV"
 
 #: course_registrations/apps.py:8 course_registrations/models.py:155
 msgid "Course Registrations"
-msgstr "Lehrgangsanmeldungen"
+msgstr "Enregistrements de cours"
 
 #: course_registrations/forms.py:26
 msgid "I would like to join the dinner on Saturday evening."
-msgstr "Ich möchte am Samstagabend am gemeinsamen Abendessen teilnehmen."
+msgstr "J'aimerais me joindre au dîner du samedi soir."
 
 #: course_registrations/forms.py:28
 msgid "I need a place to stay overnight."
-msgstr "Ich benötige eine Übernachtungsmöglichkeit."
+msgstr "J'ai besoin d'un endroit pour passer la nuit."
 
 #: course_registrations/forms.py:43 course_registrations/forms.py:98
 #: danbw_website/constants.py:66 memberships/forms.py:76 users/forms.py:25
 #: users/forms.py:73
 msgid "Other Dojo"
-msgstr "Anderes Dojo"
+msgstr "Autre Dojo"
 
 #: course_registrations/forms.py:64 danbw_website/utils.py:256
 #: templates/courseregistration_list.html:80
 msgid "Accommodation"
-msgstr "Unterkunft"
+msgstr "Accommodation"
 
 #: course_registrations/forms.py:65
 msgid "Select accommodation option"
-msgstr "Unterkunftsoption wählen"
+msgstr "Sélectionner l'option d'hébergement"
 
 #: course_registrations/forms.py:75
 msgid "I accept the terms and conditions below."
-msgstr "Ich akzeptiere die untenstehenden Teilnahmebedingungen."
+msgstr "J'accepte les termes et conditions ci-dessous."
 
 #: course_registrations/forms.py:78
 msgid "I will attend the following sessions:"
-msgstr "Ich werde an folgenden Einheiten teilnehmen:"
+msgstr "Je vais assister aux sessions suivantes :"
 
 #: course_registrations/forms.py:84
 msgid "I want to apply for an exam."
-msgstr "Ich möchte mich zur Prüfung anmelden."
+msgstr "Je souhaite m'inscrire à un examen."
 
 #: course_registrations/forms.py:87
 msgid "I am eligible for a discount."
-msgstr "Ich habe Anspruch auf eine Ermäßigung."
+msgstr "Je suis éligible à une réduction."
 
 #: course_registrations/forms.py:90
 msgid "I am a D.A.N. International member."
-msgstr "Ich bin D.A.N. International-Mitglied."
+msgstr "Je suis un membre du D.A.N. International member."
 
 #: course_registrations/forms.py:100 users/forms.py:27 users/forms.py:75
 msgid "Enter the name of your Dojo"
-msgstr "Gib den Namen Deines Dojos an"
+msgstr "Entrez le nom de votre dojo"
 
 #: course_registrations/forms.py:139
 msgid "You need to be 1st Kyu or higher to register for this course."
-msgstr ""
-"Du musst mindestens 1. Kyu sein, um Dich für diesen Lehrgang anmelden zu "
-"können."
+msgstr "Vous devez être 1er Kyu ou plus pour vous inscrire à ce cours."
 
 #: course_registrations/forms.py:143 templates/registration_form.html:111
 msgid "Please select at least one session."
-msgstr "Bitte wähle mindestens eine Einheit aus."
+msgstr "Veuillez sélectionner au moins une session."
 
 #: course_registrations/forms.py:148 memberships/forms.py:92 users/forms.py:48
 #: users/forms.py:96
 msgid "Please specify a dojo if you select 'Other'."
-msgstr "Bitte gib ein Dojo an, wenn Du 'Anderes Dojo' auswählst."
+msgstr "Veuillez préciser un dojo si vous sélectionnez 'Autre'."
 
 #: course_registrations/models.py:19
 msgid "Participant"
-msgstr "Teilnehmer"
+msgstr "Participant"
 
 #: course_registrations/models.py:24 danbw_website/utils.py:238
 #: danbw_website/utils.py:306 memberships/forms.py:51 memberships/models.py:25
 msgid "Email"
-msgstr "E-Mail"
+msgstr "Email"
 
 #: course_registrations/models.py:29 danbw_website/utils.py:236
 #: danbw_website/utils.py:303 memberships/forms.py:35 memberships/models.py:10
 #: users/forms.py:13 users/forms.py:61
 msgid "First Name"
-msgstr "Vorname"
+msgstr "Premier nom"
 
 #: course_registrations/models.py:35 danbw_website/utils.py:237
 #: danbw_website/utils.py:304 memberships/forms.py:36 memberships/models.py:11
 #: users/forms.py:17 users/forms.py:65
 msgid "Last Name"
-msgstr "Nachname"
+msgstr "Dernier nom"
 
 #: course_registrations/models.py:48
 msgid "Selected sessions"
-msgstr "Ausgewählte Einheiten"
+msgstr "Séances sélectionnées"
 
 #: course_registrations/models.py:51
 msgid "Registration date"
-msgstr "Anmeldedatum"
+msgstr "Date d'inscription"
 
 #: course_registrations/models.py:55 danbw_website/utils.py:240
 #: danbw_website/utils.py:314 memberships/forms.py:74 memberships/models.py:48
@@ -156,76 +155,77 @@ msgstr "Dojo"
 #: templates/registration_form.html:22 templates/userprofile.html:17
 #: users/models.py:23
 msgid "Grade"
-msgstr "Graduierung"
+msgstr "Grade"
 
 #: course_registrations/models.py:68 danbw_website/utils.py:246
 #: templates/course_list_item.html:85 templates/index.html:98
 #: templates/registration_form.html:120
 msgid "Exam"
-msgstr "Prüfung"
+msgstr "Examen"
 
 #: course_registrations/models.py:73 danbw_website/utils.py:247
 msgid "Exam Grade"
-msgstr "Prüfungsgrad"
+msgstr "Grade d'examen"
 
 #: course_registrations/models.py:79
 msgid "Exam Passed"
-msgstr "Prüfung bestanden"
+msgstr "Examen passé"
 
 #: course_registrations/models.py:83
 msgid "Grade Updated"
-msgstr "Graduierung aktualisiert"
+msgstr "Grade mis à jour"
 
 #: course_registrations/models.py:87
 msgid "Accept terms"
-msgstr "Bedingungen akzeptiert"
+msgstr "Accepter les conditions"
 
 #: course_registrations/models.py:91 danbw_website/utils.py:243
 #: templates/registration_form.html:147
 msgid "Discount"
-msgstr "Ermäßigung"
+msgstr "Discount"
 
 #: course_registrations/models.py:95 course_registrations/views.py:70
 msgid "D.A.N. Member"
-msgstr "D.A.N.-Mitglied"
+msgstr "Membre du D.A.N"
 
 #: course_registrations/models.py:99 danbw_website/utils.py:242
 msgid "Final Fee"
-msgstr "Gesamtbetrag"
+msgstr "Fee final"
 
 #: course_registrations/models.py:105
 msgid "Payment status"
-msgstr "Zahlungsstatus"
+msgstr "Statut de paiement"
 
 #: course_registrations/models.py:110
 msgid "Payment method"
-msgstr "Zahlungsmethode"
+msgstr "Méthode de paiement"
 
 #: course_registrations/models.py:115 course_registrations/models.py:331
 #: danbw_website/utils.py:248 memberships/forms.py:78 memberships/models.py:56
 msgid "Comment"
-msgstr "Kommentar"
+msgstr "Commentaire"
 
 #: course_registrations/models.py:119 danbw_website/utils.py:253
 #: templates/courseregistration_list.html:63
 msgid "Dinner"
-msgstr "Abendessen"
+msgstr "Dîner"
 
-#: course_registrations/models.py:124 templates/courseregistration_list.html:72
+#: course_registrations/models.py:124
+#: templates/courseregistration_list.html:72
 msgid "Overnight stay"
-msgstr "Übernachtung"
+msgstr "Séjour d'une nuit"
 
 #: course_registrations/models.py:131 courses/models.py:340
 msgid "Accommodation Option"
-msgstr "Unterkunftsoption"
+msgstr "Option d'hébergement"
 
 #: course_registrations/models.py:136 templates/course_list_item.html:79
 msgid "Attended"
-msgstr "Teilgenommen"
+msgstr "Attendus"
 
 #: course_registrations/models.py:154
 msgid "Course Registration"
-msgstr "Lehrgangsanmeldung"
+msgstr "Inscription au cours"
 
 #: course_registrations/models.py:231 course_registrations/models.py:271
 #, python-brace-format
@@ -233,320 +233,321 @@ msgid ""
 "No fee found for {course.course_type}, {course.fee_category}, {fee_type}, "
 "payment method: {self.payment_method}, dan member: {self.dan_member}"
 msgstr ""
-"Kein Preis gefunden für {course.course_type}, {course.fee_category}, "
-"{fee_type},Zahlungsmethode: {self.payment_method}, Dan-Mitglied: {self."
-"dan_member}"
+"Aucun frais trouvé pour {course.course_type}, {course.fee_category}, "
+"{fee_type}, payment method : {self.payment_method}, dan member : "
+"{self.dan_member}"
 
 #: course_registrations/models.py:256
 #, python-brace-format
 msgid ""
 "No fee found for {course.course_type}, {course.fee_category}, "
-"{day_fee_type}, payment method: {self.payment_method}, dan member: {self."
-"dan_member}"
+"{day_fee_type}, payment method: {self.payment_method}, dan member: "
+"{self.dan_member}"
 msgstr ""
-"Kein Preis gefunden für {course.course_type}, {course.fee_category}, "
-"{day_fee_type}, Zahlungsmethode: {self.payment_method}, Dan-Mitglied: {self."
-"dan_member}"
+"Aucun frais trouvé pour {course.course_type}, {course.fee_category}, "
+"{day_fee_type}, méthode de paiement : {self.payment_method}, dan member : "
+"{self.dan_member}"
 
 #: course_registrations/models.py:316 fees/models.py:11
 #: templates/registration_form.html:101 templates/registration_form.html:107
 msgid "Entire Course"
-msgstr "Ganzer Lehrgang"
+msgstr "Cours complet"
 
 #: course_registrations/models.py:323 danbw_website/utils.py:241
 msgid "Selected Sessions"
-msgstr "Ausgewählte Einheiten"
+msgstr "Sessions sélectionnées"
 
 #: course_registrations/urls.py:8
 msgid "courses/register/<slug:slug>/"
-msgstr "lehrgaenge/anmelden/<slug:slug>/"
+msgstr "cours/register/<slug:slug>/"
 
 #: course_registrations/urls.py:13
 msgid "user/registrations/"
-msgstr "benutzer/anmeldungen/"
+msgstr "user/registrations/"
 
 #: course_registrations/urls.py:18
 msgid "user/registrations/cancel/<int:pk>/"
-msgstr "benutzer/anmeldungen/stornieren/<int:pk>/"
+msgstr "user/registrations/cancel/<int:pk>/"
 
 #: course_registrations/urls.py:23
 msgid "user/registrations/update/<int:pk>/"
-msgstr "benutzer/anmeldungen/aktualisieren/<int:pk>/"
+msgstr "user/registrations/update/<int:pk>/"
 
 #: course_registrations/urls.py:33
 msgid "set-attendence-status/<int:pk>/"
-msgstr "anmeldestatus-setzen/<int:pk>/"
+msgstr "set-attendence-status/<int:pk>/"
 
 #: course_registrations/views.py:69
 msgid "reduced"
-msgstr "ermäßigt"
+msgstr "réduit"
 
 #: course_registrations/views.py:113
 msgid "Please log in to your account or continue as a guest."
-msgstr "Bitte melde Dich in Deinem Konto an oder fahre als Gast fort."
+msgstr ""
+"Veuillez vous connecter à votre compte ou continuer en tant qu'invité."
 
 #: course_registrations/views.py:122
 msgid "Please create a user profile to contine."
-msgstr "Bitte erstelle ein Benutzerprofil, um fortzufahren."
+msgstr "Veuillez créer un profil d'utilisateur pour contine."
 
 #: course_registrations/views.py:133
 msgid "You are already registered for this course."
-msgstr "Du bist bereits für diesen Lehrgang angemeldet."
+msgstr "Vous êtes déjà inscrit à cette formation."
 
 #: course_registrations/views.py:186
-msgid "A registration with this name and email already exists for this course."
-msgstr ""
-"Es existiert bereits eine Anmeldung mit diesem Namen bzw. dieser E-Mail-"
-"Adresse."
+msgid ""
+"A registration with this name and email already exists for this course."
+msgstr "Une inscription avec ce nom et cet e-mail existe déjà pour ce cours."
 
 #: course_registrations/views.py:203
 msgid "You have already registered for this course."
-msgstr "Du bist bereits für diesen Lehrgang angemeldet."
+msgstr "Vous êtes déjà inscrit à ce cours."
 
 #: course_registrations/views.py:242
 msgid "A registration with this email/name already exists for this course."
-msgstr ""
-"Es existiert bereits eine Anmeldung mit diesem Namen bzw. dieser E-Mail-"
-"Adresse."
+msgstr "Une inscription avec cet email/nom existe déjà pour ce cours."
 
 #: course_registrations/views.py:274
 msgid "You have successfully signed up for "
-msgstr "Du hast Dich erfolgreich angemeldet für "
+msgstr "Vous vous êtes inscrit(e) avec succès pour"
 
 #: course_registrations/views.py:340
 msgid ""
 "Please cancel registrations by clicking the button from the 'My "
 "Registrations' page."
 msgstr ""
-"Bitte storniere Anmeldungen durch Klicken auf den Button auf der Seite "
-"'Meine Anmeldungen'."
+"Veuillez annuler les inscriptions en cliquant sur le bouton de la page 'Mes "
+"inscriptions'."
 
 #: course_registrations/views.py:360 course_registrations/views.py:520
 msgid "Your registration for "
-msgstr "Deine Anmeldung für "
+msgstr "Votre inscription pour"
 
 #: course_registrations/views.py:361
 msgid " has been cancelled."
-msgstr " wurde storniert."
+msgstr " a été annulée."
 
 #: course_registrations/views.py:432
 msgid "You have successfully updated your registration for "
-msgstr "Du hast Deine Anmeldung erfolgreich aktualisiert für "
+msgstr "Vous avez mis à jour avec succès votre inscription pour"
 
 #: course_registrations/views.py:442
 msgid "Registration not submitted. Please select at least one session."
-msgstr "Anmeldung nicht übermittelt. Bitte wähle mindestens eine Einheit aus."
+msgstr "Inscription non soumise. Veuillez sélectionner au moins une session."
 
 #: course_registrations/views.py:468 course_registrations/views.py:479
 msgid "No registrations found for this course."
-msgstr "Es wurden keine Anmeldungen für diesen Lehrgang gefunden."
+msgstr "No registrations found for this course."
 
 #: course_registrations/views.py:471
 msgid "Download started"
-msgstr "Download gestartet"
+msgstr "Téléchargement démarré"
 
 #: course_registrations/views.py:501
 msgid ""
 "Please set the attendence status of registrations by clicking the button "
 "from the 'My Registrations' page."
 msgstr ""
-"Bitte bestätige, dass du teilgenommen hast durch Klicken auf den Button auf "
-"der Seite 'Meine Anmeldungen'."
+"Veuillez définir le statut d'admissibilité des inscriptions en cliquant sur "
+"le bouton de la page 'Mes inscriptions'."
 
 #: course_registrations/views.py:521
 msgid " has been updated."
-msgstr " wurde aktualisiert."
+msgstr " a été mis à jour."
 
 #: courses/admin.py:22
 msgid "Year"
-msgstr "Jahr"
+msgstr "Année"
 
 #: courses/admin.py:122 templates/registration_form.html:46
 msgid "Course Details"
-msgstr "Lehrgangsdetails"
+msgstr "Détails du cours"
 
 #: courses/admin.py:138 templates/course_list_header.html:7
 #: templates/course_list_item.html:40 templates/course_list_item.html:120
 msgid "Dates"
-msgstr "Datum"
+msgstr "Dates"
 
 #: courses/admin.py:147
 msgid "Payment Information"
-msgstr "Zahlungsinformationen"
+msgstr "Informations de paiement"
 
 #: courses/admin.py:154 courses/models.py:32
 #: templates/childrens_passport_form.html:108
 #: templates/course_list_item.html:200 templates/membership_form.html:117
 #: templates/registration_form.html:174
 msgid "Additional Information"
-msgstr "Zusätzliche Informationen"
+msgstr "Informations complémentaires"
 
 #: courses/admin.py:248
 msgid "Duplicate selected courses"
-msgstr "Ausgewählte Lehrgänge duplizieren"
+msgstr "Dupliquer les cours sélectionnés"
 
 #: courses/admin.py:257
 msgid "Toggle registration status of selected courses"
-msgstr "Anmeldestatus der ausgewählten Lehrgänge umschalten"
+msgstr "Basculer le statut d'inscription des cours sélectionnés"
 
 #: courses/admin.py:265
 msgid "Toggle status of selected courses"
-msgstr "Status der ausgewählten Lehrgänge umschalten"
+msgstr "Basculer le statut des cours sélectionnés"
 
 #: courses/admin.py:275
 msgid "Registrations"
-msgstr "Anmeldungen"
+msgstr "Inscriptions"
 
 #: courses/apps.py:7 courses/models.py:57 pages/context_processors.py:37
 #: templates/partials/footer.html:45 templates/partials/navigation.html:46
 msgid "Courses"
-msgstr "Lehrgänge"
+msgstr "Cours"
 
 #: courses/models.py:18 courses/models.py:260
 #: templates/course_list_header.html:13
 msgid "Title"
-msgstr "Titel"
+msgstr "Titre"
 
 #: courses/models.py:22 templates/course_list_item.html:141
 #: templates/registration_form.html:51
 msgid "Description"
-msgstr "Beschreibung"
+msgstr "Description"
 
 #: courses/models.py:27 templates/course_list_item.html:134
 msgid "Location"
-msgstr "Ort"
+msgstr "Lieu"
 
 #: courses/models.py:41
 msgid "Start Date"
-msgstr "Startdatum"
+msgstr "Date de début"
 
 #: courses/models.py:45
 msgid "End Date"
-msgstr "Enddatum"
+msgstr "Date de fin"
 
 #: courses/models.py:49
 msgid "Teacher(s)"
-msgstr "Lehrer"
+msgstr "Enseignant(s)"
 
 #: courses/models.py:88
 msgid "Start date cannot be later than end date."
-msgstr "Das Startdatum kann nicht nach dem Enddatum liegen."
+msgstr "La date de début ne peut pas être postérieure à la date de fin."
 
 #: courses/models.py:99
 msgid "closed"
-msgstr "geschlossen"
+msgstr "closed"
 
 #: courses/models.py:100
 msgid "open"
-msgstr "offen"
+msgstr "open"
 
 #: courses/models.py:104
 msgid "Preview"
-msgstr "Vorschau"
+msgstr "Aperçu"
 
 #: courses/models.py:105
 msgid "Published"
-msgstr "Veröffentlicht"
+msgstr "Publié sur"
 
 #: courses/models.py:109
 msgid "Status"
-msgstr "Status"
+msgstr "Statut"
 
 #: courses/models.py:114
 msgid "Publication Date"
-msgstr "Veröffentlichungsdatum"
+msgstr "Date de publication"
 
 #: courses/models.py:119
 msgid "Registration Status"
-msgstr "Anmeldestatus"
+msgstr "Statut d'enregistrement"
 
 #: courses/models.py:124
 msgid "Registration Start Date"
-msgstr "Anmeldebeginn"
+msgstr "Date de début de l'inscription"
 
 #: courses/models.py:129
 msgid "Registration End Date"
-msgstr "Anmeldeschluss"
+msgstr "Date de fin d'inscription"
 
 #: courses/models.py:134 courses/models.py:248
 #: templates/course_list_header.html:10
 msgid "Organizer"
-msgstr "Veranstalter"
+msgstr "Organisateur"
 
 #: courses/models.py:140
 msgid "Discount Percentage"
-msgstr "Prozentsatz Ermäßigung"
+msgstr "Pourcentage de remise"
 
 #: courses/models.py:142
 msgid "Discount for economically disadvantaged groups"
-msgstr "Ermäßigung für finanziell benachteiligte Gruppen"
+msgstr "Réduction pour les groupes économiquement défavorisés"
 
 #: courses/models.py:145
 msgid "Bank Transfer Until"
-msgstr "Überweisung bis"
+msgstr "Transfert bancaire Until"
 
 #: courses/models.py:151 fees/models.py:20
 msgid "Course Type"
-msgstr "Lehrgangstyp"
+msgstr "Type de cours"
 
 #: courses/models.py:156 fees/models.py:25
 msgid "Fee Category"
-msgstr "Preiskategorie"
+msgstr "Catégorie de fées"
 
 #: courses/models.py:161
 msgid "Flyer"
-msgstr "Flyer"
+msgstr "Dépliant"
 
 #: courses/models.py:167
 msgid "Course with D.A.N. Member Discount"
-msgstr "Lehrgang mit D.A.N.-Mitgliederrabatt"
+msgstr ""
 
 #: courses/models.py:169
 msgid "D.A.N. members receive a discount on this course."
-msgstr "D.A.N.-Mitglieder erhalten einen Rabatt auf diesen Lehrgang."
+msgstr "Les membres du D.A.N. bénéficient d'une remise sur ce cours."
 
 #: courses/models.py:172
 msgid "Course with Dan Preparation"
-msgstr "Lehrgang mit Dan-Vorbereitung"
+msgstr "Cours avec préparation au Dan"
 
 #: courses/models.py:176
 msgid "Course with Dinner"
-msgstr "Lehrgang mit Abendessen"
+msgstr "Cours avec dîner"
 
 #: courses/models.py:186
 msgid "Registration start date cannot be later than registration end date."
-msgstr "Das Anmeldestartdatum kann nicht nach dem Anmeldeschlussdatum liegen."
+msgstr ""
+"La date de début de l'inscription ne peut être postérieure à la date de fin "
+"de l'inscription."
 
 #: courses/models.py:193
 #, python-brace-format
 msgid ""
-"No fee found for course type '{self.course_type}' and fee category '{self."
-"fee_category}' found."
+"No fee found for course type '{self.course_type}' and fee category "
+"'{self.fee_category}' found."
 msgstr ""
-"Kein Preis gefunden für Lehrgangstyp '{self.course_type}' und Preiskategorie "
-"'{self.fee_category}'."
+"Aucun frais trouvé pour le type de cours '{self.course_type}' et la "
+"catégorie de frais '{self.fee_category}'."
 
 #: courses/models.py:201
 msgid ""
 "D.A.N. member discount not applicable for this course type/fee category."
 msgstr ""
-"D.A.N.-Mitgliederrabatt für Lehrgangstyp/Preiskategorie nicht anwendbar."
+"Réduction membre D.A.N. non applicable pour ce type de cours/catégorie de "
+"frais."
 
 #: courses/models.py:206
 msgid ""
-"Online Registration for children's courses is not allowed. Please change the "
-"registration status to 'closed'."
+"Online Registration for children's courses is not allowed. Please change the"
+" registration status to 'closed'."
 msgstr ""
-"Online-Anmeldung für Kinderkurse ist nicht erlaubt. Bitte ändere den "
-"Anmeldestatus auf 'geschlossen'."
+"L'inscription en ligne pour les cours pour enfants n'est pas autorisée. "
+"Veuillez changer le statut d'inscription en 'closed'."
 
 #: courses/models.py:240
 msgid "Internal Course"
-msgstr "Interner Lehrgang"
+msgstr "Cours interne"
 
 #: courses/models.py:241
 msgid "Internal Courses"
-msgstr "Interne Lehrgänge"
+msgstr "Cours internes"
 
 #: courses/models.py:252
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2628
@@ -555,261 +556,259 @@ msgstr "URL"
 
 #: courses/models.py:271
 msgid "Date"
-msgstr "Datum"
+msgstr "Date"
 
 #: courses/models.py:275
 msgid "Start Time"
-msgstr "Startzeit"
+msgstr "Heure de début"
 
 #: courses/models.py:279
 msgid "End Time"
-msgstr "Endzeit"
+msgstr "Heure de fin"
 
 #: courses/models.py:283
 msgid "Dan Preparation"
-msgstr "Dan-Vorbereitung"
+msgstr "Préparation du Dan"
 
 #: courses/models.py:293
 msgid "Start time cannot be later than end time."
-msgstr "Die Startzeit kann nicht nach der Endzeit liegen."
+msgstr "L'heure de début ne peut pas être postérieure à l'heure de fin."
 
 #: courses/models.py:297
 msgid "Dan preparation sessions are not allowed on this course."
-msgstr "Dan-Vorbereitungseinheiten sind bei diesem Lehrgang nicht erlaubt."
+msgstr ""
+"Les séances de préparation de Dan ne sont pas autorisées dans le cadre de ce"
+" cours."
 
 #: courses/models.py:305
 msgid "Course Session"
-msgstr "Lehrgangseinheit"
+msgstr "Session de cours"
 
 #: courses/models.py:306
 msgid "Course Sessions"
-msgstr "Lehrgangseinheiten"
+msgstr "Sessions de cours"
 
 #: courses/models.py:316
 msgid "e.g., 'No accommodation', '2 nights', 'Full week'"
-msgstr "z.B. 'Keine Unterkunft', '2 Nächte', 'Ganze Woche'"
+msgstr "e.g., 'No accommodation', '2 nights', 'Full week"
 
 #: courses/models.py:326 fees/models.py:58
 msgid "Fee"
-msgstr "Preis"
+msgstr "Fée"
 
 #: courses/models.py:330
 msgid "Additional fee for this accommodation option"
-msgstr "Zusätzliche Gebühr für diese Unterkunftsoption"
+msgstr "Frais supplémentaires pour cette option d'hébergement"
 
 #: courses/models.py:333
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:484
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:491
 msgid "Order"
-msgstr "Reihenfolge"
+msgstr "Commande"
 
 #: courses/models.py:335
 msgid "Display order (lower numbers appear first)"
-msgstr "Anzeigereihenfolge (niedrigere Zahlen zuerst)"
+msgstr "Ordre d'affichage (les numéros inférieurs apparaissent en premier)"
 
 #: courses/models.py:341
 msgid "Accommodation Options"
-msgstr "Unterkunftsoptionen"
+msgstr "Options d'hébergement"
 
 #: courses/urls.py:7
 msgid "courses/"
-msgstr "lehrgaenge/"
+msgstr "cours/"
 
 #: danbw_website/constants.py:28
 msgid "Unpaid"
-msgstr "Unbezahlt"
+msgstr "Non rémunéré"
 
 #: danbw_website/constants.py:28
 msgid "Paid"
-msgstr "Bezahlt"
+msgstr "Paid"
 
 #: danbw_website/constants.py:31
 msgid "Bank Transfer"
-msgstr "Überweisung"
+msgstr "Transfert de banque"
 
 #: danbw_website/constants.py:32
 msgid "Cash"
-msgstr "Barzahlung"
+msgstr "Cash"
 
 #: danbw_website/constants.py:36 danbw_website/constants.py:46
 msgid "6th Kyu ⚪️"
-msgstr "6. Kyu ⚪️"
+msgstr "6e Kyu ⚪️"
 
 #: danbw_website/constants.py:37 danbw_website/constants.py:47
 msgid "5th Kyu 🟡"
-msgstr "5. Kyu 🟡"
+msgstr "5e Kyu 🟡"
 
 #: danbw_website/constants.py:38 danbw_website/constants.py:48
 msgid "4th Kyu 🟠"
-msgstr "4. Kyu 🟠"
+msgstr "4e Kyu 🟠"
 
 #: danbw_website/constants.py:39 danbw_website/constants.py:49
 msgid "3rd Kyu 🟢"
-msgstr "3. Kyu 🟢"
+msgstr "3e Kyu 🟢"
 
 #: danbw_website/constants.py:40 danbw_website/constants.py:50
 msgid "2nd Kyu 🔵"
-msgstr "2. Kyu 🔵"
+msgstr "2e Kyu 🔵"
 
 #: danbw_website/constants.py:41 danbw_website/constants.py:51
 msgid "1st Kyu 🟤"
-msgstr "1. Kyu 🟤"
+msgstr "1er Kyu 🟤"
 
 #: danbw_website/constants.py:45
 msgid "Red Belt 🔴"
-msgstr "Rotgurt 🔴"
+msgstr "Ceinture rouge 🔴"
 
 #: danbw_website/constants.py:52
 msgid "1st Dan ⚫️"
-msgstr "1. Dan ⚫️"
+msgstr "1er Dan ⚫️"
 
 #: danbw_website/constants.py:53
 msgid "2nd  Dan ⚫️"
-msgstr "2. Dan ⚫️"
+msgstr "2e Dan ⚫️"
 
 #: danbw_website/constants.py:54
 msgid "3rd Dan ⚫️"
-msgstr "3. Dan ⚫️"
+msgstr "3e Dan ⚫️"
 
 #: danbw_website/constants.py:55
 msgid "4th Dan ⚫️"
-msgstr "4. Dan ⚫️"
+msgstr "4e Dan ⚫️"
 
 #: danbw_website/constants.py:56
 msgid "5th Dan ⚫️"
-msgstr "5. Dan ⚫️"
+msgstr "5e Dan ⚫️"
 
 #: danbw_website/constants.py:57
 msgid "6th Dan ⚫️"
-msgstr "6. Dan ⚫️"
+msgstr "6e Dan ⚫️"
 
 #: danbw_website/constants.py:61
 msgid "Select your Dojo"
-msgstr "Wähle Dein Dojo aus"
+msgstr "Choisir son dojo"
 
 #: danbw_website/constants.py:70
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:7
 msgid "Monday"
-msgstr "Montag"
+msgstr "Lundi"
 
 #: danbw_website/constants.py:71
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:8
 msgid "Tuesday"
-msgstr "Dienstag"
+msgstr "Tuesday"
 
 #: danbw_website/constants.py:72
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:9
 msgid "Wednesday"
-msgstr "Mittwoch"
+msgstr "Wednesday"
 
 #: danbw_website/constants.py:73
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:10
 msgid "Thursday"
-msgstr "Donnerstag"
+msgstr "Thursday"
 
 #: danbw_website/constants.py:74
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:11
 msgid "Friday"
-msgstr "Freitag"
+msgstr "Friday"
 
 #: danbw_website/constants.py:75
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:12
 msgid "Saturday"
-msgstr "Samstag"
+msgstr "Saturday"
 
 #: danbw_website/constants.py:76
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:13
 msgid "Sunday"
-msgstr "Sonntag"
+msgstr "Sunday"
 
 #: danbw_website/constants.py:80 memberships/models.py:78
 msgid "D.A.N. International Membership"
-msgstr "D.A.N. International Mitgliedschaft"
+msgstr "D.A.N. Adhésion internationale"
 
 #: danbw_website/constants.py:81 memberships/models.py:96
 msgid "Childrens Passport"
-msgstr "Kinderpass"
+msgstr "Passeport de l'enfant"
 
 #: danbw_website/constants.py:82 memberships/models.py:104
 msgid "D.A.N. BW Membership"
-msgstr "D.A.N. BW Mitgliedschaft"
+msgstr "Adhésion au D.A.N. BW"
 
 #: danbw_website/constants.py:95
 msgid "Sensei Emmerson"
-msgstr ""
+msgstr "Sensei Emmerson"
 
 #: danbw_website/constants.py:96
 msgid "Hombu Dojo Instructor"
-msgstr "Hombu Dojo-Lehrer"
+msgstr "Instructeur du dojo de Hombu"
 
 #: danbw_website/constants.py:97
 msgid "External Teacher"
-msgstr "Externer Lehrer"
+msgstr "Enseignant externe"
 
 #: danbw_website/constants.py:98
 msgid "D.A.N. BW Teacher"
-msgstr "D.A.N. BW-Lehrer"
+msgstr "Enseignant D.A.N. BW"
 
 #: danbw_website/constants.py:99
 msgid "Children"
-msgstr "Kinder"
+msgstr "Children"
 
 #: danbw_website/constants.py:100 danbw_website/constants.py:124
 msgid "Family Reunion"
-msgstr ""
+msgstr "Réunion de famille"
 
 #: danbw_website/constants.py:122
-#, fuzzy
-#| msgid "Regular Course"
 msgid "Regular Course"
-msgstr "Normaler Lehrgang"
+msgstr "Cours régulier"
 
 #: danbw_website/constants.py:123
 msgid "Dan Seminar"
-msgstr "Dan-Seminar"
+msgstr "Séminaire Dan"
 
 #: danbw_website/utils.py:16
 msgid "[Dynamic Aikido Nocquet BW] Email confirmation successful"
-msgstr "[Dynamic Aikido Nocquet BW] E-Mail-Bestätigung erfolgreich"
+msgstr "[Dynamic Aikido Nocquet BW] Email confirmation successful"
 
 #: danbw_website/utils.py:18
 msgid "Hi,\n"
-msgstr "Hallo,\n"
+msgstr "Salut\n"
 
 #: danbw_website/utils.py:19
 #, python-brace-format
 msgid "you have successfully confirmed your email address {email}.\n"
-msgstr "Du hast Deine E-Mail-Adresse {email} erfolgreich bestätigt.\n"
+msgstr "vous avez confirmé avec succès votre adresse e-mail {email}.\n"
 
 #: danbw_website/utils.py:21
 #, python-brace-format
 msgid "You can login to your account at: {login_url}"
-msgstr ""
-"Du kannst Dich unter folgendem Link in Dein Konto einloggen: {login_url}"
+msgstr "Vous pouvez vous connecter à votre compte à : {login_url}"
 
 #: danbw_website/utils.py:31
 msgid ""
 "Failed to send email confirmation email. Please contact the course team."
 msgstr ""
-"Fehler beim Senden der E-Mail-Bestätigung. Bitte kontaktiere das Lehrgangs-"
-"Team."
+"Failed to send email confirmation email. Veuillez contacter l'équipe de "
+"formation."
 
 #: danbw_website/utils.py:50
 msgid "[Dynamic Aikido Nocquet BW] Your Registration for "
-msgstr "[Dynamic Aikido Nocquet BW] Deine Anmeldung für "
+msgstr "[Dynamic Aikido Nocquet BW] Your Registration for"
 
 #: danbw_website/utils.py:78 danbw_website/utils.py:202
 msgid "Invalid email address. Please try again with a valid email address."
 msgstr ""
-"Ungültige E-Mail-Adresse. Bitte versuche es erneut mit einer gültigen E-Mail-"
-"Adresse."
+"Adresse e-mail invalide. Veuillez réessayer avec une adresse e-mail valide."
 
 #: danbw_website/utils.py:93
 #, python-brace-format
 msgid ""
 "[Dynamic Aikido Nocquet BW] A registration for {course} has been cancelled"
 msgstr ""
-"[Dynamic Aikido Nocquet BW] Eine Anmeldung für {course} wurde storniert"
+"[Dynamic Aikido Nocquet BW] Une inscription pour {course} a été annulée"
 
 #: danbw_website/utils.py:95 danbw_website/utils.py:127
 #: danbw_website/utils.py:211
@@ -817,7 +816,7 @@ msgid ""
 "Hi,\n"
 "\n"
 msgstr ""
-"Hallo,\n"
+"Bonjour,\n"
 "\n"
 
 #: danbw_website/utils.py:96
@@ -826,20 +825,20 @@ msgid ""
 "A registration for {course} has been cancelled.\n"
 "\n"
 msgstr ""
-"Eine Anmeldung für {course} wurde storniert.\n"
+"Une inscription pour {course} a été annulée.\n"
 "\n"
 
 #: danbw_website/utils.py:97 danbw_website/utils.py:130
 #: danbw_website/utils.py:214
 #, python-brace-format
 msgid "Name: {first_name} {last_name}\n"
-msgstr "Name: {first_name} {last_name}\n"
+msgstr "Nom : {first_name} {last_name}\n"
 
 #: danbw_website/utils.py:99 danbw_website/utils.py:132
 #: danbw_website/utils.py:216
 #, python-brace-format
 msgid "Email: {email}\n"
-msgstr "E-Mail: {email}\n"
+msgstr "Courrier électronique : {email}\n"
 
 #: danbw_website/utils.py:100
 #, python-brace-format
@@ -847,7 +846,7 @@ msgid ""
 "Course: {course}\n"
 "\n"
 msgstr ""
-"Lehrgang: {course}\n"
+"Course : {course}\n"
 "\n"
 
 #: danbw_website/utils.py:101 danbw_website/utils.py:218
@@ -856,7 +855,7 @@ msgid ""
 "Please check the admin panel at {site_url}/admin for more details.\n"
 "\n"
 msgstr ""
-"Weitere Infos findest Du im Admin-Bereich unter {site_url}/admin.\n"
+"Veuillez consulter le panneau d'administration à {site_url}/admin pour plus de détails.\n"
 "\n"
 
 #: danbw_website/utils.py:112
@@ -864,12 +863,12 @@ msgid ""
 "Failed to send cancellation notification email. Please contact the course "
 "team."
 msgstr ""
-"Fehler beim Senden der Stornierungsbestätigung. Bitte kontaktiere das "
-"Lehrgangs-Team."
+"Échec de l'envoi de l'e-mail de notification d'annulation. Veuillez "
+"contacter l'équipe de formation."
 
 #: danbw_website/utils.py:121
 msgid "[Dynamic Aikido Nocquet BW] New registration for "
-msgstr "[Dynamic Aikido Nocquet BW] Neue Anmeldung für "
+msgstr "[Dynamic Aikido Nocquet BW] Nouvelle inscription pour"
 
 #: danbw_website/utils.py:128
 #, python-brace-format
@@ -877,18 +876,18 @@ msgid ""
 "A new registration for {course} has been received.\n"
 "\n"
 msgstr ""
-"Eine neue Anmeldung für {course} ist eingegangen.\n"
+"Une nouvelle inscription pour {course} a été reçue.\n"
 "\n"
 
 #: danbw_website/utils.py:133
 #, python-brace-format
 msgid "Course: {course}\n"
-msgstr "Lehrgang: {course}\n"
+msgstr "Course : {course}\n"
 
 #: danbw_website/utils.py:138
 #, python-brace-format
 msgid "Accommodation: {accommodation}\n"
-msgstr "Unterkunft: {accommodation}\n"
+msgstr "Hébergement : {accommodation}\n"
 
 #: danbw_website/utils.py:143
 #, python-brace-format
@@ -898,7 +897,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Weitere Infos findest Du im Admin-Bereich unter {site_url}/admin.\n"
+"Veuillez consulter le panneau d'administration à {site_url}/admin pour plus de détails.\n"
 "\n"
 
 #: danbw_website/utils.py:155
@@ -906,17 +905,17 @@ msgid ""
 "Failed to send registration notification email. Please contact the course "
 "team."
 msgstr ""
-"Fehler beim Senden der Anmeldebestätigungs-E-Mail. Bitte kontaktiere das "
-"Lehrgangs-Team."
+"Échec de l'envoi de l'e-mail de notification d'inscription. Veuillez "
+"contacter l'équipe de formation."
 
 #: danbw_website/utils.py:161
 #, python-brace-format
 msgid "[Dynamic Aikido Nocquet BW] Your {membership} application"
-msgstr "[Dynamic Aikido Nocquet BW] Dein {membership} Antrag"
+msgstr "[Dynamic Aikido Nocquet BW] Votre application {membership}"
 
 #: danbw_website/utils.py:167
 msgid "The membership fees will be deducted from your account.\n"
-msgstr "Die Mitgliedsbeiträge werden von Deinem Konto abgebucht.\n"
+msgstr "Les frais d'adhésion seront déduits de votre compte.\n"
 
 #: danbw_website/utils.py:172
 #, python-brace-format
@@ -924,7 +923,7 @@ msgid ""
 "Please transfer the annual fee of €{fee} to the account below:\n"
 "\n"
 msgstr ""
-"Bitte überweise den Jahresbeitrag von {fee} € auf das unten stehende Konto:\n"
+"Veuillez transférer les frais annuels de €{fee} sur le compte ci-dessous :\n"
 "\n"
 
 #: danbw_website/utils.py:175
@@ -933,7 +932,7 @@ msgid ""
 "Please transfer the fee of €{fee} to the account below:\n"
 "\n"
 msgstr ""
-"Bitte überweise die Gebühr von {fee} € auf das unten stehende Konto:\n"
+"Veuillez transférer le montant de €{fee} sur le compte ci-dessous :\n"
 "\n"
 
 #: danbw_website/utils.py:180
@@ -943,9 +942,9 @@ msgid ""
 "You don't need to do anything else for now.\n"
 "\n"
 msgstr ""
-"Wir werden Deinen Pass so schnell wie möglich ausstellen.\n"
+"Nous délivrerons votre passeport dès que possible.\n"
 "\n"
-"Du musst bis dahin nichts weiter tun.\n"
+"Vous ne devez rien faire d'autre pour l'instant.\n"
 "\n"
 
 #: danbw_website/utils.py:184
@@ -954,7 +953,7 @@ msgid ""
 "Hi {first_name},\n"
 "\n"
 msgstr ""
-"Hallo {first_name},\n"
+"Salut {first_name},\n"
 "\n"
 
 #: danbw_website/utils.py:185
@@ -963,21 +962,21 @@ msgid ""
 "We have received your {membership} application.\n"
 "\n"
 msgstr ""
-"Wir haben Deinen Antrag auf {membership} erhalten.\n"
+"Nous avons reçu votre application {membership}.\n"
 "\n"
 
 #: danbw_website/utils.py:190
 msgid "Best regards,\n"
-msgstr "Viele Grüße,\n"
+msgstr "Meilleures salutations,\n"
 
 #: danbw_website/utils.py:191
 msgid "The D.A.N. BW team\n"
-msgstr "Das D.A.N. BW team\n"
+msgstr "L'équipe du D.A.N. BW\n"
 
 #: danbw_website/utils.py:208
 #, python-brace-format
 msgid "[Dynamic Aikido Nocquet BW] New {membership} application"
-msgstr "[Dynamic Aikido Nocquet BW] Neuer Antrag auf {membership}"
+msgstr "[Dynamic Aikido Nocquet BW] Nouvelle application {membership}"
 
 #: danbw_website/utils.py:212
 #, python-brace-format
@@ -985,7 +984,7 @@ msgid ""
 "A new {membership} application has been received.\n"
 "\n"
 msgstr ""
-"Es ist ein neuer Antrag auf {membership} eingegangen.\n"
+"Une nouvelle application {membership} a été reçue.\n"
 "\n"
 
 #: danbw_website/utils.py:217
@@ -994,163 +993,164 @@ msgid ""
 "Dojo: {dojo}\n"
 "\n"
 msgstr ""
-"Dojo: {dojo}\n"
+"Dojo : {dojo}\n"
 "\n"
 
 #: danbw_website/utils.py:228
 msgid ""
-"Failed to send membership notification email. Please contact the course team."
+"Failed to send membership notification email. Please contact the course "
+"team."
 msgstr ""
-"Senden der Benachrichtigungs-E-Mail fehlgeschlagen. Bitte kontaktiere das "
-"Lehrgangs-Team."
+"Échec de l'envoi de l'e-mail de notification d'adhésion. Veuillez contacter "
+"l'équipe de formation."
 
 #: danbw_website/utils.py:244
 msgid "Payment Method"
-msgstr "Zahlungsmethode"
+msgstr "Méthode de paiement"
 
 #: danbw_website/utils.py:245
 msgid "Payment Status"
-msgstr "Zahlungsstatus"
+msgstr "Statut de paiement"
 
 #: danbw_website/utils.py:249 danbw_website/utils.py:315
 #: memberships/models.py:52
 msgid "Accept Terms"
-msgstr "Bedingungen akzeptiert"
+msgstr "Accept Terms"
 
 #: danbw_website/utils.py:250
 msgid "Registration Date"
-msgstr "Anmeldedatum"
+msgstr "Date d'inscription"
 
 #: danbw_website/utils.py:254
 msgid "Overnight Stay"
-msgstr "Übernachtung"
+msgstr "Séjour d'une nuit"
 
 #: danbw_website/utils.py:280 danbw_website/utils.py:283
 #: danbw_website/utils.py:286 danbw_website/utils.py:290
 #: danbw_website/utils.py:292 danbw_website/utils.py:338
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:801
 msgid "Yes"
-msgstr "Ja"
+msgstr "Yes"
 
 #: danbw_website/utils.py:280 danbw_website/utils.py:283
 #: danbw_website/utils.py:286 danbw_website/utils.py:290
 #: danbw_website/utils.py:292 danbw_website/utils.py:338
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:802
 msgid "No"
-msgstr "Nein"
+msgstr "No"
 
 #: danbw_website/utils.py:305 memberships/forms.py:38 memberships/models.py:12
 msgid "Date of Birth"
-msgstr "Geburtsdatum"
+msgstr "Date de naissance"
 
 #: danbw_website/utils.py:307 memberships/forms.py:39 memberships/models.py:13
 msgid "Street"
-msgstr "Straße"
+msgstr "Rue"
 
 #: danbw_website/utils.py:308 memberships/forms.py:40 memberships/models.py:14
 msgid "Street Number"
-msgstr "Hausnummer"
+msgstr "Numéro de rue"
 
 #: danbw_website/utils.py:309 memberships/forms.py:43 memberships/models.py:17
 msgid "Postcode"
-msgstr "PLZ"
+msgstr "Code postal"
 
 #: danbw_website/utils.py:310 memberships/forms.py:41 memberships/models.py:15
 msgid "City"
-msgstr "Stadt"
+msgstr "City"
 
 #: danbw_website/utils.py:311
 msgid "Phone Home"
-msgstr "Telefon Festnetz"
+msgstr "Accueil téléphonique"
 
 #: danbw_website/utils.py:312
 msgid "Phone Mobile"
-msgstr "Telefon Mobil"
+msgstr "Téléphone mobile"
 
 #: fees/apps.py:8 fees/models.py:59
 msgid "Fees"
-msgstr "Preise"
+msgstr "Frais"
 
 #: fees/models.py:10
 msgid "Single Session"
-msgstr "Einzelne Einheit"
+msgstr "Session unique"
 
 #: fees/models.py:12
 msgid "Single Day"
-msgstr "Einzelner Tag"
+msgstr "Jour unique"
 
 #: fees/models.py:13
 msgid "Dan Preparation Session"
-msgstr "Dan-Vorbereitungseinheit"
+msgstr "Session de préparation au Dan"
 
 #: fees/models.py:14 templates/registration_form.html:95
 msgid "Entire Course with Dan Preparation"
-msgstr "Ganzer Lehrgang mit Dan-Vorbereitung"
+msgstr "Cours complet avec préparation au Dan"
 
 #: fees/models.py:15
 msgid "Single Day with Dan Seminar"
-msgstr "Einzelner Tag mit Dan-Seminar"
+msgstr "Séminaire Single Day with Dan"
 
 #: fees/models.py:16 templates/registration_form.html:93
 msgid "Entire Course with Dan Seminar"
-msgstr "Ganzer Lehrgang mit Dan-Seminar"
+msgstr "Cours complet avec séminaire Dan"
 
 #: fees/models.py:32
 msgid "Fee Type"
-msgstr "Preisart"
+msgstr "Type de frais"
 
 #: fees/models.py:37
 msgid "Amount"
-msgstr "Preis"
+msgstr "Montant"
 
 #: fees/models.py:43
 msgid "Extra Fee External"
-msgstr "Preisaufschlag Externe"
+msgstr "Extra Fee Externe"
 
 #: fees/models.py:50
 msgid "Extra Fee Cash"
-msgstr "Preisaufschlag Barzahlung"
+msgstr "Extra Fee Cash"
 
 #: memberships/admin.py:20
 msgid "Toggle Passport Status"
-msgstr "Pass-Status umschalten"
+msgstr "Toggle Passport Status"
 
 #: memberships/admin.py:38
 msgid "Export selected entries to CSV"
-msgstr "Ausgewählte Einträge als CSV exportieren"
+msgstr "Exportation des entrées sélectionnées vers CSV"
 
 #: memberships/apps.py:8
 msgid "Memberships"
-msgstr "Mitgliedschaften"
+msgstr "Memberships"
 
 #: memberships/forms.py:47 memberships/models.py:21
 msgid "Enter a valid postcode."
-msgstr "Gib eine gültige Postleitzahl ein."
+msgstr "Entrez un code postal valide."
 
 #: memberships/forms.py:53 memberships/models.py:27
 msgid "Home Phone"
-msgstr "Telefon Festnetz"
+msgstr "Téléphone à domicile"
 
 #: memberships/forms.py:57 memberships/forms.py:67 memberships/models.py:31
 #: memberships/models.py:41
 msgid "Enter a valid phone number."
-msgstr "Gib eine gültige Telefonnummer ein."
+msgstr "Entrez un numéro de téléphone valide."
 
 #: memberships/forms.py:63 memberships/models.py:37
 msgid "Mobile Phone"
-msgstr "Telefon Mobil"
+msgstr "Téléphone mobile"
 
 #: memberships/forms.py:80 memberships/models.py:75 memberships/models.py:93
 msgid "Passport Issued"
-msgstr "Pass ausgestellt"
+msgstr "Passeport délivré"
 
 #: memberships/forms.py:106
 msgid ""
 "I agree that the membership fee will be collected by SEPA direct debit from "
 "my account below."
 msgstr ""
-"Ich bin damit einverstanden, dass der Mitgliedsbeitrag per SEPA-Lastschrift "
-"von meinem unten stehenden Konto eingezogen wird."
+"J'accepte que les frais d'adhésion soient collectés par débit direct SEPA de"
+" mon compte ci-dessous."
 
 #: memberships/forms.py:111
 msgid ""
@@ -1158,9 +1158,9 @@ msgid ""
 "the terms and conditions regarding cancellation and data processing. I "
 "hereby apply for membership with D.A.N. International."
 msgstr ""
-"Ich habe die Satzung von D.A.N. International gelesen und akzeptiert und "
-"stimme den Bedingungen bezüglich Kündigung und Datenverarbeitung zu. Ich "
-"beantrage hiermit eine Mitgliedschaft bei D.A.N. International."
+"J'ai lu et j'accepte les statuts de D.A.N.  International et j'accepte les "
+"termes et conditions concernant l'annulation et le traitement des données. "
+"Je demande par la présente mon adhésion à D.A.N. International."
 
 #: memberships/forms.py:118 memberships/forms.py:142
 msgid ""
@@ -1169,15 +1169,15 @@ msgid ""
 "or injuries that occur during the practice of Aikido, except within the "
 "scope of legal regulations in cases of intent or gross negligence."
 msgstr ""
-"Ich bin mir bewusst, dass Aikido ein potenziell gefährlicher Sport ist und "
-"dass die oben genannte Organisation und ihre Vertreter nicht für Unfälle "
-"oder Verletzungen haften, die während der Ausübung von Aikido auftreten, "
-"außer im Rahmen der gesetzlichen Bestimmungen bei Vorsatz oder grober "
-"Fahrlässigkeit."
+"Je suis conscient(e) que l'aïkido est un sport potentiellement dangereux et "
+"que l'organisation susmentionnée et ses représentants ne sont pas "
+"responsables des accidents ou des blessures survenant lors de la pratique de"
+" l'aïkido, sauf dans le cadre des dispositions légales en cas de faute "
+"intentionnelle ou de négligence grave."
 
 #: memberships/forms.py:123 memberships/models.py:68
 msgid "Account Holder"
-msgstr "Kontoinhaber"
+msgstr "Détenteur de compte"
 
 #: memberships/forms.py:124 memberships/models.py:69
 msgid "IBAN"
@@ -1185,262 +1185,260 @@ msgstr "IBAN"
 
 #: memberships/forms.py:133 memberships/models.py:85
 msgid "Name of Legal Guardian"
-msgstr "Name des gesetzlichen Vertreters"
+msgstr "Nom du Legal Guardian"
 
 #: memberships/forms.py:137
 msgid ""
 "I accept the above terms and conditions and apply for a children's passport."
 msgstr ""
-"Ich akzeptiere die oben genannten Bedingungen und beantrage einen Kinderpass."
+"J'accepte les termes et conditions ci-dessus et je demande un passeport pour"
+" enfant."
 
 #: memberships/forms.py:157
 msgid ""
 "I have read the statutes of D.A.N. BW e.V. and agree to the terms and "
 "conditions above. I hereby apply for a membership with D.A.N. BW."
 msgstr ""
-"Ich habe die Satzung des D.A.N. BW e.V. gelesen und stimme den oben "
-"genannten Bedingungen zu. Ich beantrage hiermit eine D.A.N. BW-"
-"Mitgliedschaft."
+"J'ai lu les statuts de D.A.N. BW e.V. et j'accepte les termes et conditions "
+"ci-dessus. Je demande par la présente mon adhésion à D.A.N. BW."
 
 #: memberships/models.py:67
 msgid "SEPA Mandate"
-msgstr "SEPA-Mandat"
+msgstr "Mandats SEPA"
 
 #: memberships/models.py:71 memberships/models.py:89
 msgid "Liability Disclaimer"
-msgstr "Haftungsausschluss"
+msgstr "Clause de non-responsabilité"
 
 #: memberships/models.py:79
 msgid "D.A.N. International Memberships"
-msgstr "D.A.N. International Mitgliedschaften"
+msgstr "D.A.N. Membres internationaux"
 
 #: memberships/models.py:97
 msgid "Childrens Passports"
-msgstr "Kinderpässe"
+msgstr "Passeports pour enfants"
 
 #: memberships/models.py:105
 msgid "D.A.N. BW Memberships"
-msgstr "D.A.N. BW Mitgliedschaften"
+msgstr "Adhésions D.A.N. BW"
 
 #: memberships/urls.py:7
 msgid "membership/dan-international/"
-msgstr "mitgliedschaft/dan-international/"
+msgstr "membership/dan-international/"
 
 #: memberships/urls.py:9
 msgid "membership/childrens-passport/"
-msgstr "mitgliedschaft/kinderpass/"
+msgstr "membership/childrens-passport/"
 
 #: memberships/urls.py:11
 msgid "membership/danbw/"
-msgstr "mitgliedschaft/danbw/"
+msgstr "membership/danbw/"
 
 #: memberships/views.py:47
 msgid "We have received your membership application."
-msgstr "Wir haben Deinen Mitgliedschaftsantrag erhalten."
+msgstr "Nous avons reçu votre demande d'adhésion."
 
 #: memberships/views.py:48
 msgid " Please check your email for confirmation."
-msgstr " Du erhältst eine Bestätigung per E-Mail."
+msgstr " Veuillez vérifier votre e-mail pour confirmation."
 
 #: pages/admin.py:27
 msgid "Toggle page status"
-msgstr "Veröffentlichungsstatus umschalten"
+msgstr "Basculer l'état de la page"
 
 #: pages/apps.py:8
 msgid "Pages"
-msgstr "Seiten"
+msgstr "Pages"
 
 #: pages/context_processors.py:33 templates/partials/footer.html:56
 #: templates/partials/navigation.html:57 templates/userprofile.html:6
 msgid "My Profile"
-msgstr "Mein Profil"
+msgstr "Mon profil"
 
 #: pages/context_processors.py:35 templates/partials/footer.html:59
 #: templates/partials/navigation.html:61
 msgid "My Registrations"
-msgstr "Meine Anmeldungen"
+msgstr "Mes inscriptions"
 
 #: pages/context_processors.py:39
 msgid "Contact us"
-msgstr "Kontakt"
+msgstr "Contactez-nous"
 
 #: pages/forms.py:7
 msgid "Your email"
-msgstr "Deine E-Mail-Adresse"
+msgstr "Votre email"
 
 #: pages/forms.py:13
 msgid "Your website"
-msgstr "Deine Website"
+msgstr "Votre site web"
 
 #: pages/models.py:12 pages/models.py:68
 msgid "title"
-msgstr "titel"
+msgstr "titre"
 
 #: pages/models.py:15 pages/models.py:95
 msgid "menu position"
-msgstr "menüposition"
+msgstr "position du menu"
 
 #: pages/models.py:20 pages/models.py:80
 msgid "category"
-msgstr "kategorie"
+msgstr "catégorie"
 
 #: pages/models.py:21
 msgid "categories"
-msgstr "kategorien"
+msgstr "categories"
 
 #: pages/models.py:71
 msgid "content"
-msgstr "inhalt"
+msgstr "contenu"
 
 #: pages/models.py:84
 msgid "status"
-msgstr "status"
+msgstr "état"
 
 #: pages/models.py:89
 msgid "featured image"
-msgstr "featured image"
+msgstr "image en vedette"
 
 #: pages/models.py:138
 msgid "page"
-msgstr "seite"
+msgstr "page"
 
 #: pages/models.py:139
 msgid "pages"
-msgstr "seiten"
+msgstr "pages"
 
 #: pages/urls.py:8
 msgid "contact/"
-msgstr "kontakt/"
+msgstr "contact/"
 
 #: pages/urls.py:10
 msgid "category/<slug:category_slug>/"
-msgstr "kategorie/<slug:category_slug>/"
+msgstr "category/<slug:category_slug>/"
 
 #: pages/views.py:106
 msgid "Invalid Header found. Please try again."
-msgstr "Ungültiger Header gefunden. Bitte versuche es erneut."
+msgstr "En-tête invalide trouvé. Veuillez réessayer."
 
 #: pages/views.py:111
 msgid "Thank you! Your message has been sent."
-msgstr "Danke! Deine Nachricht wurde gesendet."
+msgstr "Merci à vous ! Votre message a été envoyé."
 
 #: templates/403.html:7
 msgid "You don't have permission to view this page, sorry!"
-msgstr "Du hast keine Berechtigung, diese Seite anzusehen, sorry!"
+msgstr "You don't have permission to view this page, sorry !"
 
 #: templates/403.html:8 templates/404.html:8 templates/500.html:8
 msgid "Go back home"
-msgstr "Zurück zur Startseite"
+msgstr "Retour à la maison"
 
 #: templates/404.html:7
 msgid "The page you are looking for does not exist."
-msgstr "Die Seite, die Du suchst, existiert nicht."
+msgstr "La page que vous recherchez n'existe pas."
 
 #: templates/500.html:7
 msgid "Internal server error. We're sorry for the inconvenience."
-msgstr "Interner Serverfehler. Entschuldigung für die Unannehmlichkeiten."
+msgstr "Erreur de serveur interne. Nous sommes désolés pour l'inconvénient."
 
 #: templates/account/account_inactive.html:5
 #: templates/account/account_inactive.html:8
 msgid "Account Inactive"
-msgstr "Konto inaktiv"
+msgstr "Compte Inactif"
 
 #: templates/account/account_inactive.html:10
 msgid "This account is inactive."
-msgstr "Dieses Konto ist inaktiv."
+msgstr "Ce compte est inactif."
 
 #: templates/account/email.html:5 templates/account/email.html:8
 msgid "E-mail Addresses"
-msgstr "E-Mail-Adressen"
+msgstr "Adresses e-mail"
 
 #: templates/account/email.html:10
 msgid "The following e-mail addresses are associated with your account:"
-msgstr "Die folgenden E-Mail-Adressen sind mit Deinem Konto verknüpft:"
+msgstr "Les adresses e-mail suivantes sont associées à votre compte :"
 
 #: templates/account/email.html:24
 msgid "Verified"
-msgstr "Verifiziert"
+msgstr "Vérifié"
 
 #: templates/account/email.html:26
 msgid "Unverified"
-msgstr "Nicht verifiziert"
+msgstr "Non vérifié"
 
 #: templates/account/email.html:28
 msgid "Primary"
-msgstr "Primär"
+msgstr "Primaire"
 
 #: templates/account/email.html:34
 msgid "Make Primary"
-msgstr "Als primär festlegen"
+msgstr "Faire primaire"
 
 #: templates/account/email.html:35
 msgid "Re-send Verification"
-msgstr "Verifizierung erneut senden"
+msgstr "Re-send Verification"
 
 #: templates/account/email.html:36
 msgid "Remove"
-msgstr "Entfernen"
+msgstr "Supprimer"
 
 #: templates/account/email.html:43
 msgid "Warning:"
-msgstr "Warnung:"
+msgstr "Avertissement :"
 
 #: templates/account/email.html:43
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
-"an e-mail address so you can receive notifications, reset your password, etc."
+"an e-mail address so you can receive notifications, reset your password, "
+"etc."
 msgstr ""
-"Du hast aktuell keine E-Mail-Adresse eingerichtet. Du solltest wirklich eine "
-"hinzufügen, damit Du Benachrichtigungen erhalten, Dein Passwort zurücksetzen "
-"usw. kannst."
+"Vous n'avez actuellement pas d'adresse e-mail paramétrée. Vous devriez "
+"vraiment ajouter une adresse e-mail pour pouvoir recevoir des notifications,"
+" réinitialiser votre mot de passe, etc."
 
 #: templates/account/email.html:48
 msgid "Add E-mail Address"
-msgstr "E-Mail-Adresse hinzufügen"
+msgstr "Ajouter une adresse e-mail"
 
 #: templates/account/email.html:53
 msgid "Add E-mail"
-msgstr "E-Mail hinzufügen"
+msgstr "Ajouter un e-mail"
 
 #: templates/account/email.html:63
 msgid "Do you really want to remove the selected e-mail address?"
-msgstr "Möchtest Du die ausgewählte E-Mail-Adresse wirklich entfernen?"
+msgstr "Souhaitez-vous vraiment supprimer l'adresse e-mail sélectionnée ?"
 
 #: templates/account/email/account_already_exists_message.txt:4
 #, python-format
 msgid ""
-"You are receiving this e-mail because you or someone else tried to signup "
-"for an\n"
+"You are receiving this e-mail because you or someone else tried to signup for an\n"
 "account using e-mail address:\n"
 "\n"
 "%(email)s\n"
 "\n"
-"However, an account using that e-mail address already exists.  In case you "
-"have\n"
-"forgotten about this, please use the password forgotten procedure to "
-"recover\n"
+"However, an account using that e-mail address already exists.  In case you have\n"
+"forgotten about this, please use the password forgotten procedure to recover\n"
 "your account:\n"
 "\n"
 "%(password_reset_url)s"
 msgstr ""
-"Du erhältst diese E-Mail, weil Du oder jemand anderes versucht hat, sich mit "
-"der E-Mail-Adresse:\n"
+"Vous avez reçu cet e-mail parce que vous ou quelqu'un d'autre a essayé de s'inscrire pour un\n"
+"compte en utilisant votre adresse e-mail :\n"
 "\n"
 "%(email)s\n"
 "\n"
-"zu registrieren. Ein Konto mit dieser E-Mail-Adresse existiert jedoch "
-"bereits. Falls Du das vergessen hast, benutze die Passwort-vergessen-"
-"Prozedur, um Dein Konto wiederherzustellen:\n"
+"Cependant, un compte utilisant cette adresse e-mail existe déjà.  Dans le cas où vous avez\n"
+"oublié à ce sujet, veuillez utiliser la procédure d'oubli de mot de passe pour récupérer votre compte\n"
+"votre compte :\n"
 "\n"
 "%(password_reset_url)s"
 
 #: templates/account/email/account_already_exists_subject.txt:3
 msgid "Account Already Exists"
-msgstr "Konto existiert bereits"
+msgstr "Le compte existe déjà"
 
 #: templates/account/email/base_message.txt:1
 msgid "Hi,"
-msgstr "Hallo,"
+msgstr "Salut"
 
 #: templates/account/email/base_message.txt:5
 #, python-format
@@ -1450,7 +1448,7 @@ msgid ""
 "%(site_name)s\n"
 "%(site_domain)s"
 msgstr ""
-"Danke!\n"
+"Merci !\n"
 "\n"
 "%(site_name)s\n"
 "%(site_domain)s"
@@ -1458,80 +1456,67 @@ msgstr ""
 #: templates/account/email/email_confirmation_message.txt:5
 #, python-format
 msgid ""
-"You're receiving this e-mail because you or someone else has given your e-"
-"mail address to register an account on %(site_domain)s.\n"
+"You're receiving this e-mail because you or someone else has given your e-mail address to register an account on %(site_domain)s.\n"
 "\n"
 "To confirm this is correct, go to %(activate_url)s"
 msgstr ""
-"Du erhältst diese E-Mail, weil Du oder jemand anderes Deine E-Mail-Adresse "
-"benutzt hat, um ein Konto auf %(site_domain)s zu registrieren.\n"
+"Vous recevez cet e-mail car vous ou quelqu'un d'autre a donné votre adresse e-mail pour enregistrer un compte sur %(site_domain)s.\n"
 "\n"
-"Um dies zu bestätigen, gehe zu %(activate_url)s"
+"Pour confirmer que cela est correct, allez à %(activate_url)s"
 
 #: templates/account/email/email_confirmation_subject.txt:3
 msgid "Please Confirm Your E-mail Address"
-msgstr "Bitte bestätige Deine E-Mail-Adresse"
+msgstr "Veuillez confirmer votre adresse e-mail"
 
 #: templates/account/email/password_reset_key_message.txt:4
 msgid ""
-"You're receiving this e-mail because you or someone else has requested a "
-"password for your user account.\n"
-"It can be safely ignored if you did not request a password reset. Click the "
-"link below to reset your password."
+"You're receiving this e-mail because you or someone else has requested a password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
 msgstr ""
-"Du erhältst diese E-Mail, weil Du oder jemand anderes ein Passwort für Dein "
-"Benutzerkonto angefordert hat.\n"
-"Du kannst sie ignorieren, falls Du kein Passwort-Reset angefordert hast. "
-"Klicke auf den untenstehenden Link, um Dein Passwort zurückzusetzen."
+"Vous recevez cet e-mail parce que vous ou quelqu'un d'autre a demandé un mot de passe pour votre compte utilisateur.\n"
+"Il peut être ignoré en toute sécurité si vous n'avez pas demandé de réinitialisation du mot de passe. Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe."
 
 #: templates/account/email/password_reset_key_subject.txt:3
 #: templates/account/email/unknown_account_subject.txt:3
 msgid "Password Reset E-mail"
-msgstr "Passwort-Reset E-Mail"
+msgstr "Réinitialisation du mot de passe E-mail"
 
 #: templates/account/email/unknown_account_message.txt:6
 #, python-format
 msgid ""
 "\n"
-"You are receiving this e-mail because you or someone else has requested a "
-"password for your user account. However, we do not have any record of a user "
-"with email %(email)s in our database.\n"
+"You are receiving this e-mail because you or someone else has requested a password for your user account. However, we do not have any record of a user with email %(email)s in our database.\n"
 "\n"
 "This mail can be safely ignored if you did not request a password reset.\n"
 "\n"
 "If it was you, you can sign up for an account using the link below.\n"
 msgstr ""
 "\n"
-"Du erhältst diese E-Mail, weil Du oder jemand anderes ein Passwort für Dein "
-"Benutzerkonto angefordert hat. Allerdings haben wir keinen Benutzer mit der "
-"E-Mail-Adresse %(email)s in unserer Datenbank.\n"
+"Vous avez reçu cet e-mail parce que vous ou quelqu'un d'autre a demandé un mot de passe pour votre compte utilisateur. Cependant, nous n'avons pas d'enregistrement d'un utilisateur avec email %(email)s dans notre base de données.\n"
 "\n"
-"Du kannst diese E-Mail ignorieren, falls Du kein Passwort-Reset angefordert "
-"hast.\n"
+"Cet e-mail peut être ignoré en toute sécurité si vous n'avez pas demandé de réinitialisation du mot de passe.\n"
 "\n"
-"Falls Du es warst, kannst Du ein Konto über den folgenden Link erstellen.\n"
+"Si c'est vous, vous pouvez vous inscrire pour un compte en utilisant le lien ci-dessous.\n"
 
 #: templates/account/email_confirm.html:6
 #: templates/account/email_confirm.html:10
 msgid "Confirm E-mail Address"
-msgstr "E-Mail-Adresse bestätigen"
+msgstr "Confirmer l'adresse e-mail"
 
 #: templates/account/email_confirm.html:15
 #, python-format
 msgid ""
 "\n"
-"    Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is your e-"
-"mail address.\n"
+"    Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is your e-mail address.\n"
 "    "
 msgstr ""
 "\n"
-"    Bitte bestätige, dass <a href=\"mailto:%(email)s\">%(email)s</a> Deine E-"
-"Mail-Adresse ist.\n"
+"    Veuillez confirmer que <a href=\"mailto:%(email)s\">%(email)s</a> est votre adresse e-mail.\n"
 "    "
 
 #: templates/account/email_confirm.html:22
 msgid "Confirm"
-msgstr "Bestätigen"
+msgstr "Confirmer"
 
 #: templates/account/email_confirm.html:30
 #, python-format
@@ -1542,73 +1527,72 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Dieser E-Mail-Bestätigungslink ist abgelaufen oder ungültig. Bitte\n"
-"    <a href=\"%(email_url)s\">fordere eine neue E-Mail-Bestätigung an</a>.\n"
+"    Ce lien de confirmation par e-mail a expiré ou est invalide. Veuillez consulter\n"
+"    <a href=\"%(email_url)s\">émettez une nouvelle demande de confirmation par e-mail</a>.\n"
 "    "
 
 #: templates/account/login.html:7 templates/account/login.html:34
 #: templates/account/login.html:52 templates/partials/footer.html:68
 msgid "Login"
-msgstr "Login"
+msgstr "Connexion"
 
 #: templates/account/login.html:16
 msgid "Maximize your experience!"
-msgstr "Hol das Beste raus!"
+msgstr "Maximisez votre expérience !"
 
 #: templates/account/login.html:20
 msgid ""
 "You're not logged in! You can register for courses without logging in, but "
 "you'll miss out on some nice features:"
 msgstr ""
-"Du bist nicht eingeloggt! Du kannst Dich zwar auch ohne Account für "
-"Lehrgänge anmelden, aber Du verpasst einige nützliche Features:"
+"Vous n'êtes pas connecté ! Tu peux t'inscrire aux cours sans te connecter, "
+"mais tu manqueras des fonctionnalités sympas :"
 
 #: templates/account/login.html:22
 msgid ""
 "Manage your registrations: Update course registrations with just a few "
 "clicks."
-msgstr "Aktualisiere Deine Lehrgangsanmeldungen mit nur wenigen Klicks."
+msgstr ""
+"Gérez vos inscriptions : mettez à jour vos inscriptions en quelques clics."
 
 #: templates/account/login.html:23
 msgid ""
 "Save time: No need to re-enter your personal details for every registration."
 msgstr ""
-"Spare Zeit: Du musst Deine persönlichen Daten nicht bei jeder Anmeldung neu "
-"eingeben."
+"Gain de temps : pas besoin de saisir à nouveau vos données personnelles à "
+"chaque inscription."
 
 #: templates/account/login.html:24
 msgid "Track your progress: Keep track of your past courses and examinations."
-msgstr "Behalte einen Überblick über Deine bisherigen Lehrgänge und Prüfungen."
+msgstr "Suivez vos progrès : gardez une trace de vos cours et examens passés."
 
 #: templates/account/login.html:39
 #, python-format
 msgid ""
 "\n"
-"        If you have not created an account yet, then please <a class=\"blue-"
-"link\" href=\"%(signup_url)s\">sign up</a> first.\n"
+"        If you have not created an account yet, then please <a class=\"blue-link\" href=\"%(signup_url)s\">sign up</a> first.\n"
 "        "
 msgstr ""
 "\n"
-"        Wenn Du noch kein Konto erstellt hast, dann <a class=\"blue-link\" "
-"href=\"%(signup_url)s\">registriere dich</a> bitte zuerst.\n"
+"        Si vous n'avez pas encore créé de compte, veuillez <a class=\"blue-link\" href=\"%(signup_url)s\">signer en premier</a>.\n"
 "        "
 
 #: templates/account/login.html:54 templates/account/password_change.html:27
 msgid "Forgot Password?"
-msgstr "Passwort vergessen?"
+msgstr "Mot de passe oublié ?"
 
 #: templates/account/login.html:60
 #: venv/lib/python3.12/site-packages/django/utils/text.py:323
 msgid "or"
-msgstr "oder"
+msgstr "ou"
 
 #: templates/account/login.html:62
 msgid "Continue as guest"
-msgstr "Als Gast fortfahren"
+msgstr "Continuer en tant qu'invité"
 
 #: templates/account/messages/logged_in.txt:3
 msgid "You have successfully signed in."
-msgstr "Du hast Dich erfolgreich eingeloggt."
+msgstr "Vous avez signé avec succès."
 
 #: templates/account/password_change.html:7
 #: templates/account/password_change.html:12
@@ -1619,83 +1603,79 @@ msgstr "Du hast Dich erfolgreich eingeloggt."
 #: templates/account/password_reset_from_key_done.html:7
 #: templates/userprofile.html:30
 msgid "Change Password"
-msgstr "Passwort ändern"
+msgstr "Changer le mot de passe"
 
 #: templates/account/password_reset.html:8
 #: templates/account/password_reset.html:12
 #: templates/account/password_reset_done.html:6
 #: templates/account/password_reset_done.html:9
 msgid "Password Reset"
-msgstr "Passwort zurücksetzen"
+msgstr "Réinitialisation du mot de passe"
 
 #: templates/account/password_reset.html:18
 msgid ""
 "\n"
-"    Forgotten your password? Enter your e-mail address below, and we'll send "
-"you an e-mail allowing you to reset it.\n"
+"    Forgotten your password? Enter your e-mail address below, and we'll send you an e-mail allowing you to reset it.\n"
 "    "
 msgstr ""
 "\n"
-"    Passwort vergessen? Gib unten Deine E-Mail-Adresse ein und wir senden "
-"Dir eine E-Mail, um es zurückzusetzen.\n"
+"    Vous avez perdu votre mot de passe ? Saisissez votre adresse e-mail ci-dessous et nous vous enverrons un e-mail vous permettant de le réinitialiser.\n"
 "    "
 
 #: templates/account/password_reset.html:26
 msgid "Reset My Password"
-msgstr "Mein Passwort zurücksetzen"
+msgstr "Réinitialiser mon mot de passe"
 
 #: templates/account/password_reset.html:29
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
-"Bitte kontaktiere uns, wenn Du Probleme beim Zurücksetzen Deines Passworts "
-"hast."
+"Veuillez nous contacter si vous avez des problèmes pour réinitialiser votre "
+"mot de passe."
 
 #: templates/account/password_reset_done.html:15
 msgid ""
 "We have sent you an e-mail. If you have not received it please check your "
 "spam folder. Otherwise contact us if you do not receive it in a few minutes."
 msgstr ""
-"Wir haben Dir eine E-Mail gesendet. Falls Du sie nicht erhalten hast, "
-"überprüfe bitte Deinen Spam-Ordner. Andernfalls kontaktiere uns, wenn Du sie "
-"in ein paar Minuten nicht erhältst."
+"Nous vous avons envoyé un e-mail. Si tu ne l'as pas reçu, vérifie ton "
+"dossier spam. Sinon, contactez-nous si vous ne le recevez pas d'ici quelques"
+" minutes."
 
 #: templates/account/password_reset_from_key.html:9
 msgid "Bad Token"
-msgstr "Ungültiges Token"
+msgstr "Mauvais jeton"
 
 #: templates/account/password_reset_from_key.html:14
 #, python-format
 msgid ""
 "\n"
-"    The password reset link was invalid, possibly because it has already "
-"been used. Please request a\n"
+"    The password reset link was invalid, possibly because it has already been used. Please request a\n"
 "    <a href=\"%(passwd_reset_url)s\">new password reset</a>.\n"
 "    "
 msgstr ""
 "\n"
-"    Der Passwort-Reset-Link war ungültig, möglicherweise wurde er bereits "
-"verwendet. Bitte fordere ein\n"
-"    <a href=\"%(passwd_reset_url)s\">neues Passwort-Reset</a> an.\n"
+"    Le lien de réinitialisation du mot de passe était invalide, peut-être parce qu'il a déjà été utilisé. Veuillez demander un\n"
+"    <a href=\"%(passwd_reset_url)s\">nouvelle réinitialisation du mot de passe</a>.\n"
 "    "
 
 #: templates/account/password_reset_from_key.html:22
 msgid "change password"
-msgstr "Passwort ändern"
+msgstr "changer le mot de passe"
 
 #: templates/account/password_reset_from_key_done.html:8
 msgid "Your password is now changed."
-msgstr "Dein Passwort wurde geändert."
+msgstr "Votre mot de passe a été modifié."
 
 #: templates/account/password_set.html:5 templates/account/password_set.html:8
 #: templates/account/password_set.html:13
 msgid "Set Password"
-msgstr "Passwort festlegen"
+msgstr "Définir le mot de passe"
 
 #: templates/account/signup.html:7 templates/account/signup.html:12
 #: templates/account/signup.html:30 templates/partials/footer.html:71
 #: templates/partials/navigation.html:79
 msgid "Sign Up"
-msgstr "Registrieren"
+msgstr "Sign Up"
 
 #: templates/account/signup.html:17
 #, python-format
@@ -1703,13 +1683,13 @@ msgid ""
 "Already have an account? Then please <a class=\"blue-link\" "
 "href=\"%(login_url)s\">sign in</a>."
 msgstr ""
-"Hast Du bereits ein Konto? Dann <a class=\"blue-link\" "
-"href=\"%(login_url)s\">melde Dich an</a>."
+"Vous avez déjà un compte ? Dans ce cas, veuillez <a class=\"blue-link\" "
+"href=\"%(login_url)s\">signer dans</a>."
 
 #: templates/account/verification_sent.html:5
 #: templates/account/verification_sent.html:8
 msgid "Verify Your E-mail Address"
-msgstr "Bestätige Deine E-Mail-Adresse"
+msgstr "Vérifier votre adresse e-mail"
 
 #: templates/account/verification_sent.html:10
 msgid ""
@@ -1718,11 +1698,11 @@ msgid ""
 "your main inbox, check your spam folder. Please contact us if you do not "
 "receive the verification e-mail within a few minutes."
 msgstr ""
-"Wir haben Dir eine E-Mail zur Verifizierung gesendet. Folge dem darin "
-"enthaltenen Link, um den Anmeldeprozess abzuschließen. Falls Du die "
-"Verifizierungs-E-Mail nicht im Posteingang findest, überprüfe bitte Deinen "
-"Spam-Ordner. Kontaktiere uns, wenn Du die E-Mail innerhalb weniger Minuten "
-"nicht erhältst."
+"Nous t'avons envoyé un e-mail de vérification. Suivez le lien fourni pour "
+"finaliser le processus d'inscription. Si vous ne voyez pas l'e-mail de "
+"vérification dans votre boîte de réception principale, vérifiez votre "
+"dossier de courrier indésirable. Veuillez nous contacter si vous ne recevez "
+"pas l'e-mail de vérification dans les minutes qui suivent."
 
 #: templates/base.html:11
 msgid "Dynamic Aikido Nocquet BW"
@@ -1732,19 +1712,19 @@ msgstr "Dynamic Aikido Nocquet BW"
 #: templates/courseregistration_list.html:119
 #: templates/partials/logout-modal.html:7
 msgid "Close"
-msgstr "Schließen"
+msgstr "Close"
 
 #: templates/base.html:65
 msgid "Go to your profile"
-msgstr "Profil anzeigen"
+msgstr "Accéder à votre profil"
 
 #: templates/base.html:71
 msgid "Go to the Admin Panel"
-msgstr "Admin-Bereich öffnen"
+msgstr "Accéder au panneau d'administration"
 
 #: templates/base.html:72 templates/partials/footer.html:75
 msgid "Admin Panel"
-msgstr "Admin-Bereich"
+msgstr "Panneau d'administration"
 
 #: templates/base.html:77 templates/partials/footer.html:64
 #: templates/partials/logout-modal.html:6
@@ -1752,35 +1732,29 @@ msgstr "Admin-Bereich"
 #: templates/partials/logout-modal.html:20
 #: templates/partials/navigation.html:68
 msgid "Logout"
-msgstr "Abmelden"
+msgstr "Déconnexion"
 
 #: templates/childrens_passport_form.html:9
 msgid "Children's Passport Application"
-msgstr "Antrag auf Kinderpass"
+msgstr "Demande de passeport pour enfant"
 
 #: templates/childrens_passport_form.html:18
 #, python-format
 msgid ""
 "\n"
-"  Prerequisite for registering for exams is an application for a children's "
-"passport with\n"
-"  D.A.N. in Baden-Württemberg. The children's passport  will only be issued "
-"once this application\n"
-"  is completely filled out and the fee of <strong>€%(fee)s</strong> has been "
-"received in the account listed below. This fee includes\n"
-"  the issuance of the children's passport, the Aikido guide for children and "
-"teenagers, as well as the provision\n"
+"  Prerequisite for registering for exams is an application for a children's passport with\n"
+"  D.A.N. in Baden-Württemberg. The children's passport  will only be issued once this application\n"
+"  is completely filled out and the fee of <strong>€%(fee)s</strong> has been received in the account listed below. This fee includes\n"
+"  the issuance of the children's passport, the Aikido guide for children and teenagers, as well as the provision\n"
 "  of a colored belt upon passing the exam.\n"
 "  "
 msgstr ""
 "\n"
-"  Voraussetzung für die Prüfungsanmeldung ist der Antrag auf einen "
-"Kinderpass bei D.A.N. BW. Der Kinderpass kann erst ausgestellt werden, wenn "
-"dieser Antrag vollständig ausgefüllt ist und die Gebühr von <strong>€"
-"%(fee)s</strong> auf dem untenstehenden Konto eingegangen ist. Diese Gebühr "
-"beinhaltet die Ausstellung des Kinderpasses, den Aikido-Leitfaden für Kinder "
-"und Jugendliche sowie die Bereitstellung eines entsprechenden Gürtels nach "
-"Bestehen der Prüfung.\n"
+"  La condition préalable à l'inscription aux examens est une demande de passeport pour enfant avec\n"
+"  D.A.N. dans le Bade-Wurtemberg. Le passeport pour enfant ne sera délivré qu'une fois cette demande remplie\n"
+"  est entièrement remplie et que les frais de <strong>€%(fee)s</strong> ont été reçus sur le compte mentionné ci-dessous. Cette taxe comprend\n"
+"  la délivrance du passeport enfant, du guide Aïkido pour enfants et adolescents, ainsi que la mise à disposition de\n"
+"  d'un baudrier de couleur à l'issue de l'examen.\n"
 "  "
 
 #: templates/childrens_passport_form.html:27
@@ -1789,21 +1763,22 @@ msgid ""
 "passport. Please provide your teacher with a current passport photo or "
 "similar."
 msgstr ""
-"Vor der Prüfung muss dem Kinderpass ein Foto des Kindes hinzugefügt werden. "
-"Bitte gib Deinem Lehrer ein aktuelles Passfoto oder ein vergleichbares Foto."
+"Avant l'examen, une photo de l'enfant doit être ajoutée au passeport de "
+"l'enfant. Veuillez fournir à votre enseignant une photo récente de votre "
+"passeport ou un document similaire."
 
 #: templates/childrens_passport_form.html:33
 msgid "Bank details:"
-msgstr "Bankverbindung:"
+msgstr "Détails bancaires :"
 
 #: templates/childrens_passport_form.html:43 templates/membership_form.html:28
 #: templates/registration_form.html:13
 msgid "Personal Details"
-msgstr "Persönliche Daten"
+msgstr "Détails personnels"
 
 #: templates/childrens_passport_form.html:69 templates/membership_form.html:54
 msgid "Contact Information"
-msgstr "Kontaktinformationen"
+msgstr "Informations de contact"
 
 #: templates/childrens_passport_form.html:113
 #: templates/membership_form.html:147
@@ -1812,71 +1787,71 @@ msgid ""
 "the legal provisions of the Federal Data Protection Act. No data will be "
 "passed on to third parties outside the above-mentioned organization."
 msgstr ""
-"Alle erhaltenen personenbezogenen Daten werden gemäß den gesetzlichen "
-"Bestimmungen des Bundesdatenschutzgesetzes verarbeitet und gespeichert. Es "
-"werden keine Daten an Dritte außerhalb der oben genannten Organisation "
-"weitergegeben."
+"Toutes les données personnelles reçues seront traitées et stockées en "
+"conformité avec les dispositions légales de la loi fédérale sur la "
+"protection des données. Aucune donnée ne sera transmise à des tiers en "
+"dehors de l'organisation susmentionnée."
 
 #: templates/childrens_passport_form.html:124
 #: templates/membership_form.html:171
 msgid "Send Application"
-msgstr "Antrag absenden"
+msgstr "Envoyer la demande"
 
 #: templates/contact.html:7
 msgid "Contact Us"
-msgstr "Kontakt"
+msgstr "Contactez-nous"
 
 #: templates/contact.html:8
 msgid "Leave a message. We'll get back to you."
-msgstr "Hinterlasse uns eine Nachricht. Wir melden uns bei dir."
+msgstr "Laissez un message. Nous reviendrons vers vous."
 
 #: templates/contact.html:12
 msgid "Send"
-msgstr "Senden"
+msgstr "Envoyer"
 
 #: templates/course_list.html:13
 msgid "Current Courses"
-msgstr "Aktuelle Lehrgänge"
+msgstr "Cours actuels"
 
 #: templates/course_list.html:30
 msgid "There are currently no courses available."
-msgstr "Derzeit sind keine Lehrgänge verfügbar."
+msgstr "Il n'y a actuellement aucun cours disponible."
 
 #: templates/course_list.html:38
 msgid "Show past courses"
-msgstr "Vergangene Lehrgänge anzeigen"
+msgstr "Afficher les cours passés"
 
 #: templates/course_list.html:39
 msgid "Hide past courses"
-msgstr "Vergangene Lehrgänge ausblenden"
+msgstr "Cacher les cours passés"
 
 #: templates/course_list.html:59
 msgid "There are no past courses."
-msgstr "Es gibt keine vergangenen Lehrgänge."
+msgstr "Il n'y a pas de cours passés."
 
 #: templates/course_list.html:70
 msgid "Account Found"
-msgstr "Konto gefunden"
+msgstr "Compte trouvé"
 
 #: templates/course_list.html:76
 msgid "Registration Successful!"
-msgstr "Anmeldung erfolgreich!"
+msgstr "Inscription Successful !"
 
 #: templates/course_list.html:78
 msgid ""
-"We found an existing account with this name and email. Your registration has "
-"been linked to your account."
+"We found an existing account with this name and email. Your registration has"
+" been linked to your account."
 msgstr ""
-"Wir haben ein bestehendes Konto mit diesem Namen und dieser E-Mail gefunden. "
-"Deine Anmeldung wurde mit Deinem Konto verknüpft."
+"Nous avons trouvé un compte existant avec ce nom et cet e-mail. Votre "
+"inscription a été liée à votre compte."
 
 #: templates/course_list.html:79
 msgid ""
 "You can view and manage all your course registrations by logging into your "
 "account."
 msgstr ""
-"Du kannst alle Deine Lehrgangsanmeldungen anzeigen und verwalten, indem Du "
-"Dich in Dein Konto einloggst."
+"Vous pouvez visualiser et gérer toutes vos inscriptions aux cours en vous "
+"connectant à votre compte."
 
 #: templates/course_list.html:82
 msgid "OK"
@@ -1885,7 +1860,7 @@ msgstr "OK"
 #: templates/course_list_header.html:16
 #: templates/courseregistration_list.html:182
 msgid "Teacher"
-msgstr "Lehrer"
+msgstr "Enseignant"
 
 #: templates/course_list_item.html:45 templates/course_list_item.html:127
 #: templates/course_list_item.html:157
@@ -1894,115 +1869,117 @@ msgstr "Lehrer"
 #: templates/courseregistration_list.html:223
 #: templates/email/registration_confirmation.html:19
 msgid "to"
-msgstr "bis"
+msgstr "to"
 
 #: templates/course_list_item.html:65 templates/index.html:77
 msgid "Registration"
-msgstr "Anmeldung"
+msgstr "Inscription"
 
 #: templates/course_list_item.html:73 templates/course_list_item.html:78
 #: templates/course_list_item.html:84 templates/index.html:92
 #: templates/index.html:97
 msgid "Show registration"
-msgstr "Anmeldung anzeigen"
+msgstr "Afficher l'inscription"
 
 #: templates/course_list_item.html:74 templates/index.html:93
 msgid "Signed up"
-msgstr "Angemeldet"
+msgstr "Inscrit"
 
 #: templates/course_list_item.html:94 templates/index.html:110
 #, python-format
 msgid "Go to %(course_title)s"
-msgstr "%(course_title)s anzeigen"
+msgstr "Aller à %(course_title)s"
 
 #: templates/course_list_item.html:97 templates/index.html:113
 msgid "Course website"
-msgstr "Lehrgangs-Website"
+msgstr "Site web du cours"
 
 #: templates/course_list_item.html:147
 msgid "Sessions "
-msgstr "Einheiten "
+msgstr "Sessions"
 
 #: templates/course_list_item.html:171
 msgid "Important Dates"
-msgstr "Termine"
+msgstr "Dates importantes"
 
 #: templates/course_list_item.html:177
 msgid "Registration ends:"
-msgstr "Anmeldung bis:"
+msgstr "Fin de l'inscription :"
 
 #: templates/course_list_item.html:187
 msgid "Bank transfer until:"
-msgstr "Überweisung bis:"
+msgstr "Transfert bancaire jusqu'à :"
 
 #: templates/course_list_item.html:221
 msgid "You are already signed up. Go to your registration"
-msgstr "Du bist bereits angemeldet. Deine Anmeldung anzeigen."
+msgstr "Vous êtes déjà inscrit. Accédez à votre inscription"
 
 #: templates/course_list_item.html:227
 msgid "Online registration not possible"
-msgstr "Online-Anmeldung nicht möglich"
+msgstr "L'inscription en ligne n'est pas possible"
 
 #: templates/course_list_item.html:231
 msgid "Go to registration form"
-msgstr "Zum Anmeldeformular"
+msgstr "Aller au formulaire d'inscription"
 
 #: templates/course_list_item.html:234 templates/course_list_item.html:239
 msgid "Registration closed"
-msgstr "Anmeldung geschlossen"
+msgstr "Inscription close"
 
 #: templates/course_list_item.html:235 templates/index.html:81
 msgid "Registration starts on"
-msgstr "Anmeldung beginnt am"
+msgstr "L'inscription commence le"
 
 #: templates/courseregistration_list.html:7
 msgid "Your Course Registrations"
-msgstr "Deine Lehrgangsanmeldungen"
+msgstr "Your Course Registrations"
 
 #: templates/courseregistration_list.html:9
 msgid "Your upcoming courses"
-msgstr "Deine bevorstehenden Lehrgänge"
+msgstr "Vos cours à venir"
 
 #: templates/courseregistration_list.html:21
 #: templates/courseregistration_list.html:178
 msgid "Dates:"
-msgstr "Daten:"
+msgstr "Dates :"
 
 #: templates/courseregistration_list.html:25
 msgid "Selected Sessions:"
-msgstr "Ausgewählte Einheiten:"
+msgstr "Sessions sélectionnées :"
 
 #: templates/courseregistration_list.html:37
 #: templates/email/registration_confirmation.html:40
 msgid "Course Fee:"
-msgstr "Teilnahmegebühr"
+msgstr "Frais de parcours :"
 
 #: templates/courseregistration_list.html:49
 #: templates/email/registration_confirmation.html:45
 msgid "Please transfer the course fee to the following account until"
-msgstr "Bitte überweise die Teilnahmegebühr auf folgendes Konto bis spätestens"
+msgstr ""
+"Veuillez transférer le montant du cours sur le compte suivant jusqu'au"
 
 #: templates/courseregistration_list.html:57
 msgid "Please pay the course fee in cash at the beginning of the course."
-msgstr "Bitte bezahle die Teilnahmegebühr in bar zu Beginn des Lehrgangs."
+msgstr "Veuillez payer les frais de cours en espèces au début du cours."
 
 #: templates/courseregistration_list.html:65
 #: templates/email/registration_confirmation.html:53
 msgid "You have signed up for the dinner."
-msgstr "Du hast Dich für das Abendessen angemeldet."
+msgstr "Vous avez signé pour le dîner."
 
 #: templates/courseregistration_list.html:66
 #: templates/email/registration_confirmation.html:54
 msgid "Please note that this is a binding reservation."
-msgstr "Die Anmeldung ist verbindlich."
+msgstr "Veuillez noter qu'il s'agit d'une réservation ferme."
 
 #: templates/courseregistration_list.html:74
 msgid "You have specified that you need a place to stay overnight."
-msgstr "Du hast angegeben, dass Du eine Übernachtungsmöglichkeit benötigst."
+msgstr ""
+"Vous avez spécifié que vous aviez besoin d'un endroit pour passer la nuit."
 
 #: templates/courseregistration_list.html:86
 msgid "Your Comment:"
-msgstr "Dein Kommentar:"
+msgstr "Votre commentaire :"
 
 #: templates/courseregistration_list.html:94
 #, python-format
@@ -2012,66 +1989,64 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"            Du hast Dich für eine Prüfung zum %(exam_grade)s angemeldet.\n"
+"            Vous avez demandé à passer un examen pour %(exam_grade)s.\n"
 "            "
 
 #: templates/courseregistration_list.html:104
 #: templates/update_courseregistration.html:14
 msgid "Update registration"
-msgstr "Anmeldung aktualisieren"
+msgstr "Mise à jour de l'inscription"
 
 #: templates/courseregistration_list.html:108
 msgid "Cancel registration"
-msgstr "Anmeldung stornieren"
+msgstr "Annuler l'inscription"
 
 #: templates/courseregistration_list.html:118
 msgid "Cancel Registration"
-msgstr "Anmeldung stornieren"
+msgstr "Annuler l'inscription"
 
 #: templates/courseregistration_list.html:122
 msgid "Cancel Registration for"
-msgstr "Anmeldung stornieren für"
+msgstr "Annuler l'inscription pour"
 
 #: templates/courseregistration_list.html:124
 #, python-format
 msgid ""
 "\n"
-"                        Are you sure you want to cancel your registration "
-"for %(registration.course.title)s?\n"
+"                        Are you sure you want to cancel your registration for %(registration.course.title)s?\n"
 "                        "
 msgstr ""
 "\n"
-"                        Bist Du sicher, dass Du Deine Anmeldung für "
-"%(registration.course.title)s stornieren möchtest?\n"
+"                        Êtes-vous sûr de vouloir annuler votre inscription à %(registration.course.title)s ?\n"
 "                        "
 
 #: templates/courseregistration_list.html:135 templates/userprofile.html:56
 msgid "No, go back"
-msgstr "Nein, zurück"
+msgstr "Non, revenir en arrière"
 
 #: templates/courseregistration_list.html:136
 msgid "Yes, cancel my registration"
-msgstr "Ja, Anmeldung stornieren"
+msgstr "Oui, annuler mon inscription"
 
 #: templates/courseregistration_list.html:145
 msgid "You are currently not signed up for any courses. "
-msgstr "Du bist aktuell für keine Lehrgänge angemeldet."
+msgstr "Vous n'êtes actuellement inscrit à aucun cours."
 
 #: templates/courseregistration_list.html:148 templates/index.html:57
 msgid "Go to course list"
-msgstr "Zur Lehrgangsliste"
+msgstr "Aller à la liste des cours"
 
 #: templates/courseregistration_list.html:150
 msgid "Sign up now"
-msgstr "Jetzt anmelden"
+msgstr "Inscrivez-vous maintenant"
 
 #: templates/courseregistration_list.html:155
 msgid "Your past courses"
-msgstr "Deine vergangenen Lehrgänge"
+msgstr "Vos cours passés"
 
 #: templates/courseregistration_list.html:170
 msgid "Mark as not attended"
-msgstr "Als nicht besucht markieren"
+msgstr "Mark as not attended"
 
 #: templates/courseregistration_list.html:189
 #, python-format
@@ -2081,8 +2056,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Du hast Deine %(exam_grade)s-Prüfung in diesem Lehrgang "
-"bestanden.\n"
+"                Vous avez passé votre %(exam_grade)s examen sur ce cours.\n"
 "            "
 
 #: templates/courseregistration_list.html:193
@@ -2093,8 +2067,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Du hast Deine %(exam_grade)s-Prüfung in diesem Lehrgang "
-"nicht bestanden.\n"
+"                Vous n'avez pas passé votre %(exam_grade)s examen sur ce cours.\n"
 "            "
 
 #: templates/courseregistration_list.html:197
@@ -2105,155 +2078,154 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Du hast Dich für Deine %(exam_grade)s-Prüfung in diesem "
-"Lehrgang angemeldet.\n"
+"                Vous vous êtes présenté à votre %(exam_grade)s examen sur ce cours.\n"
 "            "
 
 #: templates/courseregistration_list.html:206
 msgid "No past courses."
-msgstr "Keine vergangenen Lehrgänge."
+msgstr "Pas de cours passés."
 
 #: templates/courseregistration_list.html:213
 msgid "Show unattended courses"
-msgstr "Nicht besuchte Lehrgänge anzeigen"
+msgstr "Afficher les cours non attribués"
 
 #: templates/courseregistration_list.html:214
 msgid "Hide unattended courses"
-msgstr "Nicht besuchte Lehrgänge ausblenden"
+msgstr "Hide unattended courses"
 
 #: templates/courseregistration_list.html:231
 msgid "Mark as attended"
-msgstr "Als besucht markieren"
+msgstr "Mark as attended"
 
 #: templates/create_userprofile.html:10
 msgid "Create User Profile"
-msgstr "Benutzerprofil erstellen"
+msgstr "Créer un profil d'utilisateur"
 
 #: templates/create_userprofile.html:15
 msgid ""
 "Before being able to sign up for courses you need to create a user profile. "
 "Please fill out the form below."
 msgstr ""
-"Bevor Du Dich für Lehrgänge anmelden kannst, musst Du ein Benutzerprofil "
-"erstellen. Bitte fülle das folgende Formular aus."
+"Avant de pouvoir vous inscrire aux cours, vous devez créer un profil "
+"d'utilisateur. Veuillez remplir le formulaire ci-dessous."
 
 #: templates/create_userprofile.html:23
 msgid "Create Profile"
-msgstr "Profil erstellen"
+msgstr "Créer un profil"
 
 #: templates/email/registration_confirmation.html:14
 #: templates/email/registration_confirmation.html:15
 msgid "Hi"
-msgstr "Hallo"
+msgstr "Salut"
 
 #: templates/email/registration_confirmation.html:17
 msgid "You have successfully signed up for"
-msgstr "Du hast Dich erfolgreich angemeldet für"
+msgstr "Vous vous êtes inscrit(e) avec succès pour"
 
 #: templates/email/registration_confirmation.html:19
 msgid "Course dates:"
-msgstr "Lehrgangsdaten:"
+msgstr "Dates de cours :"
 
 #: templates/email/registration_confirmation.html:22
 msgid "Registration details:"
-msgstr "Anmeldedaten:"
+msgstr "Détails de l'inscription :"
 
 #: templates/email/registration_confirmation.html:25
 msgid "Selected sessions:"
-msgstr "Ausgewählte Einheiten:"
+msgstr "Séances sélectionnées :"
 
 #: templates/email/registration_confirmation.html:34
 msgid "You applied for an exam for"
-msgstr "Du hast Dich für eine Prüfung angemeldet für"
+msgstr "Vous avez demandé à passer un examen pour"
 
 #: templates/email/registration_confirmation.html:38
 msgid "Accommodation:"
-msgstr "Unterkunft:"
+msgstr "Hébergement :"
 
 #: templates/email/registration_confirmation.html:41
 msgid "Payment method:"
-msgstr "Zahlungsmethode:"
+msgstr "Méthode de paiement :"
 
 #: templates/email/registration_confirmation.html:58
 msgid "Kind regards"
-msgstr "Viele Grüße"
+msgstr "Salutations"
 
 #: templates/email/registration_confirmation.html:59
 msgid "Your Course Team"
-msgstr "Dein Lehrgangsteam"
+msgstr "Votre équipe de cours"
 
 #: templates/index.html:31
 msgid "Previous"
-msgstr "Zurück"
+msgstr "Previous"
 
 #: templates/index.html:35
 msgid "Next"
-msgstr "Weiter"
+msgstr "Suivant"
 
 #: templates/index.html:45
 msgid ""
 "Welcome to the official website of D.A.N. BW, the association of Aikido "
-"clubs in Baden-Württemberg, which practice Aikido in the tradition of Master "
-"André Nocquet. On this website, you can find information about our "
+"clubs in Baden-Württemberg, which practice Aikido in the tradition of Master"
+" André Nocquet. On this website, you can find information about our "
 "organization and our clubs, about Aikido and our lineage."
 msgstr ""
-"Willkommen auf der offiziellen Website von D.A.N. BW, dem Verband der Aikido-"
-"Vereine in Baden-Württemberg, die Aikido in der Tradition von Meister André "
-"Nocquet praktizieren. Auf dieser Website findest Du Informationen über "
-"unsere Organisation und unsere Vereine, über Aikido und die Geschichte "
-"unserer Organisation."
+"Bienvenue sur le site officiel de D.A.N. BW, l'association des clubs "
+"d'aïkido du Bade-Wurtemberg, qui pratiquent l'aïkido dans la tradition de "
+"Maître André Nocquet. Sur ce site, vous trouverez des informations sur notre"
+" organisation et nos clubs, sur l'aïkido et notre lignée."
 
 #: templates/index.html:52
 msgid ""
 "Whether you're a beginner or an experienced Aikidoka, we invite you to join "
 "us on the mat and start your Aikido journey with us today!"
 msgstr ""
-"Egal, ob Du Anfänger bist oder schon Aikido-Erfahrung hast, wir freuen uns "
-"darauf, Dich kennen zu lernen und mit Dir zu trainieren!"
+"Que vous soyez un débutant ou un aïkidoka expérimenté, nous vous invitons à "
+"nous rejoindre sur le tapis et à commencer votre voyage en aïkido avec nous "
+"dès aujourd'hui !"
 
 #: templates/index.html:59
 msgid "Go to our course list"
-msgstr "Zur Lehrgangsliste"
+msgstr "Aller à notre liste de cours"
 
 #: templates/index.html:64
 msgid "Upcoming Courses:"
-msgstr "Bevorstehende Lehrgänge:"
+msgstr "Cours à venir :"
 
 #: templates/index.html:69 templates/index.html:104
 msgid "Go to"
-msgstr "Zeige"
+msgstr "Aller à"
 
 #: templates/index.html:76
 msgid "Register for this course"
-msgstr "Für diesen Lehrgang anmelden"
+msgstr "Register for this course"
 
 #: templates/index.html:80
 msgid "Registration has not started yet"
-msgstr "Der Anmeldezeitraum hat noch nicht begonnen."
+msgstr "L'inscription n'a pas encore commencé"
 
 #: templates/index.html:84
 msgid "Registration is closed for this course"
-msgstr "Die Anmeldung für diesen Kurs ist bereits geschlossen."
+msgstr "L'inscription est close pour ce cours"
 
 #: templates/index.html:85
 msgid "Registration Closed"
-msgstr "Anmeldung geschlossen"
+msgstr "Inscription fermée"
 
 #: templates/index.html:119
 msgid "There are no courses available at the moment."
-msgstr "Derzeit sind keine Lehrgänge verfügbar."
+msgstr "There are no courses available at the moment."
 
 #: templates/membership_form.html:13
 msgid "D.A.N. International Membership Application"
-msgstr "D.A.N. International Mitgliedschaftsantrag"
+msgstr "D.A.N. Demande d'adhésion internationale"
 
 #: templates/membership_form.html:15
 msgid "D.A.N. BW Membership Application"
-msgstr "D.A.N. BW Mitgliedschaftsantrag"
+msgstr "Demande d'adhésion au D.A.N. BW"
 
 #: templates/membership_form.html:87 templates/registration_form.html:132
 msgid "Payment Details"
-msgstr "Zahlungsdetails"
+msgstr "Détails du paiement"
 
 #: templates/membership_form.html:92
 #, python-format
@@ -2263,25 +2235,21 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"          Der Mitgliedsbeitrag beträgt <strong>%(full_fee)s €</strong> pro "
-"Jahr.\n"
+"          Le montant de l'adhésion est de <strong>€%(full_fee)s</strong> par an.\n"
 "          "
 
 #: templates/membership_form.html:97
 #, python-format
 msgid ""
 "\n"
-"          New members who apply for membership from the 2nd, 3rd, or 4th "
-"quarter of the year are only charged a reduced\n"
-"          fee of <strong>€%(fee_2nd)s</strong>, <strong>€%(fee_3rd)s</"
-"strong>, or <strong>€%(fee_4th)s</strong>, respectively.\n"
+"          New members who apply for membership from the 2nd, 3rd, or 4th quarter of the year are only charged a reduced\n"
+"          fee of <strong>€%(fee_2nd)s</strong>, <strong>€%(fee_3rd)s</strong>, or <strong>€%(fee_4th)s</strong>, respectively.\n"
 "          "
 msgstr ""
 "\n"
-"          Neue Mitglieder, die ab dem 2., 3. oder 4. Quartal des Jahres "
-"Mitglied werden, zahlen nur einen reduzierten Beitrag von\n"
-"          <strong>%(fee_2nd)s €</strong>, <strong>%(fee_3rd)s €</strong> "
-"oder <strong>%(fee_4th)s €</strong>."
+"          Les nouveaux membres qui font une demande d'adhésion à partir du 2ème, 3ème ou 4ème trimestre de l'année ne sont facturés qu'à un tarif réduit\n"
+"          de <strong>€%(fee_2nd)s</strong>, <strong>€%(fee_3rd)s</strong>, ou <strong>€%(fee_4th)s</strong>, respectivement.\n"
+"          "
 
 #: templates/membership_form.html:103
 msgid ""
@@ -2289,19 +2257,19 @@ msgid ""
 "by SEPA direct debit from D.A.N. BW e.V. as a representative for D.A.N. "
 "International."
 msgstr ""
-"Der Mitgliedsbeitrag wird jährlich im Dezember für das Folgejahr per SEPA-"
-"Lastschrift von D.A.N. BW e.V. im Auftrag von D.A.N. International "
-"eingezogen."
+"Les frais d'adhésion sont collectés chaque année en décembre pour l'année "
+"suivante par débit direct SEPA de D.A.N. BW e.V. en tant que représentant de"
+" D.A.N. International. International."
 
 #: templates/membership_form.html:123
 msgid ""
-"Membership is automatically renewed for another year at the end of the year. "
-"A termination of membership must be made by December 1st in order to take "
+"Membership is automatically renewed for another year at the end of the year."
+" A termination of membership must be made by December 1st in order to take "
 "effect at the end of the year."
 msgstr ""
-"Die Mitgliedschaft verlängert sich am Ende des Jahres automatisch um ein "
-"weiteres Jahr. Eine Kündigung muss bis zum 1. Dezember erfolgen, um zum "
-"Jahresende wirksam zu werden."
+"L'adhésion est automatiquement renouvelée pour une autre année à la fin de "
+"l'année. L'annulation de l'adhésion doit être faite avant le 1er décembre "
+"pour prendre effet à la fin de l'année."
 
 #: templates/membership_form.html:129
 msgid ""
@@ -2309,48 +2277,46 @@ msgid ""
 "does not constitute termination. In this case, D.A.N.BW e.V. charges an "
 "administrative fee of €5 for the additional effort."
 msgstr ""
-"Das Aussetzen des Lastschriftverfahrens oder die Rückforderung des "
-"eingezogenen Betrags stellt keine Kündigung dar. In diesem Fall erhebt D.A."
-"N. BW e.V. eine Bearbeitungsgebühr von 5 € für den zusätzlichen Aufwand."
+"La suspension de la procédure de débit direct ou la récupération du montant "
+"collecté ne constitue pas une résiliation. Dans ce cas, D.A.N.BW e.V. "
+"facture des frais administratifs de 5 € pour l'effort supplémentaire."
 
 #: templates/membership_form.html:138
 #, python-format
 msgid ""
 "\n"
-"          I will transfer the annual membership fee of €%(danbw_fee)s to the "
-"following account:\n"
+"          I will transfer the annual membership fee of €%(danbw_fee)s to the following account:\n"
 "          "
 msgstr ""
 "\n"
-"          Ich werde den jährlichen Mitgliedsbeitrag von %(danbw_fee)s € auf "
-"das folgende Konto überweisen:\n"
+"          Je transférerai les frais d'adhésion annuels de €%(danbw_fee)s sur le compte suivant :\n"
 "          "
 
 #: templates/membership_form.html:157
 msgid "Statutes of D.A.N. International"
-msgstr "Satzung von D.A.N. International"
+msgstr "Statuts de D.A.N. International"
 
 #: templates/membership_form.html:161
 msgid "Statutes of D.A.N.BW e.V."
-msgstr "Satzung von D.A.N. BW e.V."
+msgstr "Statuts de l'association D.A.N.BW e.V."
 
 #: templates/partials/breadcrumbs.html:10 templates/partials/footer.html:23
 #: templates/partials/navigation.html:20
 msgid "Home"
-msgstr "Startseite"
+msgstr "Accueil"
 
 #: templates/partials/breadcrumbs.html:25 templates/partials/footer.html:29
 msgid "Category"
-msgstr "Kategorie"
+msgstr "Catégorie"
 
 #: templates/partials/footer.html:7
 msgid "Curious? Drop us a line!"
-msgstr "Neugierig geworden? Schreib uns!"
+msgstr "Vous êtes curieux ? Dépose-nous une ligne !"
 
 #: templates/partials/footer.html:14 templates/partials/footer.html:113
 #: templates/partials/navigation.html:6
 msgid "Dynamic Aikido Nocquet BW Logo"
-msgstr "Logo von Dynamic Aikido Nocquet BW"
+msgstr "Logo Dynamic Aikido Nocquet BW"
 
 #: templates/partials/footer.html:19
 msgid "Navigation"
@@ -2358,7 +2324,7 @@ msgstr "Navigation"
 
 #: templates/partials/footer.html:52
 msgid "Account"
-msgstr "Konto"
+msgstr "Compte"
 
 #: templates/partials/footer.html:81
 msgid "Organization"
@@ -2366,82 +2332,82 @@ msgstr "Organisation"
 
 #: templates/partials/footer.html:85
 msgid "Get in touch"
-msgstr "Kontakt"
+msgstr "Entrer en contact"
 
 #: templates/partials/footer.html:94
 msgid "Imprint"
-msgstr "Impressum"
+msgstr "Empreinte"
 
 #: templates/partials/footer.html:96
 msgid "Privacy Policy"
-msgstr "Datenschutzerklärung"
+msgstr "Politique de confidentialité"
 
 #: templates/partials/footer.html:107
 msgid "Statutes"
-msgstr "Satzung"
+msgstr "Statuts"
 
 #: templates/partials/logout-modal.html:11
 msgid "Are you sure you want to log out?"
-msgstr "Bist Du sicher, dass Du Dich ausloggen möchtest?"
+msgstr "Êtes-vous sûr de vouloir vous déconnecter ?"
 
 #: templates/partials/logout-modal.html:19 templates/register_course.html:21
 #: templates/update_courseregistration.html:13
 #: templates/update_userprofile.html:26
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Annuler"
 
 #: templates/partials/navigation.html:13
 msgid "Toggle navigation"
-msgstr "Navigation umschalten"
+msgstr "Toggle navigation"
 
 #: templates/partials/navigation.html:52
 msgid "My Account"
-msgstr "Mein Konto"
+msgstr "Mon compte"
 
 #: templates/partials/registration_conditions.html:4
 msgid "Discount Conditions"
-msgstr "Ermäßigungsbedingungen"
+msgstr "Conditions de remise"
 
 #: templates/partials/registration_conditions.html:5
 msgid "The following groups are eligible for a discount:"
-msgstr "Die folgenden Gruppen haben Anspruch auf eine Ermäßigung:"
+msgstr "Les groupes suivants sont éligibles pour une réduction :"
 
 #: templates/partials/registration_conditions.html:7
 msgid "Students"
-msgstr "Studierende"
+msgstr "Étudiants"
 
 #: templates/partials/registration_conditions.html:8
 msgid "Trainees"
-msgstr "Auszubildende"
+msgstr "Stagiaires"
 
 #: templates/partials/registration_conditions.html:9
 msgid "Handicapped persons"
-msgstr "Menschen mit Behinderung"
+msgstr "Personnes handicapées"
 
 #: templates/partials/registration_conditions.html:10
 msgid "Unemployed persons"
-msgstr "Arbeitslose"
+msgstr "Personnes sans emploi"
 
 #: templates/partials/registration_conditions.html:13
 msgid ""
-"If one of the above conditions applies to you, please check the \"Discount\" "
-"box in the registration form and bring proof of eligibility to the course. "
+"If one of the above conditions applies to you, please check the \"Discount\""
+" box in the registration form and bring proof of eligibility to the course. "
 "Otherwise, the full course fee will be charged."
 msgstr ""
-"Wenn eine der oben genannten Bedingungen auf Dich zutrifft, setze bitte ein "
-"Häkchen bei 'Ermäßigung' im Anmeldeformular und bringe bei Lehrgangsbeginn "
-"einen Nachweis mit. Andernfalls wird die volle Lehrgangsgebühr berechnet."
+"Si l'une des conditions ci-dessus s'applique à vous, veuillez vérifier la "
+"case \"Réduction\" dans le formulaire d'inscription et apporter une preuve "
+"d'admissibilité au cours. Dans le cas contraire, le montant total du cours "
+"sera facturé."
 
 #: templates/partials/registration_conditions.html:18
 #: templates/registration_form.html:189
 msgid "Terms and Conditions"
-msgstr "Teilnahmebedingungen"
+msgstr "Termes et conditions"
 
 #: templates/partials/registration_conditions.html:20
 msgid "The organizer (D.A.N. BW e. V.) does not provide insurance coverage."
 msgstr ""
-"Von Seiten des Veranstalters (D.A.N. BW e. V.) besteht kein "
-"Versicherungsschutz."
+"L'organisateur (D.A.N. BW e. V.) ne fournit pas de couverture d'assurance."
 
 #: templates/partials/registration_conditions.html:25
 msgid ""
@@ -2450,282 +2416,293 @@ msgid ""
 "do not wish to have your photos published, please inform the organizer "
 "before the start of the course."
 msgstr ""
-"Der Veranstalter kann während des Lehrgangs Fotos machen, die ohne "
-"Namensnennung (z.B. auf der Website von D.A.N. BW) veröffentlicht werden "
-"können. Wenn Du nicht möchtest, dass Deine Fotos veröffentlicht werden, "
-"informiere den Veranstalter bitte vor Beginn des Lehrgangs."
+"L'organisateur peut également prendre des photos pendant le cours, qui "
+"pourraient être publiées sans mentionner de nom (par exemple, sur le site "
+"web du D.A.N. BW). Si vous ne souhaitez pas que vos photos soient publiées, "
+"veuillez en informer l'organisateur avant le début du cours."
 
 #: templates/register_course.html:8
 msgid "Sign up for"
-msgstr "Anmeldung für"
+msgstr "Inscrivez-vous à"
 
 #: templates/register_course.html:11
 msgid "Please select the sessions you want to attend."
-msgstr "Bitte wähle die Einheiten aus, an denen Du teilnehmen möchtest."
+msgstr ""
+"Veuillez sélectionner les sessions auxquelles vous souhaitez assister."
 
 #: templates/register_course.html:13
 msgid ""
 "Please provide your personal details and select the sessions you want to "
 "attend."
 msgstr ""
-"Bitte gib Deine persönlichen Daten an und wähle die Einheiten aus, an denen "
-"Du teilnehmen möchtest."
+"Veuillez fournir vos coordonnées personnelles et sélectionner les sessions "
+"auxquelles vous souhaitez assister."
 
 #: templates/register_course.html:15
 msgid "The course fee will be displayed below the form"
-msgstr "Die Teilnahmegebühr wird unten im Formular angezeigt"
+msgstr "Le prix de la formation sera affiché en dessous du formulaire"
 
 #: templates/register_course.html:22
 msgid "Sign up"
-msgstr "Anmelden"
+msgstr "S'inscrire"
 
 #: templates/registration_form.html:20 templates/userprofile.html:13
 msgid "E-mail"
-msgstr "E-Mail"
+msgstr "E-mail"
 
 #: templates/registration_form.html:38
 msgid "Edit Profile"
-msgstr "Profil bearbeiten"
+msgstr "Edit Profile"
 
 #: templates/registration_form.html:61
 msgid "Sessions:"
-msgstr "Einheiten:"
+msgstr "Sessions :"
 
 #: templates/registration_form.html:85
 msgid "Entire Course without Dan Seminar"
-msgstr "Ganzer Lehrgang ohne Dan-Seminar"
+msgstr "Cours complet sans le séminaire Dan"
 
 #: templates/registration_form.html:87
 msgid "Entire Course without Dan Preparation"
-msgstr "Ganzer Lehrgang ohne Dan-Vorbereitung"
+msgstr "Cours complet sans préparation au Dan"
 
 #: templates/registration_form.html:137
 msgid "Payment"
-msgstr "Bezahlung"
+msgstr "Paiement"
 
 #: templates/registration_form.html:152
 msgid ""
-"Please refer to the <a href=\"#discount-conditions\"> Discount Conditions </"
-"a> below for more information."
+"Please refer to the <a href=\"#discount-conditions\"> Discount Conditions "
+"</a> below for more information."
 msgstr ""
-"Weitere Informationen findest Du in den <a href=\"#discount-conditions\"> "
-"Ermäßigungsbedingungen</a> unten."
+"Veuillez vous référer aux <a href=\"#discount-conditions\"> Conditions de "
+"remise </a> ci-dessous pour plus d'informations."
 
 #: templates/registration_form.html:162
 msgid "D.A.N. Member discount"
-msgstr "D.A.N.-Mitgliederrabatt"
+msgstr "Compte de membre D.A.N"
 
 #: templates/registration_form.html:191
 msgid "Please accept the terms and conditions below."
-msgstr "Bitte akzeptiere die untenstehenden Bedingungen."
+msgstr "Veuillez accepter les termes et conditions ci-dessous."
 
 #: templates/registration_form.html:199
 msgid "Registration Fee"
-msgstr "Teilnahmegebühr"
+msgstr "Frais d'inscription"
 
 #: templates/update_courseregistration.html:8
 msgid "Update registration for"
-msgstr "Anmeldung aktualisieren für"
+msgstr "Mise à jour de l'inscription pour"
 
 #: templates/update_grade.html:8
 msgid "Did you pass your exam?"
-msgstr "Hast Du Deine Prüfung bestanden?"
+msgstr "Avez-vous réussi votre examen ?"
 
 #: templates/update_grade.html:12
 #, python-format
 msgid ""
 "\n"
-"            You have applied for an exam with your registration for "
-"%(course)s\n"
+"            You have applied for an exam with your registration for %(course)s\n"
 "            "
 msgstr ""
 "\n"
-"            Du hast Dich beim Lehrgang %(course)s für eine Prüfung angemeldet"
+"            Vous avez demandé à passer un examen lors de votre inscription à %(course)s\n"
+"            "
 
 #: templates/update_grade.html:16
 msgid "Did you pass the exam?"
-msgstr "Hast Du die Prüfung bestanden?"
+msgstr "Avez-vous réussi l'examen ?"
 
 #: templates/update_grade.html:19
 msgid "No, I didn't"
-msgstr "Nein"
+msgstr "Non, je n'ai pas"
 
 #: templates/update_grade.html:20
 msgid "Yes, I passed"
-msgstr "Ja, ich habe bestanden."
+msgstr "Yes, I passed"
 
 #: templates/update_userprofile.html:10
 msgid "Update User Profile"
-msgstr "Benutzerprofil aktualisieren"
+msgstr "Mise à jour des profils d'utilisateurs"
 
 #: templates/update_userprofile.html:28
 msgid "Update profile"
-msgstr "Profil aktualisieren"
+msgstr "Mise à jour du profil"
 
 #: templates/userprofile.html:27
 msgid "Update Profile"
-msgstr "Profil aktualisieren"
+msgstr "Profils de mise à jour"
 
 #: templates/userprofile.html:34 templates/userprofile.html:43
 msgid "Deactivate Account"
-msgstr "Konto deaktivieren"
+msgstr "Désactiver le compte"
 
 #: templates/userprofile.html:47
 msgid "Deactivate your Account?"
-msgstr "Konto deaktivieren?"
+msgstr "Désactiver son compte ?"
 
 #: templates/userprofile.html:48
 msgid "Are you sure you want to deactivate your account?"
-msgstr "Bist Du sicher, dass Du Dein Konto deaktivieren möchtest?"
+msgstr "Êtes-vous sûr de vouloir désactiver votre compte ?"
 
 #: templates/userprofile.html:57
 msgid "Yes, deactivate my account"
-msgstr "Ja, deaktiviere mein Konto"
+msgstr "Oui, désactiver mon compte"
 
 #: users/apps.py:8
 msgid "Users"
-msgstr "Benutzer"
+msgstr "Utilisateurs"
 
 #: users/views.py:56
 msgid "You have successfully created a user profile."
-msgstr "Du hast Dein Benutzerprofil erfolgreich erstellt."
+msgstr "Vous avez créé avec succès un profil d'utilisateur."
 
 #: users/views.py:123
 msgid "You have successfully updated your user profile."
-msgstr "Du hast Dein Benutzerprofil erfolgreich aktualisiert."
+msgstr "Vous avez mis à jour votre profil utilisateur avec succès."
 
 #: users/views.py:171
 msgid "Congratulations! Your grade has been updated to "
-msgstr "Herzlichen Glückwunsch! Du bist jetzt "
+msgstr "Félicitations à tous ! Votre grade a été mis à jour à"
 
 #: users/views.py:177
 msgid "Your grade has not been updated."
-msgstr "Deine Graduierung wurde nicht aktualisiert."
+msgstr "Votre grade n'a pas été mis à jour."
 
 #: users/views.py:193
 msgid ""
-"Please use the button on the user profile page for deactivating your account."
+"Please use the button on the user profile page for deactivating your "
+"account."
 msgstr ""
-"Bitte benutze den Button auf der Benutzerprofilseite zum Deaktivieren Deines "
-"Kontos."
+"Veuillez utiliser le bouton sur la page de profil utilisateur pour "
+"désactiver votre compte."
 
 #: users/views.py:204
 msgid "You have successfully deactivated your account."
-msgstr "Du hast Dein Konto erfolgreich deaktiviert."
+msgstr "Vous avez réussi à désactiver votre compte."
 
 #: users/views.py:210
 msgid ""
 "Staff accounts cannot be deactivated. Please contact us if you want to "
 "deactivate your account."
 msgstr ""
-"Benutzerkonten mit Mitarbeiterstatus können nicht deaktiviert werden. Bitte "
-"kontaktiere uns, wenn Du Dein Konto deaktivieren möchtest."
+"Les comptes du personnel ne peuvent pas être désactivés. Merci de nous "
+"contacter si vous souhaitez désactiver votre compte."
 
 #: users/views.py:215
 msgid "You must be logged in to deactivate your account."
-msgstr "Du musst eingeloggt sein, um Dein Konto zu deaktivieren."
+msgstr "Vous devez être connecté pour désactiver votre compte."
 
 #: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
 msgid "Messages"
-msgstr "Mitteilungen"
+msgstr "Messages"
 
 #: venv/lib/python3.12/site-packages/django/contrib/sitemaps/apps.py:8
 msgid "Site Maps"
-msgstr ""
+msgstr "Plan du site"
 
 #: venv/lib/python3.12/site-packages/django/contrib/staticfiles/apps.py:9
 msgid "Static Files"
-msgstr ""
+msgstr "Fichiers statiques"
 
 #: venv/lib/python3.12/site-packages/django/contrib/syndication/apps.py:7
 msgid "Syndication"
-msgstr ""
+msgstr "Syndication"
 
 #. Translators: String used to replace omitted page numbers in elided page
 #. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
 #: venv/lib/python3.12/site-packages/django/core/paginator.py:30
 msgid "…"
-msgstr ""
+msgstr ".."
 
 #: venv/lib/python3.12/site-packages/django/core/paginator.py:32
 msgid "That page number is not an integer"
-msgstr ""
+msgstr "Ce numéro de page n'est pas un entier"
 
 #: venv/lib/python3.12/site-packages/django/core/paginator.py:33
 msgid "That page number is less than 1"
-msgstr ""
+msgstr "Ce numéro de page est inférieur à 1"
 
 #: venv/lib/python3.12/site-packages/django/core/paginator.py:34
 msgid "That page contains no results"
-msgstr ""
+msgstr "That page contains no results"
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:22
 msgid "Enter a valid value."
-msgstr ""
+msgstr "Entrez une valeur valide."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:104
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:760
 msgid "Enter a valid URL."
-msgstr ""
+msgstr "Entrez une URL valide."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:165
 msgid "Enter a valid integer."
-msgstr ""
+msgstr "Entrez un entier valide."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:176
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "Entrez une adresse e-mail valide."
 
 #. Translators: "letters" means latin letters: a-z and A-Z.
 #: venv/lib/python3.12/site-packages/django/core/validators.py:259
 msgid ""
 "Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
 msgstr ""
+"Saisissez un \"slug\" valide composé de lettres, de chiffres, de sous-codes "
+"ou d'hyphens."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:267
 msgid ""
-"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
-"hyphens."
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or"
+" hyphens."
 msgstr ""
+"Saisissez un \"slug\" valide composé de lettres Unicode, de chiffres, de "
+"sous-codes ou d'hyphens."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:279
 #: venv/lib/python3.12/site-packages/django/core/validators.py:306
 msgid "Enter a valid IPv4 address."
-msgstr ""
+msgstr "Entrez une adresse IPv4 valide."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:286
 #: venv/lib/python3.12/site-packages/django/core/validators.py:307
 msgid "Enter a valid IPv6 address."
-msgstr ""
+msgstr "Entrez une adresse IPv6 valide."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:298
 #: venv/lib/python3.12/site-packages/django/core/validators.py:305
 msgid "Enter a valid IPv4 or IPv6 address."
-msgstr ""
+msgstr "Entrez une adresse IPv4 ou IPv6 valide."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:341
 msgid "Enter only digits separated by commas."
-msgstr ""
+msgstr "N'entrez que des chiffres séparés par des virgules."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:347
 #, python-format
 msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
 msgstr ""
+"Assurez-vous que cette valeur est %(limit_value)s (c'est %(show_value)s)."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:382
 #, python-format
 msgid "Ensure this value is less than or equal to %(limit_value)s."
 msgstr ""
+"Assurez-vous que cette valeur est inférieure ou égale à %(limit_value)s."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:391
 #, python-format
 msgid "Ensure this value is greater than or equal to %(limit_value)s."
 msgstr ""
+"Assurez-vous que cette valeur est supérieure ou égale à %(limit_value)s."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:400
 #, python-format
 msgid "Ensure this value is a multiple of step size %(limit_value)s."
 msgstr ""
+"Assurez-vous que cette valeur est un multiple de la taille de l'étape "
+"%(limit_value)s."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:407
 #, python-format
@@ -2733,6 +2710,9 @@ msgid ""
 "Ensure this value is a multiple of step size %(limit_value)s, starting from "
 "%(offset)s, e.g. %(offset)s, %(valid_value1)s, %(valid_value2)s, and so on."
 msgstr ""
+"Assurez-vous que cette valeur est un multiple de la taille de l'étape "
+"%(limit_value)s, en commençant par %(offset)s, par exemple %(offset)s, "
+"%(valid_value1)s, %(valid_value2)s, et ainsi de suite."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:439
 #, python-format
@@ -2760,7 +2740,7 @@ msgstr[1] ""
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:355
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:394
 msgid "Enter a number."
-msgstr ""
+msgstr "Entrez un numéro."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:482
 #, python-format
@@ -2791,43 +2771,45 @@ msgid ""
 "File extension “%(extension)s” is not allowed. Allowed extensions are: "
 "%(allowed_extensions)s."
 msgstr ""
+"L'extension de fichier \"%(extension)s\" n'est pas autorisée. Les extensions"
+" autorisées sont : %(allowed_extensions)s."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:624
 msgid "Null characters are not allowed."
-msgstr ""
+msgstr "Les caractères nuls ne sont pas autorisés."
 
 #: venv/lib/python3.12/site-packages/django/db/models/base.py:1477
 #: venv/lib/python3.12/site-packages/django/forms/models.py:906
 msgid "and"
-msgstr ""
+msgstr "et"
 
 #: venv/lib/python3.12/site-packages/django/db/models/base.py:1479
 #, python-format
 msgid "%(model_name)s with this %(field_labels)s already exists."
-msgstr "%(model_name)s mit %(field_labels)s existiert bereits."
+msgstr "%(model_name)s avec ce %(field_labels)s existe déjà."
 
 #: venv/lib/python3.12/site-packages/django/db/models/constraints.py:20
 #, python-format
-msgid "Constraint “%(name)s” is violated."
-msgstr ""
+msgid "Constraint \"%(name)s\" is violated."
+msgstr "La contrainte \"%(name)s\" est violée."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:133
 #, python-format
 msgid "Value %(value)r is not a valid choice."
-msgstr ""
+msgstr "Value %(value)r n'est pas un choix valide."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:134
 msgid "This field cannot be null."
-msgstr ""
+msgstr "Ce champ ne peut pas être nul."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:135
 msgid "This field cannot be blank."
-msgstr ""
+msgstr "Ce champ ne peut pas être laissé vide."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:136
 #, python-format
 msgid "%(model_name)s with this %(field_label)s already exists."
-msgstr "%(model_name)s mit %(field_label)s existiert bereits."
+msgstr "%(model_name)s avec ce %(field_label)s existe déjà."
 
 #. Translators: The 'lookup_type' is one of 'date', 'year' or
 #. 'month'. Eg: "Title must be unique for pub_date year"
@@ -2836,38 +2818,39 @@ msgstr "%(model_name)s mit %(field_label)s existiert bereits."
 msgid ""
 "%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
 msgstr ""
+"%(field_label)s doit être unique pour %(date_field_label)s %(lookup_type)s."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:179
 #, python-format
 msgid "Field of type: %(field_type)s"
-msgstr ""
+msgstr "Champ de type : %(field_type)s"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1155
 #, python-format
 msgid "“%(value)s” value must be either True or False."
-msgstr ""
+msgstr "\"%(value)s\" valeur doit être soit True soit False."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1156
 #, python-format
 msgid "“%(value)s” value must be either True, False, or None."
-msgstr ""
+msgstr "\"%(value)s\" valeur doit être soit True, False, ou None."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1158
 msgid "Boolean (Either True or False)"
-msgstr ""
+msgstr "Boolean (Either True or False)"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1208
 #, python-format
 msgid "String (up to %(max_length)s)"
-msgstr ""
+msgstr "Chaîne (jusqu'à %(max_length)s)"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1210
 msgid "String (unlimited)"
-msgstr ""
+msgstr "Chaîne (illimitée)"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1314
 msgid "Comma-separated integers"
-msgstr ""
+msgstr "Entiers séparés par des virgules"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1415
 #, python-format
@@ -2875,6 +2858,8 @@ msgid ""
 "“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
 "format."
 msgstr ""
+"la valeur \"%(value)s\" a un format de date invalide. Elle doit être au "
+"format AAAA-MM-DD."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1419
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1554
@@ -2883,121 +2868,129 @@ msgid ""
 "“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
 "date."
 msgstr ""
+"\"%(value)s\" valeur a le bon format (AAAA-MM-DD) mais c'est une date "
+"invalide."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1423
 msgid "Date (without time)"
-msgstr ""
+msgstr "Date (sans heure)"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1550
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
-"uuuuuu]][TZ] format."
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
 msgstr ""
+"la valeur \"%(value)s\" a un format invalide. Elle doit être au format YYYY-"
+"MM-DD HH:MM[:ss[.uuuuu]][TZ]."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1558
 #, python-format
 msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
-"[TZ]) but it is an invalid date/time."
+"“%(value)s” value has the correct format (YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ]) but it is an invalid date/time."
 msgstr ""
+"la valeur \"%(value)s\" a le bon format (YYYY-MM-DD HH:MM[:ss[.uuuuu]][TZ]) "
+"mais c'est une date/heure invalide."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1563
 msgid "Date (with time)"
-msgstr ""
+msgstr "Date (avec heure)"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1690
 #, python-format
 msgid "“%(value)s” value must be a decimal number."
-msgstr ""
+msgstr "\"%(value)s\" valeur doit être un nombre décimal."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1692
 msgid "Decimal number"
-msgstr ""
+msgstr "Numéro décimal"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1853
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
-"uuuuuu] format."
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
 msgstr ""
+"la valeur \"%(value)s\" a un format invalide. Elle doit être au format [DD] "
+"[[HH :]MM :]ss[.uuuuu]."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1857
 msgid "Duration"
-msgstr ""
+msgstr "Duration"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1909
 msgid "Email address"
-msgstr ""
+msgstr "Adresse électronique"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1934
 msgid "File path"
-msgstr ""
+msgstr "Chemin de fichier"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2012
 #, python-format
 msgid "“%(value)s” value must be a float."
-msgstr ""
+msgstr "\"%(value)s\" valeur doit être un float."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2014
 msgid "Floating point number"
-msgstr ""
+msgstr "Numéro de point flottant"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2054
 #, python-format
 msgid "“%(value)s” value must be an integer."
-msgstr ""
+msgstr "\"%(value)s\" valeur doit être un entier."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2056
 msgid "Integer"
-msgstr ""
+msgstr "Entier"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2152
 msgid "Big (8 byte) integer"
-msgstr ""
+msgstr "Big (8 octets) entier"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2169
 msgid "Small integer"
-msgstr ""
+msgstr "Petit entier"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2177
 msgid "IPv4 address"
-msgstr ""
+msgstr "Adresse IPv4"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2208
 msgid "IP address"
-msgstr ""
+msgstr "Adresse IP"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2301
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2302
 #, python-format
 msgid "“%(value)s” value must be either None, True or False."
-msgstr ""
+msgstr "\"%(value)s\" valeur doit être soit None, True ou False."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2304
 msgid "Boolean (Either True, False or None)"
-msgstr ""
+msgstr "Boolean (Either True, False or None)"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2355
 msgid "Positive big integer"
-msgstr ""
+msgstr "Positive big integer"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2370
 msgid "Positive integer"
-msgstr ""
+msgstr "Intègre positif"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2385
 msgid "Positive small integer"
-msgstr ""
+msgstr "Petit entier positif"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2401
 #, python-format
 msgid "Slug (up to %(max_length)s)"
-msgstr ""
+msgstr "Slug (jusqu'à %(max_length)s)"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2437
 msgid "Text"
-msgstr ""
+msgstr "Texte"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2512
 #, python-format
@@ -3005,6 +2998,8 @@ msgid ""
 "“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
 "format."
 msgstr ""
+"la valeur \"%(value)s\" a un format invalide. Elle doit être au format "
+"HH:MM[:ss[.uuuuu]]."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2516
 #, python-format
@@ -3012,119 +3007,124 @@ msgid ""
 "“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
 "invalid time."
 msgstr ""
+"\"%(value)s\" value a le bon format (HH:MM[:ss[.uuuuu]]) mais c'est une "
+"heure invalide."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2520
 msgid "Time"
-msgstr ""
+msgstr "Time"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2652
 msgid "Raw binary data"
-msgstr ""
+msgstr "Données binaires brutes"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2717
 #, python-format
 msgid "“%(value)s” is not a valid UUID."
-msgstr ""
+msgstr "\"%(value)s\" n'est pas un UUID valide."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2719
 msgid "Universally unique identifier"
-msgstr ""
+msgstr "Identifiant unique universel"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:232
 msgid "File"
-msgstr ""
+msgstr "Fichier"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:393
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:26
 msgid "A JSON object"
-msgstr ""
+msgstr "Un objet JSON"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:28
 msgid "Value must be valid JSON."
-msgstr ""
+msgstr "La valeur doit être valide JSON."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:939
 #, python-format
 msgid "%(model)s instance with %(field)s %(value)r does not exist."
-msgstr ""
+msgstr "l'instance %(model)s avec %(field)s %(value)r n'existe pas."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:941
 msgid "Foreign Key (type determined by related field)"
-msgstr ""
+msgstr "Clé étrangère (type déterminé par le champ connexe)"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1235
 msgid "One-to-one relationship"
-msgstr ""
+msgstr "Relation one-to-one"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1292
 #, python-format
 msgid "%(from)s-%(to)s relationship"
-msgstr ""
+msgstr "relation %(from)s-%(to)s"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1294
 #, python-format
 msgid "%(from)s-%(to)s relationships"
-msgstr ""
+msgstr "%(from)s-%(to)s relations"
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1342
 msgid "Many-to-many relationship"
-msgstr ""
+msgstr "Relation de l'homme à la femme"
 
 #. Translators: If found as last label character, these punctuation
-#. characters will prevent the default label_suffix to be appended to the label
+#. characters will prevent the default label_suffix to be appended to the
+#. label
 #: venv/lib/python3.12/site-packages/django/forms/boundfield.py:185
 msgid ":?.!"
-msgstr ""
+msgstr ": ?.!"
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:95
 msgid "This field is required."
-msgstr ""
+msgstr "Ce champ est obligatoire."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:304
 msgid "Enter a whole number."
-msgstr ""
+msgstr "Entrez un nombre entier."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:475
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1252
 msgid "Enter a valid date."
-msgstr ""
+msgstr "Entrez une date valide."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:498
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1253
 msgid "Enter a valid time."
-msgstr ""
+msgstr "Entrez une heure valide."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:525
 msgid "Enter a valid date/time."
-msgstr ""
+msgstr "Entrez une date/heure valide."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:559
 msgid "Enter a valid duration."
-msgstr ""
+msgstr "Entrez une durée valide."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:560
 #, python-brace-format
 msgid "The number of days must be between {min_days} and {max_days}."
-msgstr ""
+msgstr "Le nombre de jours doit être compris entre {min_days} et {max_days}."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:629
 msgid "No file was submitted. Check the encoding type on the form."
 msgstr ""
+"Aucun fichier n'a été soumis. Vérifier le type d'encodage sur le formulaire."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:630
 msgid "No file was submitted."
-msgstr ""
+msgstr "Aucun fichier n'a été soumis."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:631
 msgid "The submitted file is empty."
-msgstr ""
+msgstr "Le fichier soumis est vide."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:633
 #, python-format
-msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid ""
+"Ensure this filename has at most %(max)d character (it has %(length)d)."
 msgid_plural ""
 "Ensure this filename has at most %(max)d characters (it has %(length)d)."
 msgstr[0] ""
@@ -3133,12 +3133,16 @@ msgstr[1] ""
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:638
 msgid "Please either submit a file or check the clear checkbox, not both."
 msgstr ""
+"Veuillez soit soumettre un fichier, soit cocher la case clear, mais pas les "
+"deux."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:702
 msgid ""
 "Upload a valid image. The file you uploaded was either not an image or a "
 "corrupted image."
 msgstr ""
+"Télécharger une image valide. Le fichier que vous avez téléchargé n'était "
+"pas une image ou était une image corrompue."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:874
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:960
@@ -3146,34 +3150,36 @@ msgstr ""
 #, python-format
 msgid "Select a valid choice. %(value)s is not one of the available choices."
 msgstr ""
+"Sélectionner un choix valide. %(value)s ne fait pas partie des choix "
+"disponibles."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:962
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1081
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1583
 msgid "Enter a list of values."
-msgstr ""
+msgstr "Entrez une liste de valeurs."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1082
 msgid "Enter a complete value."
-msgstr ""
+msgstr "Entrez une valeur complète."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1321
 msgid "Enter a valid UUID."
-msgstr ""
+msgstr "Entrez un UUID valide."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1351
 msgid "Enter a valid JSON."
-msgstr ""
+msgstr "Entrez un JSON valide."
 
 #. Translators: This is the default suffix added to form field labels
 #: venv/lib/python3.12/site-packages/django/forms/forms.py:94
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: venv/lib/python3.12/site-packages/django/forms/forms.py:231
 #, python-format
 msgid "(Hidden field %(name)s) %(error)s"
-msgstr ""
+msgstr "(Champ caché %(name)s) %(error)s"
 
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:61
 #, python-format
@@ -3181,6 +3187,9 @@ msgid ""
 "ManagementForm data is missing or has been tampered with. Missing fields: "
 "%(field_names)s. You may need to file a bug report if the issue persists."
 msgstr ""
+"Les données de ManagementForm sont manquantes ou ont été bloquées. Champs "
+"manquants : %(field_names)s. Vous devrez peut-être envoyer un rapport de "
+"bug si le problème persiste."
 
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:65
 #, python-format
@@ -3198,17 +3207,19 @@ msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:499
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:899
 #, python-format
 msgid "Please correct the duplicate data for %(field)s."
-msgstr ""
+msgstr "Veuillez corriger les données en double pour %(field)s."
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:904
 #, python-format
 msgid "Please correct the duplicate data for %(field)s, which must be unique."
 msgstr ""
+"Veuillez corriger les données en double pour %(field)s, qui doivent être "
+"uniques."
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:911
 #, python-format
@@ -3216,23 +3227,28 @@ msgid ""
 "Please correct the duplicate data for %(field_name)s which must be unique "
 "for the %(lookup)s in %(date_field)s."
 msgstr ""
+"Veuillez corriger les données en double pour %(field_name)s qui doivent "
+"être uniques pour les %(lookup)s dans %(date_field)s."
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:920
 msgid "Please correct the duplicate values below."
-msgstr ""
+msgstr "Veuillez corriger les valeurs en double ci-dessous."
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1357
 msgid "The inline value did not match the parent instance."
-msgstr ""
+msgstr "La valeur en ligne ne correspondait pas à l'instance parentale."
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1448
-msgid "Select a valid choice. That choice is not one of the available choices."
+msgid ""
+"Select a valid choice. That choice is not one of the available choices."
 msgstr ""
+"Sélectionner un choix valide. Ce choix ne fait pas partie des choix "
+"disponibles."
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1587
 #, python-format
 msgid "“%(pk)s” is not a valid value."
-msgstr ""
+msgstr "\"%(pk)s\" n'est pas une valeur valide."
 
 #: venv/lib/python3.12/site-packages/django/forms/utils.py:227
 #, python-format
@@ -3240,27 +3256,29 @@ msgid ""
 "%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
 "may be ambiguous or it may not exist."
 msgstr ""
+"%(datetime)s n'a pas pu être interprété dans le fuseau horaire "
+"%(current_timezone)s ; il peut être ambigu ou il peut ne pas exister."
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:461
 msgid "Clear"
-msgstr ""
+msgstr "Clear"
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:462
 msgid "Currently"
-msgstr ""
+msgstr "Actuellement"
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:463
 msgid "Change"
-msgstr ""
+msgstr "Changement"
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:800
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #. Translators: Please do not add spaces around commas.
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:876
 msgid "yes,no,maybe"
-msgstr ""
+msgstr "yes,no,maybe"
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:906
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:923
@@ -3273,311 +3291,311 @@ msgstr[1] ""
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:925
 #, python-format
 msgid "%s KB"
-msgstr ""
+msgstr "%s KB"
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:927
 #, python-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:929
 #, python-format
 msgid "%s GB"
-msgstr ""
+msgstr "%s GB"
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:931
 #, python-format
 msgid "%s TB"
-msgstr ""
+msgstr "%s TB"
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:933
 #, python-format
 msgid "%s PB"
-msgstr ""
+msgstr "%s PB"
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:74
 msgid "p.m."
-msgstr ""
+msgstr "p.m."
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:75
 msgid "a.m."
-msgstr ""
+msgstr "a.m."
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:80
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:81
 msgid "AM"
-msgstr ""
+msgstr "AM"
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:153
 msgid "midnight"
-msgstr ""
+msgstr "midnight"
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:155
 msgid "noon"
-msgstr ""
+msgstr "noon"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:16
 msgid "Mon"
-msgstr ""
+msgstr "Mon"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:17
 msgid "Tue"
-msgstr ""
+msgstr "Tue"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:18
 msgid "Wed"
-msgstr ""
+msgstr "Wed"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:19
 msgid "Thu"
-msgstr ""
+msgstr "Thu"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:20
 msgid "Fri"
-msgstr ""
+msgstr "Fri"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:21
 msgid "Sat"
-msgstr ""
+msgstr "Sat"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:22
 msgid "Sun"
-msgstr ""
+msgstr "Sun"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:25
 msgid "January"
-msgstr ""
+msgstr "Janvier"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:26
 msgid "February"
-msgstr ""
+msgstr "Février"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:27
 msgid "March"
-msgstr ""
+msgstr "March"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:28
 msgid "April"
-msgstr ""
+msgstr "Avril"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:29
 msgid "May"
-msgstr ""
+msgstr "May"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:30
 msgid "June"
-msgstr ""
+msgstr "June"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:31
 msgid "July"
-msgstr ""
+msgstr "Juillet"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:32
 msgid "August"
-msgstr ""
+msgstr "Août"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:33
 msgid "September"
-msgstr ""
+msgstr "Septembre"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:34
 msgid "October"
-msgstr ""
+msgstr "Octobre"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:35
 msgid "November"
-msgstr ""
+msgstr "Novembre"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:36
 msgid "December"
-msgstr ""
+msgstr "Décembre"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:39
 msgid "jan"
-msgstr ""
+msgstr "jan"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:40
 msgid "feb"
-msgstr ""
+msgstr "feb"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:41
 msgid "mar"
-msgstr ""
+msgstr "mar"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:42
 msgid "apr"
-msgstr ""
+msgstr "apr"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:43
 msgid "may"
-msgstr ""
+msgstr "may"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:44
 msgid "jun"
-msgstr ""
+msgstr "jun"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:45
 msgid "jul"
-msgstr ""
+msgstr "jul"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:46
 msgid "aug"
-msgstr ""
+msgstr "aug"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:47
 msgid "sep"
-msgstr ""
+msgstr "sep"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:48
 msgid "oct"
-msgstr ""
+msgstr "oct"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:49
 msgid "nov"
-msgstr ""
+msgstr "nov"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:50
 msgid "dec"
-msgstr ""
+msgstr "fr"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:53
 msgctxt "abbrev. month"
 msgid "Jan."
-msgstr ""
+msgstr "Jan."
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:54
 msgctxt "abbrev. month"
 msgid "Feb."
-msgstr ""
+msgstr "Feb."
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:55
 msgctxt "abbrev. month"
 msgid "March"
-msgstr ""
+msgstr "March"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:56
 msgctxt "abbrev. month"
 msgid "April"
-msgstr ""
+msgstr "Avril"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:57
 msgctxt "abbrev. month"
 msgid "May"
-msgstr ""
+msgstr "May"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:58
 msgctxt "abbrev. month"
 msgid "June"
-msgstr ""
+msgstr "June"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:59
 msgctxt "abbrev. month"
 msgid "July"
-msgstr ""
+msgstr "Juillet"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:60
 msgctxt "abbrev. month"
 msgid "Aug."
-msgstr ""
+msgstr "Aug."
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:61
 msgctxt "abbrev. month"
 msgid "Sept."
-msgstr ""
+msgstr "Sept."
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:62
 msgctxt "abbrev. month"
 msgid "Oct."
-msgstr ""
+msgstr "Oct."
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:63
 msgctxt "abbrev. month"
 msgid "Nov."
-msgstr ""
+msgstr "Nov."
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:64
 msgctxt "abbrev. month"
 msgid "Dec."
-msgstr ""
+msgstr "Dec."
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:67
 msgctxt "alt. month"
 msgid "January"
-msgstr ""
+msgstr "Janvier"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:68
 msgctxt "alt. month"
 msgid "February"
-msgstr ""
+msgstr "Février"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:69
 msgctxt "alt. month"
 msgid "March"
-msgstr ""
+msgstr "March"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:70
 msgctxt "alt. month"
 msgid "April"
-msgstr ""
+msgstr "Avril"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:71
 msgctxt "alt. month"
 msgid "May"
-msgstr ""
+msgstr "May"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:72
 msgctxt "alt. month"
 msgid "June"
-msgstr ""
+msgstr "June"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:73
 msgctxt "alt. month"
 msgid "July"
-msgstr ""
+msgstr "Juillet"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:74
 msgctxt "alt. month"
 msgid "August"
-msgstr ""
+msgstr "Août"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:75
 msgctxt "alt. month"
 msgid "September"
-msgstr ""
+msgstr "Septembre"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:76
 msgctxt "alt. month"
 msgid "October"
-msgstr ""
+msgstr "Octobre"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:77
 msgctxt "alt. month"
 msgid "November"
-msgstr ""
+msgstr "Novembre"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:78
 msgctxt "alt. month"
 msgid "December"
-msgstr ""
+msgstr "Décembre"
 
 #: venv/lib/python3.12/site-packages/django/utils/ipv6.py:8
 msgid "This is not a valid IPv6 address."
-msgstr ""
+msgstr "Ceci n'est pas une adresse IPv6 valide."
 
 #: venv/lib/python3.12/site-packages/django/utils/text.py:123
 #, python-format
 msgctxt "String to return when truncating text"
 msgid "%(truncated_text)s…"
-msgstr ""
+msgstr "%(truncated_text)s.."
 
 #. Translators: This string is used as a separator between list elements
 #: venv/lib/python3.12/site-packages/django/utils/text.py:342
 #: venv/lib/python3.12/site-packages/django/utils/timesince.py:135
 msgid ", "
-msgstr ""
+msgstr ","
 
 #: venv/lib/python3.12/site-packages/django/utils/timesince.py:8
 #, python-format
@@ -3623,11 +3641,11 @@ msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:29
 msgid "Forbidden"
-msgstr ""
+msgstr "Forbidden"
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:30
 msgid "CSRF verification failed. Request aborted."
-msgstr ""
+msgstr "Échec de la vérification du CSRF. Request aborted."
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:34
 msgid ""
@@ -3636,6 +3654,10 @@ msgid ""
 "required for security reasons, to ensure that your browser is not being "
 "hijacked by third parties."
 msgstr ""
+"Vous voyez ce message parce que ce site HTTPS requiert un \"Referer header\""
+" pour être envoyé par votre navigateur web, mais aucun n'a été envoyé. Cet "
+"en-tête est nécessaire pour des raisons de sécurité, pour s'assurer que "
+"votre navigateur n'est pas détourné par des tiers."
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:40
 msgid ""
@@ -3643,15 +3665,24 @@ msgid ""
 "enable them, at least for this site, or for HTTPS connections, or for “same-"
 "origin” requests."
 msgstr ""
+"Si vous avez configuré votre navigateur pour désactiver les en-têtes "
+"\"Referer\", veuillez les réactiver, au moins pour ce site, ou pour les "
+"connexions HTTPS, ou pour les requêtes \"same-origin\"."
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:45
 msgid ""
-"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
-"including the “Referrer-Policy: no-referrer” header, please remove them. The "
-"CSRF protection requires the “Referer” header to do strict referer checking. "
-"If you’re concerned about privacy, use alternatives like <a "
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or"
+" including the “Referrer-Policy: no-referrer” header, please remove them. "
+"The CSRF protection requires the “Referer” header to do strict referer "
+"checking. If you’re concerned about privacy, use alternatives like <a "
 "rel=\"noreferrer\" …> for links to third-party sites."
 msgstr ""
+"Si vous utilisez la balise <meta name=\"referrer\" content=\"no-referrer\"> "
+"ou si vous incluez l'en-tête \"Referrer Policy : no-referrer\", veuillez les"
+" supprimer. La protection CSRF exige que l'en-tête \"Referer\" fasse l'objet"
+" d'une vérification stricte des référents. Si vous vous souciez de la "
+"protection de la vie privée, utilisez des alternatives telles que <a "
+"rel=\"noreferrer\" ...> pour les liens vers des sites tiers."
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:54
 msgid ""
@@ -3659,96 +3690,105 @@ msgid ""
 "submitting forms. This cookie is required for security reasons, to ensure "
 "that your browser is not being hijacked by third parties."
 msgstr ""
+"Vous voyez ce message parce que ce site requiert un cookie CSRF lors de la "
+"soumission de formulaires. Ce cookie est nécessaire pour des raisons de "
+"sécurité, pour s'assurer que votre navigateur n'est pas détourné par des "
+"tiers."
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:60
 msgid ""
 "If you have configured your browser to disable cookies, please re-enable "
 "them, at least for this site, or for “same-origin” requests."
 msgstr ""
+"Si vous avez configuré votre navigateur pour désactiver les cookies, "
+"veuillez les réactiver, au moins pour ce site, ou pour les demandes \"same-"
+"origin\"."
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:66
 msgid "More information is available with DEBUG=True."
-msgstr ""
+msgstr "Plus d'informations sont disponibles avec DEBUG=True."
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:44
 msgid "No year specified"
-msgstr ""
+msgstr "Pas d'année spécifiée"
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:64
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:115
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:214
 msgid "Date out of range"
-msgstr ""
+msgstr "Date hors de portée"
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:94
 msgid "No month specified"
-msgstr ""
+msgstr "Pas de mois spécifié"
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:147
 msgid "No day specified"
-msgstr ""
+msgstr "Pas de jour spécifié"
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:194
 msgid "No week specified"
-msgstr ""
+msgstr "Pas de semaine spécifiée"
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:349
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:380
 #, python-format
 msgid "No %(verbose_name_plural)s available"
-msgstr ""
+msgstr "No %(verbose_name_plural)s disponible"
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:652
 #, python-format
 msgid ""
-"Future %(verbose_name_plural)s not available because %(class_name)s."
-"allow_future is False."
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
 msgstr ""
+"Future %(verbose_name_plural)s non disponible parce que "
+"%(class_name)s.allow_future est False."
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:692
 #, python-format
 msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
-msgstr ""
+msgstr "Invalid date string \"%(datestr)s\" given format \"%(format)s\""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/detail.py:56
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr ""
+msgstr "No %(verbose_name)s found matching the query"
 
 #: venv/lib/python3.12/site-packages/django/views/generic/list.py:70
 msgid "Page is not “last”, nor can it be converted to an int."
-msgstr ""
+msgstr "La page n'est pas \"dernière\", ni ne peut être convertie en un int."
 
 #: venv/lib/python3.12/site-packages/django/views/generic/list.py:77
 #, python-format
 msgid "Invalid page (%(page_number)s): %(message)s"
-msgstr ""
+msgstr "Page invalide (%(page_number)s) : %(message)s"
 
 #: venv/lib/python3.12/site-packages/django/views/generic/list.py:169
 #, python-format
 msgid "Empty list and “%(class_name)s.allow_empty” is False."
-msgstr ""
+msgstr "Empty list and \"%(class_name)s.allow_empty\" is False."
 
 #: venv/lib/python3.12/site-packages/django/views/static.py:49
 msgid "Directory indexes are not allowed here."
-msgstr ""
+msgstr "Les index de répertoire ne sont pas autorisés ici."
 
 #: venv/lib/python3.12/site-packages/django/views/static.py:51
 #, python-format
 msgid "“%(path)s” does not exist"
-msgstr ""
+msgstr "\"%(path)s\" n'existe pas"
 
 #: venv/lib/python3.12/site-packages/django/views/static.py:68
 #: venv/lib/python3.12/site-packages/django/views/templates/directory_index.html:8
 #: venv/lib/python3.12/site-packages/django/views/templates/directory_index.html:11
 #, python-format
 msgid "Index of %(directory)s"
-msgstr ""
+msgstr "Index de %(directory)s"
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:7
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:220
 msgid "The install worked successfully! Congratulations!"
-msgstr ""
+msgstr "L'installation s'est déroulée avec succès ! Félicitations !"
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:206
 #, python-format
@@ -3756,72 +3796,69 @@ msgid ""
 "View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
 "target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
 msgstr ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">notes de mise à jour</a> pour Django "
+"%(version)s"
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:221
 #, python-format
 msgid ""
-"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
-"%(version)s/ref/settings/#debug\" target=\"_blank\" "
-"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
-"configured any URLs."
+"You are seeing this page because <a "
+"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
+"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> is in your settings file "
+"and you have not configured any URLs."
 msgstr ""
+"Vous voyez cette page parce que <a "
+"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
+"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> est dans votre fichier de "
+"paramètres et que vous n'avez pas configuré d'URL."
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:229
 msgid "Django Documentation"
-msgstr ""
+msgstr "Documentation Django"
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:230
 msgid "Topics, references, &amp; how-to’s"
-msgstr ""
+msgstr "Topics, références, &amp ; how-to's"
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:238
 msgid "Tutorial: A Polling App"
-msgstr ""
+msgstr "Tutoriel : Une application de sondage"
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:239
 msgid "Get started with Django"
-msgstr ""
+msgstr "Démarre avec Django"
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:247
 msgid "Django Community"
-msgstr ""
+msgstr "Communauté Django"
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:248
 msgid "Connect, get help, or contribute"
-msgstr ""
+msgstr "Se connecter, obtenir de l'aide, ou contribuer"
 
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:72
 msgid "Only POST method is allowed"
-msgstr ""
+msgstr "Seule la méthode POST est autorisée"
 
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:86
 msgid "Attachment module is disabled"
-msgstr ""
+msgstr "Le module de rattachement est désactivé"
 
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:93
 msgid "Only authenticated users are allowed"
-msgstr ""
+msgstr "Seuls les utilisateurs authentifiés sont autorisés"
 
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:99
 msgid "No files were requested"
-msgstr ""
+msgstr "Aucun fichier n'a été demandé"
 
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:140
 msgid "File size exceeds the limit allowed and cannot be saved"
 msgstr ""
+"La taille du fichier dépasse la limite autorisée et ne peut pas être "
+"sauvegardée"
 
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:160
 msgid "Failed to save attachment"
-msgstr ""
-
-#~ msgid "Registration for this course is not possible at the moment."
-#~ msgstr "Eine Anmeldung für diesen Lehrgang ist momentan nicht möglich."
-
-#~ msgid "Language"
-#~ msgstr "Sprache"
-
-#~ msgid "External Course"
-#~ msgstr "Externer Lehrgang"
-
-#~ msgid "External Courses"
-#~ msgstr "Externe Lehrgänge"
+msgstr "Echec de la sauvegarde de l'attachement"
