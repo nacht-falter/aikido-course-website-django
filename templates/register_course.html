@@ -22,9 +22,7 @@
     <button id="submit-button" class="btn btn-primary disabled" type="submit">{% trans "Sign up" %}</button>
   </form>
 
-  {% if course.discount_percentage > 0 %}
   {% include "partials/registration_conditions.html" %}
-  {% endif %}
 
 </div>
 
