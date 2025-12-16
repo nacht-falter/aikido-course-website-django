@@ -406,7 +406,7 @@ function displayFinalFee(courseData) {
   }
 
   if (stickyFeeRow) {
-    stickyFeeRow.style.display = finalFee > 0 ? "flex" : "none";
+    stickyFeeRow.classList.toggle("d-none", finalFee <= 0);
   }
 }
 
