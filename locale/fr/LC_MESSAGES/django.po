@@ -2311,7 +2311,7 @@ msgstr "Catégorie"
 
 #: templates/partials/footer.html:7
 msgid "Curious? Drop us a line!"
-msgstr "Vous êtes curieux ? Dépose-nous une ligne !"
+msgstr "Envoyez-nous un message!"
 
 #: templates/partials/footer.html:14 templates/partials/footer.html:113
 #: templates/partials/navigation.html:6
