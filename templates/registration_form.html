@@ -1,5 +1,6 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
+{% load l10n %}
 {% if form.non_field_errors %}
     <div class="alert alert-danger">
         {% for error in form.non_field_errors %}
@@ -62,18 +63,23 @@
         </div>
         <div class="col-9">
           <div id="id_selected_sessions">
-            {% for session in form.fields.selected_sessions.queryset %}
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox"
-                       name="selected_sessions"
-                       value="{{ session.id }}"
-                       id="session-{{ session.id }}"
-                       {% if session in form.instance.selected_sessions.all %}checked{% endif %}
-                       data-dan-preparation="{{ session.is_dan_preparation }}"
-                       data-date="{{ session.date }}"
-                       />
-                <label class="form-check-label" for="session-{{ session.id }}">{{ session }}</label>
-            </div>
+            {% regroup form.fields.selected_sessions.queryset by date as session_dates %}
+            {% for date_group in session_dates %}
+              <div class="{% if not forloop.first %}mt-3{% endif %}">
+                {% for session in date_group.list %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox"
+                           name="selected_sessions"
+                           value="{{ session.id }}"
+                           id="session-{{ session.id }}"
+                           {% if session in form.instance.selected_sessions.all %}checked{% endif %}
+                           data-dan-preparation="{{ session.is_dan_preparation }}"
+                           data-date="{{ session.date }}"
+                           />
+                    <label class="form-check-label" for="session-{{ session.id }}">{{ session }}</label>
+                </div>
+                {% endfor %}
+              </div>
             {% endfor %}
           </div>
           <hr>

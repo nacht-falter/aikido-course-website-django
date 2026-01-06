@@ -382,7 +382,7 @@ function displayFinalFee(courseData) {
 
   if (finalFeeDisplay && feeType) {
     const feeTypeDisplay = getFeeTypeDisplay(feeType, courseData.fees);
-    finalFeeDisplay.textContent = `${finalFee.toFixed(2)} €`;
+    finalFeeDisplay.textContent = finalFee.toFixed(2);
 
     let count = 0;
 
