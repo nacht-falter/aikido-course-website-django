@@ -42,12 +42,12 @@ class CourseFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         courses = CourseRegistration.objects.values_list(
-            "course__title", flat=True).distinct().order_by("-course__start_date")
+            "course__translations__title", flat=True).distinct().order_by("-course__start_date")
         return tuple((course, course) for course in courses)
 
     def queryset(self, request, queryset):
         if self.value():
-            return queryset.filter(course__title=self.value())
+            return queryset.filter(course__translations__title=self.value())
         return queryset
 
 
@@ -111,7 +111,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "dinner",
         "overnight_stay",
     ]
-    search_fields = ["course__title", "first_name", "last_name", "email"]
+    search_fields = ["course__translations__title", "first_name", "last_name", "email"]
     list_filter = [FutureCourseFilter, CourseFilter, "payment_status",
                    "payment_method", "exam"]
     ordering = ["-course__start_date", "-registration_date"]

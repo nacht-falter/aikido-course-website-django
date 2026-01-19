@@ -169,7 +169,7 @@ class InternalCourseAdmin(TranslatableAdmin, SummernoteModelAdmin):
         "end_date",
         "get_course_registration_count",
     )
-    search_fields = ["title", "description"]
+    search_fields = ["translations__title", "translations__description"]
     list_filter = (CoursesByYearFilter, FutureCourseFilter,
                    "course_type", "status", "registration_status")
     summernote_fields = ("description",)
