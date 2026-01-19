@@ -7,6 +7,7 @@ from django.utils.html import format_html
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
+from courses.models import Course
 from danbw_website import utils
 
 from .models import CourseRegistration
@@ -41,13 +42,16 @@ class CourseFilter(admin.SimpleListFilter):
     parameter_name = "course"
 
     def lookups(self, request, model_admin):
-        courses = CourseRegistration.objects.values_list(
-            "course__translations__title", flat=True).distinct().order_by("-course__start_date")
-        return tuple((course, course) for course in courses)
+        # Get distinct course IDs from registrations
+        course_ids = CourseRegistration.objects.values_list('course', flat=True).distinct()
+        # Get course objects and let parler handle translation
+        courses = Course.objects.filter(id__in=course_ids).order_by('-start_date')
+        # Use course ID as value, title as display (parler auto-translates)
+        return tuple((str(course.id), course.title) for course in courses)
 
     def queryset(self, request, queryset):
         if self.value():
-            return queryset.filter(course__translations__title=self.value())
+            return queryset.filter(course_id=self.value())
         return queryset
 
 
