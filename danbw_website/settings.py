@@ -248,7 +248,7 @@ USE_TZ = True
 LANGUAGES = [
     ("de", "German"),
     ("en", "English"),
-    ("fr", "French"),
+    # ("fr", "French"),  # Disabled - keeping translations for future use
 ]
 
 # Django-parler configuration
@@ -256,7 +256,7 @@ PARLER_LANGUAGES = {
     SITE_ID: (
         {"code": "de"},
         {"code": "en"},
-        {"code": "fr"},
+        # {"code": "fr"},  # Disabled - keeping translations for future use
     ),
     "default": {
         "fallbacks": ["de"],  # German as fallback
