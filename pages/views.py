@@ -31,7 +31,7 @@ class HomePage(View):
             for course in all_courses
             if course.end_date >= date.today()
             and (course.end_date <= date.today() + timedelta(days=num_days)
-                 or course.course_type == 'family_reunion')
+                 or (hasattr(course, 'course_type') and course.course_type == 'family_reunion'))
         ]
 
         upcoming_courses.sort(key=lambda course: course.start_date)
@@ -57,7 +57,7 @@ class HomePage(View):
                 for registration in all_registrations
                 if registration.course.end_date >= date.today()
                 and (registration.course.end_date <= date.today() + timedelta(days=num_days)
-                     or registration.course.course_type == 'family_reunion')
+                     or (hasattr(registration.course, 'course_type') and registration.course.course_type == 'family_reunion'))
             ]
 
         return render(
