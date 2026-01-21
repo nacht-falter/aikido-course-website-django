@@ -30,8 +30,11 @@ class HomePage(View):
             course
             for course in all_courses
             if course.end_date >= date.today()
-            and course.end_date <= date.today() + timedelta(days=num_days)
+            and (course.end_date <= date.today() + timedelta(days=num_days)
+                 or course.course_type == 'family_reunion')
         ]
+
+        upcoming_courses.sort(key=lambda course: course.start_date)
 
         for course in upcoming_courses:
             if (
@@ -41,6 +44,8 @@ class HomePage(View):
                 course.user_registered = CourseRegistration.objects.filter(
                     user=request.user, course=course
                 ).exists()
+            else:
+                course.user_registered = False
 
         upcoming_registrations = []
         if request.user.is_authenticated:
@@ -51,7 +56,8 @@ class HomePage(View):
                 registration
                 for registration in all_registrations
                 if registration.course.end_date >= date.today()
-                and registration.course.end_date <= date.today() + timedelta(days=num_days)
+                and (registration.course.end_date <= date.today() + timedelta(days=num_days)
+                     or registration.course.course_type == 'family_reunion')
             ]
 
         return render(

@@ -1,0 +1,79 @@
+{% load i18n %}
+{% load l10n %}
+
+<!doctype html>
+<html lang="{{ request.LANGUAGE_CODE }}">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ subject }}</title>
+</head>
+
+<body>
+  <p>
+    {% trans "Dear Aikidoka" %},
+  </p>
+  <p>{% trans "You have successfully signed up for" %} <strong>{{ registration.course.title }}</strong></p>
+  <p>
+    {% trans "Course dates:" %} {{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}
+  </p>
+  {% if registration.course.location %}
+  <p>
+    <strong>{% trans "Event Location:" %}</strong><br />
+    {{ registration.course.location }}
+  </p>
+  {% endif %}
+
+  <p>{% trans "Registration details:" %}</p>
+  <ul>
+    <li>
+      {% trans "Selected sessions:" %}
+      <ul>
+        {% for session in sessions %}
+        <li>{{ session }}</li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% if registration.exam %}
+    <li>
+      {% trans "You applied for an exam for" %} {{ registration.get_exam_grade_display }}
+    </li>
+    {% endif %}
+    {% if registration.accommodation_option %}
+    <li>{% trans "Accommodation:" %} {{ registration.accommodation_option.name }}</li>
+    {% endif %}
+    <li>{% trans "Course Fee:" %} <strong>€ {{ registration.final_fee|floatformat:2 }}</strong>
+    <li>{% trans "Payment method:" %} {{ registration.get_payment_method_display }}</li>
+  </ul>
+  <p>
+    <strong>{% trans "Payment Information:" %}</strong>
+  </p>
+  <p>
+    {% blocktrans with bank_transfer_until=registration.course.bank_transfer_until|localize trimmed %}
+    Please transfer a deposit of €100.00 by {{ bank_transfer_until }}. This secures your spot at the DAN Family Reunion.
+    If you are unable to attend, we will refund your deposit—provided no costs have been incurred by the organisers.
+    {% endblocktrans %}
+  </p>
+  <p style="margin-left: 1rem;">
+    {{ bank_account|linebreaksbr }}<br />
+    <strong>{% trans "Reference:" %}</strong> {{ registration.course.title }} + {% trans "Your Name" %}
+  </p>
+  {% if registration.dinner %}
+  <p>
+    {% trans "You have signed up for the dinner." %}&nbsp;
+    {% trans "Please note that this is a binding reservation." %}
+  </p>
+  {% endif %}
+  <p>
+    {% trans "If you have any questions, please contact us at" %} <a href="mailto:family.reunion@danbw.de">family.reunion@danbw.de</a>
+  </p>
+  <p>
+    {% trans "See you soon in Karlsruhe – we look forward to welcoming you there!" %}
+  </p>
+  <p>
+    {% trans "Kind regards" %}<br />
+    {% trans "Your Course Team" %}
+  </p>
+</body>
+
+</html>

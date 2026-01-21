@@ -58,8 +58,13 @@ def send_registration_confirmation(request, registration):
                 'bank_account': os.environ.get('BANK_ACCOUNT'),
             }
 
+            # Use different template for family reunion courses
+            template_name = 'email/registration_confirmation_family_reunion.html' \
+                if registration.course.course_type == 'family_reunion' \
+                else 'email/registration_confirmation.html'
+
             # Render template in user's language (all translatable fields will be in user's language)
-            message = render_to_string('registration_confirmation.html', context)
+            message = render_to_string(template_name, context)
 
             sender = os.environ.get("COURSE_TEAM_EMAIL")
             recipient = registration.user.email if request.user.is_authenticated else registration.email

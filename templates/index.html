@@ -53,6 +53,32 @@
     Whether you're a beginner or an experienced Aikidoka, we invite you to join us on the mat and start your Aikido journey with us today!
     {% endblocktrans %}
   </p>
+
+  <div class="card border-primary mb-4 mt-4">
+    <div class="card-header text-white" style="background-color: #1e3c95;">
+      <h4 class="mb-0"><i class="fa-solid fa-users"></i> 28th DAN Family Reunion</h4>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{% trans "with John Emmerson Sensei 6th Dan" %}</h5>
+      <p class="card-text">
+        <strong><i class="fa-solid fa-calendar"></i> {% trans "Date:" %}</strong> 1–8 {% trans "August" %} 2026<br>
+        <strong><i class="fa-solid fa-location-dot"></i> {% trans "Location:" %}</strong> {% trans "Sportschule Schöneck, Karlsruhe, Germany" %}
+      </p>
+      <p class="card-text">
+        {% blocktrans trimmed %}
+        Join us for intensive training, familiar togetherness and reuniting with our Aikido family from many countries!
+        {% endblocktrans %}
+      </p>
+
+      <a href="{% if request.LANGUAGE_CODE == 'de' %}{% static 'documents/flyer_dfr_2026_de.pdf' %}{% else %}{% static 'documents/flyer_dfr_2026_en.pdf' %}{% endif %}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-file-pdf"></i> {% trans "Download Flyer" %}
+      </a>
+      <a href="{% url 'course_list' %}#28-dan-family-reunion" class="btn btn-outline-primary">
+        <i class="fa-solid fa-circle-info"></i> {% trans "More Information & Registration" %}
+      </a>
+    </div>
+  </div>
+
   <p>
   <a class="btn btn-outline-primary" href="{% url 'course_list' %}" title="{% trans 'Go to course list' %}">
       <i class="fa-solid fa-user-plus"></i>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-15 00:43+0100\n"
+"POT-Creation-Date: 2026-01-21 02:10+0100\n"
 "PO-Revision-Date: 2025-10-01 09:20+0200\n"
 "Last-Translator: Johannes <your-email@domain.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -17,35 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: course_registrations/admin.py:20 courses/admin.py:40
+#: course_registrations/admin.py:21 courses/admin.py:40
 msgid "Course Date"
 msgstr "Lehrgangsdatum"
 
-#: course_registrations/admin.py:25 courses/admin.py:45
+#: course_registrations/admin.py:26 courses/admin.py:45
 msgid "Future Courses"
 msgstr "Zukünftige Lehrgänge"
 
-#: course_registrations/admin.py:26 courses/admin.py:46
+#: course_registrations/admin.py:27 courses/admin.py:46
 #: templates/course_list.html:45
 msgid "Past Courses"
 msgstr "Vergangene Lehrgänge"
 
-#: course_registrations/admin.py:40 course_registrations/models.py:43
+#: course_registrations/admin.py:41 course_registrations/models.py:43
 #: courses/models.py:56 courses/models.py:268 courses/models.py:323
-#: danbw_website/utils.py:235
+#: danbw_website/utils.py:240
 msgid "Course"
 msgstr "Lehrgang"
 
-#: course_registrations/admin.py:124 courses/models.py:314
-#: templates/registration_form.html:18 templates/userprofile.html:9
+#: course_registrations/admin.py:128 courses/models.py:314
+#: templates/registration_form.html:19 templates/userprofile.html:9
 msgid "Name"
 msgstr "Name"
 
-#: course_registrations/admin.py:136
+#: course_registrations/admin.py:140
 msgid "Toggle payment status of selected registrations"
 msgstr "Zahlungsstatus der ausgewählten Anmeldungen umschalten"
 
-#: course_registrations/admin.py:153 courses/admin.py:320
+#: course_registrations/admin.py:157 courses/admin.py:320
 msgid "Export selected course registrations to CSV"
 msgstr "Ausgewählte Lehrgangs-Anmeldungen als CSV exportieren"
 
@@ -67,7 +67,7 @@ msgstr "Ich benötige eine Übernachtungsmöglichkeit."
 msgid "Other Dojo"
 msgstr "Anderes Dojo"
 
-#: course_registrations/forms.py:64 danbw_website/utils.py:256
+#: course_registrations/forms.py:64 danbw_website/utils.py:261
 #: templates/courseregistration_list.html:80
 msgid "Accommodation"
 msgstr "Unterkunft"
@@ -106,7 +106,7 @@ msgstr ""
 "Du musst mindestens 1. Kyu sein, um Dich für diesen Lehrgang anmelden zu "
 "können."
 
-#: course_registrations/forms.py:143 templates/registration_form.html:111
+#: course_registrations/forms.py:143 templates/registration_form.html:117
 msgid "Please select at least one session."
 msgstr "Bitte wähle mindestens eine Einheit aus."
 
@@ -119,19 +119,19 @@ msgstr "Bitte gib ein Dojo an, wenn Du 'Anderes Dojo' auswählst."
 msgid "Participant"
 msgstr "Teilnehmer"
 
-#: course_registrations/models.py:24 danbw_website/utils.py:238
-#: danbw_website/utils.py:306 memberships/forms.py:51 memberships/models.py:25
+#: course_registrations/models.py:24 danbw_website/utils.py:243
+#: danbw_website/utils.py:311 memberships/forms.py:51 memberships/models.py:25
 msgid "Email"
 msgstr "E-Mail"
 
-#: course_registrations/models.py:29 danbw_website/utils.py:236
-#: danbw_website/utils.py:303 memberships/forms.py:35 memberships/models.py:10
+#: course_registrations/models.py:29 danbw_website/utils.py:241
+#: danbw_website/utils.py:308 memberships/forms.py:35 memberships/models.py:10
 #: users/forms.py:13 users/forms.py:61
 msgid "First Name"
 msgstr "Vorname"
 
-#: course_registrations/models.py:35 danbw_website/utils.py:237
-#: danbw_website/utils.py:304 memberships/forms.py:36 memberships/models.py:11
+#: course_registrations/models.py:35 danbw_website/utils.py:242
+#: danbw_website/utils.py:309 memberships/forms.py:36 memberships/models.py:11
 #: users/forms.py:17 users/forms.py:65
 msgid "Last Name"
 msgstr "Nachname"
@@ -144,27 +144,27 @@ msgstr "Ausgewählte Einheiten"
 msgid "Registration date"
 msgstr "Anmeldedatum"
 
-#: course_registrations/models.py:55 danbw_website/utils.py:240
-#: danbw_website/utils.py:314 memberships/forms.py:74 memberships/models.py:48
-#: templates/registration_form.html:24 templates/userprofile.html:21
+#: course_registrations/models.py:55 danbw_website/utils.py:245
+#: danbw_website/utils.py:319 memberships/forms.py:74 memberships/models.py:48
+#: templates/registration_form.html:25 templates/userprofile.html:21
 #: users/models.py:21
 msgid "Dojo"
 msgstr "Dojo"
 
-#: course_registrations/models.py:61 danbw_website/utils.py:239
-#: danbw_website/utils.py:313 memberships/forms.py:73 memberships/models.py:46
-#: templates/registration_form.html:22 templates/userprofile.html:17
+#: course_registrations/models.py:61 danbw_website/utils.py:244
+#: danbw_website/utils.py:318 memberships/forms.py:73 memberships/models.py:46
+#: templates/registration_form.html:23 templates/userprofile.html:17
 #: users/models.py:23
 msgid "Grade"
 msgstr "Graduierung"
 
-#: course_registrations/models.py:68 danbw_website/utils.py:246
-#: templates/course_list_item.html:85 templates/index.html:98
-#: templates/registration_form.html:120
+#: course_registrations/models.py:68 danbw_website/utils.py:251
+#: templates/course_list_item.html:85 templates/index.html:124
+#: templates/registration_form.html:126
 msgid "Exam"
 msgstr "Prüfung"
 
-#: course_registrations/models.py:73 danbw_website/utils.py:247
+#: course_registrations/models.py:73 danbw_website/utils.py:252
 msgid "Exam Grade"
 msgstr "Prüfungsgrad"
 
@@ -180,8 +180,8 @@ msgstr "Graduierung aktualisiert"
 msgid "Accept terms"
 msgstr "Bedingungen akzeptiert"
 
-#: course_registrations/models.py:91 danbw_website/utils.py:243
-#: templates/registration_form.html:147
+#: course_registrations/models.py:91 danbw_website/utils.py:248
+#: templates/registration_form.html:153
 msgid "Discount"
 msgstr "Ermäßigung"
 
@@ -189,7 +189,7 @@ msgstr "Ermäßigung"
 msgid "D.A.N. Member"
 msgstr "D.A.N.-Mitglied"
 
-#: course_registrations/models.py:99 danbw_website/utils.py:242
+#: course_registrations/models.py:99 danbw_website/utils.py:247
 msgid "Final Fee"
 msgstr "Gesamtbetrag"
 
@@ -202,11 +202,11 @@ msgid "Payment method"
 msgstr "Zahlungsmethode"
 
 #: course_registrations/models.py:115 course_registrations/models.py:331
-#: danbw_website/utils.py:248 memberships/forms.py:78 memberships/models.py:56
+#: danbw_website/utils.py:253 memberships/forms.py:78 memberships/models.py:56
 msgid "Comment"
 msgstr "Kommentar"
 
-#: course_registrations/models.py:119 danbw_website/utils.py:253
+#: course_registrations/models.py:119 danbw_website/utils.py:258
 #: templates/courseregistration_list.html:63
 msgid "Dinner"
 msgstr "Abendessen"
@@ -249,11 +249,11 @@ msgstr ""
 "dan_member}"
 
 #: course_registrations/models.py:316 fees/models.py:11
-#: templates/registration_form.html:101 templates/registration_form.html:107
+#: templates/registration_form.html:107 templates/registration_form.html:113
 msgid "Entire Course"
 msgstr "Ganzer Lehrgang"
 
-#: course_registrations/models.py:323 danbw_website/utils.py:241
+#: course_registrations/models.py:323 danbw_website/utils.py:246
 msgid "Selected Sessions"
 msgstr "Ausgewählte Einheiten"
 
@@ -361,7 +361,7 @@ msgstr " wurde aktualisiert."
 msgid "Year"
 msgstr "Jahr"
 
-#: courses/admin.py:122 templates/registration_form.html:46
+#: courses/admin.py:122 templates/registration_form.html:47
 msgid "Course Details"
 msgstr "Lehrgangsdetails"
 
@@ -377,7 +377,7 @@ msgstr "Zahlungsinformationen"
 #: courses/admin.py:154 courses/models.py:32
 #: templates/childrens_passport_form.html:108
 #: templates/course_list_item.html:200 templates/membership_form.html:117
-#: templates/registration_form.html:174
+#: templates/registration_form.html:180
 msgid "Additional Information"
 msgstr "Zusätzliche Informationen"
 
@@ -408,7 +408,7 @@ msgid "Title"
 msgstr "Titel"
 
 #: courses/models.py:22 templates/course_list_item.html:141
-#: templates/registration_form.html:51
+#: templates/registration_form.html:52
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -759,8 +759,6 @@ msgid "Family Reunion"
 msgstr ""
 
 #: danbw_website/constants.py:122
-#, fuzzy
-#| msgid "Regular Course"
 msgid "Regular Course"
 msgstr "Normaler Lehrgang"
 
@@ -798,21 +796,21 @@ msgstr ""
 msgid "[Dynamic Aikido Nocquet BW] Your Registration for "
 msgstr "[Dynamic Aikido Nocquet BW] Deine Anmeldung für "
 
-#: danbw_website/utils.py:78 danbw_website/utils.py:202
+#: danbw_website/utils.py:83 danbw_website/utils.py:207
 msgid "Invalid email address. Please try again with a valid email address."
 msgstr ""
 "Ungültige E-Mail-Adresse. Bitte versuche es erneut mit einer gültigen E-Mail-"
 "Adresse."
 
-#: danbw_website/utils.py:93
+#: danbw_website/utils.py:98
 #, python-brace-format
 msgid ""
 "[Dynamic Aikido Nocquet BW] A registration for {course} has been cancelled"
 msgstr ""
 "[Dynamic Aikido Nocquet BW] Eine Anmeldung für {course} wurde storniert"
 
-#: danbw_website/utils.py:95 danbw_website/utils.py:127
-#: danbw_website/utils.py:211
+#: danbw_website/utils.py:100 danbw_website/utils.py:132
+#: danbw_website/utils.py:216
 msgid ""
 "Hi,\n"
 "\n"
@@ -820,7 +818,7 @@ msgstr ""
 "Hallo,\n"
 "\n"
 
-#: danbw_website/utils.py:96
+#: danbw_website/utils.py:101
 #, python-brace-format
 msgid ""
 "A registration for {course} has been cancelled.\n"
@@ -829,19 +827,19 @@ msgstr ""
 "Eine Anmeldung für {course} wurde storniert.\n"
 "\n"
 
-#: danbw_website/utils.py:97 danbw_website/utils.py:130
-#: danbw_website/utils.py:214
+#: danbw_website/utils.py:102 danbw_website/utils.py:135
+#: danbw_website/utils.py:219
 #, python-brace-format
 msgid "Name: {first_name} {last_name}\n"
 msgstr "Name: {first_name} {last_name}\n"
 
-#: danbw_website/utils.py:99 danbw_website/utils.py:132
-#: danbw_website/utils.py:216
+#: danbw_website/utils.py:104 danbw_website/utils.py:137
+#: danbw_website/utils.py:221
 #, python-brace-format
 msgid "Email: {email}\n"
 msgstr "E-Mail: {email}\n"
 
-#: danbw_website/utils.py:100
+#: danbw_website/utils.py:105
 #, python-brace-format
 msgid ""
 "Course: {course}\n"
@@ -850,7 +848,7 @@ msgstr ""
 "Lehrgang: {course}\n"
 "\n"
 
-#: danbw_website/utils.py:101 danbw_website/utils.py:218
+#: danbw_website/utils.py:106 danbw_website/utils.py:223
 #, python-brace-format
 msgid ""
 "Please check the admin panel at {site_url}/admin for more details.\n"
@@ -859,7 +857,7 @@ msgstr ""
 "Weitere Infos findest Du im Admin-Bereich unter {site_url}/admin.\n"
 "\n"
 
-#: danbw_website/utils.py:112
+#: danbw_website/utils.py:117
 msgid ""
 "Failed to send cancellation notification email. Please contact the course "
 "team."
@@ -867,11 +865,11 @@ msgstr ""
 "Fehler beim Senden der Stornierungsbestätigung. Bitte kontaktiere das "
 "Lehrgangs-Team."
 
-#: danbw_website/utils.py:121
+#: danbw_website/utils.py:126
 msgid "[Dynamic Aikido Nocquet BW] New registration for "
 msgstr "[Dynamic Aikido Nocquet BW] Neue Anmeldung für "
 
-#: danbw_website/utils.py:128
+#: danbw_website/utils.py:133
 #, python-brace-format
 msgid ""
 "A new registration for {course} has been received.\n"
@@ -880,17 +878,17 @@ msgstr ""
 "Eine neue Anmeldung für {course} ist eingegangen.\n"
 "\n"
 
-#: danbw_website/utils.py:133
+#: danbw_website/utils.py:138
 #, python-brace-format
 msgid "Course: {course}\n"
 msgstr "Lehrgang: {course}\n"
 
-#: danbw_website/utils.py:138
+#: danbw_website/utils.py:143
 #, python-brace-format
 msgid "Accommodation: {accommodation}\n"
 msgstr "Unterkunft: {accommodation}\n"
 
-#: danbw_website/utils.py:143
+#: danbw_website/utils.py:148
 #, python-brace-format
 msgid ""
 "\n"
@@ -901,7 +899,7 @@ msgstr ""
 "Weitere Infos findest Du im Admin-Bereich unter {site_url}/admin.\n"
 "\n"
 
-#: danbw_website/utils.py:155
+#: danbw_website/utils.py:160
 msgid ""
 "Failed to send registration notification email. Please contact the course "
 "team."
@@ -909,16 +907,16 @@ msgstr ""
 "Fehler beim Senden der Anmeldebestätigungs-E-Mail. Bitte kontaktiere das "
 "Lehrgangs-Team."
 
-#: danbw_website/utils.py:161
+#: danbw_website/utils.py:166
 #, python-brace-format
 msgid "[Dynamic Aikido Nocquet BW] Your {membership} application"
 msgstr "[Dynamic Aikido Nocquet BW] Dein {membership} Antrag"
 
-#: danbw_website/utils.py:167
+#: danbw_website/utils.py:172
 msgid "The membership fees will be deducted from your account.\n"
 msgstr "Die Mitgliedsbeiträge werden von Deinem Konto abgebucht.\n"
 
-#: danbw_website/utils.py:172
+#: danbw_website/utils.py:177
 #, python-brace-format
 msgid ""
 "Please transfer the annual fee of €{fee} to the account below:\n"
@@ -927,7 +925,7 @@ msgstr ""
 "Bitte überweise den Jahresbeitrag von {fee} € auf das unten stehende Konto:\n"
 "\n"
 
-#: danbw_website/utils.py:175
+#: danbw_website/utils.py:180
 #, python-brace-format
 msgid ""
 "Please transfer the fee of €{fee} to the account below:\n"
@@ -936,7 +934,7 @@ msgstr ""
 "Bitte überweise die Gebühr von {fee} € auf das unten stehende Konto:\n"
 "\n"
 
-#: danbw_website/utils.py:180
+#: danbw_website/utils.py:185
 msgid ""
 "We will issue your passport as soon as possible.\n"
 "\n"
@@ -948,7 +946,7 @@ msgstr ""
 "Du musst bis dahin nichts weiter tun.\n"
 "\n"
 
-#: danbw_website/utils.py:184
+#: danbw_website/utils.py:189
 #, python-brace-format
 msgid ""
 "Hi {first_name},\n"
@@ -957,7 +955,7 @@ msgstr ""
 "Hallo {first_name},\n"
 "\n"
 
-#: danbw_website/utils.py:185
+#: danbw_website/utils.py:190
 #, python-brace-format
 msgid ""
 "We have received your {membership} application.\n"
@@ -966,20 +964,20 @@ msgstr ""
 "Wir haben Deinen Antrag auf {membership} erhalten.\n"
 "\n"
 
-#: danbw_website/utils.py:190
+#: danbw_website/utils.py:195
 msgid "Best regards,\n"
 msgstr "Viele Grüße,\n"
 
-#: danbw_website/utils.py:191
+#: danbw_website/utils.py:196
 msgid "The D.A.N. BW team\n"
 msgstr "Das D.A.N. BW team\n"
 
-#: danbw_website/utils.py:208
+#: danbw_website/utils.py:213
 #, python-brace-format
 msgid "[Dynamic Aikido Nocquet BW] New {membership} application"
 msgstr "[Dynamic Aikido Nocquet BW] Neuer Antrag auf {membership}"
 
-#: danbw_website/utils.py:212
+#: danbw_website/utils.py:217
 #, python-brace-format
 msgid ""
 "A new {membership} application has been received.\n"
@@ -988,7 +986,7 @@ msgstr ""
 "Es ist ein neuer Antrag auf {membership} eingegangen.\n"
 "\n"
 
-#: danbw_website/utils.py:217
+#: danbw_website/utils.py:222
 #, python-brace-format
 msgid ""
 "Dojo: {dojo}\n"
@@ -997,73 +995,73 @@ msgstr ""
 "Dojo: {dojo}\n"
 "\n"
 
-#: danbw_website/utils.py:228
+#: danbw_website/utils.py:233
 msgid ""
 "Failed to send membership notification email. Please contact the course team."
 msgstr ""
 "Senden der Benachrichtigungs-E-Mail fehlgeschlagen. Bitte kontaktiere das "
 "Lehrgangs-Team."
 
-#: danbw_website/utils.py:244
+#: danbw_website/utils.py:249
 msgid "Payment Method"
 msgstr "Zahlungsmethode"
 
-#: danbw_website/utils.py:245
+#: danbw_website/utils.py:250
 msgid "Payment Status"
 msgstr "Zahlungsstatus"
 
-#: danbw_website/utils.py:249 danbw_website/utils.py:315
+#: danbw_website/utils.py:254 danbw_website/utils.py:320
 #: memberships/models.py:52
 msgid "Accept Terms"
 msgstr "Bedingungen akzeptiert"
 
-#: danbw_website/utils.py:250
+#: danbw_website/utils.py:255
 msgid "Registration Date"
 msgstr "Anmeldedatum"
 
-#: danbw_website/utils.py:254
+#: danbw_website/utils.py:259
 msgid "Overnight Stay"
 msgstr "Übernachtung"
 
-#: danbw_website/utils.py:280 danbw_website/utils.py:283
-#: danbw_website/utils.py:286 danbw_website/utils.py:290
-#: danbw_website/utils.py:292 danbw_website/utils.py:338
+#: danbw_website/utils.py:285 danbw_website/utils.py:288
+#: danbw_website/utils.py:291 danbw_website/utils.py:295
+#: danbw_website/utils.py:297 danbw_website/utils.py:343
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:801
 msgid "Yes"
 msgstr "Ja"
 
-#: danbw_website/utils.py:280 danbw_website/utils.py:283
-#: danbw_website/utils.py:286 danbw_website/utils.py:290
-#: danbw_website/utils.py:292 danbw_website/utils.py:338
+#: danbw_website/utils.py:285 danbw_website/utils.py:288
+#: danbw_website/utils.py:291 danbw_website/utils.py:295
+#: danbw_website/utils.py:297 danbw_website/utils.py:343
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:802
 msgid "No"
 msgstr "Nein"
 
-#: danbw_website/utils.py:305 memberships/forms.py:38 memberships/models.py:12
+#: danbw_website/utils.py:310 memberships/forms.py:38 memberships/models.py:12
 msgid "Date of Birth"
 msgstr "Geburtsdatum"
 
-#: danbw_website/utils.py:307 memberships/forms.py:39 memberships/models.py:13
+#: danbw_website/utils.py:312 memberships/forms.py:39 memberships/models.py:13
 msgid "Street"
 msgstr "Straße"
 
-#: danbw_website/utils.py:308 memberships/forms.py:40 memberships/models.py:14
+#: danbw_website/utils.py:313 memberships/forms.py:40 memberships/models.py:14
 msgid "Street Number"
 msgstr "Hausnummer"
 
-#: danbw_website/utils.py:309 memberships/forms.py:43 memberships/models.py:17
+#: danbw_website/utils.py:314 memberships/forms.py:43 memberships/models.py:17
 msgid "Postcode"
 msgstr "PLZ"
 
-#: danbw_website/utils.py:310 memberships/forms.py:41 memberships/models.py:15
+#: danbw_website/utils.py:315 memberships/forms.py:41 memberships/models.py:15
 msgid "City"
 msgstr "Stadt"
 
-#: danbw_website/utils.py:311
+#: danbw_website/utils.py:316
 msgid "Phone Home"
 msgstr "Telefon Festnetz"
 
-#: danbw_website/utils.py:312
+#: danbw_website/utils.py:317
 msgid "Phone Mobile"
 msgstr "Telefon Mobil"
 
@@ -1083,7 +1081,7 @@ msgstr "Einzelner Tag"
 msgid "Dan Preparation Session"
 msgstr "Dan-Vorbereitungseinheit"
 
-#: fees/models.py:14 templates/registration_form.html:95
+#: fees/models.py:14 templates/registration_form.html:101
 msgid "Entire Course with Dan Preparation"
 msgstr "Ganzer Lehrgang mit Dan-Vorbereitung"
 
@@ -1091,7 +1089,7 @@ msgstr "Ganzer Lehrgang mit Dan-Vorbereitung"
 msgid "Single Day with Dan Seminar"
 msgstr "Einzelner Tag mit Dan-Seminar"
 
-#: fees/models.py:16 templates/registration_form.html:93
+#: fees/models.py:16 templates/registration_form.html:99
 msgid "Entire Course with Dan Seminar"
 msgstr "Ganzer Lehrgang mit Dan-Seminar"
 
@@ -1242,7 +1240,7 @@ msgstr "Wir haben Deinen Mitgliedschaftsantrag erhalten."
 msgid " Please check your email for confirmation."
 msgstr " Du erhältst eine Bestätigung per E-Mail."
 
-#: pages/admin.py:27
+#: pages/admin.py:33
 msgid "Toggle page status"
 msgstr "Veröffentlichungsstatus umschalten"
 
@@ -1316,11 +1314,11 @@ msgstr "kontakt/"
 msgid "category/<slug:category_slug>/"
 msgstr "kategorie/<slug:category_slug>/"
 
-#: pages/views.py:106
+#: pages/views.py:112
 msgid "Invalid Header found. Please try again."
 msgstr "Ungültiger Header gefunden. Bitte versuche es erneut."
 
-#: pages/views.py:111
+#: pages/views.py:117
 msgid "Thank you! Your message has been sent."
 msgstr "Danke! Deine Nachricht wurde gesendet."
 
@@ -1797,7 +1795,7 @@ msgid "Bank details:"
 msgstr "Bankverbindung:"
 
 #: templates/childrens_passport_form.html:43 templates/membership_form.html:28
-#: templates/registration_form.html:13
+#: templates/registration_form.html:14
 msgid "Personal Details"
 msgstr "Persönliche Daten"
 
@@ -1893,29 +1891,30 @@ msgstr "Lehrer"
 #: templates/courseregistration_list.html:179
 #: templates/courseregistration_list.html:223
 #: templates/email/registration_confirmation.html:19
+#: templates/email/registration_confirmation_family_reunion.html:18
 msgid "to"
 msgstr "bis"
 
-#: templates/course_list_item.html:65 templates/index.html:77
+#: templates/course_list_item.html:65 templates/index.html:103
 msgid "Registration"
 msgstr "Anmeldung"
 
 #: templates/course_list_item.html:73 templates/course_list_item.html:78
-#: templates/course_list_item.html:84 templates/index.html:92
-#: templates/index.html:97
+#: templates/course_list_item.html:84 templates/index.html:118
+#: templates/index.html:123
 msgid "Show registration"
 msgstr "Anmeldung anzeigen"
 
-#: templates/course_list_item.html:74 templates/index.html:93
+#: templates/course_list_item.html:74 templates/index.html:119
 msgid "Signed up"
 msgstr "Angemeldet"
 
-#: templates/course_list_item.html:94 templates/index.html:110
+#: templates/course_list_item.html:94 templates/index.html:136
 #, python-format
 msgid "Go to %(course_title)s"
 msgstr "%(course_title)s anzeigen"
 
-#: templates/course_list_item.html:97 templates/index.html:113
+#: templates/course_list_item.html:97 templates/index.html:139
 msgid "Course website"
 msgstr "Lehrgangs-Website"
 
@@ -1951,7 +1950,7 @@ msgstr "Zum Anmeldeformular"
 msgid "Registration closed"
 msgstr "Anmeldung geschlossen"
 
-#: templates/course_list_item.html:235 templates/index.html:81
+#: templates/course_list_item.html:235 templates/index.html:107
 msgid "Registration starts on"
 msgstr "Anmeldung beginnt am"
 
@@ -1974,6 +1973,7 @@ msgstr "Ausgewählte Einheiten:"
 
 #: templates/courseregistration_list.html:37
 #: templates/email/registration_confirmation.html:40
+#: templates/email/registration_confirmation_family_reunion.html:45
 msgid "Course Fee:"
 msgstr "Teilnahmegebühr"
 
@@ -1988,11 +1988,13 @@ msgstr "Bitte bezahle die Teilnahmegebühr in bar zu Beginn des Lehrgangs."
 
 #: templates/courseregistration_list.html:65
 #: templates/email/registration_confirmation.html:53
+#: templates/email/registration_confirmation_family_reunion.html:63
 msgid "You have signed up for the dinner."
 msgstr "Du hast Dich für das Abendessen angemeldet."
 
 #: templates/courseregistration_list.html:66
 #: templates/email/registration_confirmation.html:54
+#: templates/email/registration_confirmation_family_reunion.html:64
 msgid "Please note that this is a binding reservation."
 msgstr "Die Anmeldung ist verbindlich."
 
@@ -2057,7 +2059,7 @@ msgstr "Ja, Anmeldung stornieren"
 msgid "You are currently not signed up for any courses. "
 msgstr "Du bist aktuell für keine Lehrgänge angemeldet."
 
-#: templates/courseregistration_list.html:148 templates/index.html:57
+#: templates/courseregistration_list.html:148 templates/index.html:83
 msgid "Go to course list"
 msgstr "Zur Lehrgangsliste"
 
@@ -2147,40 +2149,91 @@ msgid "Hi"
 msgstr "Hallo"
 
 #: templates/email/registration_confirmation.html:17
+#: templates/email/registration_confirmation_family_reunion.html:16
 msgid "You have successfully signed up for"
 msgstr "Du hast Dich erfolgreich angemeldet für"
 
 #: templates/email/registration_confirmation.html:19
+#: templates/email/registration_confirmation_family_reunion.html:18
 msgid "Course dates:"
 msgstr "Lehrgangsdaten:"
 
 #: templates/email/registration_confirmation.html:22
+#: templates/email/registration_confirmation_family_reunion.html:27
 msgid "Registration details:"
 msgstr "Anmeldedaten:"
 
 #: templates/email/registration_confirmation.html:25
+#: templates/email/registration_confirmation_family_reunion.html:30
 msgid "Selected sessions:"
 msgstr "Ausgewählte Einheiten:"
 
 #: templates/email/registration_confirmation.html:34
+#: templates/email/registration_confirmation_family_reunion.html:39
 msgid "You applied for an exam for"
 msgstr "Du hast Dich für eine Prüfung angemeldet für"
 
 #: templates/email/registration_confirmation.html:38
+#: templates/email/registration_confirmation_family_reunion.html:43
 msgid "Accommodation:"
 msgstr "Unterkunft:"
 
 #: templates/email/registration_confirmation.html:41
+#: templates/email/registration_confirmation_family_reunion.html:46
 msgid "Payment method:"
 msgstr "Zahlungsmethode:"
 
 #: templates/email/registration_confirmation.html:58
+#: templates/email/registration_confirmation_family_reunion.html:74
 msgid "Kind regards"
 msgstr "Viele Grüße"
 
 #: templates/email/registration_confirmation.html:59
+#: templates/email/registration_confirmation_family_reunion.html:75
 msgid "Your Course Team"
 msgstr "Dein Lehrgangsteam"
+
+#: templates/email/registration_confirmation_family_reunion.html:14
+msgid "Dear Aikidoka"
+msgstr "Liebe Aikidoka"
+
+#: templates/email/registration_confirmation_family_reunion.html:22
+msgid "Event Location:"
+msgstr "Ort"
+
+#: templates/email/registration_confirmation_family_reunion.html:49
+msgid "Payment Information:"
+msgstr "Zahlungsinformationen"
+
+#: templates/email/registration_confirmation_family_reunion.html:52
+msgid ""
+"Please transfer a deposit of €100.00 by %(bank_transfer_until)s. This "
+"secures your spot at the DAN Family Reunion. If you are unable to attend, we "
+"will refund your deposit—provided no costs have been incurred by the "
+"organisers."
+msgstr ""
+"Bitte überweise eine Anzahlung von €100,00 bis zum %(bank_transfer_until)s. "
+"Dies sichert dir verbindlich deinen Platz bei der D.A.N. Family Reunion. "
+"Solltest du nicht teilnehmen können, erstatten wir dir die Anzahlung zurück "
+"– vorausgesetzt, den Organisatoren sind noch keine Kosten entstanden."
+
+#: templates/email/registration_confirmation_family_reunion.html:59
+msgid "Reference:"
+msgstr "Verwendungszweck:"
+
+#: templates/email/registration_confirmation_family_reunion.html:59
+msgid "Your Name"
+msgstr "Dein Name"
+
+#: templates/email/registration_confirmation_family_reunion.html:68
+msgid "If you have any questions, please contact us at"
+msgstr "Bei Fragen kontaktiere uns bitte unter"
+
+#: templates/email/registration_confirmation_family_reunion.html:71
+msgid "See you soon in Karlsruhe – we look forward to welcoming you there!"
+msgstr ""
+"Bis bald in Karlsruhe – wir freuen uns darauf, dich dort willkommen zu "
+"heißen!"
 
 #: templates/index.html:31
 msgid "Previous"
@@ -2211,35 +2264,72 @@ msgstr ""
 "Egal, ob Du Anfänger bist oder schon Aikido-Erfahrung hast, wir freuen uns "
 "darauf, Dich kennen zu lernen und mit Dir zu trainieren!"
 
-#: templates/index.html:59
+#: templates/index.html:62
+msgid "with John Emmerson Sensei 6th Dan"
+msgstr "mit John Emmerson Sensei 6. Dan"
+
+#: templates/index.html:64
+msgid "Date:"
+msgstr "Datum:"
+
+#: templates/index.html:64
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:32
+msgid "August"
+msgstr "August"
+
+#: templates/index.html:65
+msgid "Location:"
+msgstr "Ort:"
+
+#: templates/index.html:65
+msgid "Sportschule Schöneck, Karlsruhe, Germany"
+msgstr "Sportschule Schöneck, Karlsruhe, Deutschland"
+
+#: templates/index.html:68
+msgid ""
+"Join us for intensive training, familiar togetherness and reuniting with our "
+"Aikido family from many countries!"
+msgstr ""
+"Wir freuen uns auf intensives Training, vertrautes Miteinander und das "
+"Wiedersehen mit unserer Aikido-Familie aus vielen Ländern."
+
+#: templates/index.html:74
+msgid "Download Flyer"
+msgstr "Flyer herunterladen"
+
+#: templates/index.html:77
+msgid "More Information & Registration"
+msgstr "Mehr Informationen & Anmeldung"
+
+#: templates/index.html:85
 msgid "Go to our course list"
 msgstr "Zur Lehrgangsliste"
 
-#: templates/index.html:64
+#: templates/index.html:90
 msgid "Upcoming Courses:"
 msgstr "Bevorstehende Lehrgänge:"
 
-#: templates/index.html:69 templates/index.html:104
+#: templates/index.html:95 templates/index.html:130
 msgid "Go to"
 msgstr "Zeige"
 
-#: templates/index.html:76
+#: templates/index.html:102
 msgid "Register for this course"
 msgstr "Für diesen Lehrgang anmelden"
 
-#: templates/index.html:80
+#: templates/index.html:106
 msgid "Registration has not started yet"
 msgstr "Der Anmeldezeitraum hat noch nicht begonnen."
 
-#: templates/index.html:84
+#: templates/index.html:110
 msgid "Registration is closed for this course"
 msgstr "Die Anmeldung für diesen Kurs ist bereits geschlossen."
 
-#: templates/index.html:85
+#: templates/index.html:111
 msgid "Registration Closed"
 msgstr "Anmeldung geschlossen"
 
-#: templates/index.html:119
+#: templates/index.html:145
 msgid "There are no courses available at the moment."
 msgstr "Derzeit sind keine Lehrgänge verfügbar."
 
@@ -2251,7 +2341,7 @@ msgstr "D.A.N. International Mitgliedschaftsantrag"
 msgid "D.A.N. BW Membership Application"
 msgstr "D.A.N. BW Mitgliedschaftsantrag"
 
-#: templates/membership_form.html:87 templates/registration_form.html:132
+#: templates/membership_form.html:87 templates/registration_form.html:138
 msgid "Payment Details"
 msgstr "Zahlungsdetails"
 
@@ -2398,31 +2488,31 @@ msgstr "Navigation umschalten"
 msgid "My Account"
 msgstr "Mein Konto"
 
-#: templates/partials/registration_conditions.html:4
+#: templates/partials/registration_conditions.html:5
 msgid "Discount Conditions"
 msgstr "Ermäßigungsbedingungen"
 
-#: templates/partials/registration_conditions.html:5
+#: templates/partials/registration_conditions.html:6
 msgid "The following groups are eligible for a discount:"
 msgstr "Die folgenden Gruppen haben Anspruch auf eine Ermäßigung:"
 
-#: templates/partials/registration_conditions.html:7
+#: templates/partials/registration_conditions.html:8
 msgid "Students"
 msgstr "Studierende"
 
-#: templates/partials/registration_conditions.html:8
+#: templates/partials/registration_conditions.html:9
 msgid "Trainees"
 msgstr "Auszubildende"
 
-#: templates/partials/registration_conditions.html:9
+#: templates/partials/registration_conditions.html:10
 msgid "Handicapped persons"
 msgstr "Menschen mit Behinderung"
 
-#: templates/partials/registration_conditions.html:10
+#: templates/partials/registration_conditions.html:11
 msgid "Unemployed persons"
 msgstr "Arbeitslose"
 
-#: templates/partials/registration_conditions.html:13
+#: templates/partials/registration_conditions.html:14
 msgid ""
 "If one of the above conditions applies to you, please check the \"Discount\" "
 "box in the registration form and bring proof of eligibility to the course. "
@@ -2432,18 +2522,18 @@ msgstr ""
 "Häkchen bei 'Ermäßigung' im Anmeldeformular und bringe bei Lehrgangsbeginn "
 "einen Nachweis mit. Andernfalls wird die volle Lehrgangsgebühr berechnet."
 
-#: templates/partials/registration_conditions.html:18
-#: templates/registration_form.html:189
+#: templates/partials/registration_conditions.html:20
+#: templates/registration_form.html:195
 msgid "Terms and Conditions"
 msgstr "Teilnahmebedingungen"
 
-#: templates/partials/registration_conditions.html:20
+#: templates/partials/registration_conditions.html:22
 msgid "The organizer (D.A.N. BW e. V.) does not provide insurance coverage."
 msgstr ""
 "Von Seiten des Veranstalters (D.A.N. BW e. V.) besteht kein "
 "Versicherungsschutz."
 
-#: templates/partials/registration_conditions.html:25
+#: templates/partials/registration_conditions.html:27
 msgid ""
 "Also, the organizer may take photos during the course, which could be "
 "published without mentioning names (e.g., on the D.A.N. BW website). If you "
@@ -2479,31 +2569,31 @@ msgstr "Die Teilnahmegebühr wird unten im Formular angezeigt"
 msgid "Sign up"
 msgstr "Anmelden"
 
-#: templates/registration_form.html:20 templates/userprofile.html:13
+#: templates/registration_form.html:21 templates/userprofile.html:13
 msgid "E-mail"
 msgstr "E-Mail"
 
-#: templates/registration_form.html:38
+#: templates/registration_form.html:39
 msgid "Edit Profile"
 msgstr "Profil bearbeiten"
 
-#: templates/registration_form.html:61
+#: templates/registration_form.html:62
 msgid "Sessions:"
 msgstr "Einheiten:"
 
-#: templates/registration_form.html:85
+#: templates/registration_form.html:91
 msgid "Entire Course without Dan Seminar"
 msgstr "Ganzer Lehrgang ohne Dan-Seminar"
 
-#: templates/registration_form.html:87
+#: templates/registration_form.html:93
 msgid "Entire Course without Dan Preparation"
 msgstr "Ganzer Lehrgang ohne Dan-Vorbereitung"
 
-#: templates/registration_form.html:137
+#: templates/registration_form.html:143
 msgid "Payment"
 msgstr "Bezahlung"
 
-#: templates/registration_form.html:152
+#: templates/registration_form.html:158
 msgid ""
 "Please refer to the <a href=\"#discount-conditions\"> Discount Conditions </"
 "a> below for more information."
@@ -2511,15 +2601,15 @@ msgstr ""
 "Weitere Informationen findest Du in den <a href=\"#discount-conditions\"> "
 "Ermäßigungsbedingungen</a> unten."
 
-#: templates/registration_form.html:162
+#: templates/registration_form.html:168
 msgid "D.A.N. Member discount"
 msgstr "D.A.N.-Mitgliederrabatt"
 
-#: templates/registration_form.html:191
+#: templates/registration_form.html:197
 msgid "Please accept the terms and conditions below."
 msgstr "Bitte akzeptiere die untenstehenden Bedingungen."
 
-#: templates/registration_form.html:199
+#: templates/registration_form.html:205
 msgid "Registration Fee"
 msgstr "Teilnahmegebühr"
 
@@ -3375,10 +3465,6 @@ msgstr ""
 msgid "July"
 msgstr ""
 
-#: venv/lib/python3.12/site-packages/django/utils/dates.py:32
-msgid "August"
-msgstr ""
-
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:33
 msgid "September"
 msgstr ""
@@ -3813,6 +3899,11 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:160
 msgid "Failed to save attachment"
 msgstr ""
+
+#~ msgid ""
+#~ "Please transfer the remaining course fee to the following account until"
+#~ msgstr ""
+#~ "Bitte überweise die Teilnahmegebühr auf folgendes Konto bis spätestens"
 
 #~ msgid "Registration for this course is not possible at the moment."
 #~ msgstr "Eine Anmeldung für diesen Lehrgang ist momentan nicht möglich."
