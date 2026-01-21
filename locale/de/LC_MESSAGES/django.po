@@ -2195,7 +2195,7 @@ msgstr "Dein Lehrgangsteam"
 
 #: templates/email/registration_confirmation_family_reunion.html:14
 msgid "Dear Aikidoka"
-msgstr "Liebe Aikidoka"
+msgstr "Liebe/r Aikidoka"
 
 #: templates/email/registration_confirmation_family_reunion.html:22
 msgid "Event Location:"
