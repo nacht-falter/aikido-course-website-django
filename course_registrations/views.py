@@ -171,6 +171,10 @@ class RegisterCourse(View):
             )
 
         if registration_form.is_valid():
+            # Check if the honeypot field called "website" is filled in
+            if registration_form.cleaned_data.get("website"):
+                return HttpResponseRedirect(reverse("course_list"))
+
             email = registration_form.cleaned_data.get("email")
             first_name = registration_form.cleaned_data.get("first_name")
             last_name = registration_form.cleaned_data.get("last_name")

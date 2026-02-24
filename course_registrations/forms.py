@@ -17,6 +17,10 @@ class CourseRegistrationForm(forms.ModelForm):
         self.course = course
         self.user_profile = user_profile
 
+        # Remove the required attribute from the website field on form submission
+        if self.is_bound:
+            self.fields['website'].required = False
+
         if course:
             self.fields["selected_sessions"].queryset = CourseSession.objects.filter(
                 course=course
@@ -98,6 +102,12 @@ class CourseRegistrationForm(forms.ModelForm):
         label=_("Other Dojo"),
         widget=forms.TextInput(
             attrs={"placeholder": _("Enter the name of your Dojo")}),
+    )
+    # Honeypot field to catch bots
+    website = forms.CharField(
+        required=True,
+        label=_("Your website"),
+        max_length=100
     )
 
     class Meta:

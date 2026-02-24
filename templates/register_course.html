@@ -17,6 +17,10 @@
 <div class="registration-form-wrapper">
   <form method="post">
     {% csrf_token %}
+    <!-- Honeypot field for bot protection -->
+    <div style="display: none;">
+      {{ form.website }}
+    </div>
     {% include "registration_form.html" %}
     <a href="{% url 'course_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
     <button id="submit-button" class="btn btn-primary disabled" type="submit">{% trans "Sign up" %}</button>
