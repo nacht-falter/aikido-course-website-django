@@ -419,6 +419,7 @@ function disableSubmitButton() {
   const submitButton = getSubmitButton();
   const sessionMsg = getSessionMsg();
   const termsMsg = getTermsMsg();
+  const captchaRadios = document.querySelectorAll('input[name="captcha_response"]');
 
   let sessionSelected = false;
   for (let checkbox of sessionCheckboxes) {
@@ -430,6 +431,12 @@ function disableSubmitButton() {
 
   let termsAccepted = acceptTermsCheckbox?.checked;
 
+  // Check if CAPTCHA is selected (only if CAPTCHA exists on the page - i.e., for guest users)
+  let captchaSelected = true;  // Default to true for authenticated users
+  if (captchaRadios.length > 0) {
+    captchaSelected = Array.from(captchaRadios).some(radio => radio.checked);
+  }
+
   if (sessionMsg) {
     sessionMsg.style.display = sessionSelected ? "none" : "inline";
   }
@@ -437,7 +444,7 @@ function disableSubmitButton() {
     termsMsg.style.display = termsAccepted ? "none" : "inline";
   }
   if (submitButton) {
-    if (sessionSelected && termsAccepted) {
+    if (sessionSelected && termsAccepted && captchaSelected) {
       submitButton.classList.remove("disabled");
       submitButton.disabled = false;
     } else {
@@ -544,6 +551,12 @@ document.addEventListener("DOMContentLoaded", function () {
       displayFinalFee(courseData),
     );
   }
+
+  // Add event listeners to CAPTCHA radio buttons (for guest users)
+  const captchaRadios = document.querySelectorAll('input[name="captcha_response"]');
+  captchaRadios.forEach((radio) => {
+    radio.addEventListener("change", disableSubmitButton);
+  });
 
   // Initial checks:
   checkDojo();

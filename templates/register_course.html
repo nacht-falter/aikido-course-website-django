@@ -22,8 +22,31 @@
       {{ form.website }}
     </div>
     {% include "registration_form.html" %}
-    <a href="{% url 'course_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
-    <button id="submit-button" class="btn btn-primary disabled" type="submit">{% trans "Sign up" %}</button>
+
+    <!-- Inline CAPTCHA (only for guest users) -->
+    {% if not user.is_authenticated %}
+    <div class="card mb-3 text-bg-light border-secondary d-inline-block">
+      <div class="card-header">{% trans "Confirm you're human" %}</div>
+      <div class="card-body">
+        <label class="form-label">{% blocktrans with target=form.captcha_target_display %}Select the correct kanji for "<strong>{{ target }}</strong>" as in Aikido{% endblocktrans %}</label>
+        <div class="d-flex flex-row gap-2 justify-content-start">
+          {% for value, label in form.captcha_response.field.choices %}
+          <div class="captcha-option">
+            <input type="radio" id="captcha_{{ value }}" name="captcha_response" value="{{ value }}" required style="display: none;">
+            <label for="captcha_{{ value }}" class="captcha-label">
+              {{ label }}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="mt-3">
+      <a href="{% url 'course_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+      <button id="submit-button" class="btn btn-primary disabled" type="submit">{% trans "Sign up" %}</button>
+    </div>
   </form>
 
   {% include "partials/registration_conditions.html" %}

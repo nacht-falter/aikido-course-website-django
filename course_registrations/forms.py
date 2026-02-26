@@ -1,3 +1,4 @@
+import random
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -12,23 +13,28 @@ class CourseRegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         course = kwargs.pop("course", None)
         user_profile = kwargs.pop("user_profile", None)
+        captcha_target_display = kwargs.pop("captcha_target_display", None)
         super().__init__(*args, **kwargs)
 
         self.course = course
         self.user_profile = user_profile
 
-        # Remove the required attribute from the website field on form submission
-        if self.is_bound:
-            self.fields['website'].required = False
+        # Set captcha display value (passed from view via session)
+        if captcha_target_display:
+            self.captcha_target_display = captcha_target_display
+        elif hasattr(self, "captcha_target_display"):
+            pass  # Keep existing value
+        else:
+            self.captcha_target_display = _("AI")
 
         if course:
             self.fields["selected_sessions"].queryset = CourseSession.objects.filter(
                 course=course
             )
 
-            self.fields['dinner'] = forms.BooleanField(
+            self.fields["dinner"] = forms.BooleanField(
                 required=False, label=_("I would like to join the dinner on Saturday evening."))
-            self.fields['overnight_stay'] = forms.BooleanField(
+            self.fields["overnight_stay"] = forms.BooleanField(
                 required=False, label=_("I need a place to stay overnight."))
 
         if user_profile:
@@ -48,7 +54,7 @@ class CourseRegistrationForm(forms.ModelForm):
 
         if (
             course.course_type not in constants.EXAM_COURSES or
-            course.fee_category == 'dan_seminar'
+            course.fee_category == "dan_seminar"
         ):
             self.fields["exam"].widget = forms.HiddenInput()
 
@@ -63,7 +69,7 @@ class CourseRegistrationForm(forms.ModelForm):
             # Configure accommodation options
             self.fields["accommodation_option"].queryset = AccommodationOption.objects.filter(
                 course=course
-            ).order_by('order')
+            ).order_by("order")
             self.fields["accommodation_option"].required = True
             self.fields["accommodation_option"].label = _("Accommodation")
             self.fields["accommodation_option"].empty_label = _("Select accommodation option")
@@ -105,9 +111,23 @@ class CourseRegistrationForm(forms.ModelForm):
     )
     # Honeypot field to catch bots
     website = forms.CharField(
-        required=True,
+        required=False,
         label=_("Your website"),
         max_length=100
+    )
+
+    captcha_response = forms.ChoiceField(
+        label=_("Select the correct kanji"),
+        widget=forms.RadioSelect(),
+        required=False,
+        choices=[
+            ("1", "合"),  # AI
+            ("2", "氣"),  # KI
+            ("3", "道"),  # DO
+        ],
+        error_messages={
+            "invalid_choice": _("Incorrect Captcha verification. Please try again."),
+        }
     )
 
     class Meta:

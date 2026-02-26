@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Hide honeypot field in contact form
-  if (honeypot) {
+  if (honeypot && honeypotDiv) {
     honeypot.removeAttribute("required");
     honeypotDiv.classList.add("d-none");
   }

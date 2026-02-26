@@ -1,5 +1,6 @@
 import csv
 import os
+import random
 from datetime import date
 from smtplib import SMTPException
 
@@ -25,6 +26,24 @@ from . import forms
 from .models import CourseRegistration, UserProfile
 
 User = get_user_model()
+
+CAPTCHA_TARGETS = {
+    "1": "Ai",
+    "2": "Ki",
+    "3": "Do",
+}
+
+def generate_captcha(request):
+    """Generate a new captcha challenge and store answer in session."""
+    target = random.choice(['1', '2', '3'])
+    request.session['captcha_target'] = target
+    request.session['captcha_target_display'] = CAPTCHA_TARGETS[target]
+    return target, CAPTCHA_TARGETS[target]
+
+def validate_captcha(request, response):
+    """Validate captcha response against session. Returns True if valid."""
+    target = request.session.get('captcha_target')
+    return target and response == target
 
 def validate_course_fees(course):
     required_fee_types = {
@@ -134,12 +153,17 @@ class RegisterCourse(View):
                 )
                 return HttpResponseRedirect(reverse("course_list"))
 
+            # Authenticated users don't need CAPTCHA
             registration_form = forms.CourseRegistrationForm(
                 course=course, user_profile=request.user.profile
             )
         else:
+            # Generate new captcha for guest users only
+            dummy, captcha_display = generate_captcha(request)
+
             registration_form = forms.CourseRegistrationForm(
-                course=course
+                course=course,
+                captcha_target_display=captcha_display
             )
 
         try:
@@ -161,19 +185,56 @@ class RegisterCourse(View):
         queryset = InternalCourse.objects.filter(registration_status=1)
         course = get_object_or_404(queryset, slug=slug)
 
+        # Only validate CAPTCHA for guest users
         if request.user.is_authenticated:
+            captcha_valid = True  # Skip CAPTCHA for authenticated users
             registration_form = forms.CourseRegistrationForm(
                 data=request.POST, course=course, user_profile=request.user.profile
             )
         else:
+            # Validate captcha against session for guest users
+            captcha_response = request.POST.get("captcha_response")
+            captcha_valid = validate_captcha(request, captcha_response)
+
+            # Get captcha display from session for form
+            captcha_display = request.session.get("captcha_target_display", "AI")
+
             registration_form = forms.CourseRegistrationForm(
-                data=request.POST, course=course
+                data=request.POST, course=course,
+                captcha_target_display=captcha_display
             )
+
+        # If captcha failed (only for guests), add error and re-render with fresh captcha
+        if not captcha_valid:
+            # Generate new captcha for next render
+            dummy, new_captcha_display = generate_captcha(request)
+            # Create new form with fresh captcha display
+            if request.user.is_authenticated:
+                registration_form = forms.CourseRegistrationForm(
+                    data=request.POST, course=course, user_profile=request.user.profile,
+                    captcha_target_display=new_captcha_display
+                )
+            else:
+                registration_form = forms.CourseRegistrationForm(
+                    data=request.POST, course=course,
+                    captcha_target_display=new_captcha_display
+                )
+            # Validate form and then add captcha error as non-field error
+            registration_form.is_valid()
+            registration_form.add_error(None, _("Incorrect captcha verification. Please try again."))
+            try:
+                context = prepare_context(course, registration_form)
+            except ValueError as e:
+                messages.error(request, str(e))
+                return HttpResponseRedirect(reverse("course_list"))
+            return render(request, "register_course.html", context)
 
         if registration_form.is_valid():
             # Check if the honeypot field called "website" is filled in
             if registration_form.cleaned_data.get("website"):
                 return HttpResponseRedirect(reverse("course_list"))
+
+        if registration_form.is_valid():
 
             email = registration_form.cleaned_data.get("email")
             first_name = registration_form.cleaned_data.get("first_name")
@@ -275,7 +336,14 @@ class RegisterCourse(View):
                     context,
                 )
 
+            print(f"Registration successful for {email if not request.user.is_authenticated else request.user.email}")
             messages.info(request, _("You have successfully signed up for ") + course.title)
+
+            # Clear CAPTCHA data from session after successful registration
+            if 'captcha_target' in request.session:
+                del request.session['captcha_target']
+            if 'captcha_target_display' in request.session:
+                del request.session['captcha_target_display']
 
             if request.user.is_authenticated:
                 return HttpResponseRedirect(reverse("courseregistration_list"))
