@@ -26,6 +26,7 @@ const getDojoSelect = () => document.getElementById("id_dojo");
 const getOtherDojoDiv = () => document.getElementById("div_id_other_dojo");
 const getOtherDojoInput = () => document.getElementById("id_other_dojo");
 const getAccommodationSelect = () => document.getElementById("id_accommodation_option");
+const getFormErrors = () => document.getElementById("form-errors");
 
 function updateEntireCourseWithoutDanPreparation() {
   const entireCourseWithoutDanPreparation = getEntireCourseWithoutDanPreparation();
@@ -488,6 +489,13 @@ function checkDojo() {
   }
 }
 
+function scrollToFormErrors() {
+  const formErrors = getFormErrors();
+  if (formErrors) {
+    formErrors.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
 // Event listener setup
 document.addEventListener("DOMContentLoaded", function () {
   const sessionCheckboxes = getSessionCheckboxes();
@@ -564,6 +572,7 @@ document.addEventListener("DOMContentLoaded", function () {
   updateEntireCourse();
   displayFinalFee(courseData);
   disableSubmitButton();
+  scrollToFormErrors();
 });
 
 // Wrapper functions for backward compatibility with tests

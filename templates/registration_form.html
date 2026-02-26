@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load l10n %}
 {% if form.non_field_errors %}
-    <div class="alert alert-danger">
+    <div id="form-errors" class="alert alert-danger">
         {% for error in form.non_field_errors %}
             <p class="mb-0">{{ error }}</p>
         {% endfor %}
@@ -72,7 +72,7 @@
                            name="selected_sessions"
                            value="{{ session.id }}"
                            id="session-{{ session.id }}"
-                           {% if session in form.instance.selected_sessions.all %}checked{% endif %}
+                           {% if session.id|stringformat:"s" in form.selected_sessions.value %}checked{% elif session in form.instance.selected_sessions.all %}checked{% endif %}
                            data-dan-preparation="{{ session.is_dan_preparation }}"
                            data-date="{{ session.date }}"
                            />
