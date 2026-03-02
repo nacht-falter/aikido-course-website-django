@@ -98,6 +98,7 @@ COURSE_TYPES = (
     ("dan_bw_teacher", _("D.A.N. BW Teacher")),
     ("children", _("Children")),
     ("family_reunion", _("Family Reunion")),
+    ("other", _("Other Course")),
 )
 
 INTERNATIONAL_COURSES = [
@@ -122,6 +123,7 @@ FEE_CATEGORIES = (
     ("regular", _("Regular Course")),
     ("dan_seminar", _("Dan Seminar")),
     ("family_reunion", _("Family Reunion")),
+    ("other", _("Other Course")),
 )
 
 LANGUAGE_FLAGS = {
