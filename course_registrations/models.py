@@ -137,6 +137,15 @@ class CourseRegistration(models.Model):
         null=True,
         default=True,
     )
+    deposit_paid = models.DecimalField(
+        _("Deposit Paid"),
+        default=0,
+        decimal_places=2,
+        max_digits=10,
+        blank=True,
+        null=True,
+        help_text=_("Amount of deposit received from the participant. See 'Remaining Balance' below."),
+    )
 
     class Meta:
         constraints = [
@@ -339,3 +348,9 @@ class CourseRegistration(models.Model):
             return format_html('<span title="{}">{}</span>', self.comment, truncated)
         return ""
     truncated_comment.short_description = _("Comment")
+
+    def remaining_balance(self):
+        """Calculate the remaining balance after deposit"""
+        deposit = self.deposit_paid if self.deposit_paid else 0
+        return self.final_fee - deposit
+    remaining_balance.short_description = _("Remaining Balance")

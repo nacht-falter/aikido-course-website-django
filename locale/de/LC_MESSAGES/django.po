@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-02 13:00+0100\n"
+"POT-Creation-Date: 2026-03-02 14:39+0100\n"
 "PO-Revision-Date: 2025-10-01 09:20+0200\n"
 "Last-Translator: Johannes <your-email@domain.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -36,20 +36,20 @@ msgstr "Vergangene Lehrgänge"
 msgid "Course"
 msgstr "Lehrgang"
 
-#: course_registrations/admin.py:128 courses/models.py:314
+#: course_registrations/admin.py:133 courses/models.py:314
 #: templates/registration_form.html:19 templates/userprofile.html:9
 msgid "Name"
 msgstr "Name"
 
-#: course_registrations/admin.py:140
+#: course_registrations/admin.py:145
 msgid "Toggle payment status of selected registrations"
 msgstr "Zahlungsstatus der ausgewählten Anmeldungen umschalten"
 
-#: course_registrations/admin.py:157 courses/admin.py:320
+#: course_registrations/admin.py:162 courses/admin.py:323
 msgid "Export selected course registrations to CSV"
 msgstr "Ausgewählte Lehrgangs-Anmeldungen als CSV exportieren"
 
-#: course_registrations/apps.py:8 course_registrations/models.py:155
+#: course_registrations/apps.py:8 course_registrations/models.py:164
 msgid "Course Registrations"
 msgstr "Lehrgangsanmeldungen"
 
@@ -110,7 +110,7 @@ msgstr "Deine Website"
 
 #: course_registrations/forms.py:138
 msgid "Select the correct kanji"
-msgstr ""
+msgstr "Bitte wähle das korrekte Kanji aus"
 
 #: course_registrations/forms.py:147
 msgid "Incorrect Captcha verification. Please try again."
@@ -217,7 +217,7 @@ msgstr "Zahlungsstatus"
 msgid "Payment method"
 msgstr "Zahlungsmethode"
 
-#: course_registrations/models.py:115 course_registrations/models.py:341
+#: course_registrations/models.py:115 course_registrations/models.py:350
 #: danbw_website/utils.py:253 memberships/forms.py:78 memberships/models.py:56
 msgid "Comment"
 msgstr "Kommentar"
@@ -239,11 +239,21 @@ msgstr "Unterkunftsoption"
 msgid "Attended"
 msgstr "Teilgenommen"
 
-#: course_registrations/models.py:154
+#: course_registrations/models.py:141
+msgid "Deposit Paid"
+msgstr "Anzahlung:"
+
+#: course_registrations/models.py:147
+msgid ""
+"Amount of deposit received from the participant. See 'Remaining Balance' "
+"below."
+msgstr "Höhe der bereits geleisteten Anzahlung. Vgl. 'Restbetrag' unten."
+
+#: course_registrations/models.py:163
 msgid "Course Registration"
 msgstr "Lehrgangsanmeldung"
 
-#: course_registrations/models.py:237 course_registrations/models.py:281
+#: course_registrations/models.py:246 course_registrations/models.py:290
 #, python-brace-format
 msgid ""
 "No fee found for {course.course_type}, {course.fee_category}, {fee_type}, "
@@ -253,7 +263,7 @@ msgstr ""
 "{fee_type},Zahlungsmethode: {self.payment_method}, Dan-Mitglied: {self."
 "dan_member}"
 
-#: course_registrations/models.py:264
+#: course_registrations/models.py:273
 #, python-brace-format
 msgid ""
 "No fee found for {course.course_type}, {course.fee_category}, "
@@ -264,14 +274,18 @@ msgstr ""
 "{day_fee_type}, Zahlungsmethode: {self.payment_method}, Dan-Mitglied: {self."
 "dan_member}"
 
-#: course_registrations/models.py:326 fees/models.py:11
+#: course_registrations/models.py:335 fees/models.py:11
 #: templates/registration_form.html:107 templates/registration_form.html:113
 msgid "Entire Course"
 msgstr "Ganzer Lehrgang"
 
-#: course_registrations/models.py:333 danbw_website/utils.py:246
+#: course_registrations/models.py:342 danbw_website/utils.py:246
 msgid "Selected Sessions"
 msgstr "Ausgewählte Einheiten"
+
+#: course_registrations/models.py:356
+msgid "Remaining Balance"
+msgstr "Restbetrag"
 
 #: course_registrations/urls.py:8
 msgid "courses/register/<slug:slug>/"
@@ -381,39 +395,39 @@ msgstr " wurde aktualisiert."
 msgid "Year"
 msgstr "Jahr"
 
-#: courses/admin.py:122 templates/registration_form.html:47
+#: courses/admin.py:125 templates/registration_form.html:47
 msgid "Course Details"
 msgstr "Lehrgangsdetails"
 
-#: courses/admin.py:138 templates/course_list_header.html:7
+#: courses/admin.py:141 templates/course_list_header.html:7
 #: templates/course_list_item.html:40 templates/course_list_item.html:120
 msgid "Dates"
 msgstr "Datum"
 
-#: courses/admin.py:147
+#: courses/admin.py:150
 msgid "Payment Information"
 msgstr "Zahlungsinformationen"
 
-#: courses/admin.py:154 courses/models.py:32
+#: courses/admin.py:157 courses/models.py:32
 #: templates/childrens_passport_form.html:108
 #: templates/course_list_item.html:200 templates/membership_form.html:117
 #: templates/registration_form.html:182
 msgid "Additional Information"
 msgstr "Zusätzliche Informationen"
 
-#: courses/admin.py:248
+#: courses/admin.py:251
 msgid "Duplicate selected courses"
 msgstr "Ausgewählte Lehrgänge duplizieren"
 
-#: courses/admin.py:257
+#: courses/admin.py:260
 msgid "Toggle registration status of selected courses"
 msgstr "Anmeldestatus der ausgewählten Lehrgänge umschalten"
 
-#: courses/admin.py:265
+#: courses/admin.py:268
 msgid "Toggle status of selected courses"
 msgstr "Status der ausgewählten Lehrgänge umschalten"
 
-#: courses/admin.py:275
+#: courses/admin.py:278
 msgid "Registrations"
 msgstr "Anmeldungen"
 
@@ -3957,6 +3971,9 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django_summernote/views.py:160
 msgid "Failed to save attachment"
 msgstr ""
+
+#~ msgid "Amount of deposit received from the participant"
+#~ msgstr "Bereits überwiesene Anzahlung"
 
 #~ msgid "Confirm email"
 #~ msgstr "E-Mail bestätigen"
