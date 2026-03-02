@@ -81,6 +81,24 @@ class CourseRegistrationForm(forms.ModelForm):
         if course.discount_percentage == 0:
             self.fields["discount"].widget = forms.HiddenInput()
 
+        # Check if course is completely free (all fees are 0)
+        from fees.models import Fee
+        fees = Fee.objects.filter(
+            course_type=course.course_type,
+            fee_category=course.fee_category
+        )
+        is_free_course = all(
+            fee.amount == 0 and fee.extra_fee_cash == 0 and fee.extra_fee_external == 0
+            for fee in fees
+        )
+
+        # Hide payment method for completely free courses
+        if is_free_course:
+            self.fields["payment_method"].widget = forms.HiddenInput()
+
+        # Make payment method not required (will be handled dynamically on frontend)
+        self.fields["payment_method"].required = False
+
     accept_terms = forms.BooleanField(
         required=True, label=_("I accept the terms and conditions below.")
     )

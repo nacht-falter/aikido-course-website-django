@@ -36,38 +36,44 @@
             <tr>
                 <th scope="col">{% trans "Course Fee:" %}</th>
                 {% get_current_language as LANGUAGE_CODE %}
-                {% if LANGUAGE_CODE == 'en' %}
-                    <td>€{{ registration.final_fee|floatformat:2 }}</td>
+                {% if registration.final_fee > 0 %}
+                    {% if LANGUAGE_CODE == 'en' %}
+                        <td>€{{ registration.final_fee|floatformat:2 }}</td>
+                    {% else %}
+                        <td>{{ registration.final_fee|floatformat:2 }} €</td>
+                    {% endif %}
                 {% else %}
-                    <td>{{ registration.final_fee|floatformat:2 }} €</td>
+                    <td><strong>{% trans "Free" %}</strong></td>
                 {% endif %}
             </tr>
-            {% if registration.course.course_type|default:'' == 'family_reunion' %}
-            <tr>
-                <th scope="col">{% trans "Deposit Payment:" %}</th>
-                <td>
-                    {% blocktrans with deadline=registration.course.bank_transfer_until|localize trimmed %}
-                    Please transfer a deposit of €100.00 by {{ deadline }}.
-                    {% endblocktrans %}
-                    <div class="mt-2">{{ bank_account|linebreaksbr }}</div>
-                    <div class="mt-2"><small>{% trans "If you are unable to attend, we will refund your deposit—provided no costs have been incurred by the organisers." %}</small></div>
-                </td>
-            </tr>
-            {% elif registration.payment_method == 0 %}
-            <tr>
-                <th scope="col"></th>
-                <td>
-                    {% trans "Please transfer the course fee to the following account until" %} <strong>{{ registration.course.bank_transfer_until|localize }}</strong>:
-                    <div class="mt-2">{{ bank_account|linebreaksbr }}</div>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <th scope="col"></th>
-                <td>
-                    {% trans "Please pay the course fee in cash at the beginning of the course." %}
-                </td>
-            </tr>
+            {% if registration.final_fee > 0 %}
+                {% if registration.course.course_type|default:'' == 'family_reunion' %}
+                <tr>
+                    <th scope="col">{% trans "Deposit Payment:" %}</th>
+                    <td>
+                        {% blocktrans with deadline=registration.course.bank_transfer_until|localize trimmed %}
+                        Please transfer a deposit of €100.00 by {{ deadline }}.
+                        {% endblocktrans %}
+                        <div class="mt-2">{{ bank_account|linebreaksbr }}</div>
+                        <div class="mt-2"><small>{% trans "If you are unable to attend, we will refund your deposit—provided no costs have been incurred by the organisers." %}</small></div>
+                    </td>
+                </tr>
+                {% elif registration.payment_method == 0 %}
+                <tr>
+                    <th scope="col"></th>
+                    <td>
+                        {% trans "Please transfer the course fee to the following account until" %} <strong>{{ registration.course.bank_transfer_until|localize }}</strong>:
+                        <div class="mt-2">{{ bank_account|linebreaksbr }}</div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <th scope="col"></th>
+                    <td>
+                        {% trans "Please pay the course fee in cash at the beginning of the course." %}
+                    </td>
+                </tr>
+                {% endif %}
             {% endif %}
             {% if registration.dinner %}
             <tr>

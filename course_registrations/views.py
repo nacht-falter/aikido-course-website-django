@@ -70,6 +70,12 @@ def prepare_context(course, form):
 
 #    validate_course_fees(course)
 
+    # Check if course is completely free (all fees are 0)
+    is_free_course = all(
+        fee.amount == 0 and fee.extra_fee_cash == 0 and fee.extra_fee_external == 0
+        for fee in fees
+    )
+
     course_data = {
         "course_type": course.course_type,
         "fee_category": course.fee_category,
@@ -108,7 +114,8 @@ def prepare_context(course, form):
         "form": form,
         "course_data": course_data,
         "exam_courses": constants.EXAM_COURSES,
-        "dan_preparation_courses": constants.DAN_PREPARATION_COURSES
+        "dan_preparation_courses": constants.DAN_PREPARATION_COURSES,
+        "is_free_course": is_free_course,
     }
     return context
 
@@ -282,6 +289,11 @@ class RegisterCourse(View):
             registration.course = course
 
             selected_sessions = registration_form.cleaned_data.get("selected_sessions")
+
+            # If payment method is not provided, set default to bank transfer
+            if not registration.payment_method:
+                registration.payment_method = constants.BANK
+
             registration.final_fee = registration.calculate_fees(course, selected_sessions)
             registration.dinner = registration_form.cleaned_data.get("dinner")
 
@@ -491,6 +503,10 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             registration = registration_form.save(commit=False)
             selected_sessions = registration_form.cleaned_data.get(
                 "selected_sessions")
+
+            # If payment method is not provided, set default to bank transfer
+            if not registration.payment_method:
+                registration.payment_method = constants.BANK
 
             registration.final_fee = registration.calculate_fees(
                 course, selected_sessions)

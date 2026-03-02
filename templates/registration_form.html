@@ -133,6 +133,7 @@
     </div>
   </div>
 
+  {% if not is_free_course %}
   <div class="card mb-3">
     <div class="card-header">
       <h4 class="card-title">{% trans "Payment Details" %}</h4>
@@ -174,6 +175,7 @@
       {% endif %}
     </div>
   </div>
+  {% endif %}
 
   <div class="card mb-3">
     <div class="card-header">

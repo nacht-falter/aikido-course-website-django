@@ -37,10 +37,14 @@
     {% if registration.accommodation_option %}
     <li>{% trans "Accommodation:" %} {{ registration.accommodation_option.name }}</li>
     {% endif %}
+    {% if registration.final_fee > 0 %}
     <li>{% trans "Course Fee:" %} <strong>€ {{ registration.final_fee|floatformat:2 }}</strong>
     <li>{% trans "Payment method:" %} {{ registration.get_payment_method_display }}</li>
+    {% else %}
+    <li>{% trans "Course Fee:" %} <strong>{% trans "Free" %}</strong></li>
+    {% endif %}
   </ul>
-  {% if registration.payment_method == 0 %}
+  {% if registration.final_fee > 0 and registration.payment_method == 0 %}
   <p>
     {% trans "Please transfer the course fee to the following account until" %} <strong>{{ registration.course.bank_transfer_until|localize }}</strong>:
   </p>

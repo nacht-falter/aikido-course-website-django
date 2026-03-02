@@ -42,9 +42,14 @@
     {% if registration.accommodation_option %}
     <li>{% trans "Accommodation:" %} {{ registration.accommodation_option.name }}</li>
     {% endif %}
+    {% if registration.final_fee > 0 %}
     <li>{% trans "Course Fee:" %} <strong>€ {{ registration.final_fee|floatformat:2 }}</strong>
     <li>{% trans "Payment method:" %} {{ registration.get_payment_method_display }}</li>
+    {% else %}
+    <li>{% trans "Course Fee:" %} <strong>{% trans "Free" %}</strong></li>
+    {% endif %}
   </ul>
+  {% if registration.final_fee > 0 %}
   <p>
     <strong>{% trans "Payment Information:" %}</strong>
   </p>
@@ -58,6 +63,7 @@
     {{ bank_account|linebreaksbr }}<br />
     <strong>{% trans "Reference:" %}</strong> {{ registration.course.title }} + {% trans "Your Name" %}
   </p>
+  {% endif %}
   {% if registration.dinner %}
   <p>
     {% trans "You have signed up for the dinner." %}&nbsp;

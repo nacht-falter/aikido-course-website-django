@@ -208,6 +208,10 @@ class CourseRegistration(models.Model):
             else:
                 fee_type = "single_day_with_dan_seminar" if has_dan_sessions else "single_day"
 
+        elif course.course_type == "other":
+            # For "other" course types, use entire_course as default
+            fee_type = "entire_course"
+
         return fee_type
 
     def calculate_fees(self, course, selected_sessions):
@@ -219,18 +223,20 @@ class CourseRegistration(models.Model):
             # Charge per session (e.g., for sensei_emmerson, external_teacher, dan_bw_teacher)
             for session in selected_sessions:
                 fee_type = "single_session_dan_preparation" if session.is_dan_preparation else "single_session"
+                # Check if fee exists (use None as default to distinguish from 0)
                 fee = Fee.get_fee(
                     course.course_type,
                     course.fee_category,
                     fee_type,
                     self.payment_method,
-                    self.dan_member
+                    self.dan_member,
+                    default=None
                 )
-                if fee == 0:
+                if fee is None:
                     raise ValueError(
                         _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
 
-                final_fee += fee if fee else 0
+                final_fee += fee
 
         elif course.course_type == "family_reunion" and "single_day" in fee_type:
             # Charge per unique day for family_reunion
@@ -244,29 +250,33 @@ class CourseRegistration(models.Model):
             for date, day_sessions in sessions_by_date.items():
                 has_dan_session = any(s.is_dan_preparation for s in day_sessions)
                 day_fee_type = "single_day_with_dan_seminar" if has_dan_session else "single_day"
+                # Check if fee exists (use None as default to distinguish from 0)
                 fee = Fee.get_fee(
                     course.course_type,
                     course.fee_category,
                     day_fee_type,
                     self.payment_method,
-                    self.dan_member
+                    self.dan_member,
+                    default=None
                 )
-                if fee == 0:
+                if fee is None:
                     raise ValueError(
                         _(f"No fee found for {course.course_type}, {course.fee_category}, {day_fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
 
-                final_fee += fee if fee else 0
+                final_fee += fee
 
         else:
             # Charge once for entire course or other fixed fee types
+            # Check if fee exists (use None as default to distinguish from 0)
             final_fee = Fee.get_fee(
                 course.course_type,
                 course.fee_category,
                 fee_type,
                 self.payment_method,
-                self.dan_member
+                self.dan_member,
+                default=None
             )
-            if final_fee == 0:
+            if final_fee is None:
                 raise ValueError(
                     _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
 

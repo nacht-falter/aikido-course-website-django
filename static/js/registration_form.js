@@ -209,6 +209,11 @@ function getFeeType(courseData) {
       }
       break;
 
+    case "other":
+      // For "other" course types, use entire_course as default
+      feeType = "entire_course";
+      break;
+
     default:
       feeType = null;
   }
