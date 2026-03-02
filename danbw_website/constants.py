@@ -119,6 +119,10 @@ DAN_PREPARATION_COURSES = [
     "family_reunion",
 ]
 
+DEPOSIT_COURSES = [
+    "family_reunion",
+]
+
 FEE_CATEGORIES = (
     ("regular", _("Regular Course")),
     ("dan_seminar", _("Dan Seminar")),

@@ -11,7 +11,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from parler.admin import TranslatableAdmin, TranslatableTabularInline
 
 from course_registrations.models import CourseRegistration
-from danbw_website import utils
+from danbw_website import constants, utils
 
 from .models import AccommodationOption, CourseSession, ExternalCourse, InternalCourse
 
@@ -117,6 +117,17 @@ class CourseRegistrationInline(admin.TabularInline):
         "grade",
         "dojo",
     ]
+
+    def get_fields(self, request, obj=None):
+        """Conditionally show deposit fields only for deposit courses"""
+        fields = list(super().get_fields(request, obj))
+        if obj and obj.course_type not in constants.DEPOSIT_COURSES:
+            # Remove deposit fields for non-deposit courses
+            if "deposit_paid" in fields:
+                fields.remove("deposit_paid")
+            if "remaining_balance" in fields:
+                fields.remove("remaining_balance")
+        return fields
 
 
 @admin.register(InternalCourse)

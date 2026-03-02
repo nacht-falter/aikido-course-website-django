@@ -8,7 +8,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from courses.models import Course
-from danbw_website import utils
+from danbw_website import constants, utils
 
 from .models import CourseRegistration
 
@@ -65,8 +65,6 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
         "dojo",
         "truncated_session_display",
         "final_fee",
-        "deposit_paid",
-        "remaining_balance",
         "discount",
         "payment_status",
         "payment_method",
@@ -131,6 +129,17 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
     def registration_str(self, obj):
         return str(obj)
     registration_str.short_description = _("Name")
+
+    def get_fields(self, request, obj=None):
+        """Conditionally show deposit fields only for deposit courses"""
+        fields = list(super().get_fields(request, obj))
+        if obj and obj.course.course_type not in constants.DEPOSIT_COURSES:
+            # Remove deposit fields for non-deposit courses
+            if "deposit_paid" in fields:
+                fields.remove("deposit_paid")
+            if "remaining_balance" in fields:
+                fields.remove("remaining_balance")
+        return fields
 
     def has_add_permission(self, request):
         return ("add" in request.path or "change" in request.path)
