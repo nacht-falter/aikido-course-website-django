@@ -1,4 +1,5 @@
 from datetime import date, time, timedelta
+from decimal import Decimal
 
 from django.test import TestCase
 
@@ -1392,3 +1393,200 @@ class TestCourseRegistrationDisplayMethods(TestCase):
         # __str__ should return "first_name last_name"
         # The save method populates first_name and last_name from the user
         self.assertEqual(str(registration), f"{self.user.first_name} {self.user.last_name}")
+
+
+class TestPriceOverride(TestCase):
+    """Tests for the session-level price override feature.
+
+    Courses with per-session fees (dan_bw_teacher, sensei_emmerson,
+    external_teacher) can have a price_override on individual sessions.
+    When set, the override replaces the standard Fee lookup entirely.
+    Cash and non-member surcharges do NOT apply to overridden sessions.
+    The course-level discount still applies.
+    """
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuser",
+            password="testpassword",
+            email="test@example.com",
+            first_name="Test",
+            last_name="User",
+        )
+        UserProfile.objects.create(user=self.user, dojo="Test Dojo", grade=3)
+
+        # dan_bw_teacher always uses single_session fee type, simplest to reason about
+        self.course = InternalCourse.objects.create(
+            title="DAN BW Teacher Course",
+            start_date=date.today(),
+            end_date=date.today() + timedelta(days=1),
+            course_type="dan_bw_teacher",
+            fee_category="regular",
+        )
+        Fee.objects.create(
+            course_type="dan_bw_teacher",
+            fee_category="regular",
+            fee_type="single_session",
+            amount=Decimal("25.00"),
+            extra_fee_cash=Decimal("5.00"),
+            extra_fee_external=Decimal("10.00"),
+        )
+        # Registration: cash payment, non-member — so standard fee would be 25+5+10=40
+        self.registration = CourseRegistration.objects.create(
+            user=self.user,
+            course=self.course,
+            payment_method=1,  # Cash
+            dan_member=False,
+            accept_terms=True,
+        )
+
+    def _make_session(self, price_override=None, is_dan_preparation=False):
+        return CourseSession.objects.create(
+            title="Session",
+            course=self.course,
+            date=date.today(),
+            start_time=time(10, 0),
+            end_time=time(12, 0),
+            price_override=price_override,
+            is_dan_preparation=is_dan_preparation,
+        )
+
+    def test_override_replaces_standard_fee(self):
+        print("\ntest_override_replaces_standard_fee")
+        session = self._make_session(price_override=Decimal("15.00"))
+        # setUp: cash payment (+5) and non-member (+10) surcharges apply on top
+        final_fee = self.registration.calculate_fees(
+            self.course, self.course.sessions.filter(id=session.id)
+        )
+        self.assertEqual(final_fee, 30.00)  # 15 (override) + 5 (cash) + 10 (non-member)
+
+    def test_no_override_uses_standard_fee(self):
+        print("\ntest_no_override_uses_standard_fee")
+        session = self._make_session(price_override=None)
+        final_fee = self.registration.calculate_fees(
+            self.course, self.course.sessions.filter(id=session.id)
+        )
+        # 25 (base) + 5 (cash) + 10 (non-member) = 40
+        self.assertEqual(final_fee, 40.00)
+
+    def test_mixed_sessions_override_and_standard(self):
+        print("\ntest_mixed_sessions_override_and_standard")
+        overridden = self._make_session(price_override=Decimal("15.00"))
+        standard = CourseSession.objects.create(
+            title="Standard Session",
+            course=self.course,
+            date=date.today() + timedelta(days=1),
+            start_time=time(10, 0),
+            end_time=time(12, 0),
+            price_override=None,
+        )
+        final_fee = self.registration.calculate_fees(
+            self.course, self.course.sessions.all()
+        )
+        # 30.00 (override 15 + cash 5 + non-member 10) + 40.00 (standard 25+5+10) = 70.00
+        self.assertEqual(final_fee, 70.00)
+
+    def test_cash_surcharge_applied_to_overridden_session(self):
+        print("\ntest_cash_surcharge_applied_to_overridden_session")
+        # DAN member to isolate cash surcharge only
+        self.registration.dan_member = True
+        self.registration.save()
+        session = self._make_session(price_override=Decimal("15.00"))
+        # payment_method=1 (Cash) is set in setUp — extra_fee_cash=5 applies on top
+        final_fee = self.registration.calculate_fees(
+            self.course, self.course.sessions.filter(id=session.id)
+        )
+        self.assertEqual(final_fee, 20.00)  # 15 (override) + 5 (cash)
+
+    def test_non_member_surcharge_applied_to_overridden_session(self):
+        print("\ntest_non_member_surcharge_applied_to_overridden_session")
+        # Switch to bank payment to isolate the non-member surcharge
+        self.registration.payment_method = 0
+        self.registration.save()
+        session = self._make_session(price_override=Decimal("15.00"))
+        # dan_member=False is set in setUp — extra_fee_external=10 applies on top
+        final_fee = self.registration.calculate_fees(
+            self.course, self.course.sessions.filter(id=session.id)
+        )
+        self.assertEqual(final_fee, 25.00)  # 15 (override) + 10 (non-member)
+
+    def test_discount_applies_to_overridden_fee(self):
+        print("\ntest_discount_applies_to_overridden_fee")
+        self.course.discount_percentage = 50
+        self.course.save()
+        self.registration.discount = True
+        self.registration.payment_method = 0
+        self.registration.dan_member = True
+        self.registration.save()
+
+        session = self._make_session(price_override=Decimal("20.00"))
+        final_fee = self.registration.calculate_fees(
+            self.course, self.course.sessions.filter(id=session.id)
+        )
+        self.assertEqual(final_fee, 10.00)  # 20.00 * 0.5
+
+    def test_zero_price_override(self):
+        print("\ntest_zero_price_override")
+        # Bank + DAN member so no surcharges — verifies zero override isn't skipped
+        self.registration.payment_method = 0
+        self.registration.dan_member = True
+        self.registration.save()
+        session = self._make_session(price_override=Decimal("0.00"))
+        final_fee = self.registration.calculate_fees(
+            self.course, self.course.sessions.filter(id=session.id)
+        )
+        self.assertEqual(final_fee, 0.00)
+
+    def test_dan_preparation_session_with_price_override(self):
+        print("\ntest_dan_preparation_session_with_price_override")
+        # Use sensei_emmerson which supports dan preparation sessions
+        course = InternalCourse.objects.create(
+            title="Sensei Emmerson Course",
+            start_date=date.today(),
+            end_date=date.today() + timedelta(days=1),
+            course_type="sensei_emmerson",
+            fee_category="regular",
+            has_dan_preparation=True,
+        )
+        Fee.objects.create(
+            course_type="sensei_emmerson",
+            fee_category="regular",
+            fee_type="single_session",
+            amount=Decimal("30.00"),
+        )
+        Fee.objects.create(
+            course_type="sensei_emmerson",
+            fee_category="regular",
+            fee_type="single_session_dan_preparation",
+            amount=Decimal("50.00"),
+        )
+        # A second regular session is needed so the dan prep session is not
+        # treated as the "entire course" by get_fee_type()
+        CourseSession.objects.create(
+            title="Regular Session",
+            course=course,
+            date=date.today(),
+            start_time=time(10, 0),
+            end_time=time(12, 0),
+        )
+        dan_session = CourseSession.objects.create(
+            title="Dan Preparation Session",
+            course=course,
+            date=date.today() + timedelta(days=1),
+            start_time=time(10, 0),
+            end_time=time(12, 0),
+            is_dan_preparation=True,
+            price_override=Decimal("20.00"),
+        )
+        registration = CourseRegistration.objects.create(
+            user=self.user,
+            course=course,
+            payment_method=0,
+            dan_member=True,
+            accept_terms=True,
+        )
+        final_fee = registration.calculate_fees(
+            course, course.sessions.filter(id=dan_session.id)
+        )
+        # Override should replace the single_session_dan_preparation fee (50.00)
+        self.assertEqual(final_fee, 20.00)

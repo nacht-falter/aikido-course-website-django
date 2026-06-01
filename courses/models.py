@@ -283,6 +283,14 @@ class CourseSession(TranslatableModel):
         _("Dan Preparation"),
         default=False,
     )
+    price_override = models.DecimalField(
+        _("Price Override"),
+        max_digits=6,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text=_("If set, overrides the standard session fee. Cash and membership surcharges do not apply."),
+    )
 
     def __str__(self):
         return f"{constants.WEEKDAYS[self.date.weekday()][1]}, {self.date.strftime('%d.%m.%Y')}, {self.start_time.strftime('%H:%M')}-{self.end_time.strftime('%H:%M')}: {self.title}"

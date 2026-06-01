@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-02 14:39+0100\n"
+"POT-Creation-Date: 2026-06-01 21:50+0200\n"
 "PO-Revision-Date: 2025-10-01 09:20+0200\n"
 "Last-Translator: Johannes <your-email@domain.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -31,21 +31,21 @@ msgid "Past Courses"
 msgstr "Vergangene Lehrgänge"
 
 #: course_registrations/admin.py:41 course_registrations/models.py:43
-#: courses/models.py:56 courses/models.py:268 courses/models.py:323
+#: courses/models.py:56 courses/models.py:268 courses/models.py:331
 #: danbw_website/utils.py:240
 msgid "Course"
 msgstr "Lehrgang"
 
-#: course_registrations/admin.py:133 courses/models.py:314
+#: course_registrations/admin.py:131 courses/models.py:322
 #: templates/registration_form.html:19 templates/userprofile.html:9
 msgid "Name"
 msgstr "Name"
 
-#: course_registrations/admin.py:145
+#: course_registrations/admin.py:154
 msgid "Toggle payment status of selected registrations"
 msgstr "Zahlungsstatus der ausgewählten Anmeldungen umschalten"
 
-#: course_registrations/admin.py:162 courses/admin.py:323
+#: course_registrations/admin.py:171 courses/admin.py:334
 msgid "Export selected course registrations to CSV"
 msgstr "Ausgewählte Lehrgangs-Anmeldungen als CSV exportieren"
 
@@ -108,25 +108,33 @@ msgstr "Gib den Namen Deines Dojos an"
 msgid "Your website"
 msgstr "Deine Website"
 
-#: course_registrations/forms.py:138
+#: course_registrations/forms.py:139
+msgid "Your URL"
+msgstr ""
+
+#: course_registrations/forms.py:144
+msgid "Confirm email"
+msgstr "E-Mail bestätigen"
+
+#: course_registrations/forms.py:154
 msgid "Select the correct kanji"
 msgstr "Bitte wähle das korrekte Kanji aus"
 
-#: course_registrations/forms.py:147
+#: course_registrations/forms.py:163
 msgid "Incorrect Captcha verification. Please try again."
 msgstr "CAPTCHA-Verifizierung fehlgeschlagen. Bitte versuche es erneut."
 
-#: course_registrations/forms.py:187
+#: course_registrations/forms.py:203
 msgid "You need to be 1st Kyu or higher to register for this course."
 msgstr ""
 "Du musst mindestens 1. Kyu sein, um Dich für diesen Lehrgang anmelden zu "
 "können."
 
-#: course_registrations/forms.py:191 templates/registration_form.html:117
+#: course_registrations/forms.py:207 templates/registration_form.html:118
 msgid "Please select at least one session."
 msgstr "Bitte wähle mindestens eine Einheit aus."
 
-#: course_registrations/forms.py:196 memberships/forms.py:92 users/forms.py:48
+#: course_registrations/forms.py:212 memberships/forms.py:92 users/forms.py:48
 #: users/forms.py:96
 msgid "Please specify a dojo if you select 'Other'."
 msgstr "Bitte gib ein Dojo an, wenn Du 'Anderes Dojo' auswählst."
@@ -176,7 +184,7 @@ msgstr "Graduierung"
 
 #: course_registrations/models.py:68 danbw_website/utils.py:251
 #: templates/course_list_item.html:85 templates/index.html:124
-#: templates/registration_form.html:126
+#: templates/registration_form.html:127
 msgid "Exam"
 msgstr "Prüfung"
 
@@ -197,11 +205,11 @@ msgid "Accept terms"
 msgstr "Bedingungen akzeptiert"
 
 #: course_registrations/models.py:91 danbw_website/utils.py:248
-#: templates/registration_form.html:154
+#: templates/registration_form.html:155
 msgid "Discount"
 msgstr "Ermäßigung"
 
-#: course_registrations/models.py:95 course_registrations/views.py:95
+#: course_registrations/models.py:95 course_registrations/views.py:99
 msgid "D.A.N. Member"
 msgstr "D.A.N.-Mitglied"
 
@@ -217,7 +225,7 @@ msgstr "Zahlungsstatus"
 msgid "Payment method"
 msgstr "Zahlungsmethode"
 
-#: course_registrations/models.py:115 course_registrations/models.py:350
+#: course_registrations/models.py:115 course_registrations/models.py:353
 #: danbw_website/utils.py:253 memberships/forms.py:78 memberships/models.py:56
 msgid "Comment"
 msgstr "Kommentar"
@@ -231,7 +239,7 @@ msgstr "Abendessen"
 msgid "Overnight stay"
 msgstr "Übernachtung"
 
-#: course_registrations/models.py:131 courses/models.py:340
+#: course_registrations/models.py:131 courses/models.py:348
 msgid "Accommodation Option"
 msgstr "Unterkunftsoption"
 
@@ -253,7 +261,7 @@ msgstr "Höhe der bereits geleisteten Anzahlung. Vgl. 'Restbetrag' unten."
 msgid "Course Registration"
 msgstr "Lehrgangsanmeldung"
 
-#: course_registrations/models.py:246 course_registrations/models.py:290
+#: course_registrations/models.py:249 course_registrations/models.py:293
 #, python-brace-format
 msgid ""
 "No fee found for {course.course_type}, {course.fee_category}, {fee_type}, "
@@ -263,7 +271,7 @@ msgstr ""
 "{fee_type},Zahlungsmethode: {self.payment_method}, Dan-Mitglied: {self."
 "dan_member}"
 
-#: course_registrations/models.py:273
+#: course_registrations/models.py:276
 #, python-brace-format
 msgid ""
 "No fee found for {course.course_type}, {course.fee_category}, "
@@ -274,16 +282,16 @@ msgstr ""
 "{day_fee_type}, Zahlungsmethode: {self.payment_method}, Dan-Mitglied: {self."
 "dan_member}"
 
-#: course_registrations/models.py:335 fees/models.py:11
-#: templates/registration_form.html:107 templates/registration_form.html:113
+#: course_registrations/models.py:338 fees/models.py:11
+#: templates/registration_form.html:108 templates/registration_form.html:114
 msgid "Entire Course"
 msgstr "Ganzer Lehrgang"
 
-#: course_registrations/models.py:342 danbw_website/utils.py:246
+#: course_registrations/models.py:345 danbw_website/utils.py:246
 msgid "Selected Sessions"
 msgstr "Ausgewählte Einheiten"
 
-#: course_registrations/models.py:356
+#: course_registrations/models.py:359
 msgid "Remaining Balance"
 msgstr "Restbetrag"
 
@@ -307,47 +315,47 @@ msgstr "benutzer/anmeldungen/aktualisieren/<int:pk>/"
 msgid "set-attendence-status/<int:pk>/"
 msgstr "anmeldestatus-setzen/<int:pk>/"
 
-#: course_registrations/views.py:94
+#: course_registrations/views.py:98
 msgid "reduced"
 msgstr "ermäßigt"
 
-#: course_registrations/views.py:139
+#: course_registrations/views.py:143
 msgid "Please log in to your account or continue as a guest."
 msgstr "Bitte melde Dich in Deinem Konto an oder fahre als Gast fort."
 
-#: course_registrations/views.py:148
+#: course_registrations/views.py:152
 msgid "Please create a user profile to contine."
 msgstr "Bitte erstelle ein Benutzerprofil, um fortzufahren."
 
-#: course_registrations/views.py:159
+#: course_registrations/views.py:163
 msgid "You are already registered for this course."
 msgstr "Du bist bereits für diesen Lehrgang angemeldet."
 
-#: course_registrations/views.py:231
+#: course_registrations/views.py:241
 msgid "Incorrect captcha verification. Please try again."
 msgstr "CAPTCHA-Verifizierung fehlgeschlagen. Bitte versuche es erneut."
 
-#: course_registrations/views.py:258
+#: course_registrations/views.py:295
 msgid "A registration with this name and email already exists for this course."
 msgstr ""
 "Es existiert bereits eine Anmeldung mit diesem Namen bzw. dieser E-Mail-"
 "Adresse."
 
-#: course_registrations/views.py:275
+#: course_registrations/views.py:312
 msgid "You have already registered for this course."
 msgstr "Du bist bereits für diesen Lehrgang angemeldet."
 
-#: course_registrations/views.py:319
+#: course_registrations/views.py:356
 msgid "A registration with this email/name already exists for this course."
 msgstr ""
 "Es existiert bereits eine Anmeldung mit diesem Namen bzw. dieser E-Mail-"
 "Adresse."
 
-#: course_registrations/views.py:352
+#: course_registrations/views.py:389
 msgid "You have successfully signed up for "
 msgstr "Du hast Dich erfolgreich angemeldet für "
 
-#: course_registrations/views.py:424
+#: course_registrations/views.py:461
 msgid ""
 "Please cancel registrations by clicking the button from the 'My "
 "Registrations' page."
@@ -355,31 +363,31 @@ msgstr ""
 "Bitte storniere Anmeldungen durch Klicken auf den Button auf der Seite "
 "'Meine Anmeldungen'."
 
-#: course_registrations/views.py:444 course_registrations/views.py:608
+#: course_registrations/views.py:481 course_registrations/views.py:645
 msgid "Your registration for "
 msgstr "Deine Anmeldung für "
 
-#: course_registrations/views.py:445
+#: course_registrations/views.py:482
 msgid " has been cancelled."
 msgstr " wurde storniert."
 
-#: course_registrations/views.py:520
+#: course_registrations/views.py:557
 msgid "You have successfully updated your registration for "
 msgstr "Du hast Deine Anmeldung erfolgreich aktualisiert für "
 
-#: course_registrations/views.py:530
+#: course_registrations/views.py:567
 msgid "Registration not submitted. Please select at least one session."
 msgstr "Anmeldung nicht übermittelt. Bitte wähle mindestens eine Einheit aus."
 
-#: course_registrations/views.py:556 course_registrations/views.py:567
+#: course_registrations/views.py:593 course_registrations/views.py:604
 msgid "No registrations found for this course."
 msgstr "Es wurden keine Anmeldungen für diesen Lehrgang gefunden."
 
-#: course_registrations/views.py:559
+#: course_registrations/views.py:596
 msgid "Download started"
 msgstr "Download gestartet"
 
-#: course_registrations/views.py:589
+#: course_registrations/views.py:626
 msgid ""
 "Please set the attendence status of registrations by clicking the button "
 "from the 'My Registrations' page."
@@ -387,7 +395,7 @@ msgstr ""
 "Bitte bestätige, dass du teilgenommen hast durch Klicken auf den Button auf "
 "der Seite 'Meine Anmeldungen'."
 
-#: course_registrations/views.py:609
+#: course_registrations/views.py:646
 msgid " has been updated."
 msgstr " wurde aktualisiert."
 
@@ -395,39 +403,39 @@ msgstr " wurde aktualisiert."
 msgid "Year"
 msgstr "Jahr"
 
-#: courses/admin.py:125 templates/registration_form.html:47
+#: courses/admin.py:136 templates/registration_form.html:47
 msgid "Course Details"
 msgstr "Lehrgangsdetails"
 
-#: courses/admin.py:141 templates/course_list_header.html:7
+#: courses/admin.py:152 templates/course_list_header.html:7
 #: templates/course_list_item.html:40 templates/course_list_item.html:120
 msgid "Dates"
 msgstr "Datum"
 
-#: courses/admin.py:150
+#: courses/admin.py:161
 msgid "Payment Information"
 msgstr "Zahlungsinformationen"
 
-#: courses/admin.py:157 courses/models.py:32
+#: courses/admin.py:168 courses/models.py:32
 #: templates/childrens_passport_form.html:108
 #: templates/course_list_item.html:200 templates/membership_form.html:117
-#: templates/registration_form.html:182
+#: templates/registration_form.html:183
 msgid "Additional Information"
 msgstr "Zusätzliche Informationen"
 
-#: courses/admin.py:251
+#: courses/admin.py:262
 msgid "Duplicate selected courses"
 msgstr "Ausgewählte Lehrgänge duplizieren"
 
-#: courses/admin.py:260
+#: courses/admin.py:271
 msgid "Toggle registration status of selected courses"
 msgstr "Anmeldestatus der ausgewählten Lehrgänge umschalten"
 
-#: courses/admin.py:268
+#: courses/admin.py:279
 msgid "Toggle status of selected courses"
 msgstr "Status der ausgewählten Lehrgänge umschalten"
 
-#: courses/admin.py:278
+#: courses/admin.py:289
 msgid "Registrations"
 msgstr "Anmeldungen"
 
@@ -603,45 +611,58 @@ msgstr "Endzeit"
 msgid "Dan Preparation"
 msgstr "Dan-Vorbereitung"
 
-#: courses/models.py:293
+#: courses/models.py:287
+msgid "Price Override"
+msgstr "Preisüberschreibung"
+
+#: courses/models.py:292
+msgid ""
+"If set, overrides the standard session fee. Cash and membership surcharges "
+"do not apply."
+msgstr ""
+"Falls gesetzt, überschreibt dieser Wert die reguläre Gebühr für diese "
+"Trainingseinheit. Barzahlungs- und Mitgliedschaftszuschläge werden nicht "
+"angewendet."
+
+#: courses/models.py:301
 msgid "Start time cannot be later than end time."
 msgstr "Die Startzeit kann nicht nach der Endzeit liegen."
 
-#: courses/models.py:297
+#: courses/models.py:305
 msgid "Dan preparation sessions are not allowed on this course."
 msgstr "Dan-Vorbereitungseinheiten sind bei diesem Lehrgang nicht erlaubt."
 
-#: courses/models.py:305
+#: courses/models.py:313
 msgid "Course Session"
 msgstr "Lehrgangseinheit"
 
-#: courses/models.py:306
+#: courses/models.py:314
 msgid "Course Sessions"
 msgstr "Lehrgangseinheiten"
 
-#: courses/models.py:316
+#: courses/models.py:324
 msgid "e.g., 'No accommodation', '2 nights', 'Full week'"
 msgstr "z.B. 'Keine Unterkunft', '2 Nächte', 'Ganze Woche'"
 
-#: courses/models.py:326 fees/models.py:58
+#: courses/models.py:334 fees/models.py:58
 msgid "Fee"
 msgstr "Preis"
 
-#: courses/models.py:330
+#: courses/models.py:338
 msgid "Additional fee for this accommodation option"
 msgstr "Zusätzliche Gebühr für diese Unterkunftsoption"
 
-#: courses/models.py:333
+#: courses/models.py:341
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:484
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:491
 msgid "Order"
 msgstr "Reihenfolge"
 
-#: courses/models.py:335
+#: courses/models.py:343
 msgid "Display order (lower numbers appear first)"
 msgstr "Anzeigereihenfolge (niedrigere Zahlen zuerst)"
 
-#: courses/models.py:341
+#: courses/models.py:349
 msgid "Accommodation Options"
 msgstr "Unterkunftsoptionen"
 
@@ -788,19 +809,19 @@ msgstr "D.A.N. BW-Lehrer"
 msgid "Children"
 msgstr "Kinder"
 
-#: danbw_website/constants.py:100 danbw_website/constants.py:125
+#: danbw_website/constants.py:100 danbw_website/constants.py:129
 msgid "Family Reunion"
 msgstr ""
 
-#: danbw_website/constants.py:101 danbw_website/constants.py:126
+#: danbw_website/constants.py:101 danbw_website/constants.py:130
 msgid "Other Course"
 msgstr "Sonstiger Lehrgang"
 
-#: danbw_website/constants.py:123
+#: danbw_website/constants.py:127
 msgid "Regular Course"
 msgstr "Normaler Lehrgang"
 
-#: danbw_website/constants.py:124
+#: danbw_website/constants.py:128
 msgid "Dan Seminar"
 msgstr "Dan-Seminar"
 
@@ -1119,7 +1140,7 @@ msgstr "Einzelner Tag"
 msgid "Dan Preparation Session"
 msgstr "Dan-Vorbereitungseinheit"
 
-#: fees/models.py:14 templates/registration_form.html:101
+#: fees/models.py:14 templates/registration_form.html:102
 msgid "Entire Course with Dan Preparation"
 msgstr "Ganzer Lehrgang mit Dan-Vorbereitung"
 
@@ -1127,7 +1148,7 @@ msgstr "Ganzer Lehrgang mit Dan-Vorbereitung"
 msgid "Single Day with Dan Seminar"
 msgstr "Einzelner Tag mit Dan-Seminar"
 
-#: fees/models.py:16 templates/registration_form.html:99
+#: fees/models.py:16 templates/registration_form.html:100
 msgid "Entire Course with Dan Seminar"
 msgstr "Ganzer Lehrgang mit Dan-Seminar"
 
@@ -2401,7 +2422,7 @@ msgstr "D.A.N. International Mitgliedschaftsantrag"
 msgid "D.A.N. BW Membership Application"
 msgstr "D.A.N. BW Mitgliedschaftsantrag"
 
-#: templates/membership_form.html:87 templates/registration_form.html:139
+#: templates/membership_form.html:87 templates/registration_form.html:140
 msgid "Payment Details"
 msgstr "Zahlungsdetails"
 
@@ -2534,7 +2555,7 @@ msgstr "Satzung"
 msgid "Are you sure you want to log out?"
 msgstr "Bist Du sicher, dass Du Dich ausloggen möchtest?"
 
-#: templates/partials/logout-modal.html:19 templates/register_course.html:47
+#: templates/partials/logout-modal.html:19 templates/register_course.html:43
 #: templates/update_courseregistration.html:13
 #: templates/update_userprofile.html:26
 msgid "Cancel"
@@ -2583,7 +2604,7 @@ msgstr ""
 "einen Nachweis mit. Andernfalls wird die volle Lehrgangsgebühr berechnet."
 
 #: templates/partials/registration_conditions.html:20
-#: templates/registration_form.html:197
+#: templates/registration_form.html:198
 msgid "Terms and Conditions"
 msgstr "Teilnahmebedingungen"
 
@@ -2625,11 +2646,11 @@ msgstr ""
 msgid "The course fee will be displayed below the form"
 msgstr "Die Teilnahmegebühr wird unten im Formular angezeigt"
 
-#: templates/register_course.html:29
+#: templates/register_course.html:25
 msgid "Confirm you're human"
 msgstr "Bitte bestätige, dass du ein Mensch bist"
 
-#: templates/register_course.html:31
+#: templates/register_course.html:27
 #, python-format
 msgid ""
 "Select the correct kanji for \"<strong>%(target)s</strong>\" as in Aikido"
@@ -2637,7 +2658,7 @@ msgstr ""
 "Bitte wähle das korrekte Kanji für \"<strong>%(target)s</strong>\" wie in "
 "Aikido"
 
-#: templates/register_course.html:48
+#: templates/register_course.html:44
 msgid "Sign up"
 msgstr "Anmelden"
 
@@ -2653,19 +2674,19 @@ msgstr "Profil bearbeiten"
 msgid "Sessions:"
 msgstr "Einheiten:"
 
-#: templates/registration_form.html:91
+#: templates/registration_form.html:92
 msgid "Entire Course without Dan Seminar"
 msgstr "Ganzer Lehrgang ohne Dan-Seminar"
 
-#: templates/registration_form.html:93
+#: templates/registration_form.html:94
 msgid "Entire Course without Dan Preparation"
 msgstr "Ganzer Lehrgang ohne Dan-Vorbereitung"
 
-#: templates/registration_form.html:144
+#: templates/registration_form.html:145
 msgid "Payment"
 msgstr "Bezahlung"
 
-#: templates/registration_form.html:159
+#: templates/registration_form.html:160
 msgid ""
 "Please refer to the <a href=\"#discount-conditions\"> Discount Conditions </"
 "a> below for more information."
@@ -2673,15 +2694,15 @@ msgstr ""
 "Weitere Informationen findest Du in den <a href=\"#discount-conditions\"> "
 "Ermäßigungsbedingungen</a> unten."
 
-#: templates/registration_form.html:169
+#: templates/registration_form.html:170
 msgid "D.A.N. Member discount"
 msgstr "D.A.N.-Mitgliederrabatt"
 
-#: templates/registration_form.html:199
+#: templates/registration_form.html:200
 msgid "Please accept the terms and conditions below."
 msgstr "Bitte akzeptiere die untenstehenden Bedingungen."
 
-#: templates/registration_form.html:207
+#: templates/registration_form.html:208
 msgid "Registration Fee"
 msgstr "Teilnahmegebühr"
 
@@ -3974,9 +3995,6 @@ msgstr ""
 
 #~ msgid "Amount of deposit received from the participant"
 #~ msgstr "Bereits überwiesene Anzahlung"
-
-#~ msgid "Confirm email"
-#~ msgstr "E-Mail bestätigen"
 
 #~ msgid ""
 #~ "Please transfer the remaining course fee to the following account until"

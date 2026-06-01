@@ -231,21 +231,38 @@ class CourseRegistration(models.Model):
         if "single_session" in fee_type:
             # Charge per session (e.g., for sensei_emmerson, external_teacher, dan_bw_teacher)
             for session in selected_sessions:
-                fee_type = "single_session_dan_preparation" if session.is_dan_preparation else "single_session"
-                # Check if fee exists (use None as default to distinguish from 0)
-                fee = Fee.get_fee(
-                    course.course_type,
-                    course.fee_category,
-                    fee_type,
-                    self.payment_method,
-                    self.dan_member,
-                    default=None
-                )
-                if fee is None:
-                    raise ValueError(
-                        _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
+                if session.price_override is not None:
+                    session_fee = session.price_override
+                    fee_type_for_session = "single_session_dan_preparation" if session.is_dan_preparation else "single_session"
+                    try:
+                        fee_obj = Fee.objects.get(
+                            course_type=course.course_type,
+                            fee_category=course.fee_category,
+                            fee_type=fee_type_for_session,
+                        )
+                        if self.payment_method == constants.CASH:
+                            session_fee += fee_obj.extra_fee_cash
+                        if not self.dan_member:
+                            session_fee += fee_obj.extra_fee_external
+                    except Fee.DoesNotExist:
+                        pass
+                    final_fee += session_fee
+                else:
+                    fee_type = "single_session_dan_preparation" if session.is_dan_preparation else "single_session"
+                    # Check if fee exists (use None as default to distinguish from 0)
+                    fee = Fee.get_fee(
+                        course.course_type,
+                        course.fee_category,
+                        fee_type,
+                        self.payment_method,
+                        self.dan_member,
+                        default=None
+                    )
+                    if fee is None:
+                        raise ValueError(
+                            _(f"No fee found for {course.course_type}, {course.fee_category}, {fee_type}, payment method: {self.payment_method}, dan member: {self.dan_member}"))
 
-                final_fee += fee
+                    final_fee += fee
 
         elif course.course_type == "family_reunion" and "single_day" in fee_type:
             # Charge per unique day for family_reunion

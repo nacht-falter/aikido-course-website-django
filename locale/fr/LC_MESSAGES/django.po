@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-15 00:43+0100\n"
+"POT-Creation-Date: 2026-06-01 21:50+0200\n"
 "PO-Revision-Date: 2025-12-15 23:25\n"
 "Last-Translator: DeepL API\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,98 +18,126 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: course_registrations/admin.py:20 courses/admin.py:40
+#: course_registrations/admin.py:21 courses/admin.py:40
 msgid "Course Date"
 msgstr "Date du cours"
 
-#: course_registrations/admin.py:25 courses/admin.py:45
+#: course_registrations/admin.py:26 courses/admin.py:45
 msgid "Future Courses"
 msgstr "Cours futur"
 
-#: course_registrations/admin.py:26 courses/admin.py:46
+#: course_registrations/admin.py:27 courses/admin.py:46
 #: templates/course_list.html:45
 msgid "Past Courses"
 msgstr "Cours passés"
 
-#: course_registrations/admin.py:40 course_registrations/models.py:43
-#: courses/models.py:56 courses/models.py:268 courses/models.py:323
-#: danbw_website/utils.py:235
+#: course_registrations/admin.py:41 course_registrations/models.py:43
+#: courses/models.py:56 courses/models.py:268 courses/models.py:331
+#: danbw_website/utils.py:240
 msgid "Course"
 msgstr "Course"
 
-#: course_registrations/admin.py:124 courses/models.py:314
-#: templates/registration_form.html:18 templates/userprofile.html:9
+#: course_registrations/admin.py:131 courses/models.py:322
+#: templates/registration_form.html:19 templates/userprofile.html:9
 msgid "Name"
 msgstr "Nom"
 
-#: course_registrations/admin.py:136
+#: course_registrations/admin.py:154
 msgid "Toggle payment status of selected registrations"
 msgstr "Modifier le statut de paiement des inscriptions sélectionnées"
 
-#: course_registrations/admin.py:153 courses/admin.py:320
+#: course_registrations/admin.py:171 courses/admin.py:334
 msgid "Export selected course registrations to CSV"
 msgstr "Exportation des enregistrements de cours sélectionnés au format CSV"
 
-#: course_registrations/apps.py:8 course_registrations/models.py:155
+#: course_registrations/apps.py:8 course_registrations/models.py:164
 msgid "Course Registrations"
 msgstr "Enregistrements de cours"
 
-#: course_registrations/forms.py:26
+#: course_registrations/forms.py:28
+msgid "AI"
+msgstr ""
+
+#: course_registrations/forms.py:36
 msgid "I would like to join the dinner on Saturday evening."
 msgstr "J'aimerais me joindre au dîner du samedi soir."
 
-#: course_registrations/forms.py:28
+#: course_registrations/forms.py:38
 msgid "I need a place to stay overnight."
 msgstr "J'ai besoin d'un endroit pour passer la nuit."
 
-#: course_registrations/forms.py:43 course_registrations/forms.py:98
+#: course_registrations/forms.py:53 course_registrations/forms.py:126
 #: danbw_website/constants.py:66 memberships/forms.py:76 users/forms.py:25
 #: users/forms.py:73
 msgid "Other Dojo"
 msgstr "Autre Dojo"
 
-#: course_registrations/forms.py:64 danbw_website/utils.py:256
-#: templates/courseregistration_list.html:80
+#: course_registrations/forms.py:74 danbw_website/utils.py:261
+#: templates/courseregistration_list.html:97
 msgid "Accommodation"
 msgstr "Accommodation"
 
-#: course_registrations/forms.py:65
+#: course_registrations/forms.py:75
 msgid "Select accommodation option"
 msgstr "Sélectionner l'option d'hébergement"
 
-#: course_registrations/forms.py:75
+#: course_registrations/forms.py:103
 msgid "I accept the terms and conditions below."
 msgstr "J'accepte les termes et conditions ci-dessous."
 
-#: course_registrations/forms.py:78
+#: course_registrations/forms.py:106
 msgid "I will attend the following sessions:"
 msgstr "Je vais assister aux sessions suivantes :"
 
-#: course_registrations/forms.py:84
+#: course_registrations/forms.py:112
 msgid "I want to apply for an exam."
 msgstr "Je souhaite m'inscrire à un examen."
 
-#: course_registrations/forms.py:87
+#: course_registrations/forms.py:115
 msgid "I am eligible for a discount."
 msgstr "Je suis éligible à une réduction."
 
-#: course_registrations/forms.py:90
+#: course_registrations/forms.py:118
 msgid "I am a D.A.N. International member."
 msgstr "Je suis un membre du D.A.N. International member."
 
-#: course_registrations/forms.py:100 users/forms.py:27 users/forms.py:75
+#: course_registrations/forms.py:128 users/forms.py:27 users/forms.py:75
 msgid "Enter the name of your Dojo"
 msgstr "Entrez le nom de votre dojo"
 
+#: course_registrations/forms.py:133 pages/forms.py:13
+msgid "Your website"
+msgstr "Votre site web"
+
 #: course_registrations/forms.py:139
+msgid "Your URL"
+msgstr ""
+
+#: course_registrations/forms.py:144
+#, fuzzy
+#| msgid "Confirm"
+msgid "Confirm email"
+msgstr "Confirmer"
+
+#: course_registrations/forms.py:154
+msgid "Select the correct kanji"
+msgstr ""
+
+#: course_registrations/forms.py:163
+#, fuzzy
+#| msgid "Invalid Header found. Please try again."
+msgid "Incorrect Captcha verification. Please try again."
+msgstr "En-tête invalide trouvé. Veuillez réessayer."
+
+#: course_registrations/forms.py:203
 msgid "You need to be 1st Kyu or higher to register for this course."
 msgstr "Vous devez être 1er Kyu ou plus pour vous inscrire à ce cours."
 
-#: course_registrations/forms.py:143 templates/registration_form.html:111
+#: course_registrations/forms.py:207 templates/registration_form.html:118
 msgid "Please select at least one session."
 msgstr "Veuillez sélectionner au moins une session."
 
-#: course_registrations/forms.py:148 memberships/forms.py:92 users/forms.py:48
+#: course_registrations/forms.py:212 memberships/forms.py:92 users/forms.py:48
 #: users/forms.py:96
 msgid "Please specify a dojo if you select 'Other'."
 msgstr "Veuillez préciser un dojo si vous sélectionnez 'Autre'."
@@ -118,19 +146,19 @@ msgstr "Veuillez préciser un dojo si vous sélectionnez 'Autre'."
 msgid "Participant"
 msgstr "Participant"
 
-#: course_registrations/models.py:24 danbw_website/utils.py:238
-#: danbw_website/utils.py:306 memberships/forms.py:51 memberships/models.py:25
+#: course_registrations/models.py:24 danbw_website/utils.py:243
+#: danbw_website/utils.py:311 memberships/forms.py:51 memberships/models.py:25
 msgid "Email"
 msgstr "Email"
 
-#: course_registrations/models.py:29 danbw_website/utils.py:236
-#: danbw_website/utils.py:303 memberships/forms.py:35 memberships/models.py:10
+#: course_registrations/models.py:29 danbw_website/utils.py:241
+#: danbw_website/utils.py:308 memberships/forms.py:35 memberships/models.py:10
 #: users/forms.py:13 users/forms.py:61
 msgid "First Name"
 msgstr "Premier nom"
 
-#: course_registrations/models.py:35 danbw_website/utils.py:237
-#: danbw_website/utils.py:304 memberships/forms.py:36 memberships/models.py:11
+#: course_registrations/models.py:35 danbw_website/utils.py:242
+#: danbw_website/utils.py:309 memberships/forms.py:36 memberships/models.py:11
 #: users/forms.py:17 users/forms.py:65
 msgid "Last Name"
 msgstr "Dernier nom"
@@ -143,27 +171,27 @@ msgstr "Séances sélectionnées"
 msgid "Registration date"
 msgstr "Date d'inscription"
 
-#: course_registrations/models.py:55 danbw_website/utils.py:240
-#: danbw_website/utils.py:314 memberships/forms.py:74 memberships/models.py:48
-#: templates/registration_form.html:24 templates/userprofile.html:21
+#: course_registrations/models.py:55 danbw_website/utils.py:245
+#: danbw_website/utils.py:319 memberships/forms.py:74 memberships/models.py:48
+#: templates/registration_form.html:25 templates/userprofile.html:21
 #: users/models.py:21
 msgid "Dojo"
 msgstr "Dojo"
 
-#: course_registrations/models.py:61 danbw_website/utils.py:239
-#: danbw_website/utils.py:313 memberships/forms.py:73 memberships/models.py:46
-#: templates/registration_form.html:22 templates/userprofile.html:17
+#: course_registrations/models.py:61 danbw_website/utils.py:244
+#: danbw_website/utils.py:318 memberships/forms.py:73 memberships/models.py:46
+#: templates/registration_form.html:23 templates/userprofile.html:17
 #: users/models.py:23
 msgid "Grade"
 msgstr "Grade"
 
-#: course_registrations/models.py:68 danbw_website/utils.py:246
-#: templates/course_list_item.html:85 templates/index.html:98
-#: templates/registration_form.html:120
+#: course_registrations/models.py:68 danbw_website/utils.py:251
+#: templates/course_list_item.html:85 templates/index.html:124
+#: templates/registration_form.html:127
 msgid "Exam"
 msgstr "Examen"
 
-#: course_registrations/models.py:73 danbw_website/utils.py:247
+#: course_registrations/models.py:73 danbw_website/utils.py:252
 msgid "Exam Grade"
 msgstr "Grade d'examen"
 
@@ -179,16 +207,16 @@ msgstr "Grade mis à jour"
 msgid "Accept terms"
 msgstr "Accepter les conditions"
 
-#: course_registrations/models.py:91 danbw_website/utils.py:243
-#: templates/registration_form.html:147
+#: course_registrations/models.py:91 danbw_website/utils.py:248
+#: templates/registration_form.html:155
 msgid "Discount"
 msgstr "Discount"
 
-#: course_registrations/models.py:95 course_registrations/views.py:70
+#: course_registrations/models.py:95 course_registrations/views.py:99
 msgid "D.A.N. Member"
 msgstr "Membre du D.A.N"
 
-#: course_registrations/models.py:99 danbw_website/utils.py:242
+#: course_registrations/models.py:99 danbw_website/utils.py:247
 msgid "Final Fee"
 msgstr "Fee final"
 
@@ -200,22 +228,21 @@ msgstr "Statut de paiement"
 msgid "Payment method"
 msgstr "Méthode de paiement"
 
-#: course_registrations/models.py:115 course_registrations/models.py:331
-#: danbw_website/utils.py:248 memberships/forms.py:78 memberships/models.py:56
+#: course_registrations/models.py:115 course_registrations/models.py:353
+#: danbw_website/utils.py:253 memberships/forms.py:78 memberships/models.py:56
 msgid "Comment"
 msgstr "Commentaire"
 
-#: course_registrations/models.py:119 danbw_website/utils.py:253
-#: templates/courseregistration_list.html:63
+#: course_registrations/models.py:119 danbw_website/utils.py:258
+#: templates/courseregistration_list.html:80
 msgid "Dinner"
 msgstr "Dîner"
 
-#: course_registrations/models.py:124
-#: templates/courseregistration_list.html:72
+#: course_registrations/models.py:124 templates/courseregistration_list.html:89
 msgid "Overnight stay"
 msgstr "Séjour d'une nuit"
 
-#: course_registrations/models.py:131 courses/models.py:340
+#: course_registrations/models.py:131 courses/models.py:348
 msgid "Accommodation Option"
 msgstr "Option d'hébergement"
 
@@ -223,39 +250,53 @@ msgstr "Option d'hébergement"
 msgid "Attended"
 msgstr "Attendus"
 
-#: course_registrations/models.py:154
+#: course_registrations/models.py:141
+msgid "Deposit Paid"
+msgstr ""
+
+#: course_registrations/models.py:147
+msgid ""
+"Amount of deposit received from the participant. See 'Remaining Balance' "
+"below."
+msgstr ""
+
+#: course_registrations/models.py:163
 msgid "Course Registration"
 msgstr "Inscription au cours"
 
-#: course_registrations/models.py:231 course_registrations/models.py:271
+#: course_registrations/models.py:249 course_registrations/models.py:293
 #, python-brace-format
 msgid ""
 "No fee found for {course.course_type}, {course.fee_category}, {fee_type}, "
 "payment method: {self.payment_method}, dan member: {self.dan_member}"
 msgstr ""
 "Aucun frais trouvé pour {course.course_type}, {course.fee_category}, "
-"{fee_type}, payment method : {self.payment_method}, dan member : "
-"{self.dan_member}"
+"{fee_type}, payment method : {self.payment_method}, dan member : {self."
+"dan_member}"
 
-#: course_registrations/models.py:256
+#: course_registrations/models.py:276
 #, python-brace-format
 msgid ""
 "No fee found for {course.course_type}, {course.fee_category}, "
-"{day_fee_type}, payment method: {self.payment_method}, dan member: "
-"{self.dan_member}"
+"{day_fee_type}, payment method: {self.payment_method}, dan member: {self."
+"dan_member}"
 msgstr ""
 "Aucun frais trouvé pour {course.course_type}, {course.fee_category}, "
 "{day_fee_type}, méthode de paiement : {self.payment_method}, dan member : "
 "{self.dan_member}"
 
-#: course_registrations/models.py:316 fees/models.py:11
-#: templates/registration_form.html:101 templates/registration_form.html:107
+#: course_registrations/models.py:338 fees/models.py:11
+#: templates/registration_form.html:108 templates/registration_form.html:114
 msgid "Entire Course"
 msgstr "Cours complet"
 
-#: course_registrations/models.py:323 danbw_website/utils.py:241
+#: course_registrations/models.py:345 danbw_website/utils.py:246
 msgid "Selected Sessions"
 msgstr "Sessions sélectionnées"
+
+#: course_registrations/models.py:359
+msgid "Remaining Balance"
+msgstr ""
 
 #: course_registrations/urls.py:8
 msgid "courses/register/<slug:slug>/"
@@ -277,41 +318,45 @@ msgstr "user/registrations/update/<int:pk>/"
 msgid "set-attendence-status/<int:pk>/"
 msgstr "set-attendence-status/<int:pk>/"
 
-#: course_registrations/views.py:69
+#: course_registrations/views.py:98
 msgid "reduced"
 msgstr "réduit"
 
-#: course_registrations/views.py:113
+#: course_registrations/views.py:143
 msgid "Please log in to your account or continue as a guest."
-msgstr ""
-"Veuillez vous connecter à votre compte ou continuer en tant qu'invité."
+msgstr "Veuillez vous connecter à votre compte ou continuer en tant qu'invité."
 
-#: course_registrations/views.py:122
+#: course_registrations/views.py:152
 msgid "Please create a user profile to contine."
 msgstr "Veuillez créer un profil d'utilisateur pour contine."
 
-#: course_registrations/views.py:133
+#: course_registrations/views.py:163
 msgid "You are already registered for this course."
 msgstr "Vous êtes déjà inscrit à cette formation."
 
-#: course_registrations/views.py:186
-msgid ""
-"A registration with this name and email already exists for this course."
+#: course_registrations/views.py:241
+#, fuzzy
+#| msgid "Invalid Header found. Please try again."
+msgid "Incorrect captcha verification. Please try again."
+msgstr "En-tête invalide trouvé. Veuillez réessayer."
+
+#: course_registrations/views.py:295
+msgid "A registration with this name and email already exists for this course."
 msgstr "Une inscription avec ce nom et cet e-mail existe déjà pour ce cours."
 
-#: course_registrations/views.py:203
+#: course_registrations/views.py:312
 msgid "You have already registered for this course."
 msgstr "Vous êtes déjà inscrit à ce cours."
 
-#: course_registrations/views.py:242
+#: course_registrations/views.py:356
 msgid "A registration with this email/name already exists for this course."
 msgstr "Une inscription avec cet email/nom existe déjà pour ce cours."
 
-#: course_registrations/views.py:274
+#: course_registrations/views.py:389
 msgid "You have successfully signed up for "
 msgstr "Vous vous êtes inscrit(e) avec succès pour"
 
-#: course_registrations/views.py:340
+#: course_registrations/views.py:461
 msgid ""
 "Please cancel registrations by clicking the button from the 'My "
 "Registrations' page."
@@ -319,31 +364,31 @@ msgstr ""
 "Veuillez annuler les inscriptions en cliquant sur le bouton de la page 'Mes "
 "inscriptions'."
 
-#: course_registrations/views.py:360 course_registrations/views.py:520
+#: course_registrations/views.py:481 course_registrations/views.py:645
 msgid "Your registration for "
 msgstr "Votre inscription pour"
 
-#: course_registrations/views.py:361
+#: course_registrations/views.py:482
 msgid " has been cancelled."
 msgstr " a été annulée."
 
-#: course_registrations/views.py:432
+#: course_registrations/views.py:557
 msgid "You have successfully updated your registration for "
 msgstr "Vous avez mis à jour avec succès votre inscription pour"
 
-#: course_registrations/views.py:442
+#: course_registrations/views.py:567
 msgid "Registration not submitted. Please select at least one session."
 msgstr "Inscription non soumise. Veuillez sélectionner au moins une session."
 
-#: course_registrations/views.py:468 course_registrations/views.py:479
+#: course_registrations/views.py:593 course_registrations/views.py:604
 msgid "No registrations found for this course."
 msgstr "No registrations found for this course."
 
-#: course_registrations/views.py:471
+#: course_registrations/views.py:596
 msgid "Download started"
 msgstr "Téléchargement démarré"
 
-#: course_registrations/views.py:501
+#: course_registrations/views.py:626
 msgid ""
 "Please set the attendence status of registrations by clicking the button "
 "from the 'My Registrations' page."
@@ -351,7 +396,7 @@ msgstr ""
 "Veuillez définir le statut d'admissibilité des inscriptions en cliquant sur "
 "le bouton de la page 'Mes inscriptions'."
 
-#: course_registrations/views.py:521
+#: course_registrations/views.py:646
 msgid " has been updated."
 msgstr " a été mis à jour."
 
@@ -359,39 +404,39 @@ msgstr " a été mis à jour."
 msgid "Year"
 msgstr "Année"
 
-#: courses/admin.py:122 templates/registration_form.html:46
+#: courses/admin.py:136 templates/registration_form.html:47
 msgid "Course Details"
 msgstr "Détails du cours"
 
-#: courses/admin.py:138 templates/course_list_header.html:7
+#: courses/admin.py:152 templates/course_list_header.html:7
 #: templates/course_list_item.html:40 templates/course_list_item.html:120
 msgid "Dates"
 msgstr "Dates"
 
-#: courses/admin.py:147
+#: courses/admin.py:161
 msgid "Payment Information"
 msgstr "Informations de paiement"
 
-#: courses/admin.py:154 courses/models.py:32
+#: courses/admin.py:168 courses/models.py:32
 #: templates/childrens_passport_form.html:108
 #: templates/course_list_item.html:200 templates/membership_form.html:117
-#: templates/registration_form.html:174
+#: templates/registration_form.html:183
 msgid "Additional Information"
 msgstr "Informations complémentaires"
 
-#: courses/admin.py:248
+#: courses/admin.py:262
 msgid "Duplicate selected courses"
 msgstr "Dupliquer les cours sélectionnés"
 
-#: courses/admin.py:257
+#: courses/admin.py:271
 msgid "Toggle registration status of selected courses"
 msgstr "Basculer le statut d'inscription des cours sélectionnés"
 
-#: courses/admin.py:265
+#: courses/admin.py:279
 msgid "Toggle status of selected courses"
 msgstr "Basculer le statut des cours sélectionnés"
 
-#: courses/admin.py:275
+#: courses/admin.py:289
 msgid "Registrations"
 msgstr "Inscriptions"
 
@@ -406,7 +451,7 @@ msgid "Title"
 msgstr "Titre"
 
 #: courses/models.py:22 templates/course_list_item.html:141
-#: templates/registration_form.html:51
+#: templates/registration_form.html:52
 msgid "Description"
 msgstr "Description"
 
@@ -520,8 +565,8 @@ msgstr ""
 #: courses/models.py:193
 #, python-brace-format
 msgid ""
-"No fee found for course type '{self.course_type}' and fee category "
-"'{self.fee_category}' found."
+"No fee found for course type '{self.course_type}' and fee category '{self."
+"fee_category}' found."
 msgstr ""
 "Aucun frais trouvé pour le type de cours '{self.course_type}' et la "
 "catégorie de frais '{self.fee_category}'."
@@ -535,8 +580,8 @@ msgstr ""
 
 #: courses/models.py:206
 msgid ""
-"Online Registration for children's courses is not allowed. Please change the"
-" registration status to 'closed'."
+"Online Registration for children's courses is not allowed. Please change the "
+"registration status to 'closed'."
 msgstr ""
 "L'inscription en ligne pour les cours pour enfants n'est pas autorisée. "
 "Veuillez changer le statut d'inscription en 'closed'."
@@ -570,47 +615,59 @@ msgstr "Heure de fin"
 msgid "Dan Preparation"
 msgstr "Préparation du Dan"
 
-#: courses/models.py:293
+#: courses/models.py:287
+msgid "Price Override"
+msgstr "Remplacer le prix"
+
+#: courses/models.py:292
+msgid ""
+"If set, overrides the standard session fee. Cash and membership surcharges "
+"do not apply."
+msgstr ""
+"Si défini, remplace le tarif standard de cette session. Les suppléments "
+"pour paiement en espèces ou hors-membres ne s'appliquent pas."
+
+#: courses/models.py:301
 msgid "Start time cannot be later than end time."
 msgstr "L'heure de début ne peut pas être postérieure à l'heure de fin."
 
-#: courses/models.py:297
+#: courses/models.py:305
 msgid "Dan preparation sessions are not allowed on this course."
 msgstr ""
-"Les séances de préparation de Dan ne sont pas autorisées dans le cadre de ce"
-" cours."
+"Les séances de préparation de Dan ne sont pas autorisées dans le cadre de ce "
+"cours."
 
-#: courses/models.py:305
+#: courses/models.py:313
 msgid "Course Session"
 msgstr "Session de cours"
 
-#: courses/models.py:306
+#: courses/models.py:314
 msgid "Course Sessions"
 msgstr "Sessions de cours"
 
-#: courses/models.py:316
+#: courses/models.py:324
 msgid "e.g., 'No accommodation', '2 nights', 'Full week'"
 msgstr "e.g., 'No accommodation', '2 nights', 'Full week"
 
-#: courses/models.py:326 fees/models.py:58
+#: courses/models.py:334 fees/models.py:58
 msgid "Fee"
 msgstr "Fée"
 
-#: courses/models.py:330
+#: courses/models.py:338
 msgid "Additional fee for this accommodation option"
 msgstr "Frais supplémentaires pour cette option d'hébergement"
 
-#: courses/models.py:333
+#: courses/models.py:341
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:484
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:491
 msgid "Order"
 msgstr "Commande"
 
-#: courses/models.py:335
+#: courses/models.py:343
 msgid "Display order (lower numbers appear first)"
 msgstr "Ordre d'affichage (les numéros inférieurs apparaissent en premier)"
 
-#: courses/models.py:341
+#: courses/models.py:349
 msgid "Accommodation Options"
 msgstr "Options d'hébergement"
 
@@ -757,15 +814,21 @@ msgstr "Enseignant D.A.N. BW"
 msgid "Children"
 msgstr "Children"
 
-#: danbw_website/constants.py:100 danbw_website/constants.py:124
+#: danbw_website/constants.py:100 danbw_website/constants.py:129
 msgid "Family Reunion"
 msgstr "Réunion de famille"
 
-#: danbw_website/constants.py:122
+#: danbw_website/constants.py:101 danbw_website/constants.py:130
+#, fuzzy
+#| msgid "Internal Course"
+msgid "Other Course"
+msgstr "Cours interne"
+
+#: danbw_website/constants.py:127
 msgid "Regular Course"
 msgstr "Cours régulier"
 
-#: danbw_website/constants.py:123
+#: danbw_website/constants.py:128
 msgid "Dan Seminar"
 msgstr "Séminaire Dan"
 
@@ -798,20 +861,20 @@ msgstr ""
 msgid "[Dynamic Aikido Nocquet BW] Your Registration for "
 msgstr "[Dynamic Aikido Nocquet BW] Your Registration for"
 
-#: danbw_website/utils.py:78 danbw_website/utils.py:202
+#: danbw_website/utils.py:83 danbw_website/utils.py:207
 msgid "Invalid email address. Please try again with a valid email address."
 msgstr ""
 "Adresse e-mail invalide. Veuillez réessayer avec une adresse e-mail valide."
 
-#: danbw_website/utils.py:93
+#: danbw_website/utils.py:98
 #, python-brace-format
 msgid ""
 "[Dynamic Aikido Nocquet BW] A registration for {course} has been cancelled"
 msgstr ""
 "[Dynamic Aikido Nocquet BW] Une inscription pour {course} a été annulée"
 
-#: danbw_website/utils.py:95 danbw_website/utils.py:127
-#: danbw_website/utils.py:211
+#: danbw_website/utils.py:100 danbw_website/utils.py:132
+#: danbw_website/utils.py:216
 msgid ""
 "Hi,\n"
 "\n"
@@ -819,7 +882,7 @@ msgstr ""
 "Bonjour,\n"
 "\n"
 
-#: danbw_website/utils.py:96
+#: danbw_website/utils.py:101
 #, python-brace-format
 msgid ""
 "A registration for {course} has been cancelled.\n"
@@ -828,19 +891,19 @@ msgstr ""
 "Une inscription pour {course} a été annulée.\n"
 "\n"
 
-#: danbw_website/utils.py:97 danbw_website/utils.py:130
-#: danbw_website/utils.py:214
+#: danbw_website/utils.py:102 danbw_website/utils.py:135
+#: danbw_website/utils.py:219
 #, python-brace-format
 msgid "Name: {first_name} {last_name}\n"
 msgstr "Nom : {first_name} {last_name}\n"
 
-#: danbw_website/utils.py:99 danbw_website/utils.py:132
-#: danbw_website/utils.py:216
+#: danbw_website/utils.py:104 danbw_website/utils.py:137
+#: danbw_website/utils.py:221
 #, python-brace-format
 msgid "Email: {email}\n"
 msgstr "Courrier électronique : {email}\n"
 
-#: danbw_website/utils.py:100
+#: danbw_website/utils.py:105
 #, python-brace-format
 msgid ""
 "Course: {course}\n"
@@ -849,16 +912,17 @@ msgstr ""
 "Course : {course}\n"
 "\n"
 
-#: danbw_website/utils.py:101 danbw_website/utils.py:218
+#: danbw_website/utils.py:106 danbw_website/utils.py:223
 #, python-brace-format
 msgid ""
 "Please check the admin panel at {site_url}/admin for more details.\n"
 "\n"
 msgstr ""
-"Veuillez consulter le panneau d'administration à {site_url}/admin pour plus de détails.\n"
+"Veuillez consulter le panneau d'administration à {site_url}/admin pour plus "
+"de détails.\n"
 "\n"
 
-#: danbw_website/utils.py:112
+#: danbw_website/utils.py:117
 msgid ""
 "Failed to send cancellation notification email. Please contact the course "
 "team."
@@ -866,11 +930,11 @@ msgstr ""
 "Échec de l'envoi de l'e-mail de notification d'annulation. Veuillez "
 "contacter l'équipe de formation."
 
-#: danbw_website/utils.py:121
+#: danbw_website/utils.py:126
 msgid "[Dynamic Aikido Nocquet BW] New registration for "
 msgstr "[Dynamic Aikido Nocquet BW] Nouvelle inscription pour"
 
-#: danbw_website/utils.py:128
+#: danbw_website/utils.py:133
 #, python-brace-format
 msgid ""
 "A new registration for {course} has been received.\n"
@@ -879,17 +943,17 @@ msgstr ""
 "Une nouvelle inscription pour {course} a été reçue.\n"
 "\n"
 
-#: danbw_website/utils.py:133
+#: danbw_website/utils.py:138
 #, python-brace-format
 msgid "Course: {course}\n"
 msgstr "Course : {course}\n"
 
-#: danbw_website/utils.py:138
+#: danbw_website/utils.py:143
 #, python-brace-format
 msgid "Accommodation: {accommodation}\n"
 msgstr "Hébergement : {accommodation}\n"
 
-#: danbw_website/utils.py:143
+#: danbw_website/utils.py:148
 #, python-brace-format
 msgid ""
 "\n"
@@ -897,10 +961,11 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Veuillez consulter le panneau d'administration à {site_url}/admin pour plus de détails.\n"
+"Veuillez consulter le panneau d'administration à {site_url}/admin pour plus "
+"de détails.\n"
 "\n"
 
-#: danbw_website/utils.py:155
+#: danbw_website/utils.py:160
 msgid ""
 "Failed to send registration notification email. Please contact the course "
 "team."
@@ -908,16 +973,16 @@ msgstr ""
 "Échec de l'envoi de l'e-mail de notification d'inscription. Veuillez "
 "contacter l'équipe de formation."
 
-#: danbw_website/utils.py:161
+#: danbw_website/utils.py:166
 #, python-brace-format
 msgid "[Dynamic Aikido Nocquet BW] Your {membership} application"
 msgstr "[Dynamic Aikido Nocquet BW] Votre application {membership}"
 
-#: danbw_website/utils.py:167
+#: danbw_website/utils.py:172
 msgid "The membership fees will be deducted from your account.\n"
 msgstr "Les frais d'adhésion seront déduits de votre compte.\n"
 
-#: danbw_website/utils.py:172
+#: danbw_website/utils.py:177
 #, python-brace-format
 msgid ""
 "Please transfer the annual fee of €{fee} to the account below:\n"
@@ -926,7 +991,7 @@ msgstr ""
 "Veuillez transférer les frais annuels de €{fee} sur le compte ci-dessous :\n"
 "\n"
 
-#: danbw_website/utils.py:175
+#: danbw_website/utils.py:180
 #, python-brace-format
 msgid ""
 "Please transfer the fee of €{fee} to the account below:\n"
@@ -935,7 +1000,7 @@ msgstr ""
 "Veuillez transférer le montant de €{fee} sur le compte ci-dessous :\n"
 "\n"
 
-#: danbw_website/utils.py:180
+#: danbw_website/utils.py:185
 msgid ""
 "We will issue your passport as soon as possible.\n"
 "\n"
@@ -947,7 +1012,7 @@ msgstr ""
 "Vous ne devez rien faire d'autre pour l'instant.\n"
 "\n"
 
-#: danbw_website/utils.py:184
+#: danbw_website/utils.py:189
 #, python-brace-format
 msgid ""
 "Hi {first_name},\n"
@@ -956,7 +1021,7 @@ msgstr ""
 "Salut {first_name},\n"
 "\n"
 
-#: danbw_website/utils.py:185
+#: danbw_website/utils.py:190
 #, python-brace-format
 msgid ""
 "We have received your {membership} application.\n"
@@ -965,20 +1030,20 @@ msgstr ""
 "Nous avons reçu votre application {membership}.\n"
 "\n"
 
-#: danbw_website/utils.py:190
+#: danbw_website/utils.py:195
 msgid "Best regards,\n"
 msgstr "Meilleures salutations,\n"
 
-#: danbw_website/utils.py:191
+#: danbw_website/utils.py:196
 msgid "The D.A.N. BW team\n"
 msgstr "L'équipe du D.A.N. BW\n"
 
-#: danbw_website/utils.py:208
+#: danbw_website/utils.py:213
 #, python-brace-format
 msgid "[Dynamic Aikido Nocquet BW] New {membership} application"
 msgstr "[Dynamic Aikido Nocquet BW] Nouvelle application {membership}"
 
-#: danbw_website/utils.py:212
+#: danbw_website/utils.py:217
 #, python-brace-format
 msgid ""
 "A new {membership} application has been received.\n"
@@ -987,7 +1052,7 @@ msgstr ""
 "Une nouvelle application {membership} a été reçue.\n"
 "\n"
 
-#: danbw_website/utils.py:217
+#: danbw_website/utils.py:222
 #, python-brace-format
 msgid ""
 "Dojo: {dojo}\n"
@@ -996,74 +1061,73 @@ msgstr ""
 "Dojo : {dojo}\n"
 "\n"
 
-#: danbw_website/utils.py:228
+#: danbw_website/utils.py:233
 msgid ""
-"Failed to send membership notification email. Please contact the course "
-"team."
+"Failed to send membership notification email. Please contact the course team."
 msgstr ""
 "Échec de l'envoi de l'e-mail de notification d'adhésion. Veuillez contacter "
 "l'équipe de formation."
 
-#: danbw_website/utils.py:244
+#: danbw_website/utils.py:249
 msgid "Payment Method"
 msgstr "Méthode de paiement"
 
-#: danbw_website/utils.py:245
+#: danbw_website/utils.py:250
 msgid "Payment Status"
 msgstr "Statut de paiement"
 
-#: danbw_website/utils.py:249 danbw_website/utils.py:315
+#: danbw_website/utils.py:254 danbw_website/utils.py:320
 #: memberships/models.py:52
 msgid "Accept Terms"
 msgstr "Accept Terms"
 
-#: danbw_website/utils.py:250
+#: danbw_website/utils.py:255
 msgid "Registration Date"
 msgstr "Date d'inscription"
 
-#: danbw_website/utils.py:254
+#: danbw_website/utils.py:259
 msgid "Overnight Stay"
 msgstr "Séjour d'une nuit"
 
-#: danbw_website/utils.py:280 danbw_website/utils.py:283
-#: danbw_website/utils.py:286 danbw_website/utils.py:290
-#: danbw_website/utils.py:292 danbw_website/utils.py:338
+#: danbw_website/utils.py:285 danbw_website/utils.py:288
+#: danbw_website/utils.py:291 danbw_website/utils.py:295
+#: danbw_website/utils.py:297 danbw_website/utils.py:343
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:801
 msgid "Yes"
 msgstr "Yes"
 
-#: danbw_website/utils.py:280 danbw_website/utils.py:283
-#: danbw_website/utils.py:286 danbw_website/utils.py:290
-#: danbw_website/utils.py:292 danbw_website/utils.py:338
+#: danbw_website/utils.py:285 danbw_website/utils.py:288
+#: danbw_website/utils.py:291 danbw_website/utils.py:295
+#: danbw_website/utils.py:297 danbw_website/utils.py:343
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:802
 msgid "No"
 msgstr "No"
 
-#: danbw_website/utils.py:305 memberships/forms.py:38 memberships/models.py:12
+#: danbw_website/utils.py:310 memberships/forms.py:38 memberships/models.py:12
 msgid "Date of Birth"
 msgstr "Date de naissance"
 
-#: danbw_website/utils.py:307 memberships/forms.py:39 memberships/models.py:13
+#: danbw_website/utils.py:312 memberships/forms.py:39 memberships/models.py:13
 msgid "Street"
 msgstr "Rue"
 
-#: danbw_website/utils.py:308 memberships/forms.py:40 memberships/models.py:14
+#: danbw_website/utils.py:313 memberships/forms.py:40 memberships/models.py:14
 msgid "Street Number"
 msgstr "Numéro de rue"
 
-#: danbw_website/utils.py:309 memberships/forms.py:43 memberships/models.py:17
+#: danbw_website/utils.py:314 memberships/forms.py:43 memberships/models.py:17
 msgid "Postcode"
 msgstr "Code postal"
 
-#: danbw_website/utils.py:310 memberships/forms.py:41 memberships/models.py:15
+#: danbw_website/utils.py:315 memberships/forms.py:41 memberships/models.py:15
 msgid "City"
 msgstr "City"
 
-#: danbw_website/utils.py:311
+#: danbw_website/utils.py:316
 msgid "Phone Home"
 msgstr "Accueil téléphonique"
 
-#: danbw_website/utils.py:312
+#: danbw_website/utils.py:317
 msgid "Phone Mobile"
 msgstr "Téléphone mobile"
 
@@ -1083,7 +1147,7 @@ msgstr "Jour unique"
 msgid "Dan Preparation Session"
 msgstr "Session de préparation au Dan"
 
-#: fees/models.py:14 templates/registration_form.html:95
+#: fees/models.py:14 templates/registration_form.html:102
 msgid "Entire Course with Dan Preparation"
 msgstr "Cours complet avec préparation au Dan"
 
@@ -1091,7 +1155,7 @@ msgstr "Cours complet avec préparation au Dan"
 msgid "Single Day with Dan Seminar"
 msgstr "Séminaire Single Day with Dan"
 
-#: fees/models.py:16 templates/registration_form.html:93
+#: fees/models.py:16 templates/registration_form.html:100
 msgid "Entire Course with Dan Seminar"
 msgstr "Cours complet avec séminaire Dan"
 
@@ -1149,8 +1213,8 @@ msgid ""
 "I agree that the membership fee will be collected by SEPA direct debit from "
 "my account below."
 msgstr ""
-"J'accepte que les frais d'adhésion soient collectés par débit direct SEPA de"
-" mon compte ci-dessous."
+"J'accepte que les frais d'adhésion soient collectés par débit direct SEPA de "
+"mon compte ci-dessous."
 
 #: memberships/forms.py:111
 msgid ""
@@ -1171,8 +1235,8 @@ msgid ""
 msgstr ""
 "Je suis conscient(e) que l'aïkido est un sport potentiellement dangereux et "
 "que l'organisation susmentionnée et ses représentants ne sont pas "
-"responsables des accidents ou des blessures survenant lors de la pratique de"
-" l'aïkido, sauf dans le cadre des dispositions légales en cas de faute "
+"responsables des accidents ou des blessures survenant lors de la pratique de "
+"l'aïkido, sauf dans le cadre des dispositions légales en cas de faute "
 "intentionnelle ou de négligence grave."
 
 #: memberships/forms.py:123 memberships/models.py:68
@@ -1191,8 +1255,8 @@ msgstr "Nom du Legal Guardian"
 msgid ""
 "I accept the above terms and conditions and apply for a children's passport."
 msgstr ""
-"J'accepte les termes et conditions ci-dessus et je demande un passeport pour"
-" enfant."
+"J'accepte les termes et conditions ci-dessus et je demande un passeport pour "
+"enfant."
 
 #: memberships/forms.py:157
 msgid ""
@@ -1268,10 +1332,6 @@ msgstr "Contactez-nous"
 msgid "Your email"
 msgstr "Votre email"
 
-#: pages/forms.py:13
-msgid "Your website"
-msgstr "Votre site web"
-
 #: pages/models.py:12 pages/models.py:68
 msgid "title"
 msgstr "titre"
@@ -1316,11 +1376,11 @@ msgstr "contact/"
 msgid "category/<slug:category_slug>/"
 msgstr "category/<slug:category_slug>/"
 
-#: pages/views.py:106
+#: pages/views.py:112
 msgid "Invalid Header found. Please try again."
 msgstr "En-tête invalide trouvé. Veuillez réessayer."
 
-#: pages/views.py:111
+#: pages/views.py:117
 msgid "Thank you! Your message has been sent."
 msgstr "Merci à vous ! Votre message a été envoyé."
 
@@ -1388,12 +1448,11 @@ msgstr "Avertissement :"
 #: templates/account/email.html:43
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
-"an e-mail address so you can receive notifications, reset your password, "
-"etc."
+"an e-mail address so you can receive notifications, reset your password, etc."
 msgstr ""
 "Vous n'avez actuellement pas d'adresse e-mail paramétrée. Vous devriez "
-"vraiment ajouter une adresse e-mail pour pouvoir recevoir des notifications,"
-" réinitialiser votre mot de passe, etc."
+"vraiment ajouter une adresse e-mail pour pouvoir recevoir des notifications, "
+"réinitialiser votre mot de passe, etc."
 
 #: templates/account/email.html:48
 msgid "Add E-mail Address"
@@ -1410,24 +1469,30 @@ msgstr "Souhaitez-vous vraiment supprimer l'adresse e-mail sélectionnée ?"
 #: templates/account/email/account_already_exists_message.txt:4
 #, python-format
 msgid ""
-"You are receiving this e-mail because you or someone else tried to signup for an\n"
+"You are receiving this e-mail because you or someone else tried to signup "
+"for an\n"
 "account using e-mail address:\n"
 "\n"
 "%(email)s\n"
 "\n"
-"However, an account using that e-mail address already exists.  In case you have\n"
-"forgotten about this, please use the password forgotten procedure to recover\n"
+"However, an account using that e-mail address already exists.  In case you "
+"have\n"
+"forgotten about this, please use the password forgotten procedure to "
+"recover\n"
 "your account:\n"
 "\n"
 "%(password_reset_url)s"
 msgstr ""
-"Vous avez reçu cet e-mail parce que vous ou quelqu'un d'autre a essayé de s'inscrire pour un\n"
+"Vous avez reçu cet e-mail parce que vous ou quelqu'un d'autre a essayé de "
+"s'inscrire pour un\n"
 "compte en utilisant votre adresse e-mail :\n"
 "\n"
 "%(email)s\n"
 "\n"
-"Cependant, un compte utilisant cette adresse e-mail existe déjà.  Dans le cas où vous avez\n"
-"oublié à ce sujet, veuillez utiliser la procédure d'oubli de mot de passe pour récupérer votre compte\n"
+"Cependant, un compte utilisant cette adresse e-mail existe déjà.  Dans le "
+"cas où vous avez\n"
+"oublié à ce sujet, veuillez utiliser la procédure d'oubli de mot de passe "
+"pour récupérer votre compte\n"
 "votre compte :\n"
 "\n"
 "%(password_reset_url)s"
@@ -1456,11 +1521,13 @@ msgstr ""
 #: templates/account/email/email_confirmation_message.txt:5
 #, python-format
 msgid ""
-"You're receiving this e-mail because you or someone else has given your e-mail address to register an account on %(site_domain)s.\n"
+"You're receiving this e-mail because you or someone else has given your e-"
+"mail address to register an account on %(site_domain)s.\n"
 "\n"
 "To confirm this is correct, go to %(activate_url)s"
 msgstr ""
-"Vous recevez cet e-mail car vous ou quelqu'un d'autre a donné votre adresse e-mail pour enregistrer un compte sur %(site_domain)s.\n"
+"Vous recevez cet e-mail car vous ou quelqu'un d'autre a donné votre adresse "
+"e-mail pour enregistrer un compte sur %(site_domain)s.\n"
 "\n"
 "Pour confirmer que cela est correct, allez à %(activate_url)s"
 
@@ -1470,11 +1537,16 @@ msgstr "Veuillez confirmer votre adresse e-mail"
 
 #: templates/account/email/password_reset_key_message.txt:4
 msgid ""
-"You're receiving this e-mail because you or someone else has requested a password for your user account.\n"
-"It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
+"You're receiving this e-mail because you or someone else has requested a "
+"password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password."
 msgstr ""
-"Vous recevez cet e-mail parce que vous ou quelqu'un d'autre a demandé un mot de passe pour votre compte utilisateur.\n"
-"Il peut être ignoré en toute sécurité si vous n'avez pas demandé de réinitialisation du mot de passe. Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe."
+"Vous recevez cet e-mail parce que vous ou quelqu'un d'autre a demandé un mot "
+"de passe pour votre compte utilisateur.\n"
+"Il peut être ignoré en toute sécurité si vous n'avez pas demandé de "
+"réinitialisation du mot de passe. Cliquez sur le lien ci-dessous pour "
+"réinitialiser votre mot de passe."
 
 #: templates/account/email/password_reset_key_subject.txt:3
 #: templates/account/email/unknown_account_subject.txt:3
@@ -1485,18 +1557,25 @@ msgstr "Réinitialisation du mot de passe E-mail"
 #, python-format
 msgid ""
 "\n"
-"You are receiving this e-mail because you or someone else has requested a password for your user account. However, we do not have any record of a user with email %(email)s in our database.\n"
+"You are receiving this e-mail because you or someone else has requested a "
+"password for your user account. However, we do not have any record of a user "
+"with email %(email)s in our database.\n"
 "\n"
 "This mail can be safely ignored if you did not request a password reset.\n"
 "\n"
 "If it was you, you can sign up for an account using the link below.\n"
 msgstr ""
 "\n"
-"Vous avez reçu cet e-mail parce que vous ou quelqu'un d'autre a demandé un mot de passe pour votre compte utilisateur. Cependant, nous n'avons pas d'enregistrement d'un utilisateur avec email %(email)s dans notre base de données.\n"
+"Vous avez reçu cet e-mail parce que vous ou quelqu'un d'autre a demandé un "
+"mot de passe pour votre compte utilisateur. Cependant, nous n'avons pas "
+"d'enregistrement d'un utilisateur avec email %(email)s dans notre base de "
+"données.\n"
 "\n"
-"Cet e-mail peut être ignoré en toute sécurité si vous n'avez pas demandé de réinitialisation du mot de passe.\n"
+"Cet e-mail peut être ignoré en toute sécurité si vous n'avez pas demandé de "
+"réinitialisation du mot de passe.\n"
 "\n"
-"Si c'est vous, vous pouvez vous inscrire pour un compte en utilisant le lien ci-dessous.\n"
+"Si c'est vous, vous pouvez vous inscrire pour un compte en utilisant le lien "
+"ci-dessous.\n"
 
 #: templates/account/email_confirm.html:6
 #: templates/account/email_confirm.html:10
@@ -1507,11 +1586,13 @@ msgstr "Confirmer l'adresse e-mail"
 #, python-format
 msgid ""
 "\n"
-"    Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is your e-mail address.\n"
+"    Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is your e-"
+"mail address.\n"
 "    "
 msgstr ""
 "\n"
-"    Veuillez confirmer que <a href=\"mailto:%(email)s\">%(email)s</a> est votre adresse e-mail.\n"
+"    Veuillez confirmer que <a href=\"mailto:%(email)s\">%(email)s</a> est "
+"votre adresse e-mail.\n"
 "    "
 
 #: templates/account/email_confirm.html:22
@@ -1527,8 +1608,10 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Ce lien de confirmation par e-mail a expiré ou est invalide. Veuillez consulter\n"
-"    <a href=\"%(email_url)s\">émettez une nouvelle demande de confirmation par e-mail</a>.\n"
+"    Ce lien de confirmation par e-mail a expiré ou est invalide. Veuillez "
+"consulter\n"
+"    <a href=\"%(email_url)s\">émettez une nouvelle demande de confirmation "
+"par e-mail</a>.\n"
 "    "
 
 #: templates/account/login.html:7 templates/account/login.html:34
@@ -1570,11 +1653,13 @@ msgstr "Suivez vos progrès : gardez une trace de vos cours et examens passés."
 #, python-format
 msgid ""
 "\n"
-"        If you have not created an account yet, then please <a class=\"blue-link\" href=\"%(signup_url)s\">sign up</a> first.\n"
+"        If you have not created an account yet, then please <a class=\"blue-"
+"link\" href=\"%(signup_url)s\">sign up</a> first.\n"
 "        "
 msgstr ""
 "\n"
-"        Si vous n'avez pas encore créé de compte, veuillez <a class=\"blue-link\" href=\"%(signup_url)s\">signer en premier</a>.\n"
+"        Si vous n'avez pas encore créé de compte, veuillez <a class=\"blue-"
+"link\" href=\"%(signup_url)s\">signer en premier</a>.\n"
 "        "
 
 #: templates/account/login.html:54 templates/account/password_change.html:27
@@ -1615,11 +1700,14 @@ msgstr "Réinitialisation du mot de passe"
 #: templates/account/password_reset.html:18
 msgid ""
 "\n"
-"    Forgotten your password? Enter your e-mail address below, and we'll send you an e-mail allowing you to reset it.\n"
+"    Forgotten your password? Enter your e-mail address below, and we'll send "
+"you an e-mail allowing you to reset it.\n"
 "    "
 msgstr ""
 "\n"
-"    Vous avez perdu votre mot de passe ? Saisissez votre adresse e-mail ci-dessous et nous vous enverrons un e-mail vous permettant de le réinitialiser.\n"
+"    Vous avez perdu votre mot de passe ? Saisissez votre adresse e-mail ci-"
+"dessous et nous vous enverrons un e-mail vous permettant de le "
+"réinitialiser.\n"
 "    "
 
 #: templates/account/password_reset.html:26
@@ -1638,8 +1726,8 @@ msgid ""
 "spam folder. Otherwise contact us if you do not receive it in a few minutes."
 msgstr ""
 "Nous vous avons envoyé un e-mail. Si tu ne l'as pas reçu, vérifie ton "
-"dossier spam. Sinon, contactez-nous si vous ne le recevez pas d'ici quelques"
-" minutes."
+"dossier spam. Sinon, contactez-nous si vous ne le recevez pas d'ici quelques "
+"minutes."
 
 #: templates/account/password_reset_from_key.html:9
 msgid "Bad Token"
@@ -1649,13 +1737,16 @@ msgstr "Mauvais jeton"
 #, python-format
 msgid ""
 "\n"
-"    The password reset link was invalid, possibly because it has already been used. Please request a\n"
+"    The password reset link was invalid, possibly because it has already "
+"been used. Please request a\n"
 "    <a href=\"%(passwd_reset_url)s\">new password reset</a>.\n"
 "    "
 msgstr ""
 "\n"
-"    Le lien de réinitialisation du mot de passe était invalide, peut-être parce qu'il a déjà été utilisé. Veuillez demander un\n"
-"    <a href=\"%(passwd_reset_url)s\">nouvelle réinitialisation du mot de passe</a>.\n"
+"    Le lien de réinitialisation du mot de passe était invalide, peut-être "
+"parce qu'il a déjà été utilisé. Veuillez demander un\n"
+"    <a href=\"%(passwd_reset_url)s\">nouvelle réinitialisation du mot de "
+"passe</a>.\n"
 "    "
 
 #: templates/account/password_reset_from_key.html:22
@@ -1709,7 +1800,7 @@ msgid "Dynamic Aikido Nocquet BW"
 msgstr "Dynamic Aikido Nocquet BW"
 
 #: templates/base.html:53 templates/course_list.html:71
-#: templates/courseregistration_list.html:119
+#: templates/courseregistration_list.html:136
 #: templates/partials/logout-modal.html:7
 msgid "Close"
 msgstr "Close"
@@ -1742,18 +1833,26 @@ msgstr "Demande de passeport pour enfant"
 #, python-format
 msgid ""
 "\n"
-"  Prerequisite for registering for exams is an application for a children's passport with\n"
-"  D.A.N. in Baden-Württemberg. The children's passport  will only be issued once this application\n"
-"  is completely filled out and the fee of <strong>€%(fee)s</strong> has been received in the account listed below. This fee includes\n"
-"  the issuance of the children's passport, the Aikido guide for children and teenagers, as well as the provision\n"
+"  Prerequisite for registering for exams is an application for a children's "
+"passport with\n"
+"  D.A.N. in Baden-Württemberg. The children's passport  will only be issued "
+"once this application\n"
+"  is completely filled out and the fee of <strong>€%(fee)s</strong> has been "
+"received in the account listed below. This fee includes\n"
+"  the issuance of the children's passport, the Aikido guide for children and "
+"teenagers, as well as the provision\n"
 "  of a colored belt upon passing the exam.\n"
 "  "
 msgstr ""
 "\n"
-"  La condition préalable à l'inscription aux examens est une demande de passeport pour enfant avec\n"
-"  D.A.N. dans le Bade-Wurtemberg. Le passeport pour enfant ne sera délivré qu'une fois cette demande remplie\n"
-"  est entièrement remplie et que les frais de <strong>€%(fee)s</strong> ont été reçus sur le compte mentionné ci-dessous. Cette taxe comprend\n"
-"  la délivrance du passeport enfant, du guide Aïkido pour enfants et adolescents, ainsi que la mise à disposition de\n"
+"  La condition préalable à l'inscription aux examens est une demande de "
+"passeport pour enfant avec\n"
+"  D.A.N. dans le Bade-Wurtemberg. Le passeport pour enfant ne sera délivré "
+"qu'une fois cette demande remplie\n"
+"  est entièrement remplie et que les frais de <strong>€%(fee)s</strong> ont "
+"été reçus sur le compte mentionné ci-dessous. Cette taxe comprend\n"
+"  la délivrance du passeport enfant, du guide Aïkido pour enfants et "
+"adolescents, ainsi que la mise à disposition de\n"
 "  d'un baudrier de couleur à l'issue de l'examen.\n"
 "  "
 
@@ -1772,7 +1871,7 @@ msgid "Bank details:"
 msgstr "Détails bancaires :"
 
 #: templates/childrens_passport_form.html:43 templates/membership_form.html:28
-#: templates/registration_form.html:13
+#: templates/registration_form.html:14
 msgid "Personal Details"
 msgstr "Détails personnels"
 
@@ -1839,8 +1938,8 @@ msgstr "Inscription Successful !"
 
 #: templates/course_list.html:78
 msgid ""
-"We found an existing account with this name and email. Your registration has"
-" been linked to your account."
+"We found an existing account with this name and email. Your registration has "
+"been linked to your account."
 msgstr ""
 "Nous avons trouvé un compte existant avec ce nom et cet e-mail. Votre "
 "inscription a été liée à votre compte."
@@ -1858,39 +1957,40 @@ msgid "OK"
 msgstr "OK"
 
 #: templates/course_list_header.html:16
-#: templates/courseregistration_list.html:182
+#: templates/courseregistration_list.html:199
 msgid "Teacher"
 msgstr "Enseignant"
 
 #: templates/course_list_item.html:45 templates/course_list_item.html:127
 #: templates/course_list_item.html:157
 #: templates/courseregistration_list.html:22
-#: templates/courseregistration_list.html:179
-#: templates/courseregistration_list.html:223
+#: templates/courseregistration_list.html:196
+#: templates/courseregistration_list.html:240
 #: templates/email/registration_confirmation.html:19
+#: templates/email/registration_confirmation_family_reunion.html:18
 msgid "to"
 msgstr "to"
 
-#: templates/course_list_item.html:65 templates/index.html:77
+#: templates/course_list_item.html:65 templates/index.html:103
 msgid "Registration"
 msgstr "Inscription"
 
 #: templates/course_list_item.html:73 templates/course_list_item.html:78
-#: templates/course_list_item.html:84 templates/index.html:92
-#: templates/index.html:97
+#: templates/course_list_item.html:84 templates/index.html:118
+#: templates/index.html:123
 msgid "Show registration"
 msgstr "Afficher l'inscription"
 
-#: templates/course_list_item.html:74 templates/index.html:93
+#: templates/course_list_item.html:74 templates/index.html:119
 msgid "Signed up"
 msgstr "Inscrit"
 
-#: templates/course_list_item.html:94 templates/index.html:110
+#: templates/course_list_item.html:94 templates/index.html:136
 #, python-format
 msgid "Go to %(course_title)s"
 msgstr "Aller à %(course_title)s"
 
-#: templates/course_list_item.html:97 templates/index.html:113
+#: templates/course_list_item.html:97 templates/index.html:139
 msgid "Course website"
 msgstr "Site web du cours"
 
@@ -1926,7 +2026,7 @@ msgstr "Aller au formulaire d'inscription"
 msgid "Registration closed"
 msgstr "Inscription close"
 
-#: templates/course_list_item.html:235 templates/index.html:81
+#: templates/course_list_item.html:235 templates/index.html:107
 msgid "Registration starts on"
 msgstr "L'inscription commence le"
 
@@ -1939,7 +2039,7 @@ msgid "Your upcoming courses"
 msgstr "Vos cours à venir"
 
 #: templates/courseregistration_list.html:21
-#: templates/courseregistration_list.html:178
+#: templates/courseregistration_list.html:195
 msgid "Dates:"
 msgstr "Dates :"
 
@@ -1948,40 +2048,67 @@ msgid "Selected Sessions:"
 msgstr "Sessions sélectionnées :"
 
 #: templates/courseregistration_list.html:37
-#: templates/email/registration_confirmation.html:40
+#: templates/email/registration_confirmation.html:41
+#: templates/email/registration_confirmation.html:44
+#: templates/email/registration_confirmation_family_reunion.html:46
+#: templates/email/registration_confirmation_family_reunion.html:49
 msgid "Course Fee:"
 msgstr "Frais de parcours :"
 
-#: templates/courseregistration_list.html:49
-#: templates/email/registration_confirmation.html:45
-msgid "Please transfer the course fee to the following account until"
+#: templates/courseregistration_list.html:46
+#: templates/email/registration_confirmation.html:44
+#: templates/email/registration_confirmation_family_reunion.html:49
+msgid "Free"
 msgstr ""
-"Veuillez transférer le montant du cours sur le compte suivant jusqu'au"
 
-#: templates/courseregistration_list.html:57
+#: templates/courseregistration_list.html:52
+#, fuzzy
+#| msgid "Payment"
+msgid "Deposit Payment:"
+msgstr "Paiement"
+
+#: templates/courseregistration_list.html:54
+#, python-format
+msgid "Please transfer a deposit of €100.00 by %(deadline)s."
+msgstr ""
+
+#: templates/courseregistration_list.html:58
+msgid ""
+"If you are unable to attend, we will refund your deposit—provided no costs "
+"have been incurred by the organisers."
+msgstr ""
+
+#: templates/courseregistration_list.html:65
+#: templates/email/registration_confirmation.html:49
+msgid "Please transfer the course fee to the following account until"
+msgstr "Veuillez transférer le montant du cours sur le compte suivant jusqu'au"
+
+#: templates/courseregistration_list.html:73
 msgid "Please pay the course fee in cash at the beginning of the course."
 msgstr "Veuillez payer les frais de cours en espèces au début du cours."
 
-#: templates/courseregistration_list.html:65
-#: templates/email/registration_confirmation.html:53
+#: templates/courseregistration_list.html:82
+#: templates/email/registration_confirmation.html:57
+#: templates/email/registration_confirmation_family_reunion.html:69
 msgid "You have signed up for the dinner."
 msgstr "Vous avez signé pour le dîner."
 
-#: templates/courseregistration_list.html:66
-#: templates/email/registration_confirmation.html:54
+#: templates/courseregistration_list.html:83
+#: templates/email/registration_confirmation.html:58
+#: templates/email/registration_confirmation_family_reunion.html:70
 msgid "Please note that this is a binding reservation."
 msgstr "Veuillez noter qu'il s'agit d'une réservation ferme."
 
-#: templates/courseregistration_list.html:74
+#: templates/courseregistration_list.html:91
 msgid "You have specified that you need a place to stay overnight."
 msgstr ""
 "Vous avez spécifié que vous aviez besoin d'un endroit pour passer la nuit."
 
-#: templates/courseregistration_list.html:86
+#: templates/courseregistration_list.html:103
 msgid "Your Comment:"
 msgstr "Votre commentaire :"
 
-#: templates/courseregistration_list.html:94
+#: templates/courseregistration_list.html:111
 #, python-format
 msgid ""
 "\n"
@@ -1992,63 +2119,65 @@ msgstr ""
 "            Vous avez demandé à passer un examen pour %(exam_grade)s.\n"
 "            "
 
-#: templates/courseregistration_list.html:104
+#: templates/courseregistration_list.html:121
 #: templates/update_courseregistration.html:14
 msgid "Update registration"
 msgstr "Mise à jour de l'inscription"
 
-#: templates/courseregistration_list.html:108
+#: templates/courseregistration_list.html:125
 msgid "Cancel registration"
 msgstr "Annuler l'inscription"
 
-#: templates/courseregistration_list.html:118
+#: templates/courseregistration_list.html:135
 msgid "Cancel Registration"
 msgstr "Annuler l'inscription"
 
-#: templates/courseregistration_list.html:122
+#: templates/courseregistration_list.html:139
 msgid "Cancel Registration for"
 msgstr "Annuler l'inscription pour"
 
-#: templates/courseregistration_list.html:124
+#: templates/courseregistration_list.html:141
 #, python-format
 msgid ""
 "\n"
-"                        Are you sure you want to cancel your registration for %(registration.course.title)s?\n"
+"                        Are you sure you want to cancel your registration "
+"for %(registration.course.title)s?\n"
 "                        "
 msgstr ""
 "\n"
-"                        Êtes-vous sûr de vouloir annuler votre inscription à %(registration.course.title)s ?\n"
+"                        Êtes-vous sûr de vouloir annuler votre inscription à "
+"%(registration.course.title)s ?\n"
 "                        "
 
-#: templates/courseregistration_list.html:135 templates/userprofile.html:56
+#: templates/courseregistration_list.html:152 templates/userprofile.html:56
 msgid "No, go back"
 msgstr "Non, revenir en arrière"
 
-#: templates/courseregistration_list.html:136
+#: templates/courseregistration_list.html:153
 msgid "Yes, cancel my registration"
 msgstr "Oui, annuler mon inscription"
 
-#: templates/courseregistration_list.html:145
+#: templates/courseregistration_list.html:162
 msgid "You are currently not signed up for any courses. "
 msgstr "Vous n'êtes actuellement inscrit à aucun cours."
 
-#: templates/courseregistration_list.html:148 templates/index.html:57
+#: templates/courseregistration_list.html:165 templates/index.html:83
 msgid "Go to course list"
 msgstr "Aller à la liste des cours"
 
-#: templates/courseregistration_list.html:150
+#: templates/courseregistration_list.html:167
 msgid "Sign up now"
 msgstr "Inscrivez-vous maintenant"
 
-#: templates/courseregistration_list.html:155
+#: templates/courseregistration_list.html:172
 msgid "Your past courses"
 msgstr "Vos cours passés"
 
-#: templates/courseregistration_list.html:170
+#: templates/courseregistration_list.html:187
 msgid "Mark as not attended"
 msgstr "Mark as not attended"
 
-#: templates/courseregistration_list.html:189
+#: templates/courseregistration_list.html:206
 #, python-format
 msgid ""
 "\n"
@@ -2059,7 +2188,7 @@ msgstr ""
 "                Vous avez passé votre %(exam_grade)s examen sur ce cours.\n"
 "            "
 
-#: templates/courseregistration_list.html:193
+#: templates/courseregistration_list.html:210
 #, python-format
 msgid ""
 "\n"
@@ -2067,10 +2196,11 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Vous n'avez pas passé votre %(exam_grade)s examen sur ce cours.\n"
+"                Vous n'avez pas passé votre %(exam_grade)s examen sur ce "
+"cours.\n"
 "            "
 
-#: templates/courseregistration_list.html:197
+#: templates/courseregistration_list.html:214
 #, python-format
 msgid ""
 "\n"
@@ -2078,22 +2208,23 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Vous vous êtes présenté à votre %(exam_grade)s examen sur ce cours.\n"
+"                Vous vous êtes présenté à votre %(exam_grade)s examen sur ce "
+"cours.\n"
 "            "
 
-#: templates/courseregistration_list.html:206
+#: templates/courseregistration_list.html:223
 msgid "No past courses."
 msgstr "Pas de cours passés."
 
-#: templates/courseregistration_list.html:213
+#: templates/courseregistration_list.html:230
 msgid "Show unattended courses"
 msgstr "Afficher les cours non attribués"
 
-#: templates/courseregistration_list.html:214
+#: templates/courseregistration_list.html:231
 msgid "Hide unattended courses"
 msgstr "Hide unattended courses"
 
-#: templates/courseregistration_list.html:231
+#: templates/courseregistration_list.html:248
 msgid "Mark as attended"
 msgstr "Mark as attended"
 
@@ -2119,40 +2250,92 @@ msgid "Hi"
 msgstr "Salut"
 
 #: templates/email/registration_confirmation.html:17
+#: templates/email/registration_confirmation_family_reunion.html:16
 msgid "You have successfully signed up for"
 msgstr "Vous vous êtes inscrit(e) avec succès pour"
 
 #: templates/email/registration_confirmation.html:19
+#: templates/email/registration_confirmation_family_reunion.html:18
 msgid "Course dates:"
 msgstr "Dates de cours :"
 
 #: templates/email/registration_confirmation.html:22
+#: templates/email/registration_confirmation_family_reunion.html:27
 msgid "Registration details:"
 msgstr "Détails de l'inscription :"
 
 #: templates/email/registration_confirmation.html:25
+#: templates/email/registration_confirmation_family_reunion.html:30
 msgid "Selected sessions:"
 msgstr "Séances sélectionnées :"
 
 #: templates/email/registration_confirmation.html:34
+#: templates/email/registration_confirmation_family_reunion.html:39
 msgid "You applied for an exam for"
 msgstr "Vous avez demandé à passer un examen pour"
 
 #: templates/email/registration_confirmation.html:38
+#: templates/email/registration_confirmation_family_reunion.html:43
 msgid "Accommodation:"
 msgstr "Hébergement :"
 
-#: templates/email/registration_confirmation.html:41
+#: templates/email/registration_confirmation.html:42
+#: templates/email/registration_confirmation_family_reunion.html:47
 msgid "Payment method:"
 msgstr "Méthode de paiement :"
 
-#: templates/email/registration_confirmation.html:58
+#: templates/email/registration_confirmation.html:62
+#: templates/email/registration_confirmation_family_reunion.html:80
 msgid "Kind regards"
 msgstr "Salutations"
 
-#: templates/email/registration_confirmation.html:59
+#: templates/email/registration_confirmation.html:63
+#: templates/email/registration_confirmation_family_reunion.html:81
 msgid "Your Course Team"
 msgstr "Votre équipe de cours"
+
+#: templates/email/registration_confirmation_family_reunion.html:14
+msgid "Dear Aikidoka"
+msgstr ""
+
+#: templates/email/registration_confirmation_family_reunion.html:22
+#, fuzzy
+#| msgid "Location"
+msgid "Event Location:"
+msgstr "Lieu"
+
+#: templates/email/registration_confirmation_family_reunion.html:54
+#, fuzzy
+#| msgid "Payment Information"
+msgid "Payment Information:"
+msgstr "Informations de paiement"
+
+#: templates/email/registration_confirmation_family_reunion.html:57
+#, python-format
+msgid ""
+"Please transfer a deposit of €100.00 by %(bank_transfer_until)s. This "
+"secures your spot at the DAN Family Reunion. If you are unable to attend, we "
+"will refund your deposit—provided no costs have been incurred by the "
+"organisers."
+msgstr ""
+
+#: templates/email/registration_confirmation_family_reunion.html:64
+msgid "Reference:"
+msgstr ""
+
+#: templates/email/registration_confirmation_family_reunion.html:64
+#, fuzzy
+#| msgid "Your Comment:"
+msgid "Your Name"
+msgstr "Votre commentaire :"
+
+#: templates/email/registration_confirmation_family_reunion.html:74
+msgid "If you have any questions, please contact us at"
+msgstr ""
+
+#: templates/email/registration_confirmation_family_reunion.html:77
+msgid "See you soon in Karlsruhe – we look forward to welcoming you there!"
+msgstr ""
 
 #: templates/index.html:31
 msgid "Previous"
@@ -2165,14 +2348,14 @@ msgstr "Suivant"
 #: templates/index.html:45
 msgid ""
 "Welcome to the official website of D.A.N. BW, the association of Aikido "
-"clubs in Baden-Württemberg, which practice Aikido in the tradition of Master"
-" André Nocquet. On this website, you can find information about our "
+"clubs in Baden-Württemberg, which practice Aikido in the tradition of Master "
+"André Nocquet. On this website, you can find information about our "
 "organization and our clubs, about Aikido and our lineage."
 msgstr ""
 "Bienvenue sur le site officiel de D.A.N. BW, l'association des clubs "
 "d'aïkido du Bade-Wurtemberg, qui pratiquent l'aïkido dans la tradition de "
-"Maître André Nocquet. Sur ce site, vous trouverez des informations sur notre"
-" organisation et nos clubs, sur l'aïkido et notre lignée."
+"Maître André Nocquet. Sur ce site, vous trouverez des informations sur notre "
+"organisation et nos clubs, sur l'aïkido et notre lignée."
 
 #: templates/index.html:52
 msgid ""
@@ -2183,35 +2366,78 @@ msgstr ""
 "nous rejoindre sur le tapis et à commencer votre voyage en aïkido avec nous "
 "dès aujourd'hui !"
 
-#: templates/index.html:59
+#: templates/index.html:62
+msgid "with John Emmerson Sensei 6th Dan"
+msgstr ""
+
+#: templates/index.html:64
+#, fuzzy
+#| msgid "Dates:"
+msgid "Date:"
+msgstr "Dates :"
+
+#: templates/index.html:64
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:32
+msgid "August"
+msgstr "Août"
+
+#: templates/index.html:65
+#, fuzzy
+#| msgid "Location"
+msgid "Location:"
+msgstr "Lieu"
+
+#: templates/index.html:65
+msgid "Sportschule Schöneck, Karlsruhe, Germany"
+msgstr ""
+
+#: templates/index.html:68
+msgid ""
+"Join us for intensive training, familiar togetherness and reuniting with our "
+"Aikido family from many countries!"
+msgstr ""
+
+#: templates/index.html:74
+#, fuzzy
+#| msgid "Download started"
+msgid "Download Flyer"
+msgstr "Téléchargement démarré"
+
+#: templates/index.html:77
+#, fuzzy
+#| msgid "Your Course Registrations"
+msgid "More Information & Registration"
+msgstr "Your Course Registrations"
+
+#: templates/index.html:85
 msgid "Go to our course list"
 msgstr "Aller à notre liste de cours"
 
-#: templates/index.html:64
+#: templates/index.html:90
 msgid "Upcoming Courses:"
 msgstr "Cours à venir :"
 
-#: templates/index.html:69 templates/index.html:104
+#: templates/index.html:95 templates/index.html:130
 msgid "Go to"
 msgstr "Aller à"
 
-#: templates/index.html:76
+#: templates/index.html:102
 msgid "Register for this course"
 msgstr "Register for this course"
 
-#: templates/index.html:80
+#: templates/index.html:106
 msgid "Registration has not started yet"
 msgstr "L'inscription n'a pas encore commencé"
 
-#: templates/index.html:84
+#: templates/index.html:110
 msgid "Registration is closed for this course"
 msgstr "L'inscription est close pour ce cours"
 
-#: templates/index.html:85
+#: templates/index.html:111
 msgid "Registration Closed"
 msgstr "Inscription fermée"
 
-#: templates/index.html:119
+#: templates/index.html:145
 msgid "There are no courses available at the moment."
 msgstr "There are no courses available at the moment."
 
@@ -2223,7 +2449,7 @@ msgstr "D.A.N. Demande d'adhésion internationale"
 msgid "D.A.N. BW Membership Application"
 msgstr "Demande d'adhésion au D.A.N. BW"
 
-#: templates/membership_form.html:87 templates/registration_form.html:132
+#: templates/membership_form.html:87 templates/registration_form.html:140
 msgid "Payment Details"
 msgstr "Détails du paiement"
 
@@ -2235,20 +2461,26 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"          Le montant de l'adhésion est de <strong>€%(full_fee)s</strong> par an.\n"
+"          Le montant de l'adhésion est de <strong>€%(full_fee)s</strong> par "
+"an.\n"
 "          "
 
 #: templates/membership_form.html:97
 #, python-format
 msgid ""
 "\n"
-"          New members who apply for membership from the 2nd, 3rd, or 4th quarter of the year are only charged a reduced\n"
-"          fee of <strong>€%(fee_2nd)s</strong>, <strong>€%(fee_3rd)s</strong>, or <strong>€%(fee_4th)s</strong>, respectively.\n"
+"          New members who apply for membership from the 2nd, 3rd, or 4th "
+"quarter of the year are only charged a reduced\n"
+"          fee of <strong>€%(fee_2nd)s</strong>, <strong>€%(fee_3rd)s</"
+"strong>, or <strong>€%(fee_4th)s</strong>, respectively.\n"
 "          "
 msgstr ""
 "\n"
-"          Les nouveaux membres qui font une demande d'adhésion à partir du 2ème, 3ème ou 4ème trimestre de l'année ne sont facturés qu'à un tarif réduit\n"
-"          de <strong>€%(fee_2nd)s</strong>, <strong>€%(fee_3rd)s</strong>, ou <strong>€%(fee_4th)s</strong>, respectivement.\n"
+"          Les nouveaux membres qui font une demande d'adhésion à partir du "
+"2ème, 3ème ou 4ème trimestre de l'année ne sont facturés qu'à un tarif "
+"réduit\n"
+"          de <strong>€%(fee_2nd)s</strong>, <strong>€%(fee_3rd)s</strong>, "
+"ou <strong>€%(fee_4th)s</strong>, respectivement.\n"
 "          "
 
 #: templates/membership_form.html:103
@@ -2258,13 +2490,13 @@ msgid ""
 "International."
 msgstr ""
 "Les frais d'adhésion sont collectés chaque année en décembre pour l'année "
-"suivante par débit direct SEPA de D.A.N. BW e.V. en tant que représentant de"
-" D.A.N. International. International."
+"suivante par débit direct SEPA de D.A.N. BW e.V. en tant que représentant de "
+"D.A.N. International. International."
 
 #: templates/membership_form.html:123
 msgid ""
-"Membership is automatically renewed for another year at the end of the year."
-" A termination of membership must be made by December 1st in order to take "
+"Membership is automatically renewed for another year at the end of the year. "
+"A termination of membership must be made by December 1st in order to take "
 "effect at the end of the year."
 msgstr ""
 "L'adhésion est automatiquement renouvelée pour une autre année à la fin de "
@@ -2285,11 +2517,13 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"          I will transfer the annual membership fee of €%(danbw_fee)s to the following account:\n"
+"          I will transfer the annual membership fee of €%(danbw_fee)s to the "
+"following account:\n"
 "          "
 msgstr ""
 "\n"
-"          Je transférerai les frais d'adhésion annuels de €%(danbw_fee)s sur le compte suivant :\n"
+"          Je transférerai les frais d'adhésion annuels de €%(danbw_fee)s sur "
+"le compte suivant :\n"
 "          "
 
 #: templates/membership_form.html:157
@@ -2350,7 +2584,7 @@ msgstr "Statuts"
 msgid "Are you sure you want to log out?"
 msgstr "Êtes-vous sûr de vouloir vous déconnecter ?"
 
-#: templates/partials/logout-modal.html:19 templates/register_course.html:21
+#: templates/partials/logout-modal.html:19 templates/register_course.html:43
 #: templates/update_courseregistration.html:13
 #: templates/update_userprofile.html:26
 msgid "Cancel"
@@ -2364,34 +2598,34 @@ msgstr "Toggle navigation"
 msgid "My Account"
 msgstr "Mon compte"
 
-#: templates/partials/registration_conditions.html:4
+#: templates/partials/registration_conditions.html:5
 msgid "Discount Conditions"
 msgstr "Conditions de remise"
 
-#: templates/partials/registration_conditions.html:5
+#: templates/partials/registration_conditions.html:6
 msgid "The following groups are eligible for a discount:"
 msgstr "Les groupes suivants sont éligibles pour une réduction :"
 
-#: templates/partials/registration_conditions.html:7
+#: templates/partials/registration_conditions.html:8
 msgid "Students"
 msgstr "Étudiants"
 
-#: templates/partials/registration_conditions.html:8
+#: templates/partials/registration_conditions.html:9
 msgid "Trainees"
 msgstr "Stagiaires"
 
-#: templates/partials/registration_conditions.html:9
+#: templates/partials/registration_conditions.html:10
 msgid "Handicapped persons"
 msgstr "Personnes handicapées"
 
-#: templates/partials/registration_conditions.html:10
+#: templates/partials/registration_conditions.html:11
 msgid "Unemployed persons"
 msgstr "Personnes sans emploi"
 
-#: templates/partials/registration_conditions.html:13
+#: templates/partials/registration_conditions.html:14
 msgid ""
-"If one of the above conditions applies to you, please check the \"Discount\""
-" box in the registration form and bring proof of eligibility to the course. "
+"If one of the above conditions applies to you, please check the \"Discount\" "
+"box in the registration form and bring proof of eligibility to the course. "
 "Otherwise, the full course fee will be charged."
 msgstr ""
 "Si l'une des conditions ci-dessus s'applique à vous, veuillez vérifier la "
@@ -2399,17 +2633,17 @@ msgstr ""
 "d'admissibilité au cours. Dans le cas contraire, le montant total du cours "
 "sera facturé."
 
-#: templates/partials/registration_conditions.html:18
-#: templates/registration_form.html:189
+#: templates/partials/registration_conditions.html:20
+#: templates/registration_form.html:198
 msgid "Terms and Conditions"
 msgstr "Termes et conditions"
 
-#: templates/partials/registration_conditions.html:20
+#: templates/partials/registration_conditions.html:22
 msgid "The organizer (D.A.N. BW e. V.) does not provide insurance coverage."
 msgstr ""
 "L'organisateur (D.A.N. BW e. V.) ne fournit pas de couverture d'assurance."
 
-#: templates/partials/registration_conditions.html:25
+#: templates/partials/registration_conditions.html:27
 msgid ""
 "Also, the organizer may take photos during the course, which could be "
 "published without mentioning names (e.g., on the D.A.N. BW website). If you "
@@ -2427,8 +2661,7 @@ msgstr "Inscrivez-vous à"
 
 #: templates/register_course.html:11
 msgid "Please select the sessions you want to attend."
-msgstr ""
-"Veuillez sélectionner les sessions auxquelles vous souhaitez assister."
+msgstr "Veuillez sélectionner les sessions auxquelles vous souhaitez assister."
 
 #: templates/register_course.html:13
 msgid ""
@@ -2442,51 +2675,61 @@ msgstr ""
 msgid "The course fee will be displayed below the form"
 msgstr "Le prix de la formation sera affiché en dessous du formulaire"
 
-#: templates/register_course.html:22
+#: templates/register_course.html:25
+msgid "Confirm you're human"
+msgstr ""
+
+#: templates/register_course.html:27
+#, python-format
+msgid ""
+"Select the correct kanji for \"<strong>%(target)s</strong>\" as in Aikido"
+msgstr ""
+
+#: templates/register_course.html:44
 msgid "Sign up"
 msgstr "S'inscrire"
 
-#: templates/registration_form.html:20 templates/userprofile.html:13
+#: templates/registration_form.html:21 templates/userprofile.html:13
 msgid "E-mail"
 msgstr "E-mail"
 
-#: templates/registration_form.html:38
+#: templates/registration_form.html:39
 msgid "Edit Profile"
 msgstr "Edit Profile"
 
-#: templates/registration_form.html:61
+#: templates/registration_form.html:62
 msgid "Sessions:"
 msgstr "Sessions :"
 
-#: templates/registration_form.html:85
+#: templates/registration_form.html:92
 msgid "Entire Course without Dan Seminar"
 msgstr "Cours complet sans le séminaire Dan"
 
-#: templates/registration_form.html:87
+#: templates/registration_form.html:94
 msgid "Entire Course without Dan Preparation"
 msgstr "Cours complet sans préparation au Dan"
 
-#: templates/registration_form.html:137
+#: templates/registration_form.html:145
 msgid "Payment"
 msgstr "Paiement"
 
-#: templates/registration_form.html:152
+#: templates/registration_form.html:160
 msgid ""
-"Please refer to the <a href=\"#discount-conditions\"> Discount Conditions "
-"</a> below for more information."
+"Please refer to the <a href=\"#discount-conditions\"> Discount Conditions </"
+"a> below for more information."
 msgstr ""
 "Veuillez vous référer aux <a href=\"#discount-conditions\"> Conditions de "
 "remise </a> ci-dessous pour plus d'informations."
 
-#: templates/registration_form.html:162
+#: templates/registration_form.html:170
 msgid "D.A.N. Member discount"
 msgstr "Compte de membre D.A.N"
 
-#: templates/registration_form.html:191
+#: templates/registration_form.html:200
 msgid "Please accept the terms and conditions below."
 msgstr "Veuillez accepter les termes et conditions ci-dessous."
 
-#: templates/registration_form.html:199
+#: templates/registration_form.html:208
 msgid "Registration Fee"
 msgstr "Frais d'inscription"
 
@@ -2502,11 +2745,13 @@ msgstr "Avez-vous réussi votre examen ?"
 #, python-format
 msgid ""
 "\n"
-"            You have applied for an exam with your registration for %(course)s\n"
+"            You have applied for an exam with your registration for "
+"%(course)s\n"
 "            "
 msgstr ""
 "\n"
-"            Vous avez demandé à passer un examen lors de votre inscription à %(course)s\n"
+"            Vous avez demandé à passer un examen lors de votre inscription à "
+"%(course)s\n"
 "            "
 
 #: templates/update_grade.html:16
@@ -2571,8 +2816,7 @@ msgstr "Votre grade n'a pas été mis à jour."
 
 #: users/views.py:193
 msgid ""
-"Please use the button on the user profile page for deactivating your "
-"account."
+"Please use the button on the user profile page for deactivating your account."
 msgstr ""
 "Veuillez utiliser le bouton sur la page de profil utilisateur pour "
 "désactiver votre compte."
@@ -2654,8 +2898,8 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:267
 msgid ""
-"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or"
-" hyphens."
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
 msgstr ""
 "Saisissez un \"slug\" valide composé de lettres Unicode, de chiffres, de "
 "sous-codes ou d'hyphens."
@@ -2771,8 +3015,8 @@ msgid ""
 "File extension “%(extension)s” is not allowed. Allowed extensions are: "
 "%(allowed_extensions)s."
 msgstr ""
-"L'extension de fichier \"%(extension)s\" n'est pas autorisée. Les extensions"
-" autorisées sont : %(allowed_extensions)s."
+"L'extension de fichier \"%(extension)s\" n'est pas autorisée. Les extensions "
+"autorisées sont : %(allowed_extensions)s."
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:624
 msgid "Null characters are not allowed."
@@ -2789,8 +3033,9 @@ msgid "%(model_name)s with this %(field_labels)s already exists."
 msgstr "%(model_name)s avec ce %(field_labels)s existe déjà."
 
 #: venv/lib/python3.12/site-packages/django/db/models/constraints.py:20
-#, python-format
-msgid "Constraint \"%(name)s\" is violated."
+#, fuzzy, python-format
+#| msgid "Constraint \"%(name)s\" is violated."
+msgid "Constraint “%(name)s” is violated."
 msgstr "La contrainte \"%(name)s\" est violée."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:133
@@ -2878,8 +3123,8 @@ msgstr "Date (sans heure)"
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1550
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
-"HH:MM[:ss[.uuuuuu]][TZ] format."
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
+"uuuuuu]][TZ] format."
 msgstr ""
 "la valeur \"%(value)s\" a un format invalide. Elle doit être au format YYYY-"
 "MM-DD HH:MM[:ss[.uuuuu]][TZ]."
@@ -2887,8 +3132,8 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1558
 #, python-format
 msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD "
-"HH:MM[:ss[.uuuuuu]][TZ]) but it is an invalid date/time."
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
 msgstr ""
 "la valeur \"%(value)s\" a le bon format (YYYY-MM-DD HH:MM[:ss[.uuuuu]][TZ]) "
 "mais c'est une date/heure invalide."
@@ -2909,8 +3154,8 @@ msgstr "Numéro décimal"
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1853
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid format. It must be in [DD] "
-"[[HH:]MM:]ss[.uuuuuu] format."
+"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
+"uuuuuu] format."
 msgstr ""
 "la valeur \"%(value)s\" a un format invalide. Elle doit être au format [DD] "
 "[[HH :]MM :]ss[.uuuuu]."
@@ -2998,8 +3243,8 @@ msgid ""
 "“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
 "format."
 msgstr ""
-"la valeur \"%(value)s\" a un format invalide. Elle doit être au format "
-"HH:MM[:ss[.uuuuu]]."
+"la valeur \"%(value)s\" a un format invalide. Elle doit être au format HH:"
+"MM[:ss[.uuuuu]]."
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2516
 #, python-format
@@ -3071,8 +3316,7 @@ msgid "Many-to-many relationship"
 msgstr "Relation de l'homme à la femme"
 
 #. Translators: If found as last label character, these punctuation
-#. characters will prevent the default label_suffix to be appended to the
-#. label
+#. characters will prevent the default label_suffix to be appended to the label
 #: venv/lib/python3.12/site-packages/django/forms/boundfield.py:185
 msgid ":?.!"
 msgstr ": ?.!"
@@ -3123,8 +3367,7 @@ msgstr "Le fichier soumis est vide."
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:633
 #, python-format
-msgid ""
-"Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
 msgid_plural ""
 "Ensure this filename has at most %(max)d characters (it has %(length)d)."
 msgstr[0] ""
@@ -3188,8 +3431,8 @@ msgid ""
 "%(field_names)s. You may need to file a bug report if the issue persists."
 msgstr ""
 "Les données de ManagementForm sont manquantes ou ont été bloquées. Champs "
-"manquants : %(field_names)s. Vous devrez peut-être envoyer un rapport de "
-"bug si le problème persiste."
+"manquants : %(field_names)s. Vous devrez peut-être envoyer un rapport de bug "
+"si le problème persiste."
 
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:65
 #, python-format
@@ -3227,8 +3470,8 @@ msgid ""
 "Please correct the duplicate data for %(field_name)s which must be unique "
 "for the %(lookup)s in %(date_field)s."
 msgstr ""
-"Veuillez corriger les données en double pour %(field_name)s qui doivent "
-"être uniques pour les %(lookup)s dans %(date_field)s."
+"Veuillez corriger les données en double pour %(field_name)s qui doivent être "
+"uniques pour les %(lookup)s dans %(date_field)s."
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:920
 msgid "Please correct the duplicate values below."
@@ -3239,8 +3482,7 @@ msgid "The inline value did not match the parent instance."
 msgstr "La valeur en ligne ne correspondait pas à l'instance parentale."
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1448
-msgid ""
-"Select a valid choice. That choice is not one of the available choices."
+msgid "Select a valid choice. That choice is not one of the available choices."
 msgstr ""
 "Sélectionner un choix valide. Ce choix ne fait pas partie des choix "
 "disponibles."
@@ -3392,10 +3634,6 @@ msgstr "June"
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:31
 msgid "July"
 msgstr "Juillet"
-
-#: venv/lib/python3.12/site-packages/django/utils/dates.py:32
-msgid "August"
-msgstr "Août"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:33
 msgid "September"
@@ -3654,10 +3892,10 @@ msgid ""
 "required for security reasons, to ensure that your browser is not being "
 "hijacked by third parties."
 msgstr ""
-"Vous voyez ce message parce que ce site HTTPS requiert un \"Referer header\""
-" pour être envoyé par votre navigateur web, mais aucun n'a été envoyé. Cet "
-"en-tête est nécessaire pour des raisons de sécurité, pour s'assurer que "
-"votre navigateur n'est pas détourné par des tiers."
+"Vous voyez ce message parce que ce site HTTPS requiert un \"Referer header\" "
+"pour être envoyé par votre navigateur web, mais aucun n'a été envoyé. Cet en-"
+"tête est nécessaire pour des raisons de sécurité, pour s'assurer que votre "
+"navigateur n'est pas détourné par des tiers."
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:40
 msgid ""
@@ -3671,16 +3909,16 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:45
 msgid ""
-"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or"
-" including the “Referrer-Policy: no-referrer” header, please remove them. "
-"The CSRF protection requires the “Referer” header to do strict referer "
-"checking. If you’re concerned about privacy, use alternatives like <a "
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
 "rel=\"noreferrer\" …> for links to third-party sites."
 msgstr ""
 "Si vous utilisez la balise <meta name=\"referrer\" content=\"no-referrer\"> "
-"ou si vous incluez l'en-tête \"Referrer Policy : no-referrer\", veuillez les"
-" supprimer. La protection CSRF exige que l'en-tête \"Referer\" fasse l'objet"
-" d'une vérification stricte des référents. Si vous vous souciez de la "
+"ou si vous incluez l'en-tête \"Referrer Policy : no-referrer\", veuillez les "
+"supprimer. La protection CSRF exige que l'en-tête \"Referer\" fasse l'objet "
+"d'une vérification stricte des référents. Si vous vous souciez de la "
 "protection de la vie privée, utilisez des alternatives telles que <a "
 "rel=\"noreferrer\" ...> pour les liens vers des sites tiers."
 
@@ -3739,11 +3977,11 @@ msgstr "No %(verbose_name_plural)s disponible"
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:652
 #, python-format
 msgid ""
-"Future %(verbose_name_plural)s not available because "
-"%(class_name)s.allow_future is False."
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
 msgstr ""
-"Future %(verbose_name_plural)s non disponible parce que "
-"%(class_name)s.allow_future est False."
+"Future %(verbose_name_plural)s non disponible parce que %(class_name)s."
+"allow_future est False."
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:692
 #, python-format
@@ -3803,15 +4041,15 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:221
 #, python-format
 msgid ""
-"You are seeing this page because <a "
-"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
-"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> is in your settings file "
-"and you have not configured any URLs."
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
 msgstr ""
-"Vous voyez cette page parce que <a "
-"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
-"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> est dans votre fichier de "
-"paramètres et que vous n'avez pas configuré d'URL."
+"Vous voyez cette page parce que <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> est dans votre fichier de paramètres et que "
+"vous n'avez pas configuré d'URL."
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:229
 msgid "Django Documentation"

@@ -62,7 +62,7 @@ class CourseSessionInline(TranslatableTabularInline):
 
     model = CourseSession
     extra = 0  # Set number of additional rows to 0
-    fields = ('title', 'date', 'start_time', 'end_time', 'is_dan_preparation')
+    fields = ('title', 'date', 'start_time', 'end_time', 'is_dan_preparation', 'price_override')
 
 
 class AccommodationOptionInline(TranslatableTabularInline):

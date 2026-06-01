@@ -75,6 +75,7 @@
                            {% if session.id|stringformat:"s" in form.selected_sessions.value %}checked{% elif session in form.instance.selected_sessions.all %}checked{% endif %}
                            data-dan-preparation="{{ session.is_dan_preparation }}"
                            data-date="{{ session.date }}"
+                           data-price-override="{% if session.price_override is not None %}{{ session.price_override|unlocalize }}{% endif %}"
                            />
                     <label class="form-check-label" for="session-{{ session.id }}">{{ session }}</label>
                 </div>

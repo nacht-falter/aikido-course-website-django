@@ -271,12 +271,22 @@ function calculateIndividualSessions(
   for (let checkbox of sessionCheckboxes) {
     if (!checkbox.checked) continue;
 
+    const priceOverride = checkbox.dataset.priceOverride;
     const sessionType =
       checkbox.getAttribute("data-dan-preparation") == "True"
         ? "single_session_dan_preparation"
         : "single_session";
-
-    let fee = getFee(sessionType, paymentMethod, danMember, courseData.fees);
+    let fee;
+    if (priceOverride) {
+      fee = parseFloat(priceOverride);
+      const feeObj = courseData.fees.find((f) => f.fee_type === sessionType);
+      if (feeObj) {
+        if (paymentMethod === "cash") fee += feeObj.extra_fee_cash;
+        if (!danMember) fee += feeObj.extra_fee_external;
+      }
+    } else {
+      fee = getFee(sessionType, paymentMethod, danMember, courseData.fees);
+    }
     finalFee += fee ? fee : 0;
     sessionCount++;
   }
@@ -412,7 +422,10 @@ function displayFinalFee(courseData) {
   }
 
   if (stickyFeeRow) {
-    stickyFeeRow.classList.toggle("d-none", finalFee <= 0);
+    const anySessionSelected = Array.from(sessionCheckboxes).some(
+      (cb) => cb.checked,
+    );
+    stickyFeeRow.classList.toggle("d-none", !anySessionSelected);
   }
 }
 

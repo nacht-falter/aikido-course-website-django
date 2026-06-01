@@ -60,6 +60,21 @@ class RegisterCourseTest(TestCase):
         session["captcha_target"] = answer
         session.save()
 
+    def test_price_override_attribute_in_template(self):
+        print("\ntest_price_override_attribute_in_template")
+        from decimal import Decimal
+        self.session.price_override = Decimal("20.00")
+        self.session.save()
+
+        url = reverse("register_course", kwargs={"slug": self.course.slug})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+        # Rendered with |unlocalize so the decimal point is always a dot (not a comma)
+        self.assertContains(response, 'data-price-override="20.00"')
+        # Session without override renders an empty attribute
+        self.assertContains(response, 'data-price-override=""')
+
     def test_get_registration_form_authenticated_with_profile(self):
         print("\ntest_get_registration_form_authenticated_with_profile")
         self.client.force_login(self.user)
