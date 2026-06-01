@@ -1,4 +1,5 @@
 import csv
+import logging
 import os
 import random
 from datetime import date
@@ -26,6 +27,8 @@ from . import forms
 from .models import CourseRegistration, UserProfile
 
 User = get_user_model()
+
+logger = logging.getLogger(__name__)
 
 CAPTCHA_TARGETS = {
     "1": "Ai",
@@ -162,7 +165,7 @@ class RegisterCourse(View):
 
             # Authenticated users don't need CAPTCHA
             registration_form = forms.CourseRegistrationForm(
-                course=course, user_profile=request.user.profile
+                course=course, user_profile=request.user.profile,
             )
         else:
             # Generate new captcha for guest users only
@@ -170,7 +173,7 @@ class RegisterCourse(View):
 
             registration_form = forms.CourseRegistrationForm(
                 course=course,
-                captcha_target_display=captcha_display
+                captcha_target_display=captcha_display,
             )
 
         try:
@@ -213,6 +216,10 @@ class RegisterCourse(View):
 
         # If captcha failed (only for guests), add error and re-render with fresh captcha
         if not captcha_valid:
+            logger.warning(
+                "Invalid captcha attempt for course %s from IP %s",
+                slug, request.META.get('REMOTE_ADDR', 'unknown')
+            )
             # Generate new captcha for next render
             dummy, new_captcha_display = generate_captcha(request)
             # Create new form with fresh captcha display
@@ -236,10 +243,8 @@ class RegisterCourse(View):
                 return HttpResponseRedirect(reverse("course_list"))
             return render(request, "register_course.html", context)
 
-        if registration_form.is_valid():
-            # Check if the honeypot field called "website" is filled in
-            if registration_form.cleaned_data.get("website"):
-                return HttpResponseRedirect(reverse("course_list"))
+        if request.POST.get("website"):
+            return HttpResponseRedirect(reverse("course_list"))
 
         if registration_form.is_valid():
 

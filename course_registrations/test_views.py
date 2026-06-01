@@ -54,6 +54,12 @@ class RegisterCourseTest(TestCase):
         self.client.force_login(self.user)
         self.user_profile = UserProfile.objects.create(user=self.user, dojo="AAR")
 
+    def set_captcha_session(self, answer="1"):
+        """Seed the test session with a solved captcha so guest POSTs pass validation."""
+        session = self.client.session
+        session["captcha_target"] = answer
+        session.save()
+
     def test_get_registration_form_authenticated_with_profile(self):
         print("\ntest_get_registration_form_authenticated_with_profile")
         self.client.force_login(self.user)
@@ -293,6 +299,7 @@ class RegisterCourseTest(TestCase):
     def test_post_valid_guest_registration(self):
         print("\ntest_post_valid_guest_registration")
         self.client.logout()
+        self.set_captcha_session()
 
         url = reverse("register_course", kwargs={"slug": self.course.slug})
         response = self.client.post(
@@ -307,6 +314,7 @@ class RegisterCourseTest(TestCase):
                 "accept_terms": True,
                 "exam": False,
                 "payment_method": 0,
+                "captcha_response": "1",
             },
         )
 
@@ -325,6 +333,7 @@ class RegisterCourseTest(TestCase):
     def test_guest_registration_links_to_existing_user(self):
         print("\ntest_guest_registration_links_to_existing_user")
         self.client.logout()
+        self.set_captcha_session()
 
         # Create a user with matching email/name
         existing_user = User.objects.create_user(
@@ -349,6 +358,7 @@ class RegisterCourseTest(TestCase):
                 "accept_terms": True,
                 "exam": False,
                 "payment_method": 0,
+                "captcha_response": "1",
             },
         )
 
@@ -373,6 +383,7 @@ class RegisterCourseTest(TestCase):
     def test_guest_registration_duplicate_integrity_error(self):
         print("\ntest_guest_registration_duplicate_integrity_error")
         self.client.logout()
+        self.set_captcha_session()
 
         # Create first registration
         CourseRegistration.objects.create(
@@ -397,6 +408,7 @@ class RegisterCourseTest(TestCase):
                 "accept_terms": True,
                 "exam": False,
                 "payment_method": 0,
+                "captcha_response": "1",
             },
         )
 
