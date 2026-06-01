@@ -491,6 +491,121 @@ class TestCourseRegistrationFeeCalculation(TestCase):
 
         self.assertEqual(final_fee, 25.00)
 
+    def test_other_course_single_session(self):
+        print("\ntest_other_course_single_session")
+        course = InternalCourse.objects.create(
+            title="Other Course",
+            start_date=date.today(),
+            end_date=date.today() + timedelta(days=1),
+            course_type="other",
+            fee_category="other",
+        )
+
+        session1 = CourseSession.objects.create(
+            title="Session 1",
+            course=course,
+            date=date.today(),
+            start_time=time(10, 0),
+            end_time=time(12, 0),
+        )
+        session2 = CourseSession.objects.create(
+            title="Session 2",
+            course=course,
+            date=date.today() + timedelta(days=1),
+            start_time=time(10, 0),
+            end_time=time(12, 0),
+        )
+
+        Fee.objects.create(
+            course_type="other",
+            fee_category="other",
+            fee_type="single_session",
+            amount=Decimal("20.00"),
+        )
+        Fee.objects.create(
+            course_type="other",
+            fee_category="other",
+            fee_type="entire_course",
+            amount=Decimal("35.00"),
+        )
+
+        registration = CourseRegistration.objects.create(
+            user=self.user,
+            course=course,
+            payment_method=0,
+            dan_member=True,
+            accept_terms=True,
+        )
+
+        # One session selected: charged per session
+        selected_sessions = course.sessions.filter(id=session1.id)
+        self.assertEqual(registration.calculate_fees(course, selected_sessions), 20.00)
+
+        # All sessions selected: flat entire_course fee
+        selected_sessions = course.sessions.all()
+        self.assertEqual(registration.calculate_fees(course, selected_sessions), 35.00)
+
+    def test_other_course_price_override(self):
+        print("\ntest_other_course_price_override")
+        course = InternalCourse.objects.create(
+            title="Other Course with Override",
+            start_date=date.today(),
+            end_date=date.today() + timedelta(days=2),
+            course_type="other",
+            fee_category="other",
+        )
+
+        Fee.objects.create(
+            course_type="other",
+            fee_category="other",
+            fee_type="single_session",
+            amount=Decimal("20.00"),
+        )
+        Fee.objects.create(
+            course_type="other",
+            fee_category="other",
+            fee_type="entire_course",
+            amount=Decimal("50.00"),
+        )
+
+        standard_session = CourseSession.objects.create(
+            title="Standard Session",
+            course=course,
+            date=date.today(),
+            start_time=time(10, 0),
+            end_time=time(12, 0),
+        )
+        overridden_session = CourseSession.objects.create(
+            title="Overridden Session",
+            course=course,
+            date=date.today() + timedelta(days=1),
+            start_time=time(10, 0),
+            end_time=time(12, 0),
+            price_override=Decimal("5.00"),
+        )
+        # Third session ensures selecting the first two doesn't trigger entire_course
+        CourseSession.objects.create(
+            title="Third Session",
+            course=course,
+            date=date.today() + timedelta(days=2),
+            start_time=time(10, 0),
+            end_time=time(12, 0),
+        )
+
+        registration = CourseRegistration.objects.create(
+            user=self.user,
+            course=course,
+            payment_method=0,
+            dan_member=True,
+            accept_terms=True,
+        )
+
+        selected_sessions = course.sessions.filter(
+            id__in=[standard_session.id, overridden_session.id]
+        )
+        # 20.00 (standard) + 5.00 (override) = 25.00
+        self.assertEqual(registration.calculate_fees(course, selected_sessions), 25.00)
+
     def test_children_entire_course(self):
         print("\ntest_children_entire_course")
         course = InternalCourse.objects.create(

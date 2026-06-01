@@ -218,8 +218,7 @@ class CourseRegistration(models.Model):
                 fee_type = "single_day_with_dan_seminar" if has_dan_sessions else "single_day"
 
         elif course.course_type == "other":
-            # For "other" course types, use entire_course as default
-            fee_type = "entire_course"
+            fee_type = "entire_course" if entire_course_selected else "single_session"
 
         return fee_type
 

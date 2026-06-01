@@ -210,8 +210,9 @@ function getFeeType(courseData) {
       break;
 
     case "other":
-      // For "other" course types, use entire_course as default
-      feeType = "entire_course";
+      feeType = entireCourseWithoutDanPreparation?.checked
+        ? "entire_course"
+        : "single_session";
       break;
 
     default:
