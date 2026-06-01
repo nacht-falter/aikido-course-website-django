@@ -1635,7 +1635,22 @@ The progress of the project was tracked with a burndown chart ([Burndown Chart T
 
 ## Deployment
 
-In order to deploy the project follow the [instructions in the official Django Docs](https://docs.djangoproject.com/en/5.1/howto/deployment/).
+In order to set up the project for the first time follow the [instructions in the official Django Docs](https://docs.djangoproject.com/en/5.1/howto/deployment/).
+
+### Deploy checklist
+
+Run the following commands on the server for every release:
+
+```bash
+git pull
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic
+sudo systemctl restart gunicorn  # or however the server process is managed
+```
+
+**Why `makemigrations` on the server?** Migration files are listed in `.gitignore` and are not committed to the repository. They must be generated on each environment separately. This is intentional for a single-server/single-developer setup, but means the extra `makemigrations` step is always required before `migrate`.
 
 ## Credits
 
