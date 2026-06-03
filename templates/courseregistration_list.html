@@ -104,6 +104,12 @@
                 <td>{{ registration.comment }}</td>
             </tr>
             {% endif %}
+            {% if registration.course.additional_info %}
+            <tr>
+                <th scope="col">{% trans "Additional Information:" %}</th>
+                <td>{{ registration.course.additional_info|safe }}</td>
+            </tr>
+            {% endif %}
         </table>
 
         {% if registration.exam %}
