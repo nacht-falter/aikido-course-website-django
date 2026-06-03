@@ -39,6 +39,7 @@ DEBUG = development
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
 
 # Application definition
 
@@ -213,6 +214,11 @@ LOGGING = {
         "django": {
             "handlers": ["file"],
             "level": "ERROR",
+            "propagate": False,
+        },
+        "django.security": {
+            "handlers": ["file"],
+            "level": "WARNING",
             "propagate": False,
         },
         "django.security.DisallowedHost": {
