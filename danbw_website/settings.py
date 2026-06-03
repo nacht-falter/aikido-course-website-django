@@ -78,6 +78,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Allauth settings
+ALLAUTH_TRUSTED_CLIENT_IP_HEADER = "X-Real-IP"  # set by nginx proxy_params
 LOGIN_REDIRECT_URL = "/user/update-grade/"
 LOGOUT_REDIRECT_URL = "/"
 ACCOUNT_LOGIN_METHODS = {"email"}
