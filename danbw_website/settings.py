@@ -198,7 +198,7 @@ LOGGING = {
     },
     "handlers": {
         "file": {
-            "level": "ERROR",
+            "level": "WARNING",
             "class": "logging.FileHandler",
             "filename": LOG_FILE,
             "formatter": "verbose",
