@@ -216,6 +216,11 @@ LOGGING = {
             "level": "ERROR",
             "propagate": False,
         },
+        "django.request": {
+            "handlers": ["file"],
+            "level": "WARNING",
+            "propagate": False,
+        },
         "django.security": {
             "handlers": ["file"],
             "level": "WARNING",
