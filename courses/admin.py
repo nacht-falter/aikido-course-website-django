@@ -7,7 +7,7 @@ from django.contrib import admin
 from django.http import HttpResponse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-from django_summernote.admin import SummernoteModelAdmin
+from django_prose_editor.widgets import AdminProseEditorWidget
 from parler.admin import TranslatableAdmin, TranslatableTabularInline
 
 from course_registrations.models import CourseRegistration
@@ -131,7 +131,7 @@ class CourseRegistrationInline(admin.TabularInline):
 
 
 @admin.register(InternalCourse)
-class InternalCourseAdmin(TranslatableAdmin, SummernoteModelAdmin):
+class InternalCourseAdmin(TranslatableAdmin):
     fieldsets = (
         (_("Course Details"), {
             "fields": (
@@ -186,7 +186,6 @@ class InternalCourseAdmin(TranslatableAdmin, SummernoteModelAdmin):
     search_fields = ["translations__title", "translations__description"]
     list_filter = (CoursesByYearFilter, FutureCourseFilter,
                    "course_type", "status", "registration_status")
-    summernote_fields = ("description",)
     inlines = [CourseSessionInline, AccommodationOptionInline, CourseRegistrationInline]
     ordering = ["-start_date"]
     actions = [
@@ -195,6 +194,11 @@ class InternalCourseAdmin(TranslatableAdmin, SummernoteModelAdmin):
         "toggle_registration_status",
         "export_csv"
     ]
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if db_field.name in ("description", "additional_info"):
+            kwargs["widget"] = AdminProseEditorWidget
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
 
     def duplicate_selected_courses(self, request, queryset):
         """Action for duplicating existing courses"""
@@ -335,7 +339,7 @@ class InternalCourseAdmin(TranslatableAdmin, SummernoteModelAdmin):
 
 
 @admin.register(ExternalCourse)
-class ExternalCourseAdmin(TranslatableAdmin, SummernoteModelAdmin):
+class ExternalCourseAdmin(TranslatableAdmin):
     fields = (
         "title",
         "slug",
@@ -358,8 +362,12 @@ class ExternalCourseAdmin(TranslatableAdmin, SummernoteModelAdmin):
     readonly_fields = ("slug",)
 
     search_fields = ["translations__title", "translations__description"]
-    summernote_fields = ("description",)
     actions = ["duplicate_selected_courses"]
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if db_field.name == "description":
+            kwargs["widget"] = AdminProseEditorWidget
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
 
     def duplicate_selected_courses(self, request, queryset):
         """Action for duplicating existing courses"""

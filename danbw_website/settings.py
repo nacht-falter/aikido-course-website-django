@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "django.contrib.staticfiles",
     "parler",
-    "django_summernote",
+    "django_prose_editor",
     "crispy_forms",
     "crispy_bootstrap5",
     "easy_thumbnails",
@@ -79,9 +79,8 @@ AUTHENTICATION_BACKENDS = (
 # Allauth settings
 LOGIN_REDIRECT_URL = "/user/update-grade/"
 LOGOUT_REDIRECT_URL = "/"
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/user/profile/"
 ACCOUNT_FORMS = {'signup': 'danbw_website.forms.CustomSignupForm'}
@@ -105,11 +104,6 @@ MESSAGE_TAGS = {
     messages.ERROR: "alert-danger",
 }
 
-SUMMERNOTE_CONFIG = {
-    "summernote": {
-        "height": "300",
-    }
-}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -164,7 +158,7 @@ if development:
     }
 else:
     DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL", ""))
+        "default": dj_database_url.parse(os.environ["DATABASE_URL"])
     }
 
 # Password validation
