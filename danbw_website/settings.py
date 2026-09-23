@@ -95,6 +95,11 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 
+# Error emails (unhandled exceptions) go to ADMIN_EMAIL, sent from the SMTP mailbox
+ADMINS = [("Webmaster", os.environ["ADMIN_EMAIL"])] if os.environ.get("ADMIN_EMAIL") else []
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_SUBJECT_PREFIX = "[danbw.de] "
+
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MESSAGE_TAGS = {
@@ -186,6 +191,11 @@ DISALLOWED_LOG_FILE = os.path.join(BASE_DIR, "disallowed_hosts.log")
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+    },
     "formatters": {
         "verbose": {
             "format": "{levelname} {asctime} {module} {message}",
@@ -209,6 +219,11 @@ LOGGING = {
             "filename": DISALLOWED_LOG_FILE,
             "formatter": "verbose",
         },
+        "mail_admins": {
+            "level": "ERROR",
+            "class": "django.utils.log.AdminEmailHandler",
+            "filters": ["require_debug_false"],
+        },
     },
     "loggers": {
         "django": {
@@ -217,7 +232,7 @@ LOGGING = {
             "propagate": False,
         },
         "django.request": {
-            "handlers": ["file"],
+            "handlers": ["file", "mail_admins"],
             "level": "WARNING",
             "propagate": False,
         },

@@ -13,7 +13,10 @@ django-simple-captcha==0.6.3
 django-prose-editor==0.25.1
 djangorestframework==3.17.1
 easy-thumbnails==2.10.1
+gunicorn==22.0.0
 pillow==12.2.0
+psycopg==3.2.1
+psycopg-binary==3.2.1
 six==1.16.0
 sqlparse==0.5.0
 typing_extensions==4.12.2
