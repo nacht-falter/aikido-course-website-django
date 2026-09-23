@@ -146,7 +146,8 @@ class InternalCourseAdmin(TranslatableAdmin):
                 "description",
                 "flyer",
                 "location",
-                "has_dinner"
+                "has_dinner",
+                "has_exam",
             )
         }),
         (_("Dates"), {

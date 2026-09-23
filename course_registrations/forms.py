@@ -52,11 +52,9 @@ class CourseRegistrationForm(forms.ModelForm):
             self.fields["grade"].required = True
             self.fields["other_dojo"].initial = _("Other Dojo")
 
-        if (
-            course.course_type not in constants.EXAM_COURSES or
-            course.fee_category == "dan_seminar"
-        ):
+        if not course.has_exam:
             self.fields["exam"].widget = forms.HiddenInput()
+            self.fields["exam"].disabled = True
 
         if user_profile and user_profile.grade >= 6:
             self.fields["exam"].disabled = True

@@ -107,12 +107,6 @@ INTERNATIONAL_COURSES = [
     "external_teacher",
 ]
 
-EXAM_COURSES = [
-    "sensei_emmerson",
-    "external_teacher",
-    "dan_bw_teacher",
-]
-
 DAN_PREPARATION_COURSES = [
     "sensei_emmerson",
     "external_teacher",

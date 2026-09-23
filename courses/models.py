@@ -176,6 +176,11 @@ class InternalCourse(Course):
         _("Course with Dinner"),
         default=False,
     )
+    has_exam = models.BooleanField(
+        _("Course with Exam"),
+        default=False,
+        help_text=_("Participants can apply for an exam when registering."),
+    )
 
     def clean(self):
         """Custom validation for Internal Course model"""

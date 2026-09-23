@@ -30,6 +30,7 @@ class RegisterCourseTest(TestCase):
             fee_category="regular",
             description="Test description",
             discount_percentage=0,
+            has_exam=True,
         )
         self.session = CourseSession.objects.create(
             title="Test session",
@@ -217,6 +218,36 @@ class RegisterCourseTest(TestCase):
             user=self.user,
         )
         self.assertFalse(registration.exam)
+
+    def test_exam_ignored_for_course_without_exam(self):
+        print("\ntest_exam_ignored_for_course_without_exam")
+        self.course.has_exam = False
+        self.course.save()
+        self.client.post(
+            reverse("register_course", kwargs={"slug": self.course.slug}),
+            {
+                "selected_sessions": [self.session.id],
+                "accept_terms": True,
+                "exam": True,
+                "payment_method": 0,
+            },
+        )
+        registration = CourseRegistration.objects.get(
+            course=self.course,
+            user=self.user,
+        )
+        self.assertFalse(registration.exam)
+        self.assertIsNone(registration.exam_grade)
+
+    def test_exam_section_shown_only_for_course_with_exam(self):
+        print("\ntest_exam_section_shown_only_for_course_with_exam")
+        url = reverse("register_course", kwargs={"slug": self.course.slug})
+        response = self.client.get(url)
+        self.assertContains(response, 'id="exam-section"')
+        self.course.has_exam = False
+        self.course.save()
+        response = self.client.get(url)
+        self.assertNotContains(response, 'id="exam-section"')
 
     def test_registration_fee_calculation_entire_course(self):
         print("\ntest_registration_fee_calculation_entire_course")
@@ -710,6 +741,7 @@ class UpdateUserCourseRegistrationTest(TestCase):
             fee_category="regular",
             description="Test description",
             discount_percentage=0,
+            has_exam=True,
         )
         self.session = CourseSession.objects.create(
             title="Test session",

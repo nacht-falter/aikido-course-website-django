@@ -116,7 +116,6 @@ def prepare_context(course, form):
         "course": course,
         "form": form,
         "course_data": course_data,
-        "exam_courses": constants.EXAM_COURSES,
         "dan_preparation_courses": constants.DAN_PREPARATION_COURSES,
         "is_free_course": is_free_course,
     }

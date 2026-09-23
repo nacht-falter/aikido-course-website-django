@@ -423,6 +423,10 @@ msgstr "Zahlungsinformationen"
 msgid "Additional Information"
 msgstr "Zusätzliche Informationen"
 
+#: templates/courseregistration_list.html:109
+msgid "Additional Information:"
+msgstr "Zusätzliche Informationen:"
+
 #: courses/admin.py:262
 msgid "Duplicate selected courses"
 msgstr "Ausgewählte Lehrgänge duplizieren"
@@ -554,6 +558,14 @@ msgstr "Lehrgang mit Dan-Vorbereitung"
 #: courses/models.py:176
 msgid "Course with Dinner"
 msgstr "Lehrgang mit Abendessen"
+
+#: courses/models.py:180
+msgid "Course with Exam"
+msgstr "Lehrgang mit Prüfung"
+
+#: courses/models.py:182
+msgid "Participants can apply for an exam when registering."
+msgstr "Teilnehmende können sich bei der Anmeldung für eine Prüfung anmelden."
 
 #: courses/models.py:186
 msgid "Registration start date cannot be later than registration end date."
