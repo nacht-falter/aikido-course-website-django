@@ -3,7 +3,7 @@ from smtplib import SMTPException
 
 from django.conf import settings
 from django.contrib import messages
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import EmailMessage, get_connection, send_mail
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.formats import date_format, time_format
@@ -231,6 +231,69 @@ def send_membership_notification(first_name, last_name, email, dojo, membership_
     except SMTPException as e:
         raise SMTPException(
             _("Failed to send membership notification email. Please contact the course team.")) from e
+
+
+def get_participant_recipients(registrations):
+    """Returns (name, email) pairs for registrations, one per email address,
+    and the registrations without an email address"""
+    recipients = {}
+    missing = []
+    for registration in registrations:
+        email = registration.user.email if registration.user else registration.email
+        if not email:
+            missing.append(registration)
+            continue
+        recipients.setdefault(email.lower(), (str(registration), email))
+    return list(recipients.values()), missing
+
+
+def send_participant_email(registrations, subject, message):
+    """Sends a staff-written email to each participant individually and a copy
+    to the course team. Returns the lists of sent and failed email addresses."""
+    course_team = os.environ.get("COURSE_TEAM_EMAIL")
+    reply_to = [course_team] if course_team else None
+    recipients, _missing = get_participant_recipients(registrations)
+
+    sent, failed = [], []
+    connection = get_connection()
+    connection.open()
+    try:
+        for _name, email in recipients:
+            try:
+                EmailMessage(
+                    subject=subject,
+                    body=message,
+                    from_email=course_team,
+                    to=[email],
+                    reply_to=reply_to,
+                    connection=connection,
+                ).send()
+                sent.append(email)
+            except SMTPException:
+                failed.append(email)
+
+        if course_team:
+            # Staff emails are always in German
+            with translation.override("de"):
+                note = _("Sent to {count} participants:").format(count=len(sent))
+                recipient_lines = "\n".join(
+                    f"{name} <{email}>" for name, email in recipients if email in sent)
+                if failed:
+                    recipient_lines += "\n\n" + _("Failed:") + "\n" + "\n".join(failed)
+            try:
+                EmailMessage(
+                    subject=subject,
+                    body=f"{message}\n\n---\n{note}\n{recipient_lines}",
+                    from_email=course_team,
+                    to=[course_team],
+                    connection=connection,
+                ).send()
+            except SMTPException:
+                pass
+    finally:
+        connection.close()
+
+    return sent, failed
 
 
 def write_registrations_csv(writer, registrations):

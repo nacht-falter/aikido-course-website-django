@@ -1,0 +1,76 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n admin_urls %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+  &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+  &rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+  &rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  <input type="hidden" name="action" value="email_participants">
+  {% for registration in registrations %}
+  <input type="hidden" name="{{ action_checkbox_name }}" value="{{ registration.pk|unlocalize }}">
+  {% endfor %}
+
+  {% if review %}
+    <h2>{% translate "Please review the email before sending" %}</h2>
+    <p><strong>{% translate "Subject" %}:</strong> {{ form.cleaned_data.subject }}</p>
+    <pre style="white-space: pre-wrap; font-family: inherit; border: 1px solid var(--hairline-color); padding: 10px;">{{ form.cleaned_data.message }}</pre>
+    <input type="hidden" name="subject" value="{{ form.cleaned_data.subject }}">
+    <textarea name="message" hidden>{{ form.cleaned_data.message }}</textarea>
+    <p>
+      {% blocktranslate trimmed count counter=recipients|length %}
+        Each recipient gets an individual email. Replies go to the course team, which also receives a copy.
+        This email will be sent to {{ counter }} recipient:
+      {% plural %}
+        Each recipient gets an individual email. Replies go to the course team, which also receives a copy.
+        This email will be sent to {{ counter }} recipients:
+      {% endblocktranslate %}
+    </p>
+  {% else %}
+    <fieldset class="module aligned">
+      {% for field in form %}
+      <div class="form-row">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+      </div>
+      {% endfor %}
+    </fieldset>
+    <p>
+      {% blocktranslate trimmed count counter=recipients|length %}
+        Recipient ({{ counter }}):
+      {% plural %}
+        Recipients ({{ counter }}):
+      {% endblocktranslate %}
+    </p>
+  {% endif %}
+
+  <ul>
+    {% for name, email in recipients %}
+    <li>{{ name }} &lt;{{ email }}&gt;</li>
+    {% endfor %}
+  </ul>
+  {% if missing %}
+  <p class="errornote">
+    {% translate "No email address, will be skipped:" %}
+    {% for registration in missing %}{{ registration }}{% if not forloop.last %}, {% endif %}{% endfor %}
+  </p>
+  {% endif %}
+
+  <div class="submit-row">
+    {% if review %}
+      <button type="submit" name="stage" value="send" class="default">{% translate "Send email" %}</button>
+      <button type="submit" name="stage" value="compose">{% translate "Back" %}</button>
+    {% else %}
+      <button type="submit" name="stage" value="review" class="default">{% translate "Review" %}</button>
+    {% endif %}
+    <a href="{% url opts|admin_urlname:'changelist' %}" class="button cancel-link">{% translate "Cancel" %}</a>
+  </div>
+</form>
+{% endblock %}

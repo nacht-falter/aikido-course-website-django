@@ -199,3 +199,17 @@ class CourseRegistrationForm(forms.ModelForm):
             cleaned_data["dojo"] = dojo_display_value
 
         return cleaned_data
+
+
+class ParticipantEmailForm(forms.Form):
+    """Form for staff to write an email to course participants"""
+
+    subject = forms.CharField(
+        label=_("Subject"),
+        max_length=200,
+        initial="[Dynamic Aikido Nocquet BW] ",
+    )
+    message = forms.CharField(
+        label=_("Message"),
+        widget=forms.Textarea(attrs={"rows": 15, "cols": 80}),
+    )

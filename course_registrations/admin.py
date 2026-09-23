@@ -1,8 +1,10 @@
 import csv
 from datetime import date
 
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.contrib.admin import helpers
 from django.http import HttpResponse
+from django.template.response import TemplateResponse
 from django.utils.html import format_html
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -10,6 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from courses.models import Course
 from danbw_website import constants, utils
 
+from .forms import ParticipantEmailForm
 from .models import CourseRegistration
 
 
@@ -123,7 +126,7 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
                    "payment_method", "exam"]
     ordering = ["-course__start_date", "-registration_date"]
     actions = [
-        "toggle_payment_status", "export_csv"
+        "toggle_payment_status", "export_csv", "email_participants"
     ]
 
     def registration_str(self, obj):
@@ -169,3 +172,54 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
 
     export_csv.short_description = _(
         "Export selected course registrations to CSV")
+
+    @admin.action(
+        description=_("Email selected participants"),
+        permissions=["change"],
+    )
+    def email_participants(self, request, queryset):
+        """Action for emailing participants: compose, review, then send"""
+
+        registrations = queryset.select_related("user", "course")
+        stage = request.POST.get("stage")
+        form = ParticipantEmailForm(request.POST if stage else None)
+
+        if stage == "send" and form.is_valid():
+            sent, failed = utils.send_participant_email(
+                registrations,
+                form.cleaned_data["subject"],
+                form.cleaned_data["message"],
+            )
+            self.message_user(
+                request,
+                _("Email sent to %(count)d participants.") % {"count": len(sent)},
+                messages.SUCCESS,
+            )
+            if failed:
+                self.message_user(
+                    request,
+                    _("Email could not be sent to: %(emails)s")
+                    % {"emails": ", ".join(failed)},
+                    messages.ERROR,
+                )
+            return None
+
+        recipients, missing = utils.get_participant_recipients(registrations)
+        review = stage in ("review", "send") and form.is_valid()
+
+        context = {
+            **self.admin_site.each_context(request),
+            "title": _("Email selected participants"),
+            "opts": self.model._meta,
+            "form": form,
+            "review": review,
+            "registrations": registrations,
+            "recipients": recipients,
+            "missing": missing,
+            "action_checkbox_name": helpers.ACTION_CHECKBOX_NAME,
+        }
+        return TemplateResponse(
+            request,
+            "admin/course_registrations/email_participants.html",
+            context,
+        )

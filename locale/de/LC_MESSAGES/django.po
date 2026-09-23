@@ -4024,3 +4024,81 @@ msgstr ""
 
 #~ msgid "External Courses"
 #~ msgstr "Externe Lehrgänge"
+
+#: course_registrations/admin.py:177 course_registrations/admin.py:212
+msgid "Email selected participants"
+msgstr "E-Mail an ausgewählte Teilnehmende"
+
+#: course_registrations/admin.py:195
+#, python-format
+msgid "Email sent to %(count)d participants."
+msgstr "E-Mail an %(count)d Teilnehmende gesendet."
+
+#: course_registrations/admin.py:201
+#, python-format
+msgid "Email could not be sent to: %(emails)s"
+msgstr "E-Mail konnte nicht gesendet werden an: %(emails)s"
+
+#: course_registrations/forms.py:208
+#: templates/admin/course_registrations/email_participants.html:23
+msgid "Subject"
+msgstr "Betreff"
+
+#: course_registrations/forms.py:213
+msgid "Message"
+msgstr "Nachricht"
+
+#: danbw_website/utils.py:278
+#, python-brace-format
+msgid "Sent to {count} participants:"
+msgstr "Gesendet an {count} Teilnehmende:"
+
+#: danbw_website/utils.py:282
+msgid "Failed:"
+msgstr "Fehlgeschlagen:"
+
+#: templates/admin/course_registrations/email_participants.html:22
+msgid "Please review the email before sending"
+msgstr "Bitte prüfe die E-Mail vor dem Senden"
+
+#: templates/admin/course_registrations/email_participants.html:28
+#, python-format
+msgid ""
+"Each recipient gets an individual email. Replies go to the course team, "
+"which also receives a copy. This email will be sent to %(counter)s "
+"recipient:"
+msgid_plural ""
+"Each recipient gets an individual email. Replies go to the course team, "
+"which also receives a copy. This email will be sent to %(counter)s "
+"recipients:"
+msgstr[0] ""
+"Jede Person erhält eine eigene E-Mail. Antworten gehen an das "
+"Lehrgangsteam, das auch eine Kopie erhält. Diese E-Mail wird an "
+"%(counter)s Person gesendet:"
+msgstr[1] ""
+"Jede Person erhält eine eigene E-Mail. Antworten gehen an das "
+"Lehrgangsteam, das auch eine Kopie erhält. Diese E-Mail wird an "
+"%(counter)s Personen gesendet:"
+
+#: templates/admin/course_registrations/email_participants.html:46
+#, python-format
+msgid "Recipient (%(counter)s):"
+msgid_plural "Recipients (%(counter)s):"
+msgstr[0] "Empfänger (%(counter)s):"
+msgstr[1] "Empfänger (%(counter)s):"
+
+#: templates/admin/course_registrations/email_participants.html:61
+msgid "No email address, will be skipped:"
+msgstr "Keine E-Mail-Adresse, wird übersprungen:"
+
+#: templates/admin/course_registrations/email_participants.html:68
+msgid "Send email"
+msgstr "E-Mail senden"
+
+#: templates/admin/course_registrations/email_participants.html:69
+msgid "Back"
+msgstr "Zurück"
+
+#: templates/admin/course_registrations/email_participants.html:71
+msgid "Review"
+msgstr "Überprüfen"
