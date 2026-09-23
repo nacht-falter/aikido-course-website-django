@@ -4187,3 +4187,23 @@ msgstr ""
 "Diese Seite gehört zu Deinem persönlichen Link aus der Bestätigungs-E-Mail. "
 "Bitte gib den Link nicht weiter: Wer ihn hat, kann Deine Anmeldung ändern "
 "oder stornieren."
+
+#: course_registrations/views.py:512
+msgid "The confirmation email for your cancellation could not be sent."
+msgstr "Die Bestätigungs-E-Mail für Deine Stornierung konnte nicht gesendet werden."
+
+#: danbw_website/utils.py:145
+msgid "[Dynamic Aikido Nocquet BW] Cancellation of your registration for "
+msgstr "[Dynamic Aikido Nocquet BW] Stornierung Deiner Anmeldung für "
+
+#: templates/email/cancellation_confirmation.html:15
+msgid "Your registration for the following course has been cancelled:"
+msgstr "Deine Anmeldung für folgenden Lehrgang wurde storniert:"
+
+#: templates/email/cancellation_confirmation.html:22
+msgid ""
+"If you did not cancel this registration yourself, please let us know by "
+"replying to this email."
+msgstr ""
+"Falls Du diese Anmeldung nicht selbst storniert hast, gib uns bitte Bescheid, "
+"indem Du auf diese E-Mail antwortest."

@@ -72,7 +72,7 @@ This website aims at offering an easy and straightforward way for DANBW members 
 - After registering, participants receive a confirmation email with the course details, the selected sessions and the payment information. The course team receives a notification email.
 - Logged-in users can see their registrations on the **My Registrations** page. They can update or cancel their registrations there until the course starts, and mark past courses as attended or not attended.
 - Guests receive a personal link in their confirmation email, which lets them view, update or cancel their registration until the course starts, without an account.
-- After an update, participants receive an updated confirmation email and the course team is notified.
+- After an update or cancellation, participants receive a confirmation email and the course team is notified. The cancellation email asks participants to get in touch if they didn't cancel themselves.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_courseregistration.png)
 

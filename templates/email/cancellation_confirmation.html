@@ -1,0 +1,30 @@
+{% load i18n %}
+{% load l10n %}
+
+<!doctype html>
+<html lang="{{ request.LANGUAGE_CODE }}">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ subject }}</title>
+</head>
+
+<body>
+  <p>{% trans "Hi" %} {{ first_name }},</p>
+  <p>
+    {% trans "Your registration for the following course has been cancelled:" %}
+    <strong>{{ registration.course.title }}</strong>
+  </p>
+  <p>
+    {% trans "Course dates:" %} {{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}
+  </p>
+  <p>
+    {% trans "If you did not cancel this registration yourself, please let us know by replying to this email." %}
+  </p>
+  <p>
+    {% trans "Kind regards" %}<br />
+    {% trans "Your Course Team" %}
+  </p>
+</body>
+
+</html>

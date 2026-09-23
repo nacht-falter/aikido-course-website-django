@@ -1,5 +1,6 @@
 import os
 from datetime import date, datetime, timedelta
+from smtplib import SMTPException
 from unittest.mock import patch
 
 from django.core import mail
@@ -144,8 +145,21 @@ class GuestSelfServiceTest(TestCase):
         response = self.client.post(guest_url("guest_cancel_courseregistration", self.registration))
         self.assertRedirects(response, reverse("course_list"), fetch_redirect_response=False)
         self.assertFalse(CourseRegistration.objects.filter(pk=self.registration.pk).exists())
-        self.assertEqual([m.to for m in mail.outbox], [["team@example.com"]])
-        self.assertIn("guest@example.com", mail.outbox[0].body)
+        self.assertEqual(
+            sorted(m.to[0] for m in mail.outbox), ["guest@example.com", "team@example.com"]
+        )
+        notification = next(m for m in mail.outbox if m.to == ["team@example.com"])
+        self.assertIn("guest@example.com", notification.body)
+        confirmation = next(m for m in mail.outbox if m.to == ["guest@example.com"])
+        self.assertIn("Guest", confirmation.body)
+        self.assertIn(self.course.title, confirmation.subject)
+
+    def test_cancel_succeeds_when_confirmation_email_fails(self):
+        print("\ntest_cancel_succeeds_when_confirmation_email_fails")
+        with patch("danbw_website.utils.send_cancellation_confirmation",
+                   side_effect=SMTPException("boom")):
+            self.client.post(guest_url("guest_cancel_courseregistration", self.registration))
+        self.assertFalse(CourseRegistration.objects.filter(pk=self.registration.pk).exists())
 
     def test_no_changes_once_the_course_has_started(self):
         print("\ntest_no_changes_once_the_course_has_started")
@@ -214,6 +228,15 @@ class AccountHolderDeadlineTest(TestCase):
         self.assertIn("Member", confirmation[0].body)
         self.assertNotIn("/registration/", confirmation[0].body)
         self.assertEqual(len([m for m in mail.outbox if m.to == ["team@example.com"]]), 1)
+
+    def test_cancel_sends_confirmation_to_account_holder(self):
+        print("\ntest_cancel_sends_confirmation_to_account_holder")
+        registration = self.register(starts_in_days=7)
+        self.client.post(reverse("cancel_courseregistration", kwargs={"pk": registration.pk}))
+        confirmation = [m for m in mail.outbox if m.to == ["member@example.com"]]
+        self.assertEqual(len(confirmation), 1)
+        self.assertIn("Member", confirmation[0].body)
+        self.assertEqual(confirmation[0].from_email, "team@example.com")
 
     def test_list_hides_buttons_for_started_course(self):
         print("\ntest_list_hides_buttons_for_started_course")

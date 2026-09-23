@@ -504,6 +504,14 @@ class CancelCourseRegistration(ManageRegistrationMixin, View):
             registration.course.title + _(" has been cancelled.")
         )
 
+        try:
+            utils.send_cancellation_confirmation(request, registration)
+        except SMTPException:
+            messages.warning(
+                request,
+                _("The confirmation email for your cancellation could not be sent.")
+            )
+
         if "token" in kwargs:
             return HttpResponseRedirect(reverse("course_list"))
         return HttpResponseRedirect(reverse("courseregistration_list"))

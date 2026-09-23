@@ -136,6 +136,35 @@ def send_cancellation_notification(request, registration):
                 _("Failed to send cancellation notification email. Please contact the course team.")) from e
 
 
+def send_cancellation_confirmation(request, registration):
+    """Sends a cancellation confirmation email to the participant, so that a
+    cancellation they didn't make themselves doesn't go unnoticed"""
+
+    with translation.override(request.LANGUAGE_CODE):
+        first_name, _last_name, recipient = get_registration_contact(registration)
+        subject = _("[Dynamic Aikido Nocquet BW] Cancellation of your registration for ") + \
+            registration.course.title
+
+        message = render_to_string(
+            "email/cancellation_confirmation.html",
+            {
+                "request": request,
+                "registration": registration,
+                "first_name": first_name,
+                "subject": subject,
+            },
+        )
+
+        email = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email=os.environ.get("COURSE_TEAM_EMAIL"),
+            to=[recipient],
+        )
+        email.content_subtype = "html"
+        email.send()
+
+
 def send_registration_notification(request, registration, updated=False):
     """Sends a registration notification email"""
 
