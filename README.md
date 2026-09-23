@@ -37,55 +37,91 @@ This website aims at offering an easy and straightforward way for DANBW members 
 
 ### Existing Features
 
+#### Languages
+- The website is available in German and English. Visitors can switch the language from the footer.
+- Course details, pages and categories are translatable content, so staff can maintain both language versions in the admin site.
+- Confirmation emails are sent in the language the visitor used on the website. Registration and cancellation notifications to the course team are always sent in German.
+
 #### User Accounts and Profiles
-- Users can sign up to the website by providing an email address, a username, and a password.
+- Users can sign up to the website by providing an email address, a username, and a password. The sign-up form is protected by a CAPTCHA.
 - Users need to confirm their email address, before being able to log in to the website.
-- After having confirmed their email address, users are asked to create a user profile with their full name and their current Aikido grade.
+- After having confirmed their email address, users are asked to create a user profile with their full name, their dojo and their current Aikido grade.
 - Users can see their user profile on the **My Profile** page. From there, they can also update their information or delete their account, if they are regular users (Staff users cannot delete their accounts from the frontend, as a security measure).
 
 ![Screenshots Account](media/screenshots/screenshots_account.png)
 
-#### Course Registration and Management
-- Users can sign up for courses by choosing a course with open registration status from the **Courses** page and filling out the sign-up form. Users can decide if they want to participate in the whole course or select single sessions. The course fee will be calculated automatically, depending on the selection. Users can also apply for a grading exam. The exam grade will be stored with the registration according to the user's current grade.
-- After signing up for a course, users can see their current registrations on the **My Registrations** page. They can update or cancel their registrations if they wish.
+#### Courses
+- The **Courses** page lists upcoming and past courses. Besides the organization's own courses, it also lists external courses by other organizations, which link to the organizer's website.
+- A course can have a flyer image, a description, a location and additional information, and consists of one or more sessions.
+- Registration opens and closes automatically according to a course's registration period. Courses can be prepared as a preview and are published automatically on their publication date.
+- The start page lists courses coming up in the next months.
+
+#### Course Registration
+- Users can sign up for courses by choosing a course with open registration and filling out the sign-up form. They can register for the entire course or select single sessions.
+- Visitors without an account can register as guests. Guest registrations are protected by a CAPTCHA. If a guest registers with the name and email address of an existing account, the registration is linked to that account.
+- The course fee is calculated automatically and shown while filling out the form. It depends on:
+  - the course type and fee category, with fees for single sessions, single days, the entire course, and Dan preparation sessions or Dan seminars;
+  - the payment method (bank transfer or cash, with an optional surcharge for cash payments);
+  - D.A.N. membership (non-members can be charged a surcharge);
+  - an optional reduced fee for economically disadvantaged participants, with a discount percentage set per course;
+  - an optional fixed price for individual sessions, which overrides the standard session fee.
+- Courses can offer a dinner and an overnight stay, or several accommodation options with their own fees.
+- For family reunion courses, fees are charged per day, payment is always by bank transfer, and a deposit can be recorded.
+- Dan seminars are only open to participants with 1st Kyu or higher.
+- For courses with exams, users can apply for a grading exam. The exam grade is stored with the registration according to the user's current grade.
+- After registering, participants receive a confirmation email with the course details, the selected sessions and the payment information. The course team receives a notification email.
+- Logged-in users can see their registrations on the **My Registrations** page. They can update or cancel their registrations there, and mark past courses as attended or not attended.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_courseregistration.png)
 
-- Upon logging in for the first time after a course with an exam application has passed, the user will be asked to confirm if they have passed their exam.
+- Upon logging in for the first time after a course with an exam application has passed, the user will be asked to confirm if they have passed their exam. If so, the grade in their profile is updated.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_exam_passed.png)
 
+#### Memberships
+- Visitors can apply online for a D.A.N. BW membership, a D.A.N. International membership (including a SEPA direct debit mandate) and a children's passport.
+- Logged-in users get the form pre-filled with the data from their profile.
+- Applicants receive a confirmation email with the fees and payment information, and the treasurer is notified of each new application.
+
 #### Website UX
-- The website has a responsive navigation menu accessible from all pages.
-- The start page presents the user with an image slideshow and general information about the organization. Furthermore, the start page features a list of upcoming courses, so that users can immediately see, which courses are available to sign up for.
+- The website has a responsive navigation menu accessible from all pages, and a breadcrumb navigation.
+- The start page presents the user with an image slideshow and general information about the organization, followed by a list of upcoming courses, so that users can immediately see, which courses are available to sign up for.
 - There are several other pages available providing detailed information about Aikido, about the organization. Moreover, visitors, who are interested in learning Aikido, can get information on where to start.
-- Finally, there is a contact page available from the websites' footer. Upon submitting the contact form, an email is sent to the organization with the user's message.
+- Finally, there is a contact page available from the websites' footer. Upon submitting the contact form, an email is sent to the organization with the user's message. The footer also links to the imprint and privacy policy.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_content.png)
 
 #### Staff functions
 ##### Course and Registration Management
 - Staff members can manage courses and course registrations from the Django admin site. They can create new courses, update existing courses, and see a list of registrations for each course.
-- They can also update registrations, for example to update the payment status.
-- There are actions available for duplicating courses (in order to minimize the effort for creating new courses, which are similar to existing courses) and for toggling a course's registration status.
+- For each course, staff can decide whether participants can apply for an exam ("Course with Exam").
+- Fees are managed in the admin site as a matrix of course type, fee category and fee type. A management command (`create_fees`) can create the fee entries from a JSON price matrix.
+- Registrations can be filtered by course, date, payment status, payment method, exam and anonymization status. Staff can update registrations, for example to update the payment status.
+- There are actions available for:
+  - duplicating courses (in order to minimize the effort for creating new courses, which are similar to existing courses), toggling a course's status and registration status;
+  - toggling the payment status of registrations;
+  - exporting registrations as CSV files (one file per course, or a zip file for several courses). Members of the "Course Team" group can also download a course's registrations from the website directly;
+  - emailing selected participants: staff write a message, review the subject, text and recipient list, and each participant receives an individual email. Replies go to the course team, which also receives a copy.
+- Membership applications can be viewed and exported as CSV. For D.A.N. International memberships and children's passports, staff can toggle whether the passport has been issued.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_admin_courses.png)
 
 ##### Content Management
-- Staff users can also create new pages or edit existing pages to update the website's content.
-- Pages are assigned a category and newly created pages will automatically appear in the main navigation in the appropriate menu item. The order in which pages and categories appear in the navigation can be controlled by assigning a menu position value.
+- Staff users can also create new pages or edit existing pages to update the website's content, in both languages.
+- Pages are assigned a category and newly created pages will automatically appear in the main navigation in the appropriate menu item. The order in which pages and categories appear in the navigation can be controlled by assigning a menu position value. Pages in the "Footer Links" category appear in the footer instead.
 - The page content can be edited with a WYSIWYG editor, which allows for styling and also image upload.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_admin_pages.png)
 
+#### Data Protection
+- Personal data in course registrations is anonymized automatically. The `anonymize_registrations` management command anonymizes registrations of guests and of deactivated accounts once their course ended two or more calendar years ago, and is meant to run regularly (e.g. monthly). `--dry-run` shows what would be anonymized.
+- Anonymization removes names, email addresses, comments, grades, exam details and discount information. The course, selected sessions, fees, payment status and dojo are kept for statistics and bookkeeping.
+- Registrations of active accounts are kept as the users' course history until the account is deactivated.
+
 ### Future Features
 - The following features have not been implemented in the current scope of the project, but could be worth considering for future iterations:
-  - Add a breadcrumb navigation to the website to further improve user experience.
-  - Update a course's registration status automatically based on a registration period. This would require some task scheduling solution on the server, like [Cron](https://wiki.ubuntuusers.de/Cron/).
   - Limit the final fee of a course registration so that the fee for multiple sessions never exceeds the fee for the entire course.
-  - Add the option to upload a PDF file or an image as an attachment with a course.
-  - Add a form for signing up for a membership with the organization.
-  - Allow staff users to download course registration data as a CSV file.
+  - Allow guests to update or cancel their registrations without an account, e.g. via a personal link in the confirmation email.
 - Furthermore, all [user stories, which were not part of the current scope of the project](#user-stories-not-included-in-current-scope), could be reevaluated and considered for future iterations. 
 
 ## Design Process
@@ -1599,15 +1635,16 @@ The progress of the project was tracked with a burndown chart ([Burndown Chart T
 
 ### Addditional Python Packages
 
-- [gunicorn](https://pypi.org/project/gunicorn/): WSGI server used for deployment 
-- [psycopg2](https://pypi.org/project/psycopg2/): PostgreSQL database integration
-- [dj-database-url](https://pypi.org/project/dj-database-url/): Django database management 
-- [cloudinary](https://pypi.org/project/cloudinary/): Cloudinary integration
-- [dj3-cloudinary-storage](https://pypi.org/project/dj3-cloudinary-storage/): Using Cloudinary as Django file storage
-- [django-allauth](https://pypi.org/project/django-allauth/): Advanced authentication and user management for Django 
-- [django-summernote](https://pypi.org/project/django-summernote/): WYSIWYG editor for text fields
-- [django-crispy-forms](https://pypi.org/project/django-crispy-forms/): Provides styling for Django forms 
-- [crispy-bootstrap5](https://pypi.org/project/crispy-bootstrap5/): Bootstrap5 package for crispy forms 
+- [gunicorn](https://pypi.org/project/gunicorn/): WSGI server used for deployment
+- [psycopg](https://pypi.org/project/psycopg/): PostgreSQL database integration
+- [dj-database-url](https://pypi.org/project/dj-database-url/): Django database management
+- [django-allauth](https://pypi.org/project/django-allauth/): Advanced authentication and user management for Django
+- [django-parler](https://pypi.org/project/django-parler/): Translatable model fields for German and English content
+- [django-prose-editor](https://pypi.org/project/django-prose-editor/): WYSIWYG editor for text fields
+- [django-simple-captcha](https://pypi.org/project/django-simple-captcha/): CAPTCHA for the sign-up form
+- [django-crispy-forms](https://pypi.org/project/django-crispy-forms/): Provides styling for Django forms
+- [crispy-bootstrap5](https://pypi.org/project/crispy-bootstrap5/): Bootstrap5 package for crispy forms
+- [easy-thumbnails](https://pypi.org/project/easy-thumbnails/): Image thumbnails
 - [coverage](https://pypi.org/project/coverage/): Analyzing test coverage
 
 ### Other Software
@@ -1617,15 +1654,10 @@ The progress of the project was tracked with a burndown chart ([Burndown Chart T
 - [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) have been used for Agile sprint planning and task tracking.
   [The project boards for all sprints can be found here](https://github.com/nacht-falter/aikido-course-website-django/projects?query=is%3Aclosed).
 - [Git](https://git-scm.com/) was used for version control by committing changes to Git and pushing them to GitHub from the command line.
-- [Heroku](https://heroku.com/) is used to deploy the website. The deployed version is available at: 
-- [ElephantSQL](https://www.elephantsql.com/) is used for the project's PostgreSQL database.
-- [Cloudinary](https://cloudinary.com/) is used to store media files.
 - [Balsamiq](https://balsamiq.com/) was used to create the [wireframes](#skeleton-plane) during the design process.
 - [Lucidchart](https://www.lucidchart.com/) was used to create the [entity relationship diagrams (ERD)](#structure-plane) used for modeling the project database.
 - [Font Awesome](https://fontawesome.com/) was used to add icons for aesthetic and UX purposes. The necessary files have been included in the static/fontawesome folder to avoid loading them from an external resource on each page load.
 - [Google Fonts](https://fonts.google.com/) was used to import the font 'Source Sans 3'. The [font files](https://fonts.google.com/specimen/Source+Sans+3) have been included in the assets/fonts folder, to ensure that they don't have to be loaded from an external resource.
-- [LightHouse](https://developer.chrome.com/docs/lighthouse/) has been used to assess the website's performance.
-- [WAVE](https://wave.webaim.org/) has been used to further evaluate the website's accessibility.
 - [Neovim](https://neovim.io/) was used for writing code.
 - [Pixelmator Pro](https://www.pixelmator.com/pro/) was used to resize and edit images and to create the [mockup image](#danbw-aikido-course-website) at the top of this README
 
@@ -1644,13 +1676,14 @@ Run the following commands on the server for every release:
 ```bash
 git pull
 pip install -r requirements.txt
-python manage.py makemigrations
 python manage.py migrate
 python manage.py collectstatic
 sudo systemctl restart gunicorn  # or however the server process is managed
 ```
 
-**Why `makemigrations` on the server?** Migration files are listed in `.gitignore` and are not committed to the repository. They must be generated on each environment separately. This is intentional for a single-server/single-developer setup, but means the extra `makemigrations` step is always required before `migrate`.
+Migration files are committed to the repository. Create them locally with `makemigrations` and commit them together with the model changes; don't run `makemigrations` on the server.
+
+To anonymize old course registrations regularly (see [Data Protection](#data-protection)), schedule `python manage.py anonymize_registrations`, e.g. monthly.
 
 ## Credits
 

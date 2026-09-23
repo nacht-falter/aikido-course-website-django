@@ -44,37 +44,6 @@ The detailed test results can be found here: [Test Results JavaScript](media/tes
 
 - Also, several test users said, that they were confused by the disabled submit button in the course registration form. Since I had added some custom JavaScript to disable the submit button if required fields were not filled out, users were not able to get feedback on which fields are missing. So, some JavaScript has been added to display custom form validation messages ([Commit](https://github.com/nacht-falter/aikido-course-website-django/commit/9952002618450a99b2bab63dff36bcb602cc7ca0))
 
-## Validators and Linters
-
-### W3C Validators
-
-Both HTML and CSS pass the [W3C Markup Validator](https://validator.w3.org) and [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) with no errors:
-- [W3C Markup Validator results](https://validator.w3.org/nu/?doc=https%3A%2F%2Faikido-course-website-django-ddffe52bc952.herokuapp.com%2F) 
-- [W3C CSS Validator results](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fres.cloudinary.com%2Fdlbwcrs5v%2Fraw%2Fupload%2Fv1%2Fstatic%2Fcss%2Fstyle.6bea1ea32948.css&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en) (The W3C validator does not work with Bootstrap. Therefore, only the custom CSS code in style.css has been validated)
-
-### PEP 8 Linter
-
-All python code written for the project passes through the PEP 8 [python linter](https://pep8ci.herokuapp.com/) by Code Institute with no issues.
-
-### Jshint
-
-All JavaScript code was validated with the [Jshint linter](https://jshint.com/). All code passed with no errors.
- 
-### Chrome Lighthouse
-
-A report on the application website generated with [Chrome Lighthouse](https://developer.chrome.com/docs/lighthouse/) showed no major issues with the performance or accessibility of the application.
-
-![Lighthouse results summary](media/testing/lighthouse_result_summary.png)
-
-[Detailed Chrome Lighthouse results](media/testing/lighthouse_results.pdf)
-
-### WAVE
-
-[WAVE (Web Accessibility Evaluation Tool)](https://wave.webaim.org/) was used to assess the website's accessibility. The test results showed no errors.
-
-![WAVE Results](media/testing/WAVE.png)
-
-
 ## Bugs
 
 A list of the issues created for bugs encountered during devolpment can be found [here](https://github.com/nacht-falter/aikido-course-website-django/issues?q=label%3ABUG+is%3Aclosed).
