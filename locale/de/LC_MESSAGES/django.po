@@ -4102,3 +4102,11 @@ msgstr "Zurück"
 #: templates/admin/course_registrations/email_participants.html:71
 msgid "Review"
 msgstr "Überprüfen"
+
+#: course_registrations/models.py:156
+msgid "Anonymized on"
+msgstr "Anonymisiert am"
+
+#: course_registrations/models.py:352
+msgid "Anonymized"
+msgstr "Anonymisiert"

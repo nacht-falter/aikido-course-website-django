@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 from django.shortcuts import get_object_or_404
 from django.utils.html import format_html
@@ -145,6 +147,12 @@ class CourseRegistration(models.Model):
         blank=True,
         null=True,
         help_text=_("Amount of deposit received from the participant. See 'Remaining Balance' below."),
+    )
+    anonymized_on = models.DateField(
+        _("Anonymized on"),
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     class Meta:
@@ -343,7 +351,37 @@ class CourseRegistration(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
+        if self.anonymized_on:
+            return str(_("Anonymized"))
         return f"{self.first_name} {self.last_name}"
+
+    @classmethod
+    def due_for_anonymization(cls, today=None):
+        """Registrations to anonymize: guests and deactivated accounts, for
+        courses that ended two or more calendar years ago. The time in
+        between covers settling payments and closing the club's accounts."""
+        today = today or date.today()
+        return cls.objects.filter(
+            models.Q(user__isnull=True) | models.Q(user__is_active=False),
+            anonymized_on__isnull=True,
+            course__end_date__year__lte=today.year - 2,
+        )
+
+    def anonymize(self, today=None):
+        """Removes all personal data, keeping course, sessions and fees"""
+        self.user = None
+        self.first_name = None
+        self.last_name = None
+        self.email = None
+        self.comment = ""
+        self.grade = None
+        self.exam = False
+        self.exam_grade = None
+        self.exam_passed = None
+        self.discount = False
+        self.dan_member = False
+        self.anonymized_on = today or date.today()
+        self.save()
 
     def truncated_session_display(self):
         all_sessions = self.course.sessions.all()

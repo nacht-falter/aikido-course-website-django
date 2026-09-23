@@ -123,7 +123,8 @@ class CourseRegistrationAdmin(admin.ModelAdmin):
     ]
     search_fields = ["course__translations__title", "first_name", "last_name", "email"]
     list_filter = [FutureCourseFilter, CourseFilter, "payment_status",
-                   "payment_method", "exam"]
+                   "payment_method", "exam",
+                   ("anonymized_on", admin.EmptyFieldListFilter)]
     ordering = ["-course__start_date", "-registration_date"]
     actions = [
         "toggle_payment_status", "export_csv", "email_participants"
