@@ -1,0 +1,162 @@
+{% load i18n %}
+{% load l10n %}
+<div class="card my-4 registration-card">
+    <div class="card-header bg-secondary-subtle d-sm-flex justify-content-between">
+        <h4 id="registration-{{ registration.id }}" class="my-1 card-title">
+            {{ registration.course.title }}
+        </h4>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th scope="col">{% trans "Dates:" %}</th>
+                <td>{{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}</td>
+            </tr>
+            <tr>
+                <th scope="col">{% trans "Selected Sessions:" %}</th>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for session in registration.selected_sessions.all %}
+                        <li>
+                            <strong>{{ session.title }}</strong> ({{ session.date|localize }}, {{ session.start_time|localize }}-{{ session.end_time|localize }})
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th scope="col">{% trans "Course Fee:" %}</th>
+                {% get_current_language as LANGUAGE_CODE %}
+                {% if registration.final_fee > 0 %}
+                    {% if LANGUAGE_CODE == 'en' %}
+                        <td>€{{ registration.final_fee|floatformat:2 }}</td>
+                    {% else %}
+                        <td>{{ registration.final_fee|floatformat:2 }} €</td>
+                    {% endif %}
+                {% else %}
+                    <td><strong>{% trans "Free" %}</strong></td>
+                {% endif %}
+            </tr>
+            {% if registration.final_fee > 0 %}
+                {% if registration.course.course_type|default:'' == 'family_reunion' %}
+                <tr>
+                    <th scope="col">{% trans "Deposit Payment:" %}</th>
+                    <td>
+                        {% blocktrans with deadline=registration.course.bank_transfer_until|localize trimmed %}
+                        Please transfer a deposit of €100.00 by {{ deadline }}.
+                        {% endblocktrans %}
+                        <div class="mt-2">{{ bank_account|linebreaksbr }}</div>
+                        <div class="mt-2"><small>{% trans "If you are unable to attend, we will refund your deposit—provided no costs have been incurred by the organisers." %}</small></div>
+                    </td>
+                </tr>
+                {% elif registration.payment_method == 0 %}
+                <tr>
+                    <th scope="col"></th>
+                    <td>
+                        {% trans "Please transfer the course fee to the following account until" %} <strong>{{ registration.course.bank_transfer_until|localize }}</strong>:
+                        <div class="mt-2">{{ bank_account|linebreaksbr }}</div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <th scope="col"></th>
+                    <td>
+                        {% trans "Please pay the course fee in cash at the beginning of the course." %}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
+            {% if registration.dinner %}
+            <tr>
+                <th scope="col">{% trans "Dinner" %}:</th>
+                <td>
+                    {% trans "You have signed up for the dinner." %}<br>
+                    <small>{% trans "Please note that this is a binding reservation." %}</small>
+                </td>
+            </tr>
+            {% endif %}
+            {% if registration.overnight_stay %}
+            <tr>
+                <th scope="col">{% trans "Overnight stay" %}:</th>
+                <td>
+                    {% trans "You have specified that you need a place to stay overnight." %}<br>
+                </td>
+            </tr>
+            {% endif %}
+            {% if registration.accommodation_option %}
+            <tr>
+                <th scope="col">{% trans "Accommodation" %}:</th>
+                <td>{{ registration.accommodation_option.name }}</td>
+            </tr>
+            {% endif %}
+            {% if registration.comment %}
+            <tr>
+                <th scope="col">{% trans "Your Comment:" %}</th>
+                <td>{{ registration.comment }}</td>
+            </tr>
+            {% endif %}
+            {% if registration.course.additional_info %}
+            <tr>
+                <th scope="col">{% trans "Additional Information:" %}</th>
+                <td>{{ registration.course.additional_info|safe }}</td>
+            </tr>
+            {% endif %}
+        </table>
+
+        {% if registration.exam %}
+        <p class="badge text-bg-warning">
+            {% blocktrans with exam_grade=registration.get_exam_grade_display %}
+            You have applied for an exam for {{ exam_grade }}.
+            {% endblocktrans %}
+        </p>
+        {% endif %}
+
+    </div>
+    {% if registration.can_be_changed %}
+    <div class="card-footer bg-secondary-subtle text-center">
+        <a class="btn btn-sm btn-primary course-signup-button m-2 my-sm-0"
+            href="{{ update_url }}">
+            {% trans "Update registration" %}
+        </a>
+        <a class="btn btn-sm btn-danger m-2 my-sm-0" data-bs-toggle="modal"
+            data-bs-target="#cancelRegistrationModal{{ registration.pk }}" href="#">
+            {% trans "Cancel registration" %}
+        </a>
+    </div>
+
+    <!-- Cancel Registration Modal -->
+    <div class="modal fade" id="cancelRegistrationModal{{ registration.pk }}" tabindex="-1"
+        aria-labelledby="cancelRegistrationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelRegistrationModalLabel">{% trans "Cancel Registration" %}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans "Close" %}"></button>
+                </div>
+                <div class="modal-body">
+                    <h2>{% trans "Cancel Registration for" %} {{ registration.course.title }}?</h2>
+                    <p>
+                        {% blocktrans with course_title=registration.course.title %}
+                        Are you sure you want to cancel your registration for {{ registration.course.title }}?
+                        {% endblocktrans %}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" action="{{ cancel_url }}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">{% trans "No, go back" %}</button>
+                        <input class="btn btn-sm btn-danger" type="submit" value="{% trans "Yes, cancel my registration" %}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="card-footer bg-secondary-subtle text-center">
+        <small>{% trans "The course has started. Please contact the course team to change or cancel your registration." %}</small>
+    </div>
+    {% endif %}
+</div>

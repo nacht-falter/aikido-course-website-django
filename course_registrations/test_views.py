@@ -621,8 +621,8 @@ class CancelUserCourseRegistrationTest(TestCase):
         self.course = InternalCourse.objects.create(
             title="Test course",
             slug="test-course",
-            start_date=date.today(),
-            end_date=date.today() + timedelta(days=1),
+            start_date=date.today() + timedelta(days=1),
+            end_date=date.today() + timedelta(days=2),
             registration_status=(1),
             course_type="sensei_emmerson",
             fee_category="regular",
@@ -734,8 +734,8 @@ class UpdateUserCourseRegistrationTest(TestCase):
         self.course = InternalCourse.objects.create(
             title="Test course",
             slug="test-course",
-            start_date=date.today(),
-            end_date=date.today() + timedelta(days=1),
+            start_date=date.today() + timedelta(days=1),
+            end_date=date.today() + timedelta(days=2),
             registration_status=(1),
             course_type="sensei_emmerson",
             fee_category="regular",
@@ -790,8 +790,8 @@ class UpdateUserCourseRegistrationTest(TestCase):
         dan_prep_course = InternalCourse.objects.create(
             title="DAN Prep Course",
             slug="dan-prep-course",
-            start_date=date.today(),
-            end_date=date.today() + timedelta(days=1),
+            start_date=date.today() + timedelta(days=1),
+            end_date=date.today() + timedelta(days=2),
             registration_status=1,
             course_type="sensei_emmerson",
             fee_category="regular",

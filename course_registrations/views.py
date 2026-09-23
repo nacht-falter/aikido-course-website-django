@@ -8,10 +8,10 @@ from smtplib import SMTPException
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
-from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
                               redirect, render, reverse)
 from django.urls import reverse
@@ -416,30 +416,85 @@ class CourseRegistrationList(LoginRequiredMixin, View):
         )
 
 
-class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
-    """Deletes a course registration instance"""
+class ManageRegistrationMixin:
+    """Gives access to a registration either by personal link (guests) or by
+    primary key for the logged-in owner, until the course starts"""
 
-    def get(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
-        if registration.user != request.user:
+    def dispatch(self, request, *args, **kwargs):
+        if "token" not in kwargs and not request.user.is_authenticated:
+            return redirect_to_login(request.get_full_path())
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_registration(self):
+        if "token" in self.kwargs:
+            registration = CourseRegistration.from_manage_token(self.kwargs["token"])
+            if registration is None:
+                raise Http404
+            return registration
+
+        registration = get_object_or_404(CourseRegistration, pk=self.kwargs["pk"])
+        if registration.user != self.request.user:
             raise PermissionDenied
+        return registration
+
+    def get_overview_url(self, registration):
+        """Where to go after viewing, updating or being refused a change"""
+        if "token" in self.kwargs:
+            return reverse("guest_registration", kwargs={"token": self.kwargs["token"]})
+        return reverse("courseregistration_list")
+
+    def refuse_if_started(self, registration):
+        """Returns a redirect if the registration can no longer be changed"""
+        if registration.can_be_changed():
+            return None
         messages.warning(
+            self.request,
+            _("The course has started. Please contact the course team to change or cancel your registration.")
+        )
+        return HttpResponseRedirect(self.get_overview_url(registration))
+
+
+class GuestRegistrationDetail(ManageRegistrationMixin, View):
+    """Shows a guest's registration via their personal link"""
+
+    def get(self, request, token):
+        registration = self.get_registration()
+        return render(
             request,
-            _("Please cancel registrations by clicking the button from the 'My Registrations' page.")
+            "guest_registration.html",
+            {
+                "registration": registration,
+                "update_url": reverse("guest_update_courseregistration", kwargs={"token": token}),
+                "cancel_url": reverse("guest_cancel_courseregistration", kwargs={"token": token}),
+                "bank_account": os.environ.get("BANK_ACCOUNT"),
+            },
         )
 
-        return HttpResponseRedirect(reverse("courseregistration_list"))
 
-    def post(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
-        if registration.user != request.user:
-            raise PermissionDenied
+class CancelCourseRegistration(ManageRegistrationMixin, View):
+    """Deletes a course registration instance"""
+
+    def get(self, request, **kwargs):
+        registration = self.get_registration()
+        if "token" in kwargs:
+            message = _("Please cancel your registration by clicking the button on your registration page.")
+        else:
+            message = _("Please cancel registrations by clicking the button from the 'My Registrations' page.")
+        messages.warning(request, message)
+
+        return HttpResponseRedirect(self.get_overview_url(registration))
+
+    def post(self, request, **kwargs):
+        registration = self.get_registration()
+        refused = self.refuse_if_started(registration)
+        if refused:
+            return refused
 
         try:
             utils.send_cancellation_notification(request, registration)
         except SMTPException as e:
             messages.error(request, e)
-            return HttpResponseRedirect(reverse("courseregistration_list"))
+            return HttpResponseRedirect(self.get_overview_url(registration))
 
         registration.delete()
 
@@ -449,16 +504,46 @@ class CancelCourseRegistration(LoginRequiredMixin, SuccessMessageMixin, View):
             registration.course.title + _(" has been cancelled.")
         )
 
+        if "token" in kwargs:
+            return HttpResponseRedirect(reverse("course_list"))
         return HttpResponseRedirect(reverse("courseregistration_list"))
 
 
-class UpdateCourseRegistration(LoginRequiredMixin, View):
+class UpdateCourseRegistration(ManageRegistrationMixin, View):
     """Updates a course registration"""
 
-    def get(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
-        if registration.user != request.user:
-            raise PermissionDenied
+    def get_form_kwargs(self, registration):
+        user_profile = registration.user.profile if registration.user else None
+        return {
+            "instance": registration,
+            "course": registration.course,
+            "user_profile": user_profile,
+        }
+
+    def get_guest_initial(self, registration):
+        """Guest registrations store the dojo's display name; map it back to
+        the form's choice, or to 'other' for free-text dojos"""
+        if registration.user:
+            return {}
+        dojo_key = utils.get_tuple_key(constants.DOJO_CHOICES, registration.dojo)
+        if dojo_key:
+            return {"dojo": dojo_key}
+        return {"dojo": "other", "other_dojo": registration.dojo}
+
+    def render_form(self, request, registration, registration_form):
+        try:
+            context = prepare_context(registration.course, registration_form)
+        except ValueError as e:
+            messages.error(request, str(e))
+            return HttpResponseRedirect(self.get_overview_url(registration))
+        context["overview_url"] = self.get_overview_url(registration)
+        return render(request, "update_courseregistration.html", context)
+
+    def get(self, request, **kwargs):
+        registration = self.get_registration()
+        refused = self.refuse_if_started(registration)
+        if refused:
+            return refused
 
         course = registration.course
 
@@ -467,40 +552,26 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
             course.update_has_dan_preparation()
             course.save()
 
-        selected_sessions = registration.selected_sessions.all()
-
         registration_form = forms.CourseRegistrationForm(
-            instance=registration,
-            course=course,
-            user_profile=request.user.profile,
-            initial={"selected_sessions": selected_sessions},
+            **self.get_form_kwargs(registration),
+            initial={
+                "selected_sessions": registration.selected_sessions.all(),
+                **self.get_guest_initial(registration),
+            },
         )
+        return self.render_form(request, registration, registration_form)
 
-        try:
-            context = prepare_context(course, registration_form)
-        except ValueError as e:
-            messages.error(request, str(e))
-            return HttpResponseRedirect(reverse("courseregistration_list"))
-
-        return render(
-            request,
-            "update_courseregistration.html",
-            context,
-        )
-
-    def post(self, request, pk):
-        registration = get_object_or_404(CourseRegistration, pk=pk)
-
-        if registration.user != request.user:
-            raise PermissionDenied
+    def post(self, request, **kwargs):
+        registration = self.get_registration()
+        refused = self.refuse_if_started(registration)
+        if refused:
+            return refused
 
         course = registration.course
 
         registration_form = forms.CourseRegistrationForm(
             data=request.POST,
-            instance=registration,
-            course=course,
-            user_profile=request.user.profile,
+            **self.get_form_kwargs(registration),
         )
 
         if registration_form.is_valid():
@@ -514,7 +585,7 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
 
             registration.final_fee = registration.calculate_fees(
                 course, selected_sessions)
-            registration.set_exam(request.user)
+            registration.set_exam(registration.user)
             registration.save()
 
             registration.selected_sessions.set(selected_sessions)
@@ -525,26 +596,24 @@ class UpdateCourseRegistration(LoginRequiredMixin, View):
                 f"{course.title}",
             )
 
-            return HttpResponseRedirect(reverse("courseregistration_list"))
-
-        else:
-            if not registration_form.cleaned_data.get("selected_sessions"):
+            try:
+                utils.send_registration_confirmation(request, registration, updated=True)
+                utils.send_registration_notification(request, registration, updated=True)
+            except SMTPException:
                 messages.warning(
                     request,
-                    _("Registration not submitted. Please select at least one session.")
+                    _("The confirmation email for your updated registration could not be sent.")
                 )
 
-            try:
-                context = prepare_context(course, registration_form)
-            except ValueError as e:
-                messages.error(request, str(e))
-                return HttpResponseRedirect(reverse("courseregistration_list"))
+            return HttpResponseRedirect(self.get_overview_url(registration))
 
-            return render(
+        if not registration_form.cleaned_data.get("selected_sessions"):
+            messages.warning(
                 request,
-                "update_courseregistration.html",
-                context,
+                _("Registration not submitted. Please select at least one session.")
             )
+
+        return self.render_form(request, registration, registration_form)
 
 
 class ExportCourseRegistrations(LoginRequiredMixin, UserPassesTestMixin, View):

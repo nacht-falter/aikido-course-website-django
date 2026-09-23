@@ -4110,3 +4110,80 @@ msgstr "Anonymisiert am"
 #: course_registrations/models.py:352
 msgid "Anonymized"
 msgstr "Anonymisiert"
+
+#: course_registrations/views.py:452
+#: templates/partials/registration_card.html:159
+msgid ""
+"The course has started. Please contact the course team to change or cancel "
+"your registration."
+msgstr ""
+"Der Lehrgang hat bereits begonnen. Bitte wende Dich an das Lehrgangsteam, "
+"um Deine Anmeldung zu ändern oder zu stornieren."
+
+#: course_registrations/views.py:480
+msgid ""
+"Please cancel your registration by clicking the button on your registration "
+"page."
+msgstr ""
+"Bitte storniere Deine Anmeldung durch Klicken auf den Button auf Deiner "
+"Anmeldungsseite."
+
+#: course_registrations/views.py:605
+msgid "The confirmation email for your updated registration could not be sent."
+msgstr ""
+"Die Bestätigungs-E-Mail für Deine geänderte Anmeldung konnte nicht gesendet "
+"werden."
+
+#: danbw_website/utils.py:59
+msgid "[Dynamic Aikido Nocquet BW] Your updated registration for "
+msgstr "[Dynamic Aikido Nocquet BW] Deine geänderte Anmeldung für "
+
+#: danbw_website/utils.py:146
+msgid "[Dynamic Aikido Nocquet BW] Registration updated for "
+msgstr "[Dynamic Aikido Nocquet BW] Anmeldung geändert für "
+
+#: danbw_website/utils.py:148
+#, python-brace-format
+msgid ""
+"A registration for {course} has been updated.\n"
+"\n"
+msgstr ""
+"Eine Anmeldung für {course} wurde geändert.\n"
+"\n"
+
+#: templates/email/registration_confirmation.html:17
+#: templates/email/registration_confirmation_family_reunion.html:17
+msgid "You have successfully updated your registration for"
+msgstr "Du hast Deine Anmeldung erfolgreich geändert für"
+
+#: templates/email/registration_confirmation.html:65
+#: templates/email/registration_confirmation_family_reunion.html:78
+msgid ""
+"You can view, change or cancel your registration until the course starts "
+"using your personal link:"
+msgstr ""
+"Über Deinen persönlichen Link kannst Du Deine Anmeldung bis zum "
+"Lehrgangsbeginn ansehen, ändern oder stornieren:"
+
+#: templates/email/registration_confirmation.html:67
+#: templates/email/registration_confirmation_family_reunion.html:80
+msgid ""
+"Please don't share this link: anyone who has it can change or cancel your "
+"registration."
+msgstr ""
+"Bitte gib diesen Link nicht weiter: Wer ihn hat, kann Deine Anmeldung ändern "
+"oder stornieren."
+
+#: templates/guest_registration.html:6
+msgid "Your Course Registration"
+msgstr "Deine Lehrgangsanmeldung"
+
+#: templates/guest_registration.html:9
+msgid ""
+"This page belongs to your personal link from the confirmation email. Please "
+"don't share the link: anyone who has it can change or cancel your "
+"registration."
+msgstr ""
+"Diese Seite gehört zu Deinem persönlichen Link aus der Bestätigungs-E-Mail. "
+"Bitte gib den Link nicht weiter: Wer ihn hat, kann Deine Anmeldung ändern "
+"oder stornieren."

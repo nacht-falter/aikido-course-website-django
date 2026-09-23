@@ -70,7 +70,9 @@ This website aims at offering an easy and straightforward way for DANBW members 
 - Dan seminars are only open to participants with 1st Kyu or higher.
 - For courses with exams, users can apply for a grading exam. The exam grade is stored with the registration according to the user's current grade.
 - After registering, participants receive a confirmation email with the course details, the selected sessions and the payment information. The course team receives a notification email.
-- Logged-in users can see their registrations on the **My Registrations** page. They can update or cancel their registrations there, and mark past courses as attended or not attended.
+- Logged-in users can see their registrations on the **My Registrations** page. They can update or cancel their registrations there until the course starts, and mark past courses as attended or not attended.
+- Guests receive a personal link in their confirmation email, which lets them view, update or cancel their registration until the course starts, without an account.
+- After an update, participants receive an updated confirmation email and the course team is notified.
 
 ![Screenshots Course Registration](media/screenshots/screenshots_courseregistration.png)
 
@@ -121,7 +123,6 @@ This website aims at offering an easy and straightforward way for DANBW members 
 ### Future Features
 - The following features have not been implemented in the current scope of the project, but could be worth considering for future iterations:
   - Limit the final fee of a course registration so that the fee for multiple sessions never exceeds the fee for the entire course.
-  - Allow guests to update or cancel their registrations without an account, e.g. via a personal link in the confirmation email.
 - Furthermore, all [user stories, which were not part of the current scope of the project](#user-stories-not-included-in-current-scope), could be reevaluated and considered for future iterations. 
 
 ## Design Process

@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import EmailMessage, get_connection, send_mail
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils import translation
 from django.utils.formats import date_format, time_format
 from django.utils.translation import gettext as _
@@ -31,8 +32,15 @@ def send_email_confirmation(user, request):
             "Failed to send email confirmation email. Please contact the course team."))
 
 
-def send_registration_confirmation(request, registration):
-    """Sends a registration confirmation email"""
+def get_registration_contact(registration):
+    """Returns (first_name, last_name, email) of a registration's participant"""
+    person = registration.user or registration
+    return person.first_name, person.last_name, person.email
+
+
+def send_registration_confirmation(request, registration, updated=False):
+    """Sends a registration confirmation email. Guests get a personal link to
+    view, update or cancel their registration."""
 
     # Use override to temporarily switch language and automatically restore previous language
     with translation.override(request.LANGUAGE_CODE):
@@ -47,14 +55,29 @@ def send_registration_confirmation(request, registration):
             ]
 
             # Build subject in user's language (course title will be translated)
-            subject = _("[Dynamic Aikido Nocquet BW] Your Registration for ") + \
-                registration.course.title
+            if updated:
+                subject = _("[Dynamic Aikido Nocquet BW] Your updated registration for ") + \
+                    registration.course.title
+            else:
+                subject = _("[Dynamic Aikido Nocquet BW] Your Registration for ") + \
+                    registration.course.title
+
+            first_name, _last_name, recipient = get_registration_contact(registration)
+            manage_url = None
+            if registration.user is None:
+                manage_url = request.build_absolute_uri(
+                    reverse("guest_registration",
+                            kwargs={"token": registration.get_manage_token()})
+                )
 
             context = {
                 'request': request,
                 'registration': registration,
+                'first_name': first_name,
                 'sessions': sessions,
                 'subject': subject,
+                'updated': updated,
+                'manage_url': manage_url,
                 'bank_account': os.environ.get('BANK_ACCOUNT'),
             }
 
@@ -67,7 +90,6 @@ def send_registration_confirmation(request, registration):
             message = render_to_string(template_name, context)
 
             sender = os.environ.get("COURSE_TEAM_EMAIL")
-            recipient = registration.user.email if request.user.is_authenticated else registration.email
 
             email = EmailMessage(
                 subject=subject,
@@ -90,11 +112,8 @@ def send_cancellation_notification(request, registration):
     # Always send staff emails in German
     with translation.override('de'):
         try:
-            user = registration.user if request.user.is_authenticated else registration
             course = registration.course.title
-            first_name = user.first_name
-            last_name = user.last_name
-            email = user.email
+            first_name, last_name, email = get_registration_contact(registration)
             subject = _("[Dynamic Aikido Nocquet BW] A registration for {course} has been cancelled").format(course=course)
             message_parts = [
                 _("Hi,\n\n"),
@@ -117,21 +136,24 @@ def send_cancellation_notification(request, registration):
                 _("Failed to send cancellation notification email. Please contact the course team.")) from e
 
 
-def send_registration_notification(request, registration):
+def send_registration_notification(request, registration, updated=False):
     """Sends a registration notification email"""
 
     # Always send staff emails in German
     with translation.override('de'):
         try:
-            subject = _("[Dynamic Aikido Nocquet BW] New registration for ") + \
-                registration.course.title
-            first_name = registration.user.first_name if request.user.is_authenticated else registration.first_name
-            last_name = registration.user.last_name if request.user.is_authenticated else registration.last_name
-            email = registration.user.email if request.user.is_authenticated else registration.email
+            if updated:
+                subject = _("[Dynamic Aikido Nocquet BW] Registration updated for ") + \
+                    registration.course.title
+                intro = _("A registration for {course} has been updated.\n\n")
+            else:
+                subject = _("[Dynamic Aikido Nocquet BW] New registration for ") + \
+                    registration.course.title
+                intro = _("A new registration for {course} has been received.\n\n")
+            first_name, last_name, email = get_registration_contact(registration)
             message_parts = [
                 _("Hi,\n\n"),
-                _("A new registration for {course} has been received.\n\n").format(
-                    course=registration.course.title),
+                intro.format(course=registration.course.title),
                 _("Name: {first_name} {last_name}\n").format(
                     first_name=first_name, last_name=last_name),
                 _("Email: {email}\n").format(email=email),

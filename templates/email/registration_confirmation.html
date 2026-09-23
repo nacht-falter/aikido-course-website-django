@@ -11,10 +11,12 @@
 
 <body>
   <p>
-    {% if request.user.is_authenticated %} {% trans "Hi" %} {{ request.user.first_name }},
-    {% else %} {% trans "Hi" %} {{ registration.first_name }}, {% endif %}
+    {% trans "Hi" %} {{ first_name }},
   </p>
-  <p>{% trans "You have successfully signed up for" %} <strong>{{ registration.course.title }}</strong></p>
+  <p>
+    {% if updated %}{% trans "You have successfully updated your registration for" %}{% else %}{% trans "You have successfully signed up for" %}{% endif %}
+    <strong>{{ registration.course.title }}</strong>
+  </p>
   <p>
     {% trans "Course dates:" %} {{ registration.course.start_date|localize }} {% trans "to" %} {{ registration.course.end_date|localize }}
   </p>
@@ -56,6 +58,13 @@
   <p>
     {% trans "You have signed up for the dinner." %}&nbsp;
     {% trans "Please note that this is a binding reservation." %}
+  </p>
+  {% endif %}
+  {% if manage_url %}
+  <p>
+    {% trans "You can view, change or cancel your registration until the course starts using your personal link:" %}<br />
+    <a href="{{ manage_url }}">{{ manage_url }}</a><br />
+    <small>{% trans "Please don't share this link: anyone who has it can change or cancel your registration." %}</small>
   </p>
   {% endif %}
   <p>

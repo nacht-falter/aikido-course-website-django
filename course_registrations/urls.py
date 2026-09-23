@@ -25,6 +25,21 @@ urlpatterns = [
         name="update_courseregistration",
     ),
     path(
+        "registration/<str:token>/",
+        views.GuestRegistrationDetail.as_view(),
+        name="guest_registration",
+    ),
+    path(
+        "registration/<str:token>/update/",
+        views.UpdateCourseRegistration.as_view(),
+        name="guest_update_courseregistration",
+    ),
+    path(
+        "registration/<str:token>/cancel/",
+        views.CancelCourseRegistration.as_view(),
+        name="guest_cancel_courseregistration",
+    ),
+    path(
         "export-csv/<slug:slug>/",
         views.ExportCourseRegistrations.as_view(),
         name="export_course_registrations",

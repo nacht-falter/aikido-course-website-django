@@ -1,5 +1,6 @@
 from datetime import date
 
+from django.core import signing
 from django.db import models
 from django.shortcuts import get_object_or_404
 from django.utils.html import format_html
@@ -9,6 +10,8 @@ from courses.models import AccommodationOption, CourseSession, InternalCourse
 from danbw_website import constants
 from fees.models import Fee
 from users.models import User, UserProfile
+
+MANAGE_TOKEN_SALT = "course_registrations.manage"
 
 
 class CourseRegistration(models.Model):
@@ -354,6 +357,25 @@ class CourseRegistration(models.Model):
         if self.anonymized_on:
             return str(_("Anonymized"))
         return f"{self.first_name} {self.last_name}"
+
+    def can_be_changed(self):
+        """Registrations can be updated or cancelled until the course starts"""
+        return self.anonymized_on is None and date.today() < self.course.start_date
+
+    def get_manage_token(self):
+        """Signed token for the personal link that lets guests manage their registration"""
+        return signing.dumps(self.pk, salt=MANAGE_TOKEN_SALT)
+
+    @classmethod
+    def from_manage_token(cls, token):
+        """Returns the guest registration for a personal link token, or None"""
+        try:
+            pk = signing.loads(token, salt=MANAGE_TOKEN_SALT)
+        except signing.BadSignature:
+            return None
+        return cls.objects.filter(
+            pk=pk, user__isnull=True, anonymized_on__isnull=True
+        ).first()
 
     @classmethod
     def due_for_anonymization(cls, today=None):
