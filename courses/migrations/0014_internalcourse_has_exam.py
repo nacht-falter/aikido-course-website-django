@@ -1,6 +1,3 @@
-# Deploy to aikido-vps as courses/migrations/0014_internalcourse_has_exam.py
-# (depends on the server's migration history, not the local one)
-
 from django.db import migrations, models
 
 # Course types that allowed exams before has_exam was introduced
