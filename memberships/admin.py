@@ -56,7 +56,7 @@ class BaseMembershipAdmin(admin.ModelAdmin):
         "accept_terms",
         "comment"
     ]
-    actions = [toggle_passport_issued, export_csv]
+    actions = [export_csv]
 
     def has_add_permission(self, request):
         return "add" in request.path or "change" in request.path
@@ -65,6 +65,7 @@ class BaseMembershipAdmin(admin.ModelAdmin):
 @admin.register(DanIntMembership)
 class DanIntMembershipAdmin(BaseMembershipAdmin):
     list_display = BaseMembershipAdmin.list_display + ["passport_issued"]
+    actions = [toggle_passport_issued, export_csv]
     readonly_fields = BaseMembershipAdmin.readonly_fields + [
         "liability_disclaimer",
         "sepa",
@@ -76,6 +77,7 @@ class DanIntMembershipAdmin(BaseMembershipAdmin):
 @admin.register(ChildrensPassport)
 class ChildrensPassportAdmin(BaseMembershipAdmin):
     list_display = BaseMembershipAdmin.list_display + ["passport_issued"]
+    actions = [toggle_passport_issued, export_csv]
     readonly_fields = BaseMembershipAdmin.readonly_fields + [
         "name_legal_guardian",
         "liability_disclaimer",
