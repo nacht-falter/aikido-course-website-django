@@ -191,6 +191,52 @@ class UpdateGradeTest(TestCase):
         self.assertEqual(self.registration.grade_updated, True)
         self.assertRedirects(response, reverse("home"), 302, 200)
 
+    def test_post_update_grade_ignores_earlier_non_exam_registration(self):
+        print("\ntest_post_update_grade_ignores_earlier_non_exam_registration")
+        from courses.models import InternalCourse
+        earlier_course = InternalCourse.objects.create(
+            title="Earlier course",
+            slug="earlier-course",
+            start_date=date.today() - timedelta(days=30),
+            end_date=date.today() - timedelta(days=29),
+            registration_status=(1),
+            course_type="dan_bw_teacher",
+            fee_category="dan_member",
+        )
+        # Recreate the exam registration so the non-exam one comes first
+        self.registration.delete()
+        CourseRegistration.objects.create(
+            user=self.user,
+            course=earlier_course,
+            payment_status=0,
+            accept_terms=True,
+            exam=False,
+            grade_updated=False,
+        )
+        self.registration = CourseRegistration.objects.create(
+            user=self.user,
+            course=self.course,
+            payment_status=0,
+            accept_terms=True,
+            exam=True,
+            exam_grade=self.user_profile.grade + 1,
+            grade_updated=False,
+        )
+        response = self.client.post(reverse("update_grade"), {"answer": "yes"})
+        self.registration.refresh_from_db()
+        self.user_profile.refresh_from_db()
+        self.assertEqual(self.user_profile.grade, self.registration.exam_grade)
+        self.assertEqual(self.registration.grade_updated, True)
+        self.assertRedirects(response, reverse("home"), 302, 200)
+
+    def test_post_update_grade_without_pending_exam(self):
+        print("\ntest_post_update_grade_without_pending_exam")
+        self.registration.delete()
+        response = self.client.post(reverse("update_grade"), {"answer": "yes"})
+        self.user_profile.refresh_from_db()
+        self.assertEqual(self.user_profile.grade, 1)
+        self.assertRedirects(response, reverse("home"), 302, 200)
+
     def test_post_update_grade_cancelled(self):
         print("\ntest_post_update_grade_cancelled")
         response = self.client.post(reverse("update_grade"), {"answer": "no"})

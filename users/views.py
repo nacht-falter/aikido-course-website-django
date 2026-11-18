@@ -139,7 +139,8 @@ class UpdateUserProfile(LoginRequiredMixin, View):
 class UpdateGrade(View):
     """Updates a user's grade"""
 
-    def get(self, request):
+    def get_exam_registration(self, request):
+        """Returns the finished exam whose result the user hasn't confirmed yet"""
         exam_registration = CourseRegistration.objects.filter(
             user=request.user, grade_updated=False, exam=True
         ).first()
@@ -147,6 +148,12 @@ class UpdateGrade(View):
             exam_registration
             and exam_registration.course.end_date <= date.today()
         ):
+            return exam_registration
+        return None
+
+    def get(self, request):
+        exam_registration = self.get_exam_registration(request)
+        if exam_registration:
             return render(
                 request,
                 "update_grade.html",
@@ -156,9 +163,9 @@ class UpdateGrade(View):
 
     def post(self, request):
         answer = request.POST.get("answer")
-        exam_registration = CourseRegistration.objects.filter(
-            user=request.user, grade_updated=False
-        ).first()
+        exam_registration = self.get_exam_registration(request)
+        if not exam_registration:
+            return HttpResponseRedirect(reverse("home"))
         if answer == "yes":
             user_profile = get_object_or_404(UserProfile, user=request.user)
             user_profile.grade = exam_registration.exam_grade
