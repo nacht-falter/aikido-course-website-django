@@ -88,3 +88,28 @@ class PageTest(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
+
+
+class RootFilesTest(TestCase):
+    """Tests for robots.txt and the root-level touch icon redirects"""
+
+    def test_robots_txt(self):
+        response = self.client.get("/robots.txt")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "text/plain")
+        self.assertIn("Disallow: /admin/", response.content.decode())
+
+    def test_apple_touch_icon_redirects_to_static_file(self):
+        for path in [
+            "/apple-touch-icon.png",
+            "/apple-touch-icon-precomposed.png",
+            "/apple-touch-icon-120x120.png",
+            "/apple-touch-icon-120x120-precomposed.png",
+        ]:
+            response = self.client.get(path)
+            self.assertRedirects(
+                response,
+                "/static/favicon/apple-touch-icon.png",
+                status_code=301,
+                fetch_redirect_response=False,
+            )

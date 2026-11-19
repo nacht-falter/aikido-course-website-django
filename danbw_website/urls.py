@@ -16,13 +16,36 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.templatetags.static import static as static_url
 from django.urls import include, path
+from django.views.generic import RedirectView, TemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path('captcha/', include('captcha.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
+    path(
+        "robots.txt",
+        TemplateView.as_view(
+            template_name="robots.txt", content_type="text/plain"
+        ),
+    ),
+]
+
+# Devices and crawlers request these at the site root regardless of the
+# icon links in base.html
+apple_touch_icon = RedirectView.as_view(
+    url=static_url("favicon/apple-touch-icon.png"), permanent=True
+)
+urlpatterns += [
+    path(f"{name}.png", apple_touch_icon)
+    for name in [
+        "apple-touch-icon",
+        "apple-touch-icon-precomposed",
+        "apple-touch-icon-120x120",
+        "apple-touch-icon-120x120-precomposed",
+    ]
 ]
 
 urlpatterns += i18n_patterns(

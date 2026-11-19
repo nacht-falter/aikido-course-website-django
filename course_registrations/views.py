@@ -125,9 +125,15 @@ def prepare_context(course, form):
 class RegisterCourse(View):
     """Creates a course registration"""
 
+    def closed_registration_redirect(self, request):
+        """Sends old links to a closed course back to the course list"""
+        messages.info(request, _("Registration is closed for this course"))
+        return HttpResponseRedirect(reverse("course_list"))
+
     def get(self, request, slug):
-        courses = InternalCourse.objects.filter(registration_status=1)
-        course = get_object_or_404(courses, slug=slug)
+        course = get_object_or_404(InternalCourse, slug=slug)
+        if course.registration_status != 1:
+            return self.closed_registration_redirect(request)
 
         # Update dan preparation flag if needed
         if course.course_type in constants.DAN_PREPARATION_COURSES:
@@ -191,8 +197,9 @@ class RegisterCourse(View):
         )
 
     def post(self, request, slug):
-        queryset = InternalCourse.objects.filter(registration_status=1)
-        course = get_object_or_404(queryset, slug=slug)
+        course = get_object_or_404(InternalCourse, slug=slug)
+        if course.registration_status != 1:
+            return self.closed_registration_redirect(request)
 
         # Only validate CAPTCHA for guest users
         if request.user.is_authenticated:

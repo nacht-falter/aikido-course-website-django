@@ -114,6 +114,29 @@ class RegisterCourseTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.url.startswith("/accounts/login/"))
 
+    def test_registration_closed_redirects_to_course_list(self):
+        print("\ntest_registration_closed_redirects_to_course_list")
+        self.course.registration_status = 0
+        self.course.save()
+        url = reverse("register_course", kwargs={"slug": self.course.slug})
+
+        for response in (
+            self.client.get(url, follow=True),
+            self.client.post(url, {}, follow=True),
+        ):
+            self.assertRedirects(response, reverse("course_list"))
+            messages = [m.message for m in get_messages(response.wsgi_request)]
+            self.assertIn(
+                "Die Anmeldung für diesen Kurs ist bereits geschlossen.",
+                messages,
+            )
+        self.assertFalse(CourseRegistration.objects.exists())
+
+    def test_registration_unknown_course_returns_404(self):
+        print("\ntest_registration_unknown_course_returns_404")
+        url = reverse("register_course", kwargs={"slug": "no-such-course"})
+        self.assertEqual(self.client.get(url).status_code, 404)
+
     def test_get_registration_form_already_registered(self):
         print("\ntest_get_registration_form_already_registered")
         self.client.force_login(self.user)

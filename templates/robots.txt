@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /captcha/
+Disallow: /*/user/
+Disallow: /*/benutzer/
+Disallow: /*/registration/
+Disallow: /*/export-csv/
